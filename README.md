@@ -12,4 +12,5 @@ Although the text is copyrighted, I'm making it free to read and to use as a lea
 I hope to help make your journey into D, GtkD, and cross-platform development a little easier. If I've succeeded, please let me know in comments either here or on the gtkDcoding blog.
 
 -Ron Tarrant
-gtkDcoding.com
+
+(gtkDcoding.com)
