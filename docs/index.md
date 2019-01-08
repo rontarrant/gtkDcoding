@@ -4,3 +4,6 @@
 
 layout: home
 ---
+a site for sore skode
+
+![image](/images/gtkDcoding_logo_v3_811x184.png)
