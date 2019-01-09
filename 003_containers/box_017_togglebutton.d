@@ -6,29 +6,31 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
 
-/////////////////////////////////////
-// Additional import statements START
-/////////////////////////////////////
+///////////
+// START //
+///////////
 
+import gtk.Button;
 import gtk.ToggleButton;
 
-///////////////////////////////////
-// Additional import statements END
-///////////////////////////////////
+///////////
+//  END  //
+///////////
+
 void main(string[] args)
 {
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
 	
-	/////////////////////
-	// Test Code Start //
-	/////////////////////
+///////////
+// START //
+///////////
 	
 
 	
-	///////////////////
-	// Test Code End //
-	///////////////////
+///////////
+//  END  //
+///////////
 
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -45,8 +47,13 @@ class TestRigWindow : MainWindow
 	this(string title)
 	{
 		super(title);
-		
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
+		
+		ActionButton myActionButton = new ActionButton("Take Action");
+		add(myActionButton);
+		
+		MyToggleButton myToggle = new MyToggleButton();
+		add(myToggle);
 		
 	} // this() CONSTRUCTOR
 	
@@ -69,18 +76,32 @@ class TestRigWindow : MainWindow
 
 } // class myAppWindow
 
+///////////
+// START //
+///////////
+
+class ActionButton : Button
+{
+	this(string label)
+	{
+		super(label);
+		
+	} // this()
+	
+} // class ActionButton
+
 
 class MyToggleButton : ToggleButton
 {
 	this()
 	{
 		super();
-		
+		addOnClicked(&report);
 		
 	} // this()
 	
 	
-	report()
+	void report(Button b)
 	{
 		if(getMode() == true)
 		{
@@ -88,9 +109,13 @@ class MyToggleButton : ToggleButton
 		}
 		else
 		{
-			writeln("Toggle is off.")
+			writeln("Toggle is off.");
 		}
-		
+	
 	} // report()
 	
 } // class MyToggleButton
+
+///////////
+//  END  //
+///////////

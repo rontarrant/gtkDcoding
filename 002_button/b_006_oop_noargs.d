@@ -1,7 +1,6 @@
 // Example of:
 //  a plain button
 //  coded in the OOP paradigm
-//  no args passed to the button's callback
 
 import std.stdio;
 
@@ -26,16 +25,16 @@ void main(string[] args)
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow(title);
 	
-	///////////
-	// START // additional code
-	///////////
+///////////
+// START // add a button
+///////////
 	
 	MyButton button = new MyButton("Click this");
 	myTestRig.add(button);
 	
-	///////////
-	//  END  //
-	///////////
+///////////
+//  END  //
+///////////
 	
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -68,6 +67,9 @@ class TestRigWindow : MainWindow
 
 } // class TestRigWindow
 
+///////////
+// START // button class
+///////////
 
 class MyButton : Button
 {
@@ -86,3 +88,7 @@ class MyButton : Button
 	} // buttonAction()
 	
 } // class MyButton
+
+///////////
+//  END  //
+///////////

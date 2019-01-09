@@ -6,39 +6,40 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
 
-/////////////////////////////////////
-// Additional import statements START
-/////////////////////////////////////
+////////////
+// START  //
+////////////
 
 import gtk.Box;
 import gtk.Button;
 import gdk.Event;
 
-///////////////////////////////////
-// Additional import statements END
-///////////////////////////////////
+///////////
+//  END  //
+///////////
+
 void main(string[] args)
 {
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
 	
-	/////////////////////
-	// Test Code Start //
-	/////////////////////
+////////////
+// START  //
+////////////
 	
-	AddButton button01 = new AddButton("Button 01");
-	auto button02 = new AddButton("Button 02");
-	auto button03 = new AddButton("Button 03");
+	ActionButton button01 = new ActionButton("Button 01");
+	auto button02 = new ActionButton("Button 02");
+	auto button03 = new ActionButton("Button 03");
 	
-	AddButton[] buttons = [button01, button02, button03];
+	ActionButton[] buttons = [button01, button02, button03];
 	
 	AddBox myBox = new AddBox(buttons);
 	myTestRig.add(myBox);
 	
 	
-	///////////////////
-	// Test Code End //
-	///////////////////
+///////////
+//  END  //
+///////////
 
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -73,10 +74,13 @@ class TestRigWindow : MainWindow
 
 } // class myAppWindow
 
+////////////
+// START  //
+////////////
 
 class AddBox : Box
 {
-	this(AddButton[] buttons)
+	this(ActionButton[] buttons)
 	{
 		super(Orientation.VERTICAL, 5);
 		
@@ -90,7 +94,7 @@ class AddBox : Box
 } // class AddBox
 
 
-class AddButton : Button
+class ActionButton : Button
 {
 	this(string labelText)
 	{
@@ -108,4 +112,8 @@ class AddButton : Button
 		
 	} // doSomething()
 	
-} // class AddButton
+} // class ActionButton
+
+///////////
+//  END  //
+///////////

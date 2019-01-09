@@ -6,27 +6,23 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
 
-/////////////////////////////////////
-// Additional import statements START
-/////////////////////////////////////
+///////////
+// START // additional import statements
+///////////
 
 import gtk.Layout;
 import gtk.Button;
 import gdk.Event;
 
-///////////////////////////////////
-// Additional import statements END
-///////////////////////////////////
+///////////
+//  END  //
+///////////
 
 void main(string[] args)
 {
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
 	
-	/////////////////////////////
-	// See below for test code //
-	/////////////////////////////
-
 	// Show the window and its contents...
 	myTestRig.showAll();
 		
@@ -45,9 +41,9 @@ class TestRigWindow : MainWindow
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 
-		/////////////////////
-		// Test Code Start //
-		/////////////////////
+///////////
+// START // add two buttons to the layout
+///////////
 	
 		auto myButton = new MyButt("Button Name");
 		auto myOtherButton = new MyOtherButt("Other Button Name");
@@ -60,9 +56,9 @@ class TestRigWindow : MainWindow
 		auto myLayout = new MyLayout(myButton, myOtherButton);
 		add(myLayout);
 
-		///////////////////
-		// Test Code End //
-		///////////////////
+///////////
+//  END  //
+///////////
 		
 	} // this() CONSTRUCTOR
 	
@@ -79,9 +75,9 @@ class TestRigWindow : MainWindow
 
 } // class myAppWindow
 
-/////////////////////
-// Test Code Start //
-/////////////////////
+///////////
+// START // Layout and Button classes
+///////////
 
 class MyLayout : Layout
 {
@@ -136,6 +132,6 @@ class MyOtherButt : Button
 
 } // class MyButt
 
-///////////////////
-// Test Code End //
-///////////////////
+///////////
+//  END  //
+///////////

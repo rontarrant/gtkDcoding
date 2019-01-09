@@ -101,3 +101,7 @@ class MyButton : Button
 	} // buttonAction()
 	
 } // class MyButton
+
+///////////
+//  END  //
+///////////

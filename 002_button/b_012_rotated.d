@@ -1,4 +1,4 @@
-// Window Close button and GUI button trigger same action
+// a rotated button
 
 import std.stdio;
 
@@ -6,32 +6,22 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
 
-/////////////////////////////////////
-// Additional import statements START
-/////////////////////////////////////
+///////////
+// START //
+///////////
 
 import gtk.Button;
 import gtk.Label;
 import gtk.Layout;
 
-///////////////////////////////////
-// Additional import statements END
-///////////////////////////////////
+///////////
+//  END  //
+///////////
 
 void main(string[] args)
 {
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
-	
-	/////////////////////
-	// Test Code Start //
-	/////////////////////
-	
-	
-	
-	///////////////////
-	// Test Code End //
-	///////////////////
 	
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -50,9 +40,9 @@ class TestRigWindow : MainWindow
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		/////////////////////
-		// Test Code Start //
-		/////////////////////
+///////////
+// START // a rotated label on a button
+///////////
 		
 		// a rotated label
 		Label myRotatedLabel = new Label("My Rotated Label on a Button");
@@ -68,18 +58,18 @@ class TestRigWindow : MainWindow
 		auto myLayout = new MyLayout(myButton);
 		add(myLayout);
 		
-		///////////////////
-		// Test Code End //
-		///////////////////
+///////////
+//  END  //
+///////////
 	
 		// Show the window and its contents...
 		showAll();
 		
 	} // this() CONSTRUCTOR
 	
-	/////////////////////
-	// Test Code Start //
-	/////////////////////
+///////////
+// START // a placeholder callback
+///////////
 
 	void doSomething()
 	{
@@ -90,9 +80,9 @@ class TestRigWindow : MainWindow
 		
 	} // doSomething()
 
-	///////////////////
-	// Test Code End //
-	///////////////////
+///////////
+//  END  //
+///////////
 
 	void quitApp()
 	{
@@ -106,9 +96,9 @@ class TestRigWindow : MainWindow
 
 } // class myAppWindow
 
-/////////////////////
-// Test Code Start //
-/////////////////////
+///////////
+// START // Layout class
+///////////
 
 class MyLayout : Layout
 {
@@ -121,6 +111,6 @@ class MyLayout : Layout
 	
 } // class MyLayout
 
-///////////////////
-// Test Code End //
-///////////////////
+///////////
+//  END  //
+///////////

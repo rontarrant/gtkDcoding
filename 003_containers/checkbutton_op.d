@@ -85,6 +85,7 @@ class TestEntries : Table
 	void entryVisible(CheckButton button)
 	{
 		entry.setVisibility(button.getActive());
+		writeln("getActive = ", button.getActive());
 		
 	} // entryVisible()
 

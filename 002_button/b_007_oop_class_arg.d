@@ -26,16 +26,16 @@ void main(string[] args)
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow(title);
 	
-	///////////
-	// START // additional code
-	///////////
+///////////
+// START // additional code
+///////////
 	
 	MyButton button = new MyButton("Click this");
 	myTestRig.add(button);
 	
-	///////////
-	//  END  //
-	///////////
+///////////
+//  END  //
+///////////
 	
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -71,6 +71,10 @@ class TestRigWindow : MainWindow
  
 class MyButton : Button
 {
+///////////
+// START // additional code
+///////////
+
 	this(string label)
 	{
 		string message = "Next time, don't bring the Wookie.";
@@ -89,3 +93,7 @@ class MyButton : Button
 	} // buttonAction()
 	
 } // class MyButton
+
+///////////
+//  END  //
+///////////

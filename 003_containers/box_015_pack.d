@@ -6,38 +6,39 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
 
-/////////////////////////////////////
-// Additional import statements START
-/////////////////////////////////////
+////////////
+// START  //
+////////////
 
 import gtk.Box;
 import gtk.Button;
 import gdk.Event;
 
-///////////////////////////////////
-// Additional import statements END
-///////////////////////////////////
+///////////
+//  END  //
+///////////
+
 void main(string[] args)
 {
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
 	
-	/////////////////////
-	// Test Code Start //
-	/////////////////////
+////////////
+// START  //
+////////////
 	
-	BoxButton myButton01 = new BoxButton("First Button");
-	auto myButton02 = new BoxButton("Second Button");
-	auto myButton03 = new BoxButton("Third Button");
+	ActionButton myButton01 = new ActionButton("First Button");
+	auto myButton02 = new ActionButton("Second Button");
+	auto myButton03 = new ActionButton("Third Button");
 
-	BoxButton[] buttons = [myButton01, myButton02, myButton03];
+	ActionButton[] buttons = [myButton01, myButton02, myButton03];
 	
 	PackBox myBox = new PackBox(buttons);
 	myTestRig.add(myBox);
 	
-	///////////////////
-	// Test Code End //
-	///////////////////
+///////////
+//  END  //
+///////////
 
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -72,10 +73,13 @@ class TestRigWindow : MainWindow
 
 } // class myAppWindow
 
+////////////
+// START  //
+////////////
 
 class PackBox : Box
 {
-	this(BoxButton[] buttons)
+	this(ActionButton[] buttons)
 	{
 		super(Orientation.VERTICAL, 5); // top to bottom, widget spacing: 5
 		
@@ -89,7 +93,7 @@ class PackBox : Box
 } // class AddBox
 
 
-class BoxButton : Button
+class ActionButton : Button
 {
 	this(string buttonLabel)
 	{
@@ -109,3 +113,7 @@ class BoxButton : Button
 	} // doSomething()
 	
 } // class AddButton
+
+///////////
+//  END  //
+///////////
