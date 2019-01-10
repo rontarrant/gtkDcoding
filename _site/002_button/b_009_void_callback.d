@@ -8,8 +8,17 @@ import std.stdio;
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
+
+///////////
+// START // additional import statements
+///////////
+
 import gtk.Button;
 import gdk.Event;
+
+///////////
+//  END  //
+///////////
 
 void main(string[] args)
 {
@@ -27,19 +36,30 @@ class TestRigWindow : MainWindow
 	this(string title, string[] args)
 	{
 		super(title);
-		addOnDestroy(&quitApp);                                     // *** NEW ***
+		addOnDestroy(&quitApp);
 		
-		MyButton button = new MyButton("Click this", args);
-		add(button);
+///////////
+// START // additional code
+///////////
 	
+	MyButton button = new MyButton("Click this", args);
+	add(button);
+	
+///////////
+//  END  //
+///////////
+
 		// Show the window and its contents...
 		showAll();
 
 	} // this()
 	
 	
-	void quitApp(Widget w)                                         // *** NEW ***
+	void quitApp(Widget w)
 	{
+		// This exists in case we want to do anything
+		// before exiting such as warn the user to
+		// save work.
 		writeln("Bye.");
 		Main.quit();
 		
@@ -48,6 +68,10 @@ class TestRigWindow : MainWindow
 } // class TestRigWindow
 
  
+///////////
+// START // button sub-class
+///////////
+
 class MyButton : Button
 {
 	this(string label, string[] args)
@@ -56,13 +80,13 @@ class MyButton : Button
 		// Either of the two following lines will do the job at hand. The first
 		// line shows the actual syntax while the second shows the same thing, but
 		// using type inference.
-		//addOnClicked(delegate void(Button b) { buttonAction(args); });          // *** NEW ***
-		addOnClicked(delegate void(_) { buttonAction(args); });                   // *** NEW ***
+		//addOnClicked(delegate void(Button b) { buttonAction(args); });
+		addOnClicked(delegate void(_) { buttonAction(args); });
 		
 	} // this()
 	
 	
-	void buttonAction(string[] args)                                             // *** NEW ***
+	void buttonAction(string[] args)
 	{
 		writeln("The command line arguments are:");
 
@@ -77,3 +101,7 @@ class MyButton : Button
 	} // buttonAction()
 	
 } // class MyButton
+
+///////////
+//  END  //
+///////////

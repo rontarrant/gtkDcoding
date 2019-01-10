@@ -1,26 +1,20 @@
-// Window Close button and GUI button trigger same action
+// move button creation inside the TestRigWindow class
+// use the onButtonRelease signal instead of onClicked
+//
+//
 
 import std.stdio;
 
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
-
-///////////
-// START // additional imports
-///////////
-
 import gtk.Button;
 import gdk.Event;
-
-///////////
-//  END  //
-///////////
 
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow myTestRig = new TestRigWindow("Test Rig");       // *** NEW ***
 	
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -39,29 +33,18 @@ class TestRigWindow : MainWindow
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-///////////
-// START // button creation, pass args
-///////////
-		
 		// a button that does something
-		MyButton myButt = new MyButton("My Butt");
-		add(myButt);
+		MyButton myButt = new MyButton("My Butt");                  // *** NEW ***
+		add(myButt);                                                // *** NEW ***
 		
-///////////
-//  END  //
-///////////
-	
 		// Show the window and its contents...
 		showAll();
 		
 	} // this() CONSTRUCTOR
 	
 	
-	void quitApp()
+	void quitApp()                                                 // *** NEW ***
 	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
 		writeln("Bye.");
 		Main.quit();
 		
@@ -69,22 +52,18 @@ class TestRigWindow : MainWindow
 
 } // class myAppWindow
 
-///////////
-// START // button class
-///////////
-
 
 class MyButton : Button
 {
 	this(string label)
 	{
 		super(label);
-		addOnButtonRelease(&takeAction);
+		addOnButtonRelease(&takeAction);                            // *** NEW ***
 		
 	} // this()
 	
 	
-	bool takeAction(Event event, Widget widget)
+	bool takeAction(Event event, Widget widget)                    // *** NEW ***
 	{
 		writeln("Action was taken.");
 		
@@ -93,7 +72,3 @@ class MyButton : Button
 	} // takeAction()
 	
 } // class MyButton
-
-///////////
-//  END  //
-///////////

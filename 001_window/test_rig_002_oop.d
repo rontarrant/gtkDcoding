@@ -6,28 +6,13 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
 
-///////////
-// START //
-///////////
-
-///////////
-//  END  //
-///////////
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow myTestRig = new TestRigWindow("Test Rig");       // *** NEW ***
 	
-	///////////
-	// START //
-	///////////
+	myTestRig.sayHi(); // *** NEW ***
 	
-	myTestRig.sayHi();
-	
-	///////////
-	//  END  //
-	///////////
-
 	// Show the window and its contents...
 	myTestRig.showAll();
 	
@@ -38,7 +23,7 @@ void main(string[] args)
 } // main()
 
 
-class TestRigWindow : MainWindow
+class TestRigWindow : MainWindow                                  // *** NEW ***
 {
 	this(string title)
 	{
@@ -49,11 +34,8 @@ class TestRigWindow : MainWindow
 	} // this() CONSTRUCTOR
 	
 		
-	void quitApp(Widget widget)
-	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
+	void quitApp(Widget widget)                                    // *** NEW ***
+	{                                                              // becomes a class function
 		writeln("Bye.");
 		Main.quit();
 		

@@ -1,6 +1,7 @@
 // Example of:
 //  a plain button
 //  coded in the OOP paradigm
+//  an argument is passed from the button constructor to the button's callback
 
 import std.stdio;
 
@@ -26,7 +27,7 @@ void main(string[] args)
 	TestRigWindow myTestRig = new TestRigWindow(title);
 	
 ///////////
-// START // add a button
+// START // additional code
 ///////////
 	
 	MyButton button = new MyButton("Click this");
@@ -67,23 +68,27 @@ class TestRigWindow : MainWindow
 
 } // class TestRigWindow
 
-///////////
-// START // button class
-///////////
-
+ 
 class MyButton : Button
 {
+///////////
+// START // additional code
+///////////
+
 	this(string label)
 	{
+		string message = "Next time, don't bring the Wookie.";
+		
 		super(label);
-		addOnClicked(&buttonAction);
+		//addOnClicked(delegate void(Button b) { buttonAction(message); });
+		addOnClicked(delegate void(_) { buttonAction(message); });
 		
 	} // this()
 	
 	
-	void buttonAction(Button b)
+	void buttonAction(string message)
 	{
-		writeln("Action taken.");
+		writeln("The message is: ", message);
 		
 	} // buttonAction()
 	

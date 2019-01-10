@@ -9,16 +9,8 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
 
-///////////
-// START // additional import statements
-///////////
-
-import gtk.Button;
-import gdk.Event;
-
-///////////
-//  END  //
-///////////
+import gtk.Button;                                                // *** NEW ***
+import gdk.Event;                                                 // *** NEW ***
 
 void main(string[] args)
 {
@@ -26,18 +18,10 @@ void main(string[] args)
 	MainWindow myTestRig = new MainWindow("Test Rig");
 	myTestRig.addOnDestroy(delegate void(Widget w) { quitApp(); } );
 	
-	///////////
-	// START // additional code
-	///////////
-	
-	Button button = new Button("Label Text");
+	Button button = new Button("Label Text");                      // *** NEW ***
 	button.addOnClicked(delegate void(Button b) { quitApp(); });
 	myTestRig.add(button);
 
-	///////////
-	//  END  //
-	///////////
-	
 	// Show the window and its contents...
 	myTestRig.showAll();
 		

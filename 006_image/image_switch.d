@@ -1,40 +1,23 @@
-// Just a button with an image
+// switch the button's image each time it's clicked
 
 import std.stdio;
 
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
-
-/////////////////////////////////////
-// Additional import statements START
-/////////////////////////////////////
-
 import gtk.Button;
 import gtk.Image;
 import gtk.Label;
 import gtk.Box;
 import gdk.Event;
 
-///////////////////////////////////
-// Additional import statements END
-///////////////////////////////////
-
 void main(string[] args)
 {
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
 	
-	/////////////////////
-	// Test Code Start //
-	/////////////////////
-
 	ImageButton myButt = new ImageButton();
 	myTestRig.add(myButt);
-	
-	////////////////////////////////
-	// Test Code End (more below) //
-	////////////////////////////////
 	
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -58,9 +41,6 @@ class TestRigWindow : MainWindow
 	
 	void quitApp()
 	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
 		writeln("Bye.");
 		Main.quit();
 		
@@ -68,11 +48,8 @@ class TestRigWindow : MainWindow
 
 } // class myAppWindow
 
-/////////////////////
-// Test Code Start //
-/////////////////////
 
-class ImageButton : Button
+class ImageButton : Button                                                      // *** NEW ***
 {
 	Box myBox;
 	SwitchingLabel mySwitchingLabel;
@@ -87,8 +64,8 @@ class ImageButton : Button
 		add(myBox);
 		
 		// and fill it
-		mySwitchingLabel = new SwitchingLabel();
-		mySwitchingImage = new SwitchingImage();
+		mySwitchingLabel = new SwitchingLabel();                                  // *** NEW ***
+		mySwitchingImage = new SwitchingImage();                                  // *** NEW ***
 		myBox.add(mySwitchingLabel);
 		myBox.add(mySwitchingImage);
 		
@@ -98,7 +75,7 @@ class ImageButton : Button
 	} // this()
 
 
-	bool switchThings(Event event, Widget widget)
+	bool switchThings(Event event, Widget widget)                                // *** NEW ***
 	{
 		if(mySwitchingLabel.getText() == "Apples")
 		{
@@ -122,7 +99,7 @@ class ImageButton : Button
 } // class ImageButton
 
 
-class SwitchingImage : Image
+class SwitchingImage : Image                                                    // *** NEW ***
 {
 	this()
 	{
@@ -141,7 +118,3 @@ class SwitchingLabel : Label
 	} // this()
 
 } // class SwitchingLabel
-
-///////////////////
-// Test Code End //
-///////////////////

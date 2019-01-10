@@ -8,17 +8,8 @@ import std.stdio;
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
-
-///////////
-// START // additional import statements
-///////////
-
 import gtk.Button;
 import gdk.Event;
-
-///////////
-//  END  //
-///////////
 
 void main(string[] args)
 {
@@ -26,16 +17,8 @@ void main(string[] args)
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow(title);
 	
-///////////
-// START // additional code
-///////////
-	
 	MyButton button = new MyButton("Click this");
 	myTestRig.add(button);
-	
-///////////
-//  END  //
-///////////
 	
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -58,9 +41,6 @@ class TestRigWindow : MainWindow
 	
 	void quitApp(Widget w)
 	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
 		writeln("Bye.");
 		Main.quit();
 		
@@ -71,10 +51,6 @@ class TestRigWindow : MainWindow
  
 class MyButton : Button
 {
-///////////
-// START // additional code
-///////////
-
 	this(string label)
 	{
 		string message = "Next time, don't bring the Wookie.";
@@ -93,7 +69,3 @@ class MyButton : Button
 	} // buttonAction()
 	
 } // class MyButton
-
-///////////
-//  END  //
-///////////

@@ -5,17 +5,8 @@ import std.stdio;
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
-
-///////////
-// START // additional imports
-///////////
-
 import gtk.Button;
 import gdk.Event;
-
-///////////
-//  END  //
-///////////
 
 void main(string[] args)
 {
@@ -33,23 +24,14 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	this(string title)                                             // *** NEW ***
 	{
-		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-///////////
-// START // create a button
-///////////
-		
 		// a button that does something
-		MyButton myButt = new MyButton("My Butt");
+		MyButton myButt = new MyButton("My Butt");                  // *** NEW ***
 		add(myButt);
-		
-///////////
-//  END  //
-///////////
 	
 		// Show the window and its contents...
 		showAll();
@@ -59,9 +41,6 @@ class TestRigWindow : MainWindow
 	
 	void quitApp()
 	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
 		writeln("Bye.");
 		Main.quit();
 		
@@ -69,38 +48,31 @@ class TestRigWindow : MainWindow
 
 } // class myAppWindow
 
-///////////
-// START // derived button class
-///////////
 
-class MyButton : Button
+class MyButton : Button                                           // *** NEW ***
 {
-	this(string label)
+	this(string label)                                             // *** NEW ***
 	{
 		super(label);
-		addOnClicked(&clickReport);
-		addOnButtonRelease(&takeAction);
+		addOnClicked(&clickReport);                                 // *** NEW ***
+		addOnButtonRelease(&takeAction);                            // *** NEW ***
 		
 	} // this()
 	
 	
-	void clickReport(Button button)
+	void clickReport(Button button)                                // *** NEW ***
 	{
 		writeln("Reporting a click.");
 		
 	} // clickReport()
 	
 	
-	bool takeAction(Event event, Widget widget)
+	bool takeAction(Event event, Widget widget)                    // *** NEW ***
 	{
 		writeln("Action was taken.");
 		
-		return(false);
+		return(false);                                              // *** NEW ***
 		
 	} // takeAction()
 	
 } // class MyButton
-
-///////////
-//  END  //
-///////////

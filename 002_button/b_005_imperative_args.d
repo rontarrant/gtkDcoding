@@ -8,39 +8,22 @@ import std.stdio;
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
-
-///////////
-// START // additional import statements
-///////////
-
 import gtk.Button;
 import gdk.Event;
 
-///////////
-//  END  //
-///////////
-
 void main(string[] args)
 {
-	string message = "Window close button clicked.";
-	string otherMessage = "Button clicked instead.";
+	string message = "Window close button clicked.";               // *** NEW ***
+	string otherMessage = "Button clicked instead.";               // *** NEW ***
 	
 	Main.init(args);
 	MainWindow myTestRig = new MainWindow("Test Rig");
-	myTestRig.addOnDestroy(delegate void(Widget w) { quitApp(message); } );
-	
-	///////////
-	// START // additional code
-	///////////
+	myTestRig.addOnDestroy(delegate void(Widget w) { quitApp(message); } ); // *** NEW ***
 	
 	Button button = new Button("Label Text");
-	button.addOnClicked(delegate void(Button b) { quitApp(otherMessage); });
+	button.addOnClicked(delegate void(Button b) { quitApp(otherMessage); }); // *** NEW ***
 	myTestRig.add(button);
 
-	///////////
-	//  END  //
-	///////////
-	
 	// Show the window and its contents...
 	myTestRig.showAll();
 		
@@ -50,12 +33,12 @@ void main(string[] args)
 } // main()
 
 
-void quitApp(string message)
+void quitApp(string message) // *** NEW ***
 {
 	// This exists in case we want to do anything
 	// before exiting such as warn the user to
 	// save work.
-	writeln("Bye.", message);
+	writeln("Bye.", message);                                      // *** NEW ***
 	Main.quit();
 	
 } // quitApp()
