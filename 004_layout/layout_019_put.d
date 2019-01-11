@@ -57,8 +57,8 @@ class MyLayout : Layout
 	this(MyButt myButton, MyOtherButt otherButton)
 	{
 		super(null, null);
-		put(myButton, 10, 20); // *** NEW ***
-		put(otherButton, 10, 60); // *** NEW ***
+		put(myButton, 10, 20);                                                    // *** NEW ***
+		put(otherButton, 10, 60);                                                 // *** NEW ***
 		
 	} // this()
 	
