@@ -132,9 +132,9 @@ Save this as test_rig_imperative.d (or whatever you want, really) and compile it
 
 After correcting typos so the compiler finishes, type the name without an extension (or you can include the .exe extension if you’re on Windows) to run it.
 
-And that’s it for now. Next time, we’ll break down the test rig code so you know what’s going on in there. Then I’ll show you the same functionality in an OOP version of the test rig.
+And that’s it for now. Next time, we’ll break down the test rig code and then I’ll show the same functionality in an OOP version of the test rig.
 
 Until then, happy D-coding and may the widgets be with you.
 
-Copyright © 2018 Ron Tarrant
+Copyright © 2019 Ron Tarrant
 
