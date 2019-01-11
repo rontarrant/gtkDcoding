@@ -5,13 +5,9 @@ import std.stdio;
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
-
-///////////
-// START //
-///////////
-
+import gtk.Box;
 import gtk.Button;
-import gtk.ToggleButton;
+import gtk.ToggleButton;                                          // *** NEW ***
 
 void main(string[] args)
 {
@@ -20,7 +16,6 @@ void main(string[] args)
 
 	// Show the window and its contents...
 	myTestRig.showAll();
-	
 	
 	// give control over to gtkD.
 	Main.run();
@@ -32,14 +27,13 @@ class TestRigWindow : MainWindow
 {
 	this(string title)
 	{
+		Button[] buttons;
+		
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		ActionButton myActionButton = new ActionButton("Take Action");
-		add(myActionButton);
-		
-		MyToggleButton myToggle = new MyToggleButton();
-		add(myToggle);
+		AddBox addBox = new AddBox();
+		add(addBox);
 		
 	} // this() CONSTRUCTOR
 	
@@ -52,9 +46,6 @@ class TestRigWindow : MainWindow
 	
 	void quitApp()
 	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
 		writeln("Bye.");
 		Main.quit();
 		
@@ -63,38 +54,128 @@ class TestRigWindow : MainWindow
 } // class myAppWindow
 
 
-class ActionButton : Button
+class AddBox : Box
 {
-	this(string label)
-	{
-		super(label);
-		
-	} // this()
+	Observed observed;
 	
-} // class ActionButton
-
-
-class MyToggleButton : ToggleButton
-{
 	this()
 	{
-		super();
-		addOnClicked(&report);
+		super(Orientation.VERTICAL, 5);
+		
+		// set up observer/observed to sync up the buttons
+		observed = new Observed();
+		
+		ActionButton myActionButton = new ActionButton("Take Action", observed);
+		MyToggleButton myToggle = new MyToggleButton("Toggle", observed);         // *** NEW ***
+		add(myActionButton);
+		add(myToggle);
+		
+	} // this()
+	
+} // class AddBox
+
+
+class ActionButton : Button
+{
+	Observed observed;
+
+	this(string label, Observed extObserved)
+	{
+		super(label);
+		observed = extObserved;
+		addOnClicked(&outputSomething);
 		
 	} // this()
 	
 	
-	void report(Button b)
+	void outputSomething(Button b)                                               // *** NEW ***
 	{
-		if(getMode() == true)
+		if(observed.getState()) // if it's 'true'
 		{
-			writeln("Toggle is on.");
+			writeln("observedState = ", observed.observedState, " Walls make good neighbours, eh.");
 		}
 		else
 		{
+			writeln("observedState = ", observed.observedState, " Berlin doesn't like walls.");
+		}
+	}
+} // class ActionButton
+
+
+class MyToggleButton : ToggleButton                                             // *** NEW ***
+{
+	Observed observed;
+
+	this(string label, Observed extObserved)
+	{
+		super(label);
+		addOnClicked(&toggleMode);
+		setMode(true);
+		observed = extObserved;
+		
+	} // this()
+	
+	
+	void toggleMode(Button b)
+	{
+		if(getMode() == true)
+		{
+			setMode(false);
+			observed.setState(false);
 			writeln("Toggle is off.");
+		}
+		else
+		{
+			setMode(true);
+			observed.setState(true);
+			writeln("Toggle is on.");
 		}
 	
 	} // report()
 	
 } // class MyToggleButton
+
+
+class Observed
+{
+	private:
+	bool observedState;
+	
+	this()
+	{
+		observedState = true;
+		
+	} // this()
+	
+// end private
+	
+	public:
+	
+	void toggleState()
+	{
+		if(observedState == true)
+		{
+			observedState = false;
+		}
+		else
+		{
+			observedState = true;
+		}
+
+	} // toggleState()
+
+
+	void setState(bool state)
+	{
+		observedState = state;
+		
+	} // setState()
+	
+	
+	bool getState()
+	{
+		return(observedState);
+		
+	} // getState()
+
+} // class Observed

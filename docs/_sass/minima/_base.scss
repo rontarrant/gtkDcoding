@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
 ul, ol, dl, figure,
 %vertical-rhythm {
-  font: $heading-font-family;
+  font: $heading-font-weight #{$heading-font-size}/#{$heading-line-height} $heading-font-family;
   margin-bottom: $spacing-unit / 2;
 }
 

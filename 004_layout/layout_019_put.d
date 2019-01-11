@@ -1,4 +1,4 @@
-// Precise placement of buttons using put()
+// Precision placement of buttons using put()
 
 import std.stdio;
 
@@ -44,10 +44,7 @@ class TestRigWindow : MainWindow
 	
 	void quitApp()
 	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
-		writeln("Bye.");
+		writeln("I could have done something here.");
 		Main.quit();
 		
 	} // quitApp()

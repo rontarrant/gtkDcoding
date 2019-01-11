@@ -1,5 +1,5 @@
 // example of a CheckButton
-// using an Observer pattern to keep two buttons in sync
+// using an Observed pattern to keep two buttons in sync
 
 import std.stdio;
 
@@ -9,7 +9,7 @@ import gtk.Widget;
 import gtk.Box;
 import gtk.Button;
 import gdk.Event;
-import gtk.CheckButton;                                           // *** NEW ***
+import gtk.CheckButton;                                                         // *** NEW ***
 
 void main(string[] args)
 {
@@ -49,27 +49,26 @@ class TestRigWindow : MainWindow
 } // class myAppWindow
 
 
-class AddBox : Box                                                // *** NEW ***
+class AddBox : Box
 {
-	Observed switcher;                                             // *** NEW ***
+	Observed switcher;                                                                  // *** NEW ***
 	
 	this()
 	{
 		super(Orientation.VERTICAL, 5);
 
-		switcher = new Observed();                                  // *** NEW ***
+		switcher = new Observed();                                                       // *** NEW ***
 		
 		MyCheckButton switchOutputButton = new MyCheckButton("Change Output", switcher); // *** NEW ***
-
 		ActionButton actionButton = new ActionButton("Take Action", switcher);           // *** NEW ***
 		
-		add(actionButton);                                          // *** NEW ***
-		add(switchOutputButton);                                    // *** NEW ***
+		add(actionButton);                                                               // *** NEW ***
+		add(switchOutputButton);                                                         // *** NEW ***
 		
 	} // this()
 
 	
-	void changeOutput()                                            // *** NEW ***
+	void changeOutput()                                                                 // *** NEW ***
 	{
 		
 	} // changeOutput()
@@ -81,9 +80,9 @@ class ActionButton : Button
 {
 	string standardMessage = "Droids? We don't need no stinking droids!";        // *** NEW ***
 	string switchMessage = "These aren't the droids you're looking for.";        // *** NEW ***
-	Observed switcher; // *** NEW ***
+	Observed switcher;                                                           // *** NEW ***
 
-	this(string labelText, Observed extSwitcher)                   // *** NEW ***
+	this(string labelText, Observed extSwitcher)                                 // *** NEW ***
 	{
 		super(labelText);
 		addOnClicked(&doSomething);
@@ -92,7 +91,7 @@ class ActionButton : Button
 	} // this()
 	
 	
-	void doSomething(Button b)                                     // *** NEW ***
+	void doSomething(Button b)                                                   // *** NEW ***
 	{
 		if(switcher.getState() == true)
 		{
@@ -114,13 +113,13 @@ class MyCheckButton : CheckButton                                 // *** NEW ***
 	
 	this(string label, Observed extSwitcher)
 	{
-		super(label, &setObserver);
+		super(label, &setObserved);
 		switcher = extSwitcher;
 		
 	} // this()
 	
 	
-	void setObserver(CheckButton cb)                               // *** NEW ***
+	void setObserved(CheckButton cb)                               // *** NEW ***
 	{
 		switcher.setState(getActive());
 		
