@@ -90,40 +90,40 @@ for a 32-bit OS, it’ll be:
 And that should be that. You should be ready to dance the D-dance.
 
 For now, you can copy this code (I highly suggest you type it out unless you’ve got an eidetic memory) and look for the compile instructions below:
-
+```d
 import std.stdio;
 
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
 
-	void main(string[] args)
-	{
-		Main.init(args);
-		MainWindow myTestRig = new MainWindow("Test Rig");
-		myTestRig.addOnDestroy(delegate void(Widget w) { quitApp(); } );
-		
-		writeln("Hello GtkD Imperative");
+void main(string[] args)
+{
+	Main.init(args);
+	MainWindow myTestRig = new MainWindow("Test Rig");
+	myTestRig.addOnDestroy(delegate void(Widget w) { quitApp(); } );
 	
-		// Show the window and its contents...
-		myTestRig.showAll();
-			
-		// give control over to the gtkD .
-		Main.run();
-		
-	} // main()
-	
-	
-	void quitApp()
-	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
-		writeln("Bye.");
-		Main.quit();
-		
-	} // quitApp()
+	writeln("Hello GtkD Imperative");
 
+	// Show the window and its contents...
+	myTestRig.showAll();
+		
+	// give control over to the gtkD .
+	Main.run();
+	
+} // main()
+
+
+void quitApp()
+{
+	// This exists in case we want to do anything
+	// before exiting such as warn the user to
+	// save work.
+	writeln("Bye.");
+	Main.quit();
+	
+} // quitApp()
+````
 (This code can be found online at: [Test Rig Code - Imperative](https://github.com/rontarrant/gtkDcoding/blob/master/001_window/test_rig_001_imperative.d)
 
 Save this as test_rig_imperative.d (or whatever you want, really) and compile it thusly:
