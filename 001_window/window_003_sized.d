@@ -46,7 +46,7 @@ class TestRigWindow : MainWindow
 	} // quitApp()
 
 
-	void sayHi()                                                   // *** NEW ***
+	void sayHi()
 	{
 		writeln("Hello GtkD World."); // appears in the console, not the GUI
 	}
