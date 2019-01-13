@@ -1,5 +1,9 @@
-# OOP Test Rig Breakdown
-When you look at the imperative test rig alongside the OOP version, it becomes quickly apparent that it’s mostly about code organization. The changes start in the **main()** function:
+# 0002 - OOP Test Rig Breakdown
+When you look at the imperative test rig alongside the OOP version, it becomes quickly apparent that it’s mostly about code organization.
+
+## main()
+
+The changes start in the **main()** function:
 
 	void main(string[] args)
 	{
@@ -18,6 +22,8 @@ When you look at the imperative test rig alongside the OOP version, it becomes q
 	} // main()
 
 On line 2 of **main()**, the window declaration is quite different because instead of instantiating the *MainWindow* class directly, there’s a derived class called *TestRigWindow*. Other than that, everyone else is the same, so let’s move on.
+
+## quitApp()
 
 **quitApp()** is no longer a standalone function as it’s been incorporated into the *TestRigWindow* class which looks like this:
 
@@ -45,7 +51,7 @@ On line 2 of **main()**, the window declaration is quite different because inste
 	
 	} // class myAppWindow
 
-The first function is the constructor. D uses **this()** instead of  the class name (Java) or construct() (PHP) and inside we:
+The first function is the constructor. D uses **this()** instead of  the class name (like Java) or **construct()** (like PHP) and inside we:
 
  - call **super()**, a shorthand for calling the parent class’s constructor,
  -	while passing along the window’s title, and

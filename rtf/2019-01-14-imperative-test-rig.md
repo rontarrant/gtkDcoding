@@ -1,8 +1,8 @@
-#0001 - The Test Rig
+# 0001 - The Test Rig
 
 Before we start examining the test rig code…
 
-##PS Pad and CodeBlocks Syntax Highlighters
+## PS Pad and CodeBlocks Syntax Highlighters
 
 If you haven’t settled on an editor with support for D, I’d like to make a couple of recommendations. I’ve written lexers for GtkD for two text editors, PSPad and CodeBlocks. You can find them along with instructions for where to install them in the downloads directory on my GitHub site.
 
@@ -82,7 +82,7 @@ And here we hand control over to GTK’s main loop. In a nutshell, the main loop
 
 And this is the end of the **main()** function. I like to mark the ends of all functions with a comment stating the function’s name in case it’s off screen. No point scrolling back up if I don’t have to.
 
-##Callback Function
+## Callback Function
 
 	void quitApp()
 
