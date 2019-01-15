@@ -4,7 +4,7 @@ Before we start examining the test rig code…
 
 ## PS Pad and CodeBlocks Syntax Highlighters
 
-If you haven’t settled on an editor with support for D, I’d like to make a couple of recommendations. I’ve written lexers for GtkD for two text editors, PSPad and CodeBlocks. You can find them along with instructions for where to install them in the downloads directory on my GitHub site.
+If you haven’t settled on an editor with support for D, I’d like to make a couple of recommendations. I’ve written lexers for GtkD for two text editors, PSPad and CodeBlocks. You can find them along with instructions for where to install them in the [downloads directory](https://github.com/rontarrant/gtkDcoding/blob/master/downloads/syntax_ps_pad_codeblocks.zip) on my GitHub site.
 
 ## The Test Rig Code
 This version of the test rig is written in the imperative paradigm. There’s a second one we’ll look at next time that’s written for OOP. And now here’s a breakdown of the test rig code:
