@@ -5,7 +5,7 @@ private import gtk.Entry;
 private import gtk.CheckButton;
 private import gtk.Button;
 private import gtk.Label;
-private import gtk.Table;
+private import gtk.Grid;
 
 // private import glib.Str;
 
@@ -13,7 +13,7 @@ private import std.stdio;
 /**
  * This tests the GtkD Entry widget
  */
-class TestEntries : Table
+class TestEntries : Grid
 {
 	/**
 	 * Our main widget to test
@@ -23,28 +23,29 @@ class TestEntries : Table
 	// constructor
 	this()
 	{
-		super(3, 2, false);
+		super();
 
 		// create the main test widget
 		entry = new Entry("Change me!");
-		attach(new Label("Input text"), 0, 1, 0, 1, AttachOptions.SHRINK, AttachOptions.SHRINK, 4, 4);
-		attach(entry, 1, 2, 0, 1, AttachOptions.EXPAND, AttachOptions.EXPAND, 4, 4);
+		Label entryLabel = new Label("Input text");
+		attach(entryLabel, 0, 0, 1, 1);
+		attach(entry, 1, 0, 2, 1);
 
 		// create a button that will print the content of the entry to stdout
 		Button testButton = new Button("Show entry", &showEntry);
-		attach(testButton, 2, 3, 0, 1, AttachOptions.SHRINK, AttachOptions.SHRINK, 4, 4);
+		attach(testButton, 3, 0, 1, 1);
 		//testButton.setTooltip("This is just a test",null);
 
 		// create a button that will change the entry display mode to invisible
 		// i.e. like a password entry
 		CheckButton entryVisible = new CheckButton("Visible", &entryVisible);
 		entryVisible.setActive(true);
-		attach(entryVisible, 2, 3, 1, 2, AttachOptions.SHRINK, AttachOptions.SHRINK, 4, 4);
+		attach(entryVisible, 0, 1, 2, 1);
 
 		// create a button that will change the entry mode to not editable
 		CheckButton entryEditable = new CheckButton("Editable", &entryEditable);
 		entryEditable.setActive(true);
-		attach(entryEditable, 1, 2, 1, 2, AttachOptions.SHRINK, AttachOptions.SHRINK, 4, 4);
+		attach(entryEditable, 2, 1, 2, 1);
 	} // this()
 
 
