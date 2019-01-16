@@ -8,7 +8,7 @@ If you haven’t settled on an editor with support for D, I’d like to make a c
 
 ## The Test Rig Code
 
-The code file for this entry is available [here](https://github.com/rontarrant/gtkDcoding/blob/master/001_window/test_rig_001_imperative.d).
+The code file for this entry is available [here](https://github.com/rontarrant/gtkDcoding/blob/master/001_window/test_rig_001_01_imperative.d).
 
 This version of the test rig is written in the imperative paradigm. There’s a second one we’ll look at next time that’s written for OOP. And now here’s a breakdown of the test rig code:
 

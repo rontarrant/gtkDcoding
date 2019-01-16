@@ -124,7 +124,7 @@ void quitApp()
 	
 } // quitApp()
 ````
-(This code can be found online at: [Test Rig Code - Imperative](https://github.com/rontarrant/gtkDcoding/blob/master/001_window/test_rig_001_imperative.d)
+(This code can be found online at: [Test Rig Code - Imperative](https://github.com/rontarrant/gtkDcoding/blob/master/001_window/test_rig_001_01_imperative.d)
 
 Save this as test_rig_imperative.d (or whatever you want, really) and compile it thusly:
 
