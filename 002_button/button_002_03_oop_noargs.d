@@ -49,17 +49,17 @@ class TestRigWindow : MainWindow
 } // class TestRigWindow
 
 
-class MyButton : Button
+class MyButton : Button                                // *** NEW ***
 {
 	this(string label)
 	{
 		super(label);
-		addOnClicked(&buttonAction);                                // *** NEW ***
+		addOnClicked(&buttonAction);
 		
 	} // this()
 	
 	
-	void buttonAction(Button b)                                    // *** NEW ***
+	void buttonAction(Button b)
 	{
 		writeln("Action taken.");
 		
