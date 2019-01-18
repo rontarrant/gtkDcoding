@@ -51,18 +51,19 @@ class TestRigWindow : MainWindow
  
 class MyButton : Button
 {
+private:
 	this(string label)
 	{
-		string message = "Next time, don't bring the Wookie.";                                // *** NEW ***
+		string message = "Next time, don't bring the Wookie.";                    // *** NEW ***
 		
 		super(label);
 		//addOnClicked(delegate void(Button b) { buttonAction(message); });
-		addOnClicked(delegate void(_) { buttonAction(message); });                                // *** NEW ***
+		addOnClicked(delegate void(_) { buttonAction(message); });                // *** NEW ***
 		
 	} // this()
 	
 	
-	void buttonAction(string message)                                // *** NEW ***
+	void buttonAction(string message)                                            // *** NEW ***
 	{
 		writeln("The message is: ", message);
 		

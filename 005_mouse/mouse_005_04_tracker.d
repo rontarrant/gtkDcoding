@@ -31,7 +31,7 @@ class TestRigWindow : MainWindow
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		// make the window sensitive to mouse clicking (any button)
+		// make the callback sensitive to mouse movement
 		addOnMotionNotify(&onMotion);                                             // *** NEW ***
 		
 		// Show the window and its contents...
@@ -50,6 +50,7 @@ class TestRigWindow : MainWindow
 
 	public bool onMotion(Event event, Widget widget)                             // *** NEW ***
 	{
+		// make sure we're not reacting to the wrong event
 		if(event.type == EventType.MOTION_NOTIFY)
 		{
 			writeln("x = ", event.motion.x, " y = ", event.motion.y);
