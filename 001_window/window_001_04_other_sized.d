@@ -78,7 +78,7 @@ class ResizeButton : Button                                                     
 			// The effect here is to set a minimum size and it can't be made smaller
 			// after this condition becomes true.
 			writeln("Minimum size is now set. You can shrink it, but not below the minimum size.");
-			window.setSizeRequest(640, 480);
+			window.setSizeRequest(-1, -1);
 		}
 	}
 } // class ResizeButton

@@ -13,13 +13,13 @@ void main(string[] args)
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
 	
-	CenterButton centerButton = new CenterButton(myTestRig);
-	ToMouseButton toMouseButton = new ToMouseButton(myTestRig);
+	LeftButton leftButton = new LeftButton(myTestRig);
+	RightButton rightButton = new RightButton(myTestRig);
 	
 	Box box = new Box(Orientation.VERTICAL, 5);
 	
-	box.add(toMouseButton);
-	box.add(centerButton);
+	box.add(leftButton);
+	box.add(rightButton);
 	myTestRig.add(box);
 	
 	// Show the window and its contents...
@@ -57,7 +57,7 @@ class TestRigWindow : MainWindow
 } // class myAppWindow
 
 
-interface PositionButton
+interface PositionButton                                                        // *** NOTE ***
 {
 	// Derived buttons will use one of the enum WindowPosition values:
 	// 	NONE = No influence is made on placement
@@ -71,11 +71,11 @@ interface PositionButton
 } // interface PositionButton
 
 
-class CenterButton : Button, PositionButton
+class LeftButton : Button, PositionButton
 {
 	this(MainWindow window)
 	{
-		super("Center Window");
+		super("Left");
 		addOnClicked(delegate void(Button b) { moveWindow(window); });
 		
 	} // this()
@@ -83,19 +83,21 @@ class CenterButton : Button, PositionButton
 
 	void moveWindow(MainWindow window)
 	{
-		writeln("Centering the window...");
-		window.move(WindowPosition.CENTER);
+		int x, y;
+		window.getPosition(x, y);
+		writeln("window position: x = ", x, "y = ", y);
+		window.move(x - 40, y - 60);
 		
-	} // moveWindow()
+	} // moveWindowLeft()
 
-} // class CenterButton
+} // class LeftButton
 
 
-class ToMouseButton : Button, PositionButton
+class RightButton : Button, PositionButton
 {
 	this(MainWindow window)
 	{
-		super("Move to Mouse");
+		super("Right");
 		addOnClicked(delegate void(Button b) { moveWindow(window); });
 		
 	} // this()
@@ -103,9 +105,11 @@ class ToMouseButton : Button, PositionButton
 	
 	void moveWindow(MainWindow window)
 	{
-		writeln("Moving the window to the mouse position...");
-		window.move(45, 60);
+		int x, y;
+		window.getPosition(x, y);
+		writeln("window position: x = ", x, "y = ", y);
+		window.move(x + 40, y + 60);
 		
-	} // moveWindow()
+	} // moveWindowRight()
 
-} // class ToMouseButton
+} // class RightButton
