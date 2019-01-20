@@ -66,12 +66,14 @@ class ColorBox : Box                                                            
 	{
 		super(orientation, padding);
 		observedColor = new ObservedColor();
-	
+		
+		// create the buttons
 		SetColorButton colorButton = new SetColorButton(observedColor);
 		FetchColorButton fetchColorButton = new FetchColorButton("Show Color", observedColor);
 		ResetColorButton resetColorButton = new ResetColorButton("Reset Color", observedColor, colorButton);
+		// stuff them into an array...
 		buttons = [colorButton, fetchColorButton, resetColorButton];
-		
+		// so we can do this:
 		foreach(button; buttons)
 		{
 			add(button);
@@ -100,19 +102,10 @@ class SetColorButton : ColorButton                                              
 	{
 		RGBA rgba;
 		getRgba(rgba);
-		
 		myColor.setColor(rgba);
 		
-	} // buttonAction()
-	
-	
-	void setObservedColor(RGBA rgba)
-	{
-		myColor.color = rgba;
-		setRgba(rgba);
-		
 	} // setObservedColor()
-	
+
 } // class SetColorButton
 
 
