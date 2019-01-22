@@ -59,13 +59,6 @@ class TestRigWindow : MainWindow
 
 interface PositionButton                                                        // *** NOTE ***
 {
-	// Derived buttons will use one of the enum WindowPosition values:
-	// 	NONE = No influence is made on placement
-	// 	CENTER = Window should be placed in the center of the screen
-	// 	MOUSE = Window should be placed at the current mouse position
-	// 	CENTER_ALWAYS = Keep window centered as it changes size, etc.
-	// 	CENTER_ON_PARENT = Center the window on its transient
-
 	void moveWindow(MainWindow window);
 	
 } // interface PositionButton
