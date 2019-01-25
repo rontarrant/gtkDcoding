@@ -38,7 +38,7 @@ class TestRigWindow : MainWindow
 		add(myButt);                                                // *** NEW ***
 		
 		// Show the window and its contents...
-		showAll();
+//		showAll();
 		
 	} // this() CONSTRUCTOR
 	
