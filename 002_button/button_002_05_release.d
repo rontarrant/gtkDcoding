@@ -28,7 +28,6 @@ void main(string[] args)
 class TestRigWindow : MainWindow
 {
 	string windowTitle = "Test Rig";
-	string buttonCaption = "My Butt";
 	string departingMessage = "Bye.";
 	
 	this(/* NO ARGS */)
