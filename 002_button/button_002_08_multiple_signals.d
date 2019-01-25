@@ -11,7 +11,7 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow myTestRig = new TestRigWindow();
 	
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -24,13 +24,16 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)                                             // *** NEW ***
+	string title = "Test Rig";
+	string bye = "Bye, bye.";
+	
+	this()                                             // *** NEW ***
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// a button that does something
-		MyButton myButt = new MyButton("My Butt");                  // *** NEW ***
+		MyButton myButt = new MyButton();                  // *** NEW ***
 		add(myButt);
 	
 		// Show the window and its contents...
@@ -41,7 +44,8 @@ class TestRigWindow : MainWindow
 	
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(bye);
+		
 		Main.quit();
 		
 	} // quitApp()
@@ -51,7 +55,9 @@ class TestRigWindow : MainWindow
 
 class MyButton : Button                                           // *** NEW ***
 {
-	this(string label)                                             // *** NEW ***
+	string label = "My Butt";
+	
+	this()                                                         // *** NEW ***
 	{
 		super(label);
 		addOnClicked(&clickReport);                                 // *** NEW ***

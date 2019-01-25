@@ -14,13 +14,7 @@ import gtk.CheckButton;                                                         
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
-
-	AddBox myBox = new AddBox();
-	myTestRig.add(myBox);
-
-	// Show the window and its contents...
-	myTestRig.showAll();
+	TestRigWindow myTestRig = new TestRigWindow();
 
 	// give control over to gtkD.
 	Main.run();
@@ -30,18 +24,25 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	string byeBye = "Bye, y'all.";
+	
+	this()
 	{
 		super(title);
-		
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
+		AddBox myBox = new AddBox();
+		add(myBox);
+
+		showAll();
+
 	} // this() CONSTRUCTOR
 	
 	
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(byeBye);
 		Main.quit();
 		
 	} // quitApp()
@@ -51,24 +52,24 @@ class TestRigWindow : MainWindow
 
 class AddBox : Box
 {
-	Observed switcher;                                                                  // *** NEW ***
+	Observed switcher;                                                           // *** NEW ***
 	
 	this()
 	{
 		super(Orientation.VERTICAL, 5);
 
-		switcher = new Observed();                                                       // *** NEW ***
+		switcher = new Observed();                                                // *** NEW ***
 		
-		MyCheckButton switchOutputButton = new MyCheckButton("Change Output", switcher); // *** NEW ***
-		ActionButton actionButton = new ActionButton("Take Action", switcher);           // *** NEW ***
+		MyCheckButton switchOutputButton = new MyCheckButton(switcher);           // *** NEW ***
+		ActionButton actionButton = new ActionButton(switcher);                   // *** NEW ***
 		
-		add(actionButton);                                                               // *** NEW ***
-		add(switchOutputButton);                                                         // *** NEW ***
+		add(actionButton);                                                        // *** NEW ***
+		add(switchOutputButton);                                                  // *** NEW ***
 		
 	} // this()
 
 	
-	void changeOutput()                                                                 // *** NEW ***
+	void changeOutput()                                                          // *** NEW ***
 	{
 		
 	} // changeOutput()
@@ -78,13 +79,15 @@ class AddBox : Box
 
 class ActionButton : Button
 {
+	string label = "Take Action";
+	
 	string standardMessage = "Droids? We don't need no stinking droids!";        // *** NEW ***
 	string switchMessage = "These aren't the droids you're looking for.";        // *** NEW ***
 	Observed switcher;                                                           // *** NEW ***
 
-	this(string labelText, Observed extSwitcher)                                 // *** NEW ***
+	this(Observed extSwitcher)                                 // *** NEW ***
 	{
-		super(labelText);
+		super(label);
 		addOnClicked(&doSomething);
 		switcher = extSwitcher;
 		
@@ -109,9 +112,11 @@ class ActionButton : Button
 
 class MyCheckButton : CheckButton                                 // *** NEW ***
 {
+	string label = "Change Output";
+	
 	Observed switcher;
 	
-	this(string label, Observed extSwitcher)
+	this(Observed extSwitcher)
 	{
 		super(label, &setObserved);
 		switcher = extSwitcher;

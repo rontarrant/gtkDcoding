@@ -14,7 +14,7 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig OOP - Pass Args", args);
+	TestRigWindow myTestRig = new TestRigWindow(args);
 	
 	// Show the window and its contents...
 	myTestRig.showAll();                                           // *** NEW ***
@@ -27,12 +27,15 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title, string[] args)
+	string title = "Test Rig OOP - Pass Args";
+	string sayBye = "Bye";
+	
+	this(string[] args)
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );      // *** NEW ***
 		
-		MyArgsButton myButton = new MyArgsButton("Show Args", args);
+		MyArgsButton myButton = new MyArgsButton(args);
 		add(myButton);
 		
 		// Show the window and its contents...
@@ -43,7 +46,8 @@ class TestRigWindow : MainWindow
 	
 	void quitApp()                                                 // *** NEW ***
 	{
-		writeln("Bye.");
+		writeln(sayBye);
+		
 		Main.quit();
 
 	} // quitApp()
@@ -52,20 +56,26 @@ class TestRigWindow : MainWindow
 
 class MyArgsButton : Button                                       // *** NEW ***
 {
-	this(string labelText, string[] args)
+	string labelText = "Show Args";
+	
+	this(string[] args)
 	{
 		super(labelText);
-		// addOnButtonRelease(&onButtonRelease);                                  // *** NEW ***
+		
+		// addOnButtonRelease(&onButtonRelease);                                                                  // *** NEW ***
 		addOnButtonRelease(delegate bool(Event e, Widget w){ buttonAction(args); return false; } );               // *** NEW ***
 		
 	} // this()
 	
 	
-	public bool buttonAction(string[] buttonArgs)                                // *** NEW ***
+	public bool buttonAction(string[] buttonArgs)                                                                // *** NEW ***
 	{
 		foreach(arg; buttonArgs)
 		{
-			writeln("arg: ", arg);
+			if(arg != buttonArgs[0])                                               // *** NEW *** skip arg 0, it's the name of the program
+			{
+				writeln("\t", arg);
+			}
 		}
 
 		return(true);

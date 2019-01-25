@@ -13,16 +13,7 @@ import gtk.Box;                                                   // *** NEW ***
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
-	
-	ActionButton button01 = new ActionButton("Button 01");         // *** NEW ***
-	auto button02 = new ActionButton("Button 02");                 // *** NEW ***
-	auto button03 = new ActionButton("Button 03");                 // *** NEW ***
-	
-	ActionButton[] buttons = [button01, button02, button03];       // *** NEW ***
-	
-	AddBox myBox = new AddBox(buttons);                            // *** NEW ***
-	myTestRig.add(myBox);                                          // *** NEW ***
+	TestRigWindow myTestRig = new TestRigWindow();
 
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -36,11 +27,16 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	
+	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
+		AddBox myBox = new AddBox();                            // *** NEW ***
+		add(myBox);                                             // *** NEW ***
+
 	} // this() CONSTRUCTOR
 	
 	
@@ -56,13 +52,21 @@ class TestRigWindow : MainWindow
 
 class AddBox : Box                                                // *** NEW ***
 {
-	this(ActionButton[] buttons)
+	string[] labels = ["Button 01", "Button 02", "Button 03"];
+	ActionButton[] buttons;
+	
+	this()
 	{
-		super(Orientation.VERTICAL, 5);
+		int buttonCount = 0;
 		
-		foreach(Button button; buttons)
+		super(Orientation.VERTICAL, 5);
+
+		foreach(label; labels)
 		{
-			add(button);
+			ActionButton button = new ActionButton(label);
+			buttons ~= button;
+			add(buttons[buttonCount]);
+			buttonCount += 1;
 		}
 		
 	} // this()

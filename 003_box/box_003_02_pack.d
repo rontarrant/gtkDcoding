@@ -13,20 +13,7 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
-	
-	ActionButton myButton01 = new ActionButton("First Button");
-	auto myButton02 = new ActionButton("Second Button");
-	auto myButton03 = new ActionButton("Third Button");
-
-	ActionButton[] buttons = [myButton01, myButton02, myButton03];
-	
-	PackBox myBox = new PackBox(buttons);                          // *** NEW ***
-	myTestRig.add(myBox);
-	
-	// Show the window and its contents...
-	myTestRig.showAll();
-	
+	TestRigWindow myTestRig = new TestRigWindow();
 	
 	// give control over to gtkD.
 	Main.run();
@@ -36,12 +23,18 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	
+	this()
 	{
 		super(title);
-		
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
+		PackBox myBox = new PackBox();
+		add(myBox);
+		
+		showAll(); // Let's try this from in here this time                       *** NEW ***
+
 	} // this() CONSTRUCTOR
 	
 	
@@ -57,12 +50,19 @@ class TestRigWindow : MainWindow
 
 class PackBox : Box
 {
-	this(ActionButton[] buttons)
+	string[] labels = ["First Button", "Second Button", "Third Button"];
+	ActionButton[] buttons;
+	
+	this()
 	{
+		int countButts = 0;
+		
 		super(Orientation.VERTICAL, 5); // top to bottom, widget spacing: 5
 		
-		foreach(Button button; buttons)
+		foreach(label; labels)
 		{
+			ActionButton button = new ActionButton(label);
+			buttons ~= button;
 			packStart(button, true, true, 0);                        // *** NEW ***
 		}
 
@@ -78,7 +78,6 @@ class ActionButton : Button
 		super(buttonLabel);
 		addOnButtonRelease(&doSomething);
 		
-		
 	} // this()
 	
 	
@@ -90,4 +89,4 @@ class ActionButton : Button
 		
 	} // doSomething()
 	
-} // class AddButton
+} // class ActionButton

@@ -14,7 +14,7 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig OOP", args);
+	TestRigWindow myTestRig = new TestRigWindow(args);
 	
 	// give control over to the gtkD .
 	Main.run();
@@ -24,12 +24,15 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title, string[] args)
+	string title = "Test Rig OOP";
+	string departureMessage = "Bye.";
+	
+	this(string[] args)
 	{
 		super(title);
 		addOnDestroy(&quitApp);                                     // *** NEW ***
 		
-		MyButton button = new MyButton("Click this", args);
+		MyButton button = new MyButton(args);
 		add(button);
 	
 		// Show the window and its contents...
@@ -40,7 +43,8 @@ class TestRigWindow : MainWindow
 	
 	void quitApp(Widget w)                                         // *** NEW ***
 	{
-		writeln("Bye.");
+		writeln(departureMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
@@ -50,7 +54,9 @@ class TestRigWindow : MainWindow
  
 class MyButton : Button
 {
-	this(string label, string[] args)
+	string label = "Click This...";
+	
+	this(string[] args)
 	{
 		super(label);
 		// Either of the two following lines will do the job at hand. The first
@@ -68,10 +74,7 @@ class MyButton : Button
 
 		foreach(arg; args)
 		{
-			if(arg != args[0])
-			{
-				writeln("\t", arg);
-			}
+			writeln("\t", arg);
 		}
 		
 	} // buttonAction()

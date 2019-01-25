@@ -12,7 +12,7 @@ import gtk.ToggleButton;                                          // *** NEW ***
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow myTestRig = new TestRigWindow();
 
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -25,10 +25,12 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	string greeting = "Hello GtkD World.";
+	string ungreeting = "Bye, bye, GtkD World.";
+	
+	this()
 	{
-		Button[] buttons;
-		
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
@@ -40,13 +42,14 @@ class TestRigWindow : MainWindow
 	
 	void sayHi()
 	{
-		writeln("Hello GtkD World."); // appears in the console, not the GUI
+		writeln(greeting); // appears in the console, not the GUI
 	}
 	
 	
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(ungreeting);
+		
 		Main.quit();
 		
 	} // quitApp()
@@ -65,8 +68,8 @@ class AddBox : Box
 		// set up observer/observed to sync up the buttons
 		observed = new Observed();
 		
-		ActionButton myActionButton = new ActionButton("Take Action", observed);
-		MyToggleButton myToggle = new MyToggleButton("Toggle", observed);         // *** NEW ***
+		ActionButton myActionButton = new ActionButton(observed);
+		MyToggleButton myToggle = new MyToggleButton(observed);                   // *** NEW ***
 		add(myActionButton);
 		add(myToggle);
 		
@@ -77,9 +80,11 @@ class AddBox : Box
 
 class ActionButton : Button
 {
+	string label = "Take Action";
+	
 	Observed observed;
 
-	this(string label, Observed extObserved)
+	this(Observed extObserved)
 	{
 		super(label);
 		observed = extObserved;
@@ -90,13 +95,15 @@ class ActionButton : Button
 	
 	void outputSomething(Button b)                                               // *** NEW ***
 	{
+		write("observedState = ", observed.observedState, ": ");
+		
 		if(observed.getState()) // if it's 'true'
 		{
-			writeln("observedState = ", observed.observedState, " Walls make good neighbours, eh.");
+			writeln("Walls make good neighbours, eh.");
 		}
 		else
 		{
-			writeln("observedState = ", observed.observedState, " Berlin doesn't like walls.");
+			writeln("Berlin doesn't like walls.");
 		}
 	}
 } // class ActionButton
@@ -104,14 +111,20 @@ class ActionButton : Button
 
 class MyToggleButton : ToggleButton                                             // *** NEW ***
 {
+	string onText = "Toggle is on.";
+	string offText = "Toggle is off.";
+	string label = "Toggle";
+	
 	Observed observed;
 
-	this(string label, Observed extObserved)
+	this(Observed extObserved)
 	{
 		super(label);
 		addOnClicked(&toggleMode);
 		setMode(true);
+		
 		observed = extObserved;
+		writeln(onText);
 		
 	} // this()
 	
@@ -122,13 +135,13 @@ class MyToggleButton : ToggleButton                                             
 		{
 			setMode(false);
 			observed.setState(false);
-			writeln("Toggle is off.");
+			writeln(offText);
 		}
 		else
 		{
 			setMode(true);
 			observed.setState(true);
-			writeln("Toggle is on.");
+			writeln(onText);
 		}
 	
 	} // report()
