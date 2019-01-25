@@ -14,7 +14,7 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");       // *** NEW ***
+	TestRigWindow myTestRig = new TestRigWindow();       // *** NEW ***
 	
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -27,25 +27,26 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string windowTitle = "Test Rig";
+	string buttonCaption = "My Butt";
+	string departingMessage = "Bye.";
+	
+	this(/* NO ARGS */)
 	{
 		// window
-		super(title);
+		super(windowTitle);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// a button that does something
-		MyButton myButt = new MyButton("My Butt");                  // *** NEW ***
+		MyButton myButt = new MyButton(buttonCaption);                  // *** NEW ***
 		add(myButt);                                                // *** NEW ***
-		
-		// Show the window and its contents...
-//		showAll();
 		
 	} // this() CONSTRUCTOR
 	
 	
 	void quitApp()                                                 // *** NEW ***
 	{
-		writeln("Bye.");
+		writeln(departingMessage);
 		Main.quit();
 		
 	} // quitApp()
@@ -55,6 +56,9 @@ class TestRigWindow : MainWindow
 
 class MyButton : Button
 {
+	string buttonCaption = "My Butt";
+	string actionMessage = "Action was taken.";
+	
 	this(string label)
 	{
 		super(label);
@@ -65,7 +69,7 @@ class MyButton : Button
 	
 	bool takeAction(Event event, Widget widget)                    // *** NEW ***
 	{
-		writeln("Action was taken.");
+		writeln(actionMessage);
 		
 		return(false);
 		
