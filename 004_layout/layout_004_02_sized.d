@@ -12,13 +12,9 @@ import gtk.Layout;                                                // *** NEW ***
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	
-	// give control over to gtkD.
+	TestRigWindow myTestRig = new TestRigWindow();
+
 	Main.run();
 	
 } // main()
@@ -26,22 +22,18 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	
+	this()
 	{
-		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
-
-		auto myButton = new MyButt("Button Name");
-		auto myOtherButton = new MyOtherButt("Other Button Name");
-		
-		// set the sizes
-		myButton.setSizeRequest(160, 60);
-		myOtherButton.setSizeRequest(160, 60);
-		
+	
 		// layout
-		auto myLayout = new MyLayout(myButton, myOtherButton);      // *** NEW ***
+		auto myLayout = new MyLayout();                             // *** NEW ***
 		add(myLayout);                                              // *** NEW ***
+
+		showAll();
 
 	} // this() CONSTRUCTOR
 	
@@ -58,11 +50,15 @@ class TestRigWindow : MainWindow
 
 class MyLayout : Layout                                           // *** NEW ***
 {
-	this(MyButt myButton, MyOtherButt otherButton)
+	this()
 	{
 		super(null, null);
+		
+		auto myButton = new MyButt();
+		auto myOtherButton = new MyOtherButt();
+
 		put(myButton, 20, 20);
-		put(otherButton, 20, 100);
+		put(myOtherButton, 20, 100);
 		
 	} // this()
 	
@@ -71,17 +67,23 @@ class MyLayout : Layout                                           // *** NEW ***
 
 class MyButt : Button
 {
-	this(string labelText)
+	string labelText = "Button Name";
+	string actionMessage = "Something was done.";
+	
+	this()
 	{
 		super(labelText);
+		
 		addOnButtonRelease(&doSomething);
 		
+		setSizeRequest(160, 60);
+				
 	} // this()
 	
 	
 	bool doSomething(Event e, Widget w)
 	{
-		writeln("Something was done.");
+		writeln(actionMessage);
 		
 		return(true);
 		
@@ -92,18 +94,23 @@ class MyButt : Button
 
 class MyOtherButt : Button
 {
-	this(string labelText)
+	string labelText = "Other Button Name";
+	string message = "Something other than that was done.";
+		
+	this()
 	{
 		super(labelText);
-		string message = "Something other than that was done.";
-		addOnClicked(delegate void(_) { doSomething(message); } );
 		
+		addOnClicked(delegate void(_) { doSomething(); } );
+		
+		setSizeRequest(160, 60);
+				
 	} // this()
 	
 	
-	void doSomething(string messageText)
+	void doSomething()
 	{
-		writeln(messageText);
+		writeln(message);
 		
 	} // doSomething()
 

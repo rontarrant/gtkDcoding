@@ -10,48 +10,96 @@ import gtk.Button;
 void main(string[] args)
 {
 	Main.init(args);
-	MainWindow mainWindow = new MainWindow("Pretty Label");
+	
+	TestRigWindow testRigWindow = new TestRigWindow();
 
-	// create a markup-switching button
-	MarkupSwitchButton button = new MarkupSwitchButton("<i>Fancy</i> <b>Schmancy</b>");
-
-	mainWindow.add(button);
-
-	mainWindow.showAll();
 	Main.run();
 	
 } // main()
 
 
-class MarkupSwitchButton : Button
+class TestRigWindow : MainWindow
 {
-	Label label;
+	string title = "Pretty Label";
+	MarkupSwitchButton button;
 	
-	this(string markupText)
+	this()
 	{
-		super();
-		label = new Label(markupText);
-		label.setUseMarkup(true);
-		add(label);
-		
-		addOnClicked(&markupSwitch);
+		super(title);
 
+		button = new MarkupSwitchButton();                     // *** NEW ***
+		add(button);
+	
+		showAll();
+		
 	} // this()
 	
+} // class TestRigWindow
+
+
+class MarkupSwitchButton : Button
+{
+	MarkupLabel muLabel;
+	
+	this()
+	{
+		super();
+		muLabel = new MarkupLabel();
+		add(muLabel);
+		
+		addOnClicked(&switchStuff);
+
+	} // this()
+
+
+	void switchStuff(Button b)
+	{
+		muLabel.markupSwitch();
+		
+	} // switchStuff()
+	
+} // class MarkupSwitchButton
+
+
+class MarkupLabel : Label
+{
+	string markupText = "<i>Fancy</i> <b>Schmancy</b>";
+	string onMessage = "Markup is ON.";
+	string offMessage = "Markup is OFF.";
+	string currentStateMessage;
+	
+	this()
+	{
+		super(markupText);
+		setUseMarkup(true);
+		currentStateMessage = onMessage;
+		markupState();
+		
+	} // this()
 	
 	// a function to turn markup on and off
-	void markupSwitch(Button b)
+	void markupSwitch()	                                                        // *** NEW ***
 	{
-		if(label.getUseMarkup() == true)
+		if(getUseMarkup() == true)
 		{
-			writeln("turning it off");
-			label.setUseMarkup(false);
+			setUseMarkup(false);
+			currentStateMessage = offMessage;
 		}
 		else
 		{
-			writeln("turning it off");
-			label.setUseMarkup(true);
+			setUseMarkup(true);
+			currentStateMessage = onMessage;
 		}
+
+		markupState();
+
 	} // markupSwitch()
 	
-} // class MarkupSwitchButton
+	
+	void markupState()
+	{
+		writeln(currentStateMessage);
+		
+	} // markupState()
+
+} // class MarkupLabel

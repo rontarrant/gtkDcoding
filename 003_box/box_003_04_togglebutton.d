@@ -12,12 +12,9 @@ import gtk.ToggleButton;                                          // *** NEW ***
 void main(string[] args)
 {
 	Main.init(args);
+
 	TestRigWindow myTestRig = new TestRigWindow();
 
-	// Show the window and its contents...
-	myTestRig.showAll();
-	
-	// give control over to gtkD.
 	Main.run();
 	
 } // main()
@@ -36,6 +33,8 @@ class TestRigWindow : MainWindow
 		
 		AddBox addBox = new AddBox();
 		add(addBox);
+		
+		showAll();
 		
 	} // this() CONSTRUCTOR
 	
@@ -113,7 +112,8 @@ class MyToggleButton : ToggleButton                                             
 {
 	string onText = "Toggle is on.";
 	string offText = "Toggle is off.";
-	string label = "Toggle";
+	string label = "Toggle: ON";
+	string altLabel = "Toggle: OFF";
 	
 	Observed observed;
 
@@ -136,12 +136,14 @@ class MyToggleButton : ToggleButton                                             
 			setMode(false);
 			observed.setState(false);
 			writeln(offText);
+			setLabel(altLabel);
 		}
 		else
 		{
 			setMode(true);
 			observed.setState(true);
 			writeln(onText);
+			setLabel(label);
 		}
 	
 	} // report()

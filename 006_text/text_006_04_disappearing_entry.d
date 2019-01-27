@@ -16,9 +16,9 @@ import gtk.ToggleButton;                                                        
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow testRig = new TestRigWindow("Entry example");
+
+	TestRigWindow testRig = new TestRigWindow();
 	
-	testRig.showAll();
 	Main.run();
 	
 } // main()
@@ -26,16 +26,20 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string titleText = "Disappearing Entry";
+	
 	EntryBox entryBox;
 		
-	this(string titleText)
+	this()
 	{
 		super(titleText);
 		addOnDestroy(&endProgram);
 		
 		entryBox = new EntryBox();
 		add(entryBox);
-		
+
+		showAll();
+				
 	} // this()
 	
 	
@@ -53,6 +57,7 @@ class EntryBox : Box
 	int padding = 5;
 	Entry entry;
 	CheckButton checkButton;
+	string checkText = "Visible";
 	
 	this()
 	{
@@ -60,7 +65,7 @@ class EntryBox : Box
 		entry = new Entry();
 		entry.setEditable(true);
 		
-		checkButton = new CheckButton("Visible");
+		checkButton = new CheckButton(checkText);
 		checkButton.addOnToggled(&entryVisible);
 		checkButton.setActive(true);
 				

@@ -11,14 +11,10 @@ import gtk.c.types;
 
 void main(string[] args)
 {
-	// initialization & creation
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD
+	TestRigWindow myTestRig = new TestRigWindow();
+	
 	Main.run();
 	
 } // main()
@@ -26,9 +22,11 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	string byeBye = "Bye, bye.";
+	
+	this()
 	{
-		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
@@ -43,7 +41,8 @@ class TestRigWindow : MainWindow
 
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(byeBye);
+		
 		Main.quit();
 
 	} // quitApp()
@@ -68,4 +67,4 @@ class TestRigWindow : MainWindow
 
 	} // onScroll()
 
-} // class myAppWindow
+} // class TestRigWindow

@@ -1,4 +1,5 @@
 // switch the button's image each time it's clicked
+// a study in propagation/fall-through
 
 import std.stdio;
 
@@ -14,15 +15,9 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
-	
-	ImageButton myButt = new ImageButton();
-	myTestRig.add(myButt);
-	
-	// Show the window and its contents...
-	myTestRig.showAll();
 
-	// give control over to gtkD.
+	TestRigWindow myTestRig = new TestRigWindow();
+
 	Main.run();
 	
 } // main()
@@ -30,11 +25,18 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	
+	this()
 	{
 		super(title);
 		
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
+		
+		ImageButton myButt = new ImageButton();
+		add(myButt);
+
+		showAll();
 		
 	} // this() CONSTRUCTOR
 	
@@ -51,70 +53,116 @@ class TestRigWindow : MainWindow
 
 class ImageButton : Button                                                      // *** NEW ***
 {
-	Box myBox;
-	SwitchingLabel mySwitchingLabel;
-	SwitchingImage mySwitchingImage;
+	InnerBox innerBox;
 	
 	this()
 	{
 		super();
 		
-		// add a multi-widget container
-		myBox = new Box(Orientation.VERTICAL, 10); // orientation, padding
-		add(myBox);
+		innerBox = new InnerBox(); // orientation, padding
+		add(innerBox);
 		
-		// and fill it
-		mySwitchingLabel = new SwitchingLabel();                                  // *** NEW ***
-		mySwitchingImage = new SwitchingImage();                                  // *** NEW ***
-		myBox.add(mySwitchingLabel);
-		myBox.add(mySwitchingImage);
-		
-		// finally, hook it up
-		addOnButtonRelease(&switchThings);
+		addOnButtonRelease(&changeBoth);
 		
 	} // this()
 
 
-	bool switchThings(Event event, Widget widget)                                // *** NEW ***
+	bool changeBoth(Event event, Widget widget)                                // *** NEW ***
 	{
-		if(mySwitchingLabel.getText() == "Apples")
-		{
-			mySwitchingLabel.setText("Oranges");
-			mySwitchingImage.setFromFile("images/oranges.jpg");
-
-			//box.image.
-		}
-		else
-		{
-			mySwitchingLabel.setText("Apples");
-			mySwitchingImage.setFromFile("images/apples.jpg");
-		}
-		//add(image);
-	
+		innerBox.changeBoth();	
 		
 		return(true);
 		
-	} // switchThings()
+	} // changeBoth()
 
 } // class ImageButton
 
 
-class SwitchingImage : Image                                                    // *** NEW ***
+class InnerBox : Box
 {
+	SwitchLabel switchLabel;
+	SwitchImage switchImage;
+
 	this()
 	{
-		super("images/apples.jpg");	
-	}
-	
-} // class SwitchingImage
+		super(Orientation.VERTICAL, 10);
+		switchLabel = new SwitchLabel();                                  // *** NEW ***
+		add(switchLabel);
 
-
-class SwitchingLabel : Label
-{
-	this()
-	{
-		super("Apples");
+		switchImage = new SwitchImage();                                  // *** NEW ***
+		add(switchImage);
 		
 	} // this()
+	
+	
+	void changeBoth()
+	{
+		switchLabel.change();
+		switchImage.change();
+		
+	} // changeBoth()
+	
+} // class InnerBox
 
-} // class SwitchingLabel
+
+class SwitchImage : Image                                                    // *** NEW ***
+{
+	string apples = "images/apples.jpg";
+	string oranges = "images/oranges.jpg";
+	string current;
+	
+	this()
+	{
+		super();
+		current = apples;
+		setFromFile(current);	
+	}
+	
+	void change()
+	{
+		if(current == apples)
+		{
+			current = oranges;
+		}
+		else
+		{
+			current = apples;
+		}
+
+		setFromFile(current);
+		
+	} // change()
+	
+} // class SwitchImage
+
+
+class SwitchLabel : Label
+{
+	string apples = "Apples";
+	string oranges = "Oranges";
+	string current;
+	
+	this()
+	{
+		current = apples;
+		super(apples);
+		
+	} // this()
+	
+	
+	void change()
+	{
+		if(current == apples)
+		{
+			current = oranges;
+		}
+		else
+		{
+			current = apples;
+		}
+
+		setText(current);
+		
+	} // change()
+
+} // class SwitchLabel

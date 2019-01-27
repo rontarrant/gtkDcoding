@@ -11,15 +11,9 @@ import gtk.Image;                                                 // *** NEW ***
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+
+	TestRigWindow myTestRig = new TestRigWindow();
 	
-	ImageButton myButt = new ImageButton("images/apples.jpg");     // *** NEW ***
-	myTestRig.add(myButt);
-	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD.
 	Main.run();
 	
 } // main()
@@ -27,13 +21,17 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Image Button Example";
+	string byeBye = "Bye bye";
+	
+	this()
 	{
 		super(title);
-		
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
-		
-		// Show the window and its contents...
+
+		ImageButton myButt = new ImageButton();     // *** NEW ***
+		add(myButt);
+
 		showAll();
 		
 	} // this() CONSTRUCTOR
@@ -41,7 +39,8 @@ class TestRigWindow : MainWindow
 	
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(byeBye);
+		
 		Main.quit();
 		
 	} // quitApp()
@@ -51,11 +50,14 @@ class TestRigWindow : MainWindow
 
 class ImageButton : Button                                        // *** NEW ***
 {
-	this(string imageName)
+	string imageFilename = "images/apples.jpg";
+	string actionMessage = "You have added one (1) apple to your cart.";
+		
+	this()
 	{
 		super();
 		
-		Image oranges = new Image(imageName);
+		Image oranges = new Image(imageFilename);
 		add(oranges);
 		
 		addOnClicked(&doSomething);
@@ -65,7 +67,7 @@ class ImageButton : Button                                        // *** NEW ***
 	
 	void doSomething(Button b)
 	{
-		writeln("You have added one (1) orange to your cart.");
+		writeln(actionMessage);
 		
 	} // doSomething()
 	

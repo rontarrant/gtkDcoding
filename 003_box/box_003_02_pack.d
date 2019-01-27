@@ -13,9 +13,9 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
+	
 	TestRigWindow myTestRig = new TestRigWindow();
 	
-	// give control over to gtkD.
 	Main.run();
 	
 } // main()
@@ -24,6 +24,7 @@ void main(string[] args)
 class TestRigWindow : MainWindow
 {
 	string title = "Test Rig";
+	string soLong = "That's it";
 	
 	this()
 	{
@@ -40,7 +41,8 @@ class TestRigWindow : MainWindow
 	
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(soLong);
+		
 		Main.quit();
 		
 	} // quitApp()

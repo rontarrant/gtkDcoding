@@ -11,14 +11,10 @@ import gtk.c.types;                                               // *** NEW ***
 
 void main(string[] args)
 {
-	// initialization & creation
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+
+	TestRigWindow myTestRig = new TestRigWindow();
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD
 	Main.run();
 	
 } // main()
@@ -26,14 +22,18 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	string buy = "Bye";
+	string action = " was pressed.";
+	
+	this()
 	{
 		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// make the window sensitive to mouse clicking (any button)
-		addOnButtonPress(&onButtonPress);                           // *** NEW ***
+		addOnButtonPress(&onMousePress);                           // *** NEW ***
 		
 		// Show the window and its contents...
 		showAll();
@@ -43,61 +43,33 @@ class TestRigWindow : MainWindow
 
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(buy);
+		
 		Main.quit();
 
 	} // quitApp()
 
 
-	public bool onButtonPress(Event event, Widget widget)          // *** NEW ***
+	public bool onMousePress(Event event, Widget widget)          // *** NEW ***
 	{
 		bool value = false;
 		
 		if(event.type == EventType.BUTTON_PRESS)
 		{
-			GdkEventButton* buttonEvent = event.button;
-
-			if(buttonEvent.button == 3)
-			{
-				rightPress();
-				value = true;
-			}
-			else if(buttonEvent.button == 2)
-			{
-				middlePress();
-				value = true;
-
-			}
-			else if(buttonEvent.button == 1)
-			{
-				leftPress();
-				value = true;
-			}
+			GdkEventButton* mouseEvent = event.button;
+			pressReport(mouseEvent.button);
+			value = true;
 		}
 
 		return(value);
 		
-	} // onButtonPress()
+	} // onMousePress()
 
 
-	void leftPress()                                               // *** NEW ***
+	void pressReport(uint mouseButtonNumber)                                               // *** NEW ***
 	{
-		writeln("Left Button pressed.");
+		writeln("Button # ", mouseButtonNumber, action);
 
-	} // leftPress()
-
-
-	void middlePress()                                             // *** NEW ***
-	{
-		writeln("Middle Button pressed.");
-		
-	} // middlePress()
-
-
-	void rightPress()                                              // *** NEW ***
-	{
-		writeln("Right Button pressed.");
-		
-	} // rightPress()
-
+	} // pressReport()
+	
 } // class myAppWindow

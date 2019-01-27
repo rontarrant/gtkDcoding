@@ -10,14 +10,10 @@ import gdk.Event; // *** NEW ***
 
 void main(string[] args)
 {
-	// initialization & creation
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	
+	TestRigWindow myTestRig = new TestRigWindow();
 
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD
 	Main.run();
 	
 } // main()
@@ -25,17 +21,17 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	string byeBye = "Bye, bye.";
+	
+	this()
 	{
-		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		// a button that does something
-		MyLMRButton myLMRButton = new MyLMRButton("LeftMiddleRight");             // *** NEW ***
+		MyLMRButton myLMRButton = new MyLMRButton();             // *** NEW ***
 		add(myLMRButton);
 		
-		// Show the window and its contents...
 		showAll();
 		
 	} // this() CONSTRUCTOR
@@ -43,7 +39,8 @@ class TestRigWindow : MainWindow
 	
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(byeBye);
+		
 		Main.quit();
 
 	} // quitApp()
@@ -53,7 +50,11 @@ class TestRigWindow : MainWindow
 
 class MyLMRButton : Button                                        // *** NEW ***
 {
-	this(string labelText)
+	string labelText = "LeftMiddleRight";
+	string[] mouseButtons = ["None", "Left", "Middle", "Right"]; // we'll never get a '0', so "None" keeps us from having
+	                                                           // to do math to get the right name for the event 
+	
+	this()
 	{
 		super(labelText);
 		addOnButtonPress(&onButtonPress);
@@ -70,22 +71,9 @@ class MyLMRButton : Button                                        // *** NEW ***
 		{
 			GdkEventButton* buttonEvent = event.button;
 
-			if(buttonEvent.button == 3)
-			{
-				rightPress();
-				value = true;
-			}
-			else if(buttonEvent.button == 2)
-			{
-				middlePress();
-				value = true;
+			mousePress(buttonEvent.button);
 
-			}
-			else if(buttonEvent.button == 1)
-			{
-				leftPress();
-				value = true;
-			}
+			value = true;
 		}
 
 		return(value);
@@ -101,22 +89,9 @@ class MyLMRButton : Button                                        // *** NEW ***
 		{
 			GdkEventButton* buttonEvent = event.button;
 
-			if(buttonEvent.button == 3)
-			{
-				rightRelease();
-				value = true;
-			}
-			else if(buttonEvent.button == 2)
-			{
-				middleRelease();
-				value = true;
+			mouseRelease(buttonEvent.button);
 
-			}
-			else if(buttonEvent.button == 1)
-			{
-				leftRelease();
-				value = true;
-			}
+			value = true;
 		}
 
 		return(value);
@@ -124,45 +99,18 @@ class MyLMRButton : Button                                        // *** NEW ***
 	} // onButtonRelease()
 
 
-	void leftPress()                                               // *** NEW ***
+	void mousePress(uint mouseButton)                                               // *** NEW ***
 	{
-		writeln("Left Button pressed.");
-
-	} // leftPress()
-
-
-	void middlePress()                                             // *** NEW ***
-	{
-		writeln("Middle Button pressed.");
 		
-	} // middlePress()
+		writeln("The ", mouseButtons[mouseButton], " was pressed.");
+
+	} // mousePress()
 
 
-	void rightPress()                                              // *** NEW ***
+	void mouseRelease(uint mouseButton)                                             // *** NEW ***
 	{
-		writeln("Right Button pressed.");
+		writeln("The ", mouseButtons[mouseButton], " was released.");
 		
-	} // rightPress()
-
-
-	void leftRelease()                                             // *** NEW ***
-	{
-		writeln("Left Button released.");
-		
-	} // leftRelease()
-
-
-	void middleRelease()                                           // *** NEW ***
-	{
-		writeln("Middle Button released.");
-		
-	} // middleRelease()
-
-
-	void rightRelease()                                            // *** NEW ***
-	{
-		writeln("Right Button released.");
-		
-	} // rightRelease()
+	} // mouseRelease()
 
 } // class MyLMRButton

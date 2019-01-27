@@ -16,9 +16,9 @@ import gtk.ToggleButton;                                                        
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow testRig = new TestRigWindow("Entry example");
+
+	TestRigWindow testRig = new TestRigWindow();
 	
-	testRig.showAll();
 	Main.run();
 	
 } // main()
@@ -26,16 +26,19 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string titleText = "Entry Editable/Non-editable";
 	EntryBox entryBox;
 		
-	this(string titleText)
+	this()
 	{
 		super(titleText);
 		addOnDestroy(&endProgram);
 		
 		entryBox = new EntryBox();
 		add(entryBox);
-		
+
+		showAll();
+				
 	} // this()
 	
 	
@@ -53,6 +56,7 @@ class EntryBox : Box
 	int padding = 5;
 	Entry entry;
 	CheckButton checkButton;
+	string checkText = "Editable";
 	
 	this()
 	{
@@ -60,7 +64,7 @@ class EntryBox : Box
 		entry = new Entry();
 		entry.setEditable(true);
 		
-		checkButton = new CheckButton("Editable");
+		checkButton = new CheckButton(checkText);
 		checkButton.addOnToggled(&entryEditable);
 		checkButton.setActive(true);
 				
@@ -76,11 +80,11 @@ class EntryBox : Box
 		
 		if(button.getActive() == true)
 		{
-			writeln("Editable");
+			writeln(checkText);
 		}
 		else
 		{
-			writeln("not editable.");
+			writeln("Not ", checkText);
 		}
 		
 	} // entryEditable()

@@ -13,25 +13,45 @@ import gtk.c.types; // to bring in the StateFlags ENUM (an EventBox needs to kno
 void main(string[] args)
 {
 	Main.init(args);
-	MainWindow mainWindow = new MainWindow("A label with a colored background");
 
-	RedLabel redLabel = new RedLabel("  Label with Red Background  "); // extra spaces at start and end so it doesn't look crowded
-	mainWindow.add(redLabel);
+	TestRigWindow testRigWindow = new TestRigWindow();
 
-	mainWindow.showAll();
 	Main.run();
 	
 } // main()
 
 
-class RedLabel : EventBox
+class TestRigWindow : MainWindow
 {
-	this(string labelText)
+	string title = "A label with a colored background";
+	
+	this()
+	{
+		super(title);
+		
+		RedLabel redLabel = new RedLabel(); // extra spaces at start and end so it doesn't look crowded
+		add(redLabel);
+
+		showAll();
+		
+	} // this()
+	
+	
+} // class TestRigWindow
+
+
+// wrap a widget in an EventBox
+class RedLabel : EventBox                                                       // *** NEW ***
+{
+	string labelText = "  Label with Red Background  ";
+	
+	this()
 	{
 		super();
 		Label label = new Label(labelText);
 		RGBA redColor = new RGBA(1.0, 0.420, 0.557, 1.0); // 1.000	0.420	0.557
 		overrideBackgroundColor(StateFlags.NORMAL, redColor);
+		
 		add(label);
 		
 	} // this()

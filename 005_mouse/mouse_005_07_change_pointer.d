@@ -13,14 +13,10 @@ import gtk.Layout;
 
 void main(string[] args)
 {
-	// initialization & creation
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+
+	TestRigWindow myTestRig = new TestRigWindow();
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD
 	Main.run();
 	
 } // main()
@@ -28,51 +24,54 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	string byeBye = "Bye, bye.";
+	
+	this()
 	{
-		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// First, let's resize the window for esthetics.
 		setSizeRequest(184, 254);                                                 // *** NEW ***
 		
-		// create an array of buttons
-		// and because they're widgets at heart, we can declare the button array
-		// as an array of widgets. We could also have made this an array of buttons,
-		// but it's good to know just how far up the ancestor tree we can go.
-		HandButton handButton = new HandButton("Hand Over");                      // *** NEW ***
-		HeartButton heartButton = new HeartButton("Heart Over");                  // *** NEW ***
-		GumbyButton gumbyButton = new GumbyButton("Gumby Over");                  // *** NEW ***
-		Widget[] buttons = [handButton, heartButton, gumbyButton];                // *** NEW ***
+		Layout myLayout = new MyLayout();
+		add(myLayout);
 		
-		// create the layout, passing in the array of buttons so they can be placed.
-		Layout myLayout = new MyLayout(buttons);                                  // *** NEW ***
-		add(myLayout);  // *** NEW ***
-		
-		// Show the window and its contents...
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 
 
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(byeBye);
+		
 		Main.quit();
 
 	} // quitApp()
 
-} // class myAppWindow
+} // class TextRigWindow
 
 
 class MyLayout : Layout                                           // *** NEW ***
 {
-	this(Widget[] buttons)
+	int x = 40, y = 20;
+	Widget[] buttons;
+	
+	this()
 	{
 		super(null, null);
 		
-		int x = 40, y = 20;
+		// create an array of buttons
+		// and because they're widgets at heart, we can declare the button array
+		// as an array of widgets. We could also have made this an array of buttons,
+		// but it's good to know just how far up the ancestor tree we can go.
+		HandButton handButton = new HandButton();                      // *** NEW ***
+		HeartButton heartButton = new HeartButton();                  // *** NEW ***
+		GumbyButton gumbyButton = new GumbyButton();                  // *** NEW ***
+
+		buttons = [handButton, heartButton, gumbyButton];                // *** NEW ***
 		
 		foreach(button; buttons)
 		{
@@ -87,9 +86,12 @@ class MyLayout : Layout                                           // *** NEW ***
 
 class HandButton : Button                                         // *** NEW ***
 {
-	this(string title)
+	string labelText = "Hand Over";
+	
+	this()
 	{
-		super(title);
+		super(labelText);
+		
 		addOnEnterNotify(&onEnter);
 		addOnLeaveNotify(&onLeave);
 		
@@ -123,9 +125,12 @@ class HandButton : Button                                         // *** NEW ***
 
 class GumbyButton : Button                                        // *** NEW ***
 {
-	this(string title)
+	string title = "Gumby Over";
+	
+	this()
 	{
 		super(title);
+		
 		addOnEnterNotify(&onEnter);
 		addOnLeaveNotify(&onLeave);
 		
@@ -134,7 +139,7 @@ class GumbyButton : Button                                        // *** NEW ***
 
 	public bool onEnter(Event event, Widget widget)
 	{
-		bool value = false;
+		bool value = true;
 		
 		Cursor myCursor = new Cursor(CursorType.GUMBY);
 		setCursor(myCursor);
@@ -146,7 +151,7 @@ class GumbyButton : Button                                        // *** NEW ***
 
 	public bool onLeave(Event event, Widget widget)
 	{
-		bool value = false;
+		bool value = true;
 		
 		resetCursor();
 
@@ -159,9 +164,12 @@ class GumbyButton : Button                                        // *** NEW ***
 
 class HeartButton : Button                                        // *** NEW ***
 {
-	this(string title)
+	string title = "Heart Over";
+	
+	this()
 	{
 		super(title);
+		
 		addOnEnterNotify(&onEnter);
 		addOnLeaveNotify(&onLeave);
 		

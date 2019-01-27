@@ -14,9 +14,9 @@ import gtk.CheckButton;                                                         
 void main(string[] args)
 {
 	Main.init(args);
+
 	TestRigWindow myTestRig = new TestRigWindow();
 
-	// give control over to gtkD.
 	Main.run();
 	
 } // main()

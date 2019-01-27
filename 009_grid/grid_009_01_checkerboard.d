@@ -13,8 +13,9 @@ import gtk.c.types; // to bring in the StateFlags ENUM (an EventBox needs to kno
 void main(string[] args)
 {
 	Main.init(args);
-	GridWindow gridWindow = new GridWindow("A simple grid example");
-	gridWindow.showAll();
+	
+	GridWindow gridWindow = new GridWindow();
+
 	Main.run();
 	
 } // main()
@@ -22,11 +23,14 @@ void main(string[] args)
 
 class GridWindow : MainWindow
 {
-	this(string title)
+	string title = "A simple grid example";
+	Grid grid;
+	
+	this()
 	{
 		super(title);
 		
-		Grid grid = new Grid();
+		grid = new Grid();
 		
 		// row 0
 		RedLabel zeroZero = new RedLabel("cell 0, 0");
@@ -70,6 +74,8 @@ class GridWindow : MainWindow
 		
 		add(grid);
 		
+		showAll();
+
 	} // this()
 		
 } // class GridWindow
@@ -77,10 +83,13 @@ class GridWindow : MainWindow
 
 class WideLabel : EventBox
 {
+	Label label;
+	
 	this(string text)
 	{
 			super();
-			Label label = new Label(text);
+			
+			label = new Label(text);
 			label.setSizeRequest(60, 60);
 			add(label);
 			
@@ -94,6 +103,7 @@ class BlueLabel : WideLabel
 	this(string labelText)
 	{
 		super(labelText);
+		
 		RGBA blueColor = new RGBA(0.518, 0.710, 1.0, 1.0); // 0.518	0.710	1.000
 		overrideBackgroundColor(StateFlags.NORMAL, blueColor);
 		
@@ -107,6 +117,7 @@ class RedLabel : WideLabel
 	this(string labelText)
 	{
 		super(labelText);
+		
 		RGBA redColor = new RGBA(1.0, 0.420, 0.557, 1.0); // 1.000	0.420	0.557
 
 		overrideBackgroundColor(StateFlags.NORMAL, redColor);

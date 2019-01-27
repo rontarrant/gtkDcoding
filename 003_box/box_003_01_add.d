@@ -13,13 +13,9 @@ import gtk.Box;                                                   // *** NEW ***
 void main(string[] args)
 {
 	Main.init(args);
+	
 	TestRigWindow myTestRig = new TestRigWindow();
 
-	// Show the window and its contents...
-	myTestRig.showAll();
-	
-	
-	// give control over to gtkD.
 	Main.run();
 	
 } // main()
@@ -28,6 +24,7 @@ void main(string[] args)
 class TestRigWindow : MainWindow
 {
 	string title = "Test Rig";
+	string unhello = "Good-bye";
 	
 	this()
 	{
@@ -37,12 +34,15 @@ class TestRigWindow : MainWindow
 		AddBox myBox = new AddBox();                            // *** NEW ***
 		add(myBox);                                             // *** NEW ***
 
+		showAll();
+
 	} // this() CONSTRUCTOR
 	
 	
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(unhello);
+		
 		Main.quit();
 		
 	} // quitApp()

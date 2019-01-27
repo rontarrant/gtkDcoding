@@ -1,7 +1,4 @@
-// Example of:
-//  a plain button
-//  coded in the OOP paradigm
-
+// ColorButton
 
 import std.stdio;
 
@@ -16,15 +13,10 @@ import gtk.Box;
 
 void main(string[] args)
 {
-	string title = "Test Rig OOP";
-	 
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow(title);
 
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to the gtkD .
+	TestRigWindow myTestRig = new TestRigWindow();
+
 	Main.run();
 	
 } // main()
@@ -32,9 +24,11 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "Test Rig OOP";
+	string byeBye = "Bye, bye, y'all.";
 	ColorBox box;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		addOnDestroy(&quitApp);
@@ -42,12 +36,15 @@ class TestRigWindow : MainWindow
 		box = new ColorBox();
 		add(box);
 
+		showAll();
+
 	} // this()
 	
 	
 	void quitApp(Widget w)
 	{
-		writeln("Bye.");
+		writeln(byeBye);
+		
 		Main.quit();
 		
 	} // quitApp()
@@ -57,9 +54,12 @@ class TestRigWindow : MainWindow
 
 class ColorBox : Box                                                            // *** NOTE ***
 {
+	int padding = 5;
 	ObservedColor observedColor;
 	Orientation orientation = Orientation.VERTICAL;
-	int padding = 5;
+	SetColorButton colorButton;
+	FetchColorButton fetchColorButton;
+	ResetColorButton resetColorButton;
 	Button[] buttons;
 	
 	this()
@@ -68,11 +68,13 @@ class ColorBox : Box                                                            
 		observedColor = new ObservedColor();
 		
 		// create the buttons
-		SetColorButton colorButton = new SetColorButton(observedColor);
-		FetchColorButton fetchColorButton = new FetchColorButton("Show Color", observedColor);
-		ResetColorButton resetColorButton = new ResetColorButton("Reset Color", observedColor, colorButton);
+		colorButton = new SetColorButton(observedColor);
+		fetchColorButton = new FetchColorButton(observedColor);
+		resetColorButton = new ResetColorButton(observedColor, colorButton);
+		
 		// stuff them into an array...
 		buttons = [colorButton, fetchColorButton, resetColorButton];
+		
 		// so we can do this:
 		foreach(button; buttons)
 		{
@@ -112,10 +114,11 @@ class SetColorButton : ColorButton                                              
 // is passed a pointer to SetColorButton so it can call its setRgba() function
 class ResetColorButton : Button                                                 // *** NOTE ***
 {
+	string labelText = "Reset Color";
 	ObservedColor resetColor;
 	SetColorButton setColorButton;
 	
-	this(string labelText, ObservedColor extColor, SetColorButton extColorButton)
+	this(ObservedColor extColor, SetColorButton extColorButton)
 	{
 		super(labelText);
 		addOnClicked(&buttonAction);
@@ -137,12 +140,18 @@ class ResetColorButton : Button                                                 
 
 class FetchColorButton : Button                                                  // *** NOTE ***
 {
+	string labelText = "Show Color";
+	string preMessage = "Chosen color is: ";
+	string postMessage = " and here is where we'd do something with it.";
+	
 	ObservedColor showColor;
 	
-	this(string labelText, ObservedColor extColor)
+	this(ObservedColor extColor)
 	{
 		super(labelText);
+		
 		showColor = extColor;
+		
 		addOnClicked(&buttonAction);
 		
 	} // this()
@@ -150,7 +159,7 @@ class FetchColorButton : Button                                                 
 	
 	void buttonAction(Button b)
 	{
-		writeln("Chosen color is: ", showColor.color, " and here is where we'd do something with it.");
+		writeln(preMessage, showColor.color, postMessage);
 		
 	} // buttonAction()
 	
@@ -160,6 +169,7 @@ class FetchColorButton : Button                                                 
 class ObservedColor                                                             // *** NOTE *** r, g, b, a = 0.00 - 1.0
 {
 	private:
+	string message = "Color is now ";
 	RGBA color;
 	RGBA defaultColor;
 	
@@ -177,7 +187,7 @@ class ObservedColor                                                             
 	void setColor(RGBA extColor)
 	{
 		color = extColor;
-		writeln("Color is now ", extColor);
+		writeln(message, extColor);
 
 	} // toggleState()
 

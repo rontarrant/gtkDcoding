@@ -13,12 +13,9 @@ void main(string[] args)
 {
 	// initialization & creation
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+
+	TestRigWindow myTestRig = new TestRigWindow();
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD
 	Main.run();
 	
 } // main()
@@ -26,9 +23,12 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	string byeBlurb = "Bye.";
+	string action = " released.";
+	
+	this()
 	{
-		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
@@ -41,17 +41,6 @@ class TestRigWindow : MainWindow
 	} // this() CONSTRUCTOR
 
 
-	void quitApp()
-	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
-		writeln("Bye.");
-		Main.quit();
-
-	} // quitApp()
-
-
 	public bool onButtonRelease(Event event, Widget widget)        // *** NEW ***
 	{
 		bool value = false;
@@ -59,23 +48,8 @@ class TestRigWindow : MainWindow
 		if(event.type == EventType.BUTTON_RELEASE)
 		{
 			GdkEventButton* buttonEvent = event.button;
-
-			if(buttonEvent.button == 3)
-			{
-				rightRelease();
-				value = true;
-			}
-			else if(buttonEvent.button == 2)
-			{
-				middleRelease();
-				value = true;
-
-			}
-			else if(buttonEvent.button == 1)
-			{
-				leftRelease();
-				value = true;
-			}
+			mouseRelease(buttonEvent.button);
+			value = true;
 		}
 
 		return(value);
@@ -83,24 +57,21 @@ class TestRigWindow : MainWindow
 	} // onButtonRelease()
 
 
-	void leftRelease()                                             // *** NEW ***
+	void mouseRelease(uint buttonNumber)                                             // *** NEW ***
 	{
-		writeln("Left Button released.");
+		writeln("Button #", buttonNumber, " was ", action, ".");
 		
-	} // leftRelease()
+	} // mouseRelease()
 
 
-	void middleRelease()                                           // *** NEW ***
+	void quitApp()
 	{
-		writeln("Middle Button released.");
-		
-	} // middleRelease()
+		// This exists in case we want to do anything
+		// before exiting such as warn the user to
+		// save work.
+		writeln(byeBlurb);
+		Main.quit();
 
-
-	void rightRelease()                                            // *** NEW ***
-	{
-		writeln("Right Button released.");
-		
-	} // rightRelease()
+	} // quitApp()
 
 } // class myAppWindow

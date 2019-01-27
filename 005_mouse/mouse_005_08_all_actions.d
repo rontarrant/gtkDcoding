@@ -15,12 +15,9 @@ void main(string[] args)
 {
 	// initialization & creation
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD
+	TestRigWindow myTestRig = new TestRigWindow();
+	
 	Main.run();
 	
 } // main()
@@ -28,9 +25,11 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	string byeBye = "Bye, bye";
+	
+	this()
 	{
-		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
@@ -40,7 +39,6 @@ class TestRigWindow : MainWindow
 		addOnMotionNotify(&onMotion);                               // *** NEW ***
 		addOnScroll(&onScroll);                                     // *** NEW ***
 	
-		// Show the window and its contents...
 		showAll();
 		
 	} // this() CONSTRUCTOR
@@ -49,16 +47,17 @@ class TestRigWindow : MainWindow
 	public bool onScroll(Event event, Widget widget)               // *** NEW ***
 	{
 		bool value = false; // assume no scrolling
+		string[] scrollMessage = ["scrolling up", "scrolling down"];
 		
 		if(event.scroll.direction == ScrollDirection.DOWN)
 		{
 			value = true;
-			writeln("scrolling down...");
+			writeln(scrollMessage[ScrollDirection.DOWN], "..."); // this implies that ScrollDirection.DOWN = 0
 		}
 		else if(event.scroll.direction == ScrollDirection.UP)
 		{
 			value = true;
-			writeln("scrolling up...");
+			writeln(scrollMessage[ScrollDirection.UP], "..."); // this implies that ScrollDirection.UP = 1
 		}
 
 		return(value);
@@ -78,14 +77,6 @@ class TestRigWindow : MainWindow
 	} // onMotion()
 		
 	
-	void quitApp()
-	{
-		writeln("Bye.");
-		Main.quit();
-
-	} // quitApp()
-
-
 	public bool onButtonPress(Event event, Widget widget)          // *** NEW ***
 	{
 		bool value = false;
@@ -94,22 +85,9 @@ class TestRigWindow : MainWindow
 		{
 			GdkEventButton* buttonEvent = event.button;
 
-			if(buttonEvent.button == 3)
-			{
-				rightPress();
-				value = true;
-			}
-			else if(buttonEvent.button == 2)
-			{
-				middlePress();
-				value = true;
+			mousePress(buttonEvent.button);
 
-			}
-			else if(buttonEvent.button == 1)
-			{
-				leftPress();
-				value = true;
-			}
+			value = true;
 		}
 
 		return(value);
@@ -117,7 +95,7 @@ class TestRigWindow : MainWindow
 	} // onButtonPress()
 
 
-	public bool onButtonRelease(Event event, Widget widget)        // *** NEW ***
+	public bool onButtonRelease(Event event, Widget widget)
 	{
 		bool value = false;
 		
@@ -125,22 +103,9 @@ class TestRigWindow : MainWindow
 		{
 			GdkEventButton* buttonEvent = event.button;
 
-			if(buttonEvent.button == 3)
-			{
-				rightRelease();
-				value = true;
-			}
-			else if(buttonEvent.button == 2)
-			{
-				middleRelease();
-				value = true;
+			mouseRelease(buttonEvent.button);
 
-			}
-			else if(buttonEvent.button == 1)
-			{
-				leftRelease();
-				value = true;
-			}
+			value = true;
 		}
 
 		return(value);
@@ -148,45 +113,26 @@ class TestRigWindow : MainWindow
 	} // onButtonRelease()
 
 
-	void leftPress()                                            // *** NEW ***
+	void mousePress(uint buttonNumber)
 	{
-		writeln("Left Button pressed.");
+		writeln("Button #", buttonNumber, " was pressed.");
 
-	} // leftPress()
+	} // mousePress()
 
 
-	void middlePress()                                            // *** NEW ***
+	void mouseRelease(uint buttonNumber)                                            // *** NEW ***
 	{
-		writeln("Middle Button pressed.");
+		writeln("Button #", buttonNumber, " was released.");
 		
-	} // middlePress()
+	} // mouseRelease()
 
 
-	void rightPress()                                            // *** NEW ***
+	void quitApp()
 	{
-		writeln("Right Button pressed.");
+		writeln(byeBye);
 		
-	} // rightPress()
+		Main.quit();
 
-
-	void leftRelease()                                            // *** NEW ***
-	{
-		writeln("Left Button released.");
-		
-	} // leftRelease()
-
-
-	void middleRelease()                                            // *** NEW ***
-	{
-		writeln("Middle Button released.");
-		
-	} // middleRelease()
-
-
-	void rightRelease()                                            // *** NEW ***
-	{
-		writeln("Right Button released.");
-		
-	} // rightRelease()
+	} // quitApp()
 
 } // class myAppWindow

@@ -12,14 +12,10 @@ import gtk.c.types;
 
 void main(string[] args)
 {
-	// initialization & creation
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+
+	TestRigWindow myTestRig = new TestRigWindow();
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD
 	Main.run();
 	
 } // main()
@@ -27,7 +23,11 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	string byeBye = "Bye, bye.";
+	string messageStart = "We've experienced ";
+	
+	this()
 	{
 		// window
 		super(title);
@@ -45,7 +45,8 @@ class TestRigWindow : MainWindow
 
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(byeBye);
+		
 		Main.quit();
 
 	} // quitApp()
@@ -54,8 +55,18 @@ class TestRigWindow : MainWindow
 	public bool onEvent(Event event, Widget widget)                // *** NEW ***
 	{
 		bool value = false;
+		string article;
 		
-		writeln(event.type());
+		if(event.type() == EventType.ENTER_NOTIFY)
+		{
+			article = "an ";
+		}
+		else
+		{
+			article = "a ";
+		}
+		
+		writeln(messageStart, article, event.type(), " event.");
 
 		return(value);
 		

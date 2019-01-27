@@ -12,36 +12,57 @@ import gtk.Button;
 void main(string[] args)
 {
 	Main.init(args);
-	MainWindow win = new MainWindow("Window");
-	win.setDefaultSize(500, 500);
 	
-	RadioBox radioBox = new RadioBox();
+	TestRigWindow testRigWin = new TestRigWindow();
 	
-	win.add(radioBox);
-	win.showAll();
 	Main.run();
 	
 } // main()
 
 
+class TestRigWindow : MainWindow
+{
+	string title = "Window";
+	RadioBox radioBox;
+	
+	this()
+	{
+		super(title);
+		setDefaultSize(500, 500);
+	
+		radioBox = new RadioBox();
+		add(radioBox);
+
+		showAll();
+		
+	} // this()
+	
+} // class TestRigWindow
+
+
 class RadioBox : Box
 {
 	int padding = 5;
-	Observed mainObserved = new Observed(null);
+	Observed observed = new Observed(null);
+	MyRadioButton button1, button2, button3;
+	ActionButton actionButton;
 	
 	this()
 	{
 		super(Orientation.VERTICAL, padding);
 		
-		MyRadioButton button1 = new MyRadioButton("button 1", mainObserved);
+		button1 = new MyRadioButton("button 1", observed);
 		
-		MyRadioButton button2 = new MyRadioButton("button 2", mainObserved);
+		button2 = new MyRadioButton("button 2", observed);
 		button2.setGroup(button1.getGroup());                                        // ** NOTE **
 		
-		MyRadioButton button3 = new MyRadioButton("button 3", mainObserved);
+		button3 = new MyRadioButton("button 3", observed);
 		button3.setGroup(button1.getGroup());
 		
-		ActionButton actionButton = new ActionButton("Do it", mainObserved);
+		observed.setState(button1.getLabel());      	// set the initial state
+																	// must be set AFTER all buttons are built (because the last button built is set as active)
+
+		actionButton = new ActionButton(observed);
 		
 		add(button1);
 		add(button2);
@@ -56,12 +77,16 @@ class RadioBox : Box
 
 class ActionButton : Button
 {
+	string labelText = "Do it";
 	Observed observed;
+	string stateMessage = "And the setting state is: ";
 	
-	this(string labelText, Observed extObserved)
+	this(Observed extObserved)
 	{
 		super(labelText);
+		
 		addOnClicked(&getSettingState);
+		
 		observed = extObserved;
 		
 	} // this()
@@ -69,7 +94,7 @@ class ActionButton : Button
 	
 	void getSettingState(Button b)
 	{
-		writeln("And the setting state is: ", observed.getState());
+		writeln(stateMessage, observed.getState());
 		
 	} // getSettingState()
 		
@@ -85,6 +110,7 @@ class MyRadioButton : RadioButton
 	{
 		super(labelText);
 		addOnToggled(&onToggle); // this signal derives from Toggle
+		
 		observed = extObserved;
 		
 	} // this()
@@ -94,7 +120,7 @@ class MyRadioButton : RadioButton
 	void onToggle(ToggleButton b)  // because Radio derives from Toggle, we can (and must) do this.
 	{
 		observed.setState(getLabel());
-			
+		
 	} // onToggle()
 
 } // class MyRadioButton

@@ -14,12 +14,8 @@ import gtk.Tooltip;                                               // *** NEW ***
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow myTestRig = new TestRigWindow();
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD.
 	Main.run();
 	
 } // main()
@@ -27,19 +23,16 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	
+	this()
 	{
-		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		// and a button to put it on
-		Button myButton = new TooltipButton();
-
-		auto myLayout = new MyLayout(myButton);
+		auto myLayout = new MyLayout();
 		add(myLayout);
 
-		// Show the window and its contents...
 		showAll();
 		
 	} // this() CONSTRUCTOR
@@ -47,10 +40,8 @@ class TestRigWindow : MainWindow
 
 	void quitApp()
 	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
 		writeln("Bye.");
+		
 		Main.quit();
 		
 	} // quitApp()
@@ -65,8 +56,7 @@ class TooltipButton : Button                                      // *** NEW ***
 		super();
 
 		// a rotated label
-		Label myRotatedLabel = new Label("My Rotated Label on a Button");
-		myRotatedLabel.setAngle(90);
+		RotatedLabel myRotatedLabel = new RotatedLabel();
 		add(myRotatedLabel);
 
 		addOnClicked(delegate void(_) { doSomething(); } );
@@ -90,12 +80,28 @@ class TooltipButton : Button                                      // *** NEW ***
 } // class TooltipButton
 
 
+class RotatedLabel : Label
+{
+	string labelText = "My Rotated Label on a Button";
+	
+	this()
+	{
+		super(labelText);
+		setAngle(90);
+		
+	} // this()
+	
+} // class RotatedLabel
+
+
 class MyLayout : Layout
 {
-	this(Button button)
+	this()
 	{
 		super(null, null);
-		put(button, 10, 10);
+		
+		Button myButton = new TooltipButton();
+		put(myButton, 10, 10);
 		
 	} // this()
 	

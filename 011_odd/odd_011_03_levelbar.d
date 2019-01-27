@@ -29,8 +29,8 @@ class TestRigWindow : MainWindow
 		
 		levelBar = new LevelBar();
 		levelBar.addOffsetValue("myValue", 0.5);
-		levelBar.setWidth(300);
-		levelBar.setHeight(100);
+//		levelBar.setWidth(300);
+//		levelBar.setHeight(100);
 		
 		add(levelBar);
 		

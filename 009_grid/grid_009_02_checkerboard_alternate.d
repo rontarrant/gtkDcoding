@@ -15,7 +15,7 @@ import gtk.c.types; // to bring in the StateFlags ENUM (an EventBox needs to kno
 void main(string[] args)
 {
 	Main.init(args);
-	GridWindow gridWindow = new GridWindow("A simple grid example");
+	GridWindow gridWindow = new GridWindow();
 	gridWindow.showAll();
 	Main.run();
 	
@@ -24,9 +24,11 @@ void main(string[] args)
 
 class GridWindow : MainWindow
 {
+	string title = "A simple grid example";
+	Grid grid;
 	Widget[] labels;
 	
-	this(string title)
+	this()
 	{
 		int x, y; // positions within the grid
 		int xOddEven, yOddEven;
@@ -34,15 +36,17 @@ class GridWindow : MainWindow
 		
 		super(title);
 		
-		Grid grid = new Grid();
+		grid = new Grid();
 		
 		for(x = 0; x < 4; x++)
 		{
 			for(y = 0; y < 4; y++)
 			{
-				xOddEven = x % 2;
-				yOddEven = y % 2;
-				labelText = format("cell %d, %d", x, y);
+				// where the row and column numbers are both odd or both even, squares are red
+				// where one is odd and the other even, squares are blue
+				xOddEven = x % 2; // find the row #, if it's odd or even
+				yOddEven = y % 2; // find the column #, if it's odd or even
+				labelText = format("cell %d, %d", x, y); formulate the label
 				
 				if((xOddEven == 0 && yOddEven == 0) || (xOddEven != 0 && yOddEven != 0 ))
 				{
@@ -68,10 +72,12 @@ class GridWindow : MainWindow
 
 class WideLabel : EventBox
 {
+	Label label;
+	
 	this(string text)
 	{
 			super();
-			Label label = new Label(text);
+			label = new Label(text);
 			label.setSizeRequest(60, 60);
 			add(label);
 			
@@ -82,10 +88,14 @@ class WideLabel : EventBox
 
 class BlueLabel : WideLabel
 {
+	RGBA blueColor;
+	
 	this(string labelText)
 	{
 		super(labelText);
-		RGBA blueColor = new RGBA(0.518, 0.710, 1.0, 1.0); // 0.518	0.710	1.000
+		
+		blueColor = new RGBA(0.518, 0.710, 1.0, 1.0);
+		
 		overrideBackgroundColor(StateFlags.NORMAL, blueColor);
 		
 	} // this()
@@ -95,10 +105,13 @@ class BlueLabel : WideLabel
 
 class RedLabel : WideLabel
 {
+	RGBA redColor;
+	
 	this(string labelText)
 	{
 		super(labelText);
-		RGBA redColor = new RGBA(1.0, 0.420, 0.557, 1.0); // 1.000	0.420	0.557
+		
+		redColor = new RGBA(1.0, 0.420, 0.557, 1.0);
 
 		overrideBackgroundColor(StateFlags.NORMAL, redColor);
 		

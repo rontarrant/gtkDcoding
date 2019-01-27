@@ -10,9 +10,9 @@ import gtk.Widget;
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow testRig = new TestRigWindow("LinkButton example");
+
+	TestRigWindow testRig = new TestRigWindow();
 	
-	testRig.showAll();
 	Main.run();
 	
 } // main()
@@ -20,22 +20,27 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "LinkButton example";
+	string link = "http://gtkDcoding.com";
+	string message = "The text entry box holds: ";
 	LinkButton linkButton;
 	
-	this(string titleText)
+	this()
 	{
-		super(titleText);
+		super(title);
 		addOnDestroy(&endProgram);
 		
-		linkButton = new LinkButton("http://gtkDcoding.com");
+		linkButton = new LinkButton(link);
 		add(linkButton);
+		
+		showAll();
 		
 	} // this()
 	
 	
 	void endProgram(Widget w)
 	{
-		writeln("The text entry box holds: ", linkButton.getUri());
+		writeln(message, linkButton.getUri());
 		
 	} // endProgram()
 	

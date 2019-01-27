@@ -10,9 +10,9 @@ import gtk.Widget;
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow testRig = new TestRigWindow("Entry example");
+
+	TestRigWindow testRig = new TestRigWindow();
 	
-	testRig.showAll();
 	Main.run();
 	
 } // main()
@@ -20,16 +20,20 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string titleText = "Entry example";
+	
 	Entry entry;
 	
-	this(string titleText)
+	this()
 	{
 		super(titleText);
 		addOnDestroy(&endProgram);
 		
 		entry = new Entry();
 		add(entry);
-		
+
+		showAll();
+				
 	} // this()
 	
 	

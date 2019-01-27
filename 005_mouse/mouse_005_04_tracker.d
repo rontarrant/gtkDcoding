@@ -13,12 +13,9 @@ void main(string[] args)
 {
 	// initialization & creation
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+
+	TestRigWindow myTestRig = new TestRigWindow();
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD
 	Main.run();
 	
 } // main()
@@ -26,7 +23,10 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	string byeBye = "Good-bye";
+	
+	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
@@ -34,7 +34,6 @@ class TestRigWindow : MainWindow
 		// make the callback sensitive to mouse movement
 		addOnMotionNotify(&onMotion);                                             // *** NEW ***
 		
-		// Show the window and its contents...
 		showAll();
 		
 	} // this() CONSTRUCTOR
@@ -42,7 +41,8 @@ class TestRigWindow : MainWindow
 
 	void quitApp()
 	{
-		writeln("Bye.");
+		writeln(byeBye);
+		
 		Main.quit();
 
 	} // quitApp()
@@ -60,4 +60,4 @@ class TestRigWindow : MainWindow
 		
 	} // onMotion()
 
-} // class myAppWindow
+} // class TestRigWindow
