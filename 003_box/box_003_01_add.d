@@ -60,6 +60,7 @@ class AddBox : Box                                                // *** NEW ***
 		int buttonCount = 0;
 		
 		super(Orientation.VERTICAL, 5);
+		// super(Orientation.HORIZONTAL, 5);
 
 		foreach(label; labels)
 		{

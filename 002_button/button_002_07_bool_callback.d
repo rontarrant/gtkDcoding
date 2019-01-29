@@ -14,12 +14,9 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
+	
 	TestRigWindow myTestRig = new TestRigWindow(args);
 	
-	// Show the window and its contents...
-	myTestRig.showAll();                                           // *** NEW ***
-		
-	// give control over to gtkD
 	Main.run();
 	
 } // main()
@@ -33,18 +30,17 @@ class TestRigWindow : MainWindow
 	this(string[] args)
 	{
 		super(title);
-		addOnDestroy(delegate void(Widget w) { quitApp(); } );      // *** NEW ***
+		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		MyArgsButton myButton = new MyArgsButton(args);
 		add(myButton);
 		
-		// Show the window and its contents...
 		showAll();
 		
 	} // this()
 	
 	
-	void quitApp()                                                 // *** NEW ***
+	void quitApp()
 	{
 		writeln(sayBye);
 		
@@ -54,7 +50,7 @@ class TestRigWindow : MainWindow
 
 } // class TestRigWindow
 
-class MyArgsButton : Button                                       // *** NEW ***
+class MyArgsButton : Button
 {
 	string labelText = "Show Args";
 	
@@ -62,8 +58,8 @@ class MyArgsButton : Button                                       // *** NEW ***
 	{
 		super(labelText);
 		
-		// addOnButtonRelease(&onButtonRelease);                                                                  // *** NEW ***
-		addOnButtonRelease(delegate bool(Event e, Widget w){ buttonAction(args); return false; } );               // *** NEW ***
+		// addOnButtonRelease(&onButtonRelease);                                                                  
+		addOnButtonRelease(delegate bool(Event e, Widget w){ buttonAction(args); return(false); } );
 		
 	} // this()
 	
@@ -78,7 +74,7 @@ class MyArgsButton : Button                                       // *** NEW ***
 			}
 		}
 
-		return(true);
+		return(true); // countermands the 'false' return of the callback definition above
 		
 	} // buttonAction()
 

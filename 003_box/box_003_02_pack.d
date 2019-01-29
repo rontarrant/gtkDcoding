@@ -70,7 +70,7 @@ class PackBox : Box
 
 	} // this()
 	
-} // class AddBox
+} // class PackBox
 
 
 class ActionButton : Button

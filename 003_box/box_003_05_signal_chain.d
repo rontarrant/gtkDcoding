@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// illustrates how to interrupt the flow of signals 
 
 import std.stdio;
 
@@ -7,7 +7,8 @@ import gtk.Main;
 import gtk.Widget;
 import gtk.Box;
 import gtk.Button;
-import gtk.ToggleButton;                                          // *** NEW ***
+import gtk.ToggleButton;
+import gdk.Event;
 
 void main(string[] args)
 {
@@ -87,12 +88,53 @@ class ActionButton : Button
 	{
 		super(label);
 		observed = extObserved;
-		addOnClicked(&outputSomething);
-		
+		addOnButtonRelease(&takeAction);                            // *** NEW ***
+		addOnButtonRelease(&outputSomething);
+		addOnButtonRelease(&clickReport);                           // *** NEW ***
+		addOnButtonRelease(&endStatement);
+
 	} // this()
 	
 	
-	void outputSomething(Button b)                                               // *** NEW ***
+	bool endStatement(Event event, Widget widget)
+	{
+		writeln("\n");
+		
+		return(true);
+		
+	} // endStatement()
+	
+	
+	bool clickReport(Event event, Widget widget)                                // *** NEW ***
+	{
+		writeln("Reporting a click.");
+		
+		return(false);
+		
+	} // clickReport()
+	
+	
+	bool takeAction(Event event, Widget widget)                    // *** NEW ***
+	{
+		bool continueFlag = true;
+		
+		writeln("Action was taken.");
+		
+		if(observed.getState() == true)
+		{
+			continueFlag = false;
+		}
+		else
+		{
+			continueFlag = true;
+		}
+
+		return(continueFlag);                                              // *** NEW ***
+		
+	} // takeAction()
+		
+	
+	bool outputSomething(Event event, Widget widget)                                               // *** NEW ***
 	{
 		write("observedState = ", observed.observedState, ": ");
 		
@@ -104,14 +146,18 @@ class ActionButton : Button
 		{
 			writeln("Berlin doesn't like walls.");
 		}
-	}
+
+		return(false);
+		
+	} // outputSomething()
+
 } // class ActionButton
 
 
 class MyToggleButton : ToggleButton                                             // *** NEW ***
 {
-	string onText = "Toggle is on.";
-	string offText = "Toggle is off.";
+	string onText = "Toggle is on.\n";
+	string offText = "Toggle is off.\n";
 	string onLabel = "Toggle: ON";
 	string offLabel = "Toggle: OFF";
 	
@@ -146,7 +192,7 @@ class MyToggleButton : ToggleButton                                             
 			setLabel(onLabel);
 		}
 	
-	} // toggleMode()
+	} // report()
 	
 } // class MyToggleButton
 

@@ -14,9 +14,9 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
+	
 	TestRigWindow myTestRig = new TestRigWindow(args);
 	
-	// give control over to the gtkD .
 	Main.run();
 	
 } // main()
@@ -30,18 +30,17 @@ class TestRigWindow : MainWindow
 	this(string[] args)
 	{
 		super(title);
-		addOnDestroy(&quitApp);                                     // *** NEW ***
+		addOnDestroy(&quitApp);
 		
 		MyButton button = new MyButton(args);
 		add(button);
 	
-		// Show the window and its contents...
 		showAll();
 
 	} // this()
 	
 	
-	void quitApp(Widget w)                                         // *** NEW ***
+	void quitApp(Widget w)
 	{
 		writeln(departureMessage);
 		
@@ -59,11 +58,11 @@ class MyButton : Button
 	this(string[] args)
 	{
 		super(label);
-		// Either of the two following lines will do the job at hand. The first
-		// line shows the actual syntax while the second shows the same thing, but
-		// using type inference.
-		//addOnClicked(delegate void(Button b) { buttonAction(args); });          // *** NEW ***
-		addOnClicked(delegate void(_) { buttonAction(args); });                   // *** NEW ***
+		// Either of the two following lines will do the job at hand.
+		// The first shows the actual syntax while the second shows
+		// the same thing, but using type inference.
+		//addOnClicked(delegate void(Button b) { buttonAction(args); });
+		addOnClicked(delegate void(_) { buttonAction(args); });
 		
 	} // this()
 	

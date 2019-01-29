@@ -11,7 +11,7 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow();
+	TestRigWindow myTestRig = new TestRigWindow(args);
 	
 	// Show the window and its contents...
 	myTestRig.showAll();
@@ -27,13 +27,13 @@ class TestRigWindow : MainWindow
 	string title = "Test Rig";
 	string bye = "Bye, bye.";
 	
-	this()                                             // *** NEW ***
+	this(string[] args)                                             // *** NEW ***
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// a button that does something
-		MyButton myButt = new MyButton();                  // *** NEW ***
+		MyButton myButt = new MyButton(args);                  // *** NEW ***
 		add(myButt);
 	
 		// Show the window and its contents...
@@ -57,11 +57,12 @@ class MyButton : Button                                           // *** NEW ***
 {
 	string label = "My Butt";
 	
-	this()                                                         // *** NEW ***
+	this(string[] args)                                                         // *** NEW ***
 	{
 		super(label);
 		addOnClicked(&clickReport);                                 // *** NEW ***
 		addOnButtonRelease(&takeAction);                            // *** NEW ***
+		addOnButtonRelease(delegate bool(Event e, Widget w) { showArgs(args); return(true); });
 		
 	} // this()
 	
@@ -81,4 +82,20 @@ class MyButton : Button                                           // *** NEW ***
 		
 	} // takeAction()
 	
+	
+		
+	public bool showArgs(string[] buttonArgs)                                                                // *** NEW ***
+	{
+		foreach(arg; buttonArgs)
+		{
+			if(arg != buttonArgs[0])                                               // *** NEW *** skip arg 0, it's the name of the program
+			{
+				writeln("\t", arg);
+			}
+		}
+
+		return(true); // countermands the 'false' return of the callback definition above
+		
+	} // buttonAction()
+
 } // class MyButton
