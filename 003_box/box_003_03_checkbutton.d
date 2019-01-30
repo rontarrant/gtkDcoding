@@ -24,7 +24,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
+	string title = "Test Rig: CheckButton";
 	string byeBye = "Bye, y'all.";
 	
 	this()
@@ -32,7 +32,7 @@ class TestRigWindow : MainWindow
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		AddBox myBox = new AddBox();
+		ObservationBox myBox = new ObservationBox();
 		add(myBox);
 
 		showAll();
@@ -50,53 +50,43 @@ class TestRigWindow : MainWindow
 } // class myAppWindow
 
 
-class AddBox : Box
+class ObservationBox : Box
 {
-	Observed switcher;                                                           // *** NEW ***
-	
 	this()
 	{
 		super(Orientation.VERTICAL, 5);
 
-		switcher = new Observed();                                                // *** NEW ***
+		CheckButton switchOutputButton = new CheckButton("Switch Output");
+		ObserverButton actionButton = new ObserverButton(switchOutputButton);
 		
-		MyCheckButton switchOutputButton = new MyCheckButton(switcher);           // *** NEW ***
-		ActionButton actionButton = new ActionButton(switcher);                   // *** NEW ***
-		
-		add(actionButton);                                                        // *** NEW ***
-		add(switchOutputButton);                                                  // *** NEW ***
+		add(actionButton);
+		add(switchOutputButton);
 		
 	} // this()
 
-	
-	void changeOutput()                                                          // *** NEW ***
-	{
-		
-	} // changeOutput()
-	
-} // class AddBox
+} // class ObservationBox
 
 
-class ActionButton : Button
+class ObserverButton : Button
 {
 	string label = "Take Action";
 	
-	string standardMessage = "Droids? We don't need no stinking droids!";        // *** NEW ***
-	string switchMessage = "These aren't the droids you're looking for.";        // *** NEW ***
-	Observed switcher;                                                           // *** NEW ***
+	string standardMessage = "Droids? We don't need no stinking droids!";
+	string switchMessage = "These aren't the droids you're looking for.";
+	CheckButton checkButton;
 
-	this(Observed extSwitcher)                                 // *** NEW ***
+	this(CheckButton extCheckButton)
 	{
 		super(label);
 		addOnClicked(&doSomething);
-		switcher = extSwitcher;
+		checkButton = extCheckButton;
 		
 	} // this()
 	
 	
-	void doSomething(Button b)                                                   // *** NEW ***
+	void doSomething(Button b)
 	{
-		if(switcher.getState() == true)
+		if(checkButton.getActive() == true)
 		{
 			writeln(switchMessage);
 		}
@@ -109,51 +99,3 @@ class ActionButton : Button
 	
 } // class ActionButton
 
-
-class MyCheckButton : CheckButton                                 // *** NEW ***
-{
-	string label = "Change Output";
-	
-	Observed switcher;
-	
-	this(Observed extSwitcher)
-	{
-		super(label, &setObserved);
-		switcher = extSwitcher;
-		
-	} // this()
-	
-	
-	void setObserved(CheckButton cb)                               // *** NEW ***
-	{
-		switcher.setState(getActive());
-		
-	} // getState()
-	
-}
-
-
-class Observed                                                    // *** NEW ***
-{
-	bool switcher;                                                 // *** NEW ***
-	
-	this()
-	{
-		switcher = false;
-		
-	} // this()
-	
-	
-	bool getState()                                                // *** NEW ***
-	{
-		return(switcher);
-	}
-
-
-	void setState(bool state)                                      // *** NEW ***
-	{
-		switcher = state;
-		
-	} // setState()
-	
-} // class Observed

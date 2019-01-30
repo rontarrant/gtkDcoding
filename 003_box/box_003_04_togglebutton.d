@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// Test Rig with an observer pattern and a ToggleButton
 
 import std.stdio;
 
@@ -31,7 +31,7 @@ class TestRigWindow : MainWindow
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		AddBox addBox = new AddBox();
+		ObservationBox addBox = new ObservationBox();
 		add(addBox);
 		
 		showAll();
@@ -56,34 +56,30 @@ class TestRigWindow : MainWindow
 } // class myAppWindow
 
 
-class AddBox : Box
+class ObservationBox : Box
 {
-	Observed observed;
-	
 	this()
 	{
 		super(Orientation.VERTICAL, 5);
 		
-		// set up observer/observed to sync up the buttons
-		observed = new Observed();
-		
-		ActionButton myActionButton = new ActionButton(observed);
-		MyToggleButton myToggle = new MyToggleButton(observed);                   // *** NEW ***
-		add(myActionButton);
-		add(myToggle);
+		ObservedToggleButton observedToggle = new ObservedToggleButton();
+		ObserverButton myObserverButton = new ObserverButton(observedToggle);
+
+		add(myObserverButton);
+		add(observedToggle);
 		
 	} // this()
 	
-} // class AddBox
+} // class ObservationBox
 
 
-class ActionButton : Button
+class ObserverButton : Button
 {
 	string label = "Take Action";
 	
-	Observed observed;
+	ObservedToggleButton observed;
 
-	this(Observed extObserved)
+	this(ObservedToggleButton extObserved)
 	{
 		super(label);
 		observed = extObserved;
@@ -92,11 +88,11 @@ class ActionButton : Button
 	} // this()
 	
 	
-	void outputSomething(Button b)                                               // *** NEW ***
+	void outputSomething(Button b)
 	{
-		write("observedState = ", observed.observedState, ": ");
+		write("observedState = ", observed.getMode(), ": "); // NOTE: no linefeed here
 		
-		if(observed.getState()) // if it's 'true'
+		if(observed.getMode()) // if it's 'true'
 		{
 			writeln("Walls make good neighbours, eh.");
 		}
@@ -105,43 +101,38 @@ class ActionButton : Button
 			writeln("Berlin doesn't like walls.");
 		}
 	}
-} // class ActionButton
+} // class ObserverButton
 
 
-class MyToggleButton : ToggleButton                                             // *** NEW ***
+class ObservedToggleButton : ToggleButton
 {
 	string onText = "Toggle is on.";
 	string offText = "Toggle is off.";
 	string onLabel = "Toggle: ON";
 	string offLabel = "Toggle: OFF";
 	
-	Observed observed;
-
-	this(Observed extObserved)
+	this()
 	{
 		super(onLabel);
-		addOnClicked(&toggleMode);
+		addOnToggled(&toggleMode);
 		setMode(true);
 		
-		observed = extObserved;
 		writeln(onText);
 		
 	} // this()
 	
 	
-	void toggleMode(Button b)
+	void toggleMode(ToggleButton tb)
 	{
 		if(getMode() == true)
 		{
 			setMode(false);
-			observed.setState(false);
 			writeln(offText);
 			setLabel(offLabel);
 		}
 		else
 		{
 			setMode(true);
-			observed.setState(true);
 			writeln(onText);
 			setLabel(onLabel);
 		}
@@ -149,48 +140,3 @@ class MyToggleButton : ToggleButton                                             
 	} // toggleMode()
 	
 } // class MyToggleButton
-
-
-class Observed
-{
-	private:
-	bool observedState;
-	
-	this()
-	{
-		observedState = true;
-		
-	} // this()
-	
-// end private
-	
-	public:
-	
-	void toggleState()
-	{
-		if(observedState == true)
-		{
-			observedState = false;
-		}
-		else
-		{
-			observedState = true;
-		}
-
-	} // toggleState()
-
-
-	void setState(bool state)
-	{
-		observedState = state;
-		
-	} // setState()
-	
-	
-	bool getState()
-	{
-		return(observedState);
-		
-	} // getState()
-
-} // class Observed
