@@ -1,5 +1,5 @@
 // example of a CheckButton
-// using an Observed pattern to keep two buttons in sync
+// using an Observer pattern to keep two buttons in sync
 
 import std.stdio;
 
