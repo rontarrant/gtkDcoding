@@ -59,18 +59,14 @@ class TestRigWindow : MainWindow
 
 class AddBox : Box
 {
-	Observed observed;
-	
 	this()
 	{
 		super(Orientation.VERTICAL, 5);
 		
-		// set up observer/observed to sync up the buttons
-		observed = new Observed();
-		
-		ActionButton myActionButton = new ActionButton(observed);
-		MyToggleButton myToggle = new MyToggleButton(observed);                   // *** NEW ***
-		add(myActionButton);
+		WatchedButton myToggle = new WatchedButton();
+		ObserverButton observerButton = new ObserverButton(myToggle);
+
+		add(observerButton);
 		add(myToggle);
 		
 	} // this()
@@ -78,19 +74,20 @@ class AddBox : Box
 } // class AddBox
 
 
-class ActionButton : Button
+class ObserverButton : Button
 {
 	string label = "Take Action";
+	WatchedButton watchedButton;
 	
-	Observed observed;
-
-	this(Observed extObserved)
+	this(WatchedButton extWatched)
 	{
 		super(label);
-		observed = extObserved;
-		addOnButtonRelease(&takeAction);                            // *** NEW ***
+		watchedButton = extWatched;
+		
+		// signal hook-ups
 		addOnButtonRelease(&outputSomething);
-		addOnButtonRelease(&clickReport);                           // *** NEW ***
+		addOnButtonRelease(&takeAction);
+		addOnButtonRelease(&clickReport);
 		addOnButtonRelease(&endStatement);
 
 	} // this()
@@ -98,14 +95,14 @@ class ActionButton : Button
 	
 	bool endStatement(Event event, Widget widget)
 	{
-		writeln("\n");
+		writeln("And that's the report from Walls-R-Us.\n");
 		
 		return(true);
 		
 	} // endStatement()
 	
 	
-	bool clickReport(Event event, Widget widget)                                // *** NEW ***
+	bool clickReport(Event event, Widget widget)
 	{
 		writeln("Reporting a click.");
 		
@@ -114,31 +111,33 @@ class ActionButton : Button
 	} // clickReport()
 	
 	
-	bool takeAction(Event event, Widget widget)                    // *** NEW ***
+	bool takeAction(Event event, Widget widget)
 	{
 		bool continueFlag = true;
 		
 		writeln("Action was taken.");
 		
-		if(observed.getState() == true)
+		if(watchedButton.getMode() == true)
 		{
 			continueFlag = false;
+			writeln("A value of 'false' keeps the signal chain going.");
 		}
 		else
 		{
 			continueFlag = true;
+			writeln("A value of 'true' tells the chain its work is done.\n");
 		}
 
-		return(continueFlag);                                              // *** NEW ***
+		return(continueFlag);
 		
 	} // takeAction()
 		
 	
-	bool outputSomething(Event event, Widget widget)                                               // *** NEW ***
+	bool outputSomething(Event event, Widget widget)
 	{
-		write("observedState = ", observed.observedState, ": ");
+		write("observedState = ", watchedButton.getMode(), ": ");
 		
-		if(observed.getState()) // if it's 'true'
+		if(watchedButton.getMode()) // if it's 'true'
 		{
 			writeln("Walls make good neighbours, eh.");
 		}
@@ -151,25 +150,22 @@ class ActionButton : Button
 		
 	} // outputSomething()
 
-} // class ActionButton
+} // class ObserverButton
 
 
-class MyToggleButton : ToggleButton                                             // *** NEW ***
+class WatchedButton : ToggleButton
 {
 	string onText = "Toggle is on.\n";
 	string offText = "Toggle is off.\n";
 	string onLabel = "Toggle: ON";
 	string offLabel = "Toggle: OFF";
 	
-	Observed observed;
-
-	this(Observed extObserved)
+	this()
 	{
 		super(onLabel);
 		addOnClicked(&toggleMode);
 		setMode(true);
 		
-		observed = extObserved;
 		writeln(onText);
 		
 	} // this()
@@ -180,63 +176,16 @@ class MyToggleButton : ToggleButton                                             
 		if(getMode() == true)
 		{
 			setMode(false);
-			observed.setState(false);
 			writeln(offText);
 			setLabel(offLabel);
 		}
 		else
 		{
 			setMode(true);
-			observed.setState(true);
 			writeln(onText);
 			setLabel(onLabel);
 		}
 	
 	} // report()
 	
-} // class MyToggleButton
-
-
-class Observed
-{
-	private:
-	bool observedState;
-	
-	this()
-	{
-		observedState = true;
-		
-	} // this()
-	
-// end private
-	
-	public:
-	
-	void toggleState()
-	{
-		if(observedState == true)
-		{
-			observedState = false;
-		}
-		else
-		{
-			observedState = true;
-		}
-
-	} // toggleState()
-
-
-	void setState(bool state)
-	{
-		observedState = state;
-		
-	} // setState()
-	
-	
-	bool getState()
-	{
-		return(observedState);
-		
-	} // getState()
-
-} // class Observed
+} // class WatchedButton
