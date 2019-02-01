@@ -11,12 +11,9 @@ import gdk.Event;
 void main(string[] args)
 {
 	Main.init(args);
+
 	TestRigWindow myTestRig = new TestRigWindow(args);
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
-	// give control over to gtkD.
 	Main.run();
 	
 } // main()
@@ -27,13 +24,13 @@ class TestRigWindow : MainWindow
 	string title = "Test Rig";
 	string bye = "Bye, bye.";
 	
-	this(string[] args)                                             // *** NEW ***
+	this(string[] args)
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// a button that does something
-		MyButton myButt = new MyButton(args);                  // *** NEW ***
+		MyButton myButt = new MyButton(args);
 		add(myButt);
 	
 		// Show the window and its contents...
@@ -53,42 +50,42 @@ class TestRigWindow : MainWindow
 } // class myAppWindow
 
 
-class MyButton : Button                                           // *** NEW ***
+class MyButton : Button
 {
 	string label = "My Butt";
 	
-	this(string[] args)                                                         // *** NEW ***
+	this(string[] args)
 	{
 		super(label);
-		addOnClicked(&clickReport);                                 // *** NEW ***
-		addOnButtonRelease(&takeAction);                            // *** NEW ***
+		addOnClicked(&clickReport);
+		addOnButtonRelease(&takeAction);
 		addOnButtonRelease(delegate bool(Event e, Widget w) { showArgs(args); return(true); });
 		
 	} // this()
 	
 	
-	void clickReport(Button button)                                // *** NEW ***
+	void clickReport(Button button)
 	{
 		writeln("Reporting a click.");
 		
 	} // clickReport()
 	
 	
-	bool takeAction(Event event, Widget widget)                    // *** NEW ***
+	bool takeAction(Event event, Widget widget)
 	{
 		writeln("Action was taken.");
 		
-		return(false);                                              // *** NEW ***
+		return(false);
 		
 	} // takeAction()
 	
 	
 		
-	public bool showArgs(string[] buttonArgs)                                                                // *** NEW ***
+	public bool showArgs(string[] buttonArgs)
 	{
 		foreach(arg; buttonArgs)
 		{
-			if(arg != buttonArgs[0])                                               // *** NEW *** skip arg 0, it's the name of the program
+			if(arg != buttonArgs[0]) // skip arg 0, it's the name of the program
 			{
 				writeln("\t", arg);
 			}
