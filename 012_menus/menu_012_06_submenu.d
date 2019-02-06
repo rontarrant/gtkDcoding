@@ -1,3 +1,10 @@
+/*
+ * NOTE: On Windows 10, normal clicking doesn't bring up the menu right away. You
+ * need to either hold the button down until the menu appears or let go and click
+ * a second time.
+ * Apparently this doesn't happen on Linux or POSIX systems.
+ */
+ 
 import std.stdio;
 
 import gtk.MainWindow;
