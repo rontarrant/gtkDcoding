@@ -6,8 +6,10 @@ import gtk.Main;
 import gtk.Menu;
 import gtk.MenuBar;
 import gtk.MenuItem;
+import gtk.ImageMenuItem;
 import gtk.Widget;
 import gdk.Event;
+import gtk.Image;
 
 void main(string[] args)
 {
@@ -22,7 +24,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Menu Item with a Mnemonic Shortcut Key";
+	string title = "ImageMenuItem Example";
 
 	this()
 	{
@@ -86,7 +88,7 @@ class MyMenuBar : MenuBar
 
 class FileMenuHeader : MenuItem
 {
-	string headerTitle = "_File";
+	string headerTitle = "Images";
 	FileMenu fileMenu;
 	
 	this()
@@ -104,14 +106,14 @@ class FileMenuHeader : MenuItem
 
 class FileMenu : Menu
 {
-	ExitItem exitItem;
+	MyImageMenuItem keepItem;
 	
 	this()
 	{
 		super();
 		
-		exitItem = new ExitItem();
-		append(exitItem);
+		keepItem = new MyImageMenuItem();
+		append(keepItem);
 		
 	} // this()
 	
@@ -119,22 +121,26 @@ class FileMenu : Menu
 } // class FileMenu
 
 
-class ExitItem : MenuItem
+class MyImageMenuItem : ImageMenuItem
 {
-	string exitLabel = "_Exit";
+	string imageFilename = "images/apples.jpg";
+	string actionMessage = "You have added one (1) apple to your cart.";
+	Image applesImage;
    
 	this()
 	{
-		super(&exit, exitLabel, true);
-//		addOnActivate(&exit);
+		super();
+		applesImage = new Image(imageFilename);
+		add(applesImage);
+		addOnActivate(&reportStuff);
 		
 	} // this()
 	
 	
-	void exit(MenuItem mi)
+	void reportStuff(MenuItem mi)
 	{
-		Main.quit();
+		writeln(actionMessage);
 		
 	} // exit()
 	
-} // class FileMenuItem
+} // class MyImageMenuItem

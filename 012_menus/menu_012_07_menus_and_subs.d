@@ -22,7 +22,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Multiple Menus Example";
+	string title = "Multiple Menus and a Submenu";
 
 	this()
 	{

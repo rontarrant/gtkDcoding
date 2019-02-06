@@ -5,10 +5,9 @@ import std.stdio;
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
-
+import gtk.Layout;                                                // *** NEW ***
 import gtk.Button;
 import gtk.Label;
-import gtk.Layout; // *** NEW ***
 
 void main(string[] args)
 {
@@ -31,10 +30,8 @@ class TestRigWindow : MainWindow
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		// add a layout container so the button's size will show
-		// and put the hierarchy together
-		auto myLayout = new MyLayout();                                           // *** NEW ***
-		add(myLayout);                                                            // *** NEW ***
+		auto myLayout = new MyLayout();                             // *** NEW ***
+		add(myLayout);                                              // *** NEW ***
 		
 		showAll();
 		
@@ -52,7 +49,7 @@ class TestRigWindow : MainWindow
 } // class myAppWindow
 
 
-class MyLayout : Layout                                                 // *** NEW ***
+class MyLayout : Layout                                           // *** NEW ***
 {
 	this()
 	{
@@ -72,15 +69,15 @@ class RotatedButton : Button
 	{
 		super();
 		
-		RotatedLabel rotatedLabel = new RotatedLabel();                    // *** NEW ***
+		RotatedLabel rotatedLabel = new RotatedLabel();             // *** NEW ***
 		
 		addOnClicked(delegate void(_) { doSomething(); } );
-		add(rotatedLabel);                                               // *** NEW ***
+		add(rotatedLabel);                                          // *** NEW ***
 		
 	} // this()
 
 	
-	void doSomething()                                                           // *** NEW ***
+	void doSomething()                                             // *** NEW ***
 	{
 		writeln("Action from a rotated button...");
 		

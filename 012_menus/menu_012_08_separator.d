@@ -35,7 +35,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "File Menu Example";
+	string title = "Menu Separator Example";
 
 	this()
 	{

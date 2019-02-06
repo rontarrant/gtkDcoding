@@ -1,4 +1,3 @@
-// example from YouTube demo video
 
 import std.stdio;
 

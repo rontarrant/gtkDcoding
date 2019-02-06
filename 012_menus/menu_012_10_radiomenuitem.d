@@ -7,8 +7,10 @@ import gtk.Menu;
 import gtk.MenuBar;
 import gtk.MenuItem;
 import gtk.RadioMenuItem;
+import gtk.CheckMenuItem;
 import gtk.Widget;
 import gdk.Event;
+import glib.ListSG;
 
 void main(string[] args)
 {
@@ -23,7 +25,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "File Menu Example";
+	string title = "RadioMenuItems Example";
 
 	this()
 	{
@@ -33,7 +35,7 @@ class TestRigWindow : MainWindow
 
 		AppBox appBox = new AppBox();
 		add(appBox);
-		
+
 		showAll();
 		
 	} // this()
@@ -59,7 +61,7 @@ class AppBox : Box
 	this()
 	{
 		super(Orientation.VERTICAL, padding);
-		
+
 		menuBar = new MyMenuBar();
     	packStart(menuBar, false, false, 0);		
 		
@@ -97,7 +99,6 @@ class FileMenuHeader : MenuItem
 		fileMenu = new FileMenu();
 		setSubmenu(fileMenu);
 		
-		
 	} // this()
 	
 } // class FileMenu
@@ -105,14 +106,26 @@ class FileMenuHeader : MenuItem
 
 class FileMenu : Menu
 {
-	MyCheckMenuItem keepItem;
+	Observed observed;
+	MyRadioMenuItem radioItem01, radioItem02, radioItem03;
+	ListSG group;
 	
 	this()
 	{
 		super();
 		
-		keepItem = new MyCheckMenuItem();
-		append(keepItem);
+		observed = new Observed(null);
+		
+		// The variable 'group' can have no value the first time a RadioMenuItem is created
+		// as long as it's declared as a ListSG object.
+		radioItem01 = new MyRadioMenuItem(group, "Radio 01", observed);
+
+		radioItem02 = new MyRadioMenuItem(radioItem01.getGroup(), "Radio 02", observed);
+		radioItem03 = new MyRadioMenuItem(radioItem01.getGroup(), "Radio 03", observed);
+		
+		append(radioItem01);
+		append(radioItem02);
+		append(radioItem03);
 		
 	} // this()
 	
@@ -120,29 +133,61 @@ class FileMenu : Menu
 } // class FileMenu
 
 
-class MyCheckMenuItem : CheckMenuItem
+// The first RadioMenuItem created will have its mode set automatically?
+class MyRadioMenuItem : RadioMenuItem
 {
-	string keepLabel = "Keep";
-   
-	this()
+	string message = "The setting state is: ";
+	
+	Observed observed;
+	
+	this(ListSG group, string radioLabel, Observed extObserved)
 	{
-		super(keepLabel);
-		addOnToggled(&keep);
+		super(group, radioLabel);
+writeln("Got this far 3.");
+//		setLabel(radioLabel);
+		addOnToggled(&onToggle);
+		
+		observed = extObserved;
 		
 	} // this()
 	
 	
-	void keep(CheckMenuItem mi)
+	void onToggle(CheckMenuItem rmi) // 
 	{
-		if(getActive() == true)
-		{
-			writeln("We're keeping it.");
-		}
-		else
-		{
-			writeln("OMG! Get rid of it!");
-		}
+		observed.setState(getLabel());
+		writeln("The setting state is: ", observed.getState());
 		
 	} // exit()
 	
 } // class MyCheckMenuItem
+
+
+class Observed
+{
+	private:
+	string observedState;
+	
+	this(string extState)
+	{
+		setState(extState);
+		
+	} // this()
+	
+// end private
+	
+	public:
+	
+	void setState(string extState)
+	{
+		observedState = extState;
+
+	} // toggleState()
+
+
+	string getState()
+	{
+		return(observedState);
+		
+	} // getState()
+
+} // class Observed

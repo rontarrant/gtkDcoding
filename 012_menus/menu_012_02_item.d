@@ -22,7 +22,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "File Menu Example";
+	string title = "Menu with one Item";
 
 	this()
 	{
