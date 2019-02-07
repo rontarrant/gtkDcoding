@@ -72,4 +72,4 @@ class TestRigWindow : MainWindow
 
 	} // pressReport()
 	
-} // class myAppWindow
+} // class TestRigWindow

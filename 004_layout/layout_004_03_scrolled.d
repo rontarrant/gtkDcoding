@@ -7,7 +7,8 @@ import gtk.Main;
 import gtk.Widget;
 import gtk.Button;
 import gdk.Event;
-import gtk.Layout;                                                // *** NEW ***
+import gtk.Layout;
+import gtk.ScrolledWindow;                                        // *** NEW ***
 
 void main(string[] args)
 {
@@ -28,10 +29,13 @@ class TestRigWindow : MainWindow
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
-	
-		// layout
-		auto myLayout = new MyLayout();                             // *** NEW ***
-		add(myLayout);                                              // *** NEW ***
+		setSizeRequest(200, 200);
+		
+		ScrolledWindow scrolledWindow = new ScrolledWindow();       // *** NEW ***
+		add(scrolledWindow);
+		
+		auto myLayout = new MyLayout();
+		scrolledWindow.add(myLayout);
 
 		showAll();
 
@@ -48,16 +52,17 @@ class TestRigWindow : MainWindow
 } // class myAppWindow
 
 
-class MyLayout : Layout                                           // *** NEW ***
+class MyLayout : Layout
 {
 	this()
 	{
 		super(null, null);
+		setSize(400, 400);
 		
 		auto myButton = new MyButt();
-		auto myOtherButton = new MyOtherButt();
-
 		put(myButton, 20, 20);
+		
+		auto myOtherButton = new MyOtherButt();
 		put(myOtherButton, 20, 100);
 		
 	} // this()

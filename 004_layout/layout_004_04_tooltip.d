@@ -49,6 +49,20 @@ class TestRigWindow : MainWindow
 } // class myAppWindow
 
 
+class MyLayout : Layout
+{
+	this()
+	{
+		super(null, null);
+		
+		Button myButton = new TooltipButton();
+		put(myButton, 10, 10);
+		
+	} // this()
+	
+} // class MyLayout
+
+
 class TooltipButton : Button                                      // *** NEW ***
 {
 	this()
@@ -92,17 +106,3 @@ class RotatedLabel : Label
 	} // this()
 	
 } // class RotatedLabel
-
-
-class MyLayout : Layout
-{
-	this()
-	{
-		super(null, null);
-		
-		Button myButton = new TooltipButton();
-		put(myButton, 10, 10);
-		
-	} // this()
-	
-} // class MyLayout

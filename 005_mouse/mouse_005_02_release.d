@@ -48,7 +48,7 @@ class TestRigWindow : MainWindow
 		if(event.type == EventType.BUTTON_RELEASE)
 		{
 			GdkEventButton* buttonEvent = event.button;
-			mouseRelease(buttonEvent.button);
+			releaseReport(buttonEvent.button);
 			value = true;
 		}
 
@@ -57,11 +57,11 @@ class TestRigWindow : MainWindow
 	} // onButtonRelease()
 
 
-	void mouseRelease(uint buttonNumber)                                             // *** NEW ***
+	void releaseReport(uint buttonNumber)                                             // *** NEW ***
 	{
 		writeln("Button #", buttonNumber, " was ", action, ".");
 		
-	} // mouseRelease()
+	} // releaseReport()
 
 
 	void quitApp()
