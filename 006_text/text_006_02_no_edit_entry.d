@@ -62,11 +62,11 @@ class EntryBox : Box
 	{
 		super(Orientation.VERTICAL, padding);
 		entry = new Entry();
-		entry.setEditable(true);
+		entry.setEditable(false);
 		
 		checkButton = new CheckButton(checkText);
 		checkButton.addOnToggled(&entryEditable);
-		checkButton.setActive(true);
+		checkButton.setActive(false);
 				
 		add(entry);
 		add(checkButton);

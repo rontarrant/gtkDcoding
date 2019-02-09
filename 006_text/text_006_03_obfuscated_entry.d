@@ -28,14 +28,14 @@ class TestRigWindow : MainWindow
 {
 	string titleText = "Entry Obfuscated";
 	
-	EntryBox entryBox;
+	LoginBox entryBox;
 		
 	this()
 	{
 		super(titleText);
 		addOnDestroy(&endProgram);
 		
-		entryBox = new EntryBox();
+		entryBox = new LoginBox();
 		add(entryBox);
 		
 		showAll();
@@ -45,52 +45,58 @@ class TestRigWindow : MainWindow
 	
 	void endProgram(Widget w)
 	{
-		writeln("The text entry box holds: ", entryBox.entry.getText());
+		writeln("Your password is: ", entryBox.passwordEntry.getText());
 		
 	} // endProgram()
 	
 } // class TestRigWindow
 
 
-class EntryBox : Box
+class LoginBox : Box
 {
 	int padding = 5;
-	Entry entry;
+
+	Entry usernameEntry, passwordEntry;
 	CheckButton checkButton;
 	string checkText = "Visibility";
 	
 	this()
 	{
 		super(Orientation.VERTICAL, padding);
-		entry = new Entry();
-		entry.setEditable(true);
+
+		usernameEntry = new Entry();
+		passwordEntry = new Entry();
+		passwordEntry.setVisibility(false);
 		
 		checkButton = new CheckButton(checkText);
-		checkButton.addOnToggled(&entryVisibility);
-		checkButton.setActive(true);
-				
-		add(entry);
+		checkButton.addOnToggled(&passwordVisibility);
+		checkButton.setActive(false);
+		
+		add(usernameEntry);
+		add(passwordEntry);
 		add(checkButton);
 		
 	} // this()
 	
 	
-	void entryVisibility(ToggleButton button)
+	void passwordVisibility(ToggleButton button)
 	{
 		string messageEnd;
 		
+		bool answer = button.getActive();
+		
 		if(button.getActive() == true)
 		{
-			messageEnd = " that we can see the text.";
+			messageEnd = " I can shoulder surf your password.";
 		}
 		else
 		{
-			messageEnd = " because we cannot see the text.";
+			messageEnd = " I canNOT shoulder surf your password.";
 		}
-
-		entry.setVisibility(button.getActive());
-		writeln("It's ", button.getActive(), messageEnd);
 		
-	} // entryVisibility()
+		passwordEntry.setVisibility(button.getActive());
+		writeln("With ", button.getLabel(), " set to ", button.getActive(), messageEnd);
+		
+	} // passwordVisibility()
 
-} // class EntryBox
+} // class LoginBox
