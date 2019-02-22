@@ -28,7 +28,7 @@ But if you’re just writing utilities and applications for your own use, then h
 		
 	} // class MyLayout
 
-Like the `Box` we used in earlier examples, the derived `Layout` is mostly about getting the kids under control. The big difference here is that we don’t rely on the container to workout where things go. Instead, we use the `put()` function which takes a pointer to the child widget as well as the x and y coordinates where you want it placed.
+Like the `Box` we used in earlier examples, the derived `Layout` is mostly about getting the kids under control. The big difference here is that we don’t rely on the container to work out where things go. Instead, we use the `put()` function which takes a pointer to the child widget as well as the x and y coordinates where you want it placed.
 
 Another drawback of using a `Layout`, and therefore the `put()` function, is that it’s going to take several code-compile-test cycles before you can lock down exactly what **x** and **y** should be. And these cycles increase in number with the complexity of your design. If for no other reason, you may want to let the `Layouts` lie and pack some `Box`es instead.
 
@@ -88,6 +88,6 @@ Something else to keep in mind: angles go counter-clockwise. So if you want some
 
 And that’s pretty much it for this time. Yes, I mentioned a second code file at the beginning of this post, but all it does is `put()` a second button in the layout. Neither button is rotated, nor do they do anything we haven’t seen before, so there’s nothing new or exciting in the second example. It’s there mainly because I’d feel remiss if I didn’t show a button in a standard position/rotation.
 
-And with that said, *<Insert vague comparison between GTK and popular space opera culture here.>*
+And with that said, *Insert vague comparison between GTK and popular space opera culture here.*
 
 Bye, now.
