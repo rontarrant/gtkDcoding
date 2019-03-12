@@ -1,6 +1,4 @@
 // Entry widget
-// Notes:
-//   may need an observer - rethink, rewrite
 
 import std.stdio;
 
@@ -54,16 +52,17 @@ class TestRigWindow : MainWindow
 
 class EntryBox : Box
 {
-	int padding = 5;
 	Entry entry;
 	CheckButton checkButton;
+
+	int padding = 5;
 	string checkText = "Visible";
 	
 	this()
 	{
 		super(Orientation.VERTICAL, padding);
+		
 		entry = new Entry();
-		entry.setEditable(true);
 		
 		checkButton = new CheckButton(checkText);
 		checkButton.addOnToggled(&entryVisible);
@@ -77,7 +76,10 @@ class EntryBox : Box
 	
 	void entryVisible(ToggleButton button)
 	{
+		string[] state = ["invisible", "visible"];
+		
 		entry.setVisible(button.getActive());
+		writeln("The Entry field is now ", state[button.getActive()]);
 		
 	} // entryVisible()
 

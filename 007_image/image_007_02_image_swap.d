@@ -80,32 +80,32 @@ class ImageButton : Button                                                      
 
 class InnerBox : Box
 {
-	SwitchLabel switchLabel;
-	SwitchImage switchImage;
+	SwitchingLabel switchingLabel;
+	SwitchingImage switchingImage;
 
 	this()
 	{
 		super(Orientation.VERTICAL, 10);
-		switchLabel = new SwitchLabel();                                  // *** NEW ***
-		add(switchLabel);
+		switchingLabel = new SwitchingLabel();                                  // *** NEW ***
+		add(switchingLabel);
 
-		switchImage = new SwitchImage();                                  // *** NEW ***
-		add(switchImage);
+		switchingImage = new SwitchingImage();                                  // *** NEW ***
+		add(switchingImage);
 		
 	} // this()
 	
 	
 	void changeBoth()
 	{
-		switchLabel.change();
-		switchImage.change();
+		switchingLabel.change();
+		switchingImage.change();
 		
 	} // changeBoth()
 	
 } // class InnerBox
 
 
-class SwitchImage : Image                                                    // *** NEW ***
+class SwitchingImage : Image                                                    // *** NEW ***
 {
 	string apples = "images/apples.jpg";
 	string oranges = "images/oranges.jpg";
@@ -133,10 +133,10 @@ class SwitchImage : Image                                                    // 
 		
 	} // change()
 	
-} // class SwitchImage
+} // class SwitchingImage
 
 
-class SwitchLabel : Label
+class SwitchingLabel : Label
 {
 	string apples = "Apples";
 	string oranges = "Oranges";
@@ -165,4 +165,4 @@ class SwitchLabel : Label
 		
 	} // change()
 
-} // class SwitchLabel
+} // class SwitchingLabel
