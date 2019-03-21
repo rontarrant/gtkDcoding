@@ -1,14 +1,15 @@
 /*
-  Menu hierarchy, object names and types:
-  	menubar (MenuBar)
-  		header (MenuItem)
-  			fileMenu (Menu)
-  				newFileItem (MenuItem)
-  					newFileSubMenu (Menu)
-  						dNewFileItem (MenuItem)
-  					openFileItem (MenuItem)
-  					exitItem (MenuItem)
-*/
+ Diagram:
+ 
+ MyMenuBar
+ 	FileMenuHeader
+ 		FileMenu
+ 			NewFileItem
+ 			OpenFileItem
+ 			CloseFileItem
+ 			ExitItem
+ 	
+ */
 
 import std.stdio;
 
@@ -80,13 +81,13 @@ class AppBox : Box
 
 class MyMenuBar : MenuBar
 {
-	MenuHeader fileMenuHeader;
+	FileMenuHeader fileMenuHeader;
 	
 	this()
 	{
 		super();
 		
-		fileMenuHeader = new MenuHeader();
+		fileMenuHeader = new FileMenuHeader();
 		append(fileMenuHeader);		
 		
 	} // this()
@@ -95,7 +96,7 @@ class MyMenuBar : MenuBar
 } // class MyMenuBar
 
 
-class MenuHeader : MenuItem
+class FileMenuHeader : MenuItem
 {
 	string headerTitle = "File";
 	FileMenu fileMenu;
@@ -111,7 +112,7 @@ class MenuHeader : MenuItem
 		
 	} // this()
 	
-} // class MenuHeader
+} // class FileMenuHeader
 
 
 class FileMenu : Menu

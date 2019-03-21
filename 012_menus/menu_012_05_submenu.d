@@ -1,4 +1,23 @@
 /*
+ Diagram:
+ 
+ MyMenuBar
+ 	FileMenuHeader
+ 		FileMenu
+ 			NewFileSubHeader
+ 				NewFileSubMenu
+ 					DFileItem
+ 					TextFileItem
+ 					ImageFileItem
+ 					SpreadsheetFileItem
+ 					PDFFileItem
+ 			OpenFileItem
+ 			CloseFileItem
+ 			ExitItem
+ 	
+ */
+
+/*
  * NOTE: On Windows 10, normal clicking doesn't bring up the menu right away. You
  * need to either hold the button down until the menu appears or let go and click
  * a second time.
@@ -75,16 +94,16 @@ class AppBox : Box
 
 class MyMenuBar : MenuBar
 {
-	string fileHeaderLabel = "File";
+	string fileMenuHeaderLabel = "File";
 	
-	FileHeader fileHeader;
+	FileMenuHeader fileMenuHeader;
 	
 	this()
 	{
 		super();
 		
-		fileHeader = new FileHeader(fileHeaderLabel);
-		append(fileHeader);
+		fileMenuHeader = new FileMenuHeader(fileMenuHeaderLabel);
+		append(fileMenuHeader);
 		
 	} // this()
 
@@ -92,7 +111,7 @@ class MyMenuBar : MenuBar
 } // class MyMenuBar
 
 
-class FileHeader : MenuItem
+class FileMenuHeader : MenuItem
 {
 	FileMenu fileMenu;
 	
@@ -106,7 +125,7 @@ class FileHeader : MenuItem
 		
 	} // this()
 	
-} // class MenuHeader
+} // class FileMenuHeader
 
 
 class FileMenu : Menu
@@ -139,6 +158,31 @@ class FileMenu : Menu
 } // class FileMenu
 
 
+class NewFileItem : MenuItem
+{
+	string itemLabel = "New";
+	NewFileSubMenu newFileSubMenu;
+   
+	this()
+	{
+		super(itemLabel);
+		addOnActivate(&doSomething);
+		
+		newFileSubMenu = new NewFileSubMenu();
+		setSubmenu(newFileSubMenu);
+		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("New file created.");
+		
+	} // doSomethingNew()
+	
+} // class NewFileItem
+
+
 class NewFileSubMenu : Menu
 {
 	DFileItem dFileItem;
@@ -168,101 +212,7 @@ class NewFileSubMenu : Menu
 		
 	} // this()
 	
-	
 } // class NewFileSubMenu
-
-
-class ExitItem : MenuItem
-{
-	string itemLabel = "Exit";
-   
-	this()
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		
-	} // this()
-	
-	
-	void doSomething(MenuItem mi)
-	{
-		writeln("Quitting... Bye.");
-		
-		Main.quit();
-		
-	} // exit()
-	
-} // class ExitItem
-
-
-class NewFileItem : MenuItem
-{
-	string itemLabel = "New";
-	NewFileSubMenu newFileSubMenu;
-   
-	this()
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		
-		newFileSubMenu = new NewFileSubMenu();
-		setSubmenu(newFileSubMenu);
-		
-	} // this()
-	
-	
-	void doSomething(MenuItem mi)
-	{
-		writeln("New file created.");
-		
-	} // doSomethingNew()
-	
-} // class NewFileItem
-
-
-class OpenFileItem : MenuItem
-{
-	string itemLabel = "Open";
-   
-	this()
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		
-	} // this()
-	
-	
-	void doSomething(MenuItem mi)
-	{
-		writeln("A file dialog will be shown now.");
-		
-	} // doSomething()
-	
-} // class OpenFileItem
-
-
-class CloseFileItem : MenuItem
-{
-	string itemLabel = "Close";
-   
-	this()
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		
-	} // this()
-	
-	
-	void doSomething(MenuItem mi)
-	{
-		writeln("The file is closed.");
-		
-		// If this was the last open file, 
-		// ask the user if the the application should also be closed.
-		
-	} // doSomething()
-	
-} // class CloseFileItem
 
 
 class DFileItem : MenuItem
@@ -368,3 +318,71 @@ class PdfFileItem : MenuItem
 	} // doSomething()
 	
 } // class PdfFileItem
+
+
+class OpenFileItem : MenuItem
+{
+	string itemLabel = "Open";
+   
+	this()
+	{
+		super(itemLabel);
+		addOnActivate(&doSomething);
+		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("A file dialog will be shown now.");
+		
+	} // doSomething()
+	
+} // class OpenFileItem
+
+
+class CloseFileItem : MenuItem
+{
+	string itemLabel = "Close";
+   
+	this()
+	{
+		super(itemLabel);
+		addOnActivate(&doSomething);
+		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("The file is closed.");
+		
+		// If this was the last open file, 
+		// ask the user if the the application should also be closed.
+		
+	} // doSomething()
+	
+} // class CloseFileItem
+
+
+class ExitItem : MenuItem
+{
+	string itemLabel = "Exit";
+   
+	this()
+	{
+		super(itemLabel);
+		addOnActivate(&doSomething);
+		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("Quitting... Bye.");
+		
+		Main.quit();
+		
+	} // exit()
+	
+} // class ExitItem

@@ -1,22 +1,22 @@
 /*
-  Menu hierarchy, object names and types:
-  	menubar (MenuBar)
-  		fileHeader (MenuItem)
-  			fileMenu (Menu)
-  				newFileItem (MenuItem)
-  					newFileSubMenu (Menu)
-  						dNewFileItem (MenuItem)
-  					openFileItem (MenuItem)
-  					closeFileItem (MenuItem)
-  					exitItem (MenuItem)
-  		editHeader (MenuItem)
-  			editMenu (Menu)
-  				undoItem (MenuItem)
-  				redoItem (MenuItem)
-  				cutItem (MenuItem)
-  				copyItem (MenuItem)
-  				pasteItem (MenuItem)
-*/
+ Diagram:
+ 
+ MyMenuBar
+ 	FileMenuHeader
+ 		FileMenu
+ 			NewFileItem
+ 			OpenFileItem
+ 			CloseFileItem
+ 			ExitItem
+ 	EditMenuHeader
+ 		EditMenu
+ 			UndoItem
+ 			RedoItem
+ 			CutItem
+ 			CopyItem
+ 			PasteItem
+ 	
+ */
 
 import std.stdio;
 
@@ -91,17 +91,17 @@ class MyMenuBar : MenuBar
 	string fileHeaderLabel = "File";
 	string editHeaderLabel = "Edit";
 	
-	FileHeader fileHeader;
-	EditHeader editHeader;
+	FileMenuHeader fileHeader;
+	EditMenuHeader editHeader;
 	
 	this()
 	{
 		super();
 		
-		fileHeader = new FileHeader(fileHeaderLabel);
+		fileHeader = new FileMenuHeader(fileHeaderLabel);
 		append(fileHeader);
 				
-		editHeader = new EditHeader(editHeaderLabel);
+		editHeader = new EditMenuHeader(editHeaderLabel);
 		append(editHeader);		
 		
 	} // this()
@@ -109,34 +109,34 @@ class MyMenuBar : MenuBar
 } // class MyMenuBar
 
 
-class FileHeader : MenuItem
+class FileMenuHeader : MenuItem
 {
-	FileMenu fileMenu;
+	FileMenu fileMenuHeader;
 	
 	// arg: a Menu object
 	this(string headerTitle)
 	{
 		super(headerTitle);
 		
-		fileMenu = new FileMenu();
-		setSubmenu(fileMenu);
+		fileMenuHeader = new FileMenu();
+		setSubmenu(fileMenuHeader);
 		
 	} // this()
 	
 } // class MenuHeader
 
 
-class EditHeader : MenuItem
+class EditMenuHeader : MenuItem
 {
-	EditMenu editMenu;
+	EditMenu editMenuHeader;
 	
 	// arg: a Menu object
 	this(string headerTitle)
 	{
 		super(headerTitle);
 		
-		editMenu = new EditMenu();
-		setSubmenu(editMenu);
+		editMenuHeader = new EditMenu();
+		setSubmenu(editMenuHeader);
 		
 	} // this()
 	

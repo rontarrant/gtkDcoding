@@ -1,3 +1,11 @@
+/*
+ Diagram:
+ 
+ TestMenuBar
+ 	File MenuHeader
+ 	
+ */
+
 import gtk.MainWindow;
 import gtk.Box;
 import gtk.Main;
@@ -59,13 +67,13 @@ class TestBox : Box
 
 class TestMenuBar : MenuBar
 {
-	MenuItem fileMenuItem;
+	MenuItem fileMenuHeader;
 	string fileMenuName = "File";
 	
 	this()
 	{
-		fileMenuItem = new MenuItem(fileMenuName);
-		append(fileMenuItem);
+		fileMenuHeader = new MenuItem(fileMenuName);
+		append(fileMenuHeader);
 		
 	} // this()
 

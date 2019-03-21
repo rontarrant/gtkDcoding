@@ -1,3 +1,29 @@
+/*
+ Diagram:
+ 
+ MyMenuBar
+ 	FileMenuHeader
+ 		FileMenu
+ 			NewFileSubHeader
+ 				NewFileSubMenu
+ 					DFileSubItem
+ 					TextFileSubItem
+ 					ImageFileSubItem
+ 					SpreadsheetFileSubItem
+ 					PdfFileSubItem
+ 			OpenFileItem
+ 			CloseFileItem
+ 			ExitItem
+ 	EditMenuHeader
+ 		EditMenu
+ 			UndoItem
+ 			RedoItem
+ 			CutItem
+ 			CopyItem
+ 			PasteItem
+
+ */
+
 import std.stdio;
 
 import gtk.MainWindow;
@@ -68,21 +94,21 @@ class AppBox : Box
 
 class MyMenuBar : MenuBar
 {
-	string fileHeaderLabel = "File";
-	string editHeaderLabel = "Edit";
+	string fileMenuHeaderLabel = "File";
+	string editMenuHeaderLabel = "Edit";
 	
-	FileHeader fileHeader;
-	EditHeader editHeader;
+	FileMenuHeader fileMenuHeader;
+	EditMenuHeader editMenuHeader;
 	
 	this()
 	{
 		super();
 		
-		fileHeader = new FileHeader(fileHeaderLabel);
-		append(fileHeader);
+		fileMenuHeader = new FileMenuHeader(fileMenuHeaderLabel);
+		append(fileMenuHeader);
 				
-		editHeader = new EditHeader(editHeaderLabel);
-		append(editHeader);		
+		editMenuHeader = new EditMenuHeader(editMenuHeaderLabel);
+		append(editMenuHeader);		
 		
 	} // this()
 
@@ -90,7 +116,7 @@ class MyMenuBar : MenuBar
 } // class MyMenuBar
 
 
-class FileHeader : MenuItem
+class FileMenuHeader : MenuItem
 {
 	FileMenu fileMenu;
 	
@@ -104,29 +130,12 @@ class FileHeader : MenuItem
 		
 	} // this()
 	
-} // class MenuHeader
-
-
-class EditHeader : MenuItem
-{
-	EditMenu editMenu;
-	
-	// arg: a Menu object
-	this(string headerTitle)
-	{
-		super(headerTitle);
-		
-		editMenu = new EditMenu();
-		setSubmenu(editMenu);
-		
-	} // this()
-	
-} // class MenuHeader
+} // class FileMenuHeader
 
 
 class FileMenu : Menu
 {
-	NewFileItem newFileItem;
+	NewFileSubHeader newFileSubHeader;
 	OpenFileItem openFileItem;
 	CloseFileItem closeFileItem;
 	ExitItem exitItem;
@@ -136,8 +145,8 @@ class FileMenu : Menu
 	{
 		super();
 		
-		newFileItem = new NewFileItem();
-		append(newFileItem);
+		newFileSubHeader = new NewFileSubHeader();
+		append(newFileSubHeader);
 		
 		openFileItem = new OpenFileItem();
 		append(openFileItem);
@@ -150,101 +159,10 @@ class FileMenu : Menu
 		
 	} // this()
 	
-	
 } // class FileMenu
 
 
-class NewFileSubMenu : Menu
-{
-	DFileItem dFileItem;
-	TextFileItem textFileItem;
-	ImageFileItem imageFileItem;
-	SpreadsheetFileItem spreadsheetFileItem;
-	PdfFileItem pdfFileItem;
-	
-	this()
-	{
-		super();
-		
-		dFileItem = new DFileItem();
-		append(dFileItem);
-		
-		textFileItem = new TextFileItem();
-		append(textFileItem);
-		
-		imageFileItem = new ImageFileItem();
-		append(imageFileItem);
-		
-		spreadsheetFileItem = new SpreadsheetFileItem();
-		append(spreadsheetFileItem);
-		
-		pdfFileItem = new PdfFileItem();
-		append(pdfFileItem);
-		
-	} // this()
-	
-	
-} // class NewFileSubMenu
-
-
-class EditMenu : Menu
-{
-	UndoItem undoItem;
-	RedoItem redoItem;
-	CutItem cutItem;
-	CopyItem copyItem;
-	PasteItem pasteItem;
-	
-	// arg: an array of items
-	this()
-	{
-		super();
-		
-		undoItem = new UndoItem();
-		append(undoItem);
-		
-		redoItem = new RedoItem();
-		append(redoItem);
-		
-		cutItem = new CutItem();
-		append(cutItem);
-		
-		copyItem = new CopyItem();
-		append(copyItem);
-		
-		pasteItem = new PasteItem();
-		append(pasteItem);
-		
-	} // this()
-	
-	
-} // class EditMenu
-
-
-class ExitItem : MenuItem
-{
-	string itemLabel = "Exit";
-   
-	this()
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		
-	} // this()
-	
-	
-	void doSomething(MenuItem mi)
-	{
-		writeln("Quitting... Bye.");
-		
-		Main.quit();
-		
-	} // exit()
-	
-} // class ExitItem
-
-
-class NewFileItem : MenuItem
+class NewFileSubHeader : MenuItem
 {
 	string itemLabel = "New";
 	NewFileSubMenu newFileSubMenu;
@@ -266,7 +184,144 @@ class NewFileItem : MenuItem
 		
 	} // doSomethingNew()
 	
-} // class NewFileItem
+} // class NewFileSubHeader
+
+
+class NewFileSubMenu : Menu
+{
+	DFileSubItem dFileItem;
+	TextFileSubItem textFileItem;
+	ImageFileItem imageFileItem;
+	SpreadsheetFileSubItem spreadsheetFileItem;
+	PdfFileSubItem pdfFileItem;
+	
+	this()
+	{
+		super();
+		
+		dFileItem = new DFileSubItem();
+		append(dFileItem);
+		
+		textFileItem = new TextFileSubItem();
+		append(textFileItem);
+		
+		imageFileItem = new ImageFileItem();
+		append(imageFileItem);
+		
+		spreadsheetFileItem = new SpreadsheetFileSubItem();
+		append(spreadsheetFileItem);
+		
+		pdfFileItem = new PdfFileSubItem();
+		append(pdfFileItem);
+		
+	} // this()
+	
+} // class NewFileSubMenu
+
+
+class DFileSubItem : MenuItem
+{
+	string itemLabel = "D Source File";
+   
+	this()
+	{
+		super(itemLabel);
+		addOnActivate(&doSomething);
+		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("Dialog appears with filter: '*.d'");
+		
+	} // doSomething()
+	
+} // class UndoItem
+
+
+class TextFileSubItem : MenuItem
+{
+	string itemLabel = "Text File";
+   
+	this()
+	{
+		super(itemLabel);
+		addOnActivate(&doSomething);
+		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("Dialog appears with filter: '*.txt'");
+		
+	} // doSomething()
+	
+} // class TextFileSubItem
+
+
+class ImageFileItem : MenuItem
+{
+	string itemLabel = "Image File";
+   
+	this()
+	{
+		super(itemLabel);
+		addOnActivate(&doSomething);
+		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("Dialog appears with filter: '*.png, *.jpg, *.tiff'");
+		
+	} // doSomething()
+	
+} // class CutItem
+
+
+class SpreadsheetFileSubItem : MenuItem
+{
+	string itemLabel = "Spreadsheet File";
+   
+	this()
+	{
+		super(itemLabel);
+		addOnActivate(&doSomething);
+		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("Dialog appears with filter: '*.csv, *.xls'");
+		
+	} // doSomething()
+	
+} // class SpreadsheetFileSubItem
+
+
+class PdfFileSubItem : MenuItem
+{
+	string itemLabel = "PDF File";
+   
+	this()
+	{
+		super(itemLabel);
+		addOnActivate(&doSomething);
+		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("Dialog appears with filter: '*.pdf'");
+		
+	} // doSomething()
+	
+} // class PdfFileSubItem
 
 
 class OpenFileItem : MenuItem
@@ -312,6 +367,80 @@ class CloseFileItem : MenuItem
 	} // doSomething()
 	
 } // class CloseFileItem
+
+
+class ExitItem : MenuItem
+{
+	string itemLabel = "Exit";
+   
+	this()
+	{
+		super(itemLabel);
+		addOnActivate(&doSomething);
+		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("Quitting... Bye.");
+		
+		Main.quit();
+		
+	} // exit()
+	
+} // class ExitItem
+
+
+class EditMenuHeader : MenuItem
+{
+	EditMenu editMenu;
+	
+	// arg: a Menu object
+	this(string headerTitle)
+	{
+		super(headerTitle);
+		
+		editMenu = new EditMenu();
+		setSubmenu(editMenu);
+		
+	} // this()
+	
+} // class EditMenuHeader
+
+
+class EditMenu : Menu
+{
+	UndoItem undoItem;
+	RedoItem redoItem;
+	CutItem cutItem;
+	CopyItem copyItem;
+	PasteItem pasteItem;
+	
+	// arg: an array of items
+	this()
+	{
+		super();
+		
+		undoItem = new UndoItem();
+		append(undoItem);
+		
+		redoItem = new RedoItem();
+		append(redoItem);
+		
+		cutItem = new CutItem();
+		append(cutItem);
+		
+		copyItem = new CopyItem();
+		append(copyItem);
+		
+		pasteItem = new PasteItem();
+		append(pasteItem);
+		
+	} // this()
+	
+	
+} // class EditMenu
 
 
 class UndoItem : MenuItem
@@ -417,108 +546,3 @@ class PasteItem : MenuItem
 	} // doSomething()
 	
 } // class PasteItem
-
-
-class DFileItem : MenuItem
-{
-	string itemLabel = "D Source File";
-   
-	this()
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		
-	} // this()
-	
-	
-	void doSomething(MenuItem mi)
-	{
-		writeln("Dialog appears with filter: '*.d'");
-		
-	} // doSomething()
-	
-} // class UndoItem
-
-
-class TextFileItem : MenuItem
-{
-	string itemLabel = "Text File";
-   
-	this()
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		
-	} // this()
-	
-	
-	void doSomething(MenuItem mi)
-	{
-		writeln("Dialog appears with filter: '*.txt'");
-		
-	} // doSomething()
-	
-} // class TextFileItem
-
-
-class ImageFileItem : MenuItem
-{
-	string itemLabel = "Image File";
-   
-	this()
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		
-	} // this()
-	
-	
-	void doSomething(MenuItem mi)
-	{
-		writeln("Dialog appears with filter: '*.png, *.jpg, *.tiff'");
-		
-	} // doSomething()
-	
-} // class CutItem
-
-
-class SpreadsheetFileItem : MenuItem
-{
-	string itemLabel = "Spreadsheet File";
-   
-	this()
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		
-	} // this()
-	
-	
-	void doSomething(MenuItem mi)
-	{
-		writeln("Dialog appears with filter: '*.csv, *.xls'");
-		
-	} // doSomething()
-	
-} // class SpreadsheetFileItem
-
-
-class PdfFileItem : MenuItem
-{
-	string itemLabel = "PDF File";
-   
-	this()
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		
-	} // this()
-	
-	
-	void doSomething(MenuItem mi)
-	{
-		writeln("Dialog appears with filter: '*.pdf'");
-		
-	} // doSomething()
-	
-} // class PdfFileItem

@@ -1,3 +1,13 @@
+/*
+ Diagram:
+ 
+ MyMenuBar
+ 	FileMenuHeader
+ 		FileMenu
+ 			ExitItem
+ 	
+ */
+
 import std.stdio;
 
 import gtk.MainWindow;
