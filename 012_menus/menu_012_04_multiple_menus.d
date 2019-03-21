@@ -105,7 +105,6 @@ class MyMenuBar : MenuBar
 		append(editHeader);		
 		
 	} // this()
-
 	
 } // class MyMenuBar
 
@@ -204,7 +203,6 @@ class EditMenu : Menu
 		
 	} // this()
 	
-	
 } // class EditMenu
 
 
@@ -222,7 +220,7 @@ class ExitItem : MenuItem
 	
 	void doSomething(MenuItem mi)
 	{
-		writeln("Quitting... Bye.")
+		writeln("Quitting... Bye.");
 		
 		Main.quit();
 		

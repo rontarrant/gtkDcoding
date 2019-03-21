@@ -1,4 +1,3 @@
-
 import std.stdio;
 
 import gtk.Main;
@@ -58,8 +57,8 @@ class RadioBox : Box
 		button3 = new MyRadioButton("button 3", observed);
 		button3.setGroup(button1.getGroup());
 		
-		observed.setState(button1.getLabel());      	// set the initial state
-																	// must be set AFTER all buttons are built (because the last button built is set as active)
+		observed.setState(button2.getLabel());      	// set the initial state
+		button2.setActive(true);							// must be set AFTER all buttons are built (because the last button built is set as active)
 
 		actionButton = new ActionButton(observed);
 		
@@ -72,6 +71,30 @@ class RadioBox : Box
 	
 	
 } // class Radiobox
+
+
+// The first RadioButton created will have its mode set automatically?
+class MyRadioButton : RadioButton
+{
+	Observed observed;
+	
+	this(string labelText, Observed extObserved)
+	{
+		super(labelText);
+		addOnToggled(&onToggle); // this signal derives from Toggle
+		
+		observed = extObserved;
+		
+	} // this()
+	
+
+	void onToggle(ToggleButton b)  // because Radio derives from Toggle, we can (and must) do this.
+	{
+		observed.setState(getLabel());
+		
+	} // onToggle()
+
+} // class MyRadioButton
 
 
 class ActionButton : Button
@@ -98,31 +121,6 @@ class ActionButton : Button
 	} // getSettingState()
 		
 } // class ActionButton
-
-
-// The first RadioButton created will have its mode set automatically?
-class MyRadioButton : RadioButton
-{
-	Observed observed;
-	
-	this(string labelText, Observed extObserved)
-	{
-		super(labelText);
-		addOnToggled(&onToggle); // this signal derives from Toggle
-		
-		observed = extObserved;
-		
-	} // this()
-	
-
-//	void onToggle(RadioButton b) ******** this also would work, but would use addOnClicked instead of addOnToggled **********
-	void onToggle(ToggleButton b)  // because Radio derives from Toggle, we can (and must) do this.
-	{
-		observed.setState(getLabel());
-		
-	} // onToggle()
-
-} // class MyRadioButton
 
 
 class Observed

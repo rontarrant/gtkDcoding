@@ -46,7 +46,7 @@ class GridWindow : MainWindow
 				// where one is odd and the other even, squares are blue
 				xOddEven = x % 2; // find the row #, if it's odd or even
 				yOddEven = y % 2; // find the column #, if it's odd or even
-				labelText = format("cell %d, %d", x, y); formulate the label
+				labelText = format("cell %d, %d", x, y);
 				
 				if((xOddEven == 0 && yOddEven == 0) || (xOddEven != 0 && yOddEven != 0 ))
 				{

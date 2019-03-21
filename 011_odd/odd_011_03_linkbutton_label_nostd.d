@@ -1,6 +1,6 @@
 // LinkButton widget
 
-import std.stdio;
+// import std.stdio;
 
 import gtk.Main;
 import gtk.MainWindow;
@@ -23,7 +23,7 @@ class TestRigWindow : MainWindow
 	string title = "LinkButton example";
 	string link = "http://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html";
 	string linkText = "GTK D-coding";
-	string message = "The text entry box holds: ";
+//	string message = "The text entry box holds: ";
 	LinkButton linkButton;
 	
 	this()
@@ -41,7 +41,7 @@ class TestRigWindow : MainWindow
 	
 	void endProgram(Widget w)
 	{
-		writeln(message, linkButton.getUri());
+		//writeln(message, linkButton.getUri());
 		
 	} // endProgram()
 	
