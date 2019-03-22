@@ -7,7 +7,7 @@ This time around, we’ll be looking at how to do a...
 And here are the code files:
 
 - [a ScrolledWindow example](https://github.com/rontarrant/gtkDcoding/blob/master/004_layout/layout_004_03_scrolled.d), and
-- [a Tooltip example](https://github.com/rontarrant/gtkDcoding/blob/master/004_layout/layout_004_04_tooltip.d).
+- [a Tooltop example](https://github.com/rontarrant/gtkDcoding/blob/master/004_layout/layout_004_04_tooltip.d).
 
 It’s possible to roll your own scrolling layout by creating *Adjustment* widgets and sticking them in the layout using *setHadjustment()* and *setVadjustment()*. But maybe you don't want to go to all that trouble. It’s far quicker and less work to stuff the *Layout* into a *ScrolledWindow* widget instead. So, that’s what we’ll do for now. Sometime down the road, we’ll look into doing it the hard way because now that I’ve said it’s rare to need a Layout done that way, it’s far more likely to come up.
 
@@ -82,7 +82,7 @@ In *GTK*, it used to be that tooltips took a lot of time and effort to figure ou
 This is so easy compared to the original way. All you have to do is:
 
 - tell the *Button* to use its built-in *Tooltip* with *setHasTooltip(true)*, and
-- tell the *Tooltip* what to say with *setTooltipText(<whatever string you want>)*.
+- tell the *Tooltip* what to say with *setTooltipText("whatever string you want")*.
 
 In the example, I opted to grab the *Button*’s *Label* text and put that in the *Tooltip* along with a message.
 
