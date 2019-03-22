@@ -16,9 +16,6 @@ void main(string[] args)
 	Main.init(args);
 	TestRigWindow myTestRig = new TestRigWindow();       // *** NEW ***
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
 	// give control over to gtkD.
 	Main.run();
 	
@@ -29,6 +26,7 @@ class TestRigWindow : MainWindow
 {
 	string windowTitle = "Test Rig";
 	string departingMessage = "Bye.";
+	string buttonCaption = "Name of Button";
 	
 	this(/* NO ARGS */)
 	{
@@ -39,6 +37,8 @@ class TestRigWindow : MainWindow
 		// a button that does something
 		MyButton myButt = new MyButton(buttonCaption);                  // *** NEW ***
 		add(myButt);                                                // *** NEW ***
+		
+		showAll();
 		
 	} // this() CONSTRUCTOR
 	

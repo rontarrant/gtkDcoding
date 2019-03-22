@@ -10,7 +10,7 @@ The other thing I introduce here is D language’s interface which is used to sk
 
 The interface could also be said to lay down the rules for Buttons that change the position of the window. By reading through the interface’s code, we can see that it:
 
-- returns on value,
+- returns no value,
 - has a meaningful name (PositionButton),
 - it has one function that all derived buttons must also have (moveWindow), and
 - it takes a GTK MainWindow as an argument.
