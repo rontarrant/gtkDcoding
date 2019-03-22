@@ -137,12 +137,12 @@ class MyRadioMenuItem : RadioMenuItem
 	this(ListSG group, string radioLabel)
 	{
 		super(group, radioLabel);
-		addOnActivate(&onActivate);
+		addOnActivate(&choose);
 		
 	} // this()
 	
 	
-	void onActivate(MenuItem mi)
+	void choose(MenuItem mi)
 	{
 		bool radioMenuItemState;
 		
