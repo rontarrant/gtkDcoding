@@ -106,7 +106,6 @@ class FileMenuHeader : MenuItem
 
 class FileMenu : Menu
 {
-	Observed observed;
 	MyRadioMenuItem radioItem01, radioItem02, radioItem03;
 	ListSG group;
 	
@@ -114,21 +113,18 @@ class FileMenu : Menu
 	{
 		super();
 		
-		observed = new Observed(null);
-		
-		// The variable 'group' can have no value the first time a RadioMenuItem is created
-		// as long as it's declared as a ListSG object.
-		radioItem01 = new MyRadioMenuItem(group, "Radio 01", observed);
+		// It's okay for 'group' to have no value the first time a RadioMenuItem
+		// is created as long as it's declared as a ListSG object.
+		radioItem01 = new MyRadioMenuItem(group, "Radio 01");
 
-		radioItem02 = new MyRadioMenuItem(radioItem01.getGroup(), "Radio 02", observed);
-		radioItem03 = new MyRadioMenuItem(radioItem01.getGroup(), "Radio 03", observed);
+		radioItem02 = new MyRadioMenuItem(radioItem01.getGroup(), "Radio 02");
+		radioItem03 = new MyRadioMenuItem(radioItem01.getGroup(), "Radio 03");
 		
 		append(radioItem01);
 		append(radioItem02);
 		append(radioItem03);
 		
 	} // this()
-	
 	
 } // class FileMenu
 
@@ -138,56 +134,36 @@ class MyRadioMenuItem : RadioMenuItem
 {
 	string message = "The setting state is: ";
 	
-	Observed observed;
-	
-	this(ListSG group, string radioLabel, Observed extObserved)
+	this(ListSG group, string radioLabel)
 	{
 		super(group, radioLabel);
-writeln("Got this far 3.");
-//		setLabel(radioLabel);
-		addOnToggled(&onToggle);
-		
-		observed = extObserved;
+		addOnActivate(&onActivate);
 		
 	} // this()
 	
 	
-	void onToggle(CheckMenuItem rmi) // 
+	void onActivate(MenuItem mi)
 	{
-		observed.setState(getLabel());
-		writeln("The setting state is: ", observed.getState());
+		bool radioMenuItemState;
 		
-	} // exit()
+		radioMenuItemState = getActive();
+		
+		if(radioMenuItemState == true)
+		{
+			writeln(getLabel(), " : active");
+			workingCallback();
+		}
+		else
+		{
+			writeln(getLabel(), " : inactive. ");
+		}
+	}
+
+	void workingCallback()
+	{
+		writeln("Callback called from ", getLabel());
+		
+	} // workingCallback()
 	
+
 } // class MyCheckMenuItem
-
-
-class Observed
-{
-	private:
-	string observedState;
-	
-	this(string extState)
-	{
-		setState(extState);
-		
-	} // this()
-	
-// end private
-	
-	public:
-	
-	void setState(string extState)
-	{
-		observedState = extState;
-
-	} // toggleState()
-
-
-	string getState()
-	{
-		return(observedState);
-		
-	} // getState()
-
-} // class Observed

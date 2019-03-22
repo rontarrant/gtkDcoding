@@ -104,11 +104,15 @@ class FileMenuHeader : MenuItem
 
 class FileMenu : Menu
 {
+	NewFileItem newFileItem;
 	ExitItem exitItem;
 	
 	this()
 	{
 		super();
+		
+		newFileItem = new NewFileItem();
+		append(newFileItem);
 		
 		exitItem = new ExitItem();
 		append(exitItem);
@@ -119,14 +123,34 @@ class FileMenu : Menu
 } // class FileMenu
 
 
+class NewFileItem : MenuItem
+{
+	string newFileLabel = "_New";
+   
+	this()
+	{
+		super(newFileLabel, true); // true turns on the mnemonic
+		addOnActivate(&newFile);
+		
+	} // this()
+	
+	
+	void newFile(MenuItem mi)
+	{
+		writeln("New file created.");
+		
+	} // newFile()
+	
+} // class NewFileItem
+
+
 class ExitItem : MenuItem
 {
-	string exitLabel = "_Exit";
+	string exitLabel = "E_xit";
    
 	this()
 	{
 		super(&exit, exitLabel, true);
-//		addOnActivate(&exit);
 		
 	} // this()
 	
@@ -137,4 +161,4 @@ class ExitItem : MenuItem
 		
 	} // exit()
 	
-} // class FileMenuItem
+} // class ExitItem

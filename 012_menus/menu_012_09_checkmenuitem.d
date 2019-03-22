@@ -1,3 +1,13 @@
+/*
+ Diagram:
+ 
+ MyMenuBar
+ 	FileMenuHeader
+ 		FileMenu
+ 			KeepCheckMenuItem
+ 	
+ */
+
 import std.stdio;
 
 import gtk.MainWindow;
@@ -105,44 +115,104 @@ class FileMenuHeader : MenuItem
 
 class FileMenu : Menu
 {
-	MyCheckMenuItem keepItem;
+	KeepCheckMenuItem keepItem;
+	MakeItFancyCheckMenuItem makeItFancyItem;
 	
 	this()
 	{
 		super();
 		
-		keepItem = new MyCheckMenuItem();
+		keepItem = new KeepCheckMenuItem();
 		append(keepItem);
 		
+		makeItFancyItem = new MakeItFancyCheckMenuItem();
+		append(makeItFancyItem);
+		
 	} // this()
-	
-	
+
 } // class FileMenu
 
 
-class MyCheckMenuItem : CheckMenuItem
+class KeepCheckMenuItem : CheckMenuItem
 {
 	string keepLabel = "Keep";
    
 	this()
 	{
 		super(keepLabel);
-		addOnToggled(&keep);
+		addOnToggled(&choose);
 		
 	} // this()
 	
 	
-	void keep(CheckMenuItem mi)
+	void choose(CheckMenuItem mi)
 	{
 		if(getActive() == true)
 		{
-			writeln("We're keeping it.");
+			keep();
 		}
 		else
 		{
-			writeln("OMG! Get rid of it!");
+			toss();
 		}
 		
 	} // exit()
 	
-} // class MyCheckMenuItem
+	
+	void keep()
+	{
+		writeln("We're keeping it.");
+		
+	} // keep()
+	
+	
+	void toss()
+	{
+		writeln("OMG! Get rid of it!");
+		
+	} // toss()
+	
+} // class KeepCheckMenuItem
+
+
+class MakeItFancyCheckMenuItem : CheckMenuItem
+{
+	string makeItFancyLabel = "Make it fancy";
+   
+	this()
+	{
+		super(makeItFancyLabel);
+		setActive(true);
+		addOnToggled(&choose);
+		
+	} // this()
+	
+	
+	void choose(CheckMenuItem mi)
+	{
+		if(getActive() == true)
+		{
+			keepItFancy();
+		}
+		else
+		{
+			makeItPlain();
+		}
+		
+	} // exit()
+	
+	
+	void keepItFancy()
+	{
+		writeln("We're making it fancy, yes, sir.");
+		
+	} // keep()
+	
+	
+	void makeItPlain()
+	{
+		writeln("K.I.S.");
+		
+	} // toss()
+	
+} // class MakeItFancyCheckMenuItem
