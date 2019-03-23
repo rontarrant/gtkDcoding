@@ -39,7 +39,7 @@ class TestRigWindow : MainWindow
 	
 	void endProgram(Widget w)
 	{
-		writeln("The text entry box holds: ", fontButton.getFontName());
+		writeln("The selected font face, (weight and style if applicable) and size are: ", fontButton.getFontName());
 		
 	} // endProgram()
 	

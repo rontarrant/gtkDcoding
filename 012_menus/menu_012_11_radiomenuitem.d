@@ -129,7 +129,7 @@ class FileMenu : Menu
 } // class FileMenu
 
 
-// The first RadioMenuItem created will have its mode set automatically?
+// The first RadioMenuItem created will have its mode set automatically
 class MyRadioMenuItem : RadioMenuItem
 {
 	string message = "The setting state is: ";
@@ -166,4 +166,4 @@ class MyRadioMenuItem : RadioMenuItem
 	} // workingCallback()
 	
 
-} // class MyCheckMenuItem
+} // class MyRadioMenuItem

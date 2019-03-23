@@ -115,15 +115,11 @@ class FileMenuHeader : MenuItem
 
 class FileMenu : Menu
 {
-	KeepCheckMenuItem keepItem;
 	MakeItFancyCheckMenuItem makeItFancyItem;
 	
 	this()
 	{
 		super();
-		
-		keepItem = new KeepCheckMenuItem();
-		append(keepItem);
 		
 		makeItFancyItem = new MakeItFancyCheckMenuItem();
 		append(makeItFancyItem);
@@ -131,48 +127,6 @@ class FileMenu : Menu
 	} // this()
 
 } // class FileMenu
-
-
-class KeepCheckMenuItem : CheckMenuItem
-{
-	string keepLabel = "Keep";
-   
-	this()
-	{
-		super(keepLabel);
-		addOnToggled(&choose);
-		
-	} // this()
-	
-	
-	void choose(CheckMenuItem mi)
-	{
-		if(getActive() == true)
-		{
-			keep();
-		}
-		else
-		{
-			toss();
-		}
-		
-	} // exit()
-	
-	
-	void keep()
-	{
-		writeln("We're keeping it.");
-		
-	} // keep()
-	
-	
-	void toss()
-	{
-		writeln("OMG! Get rid of it!");
-		
-	} // toss()
-	
-} // class KeepCheckMenuItem
 
 
 class MakeItFancyCheckMenuItem : CheckMenuItem
