@@ -148,8 +148,21 @@ class FileMenu : Menu
 			append(featureItem);
 		}
 		
+		// this next line plus the foreach statement set the default
 		extObservedList.setFeatureDefault();
 		
+		foreach(item; featureItemArray)
+		{
+			if(item.getLabel() == extObservedList.getDefaultFeature())
+			{
+				item.setActive(true);
+			}
+			else
+			{
+				item.setActive(false);
+			}
+		}
+
 		exitItem = new ExitItem(extObservedList);
 		append(exitItem);
 		
@@ -215,27 +228,23 @@ class ObservedFeaturesList
 {
 	bool[string] features;
 	string[] featureNames;
-	string firstFeatureName;
+	string defaultFeatureName;
 
 	this()
 	{
-		firstFeatureName = "Small";
-		featureNames = [firstFeatureName, "Medium", "Large", "Extra Large"];
+		defaultFeatureName = "Large";
+		featureNames = ["Small", "Medium", "Large", "Extra Large"];
 		
 	} // this()
 	
 	
 	void setFeatureDefault()
 	{
-		// because the default active radio button for any group of RadioMenuItems is
-		// the first one, we can assume that when setting these.
-		features[firstFeatureName] = true;
-		
 		for(int i = 0; i < featureNames.length; i++)
 		{
 			string featureName = featureNames[i];
 			
-			if(featureName == featureNames[0])
+			if(featureName == defaultFeatureName)
 			{
 				features[featureName] = true;
 			}
@@ -244,7 +253,7 @@ class ObservedFeaturesList
 				features[featureName] = false;
 			}
 		}
-		
+
 	} // setFeatureDefault()
 	
 	
@@ -260,12 +269,15 @@ class ObservedFeaturesList
 			{
 				features[feature] = false;
 			}
-			
-			
 		}
 		
-		
 	} // setFeature()
+
+
+	string getDefaultFeature()
+	{
+		return(defaultFeatureName);
+	}	
 	
 	
 	bool getFeature(string featureName)
