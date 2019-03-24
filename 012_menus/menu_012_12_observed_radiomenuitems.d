@@ -4,10 +4,10 @@
  MyMenuBar
  	FileMenuHeader
  		FileMenu
+ 			SmallRadioMenuItem
+ 			MediumRadioMenuItem
+ 			LargeRadioMenuItem
  			ExtraLargeRadioMenuItem
- 			FancyRadioMenuItem
- 			FortifiedRadioMenuItem
- 			Soft&FluffyRadioMenuItem
  			Exit
  */
 
@@ -215,10 +215,11 @@ class ObservedFeaturesList
 {
 	bool[string] features;
 	string[] featureNames;
+	string firstFeatureName = "Small";
 
 	this()
 	{
-		featureNames = ["Fancy", "Fortified", "Extra Large", "Soft & Fluffy"];
+		featureNames = [firstFeatureName, "Medium", "Large", "Extra Large"];
 		
 	} // this()
 	
@@ -227,7 +228,7 @@ class ObservedFeaturesList
 	{
 		// because the default active radio button for any group of RadioMenuItems is
 		// the first one, we can assume that when setting these.
-		features["Fancy"] = true;
+		features[firstFeatureName] = true;
 		
 		for(int i = 0; i < featureNames.length; i++)
 		{
