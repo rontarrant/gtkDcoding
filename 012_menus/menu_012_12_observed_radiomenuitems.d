@@ -215,10 +215,11 @@ class ObservedFeaturesList
 {
 	bool[string] features;
 	string[] featureNames;
-	string firstFeatureName = "Small";
+	string firstFeatureName;
 
 	this()
 	{
+		firstFeatureName = "Small";
 		featureNames = [firstFeatureName, "Medium", "Large", "Extra Large"];
 		
 	} // this()
