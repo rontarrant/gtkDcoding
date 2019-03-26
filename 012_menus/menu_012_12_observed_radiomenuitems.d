@@ -270,6 +270,9 @@ class ObservedFeaturesList
 				features[feature] = false;
 			}
 		}
+
+		// test getFeatureState()
+		writeln("The state of ", featureName, ": ", getFeatureState(featureName));
 		
 	} // setFeature()
 
@@ -280,11 +283,11 @@ class ObservedFeaturesList
 	}	
 	
 	
-	bool getFeature(string featureName)
+	bool getFeatureState(string featureName)
 	{
 		return(features[featureName]);
 		
-	} // getFeature()
+	} // getFeatureState()
 	
 	
 	void listFeatures()
