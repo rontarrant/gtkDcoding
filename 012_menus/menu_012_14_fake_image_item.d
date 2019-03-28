@@ -8,8 +8,8 @@ import gtk.MenuBar;
 import gtk.MenuItem;
 import gtk.ImageMenuItem;
 import gtk.Widget;
-import gdk.Event;
 import gtk.Image;
+import gtk.Label;
 
 void main(string[] args)
 {
@@ -106,13 +106,13 @@ class FileMenuHeader : MenuItem
 
 class FileMenu : Menu
 {
-	MyImageMenuItem keepItem;
+	FakeImageMenuItem keepItem;
 	
 	this()
 	{
 		super();
 		
-		keepItem = new MyImageMenuItem();
+		keepItem = new FakeImageMenuItem();
 		append(keepItem);
 		
 	} // this()
@@ -121,17 +121,18 @@ class FileMenu : Menu
 } // class FileMenu
 
 
-class MyImageMenuItem : ImageMenuItem
+class FakeImageMenuItem : MenuItem
 {
-	string imageFilename = "images/apples.jpg";
 	string actionMessage = "You have added one (1) apple to your cart.";
-	Image applesImage;
+	ImageMenuBox imageMenuBox;
    
 	this()
 	{
 		super();
-		applesImage = new Image(imageFilename);
-		add(applesImage);
+		
+		imageMenuBox = new ImageMenuBox();
+		add(imageMenuBox);
+		
 		addOnActivate(&reportStuff);
 		
 	} // this()
@@ -143,4 +144,26 @@ class MyImageMenuItem : ImageMenuItem
 		
 	} // exit()
 	
-} // class MyImageMenuItem
+} // class FakeImageMenuItem
+
+
+class ImageMenuBox : Box
+{
+	string imageLabelText = "Buy an Apple";
+	string imageFilename = "images/apples.jpg";
+	Image image;
+	Label label;
+	
+	this()
+	{
+		super(Orientation.HORIZONTAL, 0); // no padding 'cause we're on a menu
+		
+		image = new Image(imageFilename);
+		label = new Label(imageLabelText);
+
+		packStart(image, true, true, 0);
+		packStart(label, true, true, 0);
+		
+	}
+
+} // class ImageMenuBox

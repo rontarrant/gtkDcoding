@@ -8,9 +8,9 @@ import gtk.MenuBar;
 import gtk.MenuItem;
 import gtk.ImageMenuItem;
 import gtk.Widget;
-import gdk.Event;
 import gtk.Image;
 import gtk.Label;
+import gtk.c.types;
 
 void main(string[] args)
 {
@@ -32,7 +32,7 @@ class TestRigWindow : MainWindow
 		super(title);
 		setDefaultSize(640, 480);
 		addOnDestroy(&quitApp);
-
+		
 		AppBox appBox = new AppBox();
 		add(appBox);
 		
@@ -107,13 +107,13 @@ class FileMenuHeader : MenuItem
 
 class FileMenu : Menu
 {
-	MyImageMenuItem keepItem;
+	FakeIconMenuItem keepItem;
 	
 	this()
 	{
 		super();
 		
-		keepItem = new MyImageMenuItem();
+		keepItem = new FakeIconMenuItem();
 		append(keepItem);
 		
 	} // this()
@@ -122,17 +122,17 @@ class FileMenu : Menu
 } // class FileMenu
 
 
-class MyImageMenuItem : ImageMenuItem
+class FakeIconMenuItem : ImageMenuItem
 {
-	string actionMessage = "You have added one (1) apple to your cart.";
-	ImageMenuBox imageMenuBox;
+	string actionMessage = "You have added a plane to your cart.";
+	IconMenuBox iconMenuBox;
    
 	this()
 	{
 		super();
 		
-		imageMenuBox = new ImageMenuBox();
-		add(imageMenuBox);
+		iconMenuBox = new IconMenuBox();
+		add(iconMenuBox);
 		
 		addOnActivate(&reportStuff);
 		
@@ -145,27 +145,26 @@ class MyImageMenuItem : ImageMenuItem
 		
 	} // exit()
 	
-} // class MyImageMenuItem
+} // class MyIconMenuItem
 
 
-class ImageMenuBox : Box
+class IconMenuBox : Box
 {
-	string imageLabelText = "Image 1";
-	string imageFilename = "images/apples.jpg";
-	Image image;
-	Label label;
+	string menuLabelText = "Buy a _Plane";
+	Image icon;
+	string iconName = "airplane-mode-symbolic";
+	Label label;	
 	
 	this()
 	{
 		super(Orientation.HORIZONTAL, 0); // no padding 'cause we're on a menu
 		
-		image = new Image(imageFilename);
-		label = new Label(imageLabelText);
+		icon = new Image(iconName, IconSize.MENU);
+		label = new Label(menuLabelText);
 
-		packStart(image, true, true, 0);
+		packStart(icon, true, true, 0);
 		packStart(label, true, true, 0);
 		
 	}
-	
-	
-} // class ImageMenuBox
+
+} // class IconMenuBox
