@@ -1,7 +1,4 @@
----
-layout: post
-title:  "0001 - The Test Rig"
----
+# 0001 - The Test Rig
 
 Before we start examining the test rig code…
 

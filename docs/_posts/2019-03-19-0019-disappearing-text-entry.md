@@ -38,26 +38,13 @@ The constructor is very much the same as so many other example we’ve already e
 		
 	} // this()
 
-First we create the `Box`, passing along the orientation and padding we want, then create the widgets. Hook up the `onToggled` signal and set the default state of the `CheckButton` so it’s checked. Dump them into the box and off we go.
+First we create the `Box`, passing along the orientation and padding we want, the create the widgets. Hook up the `onToggled` signal and set the default state of the `CheckButton` so it’s checked. Dump them into the box and off we go.
 
-### The Callback Function
+For the callback, things should also be very familiar by now. It breaks down as:
 
-It looks like this:
-
-	void entryVisible(ToggleButton button)
-	{
-		string[] state = ["invisible", "visible"];
-		
-		entry.setVisible(button.getActive());
-		writeln("The Entry field is now ", state[button.getActive()]);
-		
-	} // entryVisible()
-
-This should be familiar by now, too. The message we'll be writing to the command shell is built from bits and pieces:
-
-- a string array with descriptions of the two states,
-- the live state of the `CheckButton` which we'll use to pick from the above-mentioned array, and
-- a sentence fragment used as an argument in the `writeln()` function itself followed by a second argument where we do the picking.
+- a string array holds part of the message we’ll be writing to the command shell,
+- we collect the state of the `CheckButton` and use it to set the `Entry`’s visibility, and
+- grab the button’s state once more to use as an index into the string array and make the message complete.
 
 That’s one down. Now let’s look at…
 
@@ -77,5 +64,5 @@ It’s so dead simple as to be almost laughable. The only thing I’ll point out
 
 And that’s two down.
 
-Next time, I’ll introduce you to images on buttons and how to swap them. Until then, happy D-coding and may you find a less tired cliché than I have in these blog posts.
+Next time, I’ll introduce you to images on buttons and how to swap them. Until then, happy D-coding and may you find a less tired cliché than I have in other blog posts.
 

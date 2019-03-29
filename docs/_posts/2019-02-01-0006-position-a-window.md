@@ -1,6 +1,6 @@
-# 2019-02-01-0006 Position a Window
+# Position a Window
 
-Sometimes you need a window to land in a specific spot on the screen. I’ve never found a reason, but that doesn’t mean you won’t.
+Sometimes you need a window to land in a specific spot on the screen. As a user, I like windows and dialogs to open in the last position I used and closed them. This is pretty much mandatory behaviour with a three-monitor set-up so I don't waste time scanning all that screen real estate to figure out where my application or dialog just opened.
 
 For [this example](https://github.com/rontarrant/gtkDcoding/blob/master/001_window/window_001_05_positioned.d), I used two buttons, one to move the window up and to the left, the other to move it down to the right. And because of that, I had to use a Box object because (if you remember) we can’t put more than one object into a window, but we can if we use a Box and put the Box in the window.
 
@@ -10,7 +10,7 @@ The other thing I introduce here is D language’s interface which is used to sk
 
 The interface could also be said to lay down the rules for Buttons that change the position of the window. By reading through the interface’s code, we can see that it:
 
-- returns no value,
+- returns on value,
 - has a meaningful name (PositionButton),
 - it has one function that all derived buttons must also have (moveWindow), and
 - it takes a GTK MainWindow as an argument.
