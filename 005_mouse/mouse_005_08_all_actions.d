@@ -11,6 +11,8 @@ import gtk.Button;
 import gdk.Event;
 import gtk.c.types;                                               // *** NEW ***
 
+// Note: EventType flags are found in gtk.c.types
+
 void main(string[] args)
 {
 	// initialization & creation

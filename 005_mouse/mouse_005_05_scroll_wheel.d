@@ -9,6 +9,8 @@ import gtk.Button;
 import gdk.Event;
 import gtk.c.types;
 
+// Note: ScrollDirection flags are found in gtk.c.types
+
 void main(string[] args)
 {
 	Main.init(args);

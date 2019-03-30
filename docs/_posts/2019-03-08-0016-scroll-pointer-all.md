@@ -38,7 +38,7 @@ This should be pretty familiar by now, hook up a signal to a callback using one 
 
 	} // onScroll()
 
-Again, we have to dig a bit to find the data we want: the direction the mouse wheel is turning. The `ScrollDirection` *enum* in `gtk.c.types` (that’s *install-location-for-gtk/gtk/c/types.d* if you want to see for yourself) provides us with `UP` and `DOWN` so we can check. Makes it easy. I’ve added in a bit of return value roughage so we know for sure we’re done with any signal chain that might end up being processed at the same time.
+Again, we have to dig a bit to find the data we want: the direction the mouse wheel is turning. The `ScrollDirection` *enum* in `gtk.c.types` (that’s *generated/gtkd/gtk/c/types.d* if you want to see for yourself) provides us with `UP` and `DOWN` so we can check. Makes it easy. I’ve added in a bit of return value roughage so we know for sure we’re done with any signal chain that might end up being processed at the same time.
 
 ## Left, Middle, Right
 

@@ -10,7 +10,8 @@ import gtk.ImageMenuItem;
 import gtk.Widget;
 import gtk.Image;
 import gtk.Label;
-import gtk.c.types;
+
+// Note: Orientation flags are found in gtk.c.types
 
 void main(string[] args)
 {

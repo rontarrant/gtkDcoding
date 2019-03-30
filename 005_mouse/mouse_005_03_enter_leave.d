@@ -7,8 +7,8 @@ import gtk.Main;
 import gtk.Widget;
 import gtk.Button;
 import gdk.Event;
-import gtk.c.types;
 
+// Note: EventType flags are found in gtk.c.types
 
 void main(string[] args)
 {

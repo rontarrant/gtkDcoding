@@ -9,16 +9,15 @@ Today's files:
 - [Mouse Button PRESS example](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_005_01_press.d), and
 - [Mouse Button RELEASE example](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_005_02_release.d).
 
-## Some New Imports
+## A New Import
 
-Yeah, I’m not talking about this year’s Volvo or Toyota, but import statements… these, to be exact:
+Yeah, I’m not talking about this year’s Volvo or Toyota, but an import statement… this, to be exact:
 
 	import gdk.Event;
-	import gtk.c.types;
 
 We’ve seen the first one before, but I’ve included it here to remind everyone that it’s imported from the `gdk` side of things, not `gtk`.
 
-The second one we need so we have access to the `GdkEventType` types. With these, we can pick what we’re going to react to:
+Just below that import statement is a comment to let you know where we find `EventType` flags for events like:
 
 - buttons being pressed,
 - buttons being released,

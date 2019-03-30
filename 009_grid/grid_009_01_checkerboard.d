@@ -8,7 +8,8 @@ import gtk.Grid;
 import gtk.EventBox; // Labels can't have a background color, so we pack them in EventBoxes which can
 import gtk.Label;
 import gdk.RGBA; // needed for defining colors for the label backgrounds
-import gtk.c.types; // to bring in the StateFlags ENUM (an EventBox needs to know its state)
+
+// Note: StateFlags are found in gtk.c.types
 
 void main(string[] args)
 {

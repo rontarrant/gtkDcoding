@@ -153,7 +153,7 @@ class AboutItem : MenuItem
 		
 		logoPixbuf = new Pixbuf("images/logo.png");
 		
-		// Although is seems we should do all this config stuff in this()
+		// Although it seems we should do all this config stuff in this()
 		// it has to be done here.
 		AboutDialog aboutDialog = new AboutDialog();
 		aboutDialog.setAuthors(people);

@@ -11,6 +11,8 @@ import gtk.c.types;                                                             
 import gdk.Cursor;                                                              // *** NEW ***
 import gtk.Layout;
 
+// Note: CursorType flags are found in gtk.c.types
+
 void main(string[] args)
 {
 	Main.init(args);

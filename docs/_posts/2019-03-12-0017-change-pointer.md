@@ -19,11 +19,10 @@ We need quite a list of imports to do this:
 	import gtk.Widget;
 	import gtk.Button;
 	import gdk.Event;
-	import gtk.c.types;
 	import gdk.Cursor;
 	import gtk.Layout;
 
-The most obvious new addition is `gdk.Cursor` (as before, note the ‘*d*’ in ‘*gdk*’). But in this example, the `Cursor` class is only needed for instantiation. The `CursorType` enum is, of course, in `gtk.c.types`.
+The most obvious new addition is `gdk.Cursor` (as before, note the ‘*d*’ in ‘*gdk*’). But in this example, the `Cursor` class is only needed for instantiation. The `CursorType` enum is found in `gtk.c.types` as mentioned in the comment below the import statements.
 
 And there’s quite an array of cursor shapes available, too, all that you’d expect to see plus several dozen more. I picked a few for this demo: `HEART`, `GUMBY`, and `HAND1`.
 
