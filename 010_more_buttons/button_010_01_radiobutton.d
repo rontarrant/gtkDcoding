@@ -57,7 +57,7 @@ class RadioBox : Box
 		button3 = new MyRadioButton("button 3", observed);
 		button3.setGroup(button1.getGroup());
 		
-		setActiveButton(button2);
+		setActiveButton(button3);
 
 		actionButton = new ActionButton(observed);
 		
@@ -69,11 +69,11 @@ class RadioBox : Box
 	} // this()
 	
 	
-	void setActiveButton(Button button)
+	void setActiveButton(RadioButton button)
 	{
 		// set which button is active on start-up
-		observed.setState(button2.getLabel());      	// initial state
-		button2.setActive(true);							// set AFTER all buttons are instantiated
+		observed.setState(button.getLabel());      	// initial state
+		button.setActive(true);							// set AFTER all buttons are instantiated
 		
 	} // setActiveButton()
 	
