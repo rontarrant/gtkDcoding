@@ -1,7 +1,6 @@
+## 0000 – Introduction to gtkDcoding
 
-# 0000 – Introduction to gtkDcoding
-
-## Where All This is Coming From…
+### Where All This is Coming From…
 
 Ever since the heyday of 8-bit computers and Microsoft BASIC — which was available on almost every one of them — programmers  have been pursuing the goal of cross-platform development… write once, compile for m/any. These days, there’s Java and Electron if you’re so inclined, but I prefer something that compiles to a native executable using a single programming language. When I found D, I realized I might just have found what I was looking for.
 
@@ -20,11 +19,11 @@ D incorporates a handful of paradigms:
 
 I’ll be concentrating on object-oriented development for the most part. I’ll start with a few imperative examples, but then it’ll be OOP all the way.
 
-## Why OOP?
+### Why OOP?
 
 D and GtkD both lend themselves well to an object-oriented approach to coding. The imperative examples will get you heading in that direction if it’s where you want to go, but I much prefer a full-on OOP approach.
 
-## Blog Conventions
+### Blog Conventions
 
 **Widgets:** For the sake of clarity, each example will demonstrate just one widget unless it’s something that needs extra widgets to work.
 
@@ -39,7 +38,7 @@ All code is formatted in this way:
 - variables are declared at the tops of functions or classes, and
 - comments point out code not covered in previous examples.
 
-## What You’ll Need
+### What You’ll Need
 
 First, a **D compiler**. I’m using dmd, the official reference compiler throughout. You can find it on the Downloads page of the dlang.org web site.
 
@@ -47,7 +46,7 @@ Second, you’ll want **the latest gtk+ runtime**. This as well as the GtkD.zip 
 
 For now, I’m working on Windows and that’ll be reflected herein as well, although I’ve done a bit of preliminary work with FreeBSD, so I suspect all these examples will compile without trouble on any OS where D, GtkD, and a GTK+ runtime are available. Once I’m reoriented to the POSIX world, I’ll make sure everything works there, too. If you find any situation where you can’t compile and run these examples, please let me know.
 
-## Installation of the Development Environment
+### Installation of the Development Environment
 
 Install the reference compiler and the gtk+ runtime. Best to accept the default locations:
 
@@ -56,7 +55,7 @@ Install the reference compiler and the gtk+ runtime. Best to accept the default 
 
 So go ahead and get those installed and I’ll wait here…
 
-## Local Configuration
+### Local Configuration
 
 There are two more things we need to do before we can get down to it. Open the directory (folder, in Windows speak) where the `dmd` binary lives. If you accepted the defaults, it’ll be in:
 
@@ -149,5 +148,4 @@ And that’s it for now. Next time, we’ll break down the test rig code so you 
 
 Until then, happy D-coding and may the widgets be with you.
 
-Copyright © 2019 Ron Tarrant
 
