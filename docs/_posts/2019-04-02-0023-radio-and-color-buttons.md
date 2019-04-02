@@ -85,7 +85,7 @@ So, let’s move on to our next subject…
 
 ## A ColorButton to Select Color
 
-The second code example can be found here.
+The [second code example can be found here](https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_02_colorbutton.d).
 
 The similarities between this example and the previous one won’t be lost on you. Instead of a `RadioBox`, we’ve got a `ColorBox` and in it:
 
