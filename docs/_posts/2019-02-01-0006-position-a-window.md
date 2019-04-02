@@ -1,4 +1,4 @@
-## Position a Window
+## 0006 - Position a Window
 
 Sometimes you need a window to land in a specific spot on the screen. As a user, I like windows and dialogs to open in the last position I used and closed them. This is pretty much mandatory behaviour with a three-monitor set-up so I don't waste time scanning all that screen real estate to figure out where my application or dialog just opened.
 
