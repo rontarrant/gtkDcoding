@@ -1,6 +1,6 @@
 ## 0001 - The Test Rig
 
-Before we start examining the test rig code…
+Before we start examining the test rig code, I'd like to introduce you to a couple of syntax highlighting configurations for two popular text editors on Windows.
 
 ### PS Pad and CodeBlocks Syntax Highlighters
 
