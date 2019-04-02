@@ -1,4 +1,4 @@
-## 0011 Callback Chains
+## 0011 - Callback Chains
 
 I mentioned in post #0008 that we’d look at callback chains and here we are. In blog entry #0010, I covered setting up an observer pattern. Today we’ll have a bit of fun combining these two. All this code should seem quite familiar, so no need to fasten your seatbelt.
 

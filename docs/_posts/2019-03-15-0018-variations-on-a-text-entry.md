@@ -1,4 +1,4 @@
-## 0018 Variations on a Text Entry Widget
+## 0018 - Variations on a Text Entry Widget
 
 Let’s move away from buttons for the moment, both mouse and GUI, and look at the *Entry* widget… yeah, the one used for gathering a small bit of text from the user.
 

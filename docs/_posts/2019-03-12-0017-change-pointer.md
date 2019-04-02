@@ -1,4 +1,4 @@
-## 0017 Mouse Pointer
+## 0017 - Mouse Pointer
 
 How many programmers does it take to change a mouse pointer?
 

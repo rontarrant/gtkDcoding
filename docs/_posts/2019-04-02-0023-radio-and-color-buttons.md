@@ -1,4 +1,4 @@
-## 0023 Radio and Color Selection Buttons
+## 0023 - Radio and Color Selection Buttons
 
 `RadioButton`s are complex and tricky suckers and if you don’t prep their bits and pieces in just the right order, they aren’t going to work. `ColorButton`s? Not so much, but to harness a `ColorButton` to do our bidding means we’ll use a signal found in no other widget.
 

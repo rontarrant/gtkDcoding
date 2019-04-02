@@ -1,4 +1,4 @@
-## 0019 Disappearing Entry Text and Font Selection
+## 0019 - Disappearing Entry Text and Font Selection
 
 Today’s examples are quite unrelated. The only reason they appear in the same blog post is because my mind skipped from disappearing text Entry boxes to font selection. I don’t know why and it really doesn’t matter, so let’s just get on with it.
 

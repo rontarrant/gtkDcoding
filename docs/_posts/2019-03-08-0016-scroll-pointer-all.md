@@ -1,4 +1,4 @@
-## 0015 Scroll Wheel and More Button Stuff
+## 0015 - Scroll Wheel and More Button Stuff
 
 Time to get down to the nitty gritty of harnessing the mouse wheel with [Mouse Scroll Wheel example](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_005_05_scroll_wheel.d).
 
