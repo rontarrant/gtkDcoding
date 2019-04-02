@@ -1,4 +1,4 @@
-# 0011 Callback Chains
+## 0011 Callback Chains
 
 I mentioned in post #0008 that we’d look at callback chains and here we are. In blog entry #0010, I covered setting up an observer pattern. Today we’ll have a bit of fun combining these two. All this code should seem quite familiar, so no need to fasten your seatbelt.
 
@@ -20,18 +20,18 @@ But now let’s get to the interrupt-y bit…
 
 [Here is the code file](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_08_multiple_signals.d). 
 
-## A Refresher
+### A Refresher
 
 Callbacks with Boolean return values allow us to hook multiple signals into a chain with the added bonus of choosing whether or not to interrupt the chain. Here are the rules again:
 
 - return(true): stop processing callbacks and return to the main loop, and
 - return(false): more callbacks to come, keep going.
 
-## Another Refresher
+### Another Refresher
 
 An observer pattern lets one widget keep an eye on another and change its own behaviour based on the state of the other widget.
 
-## The Code
+### The Code
 
 This time around, the `ObserverButton` keeps an eye on a `WatchedButton` derived from the `ToggleButton` class, very much like in did in the companion code for *blog entry #0010*. But the constructor is busier:
 
@@ -48,7 +48,7 @@ This time around, the `ObserverButton` keeps an eye on a `WatchedButton` derived
 
 Lots of signals being hooked up. We’re keeping the hook-ups simple so we don’t get bogged down in details unnecessary to the objective, to interrupt the signal chain.
 
-## The Callbacks
+### The Callbacks
 
 The first two callbacks do pretty standard things. They write messages to the command shell. It’s when we get to the third callback, `takeAction()`, that we see something interesting.
 
@@ -98,7 +98,7 @@ Again, the state of the underlying `ToggleButton` is checked and this time, we s
 
 The `WatchedButton` class, derived as it is from a `ToggleButton`, is almost identical to the one we used in the [ToggleButton example code](https://github.com/rontarrant/gtkDcoding/blob/master/003_box/box_003_04_togglebutton.d), so no need to go over that.
 
-## Are we done yet?
+### Are we done yet?
 
 Yeah, for now, I think so. Happy D-coding and may the moon shine bright on your widgets tonight.
 

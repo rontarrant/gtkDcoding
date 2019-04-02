@@ -1,4 +1,4 @@
-# 0019 Disappearing Entry Text and Font Selection
+## 0019 Disappearing Entry Text and Font Selection
 
 Today’s examples are quite unrelated. The only reason they appear in the same blog post is because my mind skipped from disappearing text Entry boxes to font selection. I don’t know why and it really doesn’t matter, so let’s just get on with it.
 
@@ -7,7 +7,7 @@ Here are the code files:
 - [Disappearing Entry box](https://github.com/rontarrant/gtkDcoding/blob/master/006_text/text_006_04_disappearing_entry.d), and
 - [Font selection button](https://github.com/rontarrant/gtkDcoding/blob/master/006_text/text_006_05_fontbutton.d).
 
-## Disappearing Entry
+### Disappearing Entry
 
 Because the `TextRigWindow` class does a drill-down into the Entry to grab the text, I’ll start with the `Entry` and work backwards to `TextRigWindow`’s `endProgram()` function so as to keep things in context.
 
@@ -48,7 +48,7 @@ For the callback, things should also be very familiar by now. It breaks down as:
 
 That’s one down. Now let’s look at…
 
-## The Font Button Example
+### The Font Button Example
 
 This one is so straightforward, it almost doesn’t need any explanation. And the reason is that **GTK**’s `FontButton` wears its heart on its sleeve, so to speak. The selected font and its size show up on the button itself. Click the button and a list of fonts appears along with a set of sizing widgets. Jammed in between the font list and the sizing widgets is an `Entry` field where you can type example text so you know exactly what you’re getting into when you select a font.
 

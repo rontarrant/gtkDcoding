@@ -2,7 +2,7 @@
 
 `RadioButton`s are complex and tricky suckers and if you don’t prep their bits and pieces in just the right order, they aren’t going to work. `ColorButton`s? Not so much, but to harness a `ColorButton` to do our bidding means we’ll use a signal found in no other widget.
 
-## Put Your RadioButton On
+### Put Your RadioButton On
 
 [Here’s our first code file for today](https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_01_radiobutton.d).
 
@@ -51,11 +51,11 @@ So, let’s look at the `RadioBox`, a child class born of the `Box`:
 ****
 	} // class Radiobox
 
-### RadioBox: An Observation Point
+#### RadioBox: An Observation Point
 
 First thing of note is that we’re once again using an `Observed` class. If you think about it, there’s not much point in having a set of `RadioButton`s if they aren’t affecting some entity that is, in turn, being observed by some other entity. Here, the `RadioButton`s affect an `Observed` object and the `ActionButton` acts as observer, modifying its behaviour based on what it sees.
 
-### RadioButton Creation
+#### RadioButton Creation
 
 The first `RadioButton` is easy, just create it, give it a name, etc., and you’re done. But with the second `RadioButton` in the set, that’s where you need to know the tricky bit.
 
@@ -63,7 +63,7 @@ Yes, we simply create `button2`, but then we need to tell it that it’s in the 
 
 But once you know that, adding `button3` or other subsequent buttons is dead easy again.
 
-### RadioButton State
+#### RadioButton State
 
 If we don’t care which `RadioButton` is active, all we have to do is sync up the state of the observed object so it points at the default active `RadioButton` and that’s always going to be the first one created, `button1` in this example.
 
@@ -71,19 +71,19 @@ But if we want one of the others to be active on start-up, as well as syncing up
 
 And one more note about this: Don’t try to set state or `setActive()` until all the buttons are created. Your results may be unpredictable.
 
-### MyRadioButton Class
+#### MyRadioButton Class
 
 Familiar territory, this. Hook up the observed object, attach a signal and we’re ready to go.
 
 **One thing of note**: Because we’re using the `onToggle` signal, we have to declare our `RadioButton` as a `ToggleButton` or we’ll get an error. This works because `RadioButton` is a grandchild of `ToggleButton` (with `CheckButton` being in the middle of the hierarchy). In effect, we’re borrowing grandma’s signal. If we try to do this any other way, casting the button as a `RadioButton` (or as its parent, a `CheckButton`) won’t work because the `onToggle()` delegate can only take a `ToggleButton` as its argument.
 
-### `ActionButton` and `Observed` class
+#### `ActionButton` and `Observed` class
 
 Same as with the `MyRadioButton`, we’ve seen all this before. At least, we’ve seen stuff like it.
 
 So, let’s move on to our next subject…
 
-## A ColorButton to Select Color
+### A ColorButton to Select Color
 
 The [second code example can be found here](https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_02_colorbutton.d).
 

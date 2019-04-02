@@ -1,4 +1,4 @@
-# gtkDcoding Blog Extra #0001
+## gtkDcoding Blog Extra #0001
 
 It being Sunday, I went looking for something fun and interesting to do, code-wise, and ran across the GTK+ Inspector. I had no idea it would work on Windows 10, but it does.
 
@@ -8,7 +8,7 @@ If you have the GTK+ runtime installed, you’ve got access. All you need to do 
 
 Now you can open any GtkD application and `Ctrl-Shift-D` (how appropriate for us) to bring up the Inspector.
 
-## What It Does
+### What It Does
 
 Click on any entity listed and the Inspector flashes that entity in your running application so you can make a visual association with the code.
 

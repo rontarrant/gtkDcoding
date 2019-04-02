@@ -11,7 +11,7 @@ Mike also suggested that if your distro includes the D Language and/or GtkD, it'
 
 Anyway, let's get on with it, shall we?
 
-## Installation On Linux (an Apt Approach)
+### Installation On Linux (an Apt Approach)
 
 Note: You can just copy and paste these commands into a shell to avoid mistyping stuff, or go it the hard way and practice your touchtyping skills. Up to you.
 
@@ -33,7 +33,7 @@ And one more command to install dmd-tools (which installs some coolness we'll ta
 	
 You should now have a working development environment for D and GtkD.
 
-## One Way to Build
+### One Way to Build
 
 We're almost ready to compile some code, but first we need to find the wrappers and the static and/or shared gtk libraries. Open a shell and issue this command:
 
@@ -47,7 +47,7 @@ So, navigate to a directory containing one of the GtkD code files and type this:
 
 Well, that was fun, although it's a bit much to type every time. Let's save some wear and tear on our fingers by finding...
 
-## Another Way to Build
+### Another Way to Build
 
 It turns out that if we surround that pkg-config command with back-ticks, we can use its output as arguments to dmd like this: 
 
@@ -55,7 +55,7 @@ It turns out that if we surround that pkg-config command with back-ticks, we can
 
 Better, but this being Linux, we can pull a Bash trick to make it even easier.
 
-## Alias Away the Typing
+### Alias Away the Typing
 
 A default installation of *Linux Mint 19.1 xfce* doesn't have a `.bash_aliases` file, but creating one is not big deal:
 
@@ -81,7 +81,7 @@ And if you want the executable filename to be different from the code filename, 
 
 	-of<executable_filename>
 
-## Conclusion
+### Conclusion
 
 And there you have it, installation instructions for *Linux Mint* plus two ways to build and link D source on Linux without typing yourself into an early grave.
 

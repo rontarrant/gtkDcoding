@@ -1,10 +1,10 @@
-# 0021 – Labels with Background Colors & Markup
+## 0021 – Labels with Background Colors & Markup
 
 Whenever you create a *GTK* `Button` and slap text on it, even though it’s not obvious at first glance, the text ends up on a `Label`. So, today we’re going to skip the `Button` and go straight to the `Label`.
 
 One thing you can’t do with a `Label` is give it a coloured background… except, you can if you stick the `Label` into an `EventBox`.
 
-## Abbreviated Intro to the EventBox
+### Abbreviated Intro to the EventBox
 
 [Code example #1: a Coloured Label](https://github.com/rontarrant/gtkDcoding/blob/master/008_label/label_008_01_bg_color.d)
 
@@ -33,7 +33,7 @@ You’ll notice that we’re deriving a new class from the `EventBox`. We could 
 
 The `labelText` string has lots of extra space on either side, but this is for aesthetic reasons. Letting the text touch the edges of the coloured area is like fingernails on a chalkboard to my inner designer. (Mad scientist, designer... yeah, it's crowded in there.)
 
-### Color as an RGBA Object
+#### Color as an RGBA Object
 
 Smack in the middle of the constructor is where we build the colour as an `RGBA` object. Keep in mind that *GTK* defines each colour with four channels:
 
@@ -50,13 +50,13 @@ And finally, we drop the `Label` into the `EventBox`.
 
 Moving right along...
 
-## Markup on a Label
+### Markup on a Label
 
 [Code example #2: a marked-up Label](https://github.com/rontarrant/gtkDcoding/blob/master/008_label/label_008_02_markup.d)
 
 *GTK* patterns its markup after HTML, css, and all that web stuff, so if you’re familiar with web development at the hand-coding level, you’re well prepared.
 
-### The MarkupSwitchButton Class
+#### The MarkupSwitchButton Class
 
 That’s this thing:
 

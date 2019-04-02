@@ -1,4 +1,4 @@
-# 0014 Reacting to Mouse Events
+## 0014 Reacting to Mouse Events
 
 Now we start down the road toward full control of what happens when the user fiddles with mouse buttons. Sometimes we want to trigger something when a mouse button is pressed, but other times (more often, really) we want to react when the mouse button is released. This is the accepted norm in most GUI designs, so let’s not rock the boat until we have good reason to. And today, we have no excuse.
 
@@ -9,7 +9,7 @@ Today's files:
 - [Mouse Button PRESS example](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_005_01_press.d), and
 - [Mouse Button RELEASE example](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_005_02_release.d).
 
-## A New Import
+### A New Import
 
 Yeah, I’m not talking about this year’s Volvo or Toyota, but an import statement… this, to be exact:
 
@@ -28,7 +28,7 @@ Just below that import statement is a comment to let you know where we find `Eve
 
 …all kinds of things. They give us a serious amount of control to pass along to the user.
 
-## Changes to the TestRigWindow Class
+### Changes to the TestRigWindow Class
 
 First, let’s look at the constructor:
 
@@ -68,7 +68,7 @@ We make sure we’ve actually got a new `Event` to play with, then dig into it t
 
 All that stuff about a value that’s returned from this function has to do with signal chains which we covered in [blog post #0011 Callback Chains](http://gtkdcoding.com/2019/02/12/0011-callback-chains.html). Once the event has been handled, we tell `Main` we’re done handling signals and back away.
 
-## But, wait, There’s more...
+### But, wait, There’s more...
 
 You’ve likely noticed the call to pressReport() and here’s that function:
 
@@ -88,7 +88,7 @@ And that variable *action*? It’s a string defined at the top of `TestRigWindow
 
 Nothing out of the ordinary except for the playful misspellings.
 
-## Conclusion
+### Conclusion
 
 Next time, we’ll dig into some more mouse events. Until then, happy D-coding and may the `Widgets` be with you.
 

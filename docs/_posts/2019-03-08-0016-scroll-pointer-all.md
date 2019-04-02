@@ -1,4 +1,4 @@
-# 0015 Scroll Wheel and More Button Stuff
+## 0015 Scroll Wheel and More Button Stuff
 
 Time to get down to the nitty gritty of harnessing the mouse wheel with [Mouse Scroll Wheel example](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_005_05_scroll_wheel.d).
 
@@ -40,7 +40,7 @@ This should be pretty familiar by now, hook up a signal to a callback using one 
 
 Again, we have to dig a bit to find the data we want: the direction the mouse wheel is turning. The `ScrollDirection` *enum* in `gtk.c.types` (that’s *generated/gtkd/gtk/c/types.d* if you want to see for yourself) provides us with `UP` and `DOWN` so we can check. Makes it easy. I’ve added in a bit of return value roughage so we know for sure we’re done with any signal chain that might end up being processed at the same time.
 
-## Left, Middle, Right
+### Left, Middle, Right
 
 Let’s throw caution to the wind and put a `Button` back in the window, just one, and give it something interesting to do…
 

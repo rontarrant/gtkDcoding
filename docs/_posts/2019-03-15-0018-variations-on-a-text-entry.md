@@ -1,4 +1,4 @@
-# 0018 Variations on a Text Entry Widget
+## 0018 Variations on a Text Entry Widget
 
 Let’s move away from buttons for the moment, both mouse and GUI, and look at the *Entry* widget… yeah, the one used for gathering a small bit of text from the user.
 
@@ -15,7 +15,7 @@ Assign it to a variable, stick it in a `writeln()` function, whatever’s your p
 
 Moving right along…
 
-## Non-editable Entry
+### Non-editable Entry
 
 [The code for the second example can be found here](https://github.com/rontarrant/gtkDcoding/blob/master/006_text/text_006_02_no_edit_entry.d).
 
@@ -65,7 +65,7 @@ Rather than sub-classing the `Entry` and `CheckButton`, I used a sub-class of `B
 
 Note that both the `Entry` and `CheckButton` states are set to `false` which means if you compile and run this example, you won’t be able to type into the `Entry` until you check the `CheckButton`.
 
-## Obfuscation
+### Obfuscation
 
 Now let’s think about what else text `Entry` widgets are used for. One thing that comes to mind is collecting login information. In our third example, we’ll mimic a login with a `Username` field left in the clear (readable, in other words) and an obscured `Password` field. The `LoginBox` class serves as the parent handing out candy, so we need an extra `Entry` widget with `Visibility` set to `false`, which means our constructor now looks like this:
 

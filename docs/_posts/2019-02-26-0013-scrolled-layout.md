@@ -1,8 +1,8 @@
-# 0013 Scrolled Layout
+## 0013 Scrolled Layout
 
 This time around, we’ll be looking at how to do a...
 
-## Scrolled Layout
+### Scrolled Layout
 
 And here are the code files:
 
@@ -49,7 +49,7 @@ And everything else in this example is similar to what we've covered before. Com
 
 And since that didn’t take much time or effort, let’s look at another example, the tooltip.
 
-## Tooltip
+### Tooltip
 
 In *GTK*, it used to be that tooltips took a lot of time and effort to figure out and put into practice, but by the time version 3.x came along, things had changed. Now tooltips are built right in at the generic *Widget* level, so now it's like falling off a skateboard, anyone can do it. So, let’s look at the derived *Button* class to see how it’s done:
 
@@ -86,11 +86,11 @@ This is so easy compared to the original way. All you have to do is:
 
 In the example, I opted to grab the *Button*’s *Label* text and put that in the *Tooltip* along with a message.
 
-### There’s that Rotated Label Again
+#### There’s that Rotated Label Again
 
 Yeah, it’s one reason which leaps to mind for actually needing a *Tooltip* on a *Button*. It's not the only reason, but if you've ever used software with sideways labels, you know it can be a literal pain the neck. Besides, for our purposes, this seems logical, so there it is.
 
-## Conclusion
+### Conclusion
 
 Two for the price of one, a scrolled layout and a tooltip. The coolness just amps up every step along the path here. But now it’s time, gentlefolk, please. So have a good coding experience and I’ll see you next time.
 

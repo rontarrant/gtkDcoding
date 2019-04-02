@@ -1,4 +1,4 @@
-# 0017 Mouse Pointer
+## 0017 Mouse Pointer
 
 How many programmers does it take to change a mouse pointer?
 
@@ -6,7 +6,7 @@ I don't have an answer, but I can tell you how many functions it takes: one. And
 
 Their use is straightforward.
 
-## Code Breakdown
+### Code Breakdown
 
 First, here's [the Change Mouse Pointer example]( https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_005_07_change_pointer.d).
 
@@ -26,7 +26,7 @@ The most obvious new addition is `gdk.Cursor` (as before, note the ‘*d*’ in 
 
 And there’s quite an array of cursor shapes available, too, all that you’d expect to see plus several dozen more. I picked a few for this demo: `HEART`, `GUMBY`, and `HAND1`.
 
-## Other Differences in the Code
+### Other Differences in the Code
 
 I made an arbitrary change to how the buttons are added. Because there are three, I stuffed them into an array of `Button`s and used a `foreach()` to pop them into the `Layout`, increasing the `y` location each time by 80 pixels:
 
@@ -94,7 +94,7 @@ With minor differences, all three derived button classes are the same, so we’l
 	
 	} // class GumbyButton
 
-## Disecting Gumby
+### Disecting Gumby
 
 In the constructor, all we do is call the parent class to create the button, then hook up the `Enter` and `Leave` signals.
 
@@ -104,7 +104,7 @@ The `onEnter()` function is no stranger. It expects a *Boolean* return value whi
 
 And that’s it.
 
-## Bonus Code Example: All Actions
+### Bonus Code Example: All Actions
 
 Okay, not all, but quite a few. There are other signals you could hook up. If you want to play around, I encourage you to take a look at the `GdkEventType` enum starting on line number 947 of [the gdk types.d file]( https://github.com/gtkd-developers/GtkD/blob/master/generated/gtkd/gdk/c/types.d).
 
