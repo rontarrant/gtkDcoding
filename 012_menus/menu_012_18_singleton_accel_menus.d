@@ -7,7 +7,7 @@
  			NewFileItem
  			OpenFileItem
  			CloseFileItem
- 			ExitItem
+ 			QuitItem
  	EditMenuHeader
  		EditMenu
  			UndoItem
@@ -17,6 +17,8 @@
  			PasteItem
  	
  */
+
+// NOTE: must use '-i' compiler flag to include external modules
 
 import std.stdio;
 
@@ -30,6 +32,9 @@ import gtk.Widget;
 import gdk.Event;
 import gtk.AccelGroup;
 import gdk.c.types;
+
+// find the SingletonAccelGroup module in the singleton sub-directory
+import singleton.SingletonAccelGroup;
 
 void main(string[] args)
 {
@@ -66,7 +71,7 @@ class TestRigWindow : MainWindow
 	
 	void quitApp(Widget w)
 	{
-		// do other exit stuff here if necessary
+		// do other quit stuff here if necessary
 		
 		Main.quit();
 		
@@ -156,7 +161,7 @@ class FileMenu : Menu
 	SaveFileItem saveFileItem;
 	SaveAsFileItem saveAsFileItem;
 	CloseFileItem closeFileItem;
-	ExitItem exitItem;
+	QuitItem quitItem;
 	
 	// arg: an array of items
 	this()
@@ -178,8 +183,8 @@ class FileMenu : Menu
 		closeFileItem = new CloseFileItem();
 		append(closeFileItem);
 		
-		exitItem = new ExitItem();
-		append(exitItem);
+		quitItem = new QuitItem();
+		append(quitItem);
 		
 	} // this()
 	
@@ -224,16 +229,16 @@ class EditMenu : Menu
 } // class EditMenu
 
 
-class ExitItem : MenuItem
+class QuitItem : MenuItem
 {
-	string itemLabel = "Exit";
-	char accelKey = 'x';
-	SingletonAccelGroup accelGroup;
+	string itemLabel = "Quit";
+	char accelKey = 'q';
+	SingletonAccelGroup singletonAccelGroup;
    
 	this()
 	{
-		accelGroup = accelGroup.get();		
-		super(&doSomething, itemLabel, "activate", true, accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();		
+		super(&doSomething, itemLabel, "activate", true, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		//addOnActivate(&doSomething);
 		
 	} // this()
@@ -245,21 +250,21 @@ class ExitItem : MenuItem
 		
 		Main.quit();
 		
-	} // exit()
+	} // quit()
 	
-} // class ExitItem
+} // class QuitItem
 
 
 class NewFileItem : MenuItem
 {
 	string itemLabel = "New";
 	char accelKey = 'n';
-	SingletonAccelGroup accelGroup;
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
@@ -277,19 +282,19 @@ class OpenFileItem : MenuItem
 {
 	string itemLabel = "Open";
    char accelKey = 'o';
-	SingletonAccelGroup accelGroup;
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
 	
 	void doSomething(MenuItem mi)
 	{
-		writeln("A file dialog will be shown now.");
+		writeln("A file dialog will be shown now for chosing a file to open.");
 		
 	} // doSomething()
 	
@@ -300,19 +305,19 @@ class SaveFileItem : MenuItem
 {
 	string itemLabel = "Save";
 	char accelKey = 's';
-	SingletonAccelGroup accelGroup;
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
 	
 	void doSomething(MenuItem mi)
 	{
-		writeln("A file dialog will be shown if the file hasn't, until now, been saved.");
+		writeln("A file dialog will be shown ONLY if the file hasn't yet been saved.");
 		
 	} // doSomething()
 	
@@ -323,19 +328,19 @@ class SaveAsFileItem : MenuItem
 {
 	string itemLabel = "Save as...";
 	char accelKey = 's';
-	SingletonAccelGroup accelGroup;
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK | ModifierType.SHIFT_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK | ModifierType.SHIFT_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
 	
 	void doSomething(MenuItem mi)
 	{
-		writeln("A file dialog will be shown now.");
+		writeln("A file dialog will be shown so the file can be saved under a different name.");
 		
 	} // doSomething()
 	
@@ -345,13 +350,13 @@ class SaveAsFileItem : MenuItem
 class CloseFileItem : MenuItem
 {
 	string itemLabel = "Close";
-	char accelKey = 'c';
-	SingletonAccelGroup accelGroup;
+	char accelKey = 'w';
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
@@ -372,12 +377,12 @@ class UndoItem : MenuItem
 {
 	string itemLabel = "Undo";
 	char accelKey = 'z';
-	SingletonAccelGroup accelGroup;
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
@@ -395,12 +400,12 @@ class RedoItem : MenuItem
 {
 	string itemLabel = "Redo";
 	char accelKey = 'z';
-	SingletonAccelGroup accelGroup;
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK | ModifierType.SHIFT_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK | ModifierType.SHIFT_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
@@ -418,12 +423,12 @@ class CutItem : MenuItem
 {
 	string itemLabel = "Cut";
 	char accelKey = 'x';
-	SingletonAccelGroup accelGroup;
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
@@ -441,12 +446,12 @@ class CopyItem : MenuItem
 {
 	string itemLabel = "Copy";
 	char accelKey = 'c';
-	SingletonAccelGroup accelGroup;
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
@@ -464,12 +469,12 @@ class PasteItem : MenuItem
 {
 	string itemLabel = "Paste";
 	char accelKey = 'p';
-	SingletonAccelGroup accelGroup;
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
@@ -487,12 +492,12 @@ class NonStandardItem : MenuItem
 {
 	string itemLabel = "Non-standard command";
 	char accelKey = 'j';
-	SingletonAccelGroup accelGroup;
+	SingletonAccelGroup singletonAccelGroup;
 	   
 	this()
 	{
-		accelGroup = accelGroup.get();
-		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK | ModifierType.MOD1_MASK, AccelFlags.VISIBLE);
+		singletonAccelGroup = singletonAccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK | ModifierType.MOD1_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
 	
@@ -504,50 +509,3 @@ class NonStandardItem : MenuItem
 	} // doSomething()
 	
 } // class PasteItem
-
-
-class SingletonAccelGroup : AccelGroup
-{
-	private:
-	// Cache instantiation flag in thread-local bool
-	// Thread local
-	static bool instantiated_;
-
-	// Thread global
-	__gshared SingletonAccelGroup instance_;
-
-	this()
-	{
-		super();
-		
-	} // this()
-
-	public:
-	
-	static SingletonAccelGroup get()
-	{
-		write("getting...");
-		
-		if(!instantiated_)
-		{
-			synchronized(SingletonAccelGroup.classinfo)
-			{
-				if(!instance_)
-				{
-					instance_ = new SingletonAccelGroup();
-					writeln("creating");
-				}
-
-				instantiated_ = true;
-			}
-		}
-		else
-		{
-			writeln("not created");
-		}
-
-		return(instance_);
-		
-	} // get()
-
-} // class SingletonAccelGroup

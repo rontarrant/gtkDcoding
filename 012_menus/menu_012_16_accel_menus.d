@@ -298,7 +298,7 @@ class SaveFileItem : MenuItem
 	this(AccelGroup accelGroup)
 	{
 		super(&doSomething, itemLabel, "activate", false, accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
-		
+
 	} // this()
 	
 	
