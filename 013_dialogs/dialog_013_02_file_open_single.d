@@ -11,8 +11,6 @@ import gdk.Event;
 import gtk.FileChooserDialog;
 import gtk.Window;
 import gtk.Widget;
-import glib.ListSG;
-import std.conv;
 
 void main(string[] args)
 {
@@ -27,7 +25,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Multiple Menus Example";
+	string title = "Open a File Using a Dialog";
 
 	this()
 	{
@@ -129,7 +127,8 @@ class FileOpenItem : MenuItem
 	string itemLabel = "Open";
 	FileChooserDialog fileChooserDialog;
 	Window parentWindow;
-   
+	string filename;
+  
 	this(Window extParentWindow)
 	{
 		super(itemLabel);
@@ -142,36 +141,21 @@ class FileOpenItem : MenuItem
 	void doSomething(MenuItem mi)
 	{
 		int response;
-		string[] files;
-		string file;
+		FileChooserAction action = FileChooserAction.OPEN;
 		
-		//FileChooserAction action = FileChooserAction.OPEN;
-		FileChooserDialog dialog = new FileChooserDialog("Open File", parentWindow, FileChooserAction.OPEN, null, null);
-		dialog.setSelectMultiple(true);
+		FileChooserDialog dialog = new FileChooserDialog("Open a File", parentWindow, action, null, null);
 		response = dialog.run();
 		
 		if(response == ResponseType.OK)
 		{
-			writeln("got this far");
-			
-			auto list = dialog.getFilenames();
-			
-			while(list.next !is null)
-			{
-				file = to!string(cast(char*)list.data);
-				writeln("file: ", file);
-				files ~= file;
-				list = list.next;
-				openFile(file);
-			}
+			filename = dialog.getFilename();
+			openFile(filename);
 		}
 		else
 		{
 			writeln("cancelled.");
 		}
 
-		writeln("dialog response: ", response);
-		
 		dialog.destroy();
 		
 	} // doSomething()
@@ -183,4 +167,4 @@ class FileOpenItem : MenuItem
 		
 	} // openFile()
 	
-} // class AboutItem
+} // class FileOpenItem
