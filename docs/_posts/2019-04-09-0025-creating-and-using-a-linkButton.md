@@ -82,9 +82,9 @@ Not a lot changes. [Have a look at the code file](https://github.com/rontarrant/
 It’s all in the arguments sent to `LinkButton`’s constructor:
 
 - Send it one argument, a URL, and it’s happy to slap that onto the face of the button.
-- Send it two arguments, a URL and a nicely-formatted string, and that button cute enough to kiss.
+- Send it two arguments, a URL and a nicely-formatted string, and that button ends up all cute and cuddly.
 
-On the downside, the `LinkButton` spits out a warning to the *Windows Command Prompt* window every time you use it. My research has turned up no reasonable explanation and it’s been going since the release of *GTK 3.0*. The good news is that it doesn’t seem to matter and it seems safe to ignore.
+On the downside, the `LinkButton` spits out a warning to the *Command Prompt* window every time you use it. My research has turned up no reasonable explanation and it’s been going on since the release of *GTK 3.0*. The good news is that the message is of no consequence and it seems safe to ignore.
 
 And that’s it for this time, a short post for a short day. Come on back again sometime.
 
