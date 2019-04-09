@@ -11,6 +11,7 @@ import gdk.Event;
 import gtk.FileChooserDialog;
 import gtk.Window;
 import gtk.Widget;
+import gtk.Entry;
 
 void main(string[] args)
 {
@@ -56,13 +57,17 @@ class AppBox : Box
 {
 	int padding = 10;
 	MyMenuBar menuBar;
+	TextEntry filenameEntry;
 	
 	this(Window parentWindow)
 	{
 		super(Orientation.VERTICAL, padding);
-		
-		menuBar = new MyMenuBar(parentWindow);
-    	packStart(menuBar, false, false, 0);		
+
+		filenameEntry = new TextEntry("Untitled");
+		menuBar = new MyMenuBar(parentWindow, filenameEntry);
+
+		packStart(menuBar, false, false, 0);
+		packStart(filenameEntry, false, false, 0);		
 		
 	} // this()
 	
@@ -75,11 +80,11 @@ class MyMenuBar : MenuBar
 	
 	FileHeader fileHeader;
 	
-	this(Window parentWindow)
+	this(Window parentWindow, TextEntry filenameEntry)
 	{
 		super();
 		
-		fileHeader = new FileHeader(fileHeaderLabel, parentWindow);
+		fileHeader = new FileHeader(fileHeaderLabel, parentWindow, filenameEntry);
 		append(fileHeader);
 				
 	} // this()
@@ -93,11 +98,11 @@ class FileHeader : MenuItem
 	FileMenu fileMenu;
 	
 	// arg: a Menu object
-	this(string headerTitle, Window parentWindow)
+	this(string headerTitle, Window parentWindow, TextEntry filenameEntry)
 	{
 		super(headerTitle);
 		
-		fileMenu = new FileMenu(parentWindow);
+		fileMenu = new FileMenu(parentWindow, filenameEntry);
 		setSubmenu(fileMenu);
 		
 	} // this()
@@ -110,11 +115,11 @@ class FileMenu : Menu
 	FileSaveItem fileSaveItem;
 	
 	// arg: an array of items
-	this(Window parentWindow)
+	this(Window parentWindow, TextEntry filenameEntry)
 	{
 		super();
 		
-		fileSaveItem = new FileSaveItem(parentWindow);
+		fileSaveItem = new FileSaveItem(parentWindow, filenameEntry);
 		append(fileSaveItem);
 		
 	} // this()
@@ -127,13 +132,16 @@ class FileSaveItem : MenuItem
 	string itemLabel = "Save";
 	FileChooserDialog fileChooserDialog;
 	Window parentWindow;
-	string filename;
+	string filename = "Untitled";
+	TextEntry filenameEntry;
 	
-	this(Window extParentWindow)
+	this(Window extParentWindow, TextEntry extFilenameEntry)
 	{
 		super(itemLabel);
 		addOnActivate(&doSomething);
 		parentWindow = extParentWindow;
+		
+		filenameEntry = extFilenameEntry;
 		
 	} // this()
 	
@@ -143,9 +151,10 @@ class FileSaveItem : MenuItem
 		int response;
 		FileChooserAction action = FileChooserAction.SAVE;
 		
-		if(filename is null)
+		if(filename == "Untitled")
 		{
 			FileChooserDialog dialog = new FileChooserDialog("Save a File", parentWindow, action, null, null);
+			dialog.setCurrentName(filename);
 			response = dialog.run();
 			
 			if(response == ResponseType.OK)
@@ -160,14 +169,12 @@ class FileSaveItem : MenuItem
 	
 			dialog.destroy();		
 		}
-		else if(response == ResponseType.CANCEL)
-		{
-			writeln("action cancelled");
-		}
 		else
 		{
 			saveFile(filename);
 		}
+
+		filenameEntry.setText(filename);
 		
 	} // doSomething()
 	
@@ -179,3 +186,18 @@ class FileSaveItem : MenuItem
 	} // saveFile()
 	
 } // class FileSaveItem
+
+
+class TextEntry : Entry
+{
+	string predefinedText;
+	
+	this(string text)
+	{
+		predefinedText = text;
+		
+		super(predefinedText);
+		
+	} // this()
+
+} // class TextEntry
