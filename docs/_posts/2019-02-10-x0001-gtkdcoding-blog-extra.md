@@ -12,7 +12,7 @@ keywords:
 - GTK+ Inspector
 ---
 
-## gtkDcoding Blog Extra #0001
+## gtkDcoding Blog Extra X0001 - GTK Inspector
 
 It being Sunday, I went looking for something fun and interesting to do, code-wise, and ran across the GTK+ Inspector. I had no idea it would work on Windows 10, but it does.
 
