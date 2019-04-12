@@ -1,6 +1,21 @@
+---
+title: Variations on a Text Entry Widget
+layout: post
+description: How to obfuscate text in an Entry widget and how to make it non-editable.
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Graphical User Interface
+- Entry
+
+---
+
 ## 0018 - Variations on a Text Entry Widget
 
-Let’s move away from buttons for the moment, both mouse and GUI, and look at the *Entry* widget… yeah, the one used for gathering a small bit of text from the user.
+Let’s move away from buttons for the moment, both mouse and GUI, and look at the `Entry` widget… yeah, the one used for gathering a small bit of text from the user.
 
 This is pretty much the easiest widget to use and the code amounts to this:
 

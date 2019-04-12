@@ -1,3 +1,17 @@
+---
+title: Button Release & Reorganizing the Code
+layout: post
+description: How to use a GTK Button's onRelease signal.
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Graphical User Interface
+- GTK Button
+---
+
 ## 0007 – Button Release & Reorganizing the Code
 
 We’ll be making small but significant changes to the code this time around. The last time we looked at buttons, (Post 0004) we built everything from within the main() function. Further, we used the onClicked signal to get our button to do something.

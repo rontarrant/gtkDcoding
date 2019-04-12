@@ -1,3 +1,20 @@
+---
+title: Disappearing Entry Text and Font Selection
+layout: post
+description: How to make an Entry widget disappear and how to use the FontButton.
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Graphical User Interface
+- Entry
+- CheckButton
+- FontButton
+
+---
+
 ## 0019 - Disappearing Entry Text and Font Selection
 
 Today’s examples are quite unrelated. The only reason they appear in the same blog post is because my mind skipped from disappearing text Entry boxes to font selection. I don’t know why and it really doesn’t matter, so let’s just get on with it.

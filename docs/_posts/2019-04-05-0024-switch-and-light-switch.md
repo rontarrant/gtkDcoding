@@ -1,3 +1,22 @@
+---
+title: Switch and LightSwitch
+layout: post
+description: How to use a RadioButton or a ColorButton.
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Widget
+- Switch
+- ColorButton
+- Button
+- RGBA
+
+---
+
+
 ## 0024 - Switch and LightSwitch
 
 For today, we’ll be looking at two code files: [one showing off a Switch widget](https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_03_switch.d), and the other, [a derived class we'll call the LightSwitch](https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_04_switch_light.d).

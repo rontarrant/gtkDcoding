@@ -1,3 +1,18 @@
+---
+title: Creating and Using a LinkButton
+layout: post
+description: How to use a LinkButton, with and without a visible URL.
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Widget
+- LinkButton
+
+---
+
 ## 0025 - Creating and Using a LinkButton
 
 Today’s buttons are simple, a button to click to follow a link and another one with a pretty face and a link. So, what’s the difference?

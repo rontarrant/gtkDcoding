@@ -1,3 +1,20 @@
+---
+title: Callback Chains
+layout: post
+description: How GTK signals are chained together.
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Graphical User Interface
+- signal
+- event
+- callback
+- GTK CheckButton
+---
+
 ## 0011 - Callback Chains
 
 I mentioned in post #0008 that we’d look at callback chains and here we are. In blog entry #0010, I covered setting up an observer pattern. Today we’ll have a bit of fun combining these two. All this code should seem quite familiar, so no need to fasten your seatbelt.

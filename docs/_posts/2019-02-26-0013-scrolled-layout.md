@@ -1,3 +1,23 @@
+---
+title: Scrolled Layout
+layout: post
+description: How to scroll the contents of a GTK Layout container.
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Graphical User Interface
+- signal
+- event
+- callback
+- GTK Layout
+- ScrolledWindow
+- Tooltip
+
+---
+
 ## 0013 - Scrolled Layout
 
 This time around, we’ll be looking at how to do a...

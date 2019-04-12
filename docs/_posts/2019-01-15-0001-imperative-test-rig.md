@@ -9,7 +9,6 @@ keywords:
 - dlang
 - D language
 - Graphical User Interface
-- OOP
 - PSPad syntax highlighter
 - CodeBlocks syntax highlighter
 ---

@@ -1,3 +1,20 @@
+---
+title: Mouse Pointer
+layout: post
+description: Changing the shape of the mouse pointer based on which widget it's over.
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Graphical User Interface
+- signal
+- event
+- callback
+- mouse pointer
+---
+
 ## 0017 - Mouse Pointer
 
 How many programmers does it take to change a mouse pointer?

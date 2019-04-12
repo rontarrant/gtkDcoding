@@ -1,3 +1,17 @@
+---
+title: Blog eXtra: the GTK+ Inspector
+layout: post
+description: How to use the GTK+ Inspector to see what your code's up to.
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Graphical User Interface
+- GTK+ Inspector
+---
+
 ## gtkDcoding Blog Extra #0001
 
 It being Sunday, I went looking for something fun and interesting to do, code-wise, and ran across the GTK+ Inspector. I had no idea it would work on Windows 10, but it does.

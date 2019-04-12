@@ -1,3 +1,17 @@
+---
+title: GtkD Linux Development Environment
+layout: post
+description: How to install and use a D-language build environment on Linux Mint.
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Linux
+
+---
+
 ## X0002 - GtkD Linux Development Environment
 
 Okay, hold onto your hat, because we’re gonna install and test a D language development environment on Linux.
