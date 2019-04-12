@@ -1,3 +1,19 @@
+---
+title: Introduction to the Test Rig
+layout: post
+description: Introduction to the TestRig window, the base for all future tutorials .
+author: Ron Tarrant
+keywords:
+- GtkD
+- GTK+ 3
+- dlang
+- D language
+- Graphical User Interface
+- OOP
+- PSPad syntax highlighter
+- CodeBlocks syntax highlighter
+---
+
 ## 0001 - The Test Rig
 
 Before we start examining the test rig code, I'd like to introduce you to a couple of syntax highlighting configurations for two popular text editors on Windows.

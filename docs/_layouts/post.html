@@ -3,27 +3,27 @@ layout: default
 ---
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
-    <!-- <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1> /-->
-    {% if page.keywords %}
-		<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">
-{% endif %}
-    <p class="post-meta">
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        {{ page.date | date: date_format }}
-      </time>
-      {%- if page.author -%}
-        • by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
-      {%- endif -%}</p>
-  </header>
+	<header class="post-header">
+		<!-- <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1> /-->
+		{% if page.keywords %}
+			<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">
+		{% endif %}
+		<p class="post-meta">
+		<time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+			{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+			{{ page.date | date: date_format }}
+		</time>
+			{%- if page.author -%}
+			• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+	      {%- endif -%}</p>
+	</header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    {{ content }}
-    <p><i>If you'd like to leave a comment, please follow one of the links below to email me or go to the gtkDcoding Facebook page.</i></p>
-    <p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything.</p>
-    <p>&copy; Copyright {{ site.time | date: '%Y' }} {{ site.author }} </p>
-  </div>
+	<div class="post-content e-content" itemprop="articleBody">
+		{{ content }}
+		<p><i>If you'd like to leave a comment, please follow one of the links below to email me or go to the gtkDcoding Facebook page.</i></p>
+		<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything.</p>
+		<p>&copy; Copyright {{ site.time | date: '%Y' }} {{ site.author }} </p>
+	</div>
 
-  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+	<a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
