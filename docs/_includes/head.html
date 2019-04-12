@@ -1,0 +1,6 @@
+{% if page.summary %}
+<meta name="description" content="{{ page.summary | escape }}">
+{% endif %}
+{% if page.keywords %}
+<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">
+{% endif %}
