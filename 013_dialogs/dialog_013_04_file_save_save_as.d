@@ -26,7 +26,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Open a File Using a Dialog";
+	string title = "Untitled";
 
 	this()
 	{
@@ -63,7 +63,7 @@ class AppBox : Box
 	{
 		super(Orientation.VERTICAL, padding);
 
-		filenameEntry = new TextEntry("Untitled");
+		filenameEntry = new TextEntry(parentWindow);
 		menuBar = new MyMenuBar(parentWindow, filenameEntry);
 
 		packStart(menuBar, false, false, 0);
@@ -113,6 +113,7 @@ class FileHeader : MenuItem
 class FileMenu : Menu
 {
 	FileSaveItem fileSaveItem;
+	FileSaveAsItem fileSaveAsItem;
 	
 	// arg: an array of items
 	this(Window parentWindow, TextEntry filenameEntry)
@@ -121,6 +122,9 @@ class FileMenu : Menu
 		
 		fileSaveItem = new FileSaveItem(parentWindow, filenameEntry);
 		append(fileSaveItem);
+
+		fileSaveAsItem = new FileSaveAsItem(parentWindow, filenameEntry);
+		append(fileSaveAsItem);
 		
 	} // this()
 	
@@ -129,38 +133,43 @@ class FileMenu : Menu
 
 class FileSaveItem : MenuItem
 {
+	private:
 	string itemLabel = "Save";
 	FileChooserDialog fileChooserDialog;
-	Window parentWindow;
-	string filename = "Untitled";
-	TextEntry filenameEntry;
+	Window _parentWindow;
+	string _filename;
+	TextEntry _filenameEntry;
 	
-	this(Window extParentWindow, TextEntry extFilenameEntry)
+	public:
+	this(Window parentWindow, TextEntry filenameEntry)
 	{
 		super(itemLabel);
 		addOnActivate(&doSomething);
-		parentWindow = extParentWindow;
-		
-		filenameEntry = extFilenameEntry;
+		_parentWindow = parentWindow;
+ 
+		_filenameEntry = filenameEntry;
 		
 	} // this()
 	
 	
+	private:
 	void doSomething(MenuItem mi)
 	{
 		int response;
 		FileChooserAction action = FileChooserAction.SAVE;
+		_filename = _filenameEntry.getText();
 		
-		if(filename == "Untitled")
+		if(_filename == "Untitled")
 		{
-			FileChooserDialog dialog = new FileChooserDialog("Save a File", parentWindow, action, null, null);
-			dialog.setCurrentName(filename);
+			FileChooserDialog dialog = new FileChooserDialog("Save a File", _parentWindow, action, null, null);
+
+			dialog.setCurrentName(_filenameEntry.getText());
 			response = dialog.run();
 			
 			if(response == ResponseType.OK)
 			{
-				filename = dialog.getFilename();
-				saveFile(filename);
+				_filename = dialog.getFilename();
+				saveFile();
 			}
 			else
 			{
@@ -171,33 +180,114 @@ class FileSaveItem : MenuItem
 		}
 		else
 		{
-			saveFile(filename);
+			saveFile();
 		}
 
-		filenameEntry.setText(filename);
-		
+		_filenameEntry.setText(_filename);
+		_parentWindow.setTitle(_filename);
+				
 	} // doSomething()
 	
 	
-	void saveFile(string filename)
+	void saveFile()
 	{
-		writeln("file to save: ", filename);
-		
+		writeln("file to save: ", _filename);
+				
 	} // saveFile()
 	
 } // class FileSaveItem
 
 
-class TextEntry : Entry
+class FileSaveAsItem : MenuItem
 {
-	string predefinedText;
+	private:
+	string itemLabel = "Save as...";
+	FileChooserDialog fileChooserDialog;
+	Window _parentWindow;
+	string _filename;
+	TextEntry _filenameEntry;
 	
-	this(string text)
+	public:
+	this(Window parentWindow, TextEntry filenameEntry)
 	{
-		predefinedText = text;
+		super(itemLabel);
+		addOnActivate(&doSomething);
 		
-		super(predefinedText);
+		_parentWindow = parentWindow;
+		_filenameEntry = filenameEntry;
 		
 	} // this()
+	
+	private:
+	void doSomething(MenuItem mi)
+	{
+		int response;
+		FileChooserAction action = FileChooserAction.SAVE;
+		
+		_filename = _filenameEntry.getText();
+
+		FileChooserDialog dialog = new FileChooserDialog("Save a File", _parentWindow, action, null, null);
+		dialog.setCurrentName(_filename);
+		response = dialog.run();
+			
+		if(response == ResponseType.OK)
+		{
+			_filename = dialog.getFilename();
+			saveAsFile();
+		}
+		else
+		{
+			writeln("cancelled.");
+		}
+	
+		dialog.destroy();		
+
+		_filenameEntry.setText(_filename);
+		_parentWindow.setTitle(_filename);
+		
+	} // doSomething()
+	
+	
+	void saveAsFile()
+	{
+		writeln("file to save as...: ", _filename);
+				
+	} // saveAsFile()
+	
+} // class FileSaveAsItem
+
+
+class TextEntry : Entry
+{
+	private:
+	string _defaultFilename = "Untitled";
+	Window _parentWindow;
+	
+	public:
+	this(Window parentWindow)
+	{
+		super(_defaultFilename);
+		addOnActivate(&changeFilename);
+		
+		_parentWindow = parentWindow;
+		
+	} // this()
+
+
+	void changeFilename(Entry e)
+	{
+		if(getText() == null)
+		{
+			writeln("The filename is an empty string. Resetting to default: Untitled.");
+			setText(_defaultFilename);
+		}
+		else
+		{
+			writeln("Filename has changed to: ", getText());
+		}
+
+		_parentWindow.setTitle(getText());
+		
+	} // changeFilename()
 
 } // class TextEntry
