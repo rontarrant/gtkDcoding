@@ -25,6 +25,8 @@ If and when any of these are updated, I'll mention it as a PS here in this readm
 
 [Read the blog](http://gtkDcoding.com)
 
-PS: As of 2019-02-22, I've switched from Windows to Linux Mint 19.1 (xfce) as my main platform for development and blog contributions. I'll be doing a *howto do this on Linux* write-up soon.
+2019-02-22: I've switched from Windows to Linux Mint 19.1 (xfce) as my main platform for development and blog contributions. I'll be doing a *howto do this on Linux* write-up soon.
 
+2019-04-12: I've switched back to Windows. Linux has come a long way, but I'm so used to how things are done on Windows. Like, for instance, starting an application and having the window open in the same place I last used it. Dialogs, too. Having windows open in the same default position every single time is fine for a single-monitor set-up, but with three, I'm getting a kink in my neck trying to find stuff. Also, I much prefer PSPad as an editor over anything I've found so far on Linux. Maybe I'm just set in my ways, but most other editors just feel wrong by comparison.
 
+I also forgot to mention a few weeks back when I switched from GtkD 3.8.4 to GtkD 3.8.5. I do apologize. On the other hand, I haven't noticed (or heard of) anything breaking, so perhaps it's not a big deal.
