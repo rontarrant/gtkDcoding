@@ -10,7 +10,6 @@ keywords:
 - D language
 - Graphical User Interface
 - GTK+ Inspector
-
 ---
 
 ## Blog Extra X0001 - GTK Inspector
