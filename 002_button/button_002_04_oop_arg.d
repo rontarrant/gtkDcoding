@@ -51,7 +51,6 @@ class TestRigWindow : MainWindow
  
 class MyButton : Button
 {
-private:
 	this(string label)
 	{
 		string message = "Next time, don't bring the Wookie.";                    // *** NEW ***
