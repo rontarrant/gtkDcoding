@@ -100,6 +100,7 @@ class ClicheMessageDialog : MessageDialog
 	{
 		super(_parentWindow, flags, messageType, buttonType, messageText);
 		setTitle("Alert the User:");
+		setSizeRequest(640, 480);
 		addOnResponse(&doSomething);
 		run();
 		destroy();
