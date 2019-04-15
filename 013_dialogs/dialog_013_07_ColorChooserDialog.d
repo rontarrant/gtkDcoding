@@ -1,4 +1,4 @@
-// MessageDialog
+// ColorChooserDialog
 
 import std.stdio;
 
@@ -8,7 +8,8 @@ import gtk.Box;
 import gtk.Window;
 import gtk.Button;
 import gtk.Dialog;
-import gtk.MessageDialog;
+import gtk.ColorChooserDialog;
+import gdk.RGBA;
 
 void main(string[] args)
 {
@@ -27,7 +28,7 @@ class TestRig : MainWindow
 {
 	TestBox testBox;
 	
-	string windowTitle = "MessageDialog demo";
+	string windowTitle = "ColorChooserDialog demo";
 	
 	this()
 	{
@@ -52,7 +53,7 @@ class TestBox : Box
 	{
 		super(Orientation.VERTICAL, padding);
 		
-		Button button = new MessageButton(parentWindow);
+		Button button = new ColorChooserButton(parentWindow);
 		add(button);
 		
 	} // this()
@@ -60,12 +61,12 @@ class TestBox : Box
 } // class: TestBox
 
 
-class MessageButton : Button
+class ColorChooserButton : Button
 {
 	private:
-	string labelText = "Alert the User";
+	string labelText = "Ask for a Color";
 	
-	ClicheMessageDialog messageDialog;
+	MyColorChooserDialog colorChooserDialog;
 	Window _parentWindow;
 	
 	public:
@@ -80,29 +81,25 @@ class MessageButton : Button
 	
 	void doSomething(Button b)
 	{
-		messageDialog = new ClicheMessageDialog(_parentWindow);
+		colorChooserDialog = new MyColorChooserDialog(_parentWindow);
 		
 	} // doSomething()
 
-} // class: MessageButton
+} // class: ColorChooserButton
 
 
-class ClicheMessageDialog : MessageDialog
+class MyColorChooserDialog : ColorChooserDialog
 {
-	GtkDialogFlags flags = GtkDialogFlags.MODAL;
-	MessageType messageType = MessageType.INFO;
-	ButtonsType buttonType = ButtonsType.OK;
-	int responseID;
-	string messageText = "It was a cliché love triangle,\nIt was heaven on Earth, but with hell to pay.\nA cliché love triangle,\nThey're as common as dirt, or so they say,\nA cliché love triangle,\nHe went off half-cocked and got blown away.";
+	string title = "I am the Chooser";
+	DialogFlags flags = GtkDialogFlags.MODAL;
+	RGBA selectedColor;
 
 	
 	this(Window _parentWindow)
 	{
-		super(_parentWindow, flags, messageType, buttonType, messageText);
-		setTitle("Alert the User:");
-		setSizeRequest(200, 150);
+		super(title, _parentWindow);
 		addOnResponse(&doSomething);
-		run();
+		run(); // no response ID because this dialog ignores it
 		destroy();
 		
 	} // this()
@@ -110,8 +107,9 @@ class ClicheMessageDialog : MessageDialog
 	
 	void doSomething(int response, Dialog d)
 	{
-		writeln("Dialog closed.");
+		getRgba(selectedColor);
+		writeln("New color selection: ", selectedColor);
 		
 	} // doSomething()
 	
-} // class ClicheMessageDialog
+} // class MyColorChooserDialog

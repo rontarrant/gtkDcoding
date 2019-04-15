@@ -1,4 +1,4 @@
-module SingletonAccelGroup;
+module singleton.SingletonAccelGroup;
 
 import std.stdio;
 
