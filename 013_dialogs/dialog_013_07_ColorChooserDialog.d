@@ -90,11 +90,12 @@ class ColorChooserButton : Button
 
 class MyColorChooserDialog : ColorChooserDialog
 {
+	private:
 	string title = "I am the Chooser";
 	DialogFlags flags = GtkDialogFlags.MODAL;
 	RGBA selectedColor;
 
-	
+	public:
 	this(Window _parentWindow)
 	{
 		super(title, _parentWindow);
@@ -104,7 +105,7 @@ class MyColorChooserDialog : ColorChooserDialog
 		
 	} // this()
 
-	
+	protected:
 	void doSomething(int response, Dialog d)
 	{
 		getRgba(selectedColor);
