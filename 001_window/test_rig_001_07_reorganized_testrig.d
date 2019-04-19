@@ -1,18 +1,18 @@
-// multiple monitors
+// Test Rig Foundation for Learning GtkD Coding
 
 import std.stdio;
 
 import gtk.MainWindow;
 import gtk.Main;
+import gtk.Box;
 import gtk.Widget;
-import gdk.Display;
 
 void main(string[] args)
 {
 	Main.init(args);
+
 	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
 	
-	// give control over to gtkD.
 	Main.run();
 	
 } // main()
@@ -20,21 +20,16 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	Display myDisplay;
-	int monitors;
+	AppBox appBox;
 	
 	this(string title)
 	{
 		super(title);
-		
-		myDisplay = Display.getDefault();
-		monitors = myDisplay.getNMonitors();
-		
 		addOnDestroy(&quitApp);
-
-		monitorReport();
-	
-		// Show the window and its contents...
+		
+		appBox = new AppBox();
+		add(appBox);
+		
 		showAll();
 
 	} // this() CONSTRUCTOR
@@ -47,11 +42,21 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-
-	void monitorReport()
-	{
-		writeln("Your set-up has ", monitors, " monitors");
-		
-	} // monitorReport()
-
 } // class myAppWindow
+
+
+class AppBox : Box
+{
+	// add child object definitions here
+	
+	this()
+	{
+		super(Orientation.VERTICAL, 10);
+		
+		// instantiate child objects here
+		
+		// packStart(<child object>, false, false, 0);
+		
+	} // this()
+
+} // class AppBox
