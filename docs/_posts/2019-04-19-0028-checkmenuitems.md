@@ -51,7 +51,7 @@ While digging into this widget, I found myself unable to resist doing a more com
 
 ### Multiple CheckMenuItems and Tracking Their States
 
-[Here’s the code file]( https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_10_multiple_checkmenuitem.d), but before we look at the `CheckMenuItem`s themselves…
+[Here’s the code file]( https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_10_multiple_checkmenuitems.d), but before we look at the `CheckMenuItem`s themselves…
 
 ### The ObservedFeaturesList Object
 
