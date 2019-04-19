@@ -121,7 +121,7 @@ class SignTreeView : TreeView
  * A TreeViewColumn needs:
  * - a string that will become the title,
  * - a CellRenderer (with suffix Accel, Class, Combo, Pixbuf, Progress, Spin, Spinner, Text, or Toggle)
- * - a string describing the attribute type
+ * - a string description of the attribute (data) type
  * - and a column number (starting from 0)
  */
 class MessageTreeViewColumn : TreeViewColumn

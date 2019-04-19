@@ -153,20 +153,20 @@ class MakeItFancyCheckMenuItem : CheckMenuItem
 			makeItPlain();
 		}
 		
-	} // exit()
+	} // choose()
 	
 	
 	void keepItFancy()
 	{
 		writeln("We're making it fancy, yes, sir.");
 		
-	} // keep()
+	} // keepItFancy()
 	
 	
 	void makeItPlain()
 	{
 		writeln("K.I.S.");
 		
-	} // toss()
+	} // makeItPlain()
 	
 } // class MakeItFancyCheckMenuItem
