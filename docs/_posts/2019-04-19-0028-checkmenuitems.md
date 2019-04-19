@@ -45,7 +45,7 @@ The simplest way to write the callback is to check the state of the `CheckBox` w
 			makeItPlain();
 		}
 		
-	} // exit()
+	} // choose()
 
 While digging into this widget, I found myself unable to resist doing a more complex version with multiple `CheckMenuItem`s, so here we go...
 
