@@ -160,7 +160,7 @@ class LightBulb : ColorButton
 	{
 		RGBA rgba;
 		getRgba(rgba);
-		
+
 		if(getState() == true) // ON
 		{
 			onColor = rgba;

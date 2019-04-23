@@ -80,7 +80,16 @@ class MySpinButton : SpinButton
 		
 		adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
 		setAdjustment(adjustment);
+		addOnValueChanged(&valueChanged);
 		
 	} // this()
 	
+	
+	void valueChanged(SpinButton sb)
+	{
+		writeln(getValue());
+		
+	} // valueChanged()
+
+
 } // class MySpinButton

@@ -54,7 +54,7 @@ class TestRigWindow : MainWindow
 	public bool onMousePress(Event event, Widget widget)          // *** NEW ***
 	{
 		bool value = false;
-		
+
 		if(event.type == EventType.BUTTON_PRESS)
 		{
 			GdkEventButton* mouseEvent = event.button;
