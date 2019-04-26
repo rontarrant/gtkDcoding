@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// SpinButton example
 
 import std.stdio;
 
@@ -65,14 +65,14 @@ class AppBox : Box
 
 class MySpinButton : SpinButton
 {
-	double minimum = -50;
-	double maximum = 50;
+	double minimum = -48;
+	double maximum = 48;
 	double step = 2;
 
 	Adjustment adjustment;
 	double initialValue = 4;
 	double pageIncrement = 8;
-	double pageSize = 0;
+	double pageSize = 20;
 	
 	this()
 	{

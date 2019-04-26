@@ -1,4 +1,4 @@
-// SpinButton madness
+// SpinButtons - cardinal and float
 
 import std.stdio;
 
@@ -14,7 +14,7 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig with SpinButton");
+	TestRigWindow myTestRig = new TestRigWindow("Test Rig with SpinButtons");
 	
 	Main.run();
 	
@@ -89,8 +89,8 @@ class DoubleSpinButton : SpinButton
 
 		adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
 		setAdjustment(adjustment);
-//		addOnValueChanged(&valueChanged);
-		addOnOutput(&outputValue);
+		addOnValueChanged(&valueChanged);
+//		addOnOutput(&outputValue);
 		
 	} // this()
 
@@ -116,7 +116,7 @@ class FloatSpinButton : SpinButton
 {
 	float minimum = -1.0;
 	float maximum = 1.0;
-	float step = .1;
+	double step = .1;
 
 	Adjustment adjustment;
 	float initialValue = 0.0;
@@ -130,7 +130,6 @@ class FloatSpinButton : SpinButton
 		setAdjustment(adjustment);
 		setWrap(true);
 		
-		// WHY do these trigger twice?
 		addOnValueChanged(&valueChanged);
 //		addOnOutput(&outputValue);
 		
@@ -156,15 +155,15 @@ class FloatSpinButton : SpinButton
 
 class PrecisionSpinButton : SpinButton
 {
-	float minimum = -1.0;
-	float maximum = 1.0;
-	float step = .001;
+	double minimum = -1.0;
+	double maximum = 1.0;
+	double step = .001;
 	uint precision = 3;
 
 	Adjustment adjustment;
-	float initialValue = 0.0;
-	float pageIncrement = 0.01;
-	float pageSize = 0.0;
+	double initialValue = 0.0;
+	double pageIncrement = 0.01;
+	double pageSize = 0.0;
 	
 	this()
 	{
@@ -173,8 +172,8 @@ class PrecisionSpinButton : SpinButton
 		setAdjustment(adjustment);
 		setDigits(precision);
 
-//		addOnValueChanged(&valueChanged);
-		addOnOutput(&outputValue);
+		addOnValueChanged(&valueChanged); // NO double-fire
+//		addOnOutput(&outputValue); // double-fire
 		
 	} // this()
 
