@@ -80,7 +80,11 @@ class MyScaleButton : ScaleButton
 	double pageIncrement = 1;
 	double pageSize = 0;
 	
-	string[] icons = ["face-crying", "face-laugh", "face-embarrassed", "face-plain"];
+//	string[] icons = ["audio-volume-muted", "audio-volume-high", "audio-volume-low", "audio-volume-medium"];
+	string[] icons = ["face-crying", "face-laugh", "face-embarrassed", "face-sad", "face-plain", "face-smirk", "face-smile"];
+//	string[] icons = ["face-crying", "face-laugh", "face-plain"];
+//	string[] icons = ["face-crying", "face-laugh"];
+//	string[] icons = ["face-plain"];
 	
 	this()
 	{
@@ -89,12 +93,12 @@ class MyScaleButton : ScaleButton
 		adjustment = new Adjustment(initialValue + 1, minimum, maximum, step, pageIncrement, pageSize);
 		setAdjustment(adjustment);
 		setValue(initialValue);
-		addOnValueChanged(&valueChanged);
+//		addOnValueChanged(&valueChanged);
 		
 	} // this()
 	
 	
-	void valueChanged(double value, ScaleButton sb)
+	void valueChanged(ScaleButton sb)
 	{
 		writeln(getValue());
 		
