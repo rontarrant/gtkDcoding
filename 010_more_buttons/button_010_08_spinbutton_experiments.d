@@ -101,8 +101,8 @@ class DoubleSpinButton : SpinButton
 
 		adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
 		setAdjustment(adjustment);
-//		addOnValueChanged(&valueChanged);
-		addOnOutput(&outputValue);
+		addOnValueChanged(&valueChanged);
+//		addOnOutput(&outputValue);
 		
 	} // this()
 
