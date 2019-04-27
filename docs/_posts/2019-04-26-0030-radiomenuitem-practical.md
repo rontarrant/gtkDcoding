@@ -16,13 +16,12 @@ keywords:
 - RadioMenuItem
 - CheckMenuItem
 - ListSG
-- ObservedFeaturesList
 
 ---
 
 ## 0030 – A More Practical RadioMenuItem
 
-Today let’s look at an example that can perhaps be adapted for everyday use.
+Today let’s look at [an example that can perhaps be adapted for everyday use](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_12_observed_radiomenuitems.d).
 
 Herein we set a bit of data with our `RadioMenuItem`s and track it with an observed object. And when the application terminates, it spits out a report about the state of all options in the set. This example is patterned after [the second CheckMenuItem example from two posts ago](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_10_multiple_checkmenuitems.d), so a lot of this ground [was covered there](http://gtkdcoding.com/2019/04/19/0028-checkmenuitems.html).
 
