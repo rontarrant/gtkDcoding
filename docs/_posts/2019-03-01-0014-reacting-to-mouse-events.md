@@ -1,5 +1,5 @@
 ---
-title: Reacting to Mouse Events
+title: 0014 - Reacting to Mouse Events
 layout: post
 description: Harnessing mouse events in a GTK window.
 author: Ron Tarrant

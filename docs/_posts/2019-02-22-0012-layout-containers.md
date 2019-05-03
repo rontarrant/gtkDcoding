@@ -1,5 +1,5 @@
 ---
-title: Layout Containers
+title: 0012 - Layout Containers
 layout: post
 description: How to use a GTK Layout container to organize UI widgets.
 author: Ron Tarrant

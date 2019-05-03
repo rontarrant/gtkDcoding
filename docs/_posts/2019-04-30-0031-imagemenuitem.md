@@ -1,5 +1,5 @@
 ---
-title: Image on a Menu
+title: 0031 – Image on a Menu
 layout: post
 description: How to use an image in a MenuItem.
 author: Ron Tarrant

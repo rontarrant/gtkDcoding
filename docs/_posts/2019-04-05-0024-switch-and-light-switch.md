@@ -1,5 +1,5 @@
 ---
-title: Switch and LightSwitch
+title: 0024 - Switch and LightSwitch
 layout: post
 description: How to use a RadioButton or a ColorButton.
 author: Ron Tarrant

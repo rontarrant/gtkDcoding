@@ -1,5 +1,5 @@
 ---
-title: Mnemonics – Shortcut Keys
+title: 0027 – Mnemonics – Shortcut Keys
 layout: post
 description: How to do set up keyboard shortcuts for MenuItems.
 author: Ron Tarrant

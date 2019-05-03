@@ -1,5 +1,5 @@
 ---
-title: Window Position
+title: 0006 - Position a Window
 layout: post
 description: How to position a GTK window.
 author: Ron Tarrant

@@ -1,5 +1,5 @@
 ---
-title: CheckMenuItems
+title: 0028 – CheckMenuItems
 layout: post
 description: How to use a CheckMenuItem.
 author: Ron Tarrant

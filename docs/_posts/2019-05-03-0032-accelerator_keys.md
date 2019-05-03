@@ -1,5 +1,5 @@
 ---
-title: Adding Accelerator Keys to MenuItems
+title: 0032 – Adding Accelerator Keys to MenuItems
 layout: post
 description: How to use an image in a MenuItem.
 author: Ron Tarrant
@@ -107,6 +107,7 @@ Notice also that it gets passed to the `AppBox` constructor which passes it alon
 		} // exit()
 		
 	} // class ExitItem
+
 
 A less cumbersome way to do this would be with a singleton, but we'll have that discussion next week.
 

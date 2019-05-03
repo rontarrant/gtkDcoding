@@ -1,5 +1,5 @@
 ---
-title: Disappearing Entry Text and Font Selection
+title: 0019 - Disappearing Entry Text and Font Selection
 layout: post
 description: How to make an Entry widget disappear and how to use the FontButton.
 author: Ron Tarrant

@@ -1,5 +1,5 @@
 ---
-title: Introduction to the Test Rig
+title: 0001 - Introduction to the Test Rig
 layout: post
 description: Introduction to the TestRig window, the base for all future tutorials .
 author: Ron Tarrant

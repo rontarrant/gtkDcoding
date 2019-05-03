@@ -1,5 +1,5 @@
 ---
-title: The RadioMenuItem
+title: 0029 – The RadioMenuItem
 layout: post
 description: How to use a RadioMenuItem.
 author: Ron Tarrant
@@ -23,7 +23,7 @@ keywords:
 
 Today we start on `RadioMenuItem`s with a simple example. Next time, we’ll carry on with a second example, but with a more practical bent.
 
-I said in an earlier post that `RadioButton`s are more complex than other *GTK* widgets. Well, `RadioMenuItem`s are too, but in different ways. Those differences start with inheritance.
+I said in an earlier post that `RadioButton`s are more complex than other *GTK* widgets. Well, `RadioMeniItem`s are too, but in different ways. Those differences start with inheritance.
 
 Whereas the `RadioButton` inheritance chain looks like this:
 

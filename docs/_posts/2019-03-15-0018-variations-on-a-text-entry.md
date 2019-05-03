@@ -1,5 +1,5 @@
 ---
-title: Variations on a Text Entry Widget
+title: 0018 - Variations on a Text Entry Widget
 layout: post
 description: How to obfuscate text in an Entry widget and how to make it non-editable.
 author: Ron Tarrant

@@ -1,5 +1,5 @@
 ---
-title: Callback Chains
+title: 0011 - Callback Chains
 layout: post
 description: How GTK signals are chained together.
 author: Ron Tarrant

@@ -1,5 +1,5 @@
 ---
-title: Button Release & Reorganizing the Code
+title: 0007 – Button Release & Reorganizing the Code
 layout: post
 description: How to use a GTK Button's onRelease signal.
 author: Ron Tarrant
