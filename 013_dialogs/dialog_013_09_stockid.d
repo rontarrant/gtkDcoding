@@ -46,7 +46,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class AppBox : Box
@@ -71,7 +71,7 @@ class DialogButton : Button
 	private:
 	string labelText = "Open a Dialog";
 	
-	ScratchDialog scratchDialog;
+	StockButtonDialog scratchDialog;
 	Window _parentWindow;
 	
 	public:
@@ -86,22 +86,20 @@ class DialogButton : Button
 	
 	void doSomething(Button b)
 	{
-		scratchDialog = new ScratchDialog(_parentWindow);
+		scratchDialog = new StockButtonDialog(_parentWindow);
 		
 	} // doSomething()
 
 } // class: DialogButton
 
 
-class ScratchDialog : Dialog
+class StockButtonDialog : Dialog
 {
 	GtkDialogFlags flags = GtkDialogFlags.MODAL;
 	MessageType messageType = MessageType.INFO;
 	StockID[] stockIDs = [StockID.CONNECT, StockID.DISCONNECT];
-	int responseID;
 	ResponseType[] responseTypes = [ResponseType.YES, ResponseType.NO];
-	string messageText = "";
-	string titleText = "Do you know where the monkey is?";
+	string titleText = "Connect or disconnect?";
 
 	
 	this(Window _parentWindow)
@@ -133,4 +131,4 @@ class ScratchDialog : Dialog
 		
 	} // doSomething()
 	
-} // class ClicheMessageDialog
+} // class StockButtonDialog

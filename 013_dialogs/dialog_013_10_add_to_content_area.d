@@ -179,7 +179,7 @@ class AreaContent
 
 class PadGrid : Grid
 {
-	int _borderWidth = 10;
+	int _borderWidth = 10; // keeps the widgets from crowding each other in the grid
 	PadLabel userLabel;
 	string userLabelText = "Username:";
 	PadEntry userEntry;
@@ -192,25 +192,21 @@ class PadGrid : Grid
 	this()
 	{
 		super();
-		setBorderWidth(_borderWidth);
+		setBorderWidth(_borderWidth); // keeps the grid from crowding against the window edges
 		
 		// row 0
 		userLabel = new PadLabel(PadBoxJustify.RIGHT, userLabelText);
 		attach(userLabel, 0, 0, 1, 1);
-		userLabel.setHalign(Align.END);
 		
 		userEntry = new PadEntry(PadBoxJustify.LEFT, userPlaceholderText);
 		attach(userEntry, 1, 0, 1, 1);
-		userEntry.setHalign(Align.START);
 
 		// row 1
 		passwordLabel = new PadLabel(PadBoxJustify.RIGHT, passwordLabelText);
 		attach(passwordLabel, 0, 1, 1, 1);
-		passwordLabel.setHalign(Align.END);
 				
 		passwordEntry = new PadEntry(PadBoxJustify.LEFT);
 		attach(passwordEntry, 1, 1, 1, 1);
-		passwordEntry.setHalign(Align.START);
 		passwordEntry.setVisibility(false);
 		
 	} // this()
@@ -240,7 +236,15 @@ class PadEntry : PadBox
 	
 	this(PadBoxJustify pJustify, string placeholderText = null)
 	{
-		_placeholderText = placeholderText;
+		if(placeholderText !is null)
+		{
+			_placeholderText = placeholderText;			
+		}
+		else
+		{
+			_placeholderText = "";
+		}
+
 		_entry = new Entry(_placeholderText);
 		
 		super(_entry, pJustify);
@@ -288,7 +292,7 @@ class PadBox : Box
 			add(_widget);
 		}	
 		
-		setBorderWidth(_borderWidth);
+		setBorderWidth(_borderWidth); // keeps widgets from crowding each other
 
 	} // this()
 	

@@ -46,7 +46,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class AppBox : Box
@@ -95,15 +95,14 @@ class DialogButton : Button
 
 class ScratchDialog : Dialog
 {
-	GtkDialogFlags flags = GtkDialogFlags.MODAL;
-	MessageType messageType = MessageType.INFO;
-	string[] buttonLabels = ["Yes", "No", "In the Barrel"];
-	int responseID;
+	private:
+	DialogFlags flags = DialogFlags.MODAL;
 	ResponseType[] responseTypes = [ResponseType.YES, ResponseType.NO, ResponseType.ACCEPT];
-	string messageText = "";
+	
+	string[] buttonLabels = ["Yes", "No", "In the Barrel"];
 	string titleText = "Do you know where the monkey is?";
 
-	
+	public:
 	this(Window _parentWindow)
 	{
 		super(titleText, _parentWindow, flags, buttonLabels, responseTypes);
@@ -114,6 +113,7 @@ class ScratchDialog : Dialog
 	} // this()
 
 	
+	private:
 	void doSomething(int response, Dialog d)
 	{
 		switch(response)
@@ -137,4 +137,4 @@ class ScratchDialog : Dialog
 		
 	} // doSomething()
 	
-} // class ClicheMessageDialog
+} // class ScratchDialog
