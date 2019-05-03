@@ -1,5 +1,5 @@
 ---
-title: Image on a Menu
+title: Adding Accelerator Keys to MenuItems
 layout: post
 description: How to use an image in a MenuItem.
 author: Ron Tarrant
@@ -116,7 +116,7 @@ A less cumbersome way to do this would be with a singleton, but we'll have that 
 
 The major departure from earlier examples is, as mentioned, the call to the super-class. One by one, they are...
 
-##### Delegate
+#### Delegate
 
 This is exactly the same argument we would pass to a signal hook-up function, which is the name of the callback function, preceded by an ampersand (&).
 
@@ -124,7 +124,7 @@ This is exactly the same argument we would pass to a signal hook-up function, wh
 
 In this case, it's: `&doSomething`.
 
-##### Label
+#### Label
 
 This is the text that’ll appear on the `MenuItem`:
 
@@ -132,7 +132,7 @@ This is the text that’ll appear on the `MenuItem`:
 
 And for us (have a look at the initialization section of this class) it ends up being `"Exit"`.
 
-##### Action
+#### Action
 
 This next argument takes the place of assigning a signal when dealing with a `MenuItem`:
 
@@ -140,19 +140,19 @@ This next argument takes the place of assigning a signal when dealing with a `Me
 
 I can think of no reason to use any signal other than `“activate”`... although you might. (And if you do, please post about it either on [the D Language forum](https://forum.dlang.org/) or [the GtkD forum](https://forum.gtkd.org/groups/GtkD/) so we can all add a new technique to our toolbox.)
 
-##### Mnemonic
+#### Mnemonic
 
 No need to get deep here, just set this to `true`:
 
 	bool mnemonic
 
-##### AccelGroup
+#### AccelGroup
 
 This is what we passed down from the `RigTestWindow`, the object that connects all the keyboard shortcuts to the application's `Window`:
 
 	AccelGroup accelGroup
 
-##### The Keyboard Shortcut Itself
+#### The Keyboard Shortcut Itself
 
 This is the letter key used in combination with `ModifierType` (the next argument) to designate the entire keyboard shortcut:
 
@@ -160,7 +160,7 @@ This is the letter key used in combination with `ModifierType` (the next argumen
 
 And for our example here, it's `'x'`.
 
-##### ModifierType
+#### ModifierType
 
 This decides which qualifier key is held while pressing the letter key:
 
@@ -168,7 +168,7 @@ This decides which qualifier key is held while pressing the letter key:
 
 These take the form of `ModifierType.CONTROL_MASK` or `ModifierType.SHIFT_MASK` and can be **OR**’ed together like this: `ModifierType.CONTROL_MASK | ModifierType.SHIFT_MASK | ModifierType.MOD1_MASK` if you want someone to hold down **Ctrl-Alt-Shift-KEY**. We looked at the possible values for `ModifierType` right at the beginning of this post (in case you need to refer back).
 
-##### AccelFlags
+#### AccelFlags
 
 And lastly, the `AccelFlags` argument:
 
