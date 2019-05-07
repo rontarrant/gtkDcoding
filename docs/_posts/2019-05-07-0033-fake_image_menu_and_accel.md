@@ -24,7 +24,7 @@ keywords:
 
 Remember how I said that the *GTK* `ImageMenuItem` was deprecated? Well, with it went the easy way to add an accelerator key to a `MenuItem` with an image.
 
-Well, whether it's useful or not, we can fake it. [Here the code](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_16_accel_menus.d) and here goes nothing…
+Well, whether it's useful or not, we can fake it. [Here the code](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_17_accel_fake_image_item.d) and here goes nothing…
 
 ### Don’t Forget to Add `AccelGroup` to Your `Window`
 
