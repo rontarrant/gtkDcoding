@@ -129,7 +129,7 @@ class FileMenuHeader : MenuItem
 		
 	} // this()
 	
-} // class MenuHeader
+} // class FileMenuHeader
 
 
 class EditMenuHeader : MenuItem
@@ -146,7 +146,7 @@ class EditMenuHeader : MenuItem
 		
 	} // this()
 	
-} // class MenuHeader
+} // class EditMenuHeader
 
 
 class FileMenu : Menu
