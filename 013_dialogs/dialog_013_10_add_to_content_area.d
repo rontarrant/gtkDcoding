@@ -1,6 +1,8 @@
-// Test Rig Foundation for Learning GtkD Coding
+// Roll-yer-own Custom Dialog
 
 import std.stdio;
+import std.typecons;
+import std.conv;
 
 import gtk.MainWindow;
 import gtk.Window;
@@ -75,7 +77,7 @@ class DialogButton : Button
 	private:
 	string labelText = "Open a Dialog";
 	
-	ScratchDialog scratchDialog;
+	NewImageDialog newImageDialog;
 	Window _parentWindow;
 	
 	public:
@@ -90,23 +92,23 @@ class DialogButton : Button
 	
 	void doSomething(Button b)
 	{
-		scratchDialog = new ScratchDialog(_parentWindow);
+		newImageDialog = new NewImageDialog(_parentWindow);
 		
 	} // doSomething()
 
 } // class: DialogButton
 
 
-class ScratchDialog : Dialog
+class NewImageDialog : Dialog
 {
 	private:
 	GtkDialogFlags flags = GtkDialogFlags.MODAL;
 	MessageType messageType = MessageType.INFO;
-	string[] buttonLabels = ["Login", "Sign Up", "Cancel"];
+	string[] buttonLabels = ["OK", "Save Preset", "Cancel"];
 	int responseID;
 	ResponseType[] responseTypes = [ResponseType.OK, ResponseType.ACCEPT, ResponseType.CANCEL];
 	string messageText = "";
-	string titleText = "Select direction...";
+	string titleText = "New image...";
 	Window _parentWindow;
 	Box contentArea; // grabbed from the Dialog
 	AreaContent areaContent; // filled with stuff and passed to contentArea;
@@ -116,7 +118,7 @@ class ScratchDialog : Dialog
 	{
 		_parentWindow = parentWindow;
 		super(titleText, _parentWindow, flags, buttonLabels, responseTypes);
-		customizeContent();
+		farmOutContent();
 		
 		addOnResponse(&doSomething);
 		run();
@@ -125,13 +127,13 @@ class ScratchDialog : Dialog
 	} // this()
 
 
-	void customizeContent()
+	void farmOutContent()
 	{
 		// FARM it out to AreaContent class
 		contentArea = getContentArea();
 		areaContent = new AreaContent(contentArea);
 		
-	} // customizeContent()
+	} // farmOutContent()
 	
 	
 	void doSomething(int response, Dialog d)
@@ -139,15 +141,30 @@ class ScratchDialog : Dialog
 		switch(response)
 		{
 			case ResponseType.OK:
-				writeln("You're all logged in.");
+				writeln("Creating new image file with these specs:");
+				
+				foreach(item; areaContent.getNewImageDataGrid.getData())
+				{
+					writeln("data item: ", item);
+					
+				}
+				
+				
 			break;
 			
 			case ResponseType.ACCEPT:
-				writeln("Heading to the Sign-up page...");
+				writeln("Bringing up a second dialog to save presets using...");
+
+				foreach(item; areaContent.getNewImageDataGrid.getData())
+				{
+					writeln("data item: ", item);
+					
+				}
+				
 			break;
 			
 			case ResponseType.CANCEL:
-				writeln("Operation cancelled.");
+				writeln("Cancelled.");
 			break;
 			
 			default:
@@ -157,61 +174,129 @@ class ScratchDialog : Dialog
 		
 	} // doSomething()
 	
-} // class ClicheMessageDialog
+} // class NewImageDialog
 
 
 class AreaContent
 {
+	private:
 	Box _contentArea;
-	PadGrid padGrid; 
+	NewImageDataGrid _newImageDataGrid; 
 	
+	public:
 	this(Box contentArea)
 	{
 		_contentArea = contentArea;
-		padGrid = new PadGrid();
-		_contentArea.add(padGrid);
+		_newImageDataGrid = new NewImageDataGrid();
+		_contentArea.add(_newImageDataGrid);
 		_contentArea.showAll();
 
 	} // this()
 	
+	
+	NewImageDataGrid getNewImageDataGrid()
+	{
+		return(_newImageDataGrid);
+		
+	} // getNewImageDataGrid()
+	
 } // class AreaContent
 
 
-class PadGrid : Grid
+class NewImageDataGrid : Grid
 {
+	private:
 	int _borderWidth = 10; // keeps the widgets from crowding each other in the grid
-	PadLabel userLabel;
-	string userLabelText = "Username:";
-	PadEntry userEntry;
-	string userPlaceholderText = "Who goes there?";
-	PadLabel passwordLabel;
-	string passwordLabelText = "Password:";
-	PadEntry passwordEntry;
-	string passwordPlaceholderText = "What's the password?";	
 	
+	PadLabel filenameLabel;
+	string filenameLabelText = "Filename:";
+	PadEntry filenameEntry;
+	string filenamePlaceholderText = "Untitled";
+	
+	PadLabel widthLabel;
+	string widthLabelText = "Width:";
+	PadEntry widthEntry;
+	string widthPlaceholderText = "1920";
+	PadLabel widthUnitsLabel;
+	string widthUnitsLabelText = "pixels";
+	
+	PadLabel heightLabel;
+	string heightLabelText = "Width:";
+	PadEntry heightEntry;
+	string heightPlaceholderText = "1080";
+	PadLabel heightUnitsLabel;
+	string heightUnitsLabelText = "pixels";
+	
+	PadLabel resolutionLabel;
+	string resolutionLabelText = "Width:";
+	PadEntry resolutionEntry;
+	string resolutionPlaceholderText = "300";
+	PadLabel resolutionUnitsLabel;
+	string resolutionUnitsLabelText = "pixels/inch";
+	
+	// store the user-supplied data so it can be retrieved later
+	string _filename;
+	int _width, _height, _resolution;
+	
+	public:
 	this()
 	{
 		super();
-		setBorderWidth(_borderWidth); // keeps the grid from crowding against the window edges
+		setBorderWidth(_borderWidth); // keeps the grid separated from the window edges
 		
 		// row 0
-		userLabel = new PadLabel(PadBoxJustify.RIGHT, userLabelText);
-		attach(userLabel, 0, 0, 1, 1);
+		filenameLabel = new PadLabel(PadBoxJustify.RIGHT, filenameLabelText);
+		attach(filenameLabel, 0, 0, 1, 1);
 		
-		userEntry = new PadEntry(PadBoxJustify.LEFT, userPlaceholderText);
-		attach(userEntry, 1, 0, 1, 1);
+		filenameEntry = new PadEntry(PadBoxJustify.LEFT, filenamePlaceholderText);
+		filenameEntry.setWidthInCharacters(30);
+		attach(filenameEntry, 1, 0, 2, 1);
 
 		// row 1
-		passwordLabel = new PadLabel(PadBoxJustify.RIGHT, passwordLabelText);
-		attach(passwordLabel, 0, 1, 1, 1);
+		widthLabel = new PadLabel(PadBoxJustify.RIGHT, widthLabelText);
+		attach(widthLabel, 0, 1, 1, 1);
 				
-		passwordEntry = new PadEntry(PadBoxJustify.LEFT);
-		attach(passwordEntry, 1, 1, 1, 1);
-		passwordEntry.setVisibility(false);
+		widthEntry = new PadEntry(PadBoxJustify.LEFT, widthPlaceholderText);
+		attach(widthEntry, 1, 1, 1, 1);
+		
+		widthUnitsLabel = new PadLabel(PadBoxJustify.RIGHT, widthUnitsLabelText);
+		attach(widthUnitsLabel, 2, 1, 1, 1);
+		
+		// row 2
+		heightLabel = new PadLabel(PadBoxJustify.RIGHT, heightLabelText);
+		attach(heightLabel, 0, 2, 1, 1);
+				
+		heightEntry = new PadEntry(PadBoxJustify.LEFT, heightPlaceholderText);
+		attach(heightEntry, 1, 2, 1, 1);
+		
+		heightUnitsLabel = new PadLabel(PadBoxJustify.RIGHT, heightUnitsLabelText);
+		attach(heightUnitsLabel, 2, 2, 1, 1);
+		
+		// row 3
+		resolutionLabel = new PadLabel(PadBoxJustify.RIGHT, resolutionLabelText);
+		attach(resolutionLabel, 0, 3, 1, 1);
+				
+		resolutionEntry = new PadEntry(PadBoxJustify.LEFT, resolutionPlaceholderText);
+		attach(resolutionEntry, 1, 3, 1, 1);
+		
+		resolutionUnitsLabel = new PadLabel(PadBoxJustify.RIGHT, resolutionUnitsLabelText);
+		attach(resolutionUnitsLabel, 2, 3, 1, 1);
 		
 	} // this()
 	
-} // class PadGrid
+	Tuple!(string, int, int, int) getData()
+	{
+		_filename = filenameEntry.getText();
+		_width = to!int(widthEntry.getText());
+		_height = to!int(heightEntry.getText());
+		_resolution = to!int(resolutionEntry.getText());
+		
+		// build an associative array of user-supplied data
+		return(tuple(_filename, _width, _height, _resolution));
+		
+	} // getData()
+	
+} // class NewImageDataGrid
 
 
 class PadLabel : PadBox
@@ -258,6 +343,17 @@ class PadEntry : PadBox
 		
 	} // setVisibility()
 	
+	void setWidthInCharacters(int width)
+	{
+		_entry.setWidthChars(width);
+		
+	} // setWidthInCharacters()
+	
+	
+	string getText()
+	{
+		return(_entry.getText());
+	}
 } // class PadLabel
 
 
