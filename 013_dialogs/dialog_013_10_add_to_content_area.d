@@ -148,8 +148,12 @@ class NewImageDialog : Dialog
 					writeln("data item: ", item);
 					
 				}
-				
-				
+				/*
+				writeln("filename: ", areaContent.getNewImageDataGrid.getData()[0]);
+				writeln("width: ", areaContent.getNewImageDataGrid.getData()[1]);
+				writeln("height: ", areaContent.getNewImageDataGrid.getData()[2]);
+				writeln("resolution: ", areaContent.getNewImageDataGrid.getData()[3]);
+				*/
 			break;
 			
 			case ResponseType.ACCEPT:
@@ -160,7 +164,6 @@ class NewImageDialog : Dialog
 					writeln("data item: ", item);
 					
 				}
-				
 			break;
 			
 			case ResponseType.CANCEL:
