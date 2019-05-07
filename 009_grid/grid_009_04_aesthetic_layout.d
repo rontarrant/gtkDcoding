@@ -29,14 +29,14 @@ class TestRigWindow : MainWindow
 	int width = 400;
 	int height = 100;
 	string title = "Grid with Centre-aligned Elements";
-	PadGrid padGrid;
+	PadGrid myGrid;
 	
 	this()
 	{
 		super(title);
 		
-		padGrid = new PadGrid();
-		add(padGrid);
+		myGrid = new PadGrid();
+		add(myGrid);
 		
 		showAll();
 		
@@ -48,7 +48,8 @@ class TestRigWindow : MainWindow
 class PadGrid : Grid
 {
 	private:
-	JustifyLabel zeroZero, oneZero, zeroOne, oneOne;
+	int _borderWidth = 10;
+	PadLabel zeroZero, oneZero, zeroOne, oneOne;
 	
 	public:
 	this()
@@ -56,29 +57,32 @@ class PadGrid : Grid
 		super();
 
 		// row 0
-		zeroZero = new JustifyLabel("this is a long bit of text", BoxJustify.RIGHT);
+		zeroZero = new PadLabel("this is a long bit of text", PadBoxJustify.RIGHT);
 		attach(zeroZero, 0, 0, 1, 1);
 		
-		oneZero = new JustifyLabel("cell 1, 0", BoxJustify.LEFT);
+		oneZero = new PadLabel("cell 1, 0", PadBoxJustify.LEFT);
 		attach(oneZero, 1, 0, 1, 1);
 
 		// row 1
-		zeroOne = new JustifyLabel("and this is shorter", BoxJustify.RIGHT);
+		zeroOne = new PadLabel("and this is shorter", PadBoxJustify.RIGHT);
 		attach(zeroOne, 0, 1, 1, 1);
 				
-		oneOne = new JustifyLabel("cell 1, 1", BoxJustify.LEFT);
+		oneOne = new PadLabel("cell 1, 1", PadBoxJustify.LEFT);
 		attach(oneOne, 1, 1, 1, 1);
 
+		setBorderWidth(_borderWidth);
+		setMarginBottom(10);
+		
 	} // this()
 	
 } // class PadGrid
 
 
-class JustifyLabel : JustifyBox
+class PadLabel : PadBox
 {
 	Label label;
 	
-	this(string text, BoxJustify pJustify)
+	this(string text, PadBoxJustify pJustify)
 	{
 		label = new Label(text);
 		
@@ -86,10 +90,10 @@ class JustifyLabel : JustifyBox
 		
 	} // this()
 	
-} // class JustifyLabel
+} // class PadLabel
 
 
-class JustifyBox : Box
+class HPadBox : Box
 {
 	private:
 	Widget _widget;
@@ -97,22 +101,23 @@ class JustifyBox : Box
 	int _padding = 0;
 	bool fill = false;
 	bool expand = false;
+	int _borderWidth = 5;
 
-	BoxJustify _pJustify;
+	PadBoxJustify _pJustify;
 	
 	public:
-	this(Widget widget, BoxJustify pJustify)
+	this(Widget widget, PadBoxJustify pJustify)
 	{
 		_widget = widget;
 		_pJustify = pJustify;
 		
 		super(Orientation.HORIZONTAL, _globalPadding);
 
-		if(_pJustify == BoxJustify.LEFT)
+		if(_pJustify == PadBoxJustify.LEFT)
 		{
 			packStart(_widget, expand, fill, _padding);
 		}
-		else if(_pJustify == BoxJustify.RIGHT)
+		else if(_pJustify == PadBoxJustify.RIGHT)
 		{
 			packEnd(_widget, expand, fill, _padding);
 		}
@@ -121,15 +126,19 @@ class JustifyBox : Box
 			add(_widget);
 		}	
 		
+		setBorderWidth(_borderWidth);
+
 	} // this()
 	
-} // class JustifyBox
+} // class HPadBox
 
 
-enum BoxJustify
+enum PadBoxJustify
 {
 	LEFT = 0,
 	RIGHT = 1,
 	CENTER = 2,
+	TOP = 3,
+	BOTTOM = 4,
 	
-} // BoxJustify
+} // PadBoxJustify
