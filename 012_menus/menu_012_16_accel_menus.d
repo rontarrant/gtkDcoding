@@ -119,7 +119,6 @@ class FileMenuHeader : MenuItem
 {
 	FileMenu fileMenuHeader;
 	
-	// arg: a Menu object
 	this(string headerTitle, AccelGroup accelGroup)
 	{
 		super(headerTitle);
@@ -136,7 +135,6 @@ class EditMenuHeader : MenuItem
 {
 	EditMenu editMenuHeader;
 	
-	// arg: a Menu object
 	this(string headerTitle,  AccelGroup accelGroup)
 	{
 		super(headerTitle);
@@ -158,7 +156,6 @@ class FileMenu : Menu
 	CloseFileItem closeFileItem;
 	ExitItem exitItem;
 	
-	// arg: an array of items
 	this(AccelGroup accelGroup)
 	{
 		super();
@@ -196,7 +193,6 @@ class EditMenu : Menu
 	PasteItem pasteItem;
 	NonStandardItem nonStandardItem;
 	
-	// arg: an array of items
 	this(AccelGroup accelGroup)
 	{
 		super();
