@@ -106,7 +106,7 @@ class FileMenuHeader : MenuItem
 		
 	} // this()
 	
-} // class FileMenu
+} // class FileMenuHeader
 
 
 class FileMenu : Menu
@@ -166,7 +166,7 @@ class FakeImageMenuItem : MenuItem
 	{
 		writeln(actionMessage);
 		
-	} // exit()
+	} // reportStuff()
 	
 } // class FakeImageMenuItem
 
@@ -189,6 +189,6 @@ class ExitMenuItem : MenuItem
 		
 		Main.quit();
 		
-	} // exit()
+	} // doSomething()
 	
 } // class ExitMenuItem

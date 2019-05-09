@@ -6,6 +6,8 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Box;
 import gtk.Widget;
+import gtk.ComboBoxText;
+import gtk.Bin; // needed for getChild() to retrieve Entry text
 
 void main(string[] args)
 {
@@ -47,19 +49,43 @@ class TestRigWindow : MainWindow
 
 class AppBox : Box
 {
-	// add child object definitions here
+	DayComboBoxText dayComboBoxText;
 	
 	this()
 	{
 		super(Orientation.VERTICAL, 10);
 		
-		// instantiate child objects here
-		
-		// packStart(<child object>, false, false, 0); // LEFT justify
-		// packEnd(<child object>, false, false, 0); // RIGHT justify
+		dayComboBoxText = new DayComboBoxText();
+		packStart(dayComboBoxText, false, false, 0);
 		
 	} // this()
 
 } // class AppBox
 
 
+class DayComboBoxText : ComboBoxText
+{
+	string[] days = ["yesterday", "today", "tomorrow"];
+	bool entryOn = true;
+	
+	this()
+	{
+		super(entryOn);
+		
+		foreach(day; days)
+		{
+			appendText(day);
+		}
+
+		addOnChanged(&doSomething);
+		
+	} // this()
+	
+	
+	void doSomething(ComboBoxText cbt)
+	{
+		writeln(getActiveText());
+		
+	} // doSomething()
+
+} // class DayComboBoxText
