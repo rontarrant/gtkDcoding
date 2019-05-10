@@ -75,7 +75,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 	
-} // TestRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box
@@ -122,7 +122,6 @@ class FileMenuHeader : MenuItem
 {
 	FileMenu fileMenuHeader;
 	
-	// arg: a Menu object
 	this(string headerTitle)
 	{
 		super(headerTitle);
@@ -132,14 +131,13 @@ class FileMenuHeader : MenuItem
 		
 	} // this()
 	
-} // class MenuHeader
+} // class FileMenuHeader
 
 
 class EditMenuHeader : MenuItem
 {
 	EditMenu editMenuHeader;
 	
-	// arg: a Menu object
 	this(string headerTitle)
 	{
 		super(headerTitle);
@@ -149,7 +147,7 @@ class EditMenuHeader : MenuItem
 		
 	} // this()
 	
-} // class MenuHeader
+} // class EditMenuHeader
 
 
 class FileMenu : Menu
@@ -161,7 +159,6 @@ class FileMenu : Menu
 	CloseFileItem closeFileItem;
 	QuitItem quitItem;
 	
-	// arg: an array of items
 	this()
 	{
 		super();
@@ -199,7 +196,6 @@ class EditMenu : Menu
 	PasteItem pasteItem;
 	NonStandardItem nonStandardItem;
 	
-	// arg: an array of items
 	this()
 	{
 		super();
@@ -237,7 +233,6 @@ class QuitItem : MenuItem
 	{
 		singletonAccelGroup = singletonAccelGroup.get();		
 		super(&doSomething, itemLabel, "activate", true, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
-		//addOnActivate(&doSomething);
 		
 	} // this()
 	
@@ -271,7 +266,7 @@ class NewFileItem : MenuItem
 	{
 		writeln("New file created.");
 		
-	} // doSomethingNew()
+	} // doSomething()
 	
 } // class NewFileItem
 
@@ -364,7 +359,7 @@ class CloseFileItem : MenuItem
 		writeln("The file is closed.");
 		
 		// If this was the last open file, 
-		// ask the user if the the application should also be closed.
+		// pop up a Dailog to ask if the the application should also be closed.
 		
 	} // doSomething()
 	
@@ -506,4 +501,4 @@ class NonStandardItem : MenuItem
 		
 	} // doSomething()
 	
-} // class PasteItem
+} // class NonStandardItem
