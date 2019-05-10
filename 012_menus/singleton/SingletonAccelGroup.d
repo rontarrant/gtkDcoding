@@ -8,7 +8,6 @@ class SingletonAccelGroup : AccelGroup
 {
 	private:
 	// Cache instantiation flag in thread-local bool
-	// Thread local
 	static bool instantiated_;
 
 	// Thread global
