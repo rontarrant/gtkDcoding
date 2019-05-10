@@ -34,6 +34,8 @@ class TestRigWindow : MainWindow
 		textEntry = new TextEntry("Untitled");
 		add(textEntry);
 
+		writeln("Type something in the Entry, then hit the Enter key.");
+		
 		showAll();
 				
 	} // this()

@@ -18,8 +18,6 @@
  	
  */
 
-// NOTE: must use '-i' compiler flag to include external modules
-
 import std.stdio;
 
 import gtk.MainWindow;
@@ -33,7 +31,7 @@ import gdk.Event;
 import gtk.AccelGroup;
 import gdk.c.types;
 
-// find the SingletonAccelGroup module in the singleton sub-directory
+// NOTE: use the '-i' compiler flag to include our own external modules
 import singleton.SingletonAccelGroup;
 
 void main(string[] args)
