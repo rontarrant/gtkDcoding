@@ -470,8 +470,8 @@ class PasteItem : MenuItem
 		super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		
 	} // this()
-	
-	
+
+
 	void doSomething(MenuItem mi)
 	{
 		writeln("Pasting...");

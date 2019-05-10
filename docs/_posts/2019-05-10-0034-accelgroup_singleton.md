@@ -48,7 +48,6 @@ What we’re starting with to build our `AccelGroupSingleton` class can be found
 	    private this() {}
 	
 	    // Cache instantiation flag in thread-local bool
-	    // Thread local
 	    private static bool instantiated_;
 	
 	    // Thread global
@@ -92,7 +91,6 @@ So, our `SingletonAccelGroup` class (which you can find in [this example file ri
 	{
 		private:
 		// Cache instantiation flag in thread-local bool
-		// Thread local
 		static bool instantiated_;
 	
 		// Thread global
@@ -196,7 +194,7 @@ Just like with the stock `AccelGroup`, we need to attach it to the `MainWindow` 
 			
 		} // quitApp()
 		
-	} // TestRigWindow
+	} // class TestRigWindow
 
 I’ll draw your attention to three things here:
 
@@ -226,7 +224,7 @@ For each `MenuItem` that has a hotkey, we rewrite its definition to look similar
 		{
 			writeln("New file created.");
 			
-		} // doSomethingNew()
+		} // doSomething()
 		
 	} // class NewFileItem
 

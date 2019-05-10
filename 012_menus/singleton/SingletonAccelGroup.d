@@ -16,7 +16,7 @@ class SingletonAccelGroup : AccelGroup
 	this()
 	{
 		super();
-		
+
 	} // this()
 
 	public:
