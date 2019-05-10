@@ -1,5 +1,5 @@
 ---
-title: 0035 – AccelGroup as a Singleton
+title: 0034 – AccelGroup as a Singleton
 layout: post
 description: Wrapping an AccelGroup in a Singleton.
 author: Ron Tarrant
@@ -19,7 +19,7 @@ keywords:
 
 ---
 
-## 0035 – AccelGroup as a Singleton
+## 0034 – AccelGroup as a Singleton
 
 Something about how the `AccelGroup` was used in *gtkDcoding* blog post #32 ([*Adding Accelerator Keys to MenuItems*](http://gtkdcoding.com/2019/05/03/0032-accelerator_keys.html)) needs to be addressed. It’s this business of instantiating the `AccelGroup` at the top level (ie. `TestRigWindow`) and then passing it down through multiple layers of other UI objects until it gets to where it’s actually needed, in the `MenuItem` objects.
 
