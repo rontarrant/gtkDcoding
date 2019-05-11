@@ -10,6 +10,7 @@ import gtk.ComboBoxText;
 import gtk.Entry; // because we have an Entry in this ComboBoxText
 import gtk.Bin; // needed for getChild() to retrieve the Entry and, from there, retrieve its text
 import gtk.Button;
+import gtk.EditableT;
 
 import gdk.Event; // needed for addOnKeyRelease() and addOnReleased()
 import gdk.Keysyms; // needed for detecting which key was pressed
@@ -91,31 +92,32 @@ class DayComboBoxText : ComboBoxText
 		}
 
 		_entry = cast(Entry)getChild();
-		_entry.addOnFocusOut(&onFocusOut);
-//		addOnFocusOut(&onFocusOut); 			// doesn't fire
-//		addOnKeyRelease(&onKeyRelease); 		// doesn't fire
+
+// Because the 'changed' signal fires whether the user is typing or selecting
+// from the drop-down list, we have to distinguish between these two events.
+// And since we don't have an Event to disect, we have to look to other data
+// available within the ComboBox object, namely the index. If the index of 
+// the active text is -1, it hasn't been added to the list and therefore, we're
+// dealing with typing, not selection from the list.
+
 		addOnChanged(&onChanged);
-		addOnEventAfter(&onEventAfter);
 
 	} // this()
 
-
-	void onEventAfter(Event e, Widget w)
-	{
-		writeln("onEventAfter: ", getActiveText());
-		
-	} // onEventAfter()
 	
-
-	bool onFocusOut(Event e, Widget w)
+	void onChanged(ComboBoxText cbt)
 	{
-		bool stopHere = false;
+		if(getIndex(getActiveText()) !is -1)
+		{
+			writeln("this is a list item: ", getActiveText());
+		}
+		else
+		{
+			writeln("and this isn't: ", getActiveText());
+		}
 		
-		writeln("onFocusOut: ", getActiveText());
-		
-		return(stopHere);
-	}
-
+	} // onChanged()
+	
 
 	bool onKeyRelease(Event event, Widget w)
 	{
@@ -135,24 +137,6 @@ class DayComboBoxText : ComboBoxText
 		
 	} // echoToTerminal()
 
-	
-	void onChanged(ComboBoxText cbt)
-	{
-		// how to filter out key presses and just react to selecting an item from the list
-		
-		
-//		if(event.type == EventType.KEY_RELEASE)
-//		{
-//			GdkEventKey* keyEvent = event.key;
-			
-//			if(keyEvent.keyval == GdkKeysyms.GDK_Return)
-//			{
-				writeln("onChanged: ", getActiveText());			
-//			}
-//		}
-		
-	} // reportSelected()
-	
 } // class DayComboBoxText
 
 
