@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// ComboBoxText example #5 - add or remove Entry item from drop-down list
 
 import std.stdio;
 
@@ -10,11 +10,9 @@ import gtk.ComboBoxText;
 import gtk.Entry; // because we have an Entry in this ComboBoxText
 import gtk.Bin; // needed for getChild() to retrieve the Entry and, from there, retrieve its text
 import gtk.Button;
-import gtk.EditableT;
 
 import gdk.Event; // needed for addOnKeyRelease() and addOnReleased()
 import gdk.Keysyms; // needed for detecting which key was pressed
-import gobject.ParamSpec;
 
 void main(string[] args)
 {
@@ -51,13 +49,14 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TextRigWindow
 
 
 class AppBox : Box
 {
 	DayComboBoxText dayComboBoxText;
-	RetrieveEntryButton retrieveEntryButton;
+	AddToComboButton addToComboButton;
+	RemoveFromComboButton removeFromComboButton;
 	
 	this()
 	{
@@ -66,8 +65,11 @@ class AppBox : Box
 		dayComboBoxText = new DayComboBoxText();
 		packStart(dayComboBoxText, false, false, 0);
 		
-		retrieveEntryButton = new RetrieveEntryButton(dayComboBoxText);
-		packEnd(retrieveEntryButton, false, false, 0);
+		addToComboButton = new AddToComboButton(dayComboBoxText);
+		packEnd(addToComboButton, false, false, 0);
+
+		removeFromComboButton = new RemoveFromComboButton(dayComboBoxText);
+		packEnd(removeFromComboButton, false, false, 0);
 		
 		writeln("Type something into the Entry, then hit the Add button.");
 		writeln("You can also hit Enter to echo the contents of the Entry to the terminal, but this action doesn't add the contents to the list.");
@@ -78,10 +80,12 @@ class AppBox : Box
 
 class DayComboBoxText : ComboBoxText
 {
+	private:
 	string[] days = ["yesterday", "today", "tomorrow"];
 	bool entryOn = true;
 	Entry _entry;
 	
+	public:
 	this()
 	{
 		super(entryOn);
@@ -94,13 +98,15 @@ class DayComboBoxText : ComboBoxText
 		_entry = cast(Entry)getChild();
 
 // Because the 'changed' signal fires whether the user is typing or selecting
-// from the drop-down list, we have to distinguish between these two events.
-// And since we don't have an Event to disect, we have to look to other data
-// available within the ComboBox object, namely the index. If the index of 
+// from the drop-down list, in order for this to be a useful signal, we have to 
+// distinguish between these two events.
+// And since we don't have an Event struct to disect, we have to look to other
+// data available within the ComboBox object, namely the index. If the index of 
 // the active text is -1, it hasn't been added to the list and therefore, we're
 // dealing with typing, not selection from the list.
 
 		addOnChanged(&onChanged);
+		addOnKeyRelease(&onKeyRelease);
 
 	} // this()
 
@@ -110,10 +116,6 @@ class DayComboBoxText : ComboBoxText
 		if(getIndex(getActiveText()) !is -1)
 		{
 			writeln("this is a list item: ", getActiveText());
-		}
-		else
-		{
-			writeln("and this isn't: ", getActiveText());
 		}
 		
 	} // onChanged()
@@ -135,12 +137,12 @@ class DayComboBoxText : ComboBoxText
 
 		return(stopHereFlag);
 		
-	} // echoToTerminal()
+	} // onKeyRelease()
 
 } // class DayComboBoxText
 
 
-class RetrieveEntryButton : Button
+class AddToComboButton : Button
 {
 	private:
 	ComboBoxText _comboBoxText;
@@ -163,8 +165,61 @@ class RetrieveEntryButton : Button
 	{
 		_entry = cast(Entry) _comboBoxText.getChild();
 		_entryText = _entry.getText();
-		_comboBoxText.appendText(_entryText);
+		
+		if(_comboBoxText.getIndex(_entryText) is -1)
+		{
+			_comboBoxText.appendText(_entryText);
+			writeln(_entryText, " is now on the list.");
+		}
+		else
+		{
+			writeln(_entryText, " is already on the list.");
+		}
+		
 
 	} // doSomething()
 	
-} // class DayEntry
+} // class AddToComboButton
+
+
+class RemoveFromComboButton : Button
+{
+	private:
+	ComboBoxText _comboBoxText;
+	Entry _entry;
+	string _entryText, buttonText = "Delete";
+	
+	public:
+	this(ComboBoxText comboBoxText)
+	{
+		super(buttonText);
+		
+		_comboBoxText = comboBoxText;
+
+		addOnReleased(&doSomething);		
+		
+	} // this()
+	
+	
+	void doSomething(Button b)
+	{
+		int activeTextIndex;
+		
+		_entry = cast(Entry) _comboBoxText.getChild();
+		_entryText = _entry.getText();
+		activeTextIndex = _comboBoxText.getIndex(_entryText);
+		
+		if(activeTextIndex !is -1)
+		{
+			_comboBoxText.remove(activeTextIndex);
+			writeln(_entryText, " has been removed.");
+		}
+		else
+		{
+			writeln("Cannot complete operation. '", _entryText, "' isn't on the list.");
+		}
+		
+
+	} // doSomething()
+	
+} // class RemoveFromComboButton

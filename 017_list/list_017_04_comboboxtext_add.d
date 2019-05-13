@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// ComboBoxText example #4 - add Entry item to drop-down list
 
 import std.stdio;
 
@@ -49,13 +49,13 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class AppBox : Box
 {
 	DayComboBoxText dayComboBoxText;
-	AddButton addButton;
+	AddToComboButton addToComboButton;
 	
 	this()
 	{
@@ -64,10 +64,12 @@ class AppBox : Box
 		dayComboBoxText = new DayComboBoxText();
 		packStart(dayComboBoxText, false, false, 0);
 		
-		addButton = new AddButton(dayComboBoxText);
-		packEnd(addButton, false, false, 0);
+		addToComboButton = new AddToComboButton(dayComboBoxText);
+		packEnd(addToComboButton, false, false, 0);
 		
 		writeln("Type something into the Entry, then hit the Add button.");
+		writeln("You can also hit Enter to echo the contents of the Entry to the terminal, but this action doesn't add the contents to the list.");
+
 	} // this()
 
 } // class AppBox
@@ -75,9 +77,12 @@ class AppBox : Box
 
 class DayComboBoxText : ComboBoxText
 {
+	private:
 	string[] days = ["yesterday", "today", "tomorrow"];
 	bool entryOn = true;
+	Entry _entry;
 	
+	public:
 	this()
 	{
 		super(entryOn);
@@ -87,12 +92,26 @@ class DayComboBoxText : ComboBoxText
 			appendText(day);
 		}
 
-		addOnKeyRelease(&doSomething);
+		_entry = cast(Entry)getChild();
+
+
+		addOnChanged(&onChanged);
+		addOnKeyRelease(&onKeyRelease);
 
 	} // this()
 
+	
+	void onChanged(ComboBoxText cbt)
+	{
+		if(getIndex(getActiveText()) !is -1)
+		{
+			writeln("this is a list item: ", getActiveText());
+		}
+		
+	} // onChanged()
+	
 
-	bool doSomething(Event event, Widget w)
+	bool onKeyRelease(Event event, Widget w)
 	{
 		bool stopHereFlag = true;
 		
@@ -102,18 +121,18 @@ class DayComboBoxText : ComboBoxText
 			
 			if(keyEvent.keyval == GdkKeysyms.GDK_Return)
 			{
-				writeln(getActiveText());			
+				writeln("onKeyRelease: ", getActiveText());			
 			}
 		}
 
-		
 		return(stopHereFlag);
-	} // doSomething()
+		
+	} // onKeyRelease()
 
 } // class DayComboBoxText
 
 
-class AddButton : Button
+class AddToComboButton : Button
 {
 	private:
 	ComboBoxText _comboBoxText;
@@ -136,8 +155,18 @@ class AddButton : Button
 	{
 		_entry = cast(Entry) _comboBoxText.getChild();
 		_entryText = _entry.getText();
-		_comboBoxText.appendText(_entryText);
+		
+		if(_comboBoxText.getIndex(_entryText) is -1)
+		{
+			_comboBoxText.appendText(_entryText);
+			writeln(_entryText, " is now on the list.");
+		}
+		else
+		{
+			writeln(_entryText, " is already on the list.");
+		}
+		
 
 	} // doSomething()
 	
-} // class AddButton
+} // class AddToComboButton

@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// ComboBoxText example #1 - simple
 
 import std.stdio;
 
@@ -33,7 +33,7 @@ class TestRigWindow : MainWindow
 		
 		showAll();
 
-	} // this() CONSTRUCTOR
+	} // this()
 	
 		
 	void quitApp(Widget widget)
@@ -43,7 +43,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class AppBox : Box
@@ -64,9 +64,11 @@ class AppBox : Box
 
 class DayComboBoxText : ComboBoxText
 {
+	private:
 	string[] days = ["yesterday", "today", "tomorrow"];
 	bool entryOn = false;
 	
+	public:
 	this()
 	{
 		super(entryOn);

@@ -16,7 +16,6 @@ keywords:
 - AccelGroup
 - c.types
 - Singleton
-
 ---
 
 ## 0034 – AccelGroup as a Singleton
