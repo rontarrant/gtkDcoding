@@ -1,20 +1,8 @@
 ---
 title: 0031 – Image on a Menu
 layout: post
-description: How to use an image in a MenuItem.
+description: How to use an image in a GTK MenuItem - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- MenuBar
-- MenuItem
-- Menu
-- Widget
-- Label
-- Image
-- ImageMenuItem
 
 ---
 

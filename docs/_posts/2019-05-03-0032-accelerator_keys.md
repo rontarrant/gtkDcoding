@@ -1,20 +1,8 @@
 ---
 title: 0032 – Adding Accelerator Keys to MenuItems
 layout: post
-description: How to use an image in a MenuItem.
+description: How to add Accelerator keys to a GTK MenuItem - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Menu
-- MenuBar
-- MenuItem
-- Widget
-- Event
-- AccelGroup
-- c.types
 
 ---
 

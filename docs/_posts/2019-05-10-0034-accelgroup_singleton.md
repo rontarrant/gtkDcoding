@@ -1,21 +1,9 @@
 ---
 title: 0034 – AccelGroup as a Singleton
 layout: post
-description: Wrapping an AccelGroup in a Singleton.
+description: Wrapping a GTK AccelGroup in a Singleton using the D language.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Menu
-- MenuBar
-- MenuItem
-- Widget
-- Event
-- AccelGroup
-- c.types
-- Singleton
+
 ---
 
 ## 0034 – AccelGroup as a Singleton

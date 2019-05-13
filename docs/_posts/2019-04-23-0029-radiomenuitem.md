@@ -1,21 +1,8 @@
 ---
 title: 0029 – The RadioMenuItem
 layout: post
-description: How to use a RadioMenuItem.
+description: How to use a GTK RadioMenuItem - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- MenuBar
-- MenuItem
-- Menu
-- Widget
-- Event
-- RadioMenuItem
-- CheckMenuItem
-- ListSG
 
 ---
 

@@ -1,18 +1,9 @@
 ---
 title: 0017 - Mouse Pointer
 layout: post
-description: Changing the shape of the mouse pointer based on which widget it's over.
+description: Changing the shape of the mouse pointer based on which GTK widget it's over - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- signal
-- event
-- callback
-- mouse pointer
+
 ---
 
 ## 0017 - Mouse Pointer

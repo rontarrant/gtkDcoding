@@ -1,15 +1,9 @@
 ---
 title: 0007 – Button Release & Reorganizing the Code
 layout: post
-description: How to use a GTK Button's onRelease signal.
+description: How to use a GTK Button's onRelease signal - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- GTK Button
+
 ---
 
 ## 0007 – Button Release & Reorganizing the Code

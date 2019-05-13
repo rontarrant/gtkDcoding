@@ -1,19 +1,8 @@
 ---
 title: 0027 – Mnemonics – Shortcut Keys
 layout: post
-description: How to do set up keyboard shortcuts for MenuItems.
+description: How to do set up keyboard shortcuts for GTK MenuItems - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- MenuBar
-- MenuItem
-- Menu
-- Widget
-- Event 
-- SeparatorMenuItem
 
 ---
 

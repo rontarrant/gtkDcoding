@@ -1,18 +1,8 @@
 ---
 title: 0021 – Labels with Background Colors & Markup
 layout: post
-description: How to give a Label a unique background colour.
+description: How to give a GTK Label a unique background colour - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- EventBox
-- RGBA
-- Label
-- Button
 
 ---
 

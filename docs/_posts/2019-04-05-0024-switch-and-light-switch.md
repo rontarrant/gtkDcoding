@@ -1,18 +1,8 @@
 ---
 title: 0024 - Switch and LightSwitch
 layout: post
-description: How to use a RadioButton or a ColorButton.
+description: How to use a GTK Switch widget to simulate a light switch - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Widget
-- Switch
-- ColorButton
-- Button
-- RGBA
 
 ---
 

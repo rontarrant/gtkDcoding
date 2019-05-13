@@ -1,14 +1,8 @@
 ---
 title: X0002 - GtkD Linux Development Environment
 layout: post
-description: How to install and use a D-language build environment on Linux Mint.
+description: How to install and use a GTK and D-language build environment on Linux Mint.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Linux
 
 ---
 

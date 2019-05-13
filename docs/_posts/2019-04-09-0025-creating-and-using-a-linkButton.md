@@ -1,15 +1,8 @@
 ---
 title: 0025 - Creating and Using a LinkButton
 layout: post
-description: How to use a LinkButton, with and without a visible URL.
+description: How to use a GTK LinkButton, with and without a visible URL - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Widget
-- LinkButton
 
 ---
 

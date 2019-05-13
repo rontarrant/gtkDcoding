@@ -1,18 +1,9 @@
 ---
 title: 0012 - Layout Containers
 layout: post
-description: How to use a GTK Layout container to organize UI widgets.
+description: How to use a GTK Layout container to organize UI widgets - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- signal
-- event
-- callback
-- GTK Layout
+
 ---
 
 ## 0012 - Layout Containers

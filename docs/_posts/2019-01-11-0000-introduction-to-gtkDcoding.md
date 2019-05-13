@@ -1,16 +1,8 @@
 ---
 title: 0000 - Introduction to GtkDcoding
 layout: post
-description: An introduction to GTK+ 3 and later and how it can be used in the D language to create Graphical User Interfaces (GUI) for applications.
+description: An introduction to GTK 3 and how it can be used to create Graphical User Interfaces (GUI) for applications - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- OOP
-
 ---
 
 ## 0000 – Introduction to gtkDcoding

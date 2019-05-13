@@ -1,17 +1,8 @@
 ---
 title: 0023 - Radio and Color Selection Buttons
 layout: post
-description: How to use a RadioButton or a ColorButton.
+description: How to use a GTK RadioButton or a ColorButton - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Box
-- RadioButton
-- ToggleButton
-- Button
 
 ---
 

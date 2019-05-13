@@ -1,17 +1,8 @@
 ---
 title: 0014 - Reacting to Mouse Events
 layout: post
-description: Harnessing mouse events in a GTK window.
+description: Harnessing mouse events in a GTK Window - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- signal
-- event
-- callback
 
 ---
 

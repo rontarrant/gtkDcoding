@@ -1,15 +1,9 @@
 ---
 title: 0006 - Position a Window
 layout: post
-description: How to position a GTK window.
+description: How to position a GTK Window - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- GTK Window
+
 ---
 
 ## 0006 - Position a Window

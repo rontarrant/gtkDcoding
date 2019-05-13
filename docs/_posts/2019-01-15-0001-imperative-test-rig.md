@@ -1,16 +1,9 @@
 ---
 title: 0001 - Introduction to the Test Rig
 layout: post
-description: Introduction to the TestRig window, the base for all future tutorials .
+description: Introduction to the GTK TestRig window and how to install syntax highlighter files for PSPad and CodeBlocks - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- PSPad syntax highlighter
-- CodeBlocks syntax highlighter
+
 ---
 
 ## 0001 - The Test Rig

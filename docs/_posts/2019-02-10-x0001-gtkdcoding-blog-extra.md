@@ -3,13 +3,7 @@ title: X0001 - gtkDcoding Blog Extra
 layout: post
 description: How to use the GTK+ Inspector to see what your code's up to.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- GTK+ Inspector
+
 ---
 
 ## X0001 - gtkDcoding Blog Extra

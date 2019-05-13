@@ -1,22 +1,8 @@
 ---
 title: 0033 – An Image, a Label and an AccelKey
 layout: post
-description: How to fake an ImageMenuItem.
+description: How to fake a GTK ImageMenuItem - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Menu
-- MenuBar
-- MenuItem
-- Widget
-- Event
-- Image
-- AccelLabel
-- AccelGroup
-- c.types
 
 ---
 

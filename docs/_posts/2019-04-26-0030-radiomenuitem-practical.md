@@ -1,21 +1,8 @@
 ---
 title: 0030 – A More Practical RadioMenuItem
 layout: post
-description: How to use a RadioMenuItem, a more practical solution.
+description: How to use a GTK RadioMenuItem, a more practical solution - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- MenuBar
-- MenuItem
-- Menu
-- Widget
-- Event
-- RadioMenuItem
-- CheckMenuItem
-- ListSG
 
 ---
 

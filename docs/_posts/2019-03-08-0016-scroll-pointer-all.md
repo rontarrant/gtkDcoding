@@ -1,18 +1,8 @@
 ---
 title: 0015 - Scroll Wheel and More Button Stuff
 layout: post
-description: Getting feedback from the mouse's scrollwheel in GTK.
+description: Getting feedback from the mouse's scrollwheel in GTK - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- signal
-- event
-- callback
-- mouse
 
 ---
 

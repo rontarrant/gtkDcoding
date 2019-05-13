@@ -155,7 +155,8 @@ class AddToComboButton : Button
 		super(buttonText);
 		
 		_comboBoxText = comboBoxText;
-
+		_entry = cast(Entry) _comboBoxText.getChild();
+		
 		addOnReleased(&doSomething);		
 		
 	} // this()
@@ -163,7 +164,6 @@ class AddToComboButton : Button
 	
 	void doSomething(Button b)
 	{
-		_entry = cast(Entry) _comboBoxText.getChild();
 		_entryText = _entry.getText();
 		
 		if(_comboBoxText.getIndex(_entryText) is -1)
@@ -195,7 +195,8 @@ class RemoveFromComboButton : Button
 		super(buttonText);
 		
 		_comboBoxText = comboBoxText;
-
+		_entry = cast(Entry) _comboBoxText.getChild();
+		
 		addOnReleased(&doSomething);		
 		
 	} // this()
@@ -205,7 +206,6 @@ class RemoveFromComboButton : Button
 	{
 		int activeTextIndex;
 		
-		_entry = cast(Entry) _comboBoxText.getChild();
 		_entryText = _entry.getText();
 		activeTextIndex = _comboBoxText.getIndex(_entryText);
 		
@@ -213,6 +213,7 @@ class RemoveFromComboButton : Button
 		{
 			_comboBoxText.remove(activeTextIndex);
 			writeln(_entryText, " has been removed.");
+			_comboBoxText.setActive(0); // if we don't reset the active text, the item remains in the Entry
 		}
 		else
 		{

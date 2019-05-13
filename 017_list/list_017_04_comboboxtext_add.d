@@ -145,7 +145,8 @@ class AddToComboButton : Button
 		super(buttonText);
 		
 		_comboBoxText = comboBoxText;
-
+		_entry = cast(Entry) _comboBoxText.getChild();
+		
 		addOnReleased(&doSomething);		
 		
 	} // this()
@@ -153,7 +154,6 @@ class AddToComboButton : Button
 	
 	void doSomething(Button b)
 	{
-		_entry = cast(Entry) _comboBoxText.getChild();
 		_entryText = _entry.getText();
 		
 		if(_comboBoxText.getIndex(_entryText) is -1)

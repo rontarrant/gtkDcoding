@@ -1,18 +1,9 @@
 ---
 title: 0011 - Callback Chains
 layout: post
-description: How GTK signals are chained together.
+description: How GTK signals are chained together - a D language tutorial.
 author: Ron Tarrant
-keywords:
-- GtkD
-- GTK+ 3
-- dlang
-- D language
-- Graphical User Interface
-- signal
-- event
-- callback
-- GTK CheckButton
+
 ---
 
 ## 0011 - Callback Chains
