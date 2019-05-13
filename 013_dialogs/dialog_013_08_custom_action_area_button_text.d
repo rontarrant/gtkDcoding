@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// Custom Dialog - using a string array for Button names in the Action Area
 
 import std.stdio;
 
