@@ -110,7 +110,7 @@ class SignTreeView : TreeView
 			columnNumber = 1;
 		}
 
-		writeln("tp: ", tp, " columnNumber: ", columnNumber);
+		writeln("TreePath: ", tp, " columnNumber: ", columnNumber);
 		
 	} // displaySelected()
 	

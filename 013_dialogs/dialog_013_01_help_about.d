@@ -107,35 +107,41 @@ class HelpHeader : MenuItem
 
 class HelpMenu : Menu
 {
-	AboutItem aboutItem;
+	AboutMenuItem aboutMenuItem;
 	
 	// arg: an array of items
 	this(Window parentWindow)
 	{
 		super();
 		
-		aboutItem = new AboutItem(parentWindow);
-		append(aboutItem);
+		aboutMenuItem = new AboutMenuItem(parentWindow);
+		append(aboutMenuItem);
 		
 	} // this()
 	
 } // class HelpMenu
 
 
-class AboutItem : MenuItem
+class AboutMenuItem : MenuItem
 {
 	string itemLabel = "About";
-	AboutDialog aboutDialog;
 	string sectionName = "Them What Done Stuff";
-   string[] people = ["Laurence Fine", "Jerome Howard", "Maurice Howard"];
-   string[] artists = ["Andy Warhol", "Salvador Dali", "Sam Carter"];
+   string[] people = ["Laurence Find", "Jerome Hayward", "Dick van Puddlesopper"];
+   string[] artists = ["Alice Warhol", "Salvador Deli", "My Brother-in-law, Bill"];
    string comments = "This is a fine bit of software built for the rigors of testing dialog windows.";
-   string[] documenters = ["William Reid", "William Penn Patrick"];
+   string[] documenters = ["Billy Buck Thorndyke", "Phil Gates"];
    string license = "This is a FOSS Budget build of a GNOLD project";
+   License licenseType = License.ARTISTIC;
    string programName = "About Dialog Demo";
+   string protection = "Copywrong 2019 © The Three Stool Pigeons";
    Pixbuf logoPixbuf;
+   string pixbufFilename = "images/logo.png";
+   string productVersion = "0.10 (the first, not the tenth, for crying out loud)";
+   string website = "http://gtkdcoding.com";
+   string websiteLabel = "gtkDcoding";
    Window parentWindow;
-   
+	AboutDialog aboutDialog;
+	   
 	this(Window extParentWindow)
 	{
 		super(itemLabel);
@@ -151,20 +157,24 @@ class AboutItem : MenuItem
 		
 		writeln("Bringing up dialog...");
 		
-		logoPixbuf = new Pixbuf("images/logo.png");
+		logoPixbuf = new Pixbuf(pixbufFilename);
 		
 		// Although it seems we should do all this config stuff in this()
 		// it has to be done here.
 		AboutDialog aboutDialog = new AboutDialog();
+		aboutDialog.setArtists(artists);
 		aboutDialog.setAuthors(people);
-		aboutDialog.setArtists(artists);
-		aboutDialog.addCreditSection(sectionName, people); // shows when the Credits button is clicked
-		aboutDialog.setCopyright("Copyright 2019 © The Three Stooges");
-		aboutDialog.setArtists(artists);
 		aboutDialog.setComments(comments);
+		aboutDialog.setCopyright(protection);
+		aboutDialog.setDocumenters(documenters);
 		aboutDialog.setLicense(license);
+		aboutDialog.setLicenseType(licenseType);
+		aboutDialog.addCreditSection(sectionName, people); // shows when the Credits button is clicked
 		aboutDialog.setProgramName(programName);
 		aboutDialog.setLogo(logoPixbuf);
+		aboutDialog.setVersion(productVersion);
+		aboutDialog.setWebsite(website);
+		aboutDialog.setWebsiteLabel(websiteLabel);
 		aboutDialog.setTransientFor(parentWindow);
 		
 		aboutDialog.run();
@@ -172,4 +182,4 @@ class AboutItem : MenuItem
 		
 	} // doSomething()
 	
-} // class AboutItem
+} // class AboutMenuItem

@@ -9,7 +9,6 @@ import gtk.Box;
 import gtk.TreeView;
 import gtk.ListStore;
 import gtk.TreeIter;
-import gtk.TreePath;
 import gtk.TreeViewColumn;
 import gtk.CellRendererText;
 
