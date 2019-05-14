@@ -28,7 +28,7 @@ Okay… `main()` is the same and we've seen `TestRigWindow` more than 30 times, 
 
 And that brings us to…
 
-### The `AboutItem`
+### The AboutItem
 
 We have a ton of string tied around the initialization section and maybe that's so the other stray items don't wander off:
 
@@ -52,11 +52,11 @@ But as I breezed through that list of classes that hadn’t changed, there actua
 
 #### Passing Down the Window
 
-Because the `AboutDialog` (or any other dialog) needs to know who its mommy is, we gotta give it an ersatz family tree, passing down the `Window` pointer so when the `Dialog` goes up, it can go `MODAL` if it needs to. If you take a quick look through the code, you'll see this is done very much the same way we passed along the `AccelGroup` in the previous blog post.
+Because the `AboutDialog` (or any other dialog) needs to know who its mommy is, we gotta give it an ersatz family tree, passing down the `Window` pointer so when the `Dialog` goes up, it can go `MODAL` if it needs to. If you take a quick look through the code, you'll see this is done very much the same way we passed along the `AccelGroup` in [Blog Post #32 - Adding Accelerator Keys to MenuItems](http://gtkdcoding.com/2019/05/03/0032-accelerator_keys.html).
 
 *Note: if you want your `Dialog` to be `MODAL`, use `DialogFlags.MODAL` which can be found in `generated/gtkd/gtk/c/types.d`.*
 
-### Hooking up the `MenuItem`
+### Hooking up the MenuItem
 
 In the constructor, we do this:
 
