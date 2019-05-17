@@ -6,7 +6,7 @@ author: Ron Tarrant
 
 ---
 
-## 0035 – Help/About – a Dialog
+## 0035 – The About Dialog
 
 Starting today, and for the next few weeks, we'll be looking at `Dialog` windows of various types. We'll get started with one of the simpler ones, the AboutDialog, but to make it more interesting, we'll toss in a `Pixbuf`. [Here’s the code]( https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_013_01_help_about.d).
 
