@@ -1,5 +1,5 @@
 ---
-title: 0035 – Help/About – a Dialog
+title: 0035 – Help-About – a Dialog
 layout: post
 description: How to use a GTK AboutDialog - a D-language tutorial.
 author: Ron Tarrant
