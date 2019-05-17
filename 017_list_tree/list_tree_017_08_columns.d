@@ -127,7 +127,7 @@ class SignTreeView : TreeView
 class MessageTreeViewColumn : TreeViewColumn
 {
 	CellRendererText cellRendererText;
-	string columnTitle = "Sign Message";
+	string columnTitle = "Sign Subject";
 	string attributeType = "text";
 	int columnNumber = 0; // numbering starts at '0'
 
@@ -173,22 +173,22 @@ class SignTreeViewColumn : TreeViewColumn
  */
 class SignListStore : ListStore
 {
-	string[] items = ["bikes", "bumps", "deer", "falling rocks", "road crews", "cattle"];
+	string[] subjects = ["bikes", "bumps", "deer", "falling rocks", "road crews", "cattle"];
 	string warning = "Watch for ";
-	string[] descriptions = ["bicycle", "bump", "running stage", "hill & tumbling rocks", "douch with a hardhat", "cow"];
+	string[] descriptions = ["bicycles", "bumps in the road", "deer crossing", "rocks tumbling into the road", "dudes with a hardhats", "cows"];
 	TreeIter treeIter;
 	
 	this()
 	{
 		super([GType.STRING, GType.STRING]);
 		
-		for(int i; i < items.length; i++)
+		for(int i; i < subjects.length; i++)
 		{
-			string message = warning ~ items[i];
+			string message = warning ~ descriptions[i];
 			treeIter = createIter();
 //			setValue(treeIter, 0, message);
 //			setValue(treeIter, 1, descriptions[i]);
-			set(treeIter, [0, 1], [message, descriptions[i]]);
+			set(treeIter, [0, 1], [subjects[i], message]);
 		}
 
 	} // this()
