@@ -5,7 +5,7 @@ import std.stdio;
 import gtk.Main;
 import gtk.MainWindow;
 import gtk.Grid;
-import gtk.EventBox; // Labels can't have a background color, so we pack them in EventBoxes which can
+import gtk.EventBox; // Labels can't have a background color, so we pack them into EventBoxes which can
 import gtk.Label;
 import gdk.RGBA; // needed for defining colors for the label backgrounds
 
