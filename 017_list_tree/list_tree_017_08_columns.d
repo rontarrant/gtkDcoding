@@ -14,6 +14,8 @@ import gtk.TreePath;
 import gtk.TreeViewColumn;
 import gtk.CellRendererText;
 
+import gobject.Value;
+
 void main(string[] args)
 {
 	Main.init(args);
@@ -72,7 +74,7 @@ class AppBox : Box
 /*
  *A TreeView needs:
  * - at least one column, and
- * - a ListStore or TreeStore to serve as both data model and storage.
+ * - a ListStore or TreeStore to serve as both data model (TreeModel) and storage (ListStore or TreeStore).
  */
 class SignTreeView : TreeView
 {
@@ -83,7 +85,7 @@ class SignTreeView : TreeView
 	this()
 	{
 		super();
-		addOnRowActivated(&displaySelected);
+		addOnRowActivated(&onRowActivated);
 		
 		signListStore = new SignListStore();
 		setModel(signListStore);
@@ -97,10 +99,12 @@ class SignTreeView : TreeView
 	} // this()
 	
 	
-	void displaySelected(TreePath tp, TreeViewColumn tvc, TreeView tv)
+	void onRowActivated(TreePath treePath, TreeViewColumn tvc, TreeView tv)
 	{
 		int columnNumber;
+		TreeIter treeIter = new TreeIter(signListStore, treePath);
 		
+		// find the column number...
 		if(tvc.getTitle() == "Sign Message")
 		{
 			columnNumber = 0;
@@ -110,9 +114,15 @@ class SignTreeView : TreeView
 			columnNumber = 1;
 		}
 
-		writeln("TreePath (row): ", tp, " columnNumber: ", columnNumber);
+		writeln("TreePath (row): ", treePath, " columnNumber: ", columnNumber);
 		
-	} // displaySelected()
+		// get the contents of the cell double-clicked by the user
+		// Because there are nothing but strings in the store, we don't have to
+		// do any more digging, just echo the string to the terminal.
+		auto value = signListStore.getValue(treeIter, columnNumber);
+		writeln("cell contains: ", value.getString());
+		
+	} // onRowActivated()
 	
 } // class SignTreeView
 
@@ -120,7 +130,7 @@ class SignTreeView : TreeView
 /*
  * A TreeViewColumn needs:
  * - a string that will become the title,
- * - a CellRenderer (with suffix Accel, Class, Combo, Pixbuf, Progress, Spin, Spinner, Text, or Toggle)
+ * - at least one CellRenderer (with suffix Accel, Class, Combo, Pixbuf, Progress, Spin, Spinner, Text, or Toggle)
  * - a string description of the attribute (data) type
  * - and a column number (starting from 0)
  */
