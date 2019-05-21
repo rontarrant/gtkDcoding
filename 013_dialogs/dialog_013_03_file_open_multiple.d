@@ -183,4 +183,4 @@ class FileOpenItem : MenuItem
 		
 	} // openFile()
 	
-} // class AboutItem
+} // class FileOpenItem
