@@ -6,7 +6,7 @@ author: Ron Tarrant
 
 ---
 
-## 0037 – File Dialog II: Open Multiple Files
+## 0037 – File Dialog II - Open Multiple Files
 
 This is a companion to the previous post, [File Dialog - Open a Single File](http://gtkdcoding.com/2019/05/17/0036-file-open-dialogs.html). If you have yet to read the other post, it may clarify things that won't make sense otherwise. 
 
