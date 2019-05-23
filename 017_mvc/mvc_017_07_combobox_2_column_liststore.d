@@ -101,11 +101,11 @@ class SignComboBox : ComboBox
 		int number;
 		TreeIter treeIter;
 		
-		writeln(getActive()); // returns the index of the selected item
+		write("index: ", getActive(), " ,"); // returns the index of the selected item
 		getActiveIter(treeIter); // bool indicates if retrieval successed or not
 		day = getModel().getValueString(treeIter, 0); // get what's in the 1st (and only) column
 		number = getModel().getValueInt(treeIter, 1);
-		writeln("day: ", day, "number: ", number);
+		writeln("day: ", day, ", letters in day name: ", number);
 
 	} // doSomething()
 

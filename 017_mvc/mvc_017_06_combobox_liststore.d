@@ -89,6 +89,7 @@ class SignComboBox : ComboBox
 		// set up and bring in the store
 		_signListStore = signListStore;
 		setModel(_signListStore);
+		setActive(0);
 		
 		addOnChanged(&doSomething);
 		
@@ -99,11 +100,11 @@ class SignComboBox : ComboBox
 	{
 		string data;
 		TreeIter treeIter;
-		
-		writeln(getActive()); // returns the index of the selected item
+
+		write("index of selection: ", getActive(), ", "); // returns the index of the selected item
 		getActiveIter(treeIter); // bool indicates if retrieval successed or not
 		data = getModel().getValueString(treeIter, 0); // get what's in the 1st (and only) column
-		writeln(data);
+		writeln("data: ", data);
 
 	} // doSomething()
 
