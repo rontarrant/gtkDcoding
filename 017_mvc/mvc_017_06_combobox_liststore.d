@@ -1,4 +1,4 @@
-// Minimal TreeView with one column
+// ComboBox with one column containing strings
 
 import std.stdio;
 
@@ -75,6 +75,8 @@ class SignComboBox : ComboBox
 	bool entryOn = false;
 	SignListStore _signListStore;
 	CellRendererText cellRendererText;
+	int visibleColumn = 0;
+	int activeItem = 0;
 	
 	public:
 	this(SignListStore signListStore)
@@ -84,12 +86,12 @@ class SignComboBox : ComboBox
 		// set up the ComboBox's column to render text
 		cellRendererText = new CellRendererText();
 		packStart(cellRendererText, false);
-		addAttribute(cellRendererText, "text", 0); // column = 0
+		addAttribute(cellRendererText, "text", visibleColumn);
 		
 		// set up and bring in the store
 		_signListStore = signListStore;
 		setModel(_signListStore);
-		setActive(0);
+		setActive(activeItem);
 		
 		addOnChanged(&doSomething);
 		
@@ -102,9 +104,12 @@ class SignComboBox : ComboBox
 		TreeIter treeIter;
 
 		write("index of selection: ", getActive(), ", "); // returns the index of the selected item
-		getActiveIter(treeIter); // bool indicates if retrieval successed or not
-		data = getModel().getValueString(treeIter, 0); // get what's in the 1st (and only) column
-		writeln("data: ", data);
+		
+		if(getActiveIter(treeIter) == true) // bool indicates if retrieval successed or not
+		{
+			data = getModel().getValueString(treeIter, 0); // get what's in the 1st (and only) column
+			writeln("data: ", data);
+		}
 
 	} // doSomething()
 
@@ -113,7 +118,7 @@ class SignComboBox : ComboBox
 
 class SignListStore : ListStore
 {
-	string[] items = ["bike", "bump", "deer", "falling rocks", "road crew", "cattle"];
+	string[] items = ["bike", "bump", "cow", "deer", "crumbling cliff", "man with a stop sign", "skidding vehicle"];
 	TreeIter treeIter;
 	
 	this()

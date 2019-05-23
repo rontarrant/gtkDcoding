@@ -1,4 +1,4 @@
-// Minimal TreeView with one column
+// ComboBox with two columns containing strings and integers
 
 import std.stdio;
 
@@ -75,6 +75,8 @@ class SignComboBox : ComboBox
 	bool entryOn = false;
 	DayListStore _dayListStore;
 	CellRendererText cellRendererText;
+	int visibleColumn = 1;
+	int activeItem = 0;
 	
 	public:
 	this(DayListStore dayListStore)
@@ -84,11 +86,12 @@ class SignComboBox : ComboBox
 		// set up the ComboBox's column to render text
 		cellRendererText = new CellRendererText();
 		packStart(cellRendererText, false);
-		addAttribute(cellRendererText, "text", 0); // column = 0
+		addAttribute(cellRendererText, "text", visibleColumn);
 		
 		// set up and bring in the store
 		_dayListStore = dayListStore;
 		setModel(_dayListStore);
+		setActive(activeItem);
 		
 		addOnChanged(&doSomething);
 		
@@ -101,13 +104,48 @@ class SignComboBox : ComboBox
 		int number;
 		TreeIter treeIter;
 		
-		write("index: ", getActive(), " ,"); // returns the index of the selected item
-		getActiveIter(treeIter); // bool indicates if retrieval successed or not
-		day = getModel().getValueString(treeIter, 0); // get what's in the 1st (and only) column
-		number = getModel().getValueInt(treeIter, 1);
-		writeln("day: ", day, ", letters in day name: ", number);
-
+		if(getActiveIter(treeIter)) // bool indicates if retrieval successed or not
+		{
+			day = getModel().getValueString(treeIter, 0); // get what's in the 0th column
+			number = getModel().getValueInt(treeIter, 1);
+			
+			writeDayOfTheWeek(day, number);
+		}
+		
 	} // doSomething()
+
+
+	void writeDayOfTheWeek(string day, int number)
+	{
+		string suffix;
+		
+		switch(number)
+		{
+			case 1:
+			suffix = "st";
+			break;
+			
+			case 2:
+			suffix = "nd";
+			break;
+			
+			case 3:
+			suffix = "rd";
+			break;
+			
+			case 4: .. case 7:
+			suffix = "th";
+			break;
+			
+			default:
+			suffix = "th";
+			break;
+			
+		}
+
+		writeln("The ", number, suffix, " day of the week is ", day, ".");		
+		
+	} // writeDayOfTheWeek()
 
 } // class SignComboBox
 
@@ -115,7 +153,7 @@ class SignComboBox : ComboBox
 class DayListStore : ListStore
 {
 	string[] days = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-	int[] lettersInDays = [6, 6, 7, 9, 8, 6, 8];
+	int[] lettersInDays = [1, 2, 3, 4, 5, 6, 7];
 	
 	TreeIter treeIter;
 	
