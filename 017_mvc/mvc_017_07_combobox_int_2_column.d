@@ -53,7 +53,7 @@ class TestRigWindow : MainWindow
 
 class AppBox : Box
 {
-	SignComboBox signComboBox;
+	DayComboBox dayComboBox;
 	DayListStore dayListStore;
 	
 	this()
@@ -61,15 +61,15 @@ class AppBox : Box
 		super(Orientation.VERTICAL, 10);
 		
 		dayListStore = new DayListStore();
-		signComboBox = new SignComboBox(dayListStore);
-		packStart(signComboBox, false, false, 0);
+		dayComboBox = new DayComboBox(dayListStore);
+		packStart(dayComboBox, false, false, 0);
 		
 	} // this()
 
 } // class AppBox
 
 
-class SignComboBox : ComboBox
+class DayComboBox : ComboBox
 {
 	private:
 	bool entryOn = false;
@@ -147,7 +147,7 @@ class SignComboBox : ComboBox
 		
 	} // writeDayOfTheWeek()
 
-} // class SignComboBox
+} // class DayComboBox
 
 
 class DayListStore : ListStore
