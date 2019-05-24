@@ -153,8 +153,9 @@ class DayComboBox : ComboBox
 class DayListStore : ListStore
 {
 	string[] days = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-	int[] lettersInDays = [1, 2, 3, 4, 5, 6, 7];
-	
+	int[] dayNumbers = [1, 2, 3, 4, 5, 6, 7];
+	GType[] columnTypes = [GType.STRING, GType.INT];
+	int dayColumn = 0, numberColumn = 1;
 	TreeIter treeIter;
 	
 	this()
@@ -162,16 +163,16 @@ class DayListStore : ListStore
 		string day;
 		int number;
 		
-		super([GType.STRING, GType.INT]);
+		super(columnTypes);
 		
 		for(int i; i < days.length; i++)
 		{
 			day = days[i];
-			number = lettersInDays[i];
+			number = dayNumbers[i];
 			
 			treeIter = createIter();
-			setValue(treeIter, 0, day);
-			setValue(treeIter, 1, number);
+			setValue(treeIter, dayColumn, day);
+			setValue(treeIter, numberColumn, number);
 		}
 
 	} // this()
