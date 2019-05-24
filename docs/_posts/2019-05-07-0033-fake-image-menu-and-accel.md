@@ -1,12 +1,12 @@
 ---
-title: 0033 – Menus Part VIII - An Image, a Label and an AccelKey
+title: 0033 – Menus VIII - An Image, a Label and an AccelKey
 layout: post
 description: How to fake a GTK ImageMenuItem - a D language tutorial.
 author: Ron Tarrant
 
 ---
 
-## 0033 – Menus Part VIII - An `Image`, a `Label` and an `AccelKey`
+## 0033 – Menus VIII - An `Image`, a `Label` and an `AccelKey`
 
 Remember how I said that the *GTK* `ImageMenuItem` was deprecated? Well, with it went the easy way to add an accelerator key to a `MenuItem` with an image.
 

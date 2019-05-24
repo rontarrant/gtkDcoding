@@ -1,12 +1,12 @@
 ---
-title: 0030 – Menus Part V - A More Practical RadioMenuItem
+title: 0030 – Menus V - A More Practical RadioMenuItem
 layout: post
 description: How to use a GTK RadioMenuItem, a more practical solution - a D language tutorial.
 author: Ron Tarrant
 
 ---
 
-## 0030 – Menus Part V - A More Practical RadioMenuItem
+## 0030 – Menus V - A More Practical RadioMenuItem
 
 Today let’s look at [an example that can perhaps be adapted for everyday use](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_12_observed_radiomenuitems.d).
 
