@@ -1,12 +1,12 @@
 ---
-title: 0031 – Image on a Menu
+title: 0031 – Menus Part VI - Image on a Menu
 layout: post
 description: How to use an image in a GTK MenuItem - a D language tutorial.
 author: Ron Tarrant
 
 ---
 
-## 0031 – Image on a Menu
+## 0031 – Menus Part VI - Image on a Menu
 
 The *GTK* `ImageMenuItem` has been deprecated, but…
 

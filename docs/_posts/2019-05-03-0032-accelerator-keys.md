@@ -1,12 +1,12 @@
 ---
-title: 0032 – Adding Accelerator Keys to MenuItems
+title: 0032 – Menus Part VII - Adding Accelerator Keys to MenuItems
 layout: post
 description: How to add Accelerator keys to a GTK MenuItem - a D language tutorial.
 author: Ron Tarrant
 
 ---
 
-## 0032 – Adding Accelerator Keys to MenuItems
+## 0032 – Menus Part VII - Adding Accelerator Keys to MenuItems
 
 You say: Keyboard shortcuts… I say: Accelerator keys… [Let’s code the whole thing out](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_16_accel_menus.d).
 
