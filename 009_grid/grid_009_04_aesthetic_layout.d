@@ -78,7 +78,7 @@ class PadGrid : Grid
 } // class PadGrid
 
 
-class PadLabel : PadBox
+class PadLabel : HPadBox
 {
 	Label label;
 	

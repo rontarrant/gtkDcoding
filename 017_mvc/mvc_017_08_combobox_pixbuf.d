@@ -185,7 +185,7 @@ class SignListStore : ListStore
 	{
 		string item, imageName, description;
 		int number;
-		
+
 		super([GType.STRING, GType.INT, Pixbuf.getType(), GType.STRING]);
 		
 		for(int i; i < items.length; i++)
