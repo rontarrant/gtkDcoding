@@ -64,7 +64,7 @@ class ResizeButton : Button                                                     
 		int x, y;
 		
 		window.getSize(x, y);
-		writeln("x = ", x, "y = ", y);
+		writeln("x = ", x, ", y = ", y);
 		
 		// GTK deals in minimum sizes, not absolute sizes, therefore we can set
 		// a minimum size for a window, but not a maximum. Also, we can't set

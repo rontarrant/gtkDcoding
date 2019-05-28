@@ -196,6 +196,7 @@ class SignListStore : ListStore
 		{
 			string message = warning ~ descriptions[i];
 			treeIter = createIter();
+// NOTE TO SELF: remind the reader that usage of set() vs. setValue() was mentioned in Blog Post #0053
 //			setValue(treeIter, 0, message);
 //			setValue(treeIter, 1, descriptions[i]);
 			set(treeIter, [0, 1], [subjects[i], message]);
