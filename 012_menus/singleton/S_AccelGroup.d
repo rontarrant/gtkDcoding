@@ -1,17 +1,17 @@
-module singleton.SingletonAccelGroup;
+module singleton.S_AccelGroup;
 
 import std.stdio;
 
 import gtk.AccelGroup;
 
-class SingletonAccelGroup : AccelGroup
+class S_AccelGroup : AccelGroup
 {
 	private:
 	// Cache instantiation flag in thread-local bool
 	static bool instantiated_;
 
 	// Thread global
-	__gshared SingletonAccelGroup instance_;
+	__gshared S_AccelGroup instance_;
 
 	this()
 	{
@@ -21,17 +21,17 @@ class SingletonAccelGroup : AccelGroup
 
 	public:
 	
-	static SingletonAccelGroup get()
+	static S_AccelGroup get()
 	{
 		write("getting...");
 		
 		if(!instantiated_)
 		{
-			synchronized(SingletonAccelGroup.classinfo)
+			synchronized(S_AccelGroup.classinfo)
 			{
 				if(!instance_)
 				{
-					instance_ = new SingletonAccelGroup();
+					instance_ = new S_AccelGroup();
 					writeln("creating");
 				}
 
@@ -47,4 +47,4 @@ class SingletonAccelGroup : AccelGroup
 		
 	} // get()
 
-} // class SingletonAccelGroup
+} // class S_AccelGroup
