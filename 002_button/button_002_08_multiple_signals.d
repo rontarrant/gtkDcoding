@@ -58,9 +58,14 @@ class MyButton : Button
 	{
 		super(label);
 
-		addOnButtonRelease(&onButtonRelease);
-		addOnButtonRelease(delegate bool(Event e, Widget w) { showArgs(args); return(false); });
+		// despite being hooked up first, the onClicked signal will fire last
 		addOnClicked(&onClicked);
+		addOnPressed(&onPressed);
+		addOnReleased(&onReleased);
+		addOnButtonRelease(&onButtonRelease);
+		
+		// needs to be defined as returning 'false' or the onClicked signal won't fire
+		addOnButtonRelease(delegate bool(Event e, Widget w) { showArgs(args); return(false); });
 				
 	} // this()
 	
@@ -70,6 +75,20 @@ class MyButton : Button
 		writeln("Reporting a click.");
 		
 	} // onClicked()
+	
+	
+	void onPressed(Button button)
+	{
+		writeln("A mouse button was pressed.");
+		
+	} // onPressed()
+	
+	
+	void onReleased(Button button)
+	{
+		writeln("A mouse button was released.");
+		
+	} // onReleased()
 	
 	
 	bool onButtonRelease(Event event, Widget widget)
@@ -92,7 +111,7 @@ class MyButton : Button
 			}
 		}
 
-		return(false); // needs to be true or the onClicked() callback won't fire
+		return(true); // needs to be false or the onClicked() callback won't fire
 		
 	} // showArgs()
 
