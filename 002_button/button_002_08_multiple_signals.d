@@ -57,27 +57,28 @@ class MyButton : Button
 	this(string[] args)
 	{
 		super(label);
-		addOnClicked(&clickReport);
-		addOnButtonRelease(&takeAction);
-		addOnButtonRelease(delegate bool(Event e, Widget w) { showArgs(args); return(true); });
-		
+
+		addOnButtonRelease(&onButtonRelease);
+		addOnButtonRelease(delegate bool(Event e, Widget w) { showArgs(args); return(false); });
+		addOnClicked(&onClicked);
+				
 	} // this()
 	
 	
-	void clickReport(Button button)
+	void onClicked(Button button)
 	{
 		writeln("Reporting a click.");
 		
-	} // clickReport()
+	} // onClicked()
 	
 	
-	bool takeAction(Event event, Widget widget)
+	bool onButtonRelease(Event event, Widget widget)
 	{
 		writeln("Action was taken.");
 		
 		return(false);
 		
-	} // takeAction()
+	} // onButtonRelease()
 	
 	
 		
@@ -91,8 +92,8 @@ class MyButton : Button
 			}
 		}
 
-		return(true); // countermands the 'false' return of the callback definition above
+		return(false); // needs to be true or the onClicked() callback won't fire
 		
-	} // buttonAction()
+	} // showArgs()
 
 } // class MyButton
