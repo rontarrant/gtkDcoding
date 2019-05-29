@@ -16,6 +16,9 @@ import gdk.RGBA;
 import pango.PgFontDescription;
 import gdk.Pixbuf;
 
+// local imports
+import singleton.S_DetectedOS;
+
 void main(string[] args)
 {
 	Main.init(args);
@@ -133,19 +136,25 @@ class WeatherComboBox : ComboBox
 
 class WeatherListStore : ListStore
 {
-	string[] textItems = ["Sunny", "Partly Cloudy", "Cloudy", "Rainy", "Thunderstorm", "Snowy"];
-	string[] fontNames = ["Times New Roman", "Arial", "Trebuchet MS", "Verdana", "Comic Sans MS", "Courier New"];
-	int[] fontSizes = [12, 13, 14, 15, 16, 17];
+	private:
+	S_DetectedOS s_detectedOS;
 
-	float[][] fgColors = [[.027, .067, .855, 1.0], [.02, .043, .576, 1.0], [.012, .031, .404, 1.0], 
+	string[] _textItems = ["Sunny", "Partly Cloudy", "Cloudy", "Rainy", "Thunderstorm", "Snowy"];
+	string[] _fontNames;
+	int[] _fontSizes = [12, 13, 14, 15, 16, 17];
+
+	float[][] _fgColors = [[.027, .067, .855, 1.0], [.02, .043, .576, 1.0], [.012, .031, .404, 1.0], 
 								 [.741, .757, .816, 1.0], [.894, 1.0, 0.0, 1.0], [0.0, .933, 1.0, 1.0]];
 								 
-	float[][] bgColors = [[.592, .957, 1.0, 1.0], [.522, .847, .882, 1.0], [.365, .596, .62, 1.0], 
+	float[][] _bgColors = [[.592, .957, 1.0, 1.0], [.522, .847, .882, 1.0], [.365, .596, .62, 1.0], 
 								 [.259, .42, .435, 1.0], [.18, .29, .302, 1.0], [1.0, 1.0, 1.0, 1.0]];
 
-	string[] images = ["_images/sun_50x.png", "_images/partly_cloudy_50x.png", "_images/cloudy_50x.png",
+	string[] _images = ["_images/sun_50x.png", "_images/partly_cloudy_50x.png", "_images/cloudy_50x.png",
 							 "_images/rainy_50x.png", "_images/thunder_50x.png", "_images/snowy_50x.png"];
 
+	TreeIter _treeIter;
+	
+	public:
 	enum Column
 	{
 		TEXT = 0,
@@ -157,7 +166,6 @@ class WeatherListStore : ListStore
 		
 	} // enum Column
 	
-	TreeIter treeIter;
 	
 	this()
 	{
@@ -167,34 +175,114 @@ class WeatherListStore : ListStore
 		
 		super([GType.STRING, PgFontDescription.getType(), GType.INT, RGBA.getType(), RGBA.getType(), Pixbuf.getType()]);
 		
-		for(int i; i < textItems.length; i++)
+		assignFonts();
+		
+		for(int i; i < _textItems.length; i++)
 		{
-			textItem = textItems[i];
-			fontName = fontNames[i];
-			fontSize = fontSizes[i];
-			
-			fgRed = fgColors[i][0];
-			fgGreen = fgColors[i][1];
-			fgBlue = fgColors[i][2];
-			fgAlpha = fgColors[i][3];
-			
-			bgRed = bgColors[i][0];
-			bgGreen = bgColors[i][1];
-			bgBlue = bgColors[i][2];
-			bgAlpha = bgColors[i][3];
-			
-			imageName = images[i];
+			textItem = _textItems[i];
+			fontName = _fontNames[i];
+			fontSize = _fontSizes[i];
 
-			treeIter = createIter();
-			setValue(treeIter, Column.TEXT, textItem);
-			setValue(treeIter, Column.FONT, new PgFontDescription(fontName, fontSize));
-			setValue(treeIter, Column.COLOR_ON, true);
-			setValue(treeIter, Column.FG_COLOR, new RGBA(fgRed, fgGreen, fgBlue, fgAlpha));
-			setValue(treeIter, Column.BG_COLOR, new RGBA(bgRed, bgGreen, bgBlue, bgAlpha));
-			setValue(treeIter, Column.IMAGE, new Pixbuf(imageName));
+			fgRed = _fgColors[i][0];
+			fgGreen = _fgColors[i][1];
+			fgBlue = _fgColors[i][2];
+			fgAlpha = _fgColors[i][3];
+			
+			bgRed = _bgColors[i][0];
+			bgGreen = _bgColors[i][1];
+			bgBlue = _bgColors[i][2];
+			bgAlpha = _bgColors[i][3];
+			
+			imageName = _images[i];
+
+			_treeIter = createIter();
+			setValue(_treeIter, Column.TEXT, textItem);
+			
+			PgFontDescription fontDesc = new PgFontDescription(fontName, fontSize);
+			
+			if(fontDesc !is null)
+			{
+				writeln(fontDesc, " was found");
+			}
+			else
+			{
+				writeln(fontName, " not found");
+			}
+
+			setValue(_treeIter, Column.COLOR_ON, true);
+			setValue(_treeIter, Column.FG_COLOR, new RGBA(fgRed, fgGreen, fgBlue, fgAlpha));
+			setValue(_treeIter, Column.BG_COLOR, new RGBA(bgRed, bgGreen, bgBlue, bgAlpha));
+			setValue(_treeIter, Column.IMAGE, new Pixbuf(imageName));
 		}
 
 	} // this()
 
+
+	void assignFonts()
+	{
+		s_detectedOS = s_detectedOS.get();
+		
+		switch(s_detectedOS.getOS())
+		{
+			case "win32":
+				writeln("Windows 32 found");
+				_fontNames = ["Times New Roman", "Arial", "Georgia", "Verdana", "Comic Sans MS", "Courier New"];
+			break;
+			
+			case "win64":
+				writeln("Windows 64 found");
+				_fontNames = ["Times New Roman", "Arial", "Georgia", "Verdana", "Comic Sans MS", "Courier New"];
+			break;
+			
+			case "osx":
+				_fontNames = ["Times New Roman", "Arial", "Georgia", "Verdana", "Comic Sans MS", "Courier New"];
+			break;				
+		
+			case "linux":
+				writeln("Linux found");
+				_fontNames = ["FreeSerif", "Garuda", "Century Schoolbook L", "Kalimati", "Purisa", "FreeMono"];
+			break;
+			
+			case "freeBSD":
+				writeln("FreeBSD found");
+				_fontNames = ["FreeSerif", "Garuda", "Century Schoolbook L", "Kalimati", "Purisa", "FreeMono"];
+			break;
+			
+			default:
+				writeln("No known OS found");
+				_fontNames = ["Times New Roman", "Arial", "Georgia", "Verdana", "Comic Sans MS", "Courier New"];
+			break;
+		} // switch
+		
+	} // assignFonts()
+	
 } // class WeatherListStore
 
+/*
+ * Font Notes:
+ * 
+ * Windows - Times New Roman
+ * Linux - FreeSerif
+ * Mac OSX - Times New Roman
+ * 
+ * Windows - Arial
+ * Linux - Garuda
+ * Mac OSX - Arial
+ * 
+ * Windows - Georgia
+ * Linux - Century Schoolbook L (Nimbus Roman No9 L)
+ * Mac OSX - Georgia
+ * 
+ * Windows - Comic Sans MS
+ * Linux - Purisa, Bold
+ * Mac OSX - Comic Sans MS
+ * 
+ * Windows - Courier New
+ * Linux - FreeMono
+ * Mac OSX - Courier New
+ * 
+ * Windows - Verdana
+ * Linux - Kalimati
+ * Mac OSC - Verdana
+ * 
+ */
