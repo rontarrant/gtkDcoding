@@ -11,39 +11,15 @@ class S_DetectedOS
 
 	this()
 	{
-		version(win32)
+		version(Windows)
 		{
-			_os_type = "win32";
+			_os_type = "Windows";
 		}
-		else version(win64)
+		else version(OSX)
 		{
-			_os_type = "win64";
+			_os_type = "OSX";
 		}
-		else version(linux)
-		{
-			_os_type = "linux";
-		}
-		else version(android)
-		{
-			_os_type = "Android";
-		}
-		else version(osx)
-		{
-			_os_type = "Mac OSX";
-		}
-		else version(freeBSD)
-		{
-			_os_type = "FreeBSD";
-		}
-		else version(netBSD)
-		{
-			_os_type = "NetBSD";
-		}
-		else version(dragonFlyBSD)
-		{
-			_os_type = "DragonFlyBSD";
-		}
-		else version(otherPosix)
+		else version(Posix)
 		{
 			_os_type = "Posix";
 		}
@@ -74,6 +50,7 @@ class S_DetectedOS
 	
 	string getOS()
 	{
+		writeln("returning: ", _os_type);
 		return(_os_type);
 		
 	} // getOS()

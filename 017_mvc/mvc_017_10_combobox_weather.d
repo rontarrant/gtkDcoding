@@ -209,6 +209,7 @@ class WeatherListStore : ListStore
 				writeln(fontName, " not found");
 			}
 
+			setValue(_treeIter, Column.FONT, fontDesc);
 			setValue(_treeIter, Column.COLOR_ON, true);
 			setValue(_treeIter, Column.FG_COLOR, new RGBA(fgRed, fgGreen, fgBlue, fgAlpha));
 			setValue(_treeIter, Column.BG_COLOR, new RGBA(bgRed, bgGreen, bgBlue, bgAlpha));
@@ -224,30 +225,20 @@ class WeatherListStore : ListStore
 		
 		switch(s_detectedOS.getOS())
 		{
-			case "win32":
-				writeln("Windows 32 found");
+			case "Windows":
+				writeln("Windows found");
 				_fontNames = ["Times New Roman", "Arial", "Georgia", "Verdana", "Comic Sans MS", "Courier New"];
 			break;
 			
-			case "win64":
-				writeln("Windows 64 found");
-				_fontNames = ["Times New Roman", "Arial", "Georgia", "Verdana", "Comic Sans MS", "Courier New"];
-			break;
-			
-			case "osx":
+			case "OSX":
 				_fontNames = ["Times New Roman", "Arial", "Georgia", "Verdana", "Comic Sans MS", "Courier New"];
 			break;				
 		
-			case "linux":
+			case "Posix":
 				writeln("Linux found");
 				_fontNames = ["FreeSerif", "Garuda", "Century Schoolbook L", "Kalimati", "Purisa", "FreeMono"];
 			break;
-			
-			case "freeBSD":
-				writeln("FreeBSD found");
-				_fontNames = ["FreeSerif", "Garuda", "Century Schoolbook L", "Kalimati", "Purisa", "FreeMono"];
-			break;
-			
+
 			default:
 				writeln("No known OS found");
 				_fontNames = ["Times New Roman", "Arial", "Georgia", "Verdana", "Comic Sans MS", "Courier New"];

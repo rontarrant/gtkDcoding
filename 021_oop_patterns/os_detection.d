@@ -10,6 +10,6 @@ void main()
 	S_DetectedOS s_detectedOS;
 	
 	s_detectedOS = s_detectedOS.get();
-	s_detectedOS.writeOS();
+	s_detectedOS.getOS();
 	
 } // main()
