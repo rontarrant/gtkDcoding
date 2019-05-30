@@ -115,8 +115,8 @@ class MyButton : Button
 			}
 		}
 
-		return(false); // It doesn't matter if this is true or false because the definition
-							// of this statement as a delegate makes sure it will return true. 
+		return(false); // This return values does matter. The delegate definition
+							// decides the actual return value. 
 		
 	} // showArgs()
 
