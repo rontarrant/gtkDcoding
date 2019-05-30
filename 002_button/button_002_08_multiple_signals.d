@@ -93,7 +93,7 @@ class MyButton : Button
 	
 	bool onButtonRelease(Event event, Widget widget)
 	{
-		writeln("Action was taken.");
+		writeln("onButtonRelease is a Widget signal.");
 		
 		return(false);
 		
@@ -109,9 +109,14 @@ class MyButton : Button
 			{
 				writeln("\t", arg);
 			}
+			else
+			{
+				writeln("No arguments were supplied.");
+			}
 		}
 
-		return(true); // needs to be false or the onClicked() callback won't fire
+		return(false); // It doesn't matter if this is true or false because the definition
+							// of this statement as a delegate makes sure it will return true. 
 		
 	} // showArgs()
 
