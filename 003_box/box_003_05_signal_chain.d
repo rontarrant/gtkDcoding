@@ -54,7 +54,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class AddBox : Box
