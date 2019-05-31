@@ -83,7 +83,6 @@ class WeatherComboBox : ComboBox
 	WeatherListStore _weatherListStore;
 	CellRendererText cellRendererText;
 	CellRendererPixbuf cellRendererPixbuf;
-	int visibleColumn = 0;
 	int activeItem = 0;
 	
 	public:
@@ -158,11 +157,11 @@ class WeatherListStore : ListStore
 	enum Column
 	{
 		TEXT = 0,
-		FONT = 1,
-		COLOR_ON = 2,
-		FG_COLOR = 3,
-		BG_COLOR = 4,
-		IMAGE = 5
+		FONT,
+		COLOR_ON,
+		FG_COLOR,
+		BG_COLOR,
+		IMAGE
 		
 	} // enum Column
 	
@@ -196,19 +195,9 @@ class WeatherListStore : ListStore
 			imageName = _images[i];
 
 			_treeIter = createIter();
-			setValue(_treeIter, Column.TEXT, textItem);
-			
 			fontDesc = new PgFontDescription(fontName, fontSize);
 			
-			if(fontDesc !is null)
-			{
-				writeln(fontDesc, " was found");
-			}
-			else
-			{
-				writeln(fontName, " not found");
-			}
-
+			setValue(_treeIter, Column.TEXT, textItem);
 			setValue(_treeIter, Column.FONT, fontDesc);
 			setValue(_treeIter, Column.COLOR_ON, true);
 			setValue(_treeIter, Column.FG_COLOR, new RGBA(fgRed, fgGreen, fgBlue, fgAlpha));
