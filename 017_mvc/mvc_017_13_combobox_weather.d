@@ -151,7 +151,7 @@ class WeatherListStore : ListStore
 
 	string[] _images = ["_images/sun_50x.png", "_images/partly_cloudy_50x.png", "_images/cloudy_50x.png",
 							 "_images/rainy_50x.png", "_images/thunder_50x.png", "_images/snowy_50x.png"];
-
+	PgFontDescription fontDesc;
 	TreeIter _treeIter;
 	
 	public:
@@ -198,7 +198,7 @@ class WeatherListStore : ListStore
 			_treeIter = createIter();
 			setValue(_treeIter, Column.TEXT, textItem);
 			
-			PgFontDescription fontDesc = new PgFontDescription(fontName, fontSize);
+			fontDesc = new PgFontDescription(fontName, fontSize);
 			
 			if(fontDesc !is null)
 			{
@@ -250,7 +250,7 @@ class WeatherListStore : ListStore
 } // class WeatherListStore
 
 /*
- * Font Notes:
+ * Font equivalency cross-platform:
  * 
  * Windows - Times New Roman
  * Linux - FreeSerif
@@ -264,6 +264,10 @@ class WeatherListStore : ListStore
  * Linux - Century Schoolbook L (Nimbus Roman No9 L)
  * Mac OSX - Georgia
  * 
+ * Windows - Verdana
+ * Linux - Kalimati
+ * Mac OSC - Verdana
+ * 
  * Windows - Comic Sans MS
  * Linux - Purisa, Bold
  * Mac OSX - Comic Sans MS
@@ -271,9 +275,5 @@ class WeatherListStore : ListStore
  * Windows - Courier New
  * Linux - FreeMono
  * Mac OSX - Courier New
- * 
- * Windows - Verdana
- * Linux - Kalimati
- * Mac OSC - Verdana
  * 
  */

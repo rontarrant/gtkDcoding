@@ -17,7 +17,7 @@ class S_FontList
 	this()
 	{
 		_pgFontMap = PgCairoFontMap.getDefault();
-		_pgFontMap.listFamilies(_pgFontFamilies);
+		_pgFontMap.listFamilies(_pgFontFamilies); // list goes into the _pgFontFamilies array
 
 	} // this()
 
@@ -40,8 +40,15 @@ class S_FontList
 		
 		return(instance_);
 		
-	} // FontList()
+	} // get()
 
+
+	PgFontFamily[] getFontFamilyList()
+	{
+		return(_pgFontFamilies);
+		
+	} // getFontFamilyList()
+	
 
 	void listFonts()
 	{

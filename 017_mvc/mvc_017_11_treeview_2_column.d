@@ -14,8 +14,6 @@ import gtk.TreePath;
 import gtk.TreeViewColumn;
 import gtk.CellRendererText;
 
-import gobject.Value;
-
 void main(string[] args)
 {
 	Main.init(args);

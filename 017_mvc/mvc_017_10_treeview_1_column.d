@@ -74,8 +74,8 @@ class AppBox : Box
  */
 class SignTreeView : TreeView
 {
-	SignTreeViewColumn signTreeViewColumn;	// where the data is displayed
-	SignListStore signListStore;				// where the data is stored
+	SignTreeViewColumn signTreeViewColumn;	// data view
+	SignListStore signListStore;				// data model
 	
 	this()
 	{
