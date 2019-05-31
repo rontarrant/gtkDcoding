@@ -1,4 +1,4 @@
-// ComboBox with one column containing strings
+// ComboBox Weather Control
 
 import std.stdio;
 
@@ -69,7 +69,7 @@ class AppBox : Box
 		
 		weatherListStore = new WeatherListStore();
 		weatherComboBox = new WeatherComboBox(weatherListStore);
-		packStart(weatherComboBox, false, false, 0);
+		packStart(weatherComboBox, true, true, 0);
 		
 	} // this()
 
