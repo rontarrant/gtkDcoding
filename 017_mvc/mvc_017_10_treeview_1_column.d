@@ -130,8 +130,7 @@ class SignTreeViewColumn : TreeViewColumn
  */
 class SignListStore : ListStore
 {
-	string[] items = ["bikes", "bumps", "deer", "falling rocks", "road crew", "cattle"];
-	string warning = "Watch for ";
+	string[] items = ["bike", "bump", "cow", "deer", "crumbling cliff", "man with a stop sign", "skidding vehicle"];
 	TreeIter treeIter;
 	
 	this()
@@ -140,7 +139,7 @@ class SignListStore : ListStore
 		
 		for(int i; i < items.length; i++)
 		{
-			string message = warning ~ items[i];
+			string message = items[i];
 			treeIter = createIter();
 			setValue(treeIter, 0, message);
 		}

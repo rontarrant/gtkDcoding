@@ -144,6 +144,7 @@ class MessageTreeViewColumn : TreeViewColumn
 		cellRendererText = new CellRendererText();
 		
 		super(columnTitle, cellRendererText, attributeType, columnNumber);
+		setSortColumnId(columnNumber);
 		
 	} // this()
 
@@ -162,6 +163,7 @@ class SignTreeViewColumn : TreeViewColumn
 		cellRendererText = new CellRendererText();
 		
 		super(columnTitle, cellRendererText, attributeType, columnNumber);
+		setSortColumnId(columnNumber);
 		
 	} // this()
 
