@@ -1,12 +1,12 @@
 ---
-title: 0015 - Scroll Wheel and More Button Stuff
+title: 0016 - Scroll Wheel and More Button Stuff
 layout: post
 description: Getting feedback from the mouse's scrollwheel in GTK - a D language tutorial.
 author: Ron Tarrant
 
 ---
 
-## 0015 - Scroll Wheel and More Button Stuff
+## 0016 - Scroll Wheel and More Button Stuff
 
 Time to get down to the nitty gritty of harnessing the mouse wheel with [Mouse Scroll Wheel example](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_005_05_scroll_wheel.d).
 
