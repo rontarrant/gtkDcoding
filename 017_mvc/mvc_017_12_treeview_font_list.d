@@ -40,11 +40,6 @@ class TestRigWindow : MainWindow
 	this(string title)
 	{
 		super(title);
-		getPreferredWidth(minimumWidth, naturalWidth);
-		writeln("TestRigWindow minimum width: ", minimumWidth, " and natural width: ", naturalWidth);
-		getPreferredHeight(minimumHeight, naturalHeight);
-		writeln("TestRigWindow minimum height: ", minimumHeight, " and natural height: ", naturalHeight);
-
 		setSizeRequest(750, 400);
 		
 		addOnDestroy(&quitApp);
@@ -99,19 +94,14 @@ class MyScrolledWindow : ScrolledWindow
 } // class MyScrolledWindow
 
 
-/*
- *A TreeView needs:
- * - at least one column, and
- * - a ListStore or TreeStore to serve as both data model (TreeModel) and storage (ListStore or TreeStore).
- */
 class FontTreeView : TreeView
 {
-	FontFamilyColumn fontFamilyColumn;	// where the data is displayed
+	FontFamilyColumn fontFamilyColumn;
 	FontSizeColumn fontSizeColumn;
 	FontPangoSizeColumn fontPangoSizeColumn;
 	FontStyleColumn fontStyleColumn;
 	FontWeightColumn fontWeightColumn;
-	FontListStore fontListStore;				// where the data is stored
+	FontListStore fontListStore;
 	
 	this()
 	{
@@ -180,13 +170,6 @@ class FontTreeView : TreeView
 } // class FontTreeView
 
 
-/*
- * A TreeViewColumn needs:
- * - a string that will become the title,
- * - at least one CellRenderer (with suffix Accel, Class, Combo, Pixbuf, Progress, Spin, Spinner, Text, or Toggle)
- * - a string description of the attribute (data) type
- * - and a column number (starting from 0)
- */
 class FontFamilyColumn : TreeViewColumn
 {
 	CellRendererText cellRendererText;
@@ -282,17 +265,6 @@ class FontWeightColumn : TreeViewColumn
 } // class FontWeightColumn
 
 
-/*
- * A ListStore needs:
- * - an array of GType types (essentially, data types such as string, int, etc.)
- *   so the constructor knows what's being stored, and
- * - a TreeIter for creating rows of data.
- * 
- * Rows are added to the ListStore with the setValue() function which needs:
- * - a TreeIter (could be thought of as the row number, but it's a pointer object)
- * - a column number, and
- * - the data to be stored.
- */
 class FontListStore : ListStore
 {
 	SysFontListPango sysFontListPango;
@@ -310,9 +282,6 @@ class FontListStore : ListStore
 		
 	} // enum Column
 	
-	/*
-	 * DYNAMIC LOAD FROM FONTS
-	 */
 	this()
 	{
 		super([GType.STRING, GType.STRING, GType.STRING, GType.STRING, GType.STRING, PgFontDescription.getType()]);
