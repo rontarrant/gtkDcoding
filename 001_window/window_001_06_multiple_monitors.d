@@ -32,8 +32,6 @@ class TestRigWindow : MainWindow
 		
 		addOnDestroy(&quitApp);
 
-		monitorReport();
-	
 		// Show the window and its contents...
 		showAll();
 
@@ -42,6 +40,7 @@ class TestRigWindow : MainWindow
 		
 	void quitApp(Widget widget)
 	{
+		monitorReport();
 		writeln("Bye.");
 		Main.quit();
 		
