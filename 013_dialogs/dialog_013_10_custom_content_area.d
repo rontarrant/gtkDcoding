@@ -111,7 +111,7 @@ class NewImageDialog : Dialog
 	string titleText = "New image...";
 	Window _parentWindow;
 	Box contentArea; // grabbed from the Dialog
-	AreaContent areaContent; // filled with stuff and passed to contentArea;
+	AreaContent areaContent; // this is filled with stuff and passed to contentArea;
 	
 	public:
 	this(Window parentWindow)
@@ -224,14 +224,14 @@ class NewImageDataGrid : Grid
 	string widthUnitsLabelText = "pixels";
 	
 	PadLabel heightLabel;
-	string heightLabelText = "Width:";
+	string heightLabelText = "Height:";
 	PadEntry heightEntry;
 	string heightPlaceholderText = "1080";
 	PadLabel heightUnitsLabel;
 	string heightUnitsLabelText = "pixels";
 	
 	PadLabel resolutionLabel;
-	string resolutionLabelText = "Width:";
+	string resolutionLabelText = "Resolution:";
 	PadEntry resolutionEntry;
 	string resolutionPlaceholderText = "300";
 	PadLabel resolutionUnitsLabel;
@@ -248,43 +248,45 @@ class NewImageDataGrid : Grid
 		setBorderWidth(_borderWidth); // keeps the grid separated from the window edges
 		
 		// row 0
-		filenameLabel = new PadLabel(PadBoxJustify.RIGHT, filenameLabelText);
+		filenameLabel = new PadLabel(BoxJustify.RIGHT, filenameLabelText);
 		attach(filenameLabel, 0, 0, 1, 1);
 		
-		filenameEntry = new PadEntry(PadBoxJustify.LEFT, filenamePlaceholderText);
+		filenameEntry = new PadEntry(BoxJustify.LEFT, filenamePlaceholderText);
 		filenameEntry.setWidthInCharacters(30);
 		attach(filenameEntry, 1, 0, 2, 1);
 
 		// row 1
-		widthLabel = new PadLabel(PadBoxJustify.RIGHT, widthLabelText);
+		widthLabel = new PadLabel(BoxJustify.RIGHT, widthLabelText);
 		attach(widthLabel, 0, 1, 1, 1);
 				
-		widthEntry = new PadEntry(PadBoxJustify.LEFT, widthPlaceholderText);
+		widthEntry = new PadEntry(BoxJustify.LEFT, widthPlaceholderText);
 		attach(widthEntry, 1, 1, 1, 1);
 		
-		widthUnitsLabel = new PadLabel(PadBoxJustify.RIGHT, widthUnitsLabelText);
+		widthUnitsLabel = new PadLabel(BoxJustify.LEFT, widthUnitsLabelText);
 		attach(widthUnitsLabel, 2, 1, 1, 1);
 		
 		// row 2
-		heightLabel = new PadLabel(PadBoxJustify.RIGHT, heightLabelText);
+		heightLabel = new PadLabel(BoxJustify.RIGHT, heightLabelText);
 		attach(heightLabel, 0, 2, 1, 1);
 				
-		heightEntry = new PadEntry(PadBoxJustify.LEFT, heightPlaceholderText);
+		heightEntry = new PadEntry(BoxJustify.LEFT, heightPlaceholderText);
 		attach(heightEntry, 1, 2, 1, 1);
 		
-		heightUnitsLabel = new PadLabel(PadBoxJustify.RIGHT, heightUnitsLabelText);
+		heightUnitsLabel = new PadLabel(BoxJustify.LEFT, heightUnitsLabelText);
 		attach(heightUnitsLabel, 2, 2, 1, 1);
 		
 		// row 3
-		resolutionLabel = new PadLabel(PadBoxJustify.RIGHT, resolutionLabelText);
+		resolutionLabel = new PadLabel(BoxJustify.RIGHT, resolutionLabelText);
 		attach(resolutionLabel, 0, 3, 1, 1);
 				
-		resolutionEntry = new PadEntry(PadBoxJustify.LEFT, resolutionPlaceholderText);
+		resolutionEntry = new PadEntry(BoxJustify.LEFT, resolutionPlaceholderText);
 		attach(resolutionEntry, 1, 3, 1, 1);
 		
-		resolutionUnitsLabel = new PadLabel(PadBoxJustify.RIGHT, resolutionUnitsLabelText);
+		resolutionUnitsLabel = new PadLabel(BoxJustify.LEFT, resolutionUnitsLabelText);
 		attach(resolutionUnitsLabel, 2, 3, 1, 1);
 		
+		setMarginBottom(7);
+
 	} // this()
 	
 	Tuple!(string, int, int, int) getData()
@@ -302,11 +304,11 @@ class NewImageDataGrid : Grid
 } // class NewImageDataGrid
 
 
-class PadLabel : PadBox
+class PadLabel : HPadBox
 {
 	Label label;
 	
-	this(PadBoxJustify pJustify, string text = null)
+	this(BoxJustify pJustify, string text = null)
 	{
 		label = new Label(text);
 		
@@ -317,12 +319,12 @@ class PadLabel : PadBox
 } // class PadLabel
 
 
-class PadEntry : PadBox
+class PadEntry : HPadBox
 {
 	Entry _entry;
 	string _placeholderText;
 	
-	this(PadBoxJustify pJustify, string placeholderText = null)
+	this(BoxJustify pJustify, string placeholderText = null)
 	{
 		if(placeholderText !is null)
 		{
@@ -360,8 +362,9 @@ class PadEntry : PadBox
 } // class PadLabel
 
 
-class PadBox : Box
+class HPadBox : Box
 {
+	private:
 	Widget _widget;
 	int globalPadding = 0;
 	int padding = 0;
@@ -369,20 +372,21 @@ class PadBox : Box
 	bool expand = false;
 	int _borderWidth = 5;
 
-	PadBoxJustify _pJustify;
+	BoxJustify _pJustify;
 	
-	this(Widget widget, PadBoxJustify pJustify)
+	public:
+	this(Widget widget, BoxJustify pJustify)
 	{
 		_widget = widget;
 		_pJustify = pJustify;
 		
 		super(Orientation.HORIZONTAL, globalPadding);
 
-		if(_pJustify == PadBoxJustify.LEFT)
+		if(_pJustify == BoxJustify.LEFT)
 		{
 			packStart(_widget, expand, fill, padding);
 		}
-		else if(_pJustify == PadBoxJustify.RIGHT)
+		else if(_pJustify == BoxJustify.RIGHT)
 		{
 			packEnd(_widget, expand, fill, padding);
 		}
@@ -391,17 +395,17 @@ class PadBox : Box
 			add(_widget);
 		}	
 		
-		setBorderWidth(_borderWidth); // keeps widgets from crowding each other
+		setBorderWidth(_borderWidth);
 
 	} // this()
 	
-} // class PadBox
+} // class HPadBox
 
 
-enum PadBoxJustify
+enum BoxJustify
 {
 	LEFT = 0,
 	RIGHT = 1,
 	CENTER = 2,
 	
-} // PadBoxJustify
+} // BoxJustify

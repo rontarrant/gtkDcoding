@@ -49,7 +49,7 @@ class PadGrid : Grid
 {
 	private:
 	int _borderWidth = 10;
-	PadLabel zeroZero, oneZero, zeroOne, oneOne;
+	HPadLabel zeroZero, oneZero, zeroOne, oneOne;
 	
 	public:
 	this()
@@ -57,17 +57,17 @@ class PadGrid : Grid
 		super();
 
 		// row 0
-		zeroZero = new PadLabel("this is a long bit of text", PadBoxJustify.RIGHT);
+		zeroZero = new HPadLabel("this is a long bit of text", BoxJustify.RIGHT);
 		attach(zeroZero, 0, 0, 1, 1);
 		
-		oneZero = new PadLabel("cell 1, 0", PadBoxJustify.LEFT);
+		oneZero = new HPadLabel("cell 1, 0", BoxJustify.LEFT);
 		attach(oneZero, 1, 0, 1, 1);
 
 		// row 1
-		zeroOne = new PadLabel("and this is shorter", PadBoxJustify.RIGHT);
+		zeroOne = new HPadLabel("and this is shorter", BoxJustify.RIGHT);
 		attach(zeroOne, 0, 1, 1, 1);
 				
-		oneOne = new PadLabel("cell 1, 1", PadBoxJustify.LEFT);
+		oneOne = new HPadLabel("cell 1, 1", BoxJustify.LEFT);
 		attach(oneOne, 1, 1, 1, 1);
 
 		setBorderWidth(_borderWidth);
@@ -78,11 +78,11 @@ class PadGrid : Grid
 } // class PadGrid
 
 
-class PadLabel : HPadBox
+class HPadLabel : HPadBox
 {
 	Label label;
 	
-	this(string text, PadBoxJustify pJustify)
+	this(string text, BoxJustify pJustify)
 	{
 		label = new Label(text);
 		
@@ -90,7 +90,7 @@ class PadLabel : HPadBox
 		
 	} // this()
 	
-} // class PadLabel
+} // class HPadLabel
 
 
 class HPadBox : Box
@@ -103,21 +103,21 @@ class HPadBox : Box
 	bool expand = false;
 	int _borderWidth = 5;
 
-	PadBoxJustify _pJustify;
+	BoxJustify _pJustify;
 	
 	public:
-	this(Widget widget, PadBoxJustify pJustify)
+	this(Widget widget, BoxJustify pJustify)
 	{
 		_widget = widget;
 		_pJustify = pJustify;
 		
 		super(Orientation.HORIZONTAL, _globalPadding);
 
-		if(_pJustify == PadBoxJustify.LEFT)
+		if(_pJustify == BoxJustify.LEFT)
 		{
 			packStart(_widget, expand, fill, _padding);
 		}
-		else if(_pJustify == PadBoxJustify.RIGHT)
+		else if(_pJustify == BoxJustify.RIGHT)
 		{
 			packEnd(_widget, expand, fill, _padding);
 		}
@@ -133,7 +133,7 @@ class HPadBox : Box
 } // class HPadBox
 
 
-enum PadBoxJustify
+enum BoxJustify
 {
 	LEFT = 0,
 	RIGHT = 1,
@@ -141,4 +141,4 @@ enum PadBoxJustify
 	TOP = 3,
 	BOTTOM = 4,
 	
-} // PadBoxJustify
+} // BoxJustify
