@@ -8,7 +8,6 @@ import gtk.Main;
 import gtk.Box;
 import gtk.Widget;
 import cairo.Context;
-import cairo.Surface;
 import gtk.DrawingArea;
 
 void main(string[] args)
@@ -70,8 +69,6 @@ class AppBox : Box
 
 class MyDrawingArea : DrawingArea
 {
-	Surface surface;
-	
 	this()
 	{
 		addOnDraw(&onDraw);

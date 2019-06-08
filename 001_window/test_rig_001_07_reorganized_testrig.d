@@ -9,9 +9,11 @@ import gtk.Widget;
 
 void main(string[] args)
 {
+	TestRigWindow myTestRig;
+	
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	myTestRig = new TestRigWindow();
 	
 	Main.run();
 	
@@ -20,9 +22,10 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "Test Rig";
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		addOnDestroy(&quitApp);

@@ -1,3 +1,5 @@
+// Needs cleaning up. The dashed rectangle looks ragged.
+
 import std.stdio;
 import std.conv;
 
@@ -7,7 +9,6 @@ import gtk.Box;
 import gtk.Widget;
 import cairo.Context;
 import gtk.DrawingArea;
-import gdk.Pixbuf;
 
 void main(string[] args)
 {
@@ -68,10 +69,6 @@ class AppBox : Box
 
 class MyDrawingArea : DrawingArea
 {
-	GtkAllocation size; // the area assigned to the DrawingArea by its parent
-	Pixbuf pixbuf; // an 8-bit/pixel image buffer
-	string[] pngOptions, pngOptionValues;
-	
 	this()
 	{
 		addOnDraw(&onDraw);

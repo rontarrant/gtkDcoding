@@ -6,9 +6,7 @@ import gtk.Main;
 import gtk.Box;
 import gtk.Widget;
 import cairo.Context;
-import cairo.Surface;
 import gtk.DrawingArea;
-import gdk.Pixbuf;
 
 void main(string[] args)
 {
@@ -69,11 +67,6 @@ class AppBox : Box
 
 class MyDrawingArea : DrawingArea
 {
-	GtkAllocation size; // the area assigned to the DrawingArea by its parent
-	Pixbuf pixbuf; // an 8-bit/pixel image buffer
-	string[] icoOptions, icoOptionValues;
-	Surface surface;	
-	
 	this()
 	{
 		addOnDraw(&onDraw);

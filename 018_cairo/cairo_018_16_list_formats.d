@@ -72,7 +72,6 @@ class MyDrawingArea : DrawingArea
 {
 	GtkAllocation size; // the area assigned to the DrawingArea by its parent
 	Pixbuf pixbuf; // an 8-bit/pixel image buffer
-	string[] icoOptions, icoOptionValues;
 	ListSG formatList;
 	string[] listOfFormats;
 	PixbufFormat pixbufFormat;
@@ -96,15 +95,25 @@ class MyDrawingArea : DrawingArea
 		formatList = pixbuf.getFormats();
 		pixbufFormats = formatList.toArray!PixbufFormat();
 		// set up a font...
+		context.selectFontFace("Arial", CairoFontSlant.NORMAL, CairoFontWeight.BOLD);
+		context.setFontSize(12);
+		context.setSourceRgb(0.0, 0.0, 1.0);
+		// so we can print a header
+		context.moveTo(20, y);
+		context.showText("Formats found:");
+
+		// advance the cursor down the page...
+		y = y + 30;
+		
+		// set up another font...
 		context.selectFontFace("Times New Roman", CairoFontSlant.NORMAL, CairoFontWeight.NORMAL);
 		context.setFontSize(12);
 		context.setSourceRgb(0.0, 0.0, 1.0);
-
-		//  so we can print the list in the DrawingArea
+		//  so we can print the list in the DrawingArea		
 		foreach(pixbufFormat; pixbufFormats)
 		{
-			context.moveTo(20, y);
-			format = "format found: " ~ pixbufFormat.getName();
+			context.moveTo(40, y);
+			format = pixbufFormat.getName();
 			context.showText(format);
 			y += 30;
 		}
