@@ -1,5 +1,8 @@
+// Cairo: Draw an arc
+
 import std.stdio;
 import std.conv;
+import std.math;
 
 import gtk.MainWindow;
 import gtk.Main;
@@ -7,12 +10,13 @@ import gtk.Box;
 import gtk.Widget;
 import cairo.Context;
 import gtk.DrawingArea;
+import glib.Timeout;
 
 void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow myTestRig = new TestRigWindow();
 	
 	Main.run();
 	
@@ -21,12 +25,14 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "Cairo: Draw an Arc";
+	int width = 640, height = 360; 
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
-		setSizeRequest(640, 360);
+		setSizeRequest(width, height);
 		
 		addOnDestroy(&quitApp);
 		
@@ -67,8 +73,10 @@ class AppBox : Box
 
 class MyDrawingArea : DrawingArea
 {
-	//                   R    G    B    Alpha
-	float[] rgbaColor = [0.3, 0.6, 0.2, 0.9];
+	Timeout _timeout;
+	int number = 1;
+	int fps = 1000 / 24; // 24 frames per second
+	cairo_text_extents_t extents;
 	
 	this()
 	{
@@ -76,14 +84,40 @@ class MyDrawingArea : DrawingArea
 		
 	} // this()
 	
-	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		context.setSourceRgba(rgbaColor[0], rgbaColor[1], rgbaColor[2], rgbaColor[3]);
-		context.paint();
+		if(_timeout is null)
+		{
+			_timeout = new Timeout(fps, &onFrameElapsed, false);
+		}
+		
+		context.selectFontFace("Comic Sans MS", CairoFontSlant.NORMAL, CairoFontWeight.NORMAL);
+		context.setFontSize(35);
+		context.setSourceRgb(0.0, 0.0, 1.0);
+		context.moveTo(580, 340); // bottom right corner
+		
+		if(number > 24) // number range: 1 - 24
+		{
+			number = 1;
+		}
+
+		context.showText(number.to!string());
+		number++;
 
 		return(true);
 		
 	} // onDraw()
+
+
+	bool onFrameElapsed()
+	{
+		GtkAllocation area;
+		getAllocation(area);
+		
+		queueDrawArea(area.x, area.y, area.width, area.height);
+		
+		return(true);
+		
+	} // onFrameElapsed()
 	
 } // class MyDrawingArea
