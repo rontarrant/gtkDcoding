@@ -67,8 +67,8 @@ class AppBox : Box
 
 class MyDrawingArea : DrawingArea
 {
-	//                   R    G    B    Alpha
-	float[] rgbaColor = [0.3, 0.6, 0.2, 0.9];
+	//              R    G    B    Alpha
+	float[] rgba = [0.3, 0.6, 0.2, 0.9];
 	
 	this()
 	{
@@ -79,7 +79,7 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		context.setSourceRgba(rgbaColor[0], rgbaColor[1], rgbaColor[2], rgbaColor[3]);
+		context.setSourceRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
 		context.paint();
 
 		return(true);

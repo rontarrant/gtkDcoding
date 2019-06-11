@@ -67,6 +67,8 @@ class AppBox : Box
 
 class MyDrawingArea : DrawingArea
 {
+	int x = 150, y = 100, width = 340, height = 170;
+	
 	this()
 	{
 		addOnDraw(&onDraw);
@@ -78,7 +80,7 @@ class MyDrawingArea : DrawingArea
 		// set up and outline a rectangle
 		context.setLineWidth(1);
 		context.setSourceRgba(0.1, 0.2, 0.3, 0.8); // pen color with alpha
-		context.rectangle(150, 100, 340, 170); // rectangle upper-left/lower-right corners
+		context.rectangle(x, y, width, height); // rectangle upper-left/lower-right corners
 		context.stroke(); // draw a filled rectangle
 
 		return(true);

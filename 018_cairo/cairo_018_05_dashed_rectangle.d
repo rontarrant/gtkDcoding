@@ -77,13 +77,14 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		double[] dashPattern = [5.0, 7.0, 3.0, 5.0];
+		double[] dashPattern = [5, 10, 15, 20];
 		// set up and draw a dashed-line rectangle
 		context.setLineWidth(3);
+		context.setLineCap(CairoLineCap.SQUARE);
 		context.setSourceRgba(0.1, 0.2, 0.3, 0.8); // pen color with alpha
-		context.rectangle(150, 100, 340, 170); // rectangle upper-left/lower-right corners
-		context.setDash(dashPattern, 0.0);
-		context.stroke(); // draw a filled rectangle
+		context.rectangle(150, 100, 340, 170); // rectangle upper-left/width/height
+		context.setDash(dashPattern, 0);
+		context.stroke();
 		
 		return(true);
 		
