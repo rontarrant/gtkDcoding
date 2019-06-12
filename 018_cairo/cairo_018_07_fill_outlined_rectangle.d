@@ -75,16 +75,16 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		// set up and outline a rectangle
-		context.setLineWidth(1);
-		context.setSourceRgba(0.1, 0.2, 0.3, 0.8); // pen color with alpha
-		context.rectangle(150, 100, 340, 170); // rectangle upper-left corner and width/height
-		context.stroke(); // draw a filled rectangle
+		// outline
+		context.setLineWidth(3);
+		context.setSourceRgba(0.25, 0.25, 0.25, 1.0);
+		context.rectangle(150, 100, 340, 170);
+		context.stroke();
 		
-		// prep for and fill rectangle
-		context.setSourceRgba(0.945, 1.00, 0.694, 1.0); // make the fill color yellow
-		context.rectangle(150, 100, 340, 170); // have to remind cairo of the shape we're about to fill
-		context.fill(); // and fill
+		// fill
+		context.setSourceRgba(0.945, 1.00, 0.694, 1.0); // yellow
+		context.rectangle(150, 100, 340, 170);
+		context.fill();
 		
 		return(true);
 		

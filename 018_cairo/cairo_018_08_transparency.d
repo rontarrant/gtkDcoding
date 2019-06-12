@@ -92,7 +92,7 @@ class MyDrawingArea : DrawingArea
 		for(i = 0; i < 11; i++)
 		{
 			context.setSourceRgba(0.965, 1.0, 0.0, (i * 0.1));
-			context.rectangle(((i * 64) + 10), 150, 32, 32);
+			context.rectangle((i * 56), 150, 32, 32);
 			context.fill();
 		}
 		

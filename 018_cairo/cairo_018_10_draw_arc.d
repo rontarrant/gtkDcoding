@@ -79,12 +79,13 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
+		float x = 320, y = 180;
+		float radius = 40, startAngle = 0.7, endAngle = 2.44;
 		/*	x & y = position of the center of an imaginary circle
 		 * radius = the radius of the circle
 		 * angle1 = the start angle of the arc, in radians
 		 * angle2 = the end angle of the arc, in radians
 		*/
-		float x = 320, y = 180, radius = 40, startAngle = 0.7, endAngle = 2.44;
 		
 	 	// draw the arc
 		context.setLineWidth(3);

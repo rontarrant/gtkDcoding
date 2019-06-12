@@ -78,7 +78,7 @@ class MyDrawingArea : DrawingArea
 	bool onDraw(Scoped!Context context, Widget w)
 	{
 		// set up and outline a rectangle
-		context.setLineWidth(1);
+		context.setLineWidth(3);
 		context.setSourceRgba(0.1, 0.2, 0.3, 0.8); // pen color with alpha
 		context.rectangle(x, y, width, height); // rectangle upper-left/lower-right corners
 		context.stroke(); // draw a filled rectangle

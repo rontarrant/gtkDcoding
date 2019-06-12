@@ -75,10 +75,10 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		// set up and draw a rectangle
-		context.setSourceRgb(0.541, 0.835, 0.886); // pen color
-		context.rectangle(150, 100, 340, 170); // rectangle upper-left/lower-right corners
-		context.fill(); // draw the rectangle
+		// fill rectangle
+		context.setSourceRgb(0.541, 0.835, 0.886); // sky blue
+		context.rectangle(150, 100, 340, 170); // x, y, w, h
+		context.fill();
 
 		return(true);
 		
