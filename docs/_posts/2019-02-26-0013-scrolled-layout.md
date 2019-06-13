@@ -49,7 +49,7 @@ Because there really isn’t any need for a class derived from *ScrolledWindow*,
 			
 		} // quitApp()
 	
-	} // class myAppWindow
+	} // class testRigWindow
 
 Nothing out of the ordinary here. Create the *ScrolledWindow* object, add it to the *TestRigWindow*, then create the *Layout* and stuff it into the *ScrolledWindow*.
 

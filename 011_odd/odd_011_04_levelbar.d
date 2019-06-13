@@ -10,7 +10,7 @@ import gtk.Widget;
 void main(string[] args)
 {
 	Main.init(args);
-	TestRigWindow testRig = new TestRigWindow("LevelBar example");
+	testRigWindow testRig = new testRigWindow("LevelBar example");
 	
 	testRig.showAll();
 	Main.run();
@@ -18,7 +18,7 @@ void main(string[] args)
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	LevelBar levelBar;
 	
@@ -43,4 +43,4 @@ class TestRigWindow : MainWindow
 		
 	} // endProgram()
 	
-} // class TestRigWindow
+} // class testRigWindow

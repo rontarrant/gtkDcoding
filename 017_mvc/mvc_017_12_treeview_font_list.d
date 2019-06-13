@@ -25,14 +25,14 @@ void main(string[] args)
 {
 	Main.init(args);
 	
-	TestRigWindow testRigWindow = new TestRigWindow("Dynamically-filled TreeView");
+	testRigWindow testRigWindow = new testRigWindow("Dynamically-filled TreeView");
 
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	AppBox appBox;
 	int minimumWidth, naturalWidth, minimumHeight, naturalHeight;
@@ -59,7 +59,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class TestRigWindow
+} // class testRigWindow
 
 
 class AppBox : Box

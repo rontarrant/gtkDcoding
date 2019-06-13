@@ -8,18 +8,18 @@ import gtk.Widget;
 
 void main(string[] args)
 {
-	TestRigWindow testRigWindow;
+	testRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new TestRigWindow();
+	testRigWindow = new testRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string byeBye = "Bye-bye";
@@ -52,4 +52,4 @@ class TestRigWindow : MainWindow
 		
 	} // greeting()
 	
-} // class myAppWindow
+} // class testRigWindow

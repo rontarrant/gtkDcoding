@@ -18,14 +18,14 @@ void main(string[] args)
 	// initialization & creation
 	Main.init(args);
 	
-	TestRigWindow testRigWindow = new TestRigWindow();
+	testRigWindow testRigWindow = new testRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string byeBye = "Bye, bye";
@@ -137,4 +137,4 @@ class TestRigWindow : MainWindow
 
 	} // quitApp()
 
-} // class myAppWindow
+} // class testRigWindow

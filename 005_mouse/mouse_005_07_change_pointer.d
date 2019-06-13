@@ -17,14 +17,14 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow testRigWindow = new TestRigWindow();
+	testRigWindow testRigWindow = new testRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string byeBye = "Bye, bye.";

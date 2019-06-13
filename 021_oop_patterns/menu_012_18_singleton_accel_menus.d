@@ -38,14 +38,14 @@ void main(string[] args)
 {
     Main.init(args);
 
-    TestRigWindow testRig = new TestRigWindow();
+    testRigWindow testRig = new testRigWindow();
     
     Main.run();
     
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Multiple Menus Example";
 	S_AccelGroup s_AccelGroup;
@@ -75,7 +75,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 	
-} // class TestRigWindow
+} // class testRigWindow
 
 
 class AppBox : Box

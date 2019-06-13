@@ -15,14 +15,14 @@ void main(string[] args)
 {
 	Main.init(args);
 	
-	TestRigWindow testRigWindow = new TestRigWindow();
+	testRigWindow testRigWindow = new testRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Switch Light ON/OFF with Color Changes";
 	string byeBye = "Bye-bye";
@@ -50,7 +50,7 @@ class TestRigWindow : MainWindow
 
 
 	
-} // class myAppWindow
+} // class testRigWindow
 
 
 class SwitchBox : Box

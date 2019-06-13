@@ -11,14 +11,14 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow testRigWindow = new TestRigWindow();
+	testRigWindow testRigWindow = new testRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Cairo: Draw a Line";
 	AppBox appBox;
@@ -45,7 +45,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class testRigWindow
 
 
 class AppBox : Box

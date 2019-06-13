@@ -11,14 +11,14 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow testRig = new TestRigWindow();
+	testRigWindow testRig = new testRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string titleText = "Entry example";
 	
@@ -43,4 +43,4 @@ class TestRigWindow : MainWindow
 		
 	} // endProgram()
 	
-} // class TestRigWindow
+} // class testRigWindow

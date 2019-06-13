@@ -9,11 +9,11 @@ import gtk.Button;
 
 void main(string[] args)
 {
-	TestRigWindow testRigWindow;
+	testRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new TestRigWindow();
+	testRigWindow = new testRigWindow();
 	
 	// give control over to gtkD.
 	Main.run();
@@ -21,7 +21,7 @@ void main(string[] args)
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	
@@ -49,7 +49,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class TestRigWindow
+} // class testRigWindow
 
 
 class ResizeButton : Button                                                     // *** NEW ***

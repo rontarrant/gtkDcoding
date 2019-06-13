@@ -10,18 +10,18 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	TestRigWindow testRigWindow;
+	testRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new TestRigWindow(args);
+	testRigWindow = new testRigWindow(args);
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string bye = "Bye, bye.";
@@ -48,7 +48,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class TestRigWindow
+} // class testRigWindow
 
 
 class MyButton : Button

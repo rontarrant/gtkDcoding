@@ -13,14 +13,14 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow testRigWindow = new TestRigWindow("Test Rig with SpinButton");
+	testRigWindow testRigWindow = new testRigWindow("Test Rig with SpinButton");
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	AppBox appBox;
 	
@@ -44,7 +44,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class testRigWindow
 
 
 class AppBox : Box

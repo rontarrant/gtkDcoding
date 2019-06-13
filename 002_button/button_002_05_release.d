@@ -1,4 +1,4 @@
-// move button creation inside the TestRigWindow class
+// move button creation inside the testRigWindow class
 // use the onButtonRelease signal instead of onClicked
 //
 //
@@ -13,18 +13,18 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	TestRigWindow testRigWindow;
+	testRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new TestRigWindow();
+	testRigWindow = new testRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string windowTitle = "Test Rig";
 	string departingMessage = "Bye.";
@@ -52,7 +52,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class TestRigWindow
+} // class testRigWindow
 
 
 class MyButton : Button

@@ -11,18 +11,18 @@ import gtk.ToggleButton;                                          // *** NEW ***
 
 void main(string[] args)
 {
-	TestRigWindow testRigWindow;
+	testRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new TestRigWindow();
+	testRigWindow = new testRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string greeting = "Hello GtkD World.";
@@ -57,7 +57,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class TestRigWindow
+} // class testRigWindow
 
 
 class AddBox : Box

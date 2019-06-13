@@ -11,14 +11,14 @@ void main(string[] args)
 {
 	Main.init(args);
 	
-	TestRigWindow testRigWin = new TestRigWindow();
+	testRigWindow testRigWin = new testRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Window";
 	RadioBox radioBox;
@@ -35,7 +35,7 @@ class TestRigWindow : MainWindow
 		
 	} // this()
 	
-} // class TestRigWindow
+} // class testRigWindow
 
 
 class RadioBox : Box

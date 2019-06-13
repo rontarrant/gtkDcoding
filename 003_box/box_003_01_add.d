@@ -12,18 +12,18 @@ import gtk.Box;                                                   // *** NEW ***
 
 void main(string[] args)
 {
-	TestRigWindow testRigWindow;
+	testRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new TestRigWindow();
+	testRigWindow = new testRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string unhello = "Good-bye";
@@ -50,7 +50,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class TestRigWindow
+} // class testRigWindow
 
 
 class AddBox : Box                                                // *** NEW ***

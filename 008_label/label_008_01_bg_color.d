@@ -15,14 +15,14 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow testRigWindow = new TestRigWindow();
+	testRigWindow testRigWindow = new testRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "A label with a colored background";
 	
@@ -38,7 +38,7 @@ class TestRigWindow : MainWindow
 	} // this()
 	
 	
-} // class TestRigWindow
+} // class testRigWindow
 
 
 // wrap a widget in an EventBox

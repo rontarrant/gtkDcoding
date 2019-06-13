@@ -17,14 +17,14 @@ void main(string[] args)
 {
     Main.init(args);
 
-    TestRigWindow testRig = new TestRigWindow();
+    testRigWindow testRig = new testRigWindow();
     
     Main.run();
     
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "ImageMenuItem Example";
 
@@ -51,7 +51,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 	
-} // TestRigWindow
+} // testRigWindow
 
 
 class AppBox : Box

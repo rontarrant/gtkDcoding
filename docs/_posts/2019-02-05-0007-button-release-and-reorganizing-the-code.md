@@ -61,7 +61,7 @@ And if all you looked at was the `main()` function, you might be led to believe 
 			
 		} // quitApp()
 	
-	} // class myAppWindow
+	} // class testRigWindow
 
 These changes are all about maximizing OOP-ness and to that end, anything that has to do with a particular object has been moved into the class definition for that object. That's why the missing window title shows up here as class data along with a `partingMessage` variable. Keeping all this where it's easily found is a good habit to get into.
 

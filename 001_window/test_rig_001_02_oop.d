@@ -8,11 +8,11 @@ import gtk.Widget;
 
 void main(string[] args)
 {
-	TestRigWindow testRigWindow;
+	testRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new TestRigWindow();       // *** NEW ***
+	testRigWindow = new testRigWindow();       // *** NEW ***
 		
 	// give control over to gtkD.
 	Main.run();
@@ -20,7 +20,7 @@ void main(string[] args)
 } // main()
 
 
-class TestRigWindow : MainWindow                                  // *** NEW ***
+class testRigWindow : MainWindow                                  // *** NEW ***
 {
 	string title = "Test Rig";
 	
@@ -49,4 +49,4 @@ class TestRigWindow : MainWindow                                  // *** NEW ***
 		writeln("Hello GtkD OOP."); // appears in the console, not the GUI
 	}
 
-} // class myAppWindow
+} // class testRigWindow

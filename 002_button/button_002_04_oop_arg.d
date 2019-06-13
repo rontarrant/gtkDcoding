@@ -13,11 +13,11 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	TestRigWindow testRigWindow;
+	testRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new TestRigWindow();
+	testRigWindow = new testRigWindow();
 	
 	// give control over to the gtkD .
 	Main.run();
@@ -25,7 +25,7 @@ void main(string[] args)
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	string title = "Test Rig OOP";
 	MyButton button;
@@ -50,7 +50,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class TestRigWindow
+} // class testRigWindow
 
  
 class MyButton : Button

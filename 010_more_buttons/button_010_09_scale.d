@@ -14,14 +14,14 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow testRigWindow = new TestRigWindow("Test Rig with ScaleButton");
+	testRigWindow testRigWindow = new testRigWindow("Test Rig with ScaleButton");
 	
 	Main.run();
 	
 } // main()
 
 
-class TestRigWindow : MainWindow
+class testRigWindow : MainWindow
 {
 	int borderWidth = 10;
 	int width = 250;
@@ -50,7 +50,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class testRigWindow
 
 
 class AppBox : Box
