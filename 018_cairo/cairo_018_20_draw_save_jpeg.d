@@ -75,6 +75,7 @@ class MyDrawingArea : DrawingArea
 	GtkAllocation size; // the area assigned to the DrawingArea by its parent
 	Pixbuf pixbuf; // an 8-bit/pixel image buffer
 	string[] jpegOptions, jpegOptionValues;
+	int xOrigin = 0, yOrigin = 0;
 	
 	this()
 	{
@@ -97,12 +98,11 @@ class MyDrawingArea : DrawingArea
 		context.showText("Hello, JPeg World."); // and draw
 
 		getAllocation(size); // grab the widget's size as allocated by its parent
-		pixbuf = getFromSurface(context.getTarget(), 0, 0, size.width, size.height); // the contents of the surface go into the buffer
+		pixbuf = getFromSurface(context.getTarget(), xOrigin, yOrigin, size.width, size.height); // the contents of the surface go into the buffer
 
 		// prep and write JPEG file
 		jpegOptions = ["quality"]; 
 		jpegOptionValues = ["100"];
-//		pixbuf.savev("./rectangle_hw.jpg", "jpeg", options, opval);
 
 		if(pixbuf.savev("./rectangle_hw.jpg", "jpeg", jpegOptions, jpegOptionValues))
 		{
