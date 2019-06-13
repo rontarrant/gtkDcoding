@@ -13,7 +13,7 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
@@ -22,9 +22,10 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "Display PNG";
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		setSizeRequest(970, 546);

@@ -21,7 +21,7 @@ Take a look at the main function:
 	void main(string[] args)
 	{
 		Main.init(args);
-		TestRigWindow myTestRig = new TestRigWindow();
+		TestRigWindow testRigWindow = new TestRigWindow();
 		
 		// give control over to gtkD.
 		Main.run();
@@ -30,7 +30,7 @@ Take a look at the main function:
 
 Previously, the window’s title was defined at the top of main() and passed in as a string variable rather than a string. This time, there’s no window title because—in the interests of going full-on OOP—it’s been moved inside the TestRigWindow class.
 
-And you may also notice that we don’t even do a myTestRig.showAll() here. It, too, has been moved inside the TestRigWindow class.
+And you may also notice that we don’t even do a testRigWindow.showAll() here. It, too, has been moved inside the TestRigWindow class.
 
 ### Changes in the TestRigWindow Class
 

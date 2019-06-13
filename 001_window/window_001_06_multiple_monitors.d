@@ -9,10 +9,12 @@ import gdk.Display;
 
 void main(string[] args)
 {
-	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow testRigWindow;
 	
-	// give control over to gtkD.
+	Main.init(args);
+
+	testRigWindow = new TestRigWindow();
+	
 	Main.run();
 	
 } // main()
@@ -20,10 +22,11 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "Test Rig";
 	Display myDisplay;
 	int monitors;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		
@@ -32,7 +35,6 @@ class TestRigWindow : MainWindow
 		
 		addOnDestroy(&quitApp);
 
-		// Show the window and its contents...
 		showAll();
 
 	} // this() CONSTRUCTOR
@@ -53,4 +55,4 @@ class TestRigWindow : MainWindow
 		
 	} // monitorReport()
 
-} // class myAppWindow
+} // class TestRigWindow

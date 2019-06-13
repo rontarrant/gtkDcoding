@@ -25,7 +25,7 @@ void main(string[] args)
 {
 	Main.init(args);
 	
-	TestRigWindow myTestRig = new TestRigWindow("Dynamically-filled TreeView");
+	TestRigWindow testRigWindow = new TestRigWindow("Dynamically-filled TreeView");
 
 	Main.run();
 	

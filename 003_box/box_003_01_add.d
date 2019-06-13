@@ -12,9 +12,11 @@ import gtk.Box;                                                   // *** NEW ***
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	TestRigWindow myTestRig = new TestRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
@@ -25,14 +27,15 @@ class TestRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string unhello = "Good-bye";
+	AddBox addBox;
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		AddBox myBox = new AddBox();                            // *** NEW ***
-		add(myBox);                                             // *** NEW ***
+		addBox = new AddBox();                            // *** NEW ***
+		add(addBox);                                      // *** NEW ***
 
 		showAll();
 
@@ -47,7 +50,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class AddBox : Box                                                // *** NEW ***

@@ -13,16 +13,12 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	string title = "Test Rig OOP";
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow(title);
 	
-	MyButton button = new MyButton("Click this");
-	myTestRig.add(button);
+	testRigWindow = new TestRigWindow();
 	
-	// Show the window and its contents...
-	myTestRig.showAll();
-		
 	// give control over to the gtkD .
 	Main.run();
 	
@@ -31,11 +27,19 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig OOP";
+	MyButton button;
+	
+	this()
 	{
 		super(title);
 		addOnDestroy(&quitApp);
-		
+
+		button = new MyButton();
+		add(button);
+	
+		showAll();
+
 	} // this()
 	
 	
@@ -51,11 +55,13 @@ class TestRigWindow : MainWindow
  
 class MyButton : Button
 {
-	this(string label)
+	string labelText = "Click this";
+	
+	this()
 	{
 		string message = "Next time, don't bring the Wookie.";                    // *** NEW ***
 		
-		super(label);
+		super(labelText);
 		//addOnClicked(delegate void(Button b) { buttonAction(message); });
 		addOnClicked(delegate void(_) { buttonAction(message); });                // *** NEW ***
 		

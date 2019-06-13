@@ -18,7 +18,7 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow testRigWindow = new TestRigWindow("Test Rig");
 	
 	Main.run();
 	

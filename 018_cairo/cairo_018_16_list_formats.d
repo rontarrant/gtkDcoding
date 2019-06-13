@@ -15,7 +15,7 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
@@ -24,9 +24,10 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "Cairo: List Image Formats";
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		setSizeRequest(640, 640);
@@ -73,7 +74,6 @@ class MyDrawingArea : DrawingArea
 	GtkAllocation size; // the area assigned to the DrawingArea by its parent
 	Pixbuf pixbuf; // an 8-bit/pixel image buffer
 	ListSG formatList;
-	string[] listOfFormats;
 	PixbufFormat pixbufFormat;
 	PixbufFormat[] pixbufFormats;
 	

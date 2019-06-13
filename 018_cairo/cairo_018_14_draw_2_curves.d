@@ -12,7 +12,7 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
@@ -21,9 +21,10 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "Cairo: Draw Multiple Curves";
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		setSizeRequest(640, 360);
@@ -77,7 +78,7 @@ class MyDrawingArea : DrawingArea
 	{
 		context.setLineWidth(5);
 		context.setSourceRgb(0.3, 0.2, 0.1);
-		// by moving the pen into position, curveTo's 1st CP becomes an actuall CP
+		// by moving the pen into position, curveTo's 1st CP becomes an actual CP
 		context.moveTo(80, 130);
 		// args - 1st control point (CP): x, y, 2nd CP: x, y, end point x, y
 		context.curveTo(20, 240, 80, 220, 120, 125);

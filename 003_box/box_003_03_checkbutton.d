@@ -13,9 +13,11 @@ import gtk.CheckButton;                                                         
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
@@ -24,6 +26,8 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	ObservationBox observationBox;
+	
 	string title = "Test Rig: CheckButton";
 	string byeBye = "Bye, y'all.";
 	
@@ -32,8 +36,8 @@ class TestRigWindow : MainWindow
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		ObservationBox myBox = new ObservationBox();
-		add(myBox);
+		observationBox = new ObservationBox();
+		add(observationBox);
 
 		showAll();
 
@@ -47,7 +51,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class ObservationBox : Box
@@ -97,5 +101,5 @@ class ObserverButton : Button
 		
 	} // doSomething()
 	
-} // class ActionButton
+} // class ObservationButton
 

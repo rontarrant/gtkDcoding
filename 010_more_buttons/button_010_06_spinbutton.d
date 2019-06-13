@@ -13,7 +13,7 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig with SpinButton");
+	TestRigWindow testRigWindow = new TestRigWindow("Test Rig with SpinButton");
 	
 	Main.run();
 	

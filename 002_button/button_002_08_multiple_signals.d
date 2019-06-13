@@ -10,9 +10,11 @@ import gdk.Event;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow(args);
+	testRigWindow = new TestRigWindow(args);
 	
 	Main.run();
 	
@@ -23,17 +25,16 @@ class TestRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string bye = "Bye, bye.";
+	MyButton myButton;
 	
 	this(string[] args)
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		// a button that does something
-		MyButton myButt = new MyButton(args);
-		add(myButt);
+		myButton = new MyButton(args);
+		add(myButton);
 	
-		// Show the window and its contents...
 		showAll();
 		
 	} // this() CONSTRUCTOR
@@ -47,12 +48,12 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class MyButton : Button
 {
-	string label = "My Butt";
+	string label = "My Button";
 	
 	this(string[] args)
 	{

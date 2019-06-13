@@ -13,7 +13,7 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
@@ -22,18 +22,17 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "Cairo: Toy Text";
 	AppBox appBox;
-	int width, height;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		setSizeRequest(640, 360);
-		getSizeRequest(width, height);
 		
 		addOnDestroy(&quitApp);
 		
-		appBox = new AppBox([width, height]);
+		appBox = new AppBox();
 		add(appBox);
 		
 		showAll();
@@ -55,11 +54,11 @@ class AppBox : Box
 {
 	MyDrawingArea myDrawingArea;
 	
-	this(int[] widthHeight)
+	this()
 	{
 		super(Orientation.VERTICAL, 10);
 		
-		myDrawingArea = new MyDrawingArea(widthHeight);
+		myDrawingArea = new MyDrawingArea();
 		
 		packStart(myDrawingArea, true, true, 0); // LEFT justify
 		
@@ -70,28 +69,29 @@ class AppBox : Box
 
 class MyDrawingArea : DrawingArea
 {
+	GtkAllocation size; // the area assigned to the DrawingArea by its parent
 	cairo_text_extents_t extents;
-	int _width, _height;
 	
-	this(int[] widthHeight)
+	this()
 	{
-		_width = widthHeight[0];
-		_height = widthHeight[1];
 		addOnDraw(&onDraw);
 		
 	} // this()
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
+		getAllocation(size);
+writeln("Allocation.width: ", size.width, " Allocation.height: ", size.height);
 		// set the font, size, and color
 		context.selectFontFace("Comic Sans MS", CairoFontSlant.NORMAL, CairoFontWeight.NORMAL);
 		context.setFontSize(35);
 		context.setSourceRgb(0.0, 0.0, 1.0);
 		// find the dimensions of the text so we can center it
 		context.textExtents("Hello World", &extents);
-		context.moveTo(_width / 2 - extents.width / 2, _height / 2 - extents.height / 2);
+writeln("extents.width: ", extents.width, " extents.height: ", extents.height);
+		context.moveTo(size.width / 2 - extents.width / 2, size.height / 2 - extents.height / 2);
 		context.showText("Hello World");
-				
+writeln("position of text - x: ", (size.width / 2 - extents.width / 2), " - y: ", (size.height / 2 - extents.height / 2));
 		return(true);
 		
 	} // onDraw()

@@ -15,15 +15,15 @@ import gdk.Event;                                                 // *** NEW ***
 void main(string[] args)
 {
 	Main.init(args);
-	MainWindow myTestRig = new MainWindow("Test Rig");
-	myTestRig.addOnDestroy(delegate void(Widget w) { quitApp(); } );
+	MainWindow testRigWindow = new MainWindow("Test Rig");
+	testRigWindow.addOnDestroy(delegate void(Widget w) { quitApp(); } );
 	
 	Button button = new Button("Label Text");                      // *** NEW ***
 	button.addOnClicked(delegate void(Button b) { quitApp(); });
-	myTestRig.add(button);
+	testRigWindow.add(button);
 
 	// Show the window and its contents...
-	myTestRig.showAll();
+	testRigWindow.showAll();
 		
 	// give control over to the gtkD .
 	Main.run();

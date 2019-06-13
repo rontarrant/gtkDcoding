@@ -10,23 +10,12 @@ import gtk.Box;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
-	
-	LeftButton leftButton = new LeftButton(myTestRig);
-	RightButton rightButton = new RightButton(myTestRig);
-	
-	Box box = new Box(Orientation.VERTICAL, 5);
-	
-	box.add(leftButton);
-	box.add(rightButton);
-	myTestRig.add(box);
-	
-	// Show the window and its contents...
-	myTestRig.showAll();
-	
-	
-	// give control over to gtkD.
+
+	testRigWindow = new TestRigWindow();
+		
 	Main.run();
 	
 } // main()
@@ -34,12 +23,18 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	
+	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
-
 		setSizeRequest(300, 400);
+
+		AppBox appBox = new AppBox(this);
+		add(appBox);
+
+		showAll();
 
 	} // this() CONSTRUCTOR
 	
@@ -54,7 +49,27 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
+
+
+class AppBox : Box
+{
+	LeftButton leftButton;
+	RightButton rightButton;
+	
+	this(MainWindow mainWindow)
+	{
+		super(Orientation.VERTICAL, 5);
+		
+		leftButton = new LeftButton(mainWindow);
+		add(leftButton);
+
+		rightButton = new RightButton(mainWindow);
+		add(rightButton);
+
+	}
+	
+} // class AppBox
 
 
 interface PositionButton                                                        // *** NOTE ***

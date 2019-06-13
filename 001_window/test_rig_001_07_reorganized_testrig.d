@@ -9,11 +9,11 @@ import gtk.Widget;
 
 void main(string[] args)
 {
-	TestRigWindow myTestRig;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	myTestRig = new TestRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
@@ -45,7 +45,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class AppBox : Box

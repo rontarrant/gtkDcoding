@@ -12,9 +12,11 @@ import gdk.Event;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	TestRigWindow myTestRig = new TestRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
@@ -34,9 +36,9 @@ class TestRigWindow : MainWindow
 		PackBox myBox = new PackBox();
 		add(myBox);
 		
-		showAll(); // Let's try this from in here this time                       *** NEW ***
+		showAll();
 
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
@@ -47,7 +49,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class PackBox : Box

@@ -13,9 +13,11 @@ import gdk.Event;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	TestRigWindow myTestRig = new TestRigWindow(args);
+	testRigWindow = new TestRigWindow(args);
 	
 	Main.run();
 	

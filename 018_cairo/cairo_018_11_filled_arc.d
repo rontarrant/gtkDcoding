@@ -14,7 +14,7 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Cairo: Draw an Arc");
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
@@ -23,9 +23,10 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "Cairo: Fill an Arc";
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		setSizeRequest(640, 360);
@@ -77,16 +78,12 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		/*	x & y = position of the center of the arc
-		 * radius = the radius of the arc
-		 * angle1 = the start angle, in radians
-		 * angle2 = the end angle, in radians
-		*/
-		float x = 320, y = 180, radius = 40, angle1 = 0.7, angle2 = 2.44;
+		float x = 320, y = 180, radius = 40;
+		float start = 0.7, finish = 2.44;
 		
 	 	// draw the arc
 		context.setLineWidth(3);
-		context.arc(x, y, radius, angle1, angle2);
+		context.arc(x, y, radius, start, finish);
 		context.fill();
 
 		return(true);

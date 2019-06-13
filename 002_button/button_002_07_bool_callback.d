@@ -13,9 +13,11 @@ import gdk.Event;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	TestRigWindow myTestRig = new TestRigWindow(args);
+	testRigWindow = new TestRigWindow(args);
 	
 	Main.run();
 	
@@ -26,14 +28,15 @@ class TestRigWindow : MainWindow
 {
 	string title = "Test Rig OOP - Pass Args";
 	string sayBye = "Bye";
+	MyArgsButton myArgsButton;
 	
 	this(string[] args)
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		MyArgsButton myButton = new MyArgsButton(args);
-		add(myButton);
+		myArgsButton = new MyArgsButton(args);
+		add(myArgsButton);
 		
 		showAll();
 		
@@ -49,6 +52,7 @@ class TestRigWindow : MainWindow
 	} // quitApp()
 
 } // class TestRigWindow
+
 
 class MyArgsButton : Button
 {

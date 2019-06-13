@@ -17,15 +17,15 @@ void main(string[] args)
 	string otherMessage = "Button clicked instead.";               // *** NEW ***
 	
 	Main.init(args);
-	MainWindow myTestRig = new MainWindow("Test Rig");
-	myTestRig.addOnDestroy(delegate void(Widget w) { quitApp(message); } ); // *** NEW ***
+	MainWindow testRigWindow = new MainWindow("Test Rig");
+	testRigWindow.addOnDestroy(delegate void(Widget w) { quitApp(message); } ); // *** NEW ***
 	
 	Button button = new Button("Label Text");
 	button.addOnClicked(delegate void(Button b) { quitApp(otherMessage); }); // *** NEW ***
-	myTestRig.add(button);
+	testRigWindow.add(button);
 
 	// Show the window and its contents...
-	myTestRig.showAll();
+	testRigWindow.showAll();
 		
 	// give control over to the gtkD .
 	Main.run();

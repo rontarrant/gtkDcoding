@@ -14,7 +14,7 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig with SpinButtons");
+	TestRigWindow testRigWindow = new TestRigWindow("Test Rig with SpinButtons");
 	
 	Main.run();
 	

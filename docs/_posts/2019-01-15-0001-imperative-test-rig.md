@@ -50,22 +50,22 @@ Yup, there’s that opening curly brace on a line all by itself, just like I sai
 
 This calls the **init()** function in GtkD’s Main module. Command line arguments are passed along. We’ll see why sometime down the road.
 
-	MainWindow myTestRig = new MainWindow("Test Rig");
+	MainWindow testRigWindow = new MainWindow("Test Rig");
 
 This line creates the window the user will see when the application is run. This is the breakdown:
 
 - MainWindow (the first time) names the variable type
 - MainWindow (the second time) is the constructor function call,
-- myTestRig is the variable name we’re assigning to the window created,
+- testRigWindow is the variable name we’re assigning to the window created,
 - “Test Rig” is the window title, and
 - new speaks for itself.
 
 ### Window Close Button
-	myTestRig.addOnDestroy(delegate void(Widget w) {quitApp();});
+	testRigWindow.addOnDestroy(delegate void(Widget w) {quitApp();});
 
 This line breaks down as:
 
-- **myTestRig.addOnDestroy()** makes a call to the window’s destructor (opposite of constructor) and interrupts it, allowing us to wedge in another function call of our own before the window dies,
+- **testRigWindow.addOnDestroy()** makes a call to the window’s destructor (opposite of constructor) and interrupts it, allowing us to wedge in another function call of our own before the window dies,
 - **quitApp()** is the function we want called before the window is destroyed,
 - **void(Widget w)** defines:
 	- the return type (*void*)
@@ -80,7 +80,7 @@ This just spits a line out to the command shell with a classic-style greeting.
 
 ### Show the Window and its Contents
 
-	myTestRig.showAll();
+	testRigWindow.showAll();
 
 We now make another call to the window object to show itself.
 

@@ -8,9 +8,11 @@ import gtk.Widget;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	TestRigWindow myTestRig = new TestRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	

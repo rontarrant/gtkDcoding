@@ -12,9 +12,11 @@ import gdk.Event;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
@@ -43,7 +45,8 @@ class TestRigWindow : MainWindow
 	void sayHi()
 	{
 		writeln(greeting); // appears in the console, not the GUI
-	}
+		
+	} // sayHi()
 	
 	
 	void quitApp()
@@ -77,12 +80,12 @@ class AddBox : Box
 class ObserverButton : Button
 {
 	string label = "Take Action";
-	WatchedButton watchedButton;
+	WatchedButton _watchedButton;
 	
-	this(WatchedButton extWatched)
+	this(WatchedButton watchedButton)
 	{
 		super(label);
-		watchedButton = extWatched;
+		_watchedButton = watchedButton;
 		
 		// signal hook-ups
 		addOnButtonRelease(&outputSomething);
@@ -117,7 +120,7 @@ class ObserverButton : Button
 		
 		writeln("Action was taken.");
 		
-		if(watchedButton.getMode() == true)
+		if(_watchedButton.getMode() == true)
 		{
 			continueFlag = false;
 			writeln("A value of 'false' keeps the signal chain going.");
@@ -135,9 +138,9 @@ class ObserverButton : Button
 	
 	bool outputSomething(Event event, Widget widget)
 	{
-		write("observedState = ", watchedButton.getMode(), ": ");
+		write("observedState = ", _watchedButton.getMode(), ": ");
 		
-		if(watchedButton.getMode()) // if it's 'true'
+		if(_watchedButton.getMode()) // if it's 'true'
 		{
 			writeln("Walls make good neighbours, eh.");
 		}
@@ -186,6 +189,6 @@ class WatchedButton : ToggleButton
 			setLabel(onLabel);
 		}
 	
-	} // report()
+	} // toggleMode()
 	
 } // class WatchedButton

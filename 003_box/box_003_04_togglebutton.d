@@ -11,9 +11,11 @@ import gtk.ToggleButton;                                          // *** NEW ***
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
@@ -25,24 +27,26 @@ class TestRigWindow : MainWindow
 	string title = "Test Rig";
 	string greeting = "Hello GtkD World.";
 	string ungreeting = "Bye, bye, GtkD World.";
+	AddBox addBox;
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		ObservationBox addBox = new ObservationBox();
+		addBox = new AddBox();
 		add(addBox);
 		
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void sayHi()
 	{
 		writeln(greeting); // appears in the console, not the GUI
-	}
+		
+	} // sayHi()
 	
 	
 	void quitApp()
@@ -53,24 +57,24 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
-class ObservationBox : Box
+class AddBox : Box
 {
 	this()
 	{
 		super(Orientation.VERTICAL, 5);
 		
-		ObservedToggleButton observedToggle = new ObservedToggleButton();
-		ObserverButton myObserverButton = new ObserverButton(observedToggle);
+		ObservedToggleButton observedToggleButton = new ObservedToggleButton();
+		ObserverButton observerButton = new ObserverButton(observedToggleButton);
 
-		add(myObserverButton);
-		add(observedToggle);
+		add(observerButton);
+		add(observedToggleButton);
 		
 	} // this()
 	
-} // class ObservationBox
+} // class AddBox
 
 
 class ObserverButton : Button
@@ -100,7 +104,9 @@ class ObserverButton : Button
 		{
 			writeln("Berlin doesn't like walls.");
 		}
-	}
+
+	} // outputSomething()
+
 } // class ObserverButton
 
 
@@ -139,4 +145,4 @@ class ObservedToggleButton : ToggleButton
 	
 	} // toggleMode()
 	
-} // class MyToggleButton
+} // class ObservedToggleButton

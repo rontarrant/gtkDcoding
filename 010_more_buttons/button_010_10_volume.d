@@ -15,7 +15,7 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig with VolumeButton");
+	TestRigWindow testRigWindow = new TestRigWindow("Test Rig with VolumeButton");
 	
 	Main.run();
 	

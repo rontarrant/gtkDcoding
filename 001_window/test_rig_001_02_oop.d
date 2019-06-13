@@ -8,15 +8,12 @@ import gtk.Widget;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");       // *** NEW ***
 	
-	myTestRig.sayHi(); // *** NEW ***
-	
-	// Show the window and its contents...
-	myTestRig.showAll();
-	
-	
+	testRigWindow = new TestRigWindow();       // *** NEW ***
+		
 	// give control over to gtkD.
 	Main.run();
 	
@@ -25,11 +22,17 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow                                  // *** NEW ***
 {
-	this(string title)
+	string title = "Test Rig";
+	
+	this()
 	{
 		super(title);
-		
 		addOnDestroy(&quitApp);
+
+		sayHi(); // *** NEW ***
+	
+		// Show the window and its contents...
+		showAll();
 		
 	} // this() CONSTRUCTOR
 	

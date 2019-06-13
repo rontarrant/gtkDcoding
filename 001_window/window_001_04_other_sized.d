@@ -9,15 +9,12 @@ import gtk.Button;
 
 void main(string[] args)
 {
-	Main.init(args);
-	TestRigWindow myTestRig = new TestRigWindow("Test Rig");
+	TestRigWindow testRigWindow;
 	
-	ResizeButton button = new ResizeButton(myTestRig);
-	myTestRig.add(button);
+	Main.init(args);
 
-	// Show the window and its contents...
-	myTestRig.showAll();
-
+	testRigWindow = new TestRigWindow();
+	
 	// give control over to gtkD.
 	Main.run();
 	
@@ -26,13 +23,19 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	this(string title)
+	string title = "Test Rig";
+	
+	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
-
 		setDefaultSize(640, 480);                                                 // *** NEW ***
 
+		ResizeButton button = new ResizeButton(this);
+		add(button);
+
+		showAll();
+		
 	} // this() CONSTRUCTOR
 	
 	
@@ -46,14 +49,16 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class myAppWindow
+} // class TestRigWindow
 
 
 class ResizeButton : Button                                                     // *** NEW ***
 {
+	string buttonText = "Resize Window";
+	
 	this(MainWindow window)
 	{
-		super("Resize Window");
+		super(buttonText);
 		addOnClicked(delegate void(Button b) { resizeMe(window); });
 		
 	} // this()

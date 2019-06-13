@@ -9,13 +9,13 @@ import gtk.Widget;
 void main(string[] args)
 {
 	Main.init(args);
-	MainWindow myTestRig = new MainWindow("Test Rig");
-	myTestRig.addOnDestroy(delegate void(Widget w) { quitApp(); } );
+	MainWindow testRigWindow = new MainWindow("Test Rig");
+	testRigWindow.addOnDestroy(delegate void(Widget w) { quitApp(); } );
 	
 	writeln("Hello GtkD Imperative");
 
 	// Show the window and its contents...
-	myTestRig.showAll();
+	testRigWindow.showAll();
 		
 	// give control over to the gtkD .
 	Main.run();
