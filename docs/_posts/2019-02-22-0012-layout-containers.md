@@ -6,7 +6,7 @@ author: Ron Tarrant
 
 ---
 
-## 0012 - Layout Containers
+## 0012 - `Layout` `Container`s
 
 Starting today, we’ll be looking at a few examples of using a `Layout` container. Since we’ve already covered the `Box` container, playing with `Layout` containers won’t be foreign, so we’ll throw in some extra techniques to keep it interesting, things like presenting a button vertically instead of horizontally.
 
@@ -15,7 +15,7 @@ Today’s example files are:
 - [a rotated button](https://github.com/rontarrant/gtkDcoding/blob/master/004_layout/layout_004_01_rotated.d) and
 - [multiple buttons in a layout](https://github.com/rontarrant/gtkDcoding/blob/master/004_layout/layout_004_02_put_multiple.d)
 
-### Why a Layout?
+### Why a `Layout`?
 
 Placing widgets in a container using absolute coordinates is discouraged. Why? If your application is translated into another language or the user fiddles with font settings at the OS level, the beauty and balance of your layout is going out the window… so to speak.
 
@@ -40,7 +40,7 @@ Like the `Box` we used in earlier examples, the derived `Layout` is mostly about
 
 Another drawback of using a `Layout`, and therefore the `put()` function, is that it’s going to take several code-compile-test cycles before you can lock down exactly what **x** and **y** should be. And these cycles increase in number with the complexity of your design. If for no other reason, you may want to let the `Layouts` lie and pack some `Box`es instead.
 
-### Rotated Button
+### Rotated `Button`
 
 And here’s that rotated button I mentioned earlier:
 
@@ -68,7 +68,7 @@ And here’s that rotated button I mentioned earlier:
 
 Of course, there’s nothing here to indicate it’s at a non-standard angle. Nope, it’s all pretty straightforward here. So, where is the angle set?
 
-#### The Real Rotated Widget: the Label
+#### The Real Rotated Widget: the `Label`
 
 The rotation is in here with the `setAngle()` function:
 
@@ -96,6 +96,6 @@ Something else to keep in mind: angles go counter-clockwise. So if you want some
 
 And that’s pretty much it for this time. Yes, I mentioned a second code file at the beginning of this post, but all it does is `put()` a second button in the layout. Neither button is rotated, nor do they do anything we haven’t seen before, so there’s nothing new or exciting in the second example. It’s there mainly because I’d feel remiss if I didn’t show a button in a standard position/rotation.
 
-And with that said, *Insert vague comparison between GTK and popular space opera culture here.*
+And with that said, *Insert vague comparison between* GTK *and popular space opera culture here.*
 
 Bye, now.

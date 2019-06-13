@@ -8,7 +8,7 @@ author: Ron Tarrant
 
 ## 0011 - Callback Chains
 
-I mentioned in post #0008 that we’d look at callback chains and here we are. In blog entry #0010, I covered setting up an observer pattern. Today we’ll have a bit of fun combining these two. All this code should seem quite familiar, so no need to fasten your seat belt. However, there is a surprise in store, so you still might wanna hold onto your hat...
+I mentioned in [post #0008](http://gtkdcoding.com/2019/02/08/0008-callbacks.html) that we’d look at callback chains and here we are. In blog [entry #0010](http://gtkdcoding.com/2019/02/15/0010-checkbutton.html), I covered setting up an observer pattern. Today we’ll have a bit of fun combining these two. All this code should seem quite familiar, so no need to fasten your seat belt. However, there is a surprise in store, so you still might wanna hold onto your hat...
 
 First, we’ll look at how multiple signals are chained together. It’s nothing fancy, just a few extra lines of code in the constructor of our derived button class:
 
@@ -32,16 +32,16 @@ But now let’s get to the interrupt-y bit…
 
 ### A Refresher
 
-Callbacks with Boolean return values allow us to hook multiple signals into a chain with the added bonus of choosing whether or not to interrupt the chain. Here are the rules again:
+Callbacks with *Boolean* return values allow us to hook multiple signals into a chain with the added bonus of choosing whether or not to interrupt the chain. Here are the rules again:
 
-- return(true): stop processing callbacks and return to the main loop, and
-- return(false): more callbacks to come, keep going.
+- `return(true)`: stop processing callbacks and return to the main loop, and
+- `return(false)`: more callbacks to come, keep going.
 
 But here's the surprise...
 
 ### Signal Handling Order
 
-If you look at the order the callback signals are hooked up, you'll see:
+If you look at the order in which the callback signals are hooked up, you'll see:
 
 - `onClicked`,
 - `onPressed`,
@@ -68,7 +68,7 @@ So only one signal is hooked up to the first event (`onPressed`), three are hook
 
 Now let's move on to example #2...
 
-## Observed and Observer Buttons with Signals
+## Observed and Observer `Button`s with Signals
 
 [Here's the second code file](https://github.com/rontarrant/gtkDcoding/blob/master/003_box/box_003_05_signal_chain.d).
 
@@ -78,7 +78,7 @@ An observer pattern lets one widget keep an eye on another and change its own be
 
 ### The Code
 
-This time around, the `ObserverButton` keeps an eye on a `WatchedButton` derived from the `ToggleButton` class, very much like it did in the companion code for *blog entry #0010*. But the constructor is busier:
+This time around, the `ObserverButton` keeps an eye on a `WatchedButton` derived from the `ToggleButton` class, very much like it did in the companion code for [entry #0010](http://gtkdcoding.com/2019/02/15/0010-checkbutton.html). But the constructor is busier:
 
 	this(WatchedButton extWatched)
 	{
@@ -146,4 +146,3 @@ The `WatchedButton` class, derived as it is from a `ToggleButton`, is almost ide
 ### Are we done yet?
 
 Yeah, for now, I think so. Happy D-coding and may the moon shine bright on your widgets tonight.
-

@@ -61,6 +61,7 @@ This line creates the window the user will see when the application is run. This
 - new speaks for itself.
 
 ### Window Close Button
+
 	testRigWindow.addOnDestroy(delegate void(Widget w) {quitApp();});
 
 This line breaks down as:
@@ -74,6 +75,7 @@ This line breaks down as:
 - delegate says this function definition needs to preserve its scope, so that no matter when it’s called, the arguments passed to it will still be viable.
 
 ### Classic Greeting
+
 	writeln("Hello GtkD");
 
 This just spits a line out to the command shell with a classic-style greeting.
