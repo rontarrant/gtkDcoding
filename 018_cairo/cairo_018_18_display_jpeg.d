@@ -15,14 +15,14 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow();
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Cairo: Display JPeg";
 	AppBox appBox;
@@ -71,21 +71,20 @@ class AppBox : Box
 
 class MyDrawingArea : DrawingArea
 {
-	Surface surface;
 	Pixbuf pixbuf;
-	Context context;
-	int x, y;
+	int x = 20, y = 40;
+	string filename = "./images/guitar_bridge.jpg";
 	
 	this()
 	{
-		pixbuf = new Pixbuf("./images/guitar_bridge.jpg");
+		pixbuf = new Pixbuf(filename);
 		addOnDraw(&onDraw);
 		
 	} // this()
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		context.setSourcePixbuf(pixbuf, 0, 0);
+		context.setSourcePixbuf(pixbuf, x, y);
 		context.paint();
 		
 		return(true);

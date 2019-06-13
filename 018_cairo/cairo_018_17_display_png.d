@@ -13,14 +13,14 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow();
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Display PNG";
 	AppBox appBox;
@@ -70,10 +70,11 @@ class AppBox : Box
 class MyDrawingArea : DrawingArea
 {
 	Surface surface;
+	string filename = "./images/foundlings.png";
 	
 	this()
 	{
-		surface = ImageSurface.createFromPng("./images/foundlings.png");
+		surface = ImageSurface.createFromPng(filename);
 		addOnDraw(&onDraw);
 		
 	} // this()

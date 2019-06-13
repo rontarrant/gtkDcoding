@@ -14,14 +14,14 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow("Test Rig");
+	TestRigWindow testRigWindow = new TestRigWindow("Test Rig");
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	AppBox appBox;
 	
@@ -69,14 +69,14 @@ class AppBox : Box
 
 class MyDrawingArea : DrawingArea
 {
-
 	Pixbuf pixbuf;
 	Context context;
 	int x, y;
+	string filename = "./images/Envy.svg";
 	
 	this()
 	{
-		pixbuf = new Pixbuf("./images/e-blues-open.tif");
+		pixbuf = new Pixbuf(filename);
 		addOnDraw(&onDraw);
 		
 	} // this()
