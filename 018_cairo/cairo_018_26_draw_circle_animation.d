@@ -76,7 +76,6 @@ class MyDrawingArea : DrawingArea
 	Timeout _timeout;
 	float arcLength = PI / 12;
 	int fps = 1000 / 12; // 12 frames per second
-	cairo_text_extents_t extents;
 	
 	this()
 	{
@@ -110,10 +109,10 @@ class MyDrawingArea : DrawingArea
 
 	bool onFrameElapsed()
 	{
-		GtkAllocation area;
-		getAllocation(area);
+		GtkAllocation size;
+		getAllocation(size);
 		
-		queueDrawArea(area.x, area.y, area.width, area.height);
+		queueDrawArea(size.x, size.y, size.width, size.height);
 		
 		return(true);
 		

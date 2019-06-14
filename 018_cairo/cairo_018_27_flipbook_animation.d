@@ -78,8 +78,7 @@ class AppBox : Box
 class MyDrawingArea : DrawingArea
 {
 	int currentFrame = 0;
-	float arcLength = PI / 12;
-	int fps = 1000 / 6; // 6 frames per second
+	int fps = 1000 / 12; // 6 frames per second
 	Timeout _timeout;
 	Pixbuf[] pixbufs;
 	int numberOfFrames = 75;

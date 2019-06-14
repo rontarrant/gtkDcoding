@@ -6,12 +6,9 @@ import gtk.Main;
 import gtk.Box;
 import gtk.Widget;
 import cairo.Context;
-import cairo.ImageSurface;
-import cairo.Surface;
 import gtk.DrawingArea;
 import gdk.Pixbuf;
-import gdkpixbuf.PixbufFormat;
-import glib.ListSG;
+import gtdpixbuf.Pixbuf; // so we can see which file options exist
 
 void main(string[] args)
 {
@@ -75,7 +72,7 @@ class MyDrawingArea : DrawingArea
 	GtkAllocation size; // the area assigned to the DrawingArea by its parent
 	Pixbuf pixbuf; // an 8-bit/pixel image buffer
 	string[] jpegOptions, jpegOptionValues;
-	int xOrigin = 0, yOrigin = 0;
+	int xOffset = 0, yOffset = 0;
 	
 	this()
 	{
@@ -98,8 +95,8 @@ class MyDrawingArea : DrawingArea
 		context.showText("Hello, JPeg World."); // and draw
 
 		getAllocation(size); // grab the widget's size as allocated by its parent
-		pixbuf = getFromSurface(context.getTarget(), xOrigin, yOrigin, size.width, size.height); // the contents of the surface go into the buffer
-
+		pixbuf = getFromSurface(context.getTarget(), xOffset, yOffset, size.width, size.height); // the contents of the surface go into the buffer
+		
 		// prep and write JPEG file
 		jpegOptions = ["quality"]; 
 		jpegOptionValues = ["100"];

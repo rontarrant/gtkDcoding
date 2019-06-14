@@ -6,12 +6,8 @@ import gtk.Main;
 import gtk.Box;
 import gtk.Widget;
 import cairo.Context;
-import cairo.ImageSurface;
-import cairo.Surface;
 import gtk.DrawingArea;
 import gdk.Pixbuf;
-import gdkpixbuf.PixbufFormat;
-import glib.ListSG;
 
 void main(string[] args)
 {
