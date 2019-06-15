@@ -12,18 +12,18 @@ import gtk.MessageDialog;
 
 void main(string[] args)
 {
-	TestRig testRig;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
-	
-	testRig = new TestRig();
-	
+    
+	testRigWindow = new TestRigWindow();
+	 
 	Main.run();
 	
 } // main()
 
 
-class TestRig : MainWindow
+class TestRigWindow : MainWindow
 {
 	TestBox testBox;
 	
@@ -41,7 +41,7 @@ class TestRig : MainWindow
 		
 	} // this()
 
-} // class: TestRig
+} // class: TestRigWindow
 
 
 class TestBox : Box

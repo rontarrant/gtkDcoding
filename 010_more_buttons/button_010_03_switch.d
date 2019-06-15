@@ -9,16 +9,18 @@ import gtk.Switch;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	testRigWindow testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Switch Example";
 	string byeBye = "Bye-bye";
@@ -48,7 +50,7 @@ class testRigWindow : MainWindow
 
 
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class MySwitch : Switch

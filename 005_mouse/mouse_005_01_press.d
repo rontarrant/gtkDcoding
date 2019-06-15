@@ -14,36 +14,34 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow();
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
-	string buy = "Bye";
-	string action = " was pressed.";
+	string title = "Mouse Button Press";
 	
 	this()
 	{
-		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// make the window sensitive to mouse clicking (any button)
-		addOnButtonPress(&onMousePress);                           // *** NEW ***
+		addOnButtonPress(&onMousePress);
 		
-		// Show the window and its contents...
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 
 
 	void quitApp()
 	{
+		string buy = "Bye";
+
 		writeln(buy);
 		
 		Main.quit();
@@ -51,26 +49,28 @@ class testRigWindow : MainWindow
 	} // quitApp()
 
 
-	public bool onMousePress(Event event, Widget widget)          // *** NEW ***
+	public bool onMousePress(Event event, Widget widget)
 	{
-		bool value = false;
+		bool returnValue = false;
 
 		if(event.type == EventType.BUTTON_PRESS)
 		{
 			GdkEventButton* mouseEvent = event.button;
 			pressReport(mouseEvent.button);
-			value = true;
+			returnValue = true;
 		}
 
-		return(value);
+		return(returnValue);
 		
 	} // onMousePress()
 
 
-	void pressReport(uint mouseButtonNumber)                                               // *** NEW ***
+	void pressReport(uint mouseButtonNumber)
 	{
+		string action = " was pressed.";
+
 		writeln("Button # ", mouseButtonNumber, action);
 
 	} // pressReport()
 	
-} // class testRigWindow
+} // class TestRigWindow

@@ -1,4 +1,4 @@
-// switch the button's image each time it's clicked
+// switch Button Image each time it's clicked
 // a study in propagation/fall-through
 
 import std.stdio;
@@ -14,18 +14,21 @@ import gdk.Event;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
+	string title = "Switch Images on a Button";
+	ImageButton imageButton;
 	
 	this()
 	{
@@ -33,25 +36,28 @@ class testRigWindow : MainWindow
 		
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		ImageButton myButt = new ImageButton();
-		add(myButt);
+		imageButton = new ImageButton();
+		add(imageButton);
 
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
 	{
-		writeln("Bye.");
+		string exitMessage = "Bye.";
+		
+		writeln(exitMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
-class ImageButton : Button                                                      // *** NEW ***
+class ImageButton : Button
 {
 	InnerBox innerBox;
 	
@@ -59,7 +65,7 @@ class ImageButton : Button                                                      
 	{
 		super();
 		
-		innerBox = new InnerBox(); // orientation, padding
+		innerBox = new InnerBox();
 		add(innerBox);
 		
 		addOnButtonRelease(&changeBoth);
@@ -67,7 +73,7 @@ class ImageButton : Button                                                      
 	} // this()
 
 
-	bool changeBoth(Event event, Widget widget)                                // *** NEW ***
+	bool changeBoth(Event event, Widget widget)
 	{
 		innerBox.changeBoth();	
 		
@@ -80,16 +86,17 @@ class ImageButton : Button                                                      
 
 class InnerBox : Box
 {
+	int globalPadding = 10;
 	SwitchingLabel switchingLabel;
 	SwitchingImage switchingImage;
 
 	this()
 	{
-		super(Orientation.VERTICAL, 10);
-		switchingLabel = new SwitchingLabel();                                  // *** NEW ***
+		super(Orientation.VERTICAL, globalPadding);
+		switchingLabel = new SwitchingLabel();
 		add(switchingLabel);
 
-		switchingImage = new SwitchingImage();                                  // *** NEW ***
+		switchingImage = new SwitchingImage();
 		add(switchingImage);
 		
 	} // this()
@@ -105,7 +112,7 @@ class InnerBox : Box
 } // class InnerBox
 
 
-class SwitchingImage : Image                                                    // *** NEW ***
+class SwitchingImage : Image
 {
 	string apples = "images/apples.jpg";
 	string oranges = "images/oranges.jpg";

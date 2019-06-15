@@ -23,21 +23,24 @@ import singleton.S_FontList;
 
 void main(string[] args)
 {
-	Main.init(args);
+	TestRigWindow testRigWindow;
 	
-	testRigWindow testRigWindow = new testRigWindow("Dynamically-filled TreeView");
-
+	Main.init(args);
+    
+	testRigWindow = new TestRigWindow();
+	 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
+	string title = "MVC Dynamically-loaded TreeView";
 	AppBox appBox;
 	int minimumWidth, naturalWidth, minimumHeight, naturalHeight;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		setSizeRequest(750, 400);
@@ -59,7 +62,7 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box

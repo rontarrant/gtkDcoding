@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// Playing with the window's size requirements
 
 import std.stdio;
 
@@ -9,11 +9,11 @@ import gtk.Button;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	// give control over to gtkD.
 	Main.run();
@@ -21,39 +21,41 @@ void main(string[] args)
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
+	int width = 640, height = 480;
 	string title = "Test Rig";
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
-		setDefaultSize(640, 480);                                                 // *** NEW ***
+		setDefaultSize(width, height);                                                 // *** NEW ***
 
 		ResizeButton button = new ResizeButton(this);
 		add(button);
 
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
 	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
-		writeln("Bye.");
+		string exitMessage = "Bye.";
+		
+		writeln(exitMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class ResizeButton : Button                                                     // *** NEW ***
 {
+	int width = 640, height = 480;
 	string buttonText = "Resize Window";
 	
 	this(MainWindow window)
@@ -67,6 +69,7 @@ class ResizeButton : Button                                                     
 	void resizeMe(MainWindow window)
 	{
 		int x, y;
+		int defaultSize = -1;
 		
 		window.getSize(x, y);
 		writeln("x = ", x, ", y = ", y);
@@ -74,16 +77,18 @@ class ResizeButton : Button                                                     
 		// GTK deals in minimum sizes, not absolute sizes, therefore we can set
 		// a minimum size for a window, but not a maximum. Also, we can't set
 		// a new size smaller than the current size.
-		if(x < 640)
+		if(x < width)
 		{
-			window.setSizeRequest(640, 480);
+			window.setSizeRequest(width, height);
 		}
-		else if(x > 641)
+		else if(x > (width + 1))
 		{
 			// The effect here is to set a minimum size and it can't be made smaller
 			// after this condition becomes true.
 			writeln("Minimum size is now set. You can shrink it, but not below the minimum size.");
-			window.setSizeRequest(-1, -1);
+			window.setSizeRequest(defaultSize, defaultSize);
 		}
-	}
+
+	} // resizeMe()
+
 } // class ResizeButton

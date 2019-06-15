@@ -1,6 +1,4 @@
-// Entry widget
-// Notes:
-//   may need an observer - rethink, rewrite
+// non-readable Entry
 
 import std.stdio;
 
@@ -11,32 +9,33 @@ import gtk.Button;
 import gtk.Widget;
 import gtk.Box;
 import gtk.CheckButton;
-import gtk.ToggleButton;                                                        // *** NOTE *** needed for toggle signal
+import gtk.ToggleButton;                // *** NOTE *** needed for toggle signal
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRig = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string titleText = "Entry Obfuscated";
-	
-	LoginBox entryBox;
+	LoginBox loginBox;
 		
 	this()
 	{
 		super(titleText);
 		addOnDestroy(&endProgram);
 		
-		entryBox = new LoginBox();
-		add(entryBox);
+		loginBox = new LoginBox();
+		add(loginBox);
 		
 		showAll();
 		
@@ -45,16 +44,16 @@ class testRigWindow : MainWindow
 	
 	void endProgram(Widget w)
 	{
-		writeln("Your password is: ", entryBox.passwordEntry.getText());
+		writeln("Your password is: ", loginBox.passwordEntry.getText());
 		
 	} // endProgram()
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class LoginBox : Box
 {
-	int padding = 5;
+	int globalPadding = 5;
 
 	Entry usernameEntry, passwordEntry;
 	CheckButton checkButton;
@@ -62,7 +61,7 @@ class LoginBox : Box
 	
 	this()
 	{
-		super(Orientation.VERTICAL, padding);
+		super(Orientation.VERTICAL, globalPadding);
 
 		usernameEntry = new Entry();
 		passwordEntry = new Entry();
@@ -87,11 +86,11 @@ class LoginBox : Box
 		
 		if(button.getActive() == true)
 		{
-			messageEnd = " I can shoulder surf your password.";
+			messageEnd = " I can shoulder-surf your password.";
 		}
 		else
 		{
-			messageEnd = " I canNOT shoulder surf your password.";
+			messageEnd = " I canNOT shoulder-surf your password.";
 		}
 		
 		passwordEntry.setVisibility(button.getActive());

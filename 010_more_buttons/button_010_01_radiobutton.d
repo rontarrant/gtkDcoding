@@ -9,24 +9,27 @@ import gtk.Button;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	testRigWindow testRigWin = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Window";
+	string title = "RadioButton Example";
 	RadioBox radioBox;
+	int width = 500, height = 500;
 	
 	this()
 	{
 		super(title);
-		setDefaultSize(500, 500);
+		setDefaultSize(width, height);
 	
 		radioBox = new RadioBox();
 		add(radioBox);
@@ -35,7 +38,7 @@ class testRigWindow : MainWindow
 		
 	} // this()
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class RadioBox : Box
@@ -52,7 +55,7 @@ class RadioBox : Box
 		button1 = new MyRadioButton("button 1", observed);
 		
 		button2 = new MyRadioButton("button 2", observed);
-		button2.setGroup(button1.getGroup());                                        // ** NOTE **
+		button2.setGroup(button1.getGroup());                        // ** NOTE **
 		
 		button3 = new MyRadioButton("button 3", observed);
 		button3.setGroup(button1.getGroup());

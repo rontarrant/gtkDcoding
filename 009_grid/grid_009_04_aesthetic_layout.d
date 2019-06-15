@@ -6,29 +6,29 @@ import gtk.Main;
 import gtk.MainWindow;
 import gtk.Grid;
 import gtk.Label;
-import gtk.Widget; // needed for setHalign() and setValign() functions
+import gtk.Widget;
 import gtk.Box;
 
 // Note: StateFlags are found in gtk.c.types
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	int width = 400;
 	int height = 100;
-	string title = "Grid with Centre-aligned Elements";
+	string title = "Grid with Aesthetic Layout";
 	PadGrid myGrid;
 	
 	this()
@@ -42,7 +42,7 @@ class testRigWindow : MainWindow
 		
 	} // this()
 		
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class PadGrid : Grid

@@ -1,4 +1,4 @@
-// checkerboard grid example
+// alternate checkerboard grid example
 
 import std.stdio;
 import std.string;
@@ -6,18 +6,21 @@ import std.string;
 import gtk.Main;
 import gtk.MainWindow;
 import gtk.Grid;
-import gtk.EventBox; // Labels can't have a background color, so we pack them in EventBoxes which can
+import gtk.EventBox;
 import gtk.Widget;
 import gtk.Label;
-import gdk.RGBA; // needed for defining colors for the label backgrounds
+import gdk.RGBA;
 
 // Note: StateFlags are found in gtk.c.types
 
 void main(string[] args)
 {
+	GridWindow gridWindow;
+	
 	Main.init(args);
-	GridWindow gridWindow = new GridWindow();
-	gridWindow.showAll();
+	
+	gridWindow = new GridWindow();
+
 	Main.run();
 	
 } // main()
@@ -65,6 +68,7 @@ class GridWindow : MainWindow
 		}
 
 		add(grid);
+		showAll();
 		
 	} // this()
 		
@@ -74,12 +78,13 @@ class GridWindow : MainWindow
 class WideLabel : EventBox
 {
 	Label label;
+	int width = 60, height = 60;
 	
 	this(string text)
 	{
 			super();
 			label = new Label(text);
-			label.setSizeRequest(60, 60);
+			label.setSizeRequest(width, height);
 			add(label);
 			
 	} // this()
@@ -90,12 +95,13 @@ class WideLabel : EventBox
 class BlueLabel : WideLabel
 {
 	RGBA blueColor;
+	float red = 0.518, green = 0.710, blue = 1.0, alpha = 1.0;
 	
 	this(string labelText)
 	{
 		super(labelText);
 		
-		blueColor = new RGBA(0.518, 0.710, 1.0, 1.0);
+		blueColor = new RGBA(red, green, blue, alpha);
 		
 		overrideBackgroundColor(StateFlags.NORMAL, blueColor);
 		
@@ -107,12 +113,13 @@ class BlueLabel : WideLabel
 class RedLabel : WideLabel
 {
 	RGBA redColor;
+	float red = 1.0, green = 0.420, blue = 0.557, alpha = 1.0;
 	
 	this(string labelText)
 	{
 		super(labelText);
 		
-		redColor = new RGBA(1.0, 0.420, 0.557, 1.0);
+		redColor = new RGBA(red, green, blue, alpha);
 
 		overrideBackgroundColor(StateFlags.NORMAL, redColor);
 		

@@ -1,7 +1,7 @@
 // Example of:
 //  a plain button
 //  coded in the OOP paradigm
-//  an argument is passed in the constructor to the button's callback
+//  an argument is passed Button's callback function
 
 import std.stdio;
 
@@ -13,21 +13,20 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
-	// give control over to the gtkD .
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig OOP";
+	string title = "Argument Passed to Callback";
 	MyButton button;
 	
 	this()
@@ -45,30 +44,35 @@ class testRigWindow : MainWindow
 	
 	void quitApp(Widget w)
 	{
-		writeln("Bye.");
+		string exitMessage = "Bye.";
+		
+		writeln(exitMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
  
 class MyButton : Button
 {
-	string labelText = "Click this";
+	string labelText = "Click This";
 	
 	this()
 	{
 		string message = "Next time, don't bring the Wookie.";                    // *** NEW ***
 		
 		super(labelText);
+		
+		// The next two lines do the same thing, but the second uses shorthand in the void() definition.
 		//addOnClicked(delegate void(Button b) { buttonAction(message); });
 		addOnClicked(delegate void(_) { buttonAction(message); });                // *** NEW ***
 		
 	} // this()
 	
 	
-	void buttonAction(string message)                                            // *** NEW ***
+	void buttonAction(string message)
 	{
 		writeln("The message is: ", message);
 		

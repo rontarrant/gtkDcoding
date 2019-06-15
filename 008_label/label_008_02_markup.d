@@ -9,32 +9,34 @@ import gtk.Button;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	testRigWindow testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Pretty Label";
+	string title = "Label with Switchable Mark-up";
 	MarkupSwitchButton button;
 	
 	this()
 	{
 		super(title);
 
-		button = new MarkupSwitchButton();                     // *** NEW ***
+		button = new MarkupSwitchButton();
 		add(button);
 	
 		showAll();
 		
 	} // this()
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class MarkupSwitchButton : Button
@@ -77,8 +79,8 @@ class MarkupLabel : Label
 		
 	} // this()
 	
-	// a function to turn markup on and off
-	void markupSwitch()	                                                        // *** NEW ***
+	
+	void markupSwitch()
 	{
 		if(getUseMarkup() == true)
 		{

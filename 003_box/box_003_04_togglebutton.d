@@ -1,4 +1,4 @@
-// Test Rig with an observer pattern and a ToggleButton
+// ToggleButton with an observer
 
 import std.stdio;
 
@@ -11,20 +11,20 @@ import gtk.ToggleButton;                                          // *** NEW ***
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
+	string title = "ToggleButton with Observer";
 	string greeting = "Hello GtkD World.";
 	string ungreeting = "Bye, bye, GtkD World.";
 	AddBox addBox;
@@ -57,7 +57,7 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AddBox : Box
@@ -80,7 +80,6 @@ class AddBox : Box
 class ObserverButton : Button
 {
 	string label = "Take Action";
-	
 	ObservedToggleButton observed;
 
 	this(ObservedToggleButton extObserved)
@@ -94,15 +93,18 @@ class ObserverButton : Button
 	
 	void outputSomething(Button b)
 	{
+		string trueMessage = "Walls make good neighbours, eh.";
+		string falseMessage = "Berlin doesn't like walls.";
+		
 		write("observedState = ", observed.getMode(), ": "); // NOTE: no linefeed here
 		
 		if(observed.getMode()) // if it's 'true'
 		{
-			writeln("Walls make good neighbours, eh.");
+			writeln(trueMessage);
 		}
 		else
 		{
-			writeln("Berlin doesn't like walls.");
+			writeln(falseMessage);
 		}
 
 	} // outputSomething()

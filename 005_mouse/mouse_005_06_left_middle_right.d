@@ -6,53 +6,58 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
 import gtk.Button;
-import gdk.Event; // *** NEW ***
+import gdk.Event;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	testRigWindow testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
-	string byeBye = "Bye, bye.";
+	MyLMRButton myLMRButton;
+	
+	string title = "Left, Middle or Right Mouse Button";
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		MyLMRButton myLMRButton = new MyLMRButton();             // *** NEW ***
+		myLMRButton = new MyLMRButton();
 		add(myLMRButton);
 		
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
 	{
+		string byeBye = "Bye, bye.";
+
 		writeln(byeBye);
 		
 		Main.quit();
 
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
-class MyLMRButton : Button                                        // *** NEW ***
+class MyLMRButton : Button
 {
 	string labelText = "LeftMiddleRight";
 	string[] mouseButtons = ["None", "Left", "Middle", "Right"]; // we'll never get a '0', so "None" keeps us from having
-	                                                           // to do math to get the right name for the event 
+	                                                             // to do math to get the right name for the event 
 	
 	this()
 	{
@@ -63,7 +68,7 @@ class MyLMRButton : Button                                        // *** NEW ***
 	} // this()
 	
 	
-	public bool onButtonPress(Event event, Widget widget)          // *** NEW ***
+	public bool onButtonPress(Event event, Widget widget)
 	{
 		bool value = false;
 		
@@ -81,7 +86,7 @@ class MyLMRButton : Button                                        // *** NEW ***
 	} // onButtonPress()
 
 
-	public bool onButtonRelease(Event event, Widget widget)        // *** NEW ***
+	public bool onButtonRelease(Event event, Widget widget)
 	{
 		bool value = false;
 		
@@ -99,7 +104,7 @@ class MyLMRButton : Button                                        // *** NEW ***
 	} // onButtonRelease()
 
 
-	void mousePress(uint mouseButton)                                               // *** NEW ***
+	void mousePress(uint mouseButton)
 	{
 		
 		writeln("The ", mouseButtons[mouseButton], " was pressed.");
@@ -107,7 +112,7 @@ class MyLMRButton : Button                                        // *** NEW ***
 	} // mousePress()
 
 
-	void mouseRelease(uint mouseButton)                                             // *** NEW ***
+	void mouseRelease(uint mouseButton)
 	{
 		writeln("The ", mouseButtons[mouseButton], " was released.");
 		

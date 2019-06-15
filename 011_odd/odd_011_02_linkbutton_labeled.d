@@ -9,16 +9,18 @@ import gtk.Widget;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRig = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "LinkButton example";
 	string link = "http://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html";
@@ -45,4 +47,4 @@ class testRigWindow : MainWindow
 		
 	} // endProgram()
 	
-} // class testRigWindow
+} // class TestRigWindow

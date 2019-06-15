@@ -1,4 +1,4 @@
-// multiple monitors
+// Find number of monitors
 
 import std.stdio;
 
@@ -9,20 +9,20 @@ import gdk.Display;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
+	string title = "Number of Monitors";
 	Display myDisplay;
 	int monitors;
 	
@@ -37,13 +37,16 @@ class testRigWindow : MainWindow
 
 		showAll();
 
-	} // this() CONSTRUCTOR
+	} // this()
 	
 		
 	void quitApp(Widget widget)
 	{
+		string exitMessage = "Bye.";
+		
 		monitorReport();
-		writeln("Bye.");
+		writeln(exitMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
@@ -55,4 +58,4 @@ class testRigWindow : MainWindow
 		
 	} // monitorReport()
 
-} // class testRigWindow
+} // class TestRigWindow

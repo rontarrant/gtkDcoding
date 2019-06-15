@@ -1,7 +1,4 @@
-// move button creation inside the testRigWindow class
 // use the onButtonRelease signal instead of onClicked
-//
-//
 
 import std.stdio;
 
@@ -13,46 +10,46 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string windowTitle = "Test Rig";
-	string departingMessage = "Bye.";
+	string windowTitle = "Button Release";
 	MyButton myButton;
 	
-	this(/* NO ARGS */)
+	this()
 	{
-		// window
 		super(windowTitle);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		// a button that does something
-		myButton = new MyButton();                  // *** NEW ***
-		add(myButton);                                // *** NEW ***
+		myButton = new MyButton();
+		add(myButton);
 		
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
-	void quitApp()                                                 // *** NEW ***
+	void quitApp()
 	{
-		writeln(departingMessage);
+		string exitMessage = "Bye.";
+		
+		writeln(exitMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class MyButton : Button
@@ -63,12 +60,12 @@ class MyButton : Button
 	this()
 	{
 		super(buttonText);
-		addOnButtonRelease(&takeAction);                            // *** NEW ***
+		addOnButtonRelease(&takeAction);
 		
 	} // this()
 	
 	
-	bool takeAction(Event event, Widget widget)                    // *** NEW ***
+	bool takeAction(Event event, Widget widget)
 	{
 		writeln(actionMessage);
 		

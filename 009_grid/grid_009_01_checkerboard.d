@@ -5,17 +5,19 @@ import std.stdio;
 import gtk.Main;
 import gtk.MainWindow;
 import gtk.Grid;
-import gtk.EventBox; // Labels can't have a background color, so we pack them into EventBoxes which can
+import gtk.EventBox;
 import gtk.Label;
-import gdk.RGBA; // needed for defining colors for the label backgrounds
+import gdk.RGBA;
 
 // Note: StateFlags are found in gtk.c.types
 
 void main(string[] args)
 {
+	GridWindow gridWindow;
+	
 	Main.init(args);
 	
-	GridWindow gridWindow = new GridWindow();
+	gridWindow = new GridWindow();
 
 	Main.run();
 	

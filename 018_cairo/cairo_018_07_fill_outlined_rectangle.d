@@ -10,16 +10,18 @@ import gtk.DrawingArea;
 
 void main(string[] args)
 {
-	Main.init(args);
-
-	testRigWindow testRigWindow = new testRigWindow();
+	TestRigWindow testRigWindow;
 	
+	Main.init(args);
+    
+	testRigWindow = new TestRigWindow();
+	 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Cairo: Fill an Outlined Rectangle";
 	AppBox appBox;
@@ -46,7 +48,7 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box

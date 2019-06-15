@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// OOP Test Rig Foundation for Learning GtkD Coding
 
 import std.stdio;
 
@@ -8,19 +8,18 @@ import gtk.Widget;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new testRigWindow();       // *** NEW ***
+	testRigWindow = new TestRigWindow();
 		
-	// give control over to gtkD.
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow                                  // *** NEW ***
+class TestRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	
@@ -29,24 +28,30 @@ class testRigWindow : MainWindow                                  // *** NEW ***
 		super(title);
 		addOnDestroy(&quitApp);
 
-		sayHi(); // *** NEW ***
+		sayHi();
 	
-		// Show the window and its contents...
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 		
-	void quitApp(Widget widget)                                    // *** NEW ***
-	{                                                              // becomes a class function
-		writeln("Bye.");
+	void quitApp(Widget widget)
+	{
+		string exitMessage = "Bye.";
+		
+		writeln(exitMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
 
+
 	void sayHi()
 	{
-		writeln("Hello GtkD OOP."); // appears in the console, not the GUI
-	}
+		string message = "Hello GtkD OOP World";
+		
+		writeln(message);
+		
+	} // sayHi()
 
-} // class testRigWindow
+} // class TestRigWindow

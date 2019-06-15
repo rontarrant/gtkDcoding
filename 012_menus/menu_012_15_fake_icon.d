@@ -15,16 +15,18 @@ import gtk.Label;
 
 void main(string[] args)
 {
-    Main.init(args);
-
-    testRigWindow testRig = new testRigWindow();
+	TestRigWindow testRigWindow;
+	
+	Main.init(args);
     
-    Main.run();
-    
+	testRigWindow = new TestRigWindow();
+	 
+	Main.run();
+	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "ImageMenuItem Example";
 

@@ -1,7 +1,7 @@
 // Example of:
 //  a plain button
 //  coded in the OOP paradigm
-//  command line args are passed to a bool callback
+//  command line args are passed to a Boolean callback
 
 import std.stdio;
 
@@ -13,21 +13,20 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new testRigWindow(args);
+	testRigWindow = new TestRigWindow(args);
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig OOP - Pass Args";
-	string sayBye = "Bye";
+	string title = "Pass Terminal Args to Boolean Callback";
 	MyArgsButton myArgsButton;
 	
 	this(string[] args)
@@ -45,13 +44,15 @@ class testRigWindow : MainWindow
 	
 	void quitApp()
 	{
-		writeln(sayBye);
+		string exitMessage = "Bye";
+
+		writeln(exitMessage);
 		
 		Main.quit();
 
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class MyArgsButton : Button
@@ -68,17 +69,19 @@ class MyArgsButton : Button
 	} // this()
 	
 	
-	public bool buttonAction(string[] buttonArgs)                                                                // *** NEW ***
+	public bool buttonAction(string[] buttonArgs)
 	{
+		int appName = 0;
+		
 		foreach(arg; buttonArgs)
 		{
-			if(arg != buttonArgs[0])                                               // *** NEW *** skip arg 0, it's the name of the program
+			if(arg != buttonArgs[appName]) // skip arg 0; it's the name of the application
 			{
 				writeln("\t", arg);
 			}
 		}
 
-		return(true); // countermands the 'false' return of the callback definition above
+		return(true); // this value doesn't matter; the delegate (above) overrules it
 		
 	} // buttonAction()
 

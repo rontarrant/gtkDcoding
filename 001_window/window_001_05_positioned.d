@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// Position a window programmatically
 
 import std.stdio;
 
@@ -10,56 +10,58 @@ import gtk.Box;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 		
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
+	int width = 300, height = 400;
+	string title = "Positioned Window";
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
-		setSizeRequest(300, 400);
+		setSizeRequest(width, height);
 
 		AppBox appBox = new AppBox(this);
 		add(appBox);
 
 		showAll();
 
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
 	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
-		writeln("Bye.");
+		string exitMessage = "Bye.";
+		
+		writeln(exitMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box
 {
+	int globalPadding = 5;
 	LeftButton leftButton;
 	RightButton rightButton;
 	
 	this(MainWindow mainWindow)
 	{
-		super(Orientation.VERTICAL, 5);
+		super(Orientation.VERTICAL, globalPadding);
 		
 		leftButton = new LeftButton(mainWindow);
 		add(leftButton);
@@ -67,7 +69,7 @@ class AppBox : Box
 		rightButton = new RightButton(mainWindow);
 		add(rightButton);
 
-	}
+	} // this()
 	
 } // class AppBox
 
@@ -81,9 +83,11 @@ interface PositionButton                                                        
 
 class LeftButton : Button, PositionButton
 {
+	string buttonText = "Left";
+	
 	this(MainWindow window)
 	{
-		super("Left");
+		super(buttonText);
 		addOnClicked(delegate void(Button b) { moveWindow(window); });
 		
 	} // this()
@@ -92,20 +96,24 @@ class LeftButton : Button, PositionButton
 	void moveWindow(MainWindow window)
 	{
 		int x, y;
+		int xDistance = 40, yDistance = 60;
+		
 		window.getPosition(x, y);
 		writeln("window position: x = ", x, "y = ", y);
-		window.move(x - 40, y - 60);
+		window.move(x - xDistance, y - yDistance);
 		
-	} // moveWindowLeft()
+	} // moveWindow()
 
 } // class LeftButton
 
 
 class RightButton : Button, PositionButton
 {
+	string buttonText = "Right";
+	
 	this(MainWindow window)
 	{
-		super("Right");
+		super(buttonText);
 		addOnClicked(delegate void(Button b) { moveWindow(window); });
 		
 	} // this()
@@ -114,10 +122,12 @@ class RightButton : Button, PositionButton
 	void moveWindow(MainWindow window)
 	{
 		int x, y;
+		int xDistance = 40, yDistance = 60;
+		
 		window.getPosition(x, y);
 		writeln("window position: x = ", x, "y = ", y);
-		window.move(x + 40, y + 60);
+		window.move(x + xDistance, y + yDistance);
 		
-	} // moveWindowRight()
+	} // moveWindow()
 
 } // class RightButton

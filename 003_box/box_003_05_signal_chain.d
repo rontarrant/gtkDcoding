@@ -12,20 +12,20 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
+	string title = "Interrupt Signal Chain";
 	string greeting = "Hello GtkD World.";
 	string ungreeting = "Bye, bye, GtkD World.";
 	
@@ -39,7 +39,7 @@ class testRigWindow : MainWindow
 		
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void sayHi()
@@ -57,14 +57,16 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AddBox : Box
 {
+	int globalPadding = 5;
+	
 	this()
 	{
-		super(Orientation.VERTICAL, 5);
+		super(Orientation.VERTICAL, globalPadding);
 		
 		WatchedButton myToggle = new WatchedButton();
 		ObserverButton observerButton = new ObserverButton(myToggle);
@@ -98,7 +100,9 @@ class ObserverButton : Button
 	
 	bool endStatement(Event event, Widget widget)
 	{
-		writeln("And that's the report from Walls-R-Us.\n");
+		string message = "And that's the report from Walls-R-Us.\n";
+		 
+		writeln(message);
 		
 		return(true);
 		
@@ -107,7 +111,9 @@ class ObserverButton : Button
 	
 	bool clickReport(Event event, Widget widget)
 	{
-		writeln("Reporting a click.");
+		string message = "Reporting a click.";
+		 
+		writeln(message);
 		
 		return(false);
 		
@@ -117,18 +123,20 @@ class ObserverButton : Button
 	bool takeAction(Event event, Widget widget)
 	{
 		bool continueFlag = true;
+		string trueMessage = "A value of 'false' keeps the signal chain going.";
+		string falseMessage = "A value of 'true' tells the chain its work is done.\n";
 		
 		writeln("Action was taken.");
 		
 		if(_watchedButton.getMode() == true)
 		{
 			continueFlag = false;
-			writeln("A value of 'false' keeps the signal chain going.");
+			writeln(trueMessage);
 		}
 		else
 		{
 			continueFlag = true;
-			writeln("A value of 'true' tells the chain its work is done.\n");
+			writeln(falseMessage);
 		}
 
 		return(continueFlag);
@@ -138,15 +146,18 @@ class ObserverButton : Button
 	
 	bool outputSomething(Event event, Widget widget)
 	{
+		string trueMessage = "Walls make good neighbours, eh.";
+		string falseMessage = "Berlin doesn't like walls.";
+		
 		write("observedState = ", _watchedButton.getMode(), ": ");
 		
 		if(_watchedButton.getMode()) // if it's 'true'
 		{
-			writeln("Walls make good neighbours, eh.");
+			writeln(trueMessage);
 		}
 		else
 		{
-			writeln("Berlin doesn't like walls.");
+			writeln(falseMessage);
 		}
 
 		return(false);

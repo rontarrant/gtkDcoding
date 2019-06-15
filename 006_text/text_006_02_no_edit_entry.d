@@ -1,6 +1,4 @@
-// Entry widget
-// Notes:
-//   may need an observer - rethink, rewrite
+// Entry widget with Editable turned on and off
 
 import std.stdio;
 
@@ -11,20 +9,22 @@ import gtk.Button;
 import gtk.Widget;
 import gtk.Box;
 import gtk.CheckButton;
-import gtk.ToggleButton;                                                        // *** NOTE *** needed for toggle signal
+import gtk.ToggleButton;                // *** NOTE *** needed for toggle signal
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRig = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string titleText = "Entry Editable/Non-editable";
 	EntryBox entryBox;
@@ -48,19 +48,19 @@ class testRigWindow : MainWindow
 		
 	} // endProgram()
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class EntryBox : Box
 {
-	int padding = 5;
+	int globalPadding = 5;
 	Entry entry;
 	CheckButton checkButton;
 	string checkText = "Editable";
 	
 	this()
 	{
-		super(Orientation.VERTICAL, padding);
+		super(Orientation.VERTICAL, globalPadding);
 		entry = new Entry();
 		entry.setEditable(false);
 		

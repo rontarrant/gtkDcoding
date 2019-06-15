@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// a ScrolledWindow example
 
 import std.stdio;
 
@@ -14,24 +14,25 @@ void main(string[] args)
 {
 	Main.init(args);
 	
-	testRigWindow testRigWindow = new testRigWindow();
+	TestRigWindow testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
+	string title = "ScrolledWindow Example";
+	int windowWidth = 200, windowHeight = 200;
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
-		setSizeRequest(200, 200);
+		setSizeRequest(windowWidth, windowHeight);
 		
-		ScrolledWindow scrolledWindow = new ScrolledWindow();       // *** NEW ***
+		ScrolledWindow scrolledWindow = new ScrolledWindow();
 		add(scrolledWindow);
 		
 		auto myLayout = new MyLayout();
@@ -39,41 +40,48 @@ class testRigWindow : MainWindow
 
 		showAll();
 
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
 	{
-		writeln("Bye.");
+		string exitMessage = "Bye.";
+		
+		writeln(exitMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class MyLayout : Layout
 {
+	int buttonX = 20, buttonY = 20;
+	int otherButtonX = 20, otherButtonY = 100;
+	int layoutWidth = 400, layoutHeight = 400;
+	
 	this()
 	{
 		super(null, null);
-		setSize(400, 400);
+		setSize(layoutWidth, layoutHeight);
 		
-		auto myButton = new MyButt();
-		put(myButton, 20, 20);
+		auto myButton = new MyButton();
+		put(myButton, buttonX, buttonY);
 		
-		auto myOtherButton = new MyOtherButt();
-		put(myOtherButton, 20, 100);
+		auto myOtherButton = new MyOtherButton();
+		put(myOtherButton, otherButtonX, otherButtonY);
 		
 	} // this()
 	
 } // class MyLayout
 
 
-class MyButt : Button
+class MyButton : Button
 {
 	string labelText = "Button Name";
-	string actionMessage = "Something was done.";
+	int width = 160, height = 60;
 	
 	this()
 	{
@@ -81,42 +89,47 @@ class MyButt : Button
 		
 		addOnButtonRelease(&doSomething);
 		
-		setSizeRequest(160, 60);
+		setSizeRequest(width, height);
 				
 	} // this()
 	
 	
 	bool doSomething(Event e, Widget w)
 	{
-		writeln(actionMessage);
+		string message = "Something was done.";
+
+		writeln(message);
 		
 		return(true);
 		
 	} // doSomething()
 
-} // class MyButt
+} // class MyButton
 
 
-class MyOtherButt : Button
+class MyOtherButton : Button
 {
 	string labelText = "Other Button Name";
-	string message = "Something other than that was done.";
 		
 	this()
 	{
+		int width = 160, height = 60;
+		
 		super(labelText);
 		
 		addOnClicked(delegate void(_) { doSomething(); } );
 		
-		setSizeRequest(160, 60);
+		setSizeRequest(width, height);
 				
 	} // this()
 	
 	
 	void doSomething()
 	{
+		string message = "Something other than that was done.";
+
 		writeln(message);
 		
 	} // doSomething()
 
-} // class MyButt
+} // class MyButton

@@ -1,4 +1,5 @@
-// Precision placement of buttons using put()
+// Precision placement of multiple buttons using put()
+// Also shows the use of auto as a substitute for naming a class during instantiation.
 
 import std.stdio;
 
@@ -11,19 +12,20 @@ import gdk.Event;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	testRigWindow testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
-	string quitBlurb = "I could have done something here.";
+	string title = "Put Multiple Buttons";
 	
 	this()
 	{
@@ -35,40 +37,44 @@ class testRigWindow : MainWindow
 		
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
 	{
+		string quitBlurb = "I could have done something here.";
+
 		writeln(quitBlurb);
 		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class MyLayout : Layout
 {
+	int myButtonX = 10, myButtonY = 20;
+	int myOtherButtonX = 10, myOtherButtonY = 60;
+	
 	this()
 	{
 		super(null, null);
-		auto myButton = new MyButt();
-		auto myOtherButton = new MyOtherButt();
+		auto myButton = new MyButton();
+		auto myOtherButton = new MyOtherButton();
 		
-		put(myButton, 10, 20);                                                    // *** NEW ***
-		put(myOtherButton, 10, 60);                                                 // *** NEW ***
+		put(myButton, myButtonX, myButtonY);
+		put(myOtherButton, myOtherButtonX, myOtherButtonY);
 		
 	} // this()
 	
 } // class MyLayout
 
 
-class MyButt : Button
+class MyButton : Button
 {
 	string labelText = "Button Name";
-	string doSomethingText = "Something was done.";
 	
 	this()
 	{
@@ -80,19 +86,20 @@ class MyButt : Button
 	
 	bool doSomething(Event e, Widget w)
 	{
-		writeln(doSomethingText);
+		string message = "Something was done.";
+
+		writeln(message);
 		
 		return(true);
 		
 	} // doSomething()
 
-} // class MyButt
+} // class MyButton
 
 
-class MyOtherButt : Button
+class MyOtherButton : Button
 {
 	string labelText = "Other Button Name";
-	string message = "Something other than that was done.";
 		
 	this()
 	{
@@ -105,8 +112,10 @@ class MyOtherButt : Button
 	
 	void doSomething()
 	{
+		string message = "Something other than that was done.";
+
 		writeln(message);
 		
 	} // doSomething()
 
-} // class MyButt
+} // class MyOtherButton

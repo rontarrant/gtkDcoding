@@ -13,19 +13,20 @@ import gtk.c.types;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	testRigWindow testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
-	string byeBye = "Bye, bye.";
+	string title = "Scrollwheel Reporting";
 	
 	this()
 	{
@@ -33,16 +34,17 @@ class testRigWindow : MainWindow
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// make the window sensitive to mouse wheel scrolling
-		addOnScroll(&onScroll);                                                   // *** NEW ***
+		addOnScroll(&onScroll);
 		
-		// Show the window and its contents...
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 
 
 	void quitApp()
 	{
+		string byeBye = "Bye, bye.";
+
 		writeln(byeBye);
 		
 		Main.quit();
@@ -50,23 +52,25 @@ class testRigWindow : MainWindow
 	} // quitApp()
 
 
-	public bool onScroll(Event event, Widget widget)                             // *** NEW ***
+	public bool onScroll(Event event, Widget widget)
 	{
 		bool value = false; // assume no scrolling
+		string upText = "scrolling up...";
+		string downText = "scrolling down...";
 		
 		if(event.scroll.direction == ScrollDirection.DOWN)
 		{
 			value = true;
-			writeln("scrolling down...");
+			writeln(downText);
 		}
 		else if(event.scroll.direction == ScrollDirection.UP)
 		{
 			value = true;
-			writeln("scrolling up...");
+			writeln(upText);
 		}
 
 		return(value);
 
 	} // onScroll()
 
-} // class testRigWindow
+} // class TestRigWindow

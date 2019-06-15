@@ -13,21 +13,20 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new testRigWindow(args);
+	testRigWindow = new TestRigWindow(args);
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig OOP";
-	string departureMessage = "Bye.";
+	string title = "Pass Terminal Args to void Callback";
 	
 	this(string[] args)
 	{
@@ -44,13 +43,15 @@ class testRigWindow : MainWindow
 	
 	void quitApp(Widget w)
 	{
-		writeln(departureMessage);
+		string exitMessage = "Bye.";
+
+		writeln(exitMessage);
 		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
  
 class MyButton : Button
@@ -69,7 +70,7 @@ class MyButton : Button
 	} // this()
 	
 	
-	void buttonAction(string[] args)                                             // *** NEW ***
+	void buttonAction(string[] args)
 	{
 		writeln("The command line arguments are:");
 

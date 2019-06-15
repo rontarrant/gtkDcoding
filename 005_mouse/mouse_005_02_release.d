@@ -12,21 +12,20 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	// initialization & creation
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
-	string byeBlurb = "Bye.";
-	string action = " released.";
+	string title = "Mouse Button Release";
 	
 	this()
 	{
@@ -34,15 +33,14 @@ class testRigWindow : MainWindow
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// make the window sensitive to mouse button release event (any button)
-		addOnButtonRelease(&onButtonRelease);                                     // *** NEW ***
+		addOnButtonRelease(&onButtonRelease);
 	
-		// Show the window and its contents...
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 
 
-	public bool onButtonRelease(Event event, Widget widget)        // *** NEW ***
+	public bool onButtonRelease(Event event, Widget widget)
 	{
 		bool value = false;
 		
@@ -58,8 +56,10 @@ class testRigWindow : MainWindow
 	} // onButtonRelease()
 
 
-	void releaseReport(uint buttonNumber)                                             // *** NEW ***
+	void releaseReport(uint buttonNumber)
 	{
+		string action = " released.";
+
 		writeln("Button #", buttonNumber, " was ", action, ".");
 		
 	} // releaseReport()
@@ -67,12 +67,11 @@ class testRigWindow : MainWindow
 
 	void quitApp()
 	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
-		writeln(byeBlurb);
+		string exitMessage = "Bye.";
+
+		writeln(exitMessage);
 		Main.quit();
 
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow

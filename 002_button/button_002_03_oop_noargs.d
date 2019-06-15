@@ -1,6 +1,7 @@
 // Example of:
 //  a plain button
 //  coded in the OOP paradigm
+// no arguments are passed to the callback function
 
 
 import std.stdio;
@@ -13,11 +14,11 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 		
 	// give control over to the gtkD .
 	Main.run();
@@ -25,9 +26,9 @@ void main(string[] args)
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig OOP";
+	string title = "Plain Button";
 	
 	this()
 	{
@@ -45,17 +46,20 @@ class testRigWindow : MainWindow
 	
 	void quitApp(Widget w)
 	{
-		writeln("Bye.");
+		string exitMessage = "Bye.";
+		
+		writeln(exitMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
-class MyButton : Button                                // *** NEW ***
+class MyButton : Button
 {
-	string label = "Click this";
+	string label = "Click This";
 	 
 	this()
 	{
@@ -67,7 +71,9 @@ class MyButton : Button                                // *** NEW ***
 	
 	void buttonAction(Button b)
 	{
-		writeln("Action taken.");
+		string message = "An action was taken.";
+		
+		writeln(message);
 		
 	} // buttonAction()
 	

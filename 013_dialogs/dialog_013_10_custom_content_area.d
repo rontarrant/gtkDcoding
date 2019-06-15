@@ -19,20 +19,23 @@ import gtk.Entry;
 
 void main(string[] args)
 {
-	Main.init(args);
-
-	testRigWindow testRigWindow = new testRigWindow("Test Rig");
+	TestRigWindow testRigWindow;
 	
+	Main.init(args);
+    
+	testRigWindow = new TestRigWindow();
+	 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
+	string title = "Custom Content Area";
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		addOnDestroy(&quitApp);
@@ -52,7 +55,7 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box

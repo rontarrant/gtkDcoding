@@ -13,18 +13,18 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new testRigWindow(args);
+	testRigWindow = new TestRigWindow(args);
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Test Rig OOP - Pass Args";
 	string sayBye = "Bye";
@@ -56,7 +56,7 @@ class testRigWindow : MainWindow
 
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class MyArgsButton : Button
@@ -73,17 +73,19 @@ class MyArgsButton : Button
 	} // this()
 	
 	
-	public bool buttonAction(string[] buttonArgs)                                                                // *** NEW ***
+	public bool buttonAction(string[] buttonArgs)
 	{
+		int appName = 0;
+		
 		foreach(arg; buttonArgs)
 		{
-			if(arg != buttonArgs[0])
+			if(arg != buttonArgs[appName])
 			{
 				writeln("\t", arg);
 			}
 		}
 
-		return(true); // countermands the 'false' return of the callback definition above
+		return(true); // return value ignored. delegate definition in constructor overrides it.
 		
 	} // buttonAction()
 

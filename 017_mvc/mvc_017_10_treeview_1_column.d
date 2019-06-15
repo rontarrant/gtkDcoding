@@ -14,20 +14,23 @@ import gtk.CellRendererText;
 
 void main(string[] args)
 {
-	Main.init(args);
+	TestRigWindow testRigWindow;
 	
-	testRigWindow testRigWindow = new testRigWindow("Test Rig");
-
+	Main.init(args);
+    
+	testRigWindow = new TestRigWindow();
+	 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
+	string title = "MVC One-column TreeView";
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		
@@ -48,7 +51,7 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box

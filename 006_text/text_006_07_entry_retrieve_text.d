@@ -1,4 +1,4 @@
-// Entry widget
+// retrieving text from an Entry
 
 import std.stdio;
 // GTK
@@ -11,18 +11,20 @@ import gdk.Event;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRig = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string titleText = "Entry example";
+	string titleText = "Retrieve Text from Entry";
 	
 	TextEntry textEntry;
 	
@@ -31,7 +33,7 @@ class testRigWindow : MainWindow
 		super(titleText);
 		addOnDestroy(&endProgram);
 		
-		textEntry = new TextEntry("Untitled");
+		textEntry = new TextEntry();
 		add(textEntry);
 
 		writeln("Type something in the Entry, then hit the Enter key.");
@@ -47,20 +49,18 @@ class testRigWindow : MainWindow
 		
 	} // endProgram()
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class TextEntry : Entry
 {
 	private:
-	string _predefinedText;
+	string predefinedText = "Untitled";
 	
 	public:
-	this(string text)
+	this()
 	{
-		_predefinedText = text;
-		
-		super(_predefinedText);
+		super(predefinedText);
 		
 		addOnActivate(&doSomething);
 		

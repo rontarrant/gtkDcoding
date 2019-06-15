@@ -1,4 +1,4 @@
-// Just a button with an image
+// a Button with an Image
 
 import std.stdio;
 
@@ -10,46 +10,51 @@ import gtk.Image;                                                 // *** NEW ***
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Image Button Example";
-	string byeBye = "Bye bye";
+	ImageButton imageButton;
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 
-		ImageButton myButt = new ImageButton();     // *** NEW ***
-		add(myButt);
+		imageButton = new ImageButton();
+		add(imageButton);
 
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
 	{
+		string byeBye = "Bye bye";
+
 		writeln(byeBye);
 		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
-class ImageButton : Button                                        // *** NEW ***
+class ImageButton : Button
 {
+	Image appleImage;
 	string imageFilename = "images/apples.jpg";
 	string actionMessage = "You have added one (1) apple to your cart.";
 		
@@ -57,8 +62,8 @@ class ImageButton : Button                                        // *** NEW ***
 	{
 		super();
 		
-		Image oranges = new Image(imageFilename);
-		add(oranges);
+		appleImage = new Image(imageFilename);
+		add(appleImage);
 		
 		addOnClicked(&doSomething);
 		

@@ -1,4 +1,4 @@
-// FontButton widget
+// FontButton
 
 import std.stdio;
 
@@ -11,17 +11,16 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	testRigWindow testRig = new testRigWindow();
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string titleText = "FontButton example";
-	
 	FontButton fontButton;
 	
 	this()
@@ -43,4 +42,4 @@ class testRigWindow : MainWindow
 		
 	} // endProgram()
 	
-} // class testRigWindow
+} // class TestRigWindow

@@ -8,24 +8,27 @@ import gtk.Widget;
 import cairo.Context;
 import gtk.DrawingArea;
 import gdk.Pixbuf;
-import gtdpixbuf.Pixbuf; // so we can see which file options exist
+import gdkpixbuf.Pixbuf; // so we can see which file options exist
 
 void main(string[] args)
 {
-	Main.init(args);
-
-	testRigWindow testRigWindow = new testRigWindow("Test Rig");
+	TestRigWindow testRigWindow;
 	
+	Main.init(args);
+    
+	testRigWindow = new TestRigWindow();
+	 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
+	string title = "Cairo Draw and Save a JPeg";
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		setSizeRequest(640, 360);
@@ -47,7 +50,7 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box

@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// OOP Test Rig Reorganized (all others now comply to this standard)
 
 import std.stdio;
 
@@ -9,18 +9,18 @@ import gtk.Widget;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	AppBox appBox;
@@ -35,26 +35,30 @@ class testRigWindow : MainWindow
 		
 		showAll();
 
-	} // this() CONSTRUCTOR
+	} // this()
 	
 		
 	void quitApp(Widget widget)
 	{
-		writeln("Bye.");
+		string exitMessage = "Bye.";
+		
+		writeln(exitMessage);
+		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box
 {
-	// add child object definitions here
+	int globalPadding = 10;
+	// add child object and variable definitions here
 	
 	this()
 	{
-		super(Orientation.VERTICAL, 10);
+		super(Orientation.VERTICAL, globalPadding);
 		
 		// instantiate child objects here
 		
@@ -64,5 +68,3 @@ class AppBox : Box
 	} // this()
 
 } // class AppBox
-
-

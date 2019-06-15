@@ -1,14 +1,14 @@
-// using a Box to get more buttons in the window
-// using the Box.add() function
+// using a box to get more buttons in the window, but
+// with the Box.packEnd() function
 
 import std.stdio;
 
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
+import gtk.Box;
 import gtk.Button;
 import gdk.Event;
-import gtk.Box;                                                   // *** NEW ***
 
 void main(string[] args)
 {
@@ -17,7 +17,7 @@ void main(string[] args)
 	Main.init(args);
 	
 	testRigWindow = new TestRigWindow();
-
+	
 	Main.run();
 	
 } // main()
@@ -25,18 +25,17 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Box Example with add()";
-	string unhello = "Good-bye";
-	AddBox addBox;
+	string title = "Test Rig";
+	string soLong = "That's it";
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		addBox = new AddBox();
-		add(addBox);
-
+		PackBox myBox = new PackBox();
+		add(myBox);
+		
 		showAll();
 
 	} // this()
@@ -44,7 +43,7 @@ class TestRigWindow : MainWindow
 	
 	void quitApp()
 	{
-		writeln(unhello);
+		writeln(soLong);
 		
 		Main.quit();
 		
@@ -53,37 +52,36 @@ class TestRigWindow : MainWindow
 } // class TestRigWindow
 
 
-class AddBox : Box
+class PackBox : Box
 {
 	int globalPadding = 5;
-	string[] labels = ["Button 01", "Button 02", "Button 03"];
+	int localPadding = 0;
+	string[] labels = ["First Button", "Second Button", "Third Button"];
 	ActionButton[] buttons;
 	
 	this()
 	{
-		int buttonCount = 0;
+		int countButts = 0;
 		
 		super(Orientation.VERTICAL, globalPadding);
-		// super(Orientation.HORIZONTAL, globalPadding);
-
+		
 		foreach(label; labels)
 		{
 			ActionButton button = new ActionButton(label);
 			buttons ~= button;
-			add(buttons[buttonCount]);
-			buttonCount += 1;
+			packEnd(button, true, true, localPadding);
 		}
-		
+
 	} // this()
 	
-} // class AddBox
+} // class PackBox
 
 
 class ActionButton : Button
 {
-	this(string labelText)
+	this(string buttonLabel)
 	{
-		super(labelText);
+		super(buttonLabel);
 		addOnButtonRelease(&doSomething);
 		
 	} // this()
@@ -91,7 +89,7 @@ class ActionButton : Button
 	
 	bool doSomething(Event e, Widget w)
 	{
-		writeln(getLabel(), " was pressed.");
+		writeln("Button pressed: ", getLabel());
 		
 		return(true);
 		

@@ -10,18 +10,18 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new testRigWindow(args);
+	testRigWindow = new TestRigWindow(args);
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string bye = "Bye, bye.";
@@ -37,7 +37,7 @@ class testRigWindow : MainWindow
 	
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
@@ -48,7 +48,7 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class MyButton : Button
@@ -101,24 +101,25 @@ class MyButton : Button
 	} // onButtonRelease()
 	
 	
-		
 	public bool showArgs(string[] buttonArgs)
 	{
+		int argName = 0;
+		string noArgs = "No arguments were supplied.";
+		
 		foreach(arg; buttonArgs)
 		{
-			if(arg != buttonArgs[0]) // skip arg 0, it's the name of the program
+			if(arg != buttonArgs[argName]) // skip arg 0, it's the name of the program
 			{
 				writeln("\t", arg);
 			}
 			else
 			{
-				writeln("No arguments were supplied.");
+				writeln();
 			}
 		}
 
-		return(false); // This return values does matter. The delegate definition
-							// decides the actual return value. 
-		
+		return(false); // This return values is ignored. The delegate definition
+							// in the constructor decides the actual return value. 
 	} // showArgs()
 
 } // class MyButton

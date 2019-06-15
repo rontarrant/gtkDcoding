@@ -13,50 +13,53 @@ void main(string[] args)
 {
 	Main.init(args);
 	
-	testRigWindow testRigWindow = new testRigWindow();
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
-	string bye = "Bye";
+	string title = "Rotated Button";
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		auto myLayout = new MyLayout();                             // *** NEW ***
-		add(myLayout);                                              // *** NEW ***
+		auto myLayout = new MyLayout();
+		add(myLayout);
 		
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 
 	void quitApp()
 	{
-		writeln(bye);
+		string exitMessage = "Bye";
+
+		writeln(exitMessage);
 		
 		Main.quit();
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
-class MyLayout : Layout                                           // *** NEW ***
+class MyLayout : Layout
 {
+	int xPosition = 10, yPosition = 10;
+	
 	this()
 	{
 		super(null, null);
 
 		RotatedButton rotatedButton = new RotatedButton();
-		put(rotatedButton, 10, 10);
+		put(rotatedButton, xPosition, yPosition);
 		
 	} // this()
 	
@@ -69,17 +72,19 @@ class RotatedButton : Button
 	{
 		super();
 		
-		RotatedLabel rotatedLabel = new RotatedLabel();             // *** NEW ***
+		RotatedLabel rotatedLabel = new RotatedLabel();
 		
 		addOnClicked(delegate void(_) { doSomething(); } );
-		add(rotatedLabel);                                          // *** NEW ***
+		add(rotatedLabel);
 		
 	} // this()
 
 	
-	void doSomething()                                             // *** NEW ***
+	void doSomething()
 	{
-		writeln("Action from a rotated button...");
+		string message = "Action from a rotated button...";
+		
+		writeln(message);
 		
 	} // doSomething()
 	
@@ -92,9 +97,11 @@ class RotatedLabel : Label
 	
 	this()
 	{
+		int angle = 90;
+		
 		super(rotatedText);
 		
-		setAngle(90);
+		setAngle(angle);
 		
 	} // this()
 	

@@ -15,22 +15,22 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow();
+	TestRigWindow testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "A label with a colored background";
+	string title = "A Label with a Colored Background";
 	
 	this()
 	{
 		super(title);
 		
-		RedLabel redLabel = new RedLabel(); // extra spaces at start and end so it doesn't look crowded
+		RedLabel redLabel = new RedLabel();
 		add(redLabel);
 
 		showAll();
@@ -38,20 +38,22 @@ class testRigWindow : MainWindow
 	} // this()
 	
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
-// wrap a widget in an EventBox
-class RedLabel : EventBox                                                       // *** NEW ***
+class RedLabel : EventBox
 {
+	Label label;
+	RGBA redishColor;
+	// extra spaces at start and end so it doesn't look crowded
 	string labelText = "  Label with Red Background  ";
 	
 	this()
 	{
 		super();
-		Label label = new Label(labelText);
-		RGBA redColor = new RGBA(1.0, 0.420, 0.557, 1.0); // 1.000	0.420	0.557
-		overrideBackgroundColor(StateFlags.NORMAL, redColor);
+		label = new Label(labelText);
+		redishColor = new RGBA(1.0, 0.420, 0.557, 1.0);
+		overrideBackgroundColor(StateFlags.NORMAL, redishColor);
 		
 		add(label);
 		

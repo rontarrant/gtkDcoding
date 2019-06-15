@@ -12,10 +12,12 @@ import gdk.Cairo;
 
 void main(string[] args)
 {
-	Main.init(args);
-
-	TestRigWindow testRigWindow = new TestRigWindow("Test Rig");
+	TestRigWindow testRigWindow;
 	
+	Main.init(args);
+    
+	testRigWindow = new TestRigWindow();
+	 
 	Main.run();
 	
 } // main()
@@ -23,9 +25,11 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
+	string title = "Display SVG";
+	
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		setSizeRequest(578, 525);
@@ -47,7 +51,7 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box

@@ -1,4 +1,4 @@
-// Entry widget
+// Disappearing Entry
 
 import std.stdio;
 
@@ -9,23 +9,24 @@ import gtk.Button;
 import gtk.Widget;
 import gtk.Box;
 import gtk.CheckButton;
-import gtk.ToggleButton;                                                        // *** NOTE *** needed for toggle signal
+import gtk.ToggleButton;                // *** NOTE *** needed for toggle signal
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRig = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string titleText = "Disappearing Entry";
-	
 	EntryBox entryBox;
 		
 	this()
@@ -47,20 +48,19 @@ class testRigWindow : MainWindow
 		
 	} // endProgram()
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class EntryBox : Box
 {
 	Entry entry;
 	CheckButton checkButton;
-
-	int padding = 5;
+	int globalPadding = 5;
 	string checkText = "Visible";
 	
 	this()
 	{
-		super(Orientation.VERTICAL, padding);
+		super(Orientation.VERTICAL, globalPadding);
 		
 		entry = new Entry();
 		

@@ -11,16 +11,18 @@ import gdk.Event;
 
 void main(string[] args)
 {
-    Main.init(args);
-
-    testRigWindow testRig = new testRigWindow();
-    
-    Main.run();
+	TestRigWindow testRigWindow;
+	
+	Main.init(args);
+	
+	testRigWindow = new TestRigWindow();
+	
+	Main.run();
     
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Menu Item with a Mnemonic Shortcut Key";
 

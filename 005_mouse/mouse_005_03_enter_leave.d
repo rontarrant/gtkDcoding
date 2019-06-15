@@ -14,37 +14,35 @@ void main(string[] args)
 {
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow();
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
-	string byeBye = "Bye, bye.";
-	string messageStart = "We've experienced ";
+	string title = "Which Signal?";
 	
 	this()
 	{
-		// window
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// make the window sensitive to mouse clicking (any button)
-		addOnEnterNotify(&onEvent);                                 // *** NEW ***
-		addOnLeaveNotify(&onEvent);                                 // *** NEW ***
+		addOnEnterNotify(&onEvent);
+		addOnLeaveNotify(&onEvent);
 		
-		// Show the window and its contents...
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 
 
 	void quitApp()
 	{
+		string byeBye = "Bye, bye.";
+
 		writeln(byeBye);
 		
 		Main.quit();
@@ -52,11 +50,12 @@ class testRigWindow : MainWindow
 	} // quitApp()
 
 
-	public bool onEvent(Event event, Widget widget)                // *** NEW ***
+	public bool onEvent(Event event, Widget widget)
 	{
-		bool value = false;
+		string messageStart = "We've experienced ";
 		string article;
 		
+		// make the articles match the nouns
 		if(event.type() == EventType.ENTER_NOTIFY)
 		{
 			article = "an ";
@@ -68,8 +67,8 @@ class testRigWindow : MainWindow
 		
 		writeln(messageStart, article, event.type(), " event.");
 
-		return(value);
+		return(false);
 		
 	} // onEvent()
 
-} // class testRigWindow
+} // class TestRigWindow

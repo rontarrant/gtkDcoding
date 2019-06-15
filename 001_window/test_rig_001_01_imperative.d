@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// Imperative Test Rig Foundation for Learning GtkD Coding
 
 import std.stdio;
 
@@ -8,11 +8,14 @@ import gtk.Widget;
 
 void main(string[] args)
 {
+	string windowTitle = "Test Rig";
+	string message = "Hello GtkD Imperative World";
+	
 	Main.init(args);
-	MainWindow testRigWindow = new MainWindow("Test Rig");
+	MainWindow testRigWindow = new MainWindow(windowTitle);
 	testRigWindow.addOnDestroy(delegate void(Widget w) { quitApp(); } );
 	
-	writeln("Hello GtkD Imperative");
+	writeln(message);
 
 	// Show the window and its contents...
 	testRigWindow.showAll();
@@ -25,10 +28,12 @@ void main(string[] args)
 
 void quitApp()
 {
+	string exitMessage = "Bye.";
+	
 	// This exists in case we want to do anything
 	// before exiting such as warn the user to
 	// save work.
-	writeln("Bye.");
+	writeln(exitMessage);
 	Main.quit();
 	
 } // quitApp()

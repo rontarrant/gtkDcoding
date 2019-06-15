@@ -7,37 +7,38 @@ import gtk.Main;
 import gtk.Widget;
 import gtk.Button;
 import gdk.Event;
-import gtk.c.types;                                                             // *** NEW ***
-import gdk.Cursor;                                                              // *** NEW ***
+import gtk.c.types;                                               // *** NEW ***
+import gdk.Cursor;                                                // *** NEW ***
 import gtk.Layout;
 
 // Note: CursorType flags are found in gtk.c.types
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
-	string byeBye = "Bye, bye.";
+	MyLayout myLayout;
+	string title = "Change Pointer";
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		// First, let's resize the window for esthetics.
-		setSizeRequest(184, 254);                                                 // *** NEW ***
+		setSizeRequest(184, 254);
 		
-		Layout myLayout = new MyLayout();
+		myLayout = new MyLayout();
 		add(myLayout);
 		
 		showAll();
@@ -47,6 +48,8 @@ class testRigWindow : MainWindow
 
 	void quitApp()
 	{
+		string byeBye = "Bye, bye.";
+
 		writeln(byeBye);
 		
 		Main.quit();
@@ -56,29 +59,31 @@ class testRigWindow : MainWindow
 } // class TextRigWindow
 
 
-class MyLayout : Layout                                           // *** NEW ***
+class MyLayout : Layout
 {
-	int x = 40, y = 20;
+	int x = 40, y = 20, spacing = 80;
 	Widget[] buttons;
+	HandButton handButton;
+	HeartButton heartButton;
+	GumbyButton gumbyButton;
 	
 	this()
 	{
 		super(null, null);
 		
-		// create an array of buttons
-		// and because they're widgets at heart, we can declare the button array
-		// as an array of widgets. We could also have made this an array of buttons,
-		// but it's good to know just how far up the ancestor tree we can go.
-		HandButton handButton = new HandButton();                      // *** NEW ***
-		HeartButton heartButton = new HeartButton();                  // *** NEW ***
-		GumbyButton gumbyButton = new GumbyButton();                  // *** NEW ***
-
-		buttons = [handButton, heartButton, gumbyButton];                // *** NEW ***
+		// Create an array of Buttons and because they're Widgets at heart, we can
+		// define the Button array as an array of Widgets. We could also have made
+		// this an array of Buttons, but it's good to keep this inheritance stuff
+		// in mind.
+		handButton = new HandButton();
+		heartButton = new HeartButton();
+		gumbyButton = new GumbyButton();
+		buttons = [handButton, heartButton, gumbyButton];
 		
 		foreach(button; buttons)
 		{
 			put(button, x, y);
-			y += 80;
+			y += spacing;
 		}
 
 	} // this()
@@ -86,7 +91,7 @@ class MyLayout : Layout                                           // *** NEW ***
 } // class MyLayout
 
 
-class HandButton : Button                                         // *** NEW ***
+class HandButton : Button
 {
 	string labelText = "Hand Over";
 	
@@ -102,30 +107,26 @@ class HandButton : Button                                         // *** NEW ***
 
 	public bool onEnter(Event event, Widget widget)
 	{
-		bool value = false;
-		
 		Cursor myCursor = new Cursor(CursorType.HAND1);
 		setCursor(myCursor);
 
-		return(value);
+		return(false);
 		
 	} // onEnter()
 
 
 	public bool onLeave(Event event, Widget widget)
 	{
-		bool value = false;
-		
 		resetCursor();
 
-		return(value);
+		return(false);
 		
 	} // onLeave()
 
 } // class HandButton
 
 
-class GumbyButton : Button                                        // *** NEW ***
+class GumbyButton : Button
 {
 	string title = "Gumby Over";
 	
@@ -141,30 +142,26 @@ class GumbyButton : Button                                        // *** NEW ***
 
 	public bool onEnter(Event event, Widget widget)
 	{
-		bool value = true;
-		
 		Cursor myCursor = new Cursor(CursorType.GUMBY);
 		setCursor(myCursor);
 
-		return(value);
+		return(true);
 		
 	} // onEnter()
 
 
 	public bool onLeave(Event event, Widget widget)
 	{
-		bool value = true;
-		
 		resetCursor();
 
-		return(value);
+		return(true);
 		
 	} // onLeave()
 
 } // class GumbyButton
 
 
-class HeartButton : Button                                        // *** NEW ***
+class HeartButton : Button
 {
 	string title = "Heart Over";
 	
@@ -180,23 +177,19 @@ class HeartButton : Button                                        // *** NEW ***
 
 	public bool onEnter(Event event, Widget widget)
 	{
-		bool value = false;
-		
 		Cursor myCursor = new Cursor(CursorType.HEART);
 		setCursor(myCursor);
 
-		return(value);
+		return(false);
 		
 	} // onEnter()
 
 
 	public bool onLeave(Event event, Widget widget)
 	{
-		bool value = false;
-		
 		resetCursor();
 
-		return(value);
+		return(false);
 		
 	} // onLeave()
 

@@ -9,22 +9,25 @@ import gtk.Widget;
 
 void main(string[] args)
 {
-	Main.init(args);
-	testRigWindow testRig = new testRigWindow("LevelBar example");
+	TestRigWindow testRigWindow;
 	
-	testRig.showAll();
+	Main.init(args);
+	
+	testRigWindow = new TestRigWindow();
+	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
+	string title = "LevelBar example";
 	LevelBar levelBar;
 	
-	this(string titleText)
+	this()
 	{
-		super(titleText);
+		super(title);
 		addOnDestroy(&endProgram);
 		
 		levelBar = new LevelBar();
@@ -33,6 +36,8 @@ class testRigWindow : MainWindow
 //		levelBar.setHeight(100);
 		
 		add(levelBar);
+		
+		showAll();
 		
 	} // this()
 	
@@ -43,4 +48,4 @@ class testRigWindow : MainWindow
 		
 	} // endProgram()
 	
-} // class testRigWindow
+} // class TestRigWindow

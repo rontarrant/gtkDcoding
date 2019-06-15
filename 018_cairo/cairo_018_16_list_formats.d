@@ -13,16 +13,18 @@ import glib.ListSG;
 
 void main(string[] args)
 {
-	Main.init(args);
-
-	testRigWindow testRigWindow = new testRigWindow();
+	TestRigWindow testRigWindow;
 	
+	Main.init(args);
+    
+	testRigWindow = new TestRigWindow();
+	 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Cairo: List Image Formats";
 	AppBox appBox;
@@ -49,7 +51,7 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box

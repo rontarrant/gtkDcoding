@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// OOP Test Rig Base
 
 import std.stdio;
 
@@ -8,18 +8,18 @@ import gtk.Widget;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string byeBye = "Bye-bye";
@@ -34,7 +34,7 @@ class testRigWindow : MainWindow
 		
 		greeting();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 		
 	void quitApp(Widget widget)
@@ -52,4 +52,4 @@ class testRigWindow : MainWindow
 		
 	} // greeting()
 	
-} // class testRigWindow
+} // class TestRigWindow

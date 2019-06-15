@@ -1,5 +1,5 @@
 // using a box to get more buttons in the window, but
-// with the Box.pack() function
+// with the Box.packStart() function
 
 import std.stdio;
 
@@ -12,18 +12,18 @@ import gdk.Event;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 	
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string soLong = "That's it";
@@ -49,11 +49,13 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class PackBox : Box
 {
+	int globalPadding = 5;
+	int localPadding = 0;
 	string[] labels = ["First Button", "Second Button", "Third Button"];
 	ActionButton[] buttons;
 	
@@ -61,13 +63,13 @@ class PackBox : Box
 	{
 		int countButts = 0;
 		
-		super(Orientation.VERTICAL, 5); // top to bottom, widget spacing: 5
+		super(Orientation.VERTICAL, globalPadding);
 		
 		foreach(label; labels)
 		{
 			ActionButton button = new ActionButton(label);
 			buttons ~= button;
-			packStart(button, true, true, 0);                        // *** NEW ***
+			packStart(button, true, true, localPadding);
 		}
 
 	} // this()

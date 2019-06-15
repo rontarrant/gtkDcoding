@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// Presize the window
 
 import std.stdio;
 
@@ -8,42 +8,44 @@ import gtk.Widget;
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
-	// give control over to gtkD.
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
+	int width = 300, height = 400;
+	string title = "Pre-sized Window";
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
-		setSizeRequest(300, 400);                                   // *** NEW ***
+		setSizeRequest(width, height);                                   // *** NEW ***
 
 		// Show the window and its contents...
 		showAll();
 
 		sayHi();
 
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
 	{
+		string exitMessage = "Bye.";
+		
 		// This exists in case we want to do anything
 		// before exiting such as warn the user to
 		// save work.
-		writeln("Bye.");
+		writeln(exitMessage);
 		Main.quit();
 		
 	} // quitApp()
@@ -51,7 +53,10 @@ class testRigWindow : MainWindow
 
 	void sayHi()
 	{
-		writeln("Hello GtkD World."); // appears in the console, not the GUI
-	}
+		string message = "Hello GtkD World";
+		
+		writeln(message); // appears in the console, not the GUI
+		
+	} // sayHi()
 
-} // class testRigWindow
+} // class TestRigWindow

@@ -10,16 +10,18 @@ import glib.ListSG;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	testRigWindow testRigWin = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Window";
 	RadioBox radioBox;
@@ -36,7 +38,7 @@ class testRigWindow : MainWindow
 		
 	} // this()
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class RadioBox : Box

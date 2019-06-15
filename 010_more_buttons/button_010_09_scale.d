@@ -12,23 +12,26 @@ import gtk.c.types;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow("Test Rig with ScaleButton");
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
+	string title = "Test Rig with ScaleButton";
 	int borderWidth = 10;
 	int width = 250;
 	int height = 175;
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		addOnDestroy(&quitApp);
@@ -50,7 +53,7 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box

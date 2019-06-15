@@ -16,20 +16,23 @@ import gdk.Pixbuf;
 
 void main(string[] args)
 {
-	Main.init(args);
+	TestRigWindow testRigWindow;
 	
-	testRigWindow testRigWindow = new testRigWindow("Test Rig");
-
+	Main.init(args);
+    
+	testRigWindow = new TestRigWindow();
+	 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
+	string title = "MVC Three-column ComboBox"; 
 	AppBox appBox;
 	
-	this(string title)
+	this()
 	{
 		super(title);
 		
@@ -50,7 +53,7 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class AppBox : Box

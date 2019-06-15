@@ -14,18 +14,19 @@ import gdk.Event;                                                 // *** NEW ***
 
 void main(string[] args)
 {
+	string title = "Button in a Window - Inperative";
+	string buttonText = "Label Text";
+	
 	Main.init(args);
-	MainWindow testRigWindow = new MainWindow("Test Rig");
+	MainWindow testRigWindow = new MainWindow(title);
 	testRigWindow.addOnDestroy(delegate void(Widget w) { quitApp(); } );
 	
-	Button button = new Button("Label Text");                      // *** NEW ***
+	Button button = new Button(buttonText);                      // *** NEW ***
 	button.addOnClicked(delegate void(Button b) { quitApp(); });
 	testRigWindow.add(button);
 
-	// Show the window and its contents...
 	testRigWindow.showAll();
 		
-	// give control over to the gtkD .
 	Main.run();
 	
 } // main()
@@ -33,10 +34,10 @@ void main(string[] args)
 
 void quitApp()
 {
-	// This exists in case we want to do anything
-	// before exiting such as warn the user to
-	// save work.
-	writeln("Bye.");
+	string exitMessage = "Bye.";
+	
+	writeln(exitMessage);
+	
 	Main.quit();
 	
 } // quitApp()

@@ -1,4 +1,4 @@
-// Entry widget
+// OOP Entry
 
 import std.stdio;
 
@@ -9,19 +9,20 @@ import gtk.Widget;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 
-	testRigWindow testRig = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string titleText = "Entry example";
-	
 	TextEntry textEntry;
 	
 	this()
@@ -29,7 +30,7 @@ class testRigWindow : MainWindow
 		super(titleText);
 		addOnDestroy(&endProgram);
 		
-		textEntry = new TextEntry("Untitled");
+		textEntry = new TextEntry();
 		add(textEntry);
 
 		showAll();
@@ -43,17 +44,15 @@ class testRigWindow : MainWindow
 		
 	} // endProgram()
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class TextEntry : Entry
 {
-	string predefinedText;
+	string predefinedText = "Untitled";
 	
-	this(string text)
+	this()
 	{
-		predefinedText = text;
-		
 		super(predefinedText);
 		
 	} // this()

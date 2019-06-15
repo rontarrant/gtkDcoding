@@ -9,65 +9,68 @@ import gtk.Main;
 import gtk.Widget;
 import gtk.Button;
 import gdk.Event;
-import gtk.c.types;                                               // *** NEW ***
 
 // Note: EventType flags are found in gtk.c.types
 
 void main(string[] args)
 {
-	// initialization & creation
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
 	
-	testRigWindow testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
-	string byeBye = "Bye, bye";
+	string title = "Tracking Mouse Stuff";
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
-		// make the window sensitive to mouse clicking (any button)
-		addOnButtonPress(&onButtonPress);                           // *** NEW ***
-		addOnButtonRelease(&onButtonRelease);                       // *** NEW ***
-		addOnMotionNotify(&onMotion);                               // *** NEW ***
-		addOnScroll(&onScroll);                                     // *** NEW ***
+		// make the window sensitive to mouse clicking and other stuff
+		addOnButtonPress(&onButtonPress);
+		addOnButtonRelease(&onButtonRelease);
+		addOnMotionNotify(&onMotion);
+		addOnScroll(&onScroll);
 	
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 
 
-	public bool onScroll(Event event, Widget widget)               // *** NEW ***
+	public bool onScroll(Event event, Widget widget)
 	{
-		bool value = false; // assume no scrolling
+		bool returnValue = false; // assume no scrolling
 		string[] scrollMessage = ["scrolling up", "scrolling down"];
 		
 		if(event.scroll.direction == ScrollDirection.DOWN)
 		{
-			value = true;
-			writeln(scrollMessage[ScrollDirection.DOWN], "..."); // this implies that ScrollDirection.DOWN = 0
+			returnValue = true;
+			
+			// this implies that ScrollDirection.DOWN = 0
+			writeln(scrollMessage[ScrollDirection.DOWN], "...");
 		}
 		else if(event.scroll.direction == ScrollDirection.UP)
 		{
-			value = true;
-			writeln(scrollMessage[ScrollDirection.UP], "..."); // this implies that ScrollDirection.UP = 1
+			returnValue = true;
+
+			// this implies that ScrollDirection.UP = 1
+			writeln(scrollMessage[ScrollDirection.UP], "...");
 		}
 
-		return(value);
+		return(returnValue);
 
 	} // onScroll()
 	
 
-	public bool onMotion(Event event, Widget widget)               // *** NEW ***
+	public bool onMotion(Event event, Widget widget)
 	{
 		if(event.type == EventType.MOTION_NOTIFY)
 		{
@@ -79,9 +82,9 @@ class testRigWindow : MainWindow
 	} // onMotion()
 		
 	
-	public bool onButtonPress(Event event, Widget widget)          // *** NEW ***
+	public bool onButtonPress(Event event, Widget widget)
 	{
-		bool value = false;
+		bool returnValue = false;
 		
 		if(event.type == EventType.BUTTON_PRESS)
 		{
@@ -89,17 +92,17 @@ class testRigWindow : MainWindow
 
 			mousePress(buttonEvent.button);
 
-			value = true;
+			returnValue = true;
 		}
 
-		return(value);
+		return(returnValue);
 		
 	} // onButtonPress()
 
 
 	public bool onButtonRelease(Event event, Widget widget)
 	{
-		bool value = false;
+		bool returnValue = false;
 		
 		if(event.type == EventType.BUTTON_RELEASE)
 		{
@@ -107,10 +110,10 @@ class testRigWindow : MainWindow
 
 			mouseRelease(buttonEvent.button);
 
-			value = true;
+			returnValue = true;
 		}
 
-		return(value);
+		return(returnValue);
 		
 	} // onButtonRelease()
 
@@ -122,7 +125,7 @@ class testRigWindow : MainWindow
 	} // mousePress()
 
 
-	void mouseRelease(uint buttonNumber)                                            // *** NEW ***
+	void mouseRelease(uint buttonNumber)
 	{
 		writeln("Button #", buttonNumber, " was released.");
 		
@@ -131,10 +134,12 @@ class testRigWindow : MainWindow
 
 	void quitApp()
 	{
+		string byeBye = "Bye, bye";
+
 		writeln(byeBye);
 		
 		Main.quit();
 
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow

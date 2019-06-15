@@ -9,26 +9,26 @@ import gtk.Widget;
 import gtk.Box;
 import gtk.Button;
 import gdk.Event;
-import gtk.CheckButton;                                                         // *** NEW ***
+import gtk.CheckButton;                                           // *** NEW ***
 
 void main(string[] args)
 {
-	testRigWindow testRigWindow;
+	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
-	testRigWindow = new testRigWindow();
+	testRigWindow = new TestRigWindow();
 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	ObservationBox observationBox;
 	
-	string title = "Test Rig: CheckButton";
+	string title = "CheckButton with Observer";
 	string byeBye = "Bye, y'all.";
 	
 	this()
@@ -41,7 +41,7 @@ class testRigWindow : MainWindow
 
 		showAll();
 
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	void quitApp()
@@ -51,17 +51,21 @@ class testRigWindow : MainWindow
 		
 	} // quitApp()
 
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class ObservationBox : Box
 {
+	CheckButton switchOutputButton;
+	ObserverButton actionButton;
+	string checkButtonText = "Switch Output";
+	
 	this()
 	{
 		super(Orientation.VERTICAL, 5);
 
-		CheckButton switchOutputButton = new CheckButton("Switch Output");
-		ObserverButton actionButton = new ObserverButton(switchOutputButton);
+		switchOutputButton = new CheckButton(checkButtonText);
+		actionButton = new ObserverButton(switchOutputButton);
 		
 		add(actionButton);
 		add(switchOutputButton);
@@ -73,24 +77,26 @@ class ObservationBox : Box
 
 class ObserverButton : Button
 {
+	private:
 	string label = "Take Action";
-	
-	string standardMessage = "Droids? We don't need no stinking droids!";
-	string switchMessage = "These aren't the droids you're looking for.";
-	CheckButton checkButton;
+	CheckButton _checkButton;
 
-	this(CheckButton extCheckButton)
+	public:
+	this(CheckButton checkButton)
 	{
 		super(label);
 		addOnClicked(&doSomething);
-		checkButton = extCheckButton;
+		_checkButton = checkButton;
 		
 	} // this()
 	
 	
 	void doSomething(Button b)
 	{
-		if(checkButton.getActive() == true)
+		string standardMessage = "Droids? We don't need no stinking droids!";
+		string switchMessage = "These aren't the droids you're looking for.";
+
+		if(_checkButton.getActive() == true)
 		{
 			writeln(switchMessage);
 		}
@@ -101,5 +107,4 @@ class ObserverButton : Button
 		
 	} // doSomething()
 	
-} // class ObservationButton
-
+} // class ObserverButton

@@ -15,17 +15,16 @@ void main(string[] args)
 	// initialization & creation
 	Main.init(args);
 
-	testRigWindow testRigWindow = new testRigWindow();
+	TestRigWindow testRigWindow = new TestRigWindow();
 	
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
-	string byeBye = "Good-bye";
+	string title = "Mouse Motion";
 	
 	this()
 	{
@@ -33,15 +32,17 @@ class testRigWindow : MainWindow
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		
 		// make the callback sensitive to mouse movement
-		addOnMotionNotify(&onMotion);                                             // *** NEW ***
+		addOnMotionNotify(&onMotion);
 		
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 
 
 	void quitApp()
 	{
+		string byeBye = "Good-bye";
+
 		writeln(byeBye);
 		
 		Main.quit();
@@ -49,7 +50,7 @@ class testRigWindow : MainWindow
 	} // quitApp()
 
 
-	public bool onMotion(Event event, Widget widget)                             // *** NEW ***
+	public bool onMotion(Event event, Widget widget)
 	{
 		// make sure we're not reacting to the wrong event
 		if(event.type == EventType.MOTION_NOTIFY)
@@ -61,4 +62,4 @@ class testRigWindow : MainWindow
 		
 	} // onMotion()
 
-} // class testRigWindow
+} // class TestRigWindow

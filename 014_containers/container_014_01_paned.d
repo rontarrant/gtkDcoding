@@ -11,16 +11,18 @@ import gdk.Event;
 
 void main(string[] args)
 {
+	TestRigWindow testRigWindow;
+	
 	Main.init(args);
-	
-	testRigWindow testRigWindow = new testRigWindow();
-	
+    
+	testRigWindow = new TestRigWindow();
+	 
 	Main.run();
 	
 } // main()
 
 
-class testRigWindow : MainWindow
+class TestRigWindow : MainWindow
 {
 	string title = "Test Rig";
 	string byeBye = "Bye-bye";
@@ -57,7 +59,7 @@ class testRigWindow : MainWindow
 		
 	} // greeting()
 	
-} // class testRigWindow
+} // class TestRigWindow
 
 
 class SideBySide : Paned
