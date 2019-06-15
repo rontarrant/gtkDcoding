@@ -66,7 +66,7 @@ Seems complicated, right? Well, the only things we really need to know are:
 - the `private` keyword will only do its job if this class is in a `module` of its own, and
 - anything we add to this to make it useful goes into the constructor.
 
-So, our `SingletonAccelGroup` class (which you can find in [this example file right here](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/singleton/SingletonAccelGroup.d)) looks like this:
+So, our `SingletonAccelGroup` class (which you can find in [this example file right here](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/singleton/S_AccelGroup.d)) looks like this:
 
 	module SingletonAccelGroup;
 	
