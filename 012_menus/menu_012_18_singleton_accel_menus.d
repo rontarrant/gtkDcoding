@@ -283,7 +283,7 @@ class OpenFileItem : MenuItem
 	{
 		s_AccelGroup = s_AccelGroup.get();
 		super(&doSomething, itemLabel, "activate", false, s_AccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
-		
+		writeln(&s_AccelGroup);
 	} // this()
 	
 	
