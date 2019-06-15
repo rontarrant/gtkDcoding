@@ -8,7 +8,7 @@ author: Ron Tarrant
 
 ## 0034 – Menus IX - AccelGroup as a Singleton
 
-Something about how the `AccelGroup` was used in *gtkDcoding* blog post #32 ([*Adding Accelerator Keys to MenuItems*](http://gtkdcoding.com/2019/05/03/0032-accelerator_keys.html)) needs to be addressed. It’s this business of instantiating the `AccelGroup` at the top level (ie. `TestRigWindow`) and then passing it down through multiple layers of other UI objects until it gets to where it’s actually needed, in the `MenuItem` objects.
+Something about how the `AccelGroup` was used in *gtkDcoding* blog post #32 ([*Adding Accelerator Keys to MenuItems*](http://gtkdcoding.com/2019/05/03/0032-accelerator-keys.html)) needs to be addressed. It’s this business of instantiating the `AccelGroup` at the top level (ie. `TestRigWindow`) and then passing it down through multiple layers of other UI objects until it gets to where it’s actually needed, in the `MenuItem` objects.
 
 Not that there’s anything technically wrong with passing the AccelGroup object down like that. It works, so why fix it?
 
