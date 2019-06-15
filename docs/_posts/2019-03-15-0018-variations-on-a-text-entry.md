@@ -31,14 +31,14 @@ Sometimes, you may want the user to enter text, but once it’s entered, you don
 
 	class EntryBox : Box
 	{
-		int padding = 5;
+		int globalPadding = 5;
 		Entry entry;
 		CheckButton checkButton;
 		string checkText = "Editable";
 		
 		this()
 		{
-			super(Orientation.VERTICAL, padding);
+			super(Orientation.VERTICAL, globalPadding);
 			entry = new Entry();
 			entry.setEditable(false);
 			
@@ -79,7 +79,7 @@ Now let’s think about what else text `Entry` widgets are used for. One thing t
 
 	this()
 	{
-		super(Orientation.VERTICAL, padding);
+		super(Orientation.VERTICAL, globalPadding);
 
 		usernameEntry = new Entry();
 		passwordEntry = new Entry();
@@ -95,6 +95,7 @@ Now let’s think about what else text `Entry` widgets are used for. One thing t
 		
 	} // this()
 
+
 We set `Visibility` to `false` for the `Password` `Entry` and then in the callback function `passwordVisibility()`, we make allowances for finding either `true` or `false`:
 
 	void passwordVisibility(ToggleButton button)
@@ -105,11 +106,11 @@ We set `Visibility` to `false` for the `Password` `Entry` and then in the callba
 		
 		if(button.getActive() == true)
 		{
-			messageEnd = " I can shoulder surf your password.";
+			messageEnd = " I can shoulder-surf your password.";
 		}
 		else
 		{
-			messageEnd = " I canNOT shoulder surf your password.";
+			messageEnd = " I canNOT shoulder-surf your password.";
 		}
 		
 		passwordEntry.setVisibility(button.getActive());

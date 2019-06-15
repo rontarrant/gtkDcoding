@@ -6,7 +6,7 @@ author: Ron Tarrant
 
 ---
 
-## 0044 – Dialogs X - Custom `Dialog`s (3 of 3) - A Fancy *Content Area*
+## 0044 – Dialogs X - Custom Dialogs (3 of 3) - A Fancy Content Area
 
 A reminder...
 
@@ -14,7 +14,7 @@ This collection of topics is split up like this:
 
 - *[Part I](http://gtkdcoding.com/2019/06/07/0042-custom-dialog-i.html)* (the time before last) deals with how to create an aesthetically-pleasing widget layout for a custom `Dialog`,
 - *[Part II](http://gtkdcoding.com/2019/06/11/0043-custom-dialog-ii.html)* (last time) covers user interaction, and
-- *[Part III](http://gtkdcoding.com/2019/06/11/0044-custom-dialog-iii.html)* (this time) brings it all together.
+- *Part III* (this time) brings it all together.
 
 As promised, this time around we talk about the `Dialog`’s *Content Area* and wrap up by rolling our own *Action Area* and *Content Area* together into a fully-fledged custom `Dialog`. However, since we went over *Action Area* stuff last time and this example is only different in a few small way, I’m not going to discuss it here except to say:
 

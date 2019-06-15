@@ -51,7 +51,7 @@ I made an arbitrary change to how the buttons are added. Because there are three
 		foreach(button; buttons)
 		{
 			put(button, x, y);
-			y += 80;
+			y += spacing;
 		}
 
 	} // this()
@@ -80,23 +80,19 @@ With minor differences, all three derived button classes are the same, so we’l
 	
 		public bool onEnter(Event event, Widget widget)
 		{
-			bool value = true;
-			
 			Cursor myCursor = new Cursor(CursorType.GUMBY);
 			setCursor(myCursor);
 	
-			return(value);
+			return(true);
 			
 		} // onEnter()
 	
 	
 		public bool onLeave(Event event, Widget widget)
 		{
-			bool value = true;
-			
 			resetCursor();
 	
-			return(value);
+			return(true);
 			
 		} // onLeave()
 	

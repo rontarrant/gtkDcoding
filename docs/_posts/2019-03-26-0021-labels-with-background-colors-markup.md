@@ -22,14 +22,17 @@ There is baggage, however. We need to build a colour from scratch before we enga
 
 	class RedLabel : EventBox
 	{
+		Label label;
+		RGBA redishColor;
+		// extra spaces at start and end so it doesn't look crowded
 		string labelText = "  Label with Red Background  ";
 		
 		this()
 		{
 			super();
-			Label label = new Label(labelText);
-			RGBA redColor = new RGBA(1.0, 0.420, 0.557, 1.0);
-			overrideBackgroundColor(StateFlags.NORMAL, redColor);
+			label = new Label(labelText);
+			redishColor = new RGBA(1.0, 0.420, 0.557, 1.0);
+			overrideBackgroundColor(StateFlags.NORMAL, redishColor);
 			
 			add(label);
 			
