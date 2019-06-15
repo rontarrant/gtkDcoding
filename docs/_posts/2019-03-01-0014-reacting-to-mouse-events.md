@@ -74,7 +74,7 @@ Notice the function definition. We’re not returning a void, but a Boolean. And
 
 We make sure we’ve actually got a new `Event` to play with, then dig into it to find its type. The only one we want to react to is `BUTTON_PRESS`. And which button was pressed? To find out, we dig a little deeper. Each `Event` carries with it a field identifying whatever bit of hardware was manipulated to cause the event.
 
-All that stuff about a value that’s returned from this function has to do with signal chains which we covered in [blog post #0011 Callback Chains](http://gtkdcoding.com/2019/02/12/0011-callback-chains.html). Once the event has been handled, we tell `Main` we’re done handling signals and back away.
+All that stuff about a value that’s returned from this function has to do with signal chains which we covered in [blog post #0011 Callback Chains](http://gtkdcoding.com/2019/02/19/0011-callback-chains.html). Once the event has been handled, we tell `Main` we’re done handling signals and back away.
 
 ### But, wait, There’s more...
 
