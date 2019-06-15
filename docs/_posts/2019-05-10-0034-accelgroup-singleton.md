@@ -28,7 +28,7 @@ There’s a lot of discussion about whether or not the singleton should be taken
 
 Be aware, however, that we don’t instantiate in the normal way. But let's not get ahead of ourselves. We'll start with just the naked singleton and go from there.
 
-What we’re starting with to build our `AccelGroupSingleton` class can be found in [the D Wiki Low-lock Singleton example]( https://wiki.dlang.org/Low-Lock_Singleton_Pattern). And here’s what it looks like:
+What we’re starting with to build our `S_AccelGroup` class can be found in [the D Wiki Low-lock Singleton example]( https://wiki.dlang.org/Low-Lock_Singleton_Pattern). And here’s what the basic class looks like:
 
 	class MySingleton
 	{
@@ -66,42 +66,42 @@ Seems complicated, right? Well, the only things we really need to know are:
 - the `private` keyword will only do its job if this class is in a `module` of its own, and
 - anything we add to this to make it useful goes into the constructor.
 
-So, our `SingletonAccelGroup` class (which you can find in [this example file right here](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/singleton/S_AccelGroup.d)) looks like this:
+So, after a few naming convention changes, our `S_AccelGroup` class (which you can find in [this example file right here](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/singleton/S_AccelGroup.d)) looks like this:
 
-	module SingletonAccelGroup;
-	
+	module singleton.S_AccelGroup;
+
 	import std.stdio;
 	
 	import gtk.AccelGroup;
 	
-	class SingletonAccelGroup : AccelGroup
+	class S_AccelGroup : AccelGroup
 	{
 		private:
 		// Cache instantiation flag in thread-local bool
 		static bool instantiated_;
 	
 		// Thread global
-		__gshared SingletonAccelGroup instance_;
+		__gshared S_AccelGroup instance_;
 	
 		this()
 		{
 			super();
-			
+	
 		} // this()
 	
 		public:
 		
-		static SingletonAccelGroup get()
+		static S_AccelGroup get()
 		{
 			write("getting...");
 			
 			if(!instantiated_)
 			{
-				synchronized(SingletonAccelGroup.classinfo)
+				synchronized(S_AccelGroup.classinfo)
 				{
 					if(!instance_)
 					{
-						instance_ = new SingletonAccelGroup();
+						instance_ = new S_AccelGroup();
 						writeln("creating");
 					}
 	
@@ -117,21 +117,22 @@ So, our `SingletonAccelGroup` class (which you can find in [this example file ri
 			
 		} // get()
 	
-	} // class SingletonAccelGroup
+	} // class S_AccelGroup
+
 
 *Note: If you use this locally, don't forget to put this in its own sub-directory.*
  
 Right at the top, we have:
 
-	module SingletonAccelGroup;
+	module S_AccelGroup;
 
 Technically, you could put a similar statement at the top of every one of your `.d` files, turning them all into modules and it wouldn't really change anything for that code file, per se. What it does is give us a way to import it for those times when we want the code from one file available to another.
 
 *Note that the `module` statement has to be the first statement in the file. You can have a comment above it, but nothing else.*
 
-The file needs to be saved as `SingletonAccelGroup.d` (the `module` name plus a `.d` extension) and just for kicks, I put it in its own sub-directory which means the path and filename in relation to our dev directory is:
+The file needs to be saved as `S_AccelGroup.d` (the `module` name plus a `.d` extension) and just for kicks, I put it in its own sub-directory which means the path and filename in relation to our dev directory is:
 
-	./singleton/SingletonAccelGroup.d
+	./singleton/S_AccelGroup.d
 
 Hold that thought as we go into the next section...
 
@@ -139,22 +140,22 @@ Hold that thought as we go into the next section...
 
 To bring the external file into the mix for compiling/linking, we need an `import` statement which you’ll find near the top of [today’s primary code file](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_18_singleton_accel_menus.d). Any time the file you want to import is in a sub-directory, replace the slash (`/`) with a dot (`.`) in your import statement... like this:
 
-	import singleton.SingletonAccelGroup;
+	import singleton.S_AccelGroup;
 
 If I'd put this file in the same directory as our primary `.d` file, the import statement would look like this instead:
 
-	import SingletonAccelGroup;
+	import S_AccelGroup;
 
 Okay, now you can let go of that thought from the previous section.
 
-### Attaching the `SingeltonAccelGroup` to the `MainWindow`
+### Attaching the `S_AccelGroup` to the `MainWindow`
 
 Just like with the stock `AccelGroup`, we need to attach it to the `MainWindow` which means our `TestRigWindow` class now looks like this:
 
 	class TestRigWindow : MainWindow
 	{
 		string title = "Multiple Menus Example";
-		SingletonAccelGroup singletonAccelGroup;
+		S_AccelGroup s_AccelGroup;
 	
 		this()
 		{
@@ -162,8 +163,8 @@ Just like with the stock `AccelGroup`, we need to attach it to the `MainWindow` 
 			setDefaultSize(640, 480);
 			addOnDestroy(&quitApp);
 	
-			singletonAccelGroup = singletonAccelGroup.get();
-			addAccelGroup(singletonAccelGroup);
+			s_AccelGroup = s_AccelGroup.get();
+			addAccelGroup(s_AccelGroup);
 	
 			AppBox appBox = new AppBox();
 			add(appBox);
@@ -185,8 +186,8 @@ Just like with the stock `AccelGroup`, we need to attach it to the `MainWindow` 
 
 I’ll draw your attention to three things here:
 
-- the definition of `singletonAccelGroup` near the top,
-- the constructor where we call `singletonAccelGroup.get()` to instantiate, and
+- the definition of `s_AccelGroup` near the top,
+- the constructor where we call `s_AccelGroup.get()` to instantiate, and
 - also in the constructor, where we `addAccelGroup()` to attach it to the window.
 
 ### The Other End of Things: Inside the `MenuItem` Class
@@ -197,12 +198,12 @@ For each `MenuItem` that has a hotkey, we rewrite its definition to look similar
 	{
 		string itemLabel = "New";
 		char accelKey = 'n';
-		SingletonAccelGroup singletonAccelGroup;
+		S_AccelGroup s_AccelGroup;
 		   
 		this()
 		{
-			singletonAccelGroup = singletonAccelGroup.get();
-			super(&doSomething, itemLabel, "activate", false, singletonAccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+			s_AccelGroup = s_AccelGroup.get();
+			super(&doSomething, itemLabel, "activate", false, s_AccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 			
 		} // this()
 		
@@ -215,15 +216,15 @@ For each `MenuItem` that has a hotkey, we rewrite its definition to look similar
 		
 	} // class NewFileItem
 
-Again, we need three statements to set up and use the `SingletonAccelGroup`:
+Again, we need three statements to set up and use the `S_AccelGroup`:
 
 - the declaration near the top,
-- the call to `singletonAccelGroup.get()` in the constructor, and
+- the call to `s_AccelGroup.get()` in the constructor, and
 - the fifth argument that's passed to `super()`.
 
-And if you want to prove to yourself that all these `MenuItem`s really do use the same `SingletonAccelGroup`, add this line as the last statement in the constructors of a few of the `MenuItem`s:
+And if you want to prove to yourself that all these `MenuItem`s really do use the same `S_AccelGroup`, add this line as the last statement in the constructors of a few of the `MenuItem`s:
 
-	writeln(&singletonAccelGroup);
+	writeln(&s_AccelGroup);
 
 The address echoed to the terminal will be the same for each.
 
