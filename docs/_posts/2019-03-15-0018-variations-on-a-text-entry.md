@@ -118,6 +118,6 @@ We set `Visibility` to `false` for the `Password` `Entry` and then in the callba
 		
 	} // passwordVisibility()
 
-And just before the callback finishes up, we cobble together a message for the user about computer security. I could tell you what the messages say, but I think it’ll be more educational if you compile [the code](https://github.com/rontarrant/gtkDcoding/blob/master/006_text/text_006_03_obfuscated_entry.d) and run it yourself.
+And just before the callback finishes up, we cobble together a message for the user about computer security. I could tell you what the messages say, but I think it’ll be more educational if you compile [the code for the obfuscated Entry example](https://github.com/rontarrant/gtkDcoding/blob/master/006_text/text_006_03_obfuscated_entry.d) and run it yourself.
 
 Next time, we’ll continue with two more variations on the `Entry` widget. Until then, happy D-coding and may the `Widgets` find room in your top pocket.
