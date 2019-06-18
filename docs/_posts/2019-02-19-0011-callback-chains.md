@@ -1,5 +1,5 @@
 ---
-title: 0011 - Callback Chains
+topic: button
 layout: post
 description: How GTK signals are chained together - a D language tutorial.
 author: Ron Tarrant
@@ -146,3 +146,13 @@ The `WatchedButton` class, derived as it is from a `ToggleButton`, is almost ide
 ### Are we done yet?
 
 Yeah, for now, I think so. Happy D-coding and may the moon shine bright on your widgets tonight.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/02/15/0010-checkbutton.html">Previous: CheckButton</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/02/22/0012-layout-containers.html">Next: Layout Containers</a>
+</div>
+<BR>

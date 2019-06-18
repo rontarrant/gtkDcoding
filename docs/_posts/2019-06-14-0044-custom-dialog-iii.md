@@ -1,12 +1,12 @@
 ---
-title: 0044 – Dialogs X - Custom Dialogs (3 of 3) - A Fancy Content Area
+topic: dialog
 layout: post
 description: How to layout the Content Area of a custom GTK Dialog using basic design principals - a D-language tutorial.
 author: Ron Tarrant
 
 ---
 
-## 0044 – Dialogs X - Custom Dialogs (3 of 3) - A Fancy Content Area
+# 0044: Dialogs X - Custom Dialogs (3 of 3)<BR> - A Fancy Content Area
 
 A reminder...
 
@@ -161,3 +161,13 @@ And that is it! You now have all the information you need to:
 May you have as much fun creating your own custom `Dialog`s as I did coming up with these examples and writing this mini-series around them.
 
 And remember: *semper ubi sub-ubi*.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/06/11/0043-custom-dialog-ii.html">Previous: Dialog Action Area</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/06/18/0045-split-a-window-into-panes.html">Next: Split a Window into Panes</a>
+</div>
+<BR>

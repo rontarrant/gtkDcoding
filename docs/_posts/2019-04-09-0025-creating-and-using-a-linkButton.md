@@ -1,5 +1,5 @@
 ---
-title: 0025 - Creating and Using a LinkButton
+topic: button
 layout: post
 description: How to use a GTK LinkButton, with and without a visible URL - a D language tutorial.
 author: Ron Tarrant
@@ -96,3 +96,12 @@ On the downside, the `LinkButton` spits out a warning to the *Command Prompt* wi
 
 And that’s it for this time, a short post for a short day. Come on back again sometime.
 
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/04/05/0024-switch-and-light-switch.html">Previous: Switch</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/04/12/0026-menu-basics.html">Next: Menu Basics</a>
+</div>
+<BR>

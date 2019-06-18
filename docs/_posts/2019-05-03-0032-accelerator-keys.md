@@ -1,5 +1,5 @@
 ---
-title: 0032 – Menus VII - Adding Accelerator Keys to MenuItems
+topic: menu
 layout: post
 description: How to add Accelerator keys to a GTK MenuItem - a D language tutorial.
 author: Ron Tarrant
@@ -177,3 +177,13 @@ So, yeah, it takes a bit of extra coding to make these work:
 But your users will thank you. And speaking of thanks...
 
 Thanks for reading and do please come back for the next post. Until then...
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/04/30/0031-imagemenuitem.html">Previous: ImageMenuItem</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/05/07/0033-fake-image-menu-and-accel.html">Next: Fake ImageMenuItem</a>
+</div>
+<BR>

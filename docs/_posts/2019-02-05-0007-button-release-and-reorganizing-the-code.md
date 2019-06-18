@@ -1,12 +1,12 @@
 ---
-title: 0007 – Button Release & Reorganizing the Code
+topic: button
 layout: post
 description: How to use a GTK Button's onRelease signal - a D language tutorial.
 author: Ron Tarrant
 
 ---
 
-## 0007 – Button Release & Reorganizing the Code
+# 0007 – Button Release & Reorganizing the Code
 
 We’ll be making small but significant changes to the code this time around. The last time we looked at buttons, ([Post 0004](http://gtkdcoding.com/2019/01/25/0004-oop-button.html)) we built everything from within the `main()` function. Further, we used the `onClicked` signal to get our button to do something.
 
@@ -14,7 +14,7 @@ This time around, we’ll be building the button from within the test rig class 
 
 [Here’s the full code file](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_05_release.d).
 
-### Changes in main()
+## Changes in main()
 
 Take a look at the main function:
 
@@ -32,7 +32,7 @@ Previously, the window’s title was defined at the top of `main()` and passed i
 
 And you may also notice that we don’t even do a `testRigWindow.showAll()` here. It, too, has been moved inside the `TestRigWindow` class.
 
-### Changes in the `TestRigWindow` Class
+## Changes in the `TestRigWindow` Class
 
 And if all you looked at was the `main()` function, you might be led to believe this example didn’t do much. So, now let’s look at the `TestRigWindow` class:
 
@@ -77,15 +77,15 @@ So now all operations appear in the most appropriate places:
 - the `TestRigWindow` class contains all data and functions associated with it, no more, no less, and
 - (when we get to it) it’s same for the `MyButton` class.
 
-#### Different Signal for the Window’s Close Button
+### Different Signal for the Window’s Close Button
 
 We saw this approach to hooking up the close button back in the first blog entry and I talked about it a bit in [blog entry #0001](http://gtkdcoding.com/2019/01/15/0001-imperative-test-rig.html). It’s used here simply to keep us (me, mostly) from falling into a rut and as a reminder of how using it means defining the callback in a slightly different way. (Hint: look at the `quitApp()` definition with an eye toward counting arguments.)
 
-#### Initializing the Button
+### Initializing the Button
 
 And of course, the button is created here. Let’s move on.
 
-### The `MyButton` Class
+## The `MyButton` Class
 
 Here we go:
 
@@ -118,8 +118,17 @@ The callback now has two arguments, an event and a widget. Remember that widget 
 
 The event argument gives us access to a bunch of interesting stuff, but since the word count is already getting up there, we’ll talk about that in a later post. For now, just know there’s more than one signal we can handle with a callback and if we need access to the raw event that triggers the callback, that’ll be possible, too.
 
-### Conclusion
+## Conclusion
 
 Here we are at the end of another post. We covered a few interesting things here like reorganizing the code in a full-blown OOP style, hooking up a new signal, and reorganizing the code. Now I realize that points one and three are the same, but they're so important, I mentioned them twice (paraphrasing a joke from Red Dwarf).
 
 And that’s all for now. Be with them widgets and happy D-coding.
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/02/01/0006-position-a-window.html">Previous: Position a Window</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/02/08/0008-callbacks.html">Next: Callbacks</a>
+</div>
+<BR>

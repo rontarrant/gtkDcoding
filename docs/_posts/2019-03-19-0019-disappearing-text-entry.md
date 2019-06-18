@@ -1,5 +1,5 @@
 ---
-title: 0019 - Disappearing Entry Text and Font Selection
+topic: text
 layout: post
 description: How to make a GTK Entry widget disappear and how to use the FontButton - a D language tutorial.
 author: Ron Tarrant
@@ -74,3 +74,12 @@ And that’s two down.
 
 Next time, I’ll introduce you to images on buttons and how to swap them. Until then, happy D-coding and may you find a less tired cliché than I have in other blog posts.
 
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/03/15/0018-variations-on-a-text-entry.html">Previous: Text Entry Variations</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/03/22/0020-image-buttons.html">Next: Image Buttons</a>
+</div>
+<BR>

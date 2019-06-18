@@ -1,5 +1,5 @@
 ---
-title: 0033 – Menus VIII - An Image, a Label and an AccelKey
+topic: menu
 layout: post
 description: How to fake a GTK ImageMenuItem - a D language tutorial.
 author: Ron Tarrant
@@ -150,3 +150,13 @@ I'm going to come clean, here. I didn't come up with the idea for this code. The
 And that just about sums up today’s exploration of accelerator keys and imagery on menus. Be kind to each other and next time we’ll talk about a little *D*-centric OOP trick we can use so we don't have to pass the `AccelGroup` down from the `Window` object through all those levels to get it to where it's needed in the `MenuItem` objects.
 
 Until then...
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/05/03/0032-accelerator-keys.html">Previous: Accelerator Keys</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/05/10/0034-accelgroup-singleton.html">Next: AccelGroup Singleton</a>
+</div>
+<BR>

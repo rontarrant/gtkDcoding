@@ -1,5 +1,5 @@
 ---
-title: 0042 – Dialogs VIII - Custom Dialogs (1 of 3) - Aesthetics of the Content Area
+topic: dialog
 layout: post
 description: How to build an aesthetically-pleasing layout for the content area of a custom GTK Dialog - a D-language tutorial.
 author: Ron Tarrant
@@ -270,3 +270,13 @@ And that’s it for this time. Far from being an exhaustive or even comprehensiv
 Neither be stingy nor overzealous with border width or the bottom margin. Use glossy print magazine page layouts as guides to this whole space-around-elements thing.
 
 See you next time for *Part II*.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/06/04/0041-colorchooserdialog.html">Previous: ColorChooserDialog</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/06/11/0043-custom-dialog-ii.html">Next: Dialog Action Area</a>
+</div>
+<BR>

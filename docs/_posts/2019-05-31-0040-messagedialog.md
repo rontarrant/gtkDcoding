@@ -1,5 +1,5 @@
 ---
-title: 0040 – Dialogs VI - The MessageDialog
+topic: dialog
 layout: post
 description: Using a standard GTK MessageDialog; we also cover enum flag locations and inherited functions - a D-language tutorial.
 author: Ron Tarrant
@@ -135,3 +135,13 @@ And `Bin` inherits from `Container`, etc., etc. Thus you can trace your way back
 And that’s it for yet another episode of *gtkDcoding*. Tune in next time when we’ll get into something I’m sure will wow you just as much as everything we covered today.
 
 Bye, now.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/05/28/0039-file-save-as-dialog.html">Previous: SaveAs Dialog</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/06/04/0041-colorchooserdialog.html">Next: ColorChooserDialog</a>
+</div>
+<BR>

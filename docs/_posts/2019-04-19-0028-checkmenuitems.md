@@ -1,5 +1,5 @@
 ---
-title: 0028 – Menus III - CheckMenuItems
+topic: menu
 layout: post
 description: How to use a GTK CheckMenuItem - a D language tutorial.
 author: Ron Tarrant
@@ -217,3 +217,13 @@ As mentioned above in the section on The `ObservedFeaturesList` object, this fun
 Next time, we’ll do pretty much the same thing except with `RadioMenuItem`s. However, the mutual-exclusivity of `RadioMenuItem`s demands a different approach in a few areas.
 
 Until then, happy coding, happy hunting, happy birthday, or happy New Year, whatever’s your poison.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/04/16/0027-mnemonic-shortcut-key.html">Previous: Mnemonics</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/04/23/0029-radiomenuitem.html">Next: RadioMenuItem</a>
+</div>
+<BR>

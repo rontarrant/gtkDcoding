@@ -1,21 +1,25 @@
 ---
-title: 0000 - Introduction to GtkDcoding
+topic: odd
 layout: post
 description: An introduction to GTK 3 and how it can be used to create Graphical User Interfaces (GUI) for applications - a D language tutorial.
 author: Ron Tarrant
 ---
 
-## 0000 – Introduction to gtkDcoding
+# 0000: Introduction to GtkDcoding
 
-Where All This is Coming From…
+*Where All This is Coming From…*
 
 Ever since the heyday of 8-bit computers and *Microsoft BASIC* — which was available on almost every one of them — programmers  have been pursuing the goal of cross-platform development… write once, compile for m/any. These days, there’s *Java* and *Electron* if you’re so inclined, but I prefer something that compiles to a native executable using a single programming language. When I found *D*, I realized I might just have found what I was looking for.
+
+<img class="right" src="/images/test_rig_000_01_imperative.png" alt="Me" style="width: 150px; height: 172px;">
 
 *GtkD* is a wrapper for *GTK+*, a GUI toolkit originally from the world of Linux, an almost-POSIX-compliant OS, but now available across a number of operating systems. That pretty much makes it perfect for my intentions. By learning how to use a single language compiler (*dmd2*) I can build and run applications on *Windows*, *Linux*, *Mac*, and *FreeBSD*. With *GTK+* thrown in, we’re looking at a single-code-base solution to cross-platform development.
 
 I’ve been writing code in more than a dozen languages since 1985 and I’ve also worked with *GTK+* in some of those languages, but I’m coming into this as a *D* rookie. This blog is my exploration of *D* and *GtkD* as I work out how to code various widgets and build a thorough understanding of it all.
 
-*D* incorporates a handful of paradigms:
+## Why D?
+
+The third language I learned back in the day was *C* and I fell in love with its power and elegance. Along the way, I also grew fond of curly braces—although I can't say why. *D*, being a descendant of *C*, drives right up my street and since *D* incorporates a handful of paradigms, it's even more appealing:
 
 - imperative,
 - OOP,
@@ -24,13 +28,13 @@ I’ve been writing code in more than a dozen languages since 1985 and I’ve al
 - parallel, and
 - concurrent, but…
 
-I’ll be concentrating on object-oriented development for the most part. I’ll start with a few imperative examples, but then it’ll be OOP all the way.
+I’m a sucker for object-oriented program development, so I'll be concentrating on that for the most part. I’ll start with a few imperative examples, but then it’ll be OOP all the way.
 
-### Why OOP?
+## Why OOP?
 
 *D* and *GtkD* both lend themselves well to an object-oriented approach to coding. The imperative examples will get you heading in that direction if it’s where you want to go, but I much prefer a full-on OOP approach.
 
-### Blog Conventions
+## Blog Conventions
 
 **Widgets:** For the sake of clarity, each example will demonstrate just one widget unless it’s something that needs extra widgets to work.
 
@@ -45,11 +49,11 @@ All code is formatted in this way:
 - variables are declared at the tops of functions or classes, and
 - comments point out code not covered in previous examples.
 
-### What You’ll Need
+## What You’ll Need
 
 First, a *D* compiler. I’m using *dmd*, the official reference compiler throughout. You can find it on the [Downloads page of the dlang.org web site](https://dlang.org/download.html).
 
-Second, you’ll want the latest *GTK+* runtime. This as well as the [GtkD.zip](https://gtkd.org/Downloads/sources/GtkD-3.9.0.zip) file can be downloaded from [Mike Wey’s web site here](https://gtkd.org/download.html).
+Second, you’ll want the latest *GTK+* runtime. This as well as the [GtkD.zip](https://gtkd.org/Downloads/sources/GtkD-3.9.0.zip) file can be downloaded from [the official GtkD website (maintained by Mike Wey)](https://gtkd.org/download.html).
 
 For now, I’m working on *Windows* and that’ll be reflected herein as well, although I’ve done a bit of preliminary work with *FreeBSD*, so I suspect all these examples will compile without trouble on any OS where *D*, *GtkD*, and a *GTK+* runtime are available. Once I’m reoriented to the POSIX world, I’ll make sure everything works there, too. If you find any situation where you can’t compile and run these examples, please let me know.
 
@@ -154,3 +158,9 @@ After correcting typos so the compiler finishes, type the name without an extens
 And that’s it for now. Next time, we’ll break down the test rig code so you know what’s going on in there. Then I’ll show you the same functionality in an OOP version of the test rig.
 
 Until then, happy D-coding and may the widgets be with you.
+
+<BR>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/01/15/0001-imperative-test-rig.html">Next: Introduction to the Test Rig</a>
+</div>
+<BR>

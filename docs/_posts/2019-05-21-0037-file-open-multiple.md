@@ -1,5 +1,5 @@
 ---
-title: 0037 – Dialogs III - Opening Multiple Files
+topic: dialog
 layout: post
 description: How to retrieve multiple file names using a GTK FileChooserDialog - a D-language tutorial.
 author: Ron Tarrant
@@ -75,3 +75,13 @@ Once we have the array of file names (`fileList`) the rest is easy. A `foreach()
 And as usual, once we’re done with the dialog, we blow it up and move on.
 
 Next time, we'll tackle a `Dialog` for saving files. Until then...
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/05/17/0036-file-open-dialogs.html">Previous: Open File Dialog</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/05/24/0038-file-save-dialog.html">Next: Save File Dialog</a>
+</div>
+<BR>

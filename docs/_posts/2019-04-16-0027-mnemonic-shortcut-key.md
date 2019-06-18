@@ -1,5 +1,5 @@
 ---
-title: 0027 – Menus II - Mnemonics (Shortcut Keys)
+topic: menu
 layout: post
 description: How to do set up keyboard shortcuts for GTK MenuItems - a D language tutorial.
 author: Ron Tarrant
@@ -112,3 +112,12 @@ Well, that’s that. Mnemonic shortcut keys and separators… Yup.
 
 Bye, now.
 
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/04/12/0026-menu-basics.html">Previous: Menu Basics</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/04/19/0028-checkmenuitems.html">Next: CheckMenuItem</a>
+</div>
+<BR>

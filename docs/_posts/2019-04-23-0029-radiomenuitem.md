@@ -1,5 +1,5 @@
 ---
-title: 0029 – Menus IV - The RadioMenuItem
+topic: menu
 layout: post
 description: How to use a GTK RadioMenuItem - a D language tutorial.
 author: Ron Tarrant
@@ -128,3 +128,13 @@ And is there a difference? Not really. It's just another option. In fact, you ma
 - the `MyRadioButton` class.
 
 And that’s it for this time, but we’ll be back with the practical example on Tuesday. See you then.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/04/19/0028-checkmenuitems.html">Previous: CheckMenuItem</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/04/26/0030-radiomenuitem-practical.html">Next: Practical RadioMenuItem</a>
+</div>
+<BR>

@@ -1,5 +1,5 @@
 ---
-title: 0030 – Menus V - A More Practical RadioMenuItem
+topic: menu
 layout: post
 description: How to use a GTK RadioMenuItem, a more practical solution - a D language tutorial.
 author: Ron Tarrant
@@ -246,3 +246,13 @@ This is a lot of stuff we’ve seen before, but one thing I’d like to point ou
 We could also have used the `onActivate` signal instead of `onToggled`, but the results are pretty much the same either way.
 
 Now, since this looks to be the longest blog post I've done to date, pay no attention while I beat a hasty exit, stage right.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/04/23/0029-radiomenuitem.html">Previous: RadioMenuItem</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/04/30/0031-imagemenuitem.html">Next: ImageMenuItem</a>
+</div>
+<BR>

@@ -1,5 +1,5 @@
 ---
-title: 0012 - Layout Containers
+topic: box
 layout: post
 description: How to use a GTK Layout container to organize UI widgets - a D language tutorial.
 author: Ron Tarrant
@@ -99,3 +99,13 @@ And that’s pretty much it for this time. Yes, I mentioned a second code file a
 And with that said, *Insert vague comparison between* GTK *and popular space opera culture here.*
 
 Bye, now.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/02/19/0011-callback-chains.html">Previous: Callback Chains</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/02/26/0013-scrolled-layout.html">Next: Scrolled Layout</a>
+</div>
+<BR>

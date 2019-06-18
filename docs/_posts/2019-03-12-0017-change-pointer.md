@@ -1,12 +1,12 @@
 ---
-title: 0017 - Mouse Pointer
+topic: mouse
 layout: post
 description: Changing the shape of the mouse pointer based on which GTK widget it's over - a D language tutorial.
 author: Ron Tarrant
 
 ---
 
-## 0017 - Mouse Pointer
+## 0017 - Changing the Mouse Pointer
 
 How many programmers does it take to change a mouse pointer?
 
@@ -116,3 +116,12 @@ Okay, not all, but quite a few. There are other signals you could hook up. If yo
 
 So, happy D-coding and may the Widgets be with you, as always.
 
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/03/08/0016-scroll-pointer-all.html">Previous: Scrollwheel, etc.</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/03/15/0018-variations-on-a-text-entry.html">Next: Text Entry Variations</a>
+</div>
+<BR>

@@ -1,5 +1,5 @@
 ---
-title: 0043 – Dialogs IX - Custom Dialogs (2 of 3) - The Action Area
+topic: dialog
 layout: post
 description: How to get the appropriate buttons into the Action Area of a custom GTK Dialog - a D-language tutorial.
 author: Ron Tarrant
@@ -130,3 +130,13 @@ One more thing of note...
 If you have some very specialized actions in mind for your custom `Dialog`, you may be better off to go with the first method of naming `Button`s using a string array. The `ResponseType` names may not match up to these specialized actions, but you can cover that up with how you name the `Button`s. No one ever has to know that the `ResponseType.CONVERT` flag used with a `Button` named *Flying Rat* triggers a function called `goFetchAnotherPigeonPhoto()`.
  
 So, that’s the `Dialog`’s action area. Next time we finish up this mini-series as we dig into the Content Area and bring everything together.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/06/07/0042-custom-dialog-i.html">Previous: Dialog Aesthetics</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/06/14/0044-custom-dialog-iii.html">Next: A Fancy Dialog</a>
+</div>
+<BR>

@@ -1,18 +1,17 @@
 ---
-title: 0001 - Introduction to the Test Rig
 layout: post
+topic: window
 description: Introduction to the GTK TestRig window and how to install syntax highlighter files for PSPad and CodeBlocks - a D language tutorial.
 author: Ron Tarrant
 
 ---
+# 0001: Introduction to the Test Rig
 
-## 0001 - The Test Rig
+Before we start examining the test rig code, I'd like to introduce you to a couple of syntax highlighting configurations for two popular text editors on *Windows*.
 
-Before we start examining the test rig code, I'd like to introduce you to a couple of syntax highlighting configurations for two popular text editors on Windows.
+## PS Pad and CodeBlocks Syntax Highlighters
 
-### PS Pad and CodeBlocks Syntax Highlighters
-
-If you haven’t settled on an editor with support for D, I’d like to make a couple of recommendations. I’ve written lexers for GtkD for two text editors, PSPad and CodeBlocks. You can find them along with instructions for where to install them in the [downloads directory](https://github.com/rontarrant/gtkDcoding/blob/master/downloads/syntax_ps_pad_codeblocks.zip) on my GitHub site.
+If you haven’t settled on an editor with support for *D*, I’d like to make a couple of recommendations. I’ve written lexers for *GtkD* for two text editors, *PSPad* and *CodeBlocks*. You can find them along with instructions for where to install them in the [downloads directory](https://github.com/rontarrant/gtkDcoding/blob/master/downloads/syntax_ps_pad_codeblocks.zip) on my *GitHub* site.
 
 ## The Test Rig Code
 
@@ -27,37 +26,35 @@ This version of the test rig is written in the imperative paradigm. There’s a 
 	import gtk.Main;
 	import gtk.Widget;
 
-Import statements are how D pulls things in from other files.
+Import statements are how *D* pulls things in from other files.
 
 ### main()
 
 	void main(string[] args)
 
-Just like C, D demands a main() function unless you’re building a library. This one is defined as:
+Just like *C*, *D* demands a `main()` function unless you’re building a library. This one is defined as:
 
 - having no return value, and
 - takes an array of strings as arguments from the command line.
-
 	
 	{
 	
-
 Yup, there’s that opening curly brace on a line all by itself, just like I said it would be. You all know what it means, so let’s just carry on.
 
 ### Initialization
 
 	Main.init(args);
 
-This calls the **init()** function in GtkD’s Main module. Command line arguments are passed along. We’ll see why sometime down the road.
+This calls the `init()` function in *GtkD*’s `Main` module. Command line arguments are passed along. We’ll see why sometime down the road.
 
 	MainWindow testRigWindow = new MainWindow("Test Rig");
 
 This line creates the window the user will see when the application is run. This is the breakdown:
 
-- MainWindow (the first time) names the variable type
-- MainWindow (the second time) is the constructor function call,
-- testRigWindow is the variable name we’re assigning to the window created,
-- “Test Rig” is the window title, and
+- `MainWindow` (the first time) names the variable type
+- `MainWindow` (the second time) is the constructor function call,
+- `testRigWindow` is the variable name we’re assigning to the window created,
+- `“Test Rig”` is the window title, and
 - new speaks for itself.
 
 ### Window Close Button
@@ -66,12 +63,19 @@ This line creates the window the user will see when the application is run. This
 
 This line breaks down as:
 
-- **testRigWindow.addOnDestroy()** makes a call to the window’s destructor (opposite of constructor) and interrupts it, allowing us to wedge in another function call of our own before the window dies,
-- **quitApp()** is the function we want called before the window is destroyed,
-- **void(Widget w)** defines:
-	- the return type (*void*)
-	- as well as the argument (*w*), and
-	- the argument type (*Widget*).
+<figure class="right">
+	<img src="/images/test_rig_000_01_imperative.png" alt="Me" style="width: 150px; height: 172px;">
+	<figcaption>
+	The TestRig Window in all it's glory.
+	</figcaption>
+</figure>
+
+- `testRigWindow.addOnDestroy()` makes a call to the window’s destructor (opposite of constructor) and interrupts it, allowing us to wedge in another function call of our own before the window dies,
+- `quitApp()` is the function we want called before the window is destroyed,
+- `void(Widget w)` defines:
+	- the return type (`void`)
+	- as well as the argument (`w`), and
+	- the argument type (`Widget`).
 - delegate says this function definition needs to preserve its scope, so that no matter when it’s called, the arguments passed to it will still be viable.
 
 ### Classic Greeting
@@ -89,17 +93,17 @@ We now make another call to the window object to show itself.
 ### Start the Main Loop		
 	Main.run();
 
-And here we hand control over to GTK’s main loop. In a nutshell, the main loop will keep running until it gets a signal to act on from our application.
+And here we hand control over to *GTK*’s main loop. In a nutshell, the main loop will keep running until it gets a signal to act on from our application.
 	
 	} // main()
 
-And this is the end of the **main()** function. I like to mark the ends of all functions with a comment stating the function’s name in case it’s off screen. No point scrolling back up if I don’t have to.
+And this is the end of the `main()` function. I like to mark the ends of all functions with a comment stating the function’s name in case it’s off screen. No point scrolling back up if I don’t have to.
 
 ### Callback Function
 
 	void quitApp()
 
-Here we define the **quitApp()** function to have no return value.
+Here we define the `quitApp()` function to have no return value.
 
 	writeln("Bye.");
 
@@ -109,7 +113,7 @@ Just to show that we’ve truly interrupted the window’s destroy function, thi
 
 	Main.quit();
 
-And lastly, after we’ve done all we wanna do (perhaps warn the user that the end is nigh) we hand over to Main’s **quit()** function. This makes sure our application makes a clean exit.
+And lastly, after we’ve done all we wanna do (perhaps warn the user that the end is nigh) we hand over to Main’s `quit()` function. This makes sure our application makes a clean exit.
 
 As with the last example (and with all of them, really) to compile:
 
@@ -117,7 +121,15 @@ As with the last example (and with all of them, really) to compile:
 
 ### Conclusion
 
-That’s it for this lesson. We’ve got D and GtkD installed and we’ve done a short test to make sure everything’s working. (Let me know if everything isn’t working, okay?)
+That’s it for this lesson. We’ve got *D* and *GtkD* installed and we’ve done a short test to make sure everything’s working. (Let me know if everything isn’t working, okay?)
 
-Next time, we’ll look at the OOP version of the test rig and build our first button. Until then, happy D-coding and may the widgets be with you.
+Next time, we’ll look at the OOP version of the test rig and build our first button. Until then, happy *D*-coding and may the widgets be with you.
 
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html">Previous: Introduction to GtkDcoding</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/01/18/0002-oop-test-rig.html">Next: OOP Test Rig Breakdown</a>
+</div>
+<BR>

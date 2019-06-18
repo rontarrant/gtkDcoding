@@ -1,5 +1,5 @@
 ---
-title: X0002 - GtkD Linux Development Environment
+topic: linux
 layout: post
 description: How to install and use a GTK and D-language build environment on Linux Mint.
 author: Ron Tarrant
@@ -101,3 +101,12 @@ I hope you enjoyed this Blog eXtra. I'll continue to spring these on you from ti
  
 Until next time...
 
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/03/29/0022-grids.html">Previous: Grids</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/04/02/0023-radio-and-color-buttons.html">Next: Radio and Color Buttons</a>
+</div>
+<BR>

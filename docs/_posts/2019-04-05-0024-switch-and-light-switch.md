@@ -1,5 +1,5 @@
 ---
-title: 0024 - Switch and LightSwitch
+topic: button
 layout: post
 description: How to use a GTK Switch widget to simulate a light switch - a D language tutorial.
 author: Ron Tarrant
@@ -102,3 +102,13 @@ So there you have it, a straightforward example of how to use a Switch widget as
 Hope this was as interesting to read about as it was to research and write (both the code and the blog entry).
 
 Until next time, happy D-coding and may your Widgets always find their way home.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/04/02/0023-radio-and-color-buttons.html">Previous: Radio and Color Buttons</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/04/09/0025-creating-and-using-a-linkbutton.html">Next: LinkButton</a>
+</div>
+<BR>

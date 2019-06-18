@@ -1,5 +1,5 @@
 ---
-title: 0035 – Dialogs I - The About Dialog
+topic: dialog
 layout: post
 description: How to use a GTK AboutDialog - a D-language tutorial.
 author: Ron Tarrant
@@ -142,3 +142,13 @@ All this does is destroy everything we built. And if the `Dialog` gets opened ag
 And that was a quick look at a simple `Dialog`. As we go along, things could get complicated, especially when we dig into rolling our own dialog from scratch. Now, that will be an adventure.
 
 Until next time… bye.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/05/10/0034-accelgroup-singleton.html">Previous: AccelGroup Singleton</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/05/17/0036-file-open-dialogs.html">Next: Open File Dialog</a>
+</div>
+<BR>

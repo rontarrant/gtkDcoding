@@ -1,12 +1,12 @@
 ---
-title: 0036 – Dialogs II - Opening a Single File
+topic: dialog
 layout: post
 description: How to retrieve a single filename using a GTK FileChooserDialog - a D-language tutorial.
 author: Ron Tarrant
 
 ---
 
-## 0036 – Dialogs II - Openning a Single File
+## 0036 – Dialogs II - Opening a Single File
 
 Today we’re working with a more useful dialog, one that opens a file.
 
@@ -117,3 +117,13 @@ Had this been a production-ready example, we’d do something besides spit out t
 ## Conclusion
 
 That’s it for today. Next time, we’ll tackle opening multiple files. Until then…
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/05/14/0035-help-about-dialog.html">Previous: About Dialog</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/05/21/0037-file-open-multiple.html">Next: Dialog - Open Multiple Filesas</a>
+</div>
+<BR>

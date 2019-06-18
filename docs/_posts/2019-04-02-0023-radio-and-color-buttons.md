@@ -1,5 +1,5 @@
 ---
-title: 0023 - Radio and Color Selection Buttons
+topic: button
 layout: post
 description: How to use a GTK RadioButton or a ColorButton - a D language tutorial.
 author: Ron Tarrant
@@ -147,3 +147,13 @@ And if we want to add a second color (perhaps we want a foreground color and a b
 Of course, you’d likely want to be a little slicker with the UI design, but this gives you a place from which to leap off the cliff.
 
 And so we wrap up another *gtkDcoding* blog post with this: May your bugs only nip you a bit, and not byte.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/03/31/x0002-gtkd-in-a-linux-environment.html">Previous: GtkD Linux</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/04/05/0024-switch-and-light-switch.html">Next: Switch</a>
+</div>
+<BR>

@@ -1,5 +1,5 @@
 ---
-title: 0034 – Menus IX - AccelGroup as a Singleton
+topic: menu
 layout: post
 description: Wrapping a GTK AccelGroup in a Singleton using the D language.
 author: Ron Tarrant
@@ -265,3 +265,13 @@ As an extra bonus today, we also went over how to split our code over more than 
 - use the `–i` flag when compiling.
 
 And that’s it for another *gtkDcoding* blog post. Until next time…
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/05/07/0033-fake-image-menu-and-accel.html">Previous: Fake ImageMenuItem</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/05/14/0035-help-about-dialog.html">Next: Dialog I: About Dialog</a>
+</div>
+<BR>

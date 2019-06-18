@@ -1,5 +1,5 @@
 ---
-title: 0039 – Dialogs V - Adding SaveAs and Filename Reflection in the Titlebar
+topic: dialog
 layout: post
 description: How to save an existing file under a new name using a GTK FileChooserDialog - a D-language tutorial.
 author: Ron Tarrant
@@ -145,3 +145,13 @@ And there you have it. Over the last three blog posts, we’ve covered the basic
 - saving an already-named file under a new name.
 
 Until next time, make the gods of coding smile upon you and your work.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/05/24/0038-file-save-dialog.html">Previous: Saving a File</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/05/31/0040-messagedialog.html">Next: MessageDialog</a>
+</div>
+<BR>

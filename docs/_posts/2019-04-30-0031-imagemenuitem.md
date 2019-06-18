@@ -1,5 +1,5 @@
 ---
-title: 0031 – Menus VI - Image on a Menu
+topic: menu
 layout: post
 description: How to use an image in a GTK MenuItem - a D language tutorial.
 author: Ron Tarrant
@@ -143,3 +143,13 @@ You'll have to drill down into one of the theme directories to see the actual ic
 So my advice on this point is, if you wanna roll your own custom images for menus (or anything other part of a UI) and make them look like icons, use the `FakeImageMenuItem` approach and just make the image 16x16 pixels. Oh. And hire an experienced artist. Too many of them get asked to do stuff for no money and they're worth paying. Seriously.
 
 And here we are at the end of another *gtkDcoding* blog post. May you never get involved in a fish-slap dance... unless you're willing to get wet. See you next time.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/04/26/0030-radiomenuitem-practical.html">Previous: Practical RadioMenuItem</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/05/03/0032-accelerator-keys.html">Next: Accelerator Keys</a>
+</div>
+<BR>

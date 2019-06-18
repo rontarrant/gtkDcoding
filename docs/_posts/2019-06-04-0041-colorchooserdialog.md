@@ -1,5 +1,5 @@
 ---
-title: 0041 – Dialogs VII - The ColorChooserDialog
+topic: dialog
 layout: post
 description: Using a standard GTK ColorChooserDialog - the Dialog behind the ColorChooserButton - a D-language tutorial.
 author: Ron Tarrant
@@ -101,3 +101,13 @@ Another thing to take into consideration is whether or not you want that default
 And that’s the `ColorChooserDialog`.
 
 Take care and see you next time.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/05/31/0040-messagedialog.html">Previous: MessageDialog</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/06/07/0042-custom-dialog-i.html">Next: Dialog Aesthetics</a>
+</div>
+<BR>

@@ -1,5 +1,5 @@
 ---
-title: 0013 - Scrolled Layout
+topic: box
 layout: post
 description: How to scroll the contents of a GTK Layout container - a D language tutorial.
 author: Ron Tarrant
@@ -102,3 +102,12 @@ Yeah, it’s one reason which leaps to mind for actually needing a *Tooltip* on 
 
 Two for the price of one, a scrolled layout and a tooltip. The coolness just amps up every step along the path here. But now it’s time, gentlefolk, please. So have a good coding experience and I’ll see you next time.
 
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/02/22/0012-layout-containers.html">Previous: Layout Containers</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/03/01/0014-reacting-to-mouse-events.html">Next: Mouse Events</a>
+</div>
+<BR>

@@ -1,5 +1,5 @@
 ---
-title: 0021 – Labels with Background Colors & Markup
+topic: text
 layout: post
 description: How to give a GTK Label a unique background colour - a D language tutorial.
 author: Ron Tarrant
@@ -147,3 +147,13 @@ Most of this (as is usual by now) is standard stuff. Some notable exceptions bei
 And the rest is a function to switch the `Label`’s appear and another to relay the `Label`’s state to the command shell.
 
 Okay, well that was fun. Keep those cards and letters coming in and I’ll see you next time around.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/03/22/0020-image-buttons.html">Previous: Image Buttons</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/03/29/0022-grids.html">Next: Grids</a>
+</div>
+<BR>

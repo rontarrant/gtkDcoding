@@ -1,5 +1,5 @@
 ---
-title: 0016 - Scroll Wheel and More Button Stuff
+topic: mouse
 layout: post
 description: Getting feedback from the mouse's scrollwheel in GTK - a D language tutorial.
 author: Ron Tarrant
@@ -86,3 +86,13 @@ Which translates the *uint* to plain English using the `mouseButtons` array defi
 You may wonder why there’s a `“None”` element in this array, but it’s there because there is no mouse button #0. It keeps us from having to subtract ‘1’ each time to find our way to the correct array element.
 
 And so we come to the end of another blog post. Be kind to each other and we’ll talk again soon.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/03/05/0015-enter-leave.html">Previous: Entering and Leaving</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/03/12/0017-change-pointer.html">Next: Mouse Pointer</a>
+</div>
+<BR>

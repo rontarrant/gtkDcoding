@@ -1,5 +1,5 @@
 ---
-title: 0038 – Dialogs IV - Saving a File
+topic: dialog
 layout: post
 description: How to save a single filename using a GTK FileChooserDialog - a D-language tutorial.
 author: Ron Tarrant
@@ -183,3 +183,13 @@ Just one thing I'd like to point out here... the `filenameEntry` pointer is pass
 And that’s how a simple `Save` item can be coded. Next time, we’ll add in `Save as…` and do something else that’s often done in applications, display the file name in the `Window` header and keep it current.
 
 Until then.
+
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/05/21/0037-file-open-multiple.html">Previous: Dialog - Open Multiple Files</a>
+</div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/05/28/0039-file-save-as-dialog.html">Next: SaveAs Dialog</a>
+</div>
+<BR>
