@@ -18,7 +18,7 @@ layout: default
             {% if post.topic == 'window' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_window">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -28,7 +28,7 @@ layout: default
             {% elsif post.topic == 'button' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_button">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -38,7 +38,7 @@ layout: default
             {% elsif post.topic == 'box' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_box">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -48,7 +48,7 @@ layout: default
             {% elsif post.topic == 'layout' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_layout">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -58,7 +58,7 @@ layout: default
             {% elsif post.topic == 'mouse' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_mouse">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -68,7 +68,7 @@ layout: default
             {% elsif post.topic == 'text' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_text">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -78,7 +78,7 @@ layout: default
             {% elsif post.topic == 'image' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_image">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -88,7 +88,7 @@ layout: default
             {% elsif post.topic == 'odd' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_odd">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -98,7 +98,7 @@ layout: default
              {% elsif post.topic == 'menu' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_menu">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -108,7 +108,7 @@ layout: default
             {% elsif post.topic == 'dialog' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_dialog">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -118,7 +118,7 @@ layout: default
             {% elsif post.topic == 'pango' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_pango">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -128,7 +128,7 @@ layout: default
             {% elsif post.topic == 'cairo' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_cairo">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -138,7 +138,7 @@ layout: default
             {% elsif post.topic == 'mvc' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_mvc">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -148,7 +148,7 @@ layout: default
             {% elsif post.topic == 'oop' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_oop">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -158,7 +158,7 @@ layout: default
             {% else %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_default">
-						<a href="{{ post.url | relative_url }}">
+						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}
 						</a>
 						</h3>
