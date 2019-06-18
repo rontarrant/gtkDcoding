@@ -1,0 +1,305 @@
+img.right, figure.right
+{
+	float: right;
+	margin-left: 15px;
+}
+
+img.left, figure.left
+{
+	float: left;
+	margin-right: 20px;
+}
+
+figcaption
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: italic;
+}
+
+h1
+{
+	background-color: #bbf;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	padding-top: 50px;
+	padding-left: 35px;
+	padding-bottom: 5px;
+	text-align: left;
+	color: blue;
+}
+
+h2
+{
+	background-color: #bbf;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 25px;
+	padding-top: 25px;
+	padding-right: 35px;
+	padding-bottom: 2px;
+	text-align: right;
+	color: blue;
+}
+
+h3
+{
+	background-color: #bbf;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-style: italic;
+	padding-top: 15px;
+	padding-right: 20px;
+	padding-bottom: 4px;
+	text-align: right;
+	color: blue;
+}
+
+h4
+{
+	background-color: #bbf;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 10px;
+	padding-right: 20px;
+	padding-bottom: 3px;
+	text-align: right;
+	color: blue;
+}
+
+.post-link
+{
+	background-color: #bbf;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.post-list-heading
+{
+	background-color: #bbf;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 25px;
+	padding-top: 25px;
+	padding-right: 35px;
+	padding-bottom: 2px;
+	text-align: right;
+	color: blue;
+}
+
+.post-list /* burnt orange */
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 0px;
+	padding-right: 20px;
+	padding-bottom: 2px;
+	text-align: left;
+	color: blue;
+}
+
+.topic_window /* burnt orange */
+{
+	background-color: rgba(253, 176, 138, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_button /* yellow */
+{
+	background-color: rgba(253, 238, 138, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_box /* green */
+{
+	background-color: rgba(192, 253, 135, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_layout /* sky */
+{
+	background-color: rgba(138, 249, 253, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_mouse /* light purple */
+{
+	background-color: rgba(236, 204, 255, 1);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_text /* tan */
+{
+	background-color: rgba(229, 220, 211, 1);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_image /* redish */
+{
+	background-color: rgba(253, 138, 138, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_odd /* aqua */
+{
+	background-color: rgba(138, 253, 211, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_menu /* lemon */
+{
+	background-color: rgba(249, 253, 138, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_dialog /* blue */
+{
+	background-color: rgba(138, 208, 253, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_pango /* hot pink */
+{
+	background-color: rgba(233, 138, 253, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_cairo /* chartreuse */
+{
+	background-color: rgba(253, 138, 208, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_mvc /* brown */
+{
+	background-color: rgba(180, 172, 165, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_oop /* gray */
+{
+	background-color: rgba(200, 200, 200, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+.topic_default /* light gray */
+{
+	background-color: rgba(226, 226, 226, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 5px;
+	padding-right: 20px;
+	padding-bottom: 1px;
+	text-align: right;
+	color: blue;
+}
+
+p, li, a
+{
+	font-family: Times, Time New Roman, serif;
+}

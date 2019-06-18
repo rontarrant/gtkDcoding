@@ -4,7 +4,7 @@ layout: default
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
 	<header class="post-header">
-		<!-- <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1> /-->
+		<link rel="stylesheet" href="/css/style.css" />
 		{% if page.keywords %}
 			<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">
 		{% endif %}
@@ -20,9 +20,11 @@ layout: default
 
 	<div class="post-content e-content" itemprop="articleBody">
 		{{ content }}
-		<p><i>If you'd like to leave a comment, come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the gtkDcoding
-		announcement posts. Or drop by <a href="https://forum.gtkd.org/">the gtkD Forum</a>, follow the link below to email me, or go to the gtkDcoding 
-		Facebook page.</i></p>
+		<p><i>If you'd like to leave a comment, come on over to the 
+		<a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the gtkDcoding
+		announcement posts. Or drop by <a href="https://forum.gtkd.org/">the gtkD Forum</a>, 
+		follow the link below to email me, or go to the 
+		<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></i></p>
 		<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything.</p>
 		<p>&copy; Copyright {{ site.time | date: '%Y' }} {{ site.author }} </p>
 	</div>
