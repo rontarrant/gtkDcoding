@@ -71,7 +71,8 @@ h4
 {
 	background-color: #bbf;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 18px;
+	font-size: 14px;
+	font-style: italic;
 	padding-top: 5px;
 	padding-right: 20px;
 	padding-bottom: 1px;
@@ -95,11 +96,12 @@ h4
 {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
-	padding-top: 4px;
+	font-style: italic;
+	padding-top: 0px;
 	padding-right: 20px;
 	padding-bottom: 2px;
 	text-align: left;
-	color: blue;
+	color: black;
 }
 
 .topic_window /* burnt orange */
@@ -111,7 +113,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_button /* yellow */
@@ -123,7 +125,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_box /* green */
@@ -135,19 +137,19 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_layout /* sky */
 {
-	background-color: rgba(138, 249, 253, 1.0);
+	font-family: Arial, Helvetica, sans-serif;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 18px;
 	padding-top: 5px;
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_mouse /* light purple */
@@ -159,7 +161,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_text /* tan */
@@ -171,7 +173,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_image /* redish */
@@ -183,7 +185,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_odd /* aqua */
@@ -195,7 +197,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_menu /* lemon */
@@ -207,7 +209,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_dialog /* blue */
@@ -219,7 +221,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_pango /* hot pink */
@@ -231,7 +233,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_cairo /* chartreuse */
@@ -243,7 +245,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_mvc /* brown */
@@ -255,7 +257,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_oop /* gray */
@@ -267,7 +269,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 .topic_default /* light gray */
@@ -279,7 +281,7 @@ h4
 	padding-right: 20px;
 	padding-bottom: 1px;
 	text-align: right;
-	color: blue;
+	color: black;
 }
 
 p, li, a
