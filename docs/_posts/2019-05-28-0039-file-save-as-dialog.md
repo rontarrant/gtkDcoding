@@ -1,4 +1,5 @@
 ---
+title: 0039 – Dialogs V - Adding SaveAs and Filename in the Titlebar
 topic: dialog
 layout: post
 description: How to save an existing file under a new name using a GTK FileChooserDialog - a D-language tutorial.
@@ -6,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-## 0039 – Dialogs V - Adding SaveAs and Filename Reflection in the Titlebar
+## 0039 – Dialogs V - Adding SaveAs and Filename in the Titlebar
 
 Since we covered [a lot of this stuff last time](http://gtkdcoding.com/2019/05/24/0038-file-save-dialog.html) when we talked about adding a `Save` `MenuItem`, I’ll just cover the differences…
 

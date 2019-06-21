@@ -1,4 +1,5 @@
 ---
+title: 0000&colon; Introduction to GtkDcoding
 topic: odd
 layout: post
 description: An introduction to GTK 3 and how it can be used to create Graphical User Interfaces (GUI) for applications - a D language tutorial.

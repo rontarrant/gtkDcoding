@@ -1,4 +1,5 @@
 ---
+title: 0031 – Menus VI - Image on a Menu
 topic: menu
 layout: post
 description: How to use an image in a GTK MenuItem - a D language tutorial.

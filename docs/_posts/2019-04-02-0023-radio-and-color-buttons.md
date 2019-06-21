@@ -1,4 +1,5 @@
 ---
+title: 0023 - Radio and Color Selection Buttons
 topic: button
 layout: post
 description: How to use a GTK RadioButton or a ColorButton - a D language tutorial.

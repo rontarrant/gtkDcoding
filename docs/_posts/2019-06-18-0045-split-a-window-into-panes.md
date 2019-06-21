@@ -1,4 +1,5 @@
 ---
+title: 0046 - Split a Window into Panes
 topic: window
 layout: post
 description: How to use the GTK Paned class to split a window into panes.
@@ -119,3 +120,12 @@ The default behaviour for `add1()` or `add2()` allows both panes to resize just 
 The corollary is, if you want to mimic the behaviour of `add1()` and `add2()`, using the above arguments to `pack1()` and `pack2()` would do the trick.
 
 And that’s pretty much it for now. See you next time.
+
+<BR>
+<div style="float: left;">
+	<a href="https://gtkdcoding.com/2019/06/14/0044-custom-dialog-iii.html">Previous: A Fancy Dialog</a>
+</div>
+
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/06/21/0046-the-spinbutton.html">Next: SpinButton</a>
+</div>

@@ -1,4 +1,5 @@
 ---
+title: 0034 – Menus IX - AccelGroup as a Singleton
 topic: menu
 layout: post
 description: Wrapping a GTK AccelGroup in a Singleton using the D language.

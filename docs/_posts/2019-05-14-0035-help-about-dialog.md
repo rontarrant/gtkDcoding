@@ -1,4 +1,5 @@
 ---
+title: 0035 – Dialogs I - The About Dialog
 topic: dialog
 layout: post
 description: How to use a GTK AboutDialog - a D-language tutorial.

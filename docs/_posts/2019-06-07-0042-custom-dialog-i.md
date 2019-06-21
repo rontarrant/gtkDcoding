@@ -1,4 +1,5 @@
 ---
+title: 0042 Dialogs VIII Custom Dialogs 1 of 3 Aesthetics of the Content Area
 topic: dialog
 layout: post
 description: How to build an aesthetically-pleasing layout for the content area of a custom GTK Dialog - a D-language tutorial.

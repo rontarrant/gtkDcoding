@@ -19,6 +19,7 @@ layout: default
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_window">
 						<a class="post-link" href="{{ post.url | relative_url }}">
+<!--						<img src="/images/window-small.png" alt="Window" style="width: 50px; height: 70px;"> -->
 						{{ post.title | escape }}
 						</a>
 						</h3>
@@ -137,6 +138,7 @@ layout: default
 						{%- endif -%}
             {% elsif post.topic == 'mvc' %}
 					<span class="post-meta">{{ post.date | date: date_format }}</span>
+						<img class="post-link_right" src="/images/mvc-small.png" alt="Me" style="width: 100px; height: 89px;">
 						<h3 class="topic_mvc">
 						<a class="post-link" href="{{ post.url | relative_url }}">
 						{{ post.title | escape }}

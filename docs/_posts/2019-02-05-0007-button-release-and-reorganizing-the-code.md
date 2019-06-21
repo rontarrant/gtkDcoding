@@ -1,4 +1,5 @@
 ---
+title: 0007 – Button Release & Reorganizing the Code
 topic: button
 layout: post
 description: How to use a GTK Button's onRelease signal - a D language tutorial.

@@ -1,4 +1,5 @@
 ---
+title: 0040 – Dialogs VI - The MessageDialog
 topic: dialog
 layout: post
 description: Using a standard GTK MessageDialog; we also cover enum flag locations and inherited functions - a D-language tutorial.

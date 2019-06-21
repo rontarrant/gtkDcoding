@@ -1,4 +1,5 @@
 ---
+title: X0002 - GtkD Linux Development Environment
 topic: linux
 layout: post
 description: How to install and use a GTK and D-language build environment on Linux Mint.

@@ -1,4 +1,5 @@
 ---
+title: 0028 – Menus III - CheckMenuItems
 topic: menu
 layout: post
 description: How to use a GTK CheckMenuItem - a D language tutorial.

@@ -1,4 +1,5 @@
 ---
+title: 0025 Creating and Using a LinkButton
 topic: button
 layout: post
 description: How to use a GTK LinkButton, with and without a visible URL - a D language tutorial.
@@ -6,11 +7,11 @@ author: Ron Tarrant
 
 ---
 
-## 0025 - Creating and Using a LinkButton
+# 0025 - Creating and Using a LinkButton
 
 Today’s buttons are simple, a button to click to follow a link and another one with a pretty face and a link. So, what’s the difference?
 
-### A LinkButton
+## A LinkButton
 
 [Here's the first code example](https://github.com/rontarrant/gtkDcoding/blob/master/011_odd/odd_011_01_linkbutton.d).
 
@@ -54,7 +55,7 @@ But what if you don’t want the URL to show on the button? Perhaps your URL is 
 
 That ain’t gonna look so pretty on a button, so you might instead consider…
 
-### A LinkButton with a Pretty Face
+## A LinkButton with a Pretty Face
 
 Not a lot changes. [Have a look at the code file](https://github.com/rontarrant/gtkDcoding/blob/master/011_odd/odd_011_02_linkbutton_labeled.d) or just look at this:
 

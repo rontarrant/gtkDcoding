@@ -1,4 +1,5 @@
 ---
+title: 0016 - Scroll Wheel and More Button Stuff
 topic: mouse
 layout: post
 description: Getting feedback from the mouse's scrollwheel in GTK - a D language tutorial.

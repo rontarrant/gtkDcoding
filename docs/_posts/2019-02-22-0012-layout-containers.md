@@ -1,4 +1,5 @@
 ---
+title: 0012 - Layout Containers
 topic: box
 layout: post
 description: How to use a GTK Layout container to organize UI widgets - a D language tutorial.
