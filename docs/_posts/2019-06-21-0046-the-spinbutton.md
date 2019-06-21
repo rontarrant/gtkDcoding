@@ -71,9 +71,7 @@ At the top of the `MySpinButton` class definition, there’s a bunch of stuff in
 
 ### Oddity of the pageSize Argument
 
-I can tell you that with a `SpinButton`, `pageSize` is best set to ‘0’ because it seems to add an extra maximum constraint to the spinner. So if your maximum is 50 and `pageSize` is 20, the `SpinButton` won’t go above 30. If you set it to 60, that's a different story. It does have another meaning when the `Adjustment` is used in other places, but we'll speak of those cases when we get to them.
-
-Bottom line: at present, set it to 0 and be done with it unless you have an application-specific reason to do otherwise.
+With a `SpinButton`, the `Adjustment`'s `pageSize` is best set to ‘0.’
 
 ## Variations on a `SpinButton` – Floating Point Values
 

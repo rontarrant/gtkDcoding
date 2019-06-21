@@ -75,7 +75,7 @@ class MySpinButton : SpinButton
 	Adjustment adjustment;
 	double initialValue = 4;
 	double pageIncrement = 8;
-	double pageSize = 20;
+	double pageSize = 0;
 	
 	this()
 	{
