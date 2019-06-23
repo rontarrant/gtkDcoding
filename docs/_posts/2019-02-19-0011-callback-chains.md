@@ -1,5 +1,5 @@
 ---
-title: 0011 - Callback Chains
+title: "0011: Callback Chains"
 topic: button
 layout: post
 description: How GTK signals are chained together - a D language tutorial.

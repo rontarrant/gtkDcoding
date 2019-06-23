@@ -1,5 +1,5 @@
 ---
-title: 0014 - Reacting to Mouse Events
+title: "0014: Reacting to Mouse Events"
 topic: mouse
 layout: post
 description: Harnessing mouse events in a GTK Window - a D language tutorial.

@@ -1,5 +1,5 @@
 ---
-title: 0017 - Changing the Mouse Pointer
+title: "0017: Changing the Mouse Pointer"
 topic: mouse
 layout: post
 description: Changing the shape of the mouse pointer based on which GTK widget it's over - a D language tutorial.

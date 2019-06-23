@@ -1,5 +1,5 @@
 ---
-title: 0012 - Layout Containers
+title: "0012: Layout Containers"
 topic: box
 layout: post
 description: How to use a GTK Layout container to organize UI widgets - a D language tutorial.
@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-## 0012 - `Layout` `Container`s
+## 0012 - Layout Containers
 
 Starting today, we’ll be looking at a few examples of using a `Layout` container. Since we’ve already covered the `Box` container, playing with `Layout` containers won’t be foreign, so we’ll throw in some extra techniques to keep it interesting, things like presenting a button vertically instead of horizontally.
 

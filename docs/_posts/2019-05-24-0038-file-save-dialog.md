@@ -1,5 +1,5 @@
 ---
-title: 0038 – Dialogs IV - Saving a File
+title: "0038: Dialogs IV - Saving a File"
 topic: dialog
 layout: post
 description: How to save a single filename using a GTK FileChooserDialog - a D-language tutorial.

@@ -1,0 +1,76 @@
+img.right, figure.right
+{
+	float: right;
+	margin-left: 15px;
+}
+
+img.left, figure.left
+{
+	float: left;
+	margin-right: 20px;
+}
+
+figcaption
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: italic;
+}
+
+h1
+{
+	background-image: linear-gradient(to right, rgba(138, 208, 253, 1.0), rgba(255, 255, 255, 1.0));
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	padding-top: 50px;
+	padding-right: 0px;
+	padding-bottom: 5px;
+	text-align: right;
+	color: black;
+}
+
+h2
+{
+	background-image: linear-gradient(to right, rgba(138, 208, 253, 1.0), rgba(255, 255, 255, 1.0));
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 25px;
+	padding-top: 25px;
+	padding-right: 0px;
+	padding-bottom: 2px;
+	text-align: right;
+	color: black;
+}
+
+h3
+{
+	background-image: linear-gradient(to right, rgba(138, 208, 253, 1.0), rgba(255, 255, 255, 1.0));
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-style: italic;
+	padding-top: 15px;
+	padding-right: 0px;
+	padding-bottom: 4px;
+	text-align: right;
+	color: black;
+}
+
+h4
+{
+	background-image: linear-gradient(to right, rgba(138, 208, 253, 1.0), rgba(255, 255, 255, 1.0));
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 10px;
+	padding-right: 0px;
+	padding-bottom: 3px;
+	text-align: right;
+	color: black;
+}
+
+p, li, a
+{
+	font-family: Times, Time New Roman, serif;
+	font-style: normal;
+	color: black;
+	z-index: 20;
+}

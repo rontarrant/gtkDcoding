@@ -1,5 +1,5 @@
 ---
-title: 0030 – Menus V - A More Practical RadioMenuItem
+title: "0030: Menus V - A More Practical RadioMenuItem"
 topic: menu
 layout: post
 description: How to use a GTK RadioMenuItem, a more practical solution - a D language tutorial.

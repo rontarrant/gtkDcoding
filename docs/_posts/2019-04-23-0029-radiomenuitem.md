@@ -1,5 +1,5 @@
 ---
-title: 0029 – Menus IV - The RadioMenuItem
+title: "0029: Menus IV - The RadioMenuItem"
 topic: menu
 layout: post
 description: How to use a GTK RadioMenuItem - a D language tutorial.

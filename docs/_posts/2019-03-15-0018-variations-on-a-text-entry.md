@@ -1,5 +1,5 @@
 ---
-title: 0018 - Variations on a Text Entry Widget
+title: "0018: Variations on a Text Entry Widget"
 topic: text
 layout: post
 description: How to obfuscate text in a GTK Entry widget and how to make it non-editable - a D language tutorial.

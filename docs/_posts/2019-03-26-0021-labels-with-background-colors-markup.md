@@ -1,5 +1,5 @@
 ---
-title: 0021 – Labels with Background Colors & Markup
+title: "0021: Labels with Background Colors & Markup"
 topic: text
 layout: post
 description: How to give a GTK Label a unique background colour - a D language tutorial.

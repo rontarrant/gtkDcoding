@@ -1,5 +1,5 @@
 ---
-title: 0019 - Disappearing Entry Text and Font Selection
+title: "0019: Disappearing Entry Text and Font Selection"
 topic: text
 layout: post
 description: How to make a GTK Entry widget disappear and how to use the FontButton - a D language tutorial.

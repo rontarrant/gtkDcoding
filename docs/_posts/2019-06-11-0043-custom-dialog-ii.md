@@ -1,5 +1,5 @@
 ---
-title: 0043 – Dialogs IX - Custom Dialogs (2 of 3) - The Action Area
+title: "0043: Dialogs IX - Customizing (2 of 3) - Action Area"
 topic: dialog
 layout: post
 description: How to get the appropriate buttons into the Action Area of a custom GTK Dialog - a D-language tutorial.
@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-## 0043 – Dialogs IX - Custom Dialogs (2 of 3) - The Action Area
+## 0043 – Dialogs IX - Customizing (2 of 3) - Action Area
 
 A reminder...
 

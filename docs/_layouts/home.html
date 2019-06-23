@@ -16,157 +16,195 @@ layout: default
       <li>
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
             {% if post.topic == 'window' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_window">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/lodging.png">
+						</span>
+					</div>
+<!--					<span class="post-meta">{{ post.date | date: date_format }}</span>
 						<h3 class="topic_window">
 						<a class="post-link" href="{{ post.url | relative_url }}">
-<!--						<img src="/images/window-small.png" alt="Window" style="width: 50px; height: 70px;"> -->
+						<img src="/images/window-small.png" alt="Window" style="width: 50px; height: 70px;"> 
 						{{ post.title | escape }}
 						</a>
 						</h3>
 						{%- if site.show_excerpts -%}
 							{{ post.excerpt }}
-						{%- endif -%}
+						{%- endif -%}-->
             {% elsif post.topic == 'button' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_button">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_button">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/monkey.png">
+						</span>
+					</div>
+					
             {% elsif post.topic == 'box' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_box">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
-            {% elsif post.topic == 'layout' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_layout">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_box">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/cul-de-sac.png">
+						</span>
+					</div>
+					
             {% elsif post.topic == 'mouse' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_mouse">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_mouse">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/beaver.png">
+						</span>
+					</div>
+
             {% elsif post.topic == 'text' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_text">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_text">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/library-alt.png">
+						</span>
+					</div>
+
             {% elsif post.topic == 'image' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_image">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_image">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/poi.png">
+						</span>
+					</div>
+						
+            {% elsif post.topic == 'linux' %}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_linux">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/penguin.png">
+						</span>
+					</div>
+						
             {% elsif post.topic == 'odd' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_odd">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_odd">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/tapir.png">
+						</span>
+					</div>
+						
              {% elsif post.topic == 'menu' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_menu">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_menu">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/food.png">
+						</span>
+					</div>
+						
             {% elsif post.topic == 'dialog' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_dialog">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
-            {% elsif post.topic == 'pango' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_pango">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_dialog">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/school.png">
+						</span>
+					</div>
+						
             {% elsif post.topic == 'cairo' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_cairo">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_cairo">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/duck.png">
+						</span>
+					</div>
+						
             {% elsif post.topic == 'mvc' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<img class="post-link_right" src="/images/mvc-small.png" alt="Me" style="width: 100px; height: 89px;">
-						<h3 class="topic_mvc">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_mvc">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-icon">
+							<img class="topic_mvc-icon" src="/images/picnic.png">
+						</span>
+					</div>
+						
             {% elsif post.topic == 'oop' %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_oop">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_oop">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/bump.png">
+						</span>
+					</div>
+
             {% else %}
-					<span class="post-meta">{{ post.date | date: date_format }}</span>
-						<h3 class="topic_default">
-						<a class="post-link" href="{{ post.url | relative_url }}">
-						{{ post.title | escape }}
-						</a>
-						</h3>
-						{%- if site.show_excerpts -%}
-							{{ post.excerpt }}
-						{%- endif -%}
+            	<div class="topic-div">
+						<span class="post-date"> {{ post.date | date: date_format }}
+							<h3 class="topic-color_default">
+								<a class="post-link" href="{{ post.url | relative_url }}"</a>
+									{{ post.title | escape }}
+								</a>
+							</h3>
+						<span class="topic-span-icon">
+							<img class="topic-icon" src="/images/default.png">
+						</span>
+					</div>
 				{% endif %}
       </li>
       {%- endfor -%}

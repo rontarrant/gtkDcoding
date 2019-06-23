@@ -1,5 +1,5 @@
 ---
-title: 0037 – Dialogs III - Opening Multiple Files
+title: "0037: Dialogs III - Opening Multiple Files"
 topic: dialog
 layout: post
 description: How to retrieve multiple file names using a GTK FileChooserDialog - a D-language tutorial.

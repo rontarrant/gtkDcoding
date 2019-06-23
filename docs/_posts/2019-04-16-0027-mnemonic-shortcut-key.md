@@ -1,5 +1,5 @@
 ---
-title: 0027 – Menus II - Mnemonics (Shortcut Keys)
+title: "0027: Menus II - Mnemonics (Shortcut Keys)"
 topic: menu
 layout: post
 description: How to do set up keyboard shortcuts for GTK MenuItems - a D language tutorial.

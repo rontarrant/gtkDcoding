@@ -1,5 +1,5 @@
 ---
-title: 0024 - Switch and LightSwitch
+title: "0024: Switch and LightSwitch"
 topic: button
 layout: post
 description: How to use a GTK Switch widget to simulate a light switch - a D language tutorial.

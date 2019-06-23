@@ -1,5 +1,5 @@
 ---
-title: 0032 – Menus VII - Adding Accelerator Keys to MenuItems
+title: "0032: Menus VII - Adding Accelerator Keys to MenuItems"
 topic: menu
 layout: post
 description: How to add Accelerator keys to a GTK MenuItem - a D language tutorial.

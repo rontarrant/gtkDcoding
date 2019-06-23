@@ -1,5 +1,5 @@
 ---
-title: 0041 – Dialogs VII - The ColorChooserDialog
+title: "0041: Dialogs VII - The ColorChooserDialog"
 topic: dialog
 layout: post
 description: Using a standard GTK ColorChooserDialog - the Dialog behind the ColorChooserButton - a D-language tutorial.

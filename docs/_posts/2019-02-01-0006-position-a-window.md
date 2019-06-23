@@ -1,5 +1,5 @@
 ---
-title: 0006 - Position a Window
+title: "0006: Position a Window"
 topic: window
 layout: post
 description: How to position a GTK Window - a D language tutorial.

@@ -1,4 +1,5 @@
 ---
+title: "0001: Introduction to the Test Rig"
 layout: post
 topic: window
 description: Introduction to the GTK TestRig window and how to install syntax highlighter files for PSPad and CodeBlocks - a D language tutorial.

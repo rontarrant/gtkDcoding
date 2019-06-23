@@ -1,5 +1,5 @@
 ---
-title: 0036 – Dialogs II - Opening a Single File
+title: "0036: Dialogs II - Opening a Single File"
 topic: dialog
 layout: post
 description: How to retrieve a single filename using a GTK FileChooserDialog - a D-language tutorial.
