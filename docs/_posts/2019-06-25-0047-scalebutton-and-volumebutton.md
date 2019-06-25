@@ -1,5 +1,6 @@
 ---
 title: "0047: The ScaleButton and VolumeButton"
+topic: button
 layout: post
 description: How to use the GTK VolumeButton and the ScaleButton.
 author: Ron Tarrant
