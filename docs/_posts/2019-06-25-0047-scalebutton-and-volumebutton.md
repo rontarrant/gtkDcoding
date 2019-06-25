@@ -13,7 +13,7 @@ Because the `ScaleButton` is the more involved of these two, I’m going to star
 
 As such, [here is the first code file example and it’s for the VolumeButton]( https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_10_volume.d).
 
-### A `VolumeButton`
+### A VolumeButton
 
 As with our previous example of the `SpinButton`, nothing really changes at the top of the file except a couple of import statements:
 	
