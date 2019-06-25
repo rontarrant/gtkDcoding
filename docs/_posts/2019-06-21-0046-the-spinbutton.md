@@ -189,8 +189,6 @@ That’s it for this time around. Have a great day.
 <div style="float: left;">
 	<a href="https://gtkdcoding.com/2019/06/18/0045-split-a-window-into-panes.html">Previous: Split a Window into Panes</a>
 </div>
-<BR>
-<BR>
 <div style="float: right;">
 	<a href="https://gtkdcoding.com/2019/06/25/0047-scalebutton-and-volumebutton.html">Next: ScaleButton & VolumeButton</a>
 </div>
