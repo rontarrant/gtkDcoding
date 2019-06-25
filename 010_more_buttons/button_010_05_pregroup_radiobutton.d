@@ -23,13 +23,13 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Window";
+	string title = "Pre-group RadioButtons";
 	RadioBox radioBox;
 	
 	this()
 	{
 		super(title);
-		setDefaultSize(500, 500);
+		setDefaultSize(500, 140);
 	
 		radioBox = new RadioBox();
 		add(radioBox);

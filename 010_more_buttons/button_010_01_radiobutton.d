@@ -24,7 +24,7 @@ class TestRigWindow : MainWindow
 {
 	string title = "RadioButton Example";
 	RadioBox radioBox;
-	int width = 500, height = 500;
+	int width = 500, height = 140;
 	
 	this()
 	{

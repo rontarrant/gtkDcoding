@@ -125,4 +125,8 @@ And that’s pretty much it for now. See you next time.
 <div style="float: left;">
 	<a href="https://gtkdcoding.com/2019/06/14/0044-custom-dialog-iii.html">Previous: A Fancy Dialog</a>
 </div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/06/21/0046-the-spinbutton.html">Next: SpinButton</a>
+</div>
+<BR>
 

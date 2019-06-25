@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// ScaleButton example
 
 import std.stdio;
 
@@ -25,11 +25,12 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Test Rig with ScaleButton";
+	string title = "ScaleButton Example";
 	int borderWidth = 10;
 	int width = 250;
 	int height = 175;
 	AppBox appBox;
+	string exitMessage = "Bye.";
 	
 	this()
 	{
@@ -43,12 +44,12 @@ class TestRigWindow : MainWindow
 		
 		showAll();
 
-	} // this() CONSTRUCTOR
+	} // this()
 	
 		
 	void quitApp(Widget widget)
 	{
-		writeln("Bye.");
+		writeln(exitMessage);
 		Main.quit();
 		
 	} // quitApp()
@@ -59,13 +60,15 @@ class TestRigWindow : MainWindow
 class AppBox : Box
 {
 	MyScaleButton myScaleButton;
+	int localPadding = 0, globalPadding = 10;
+	bool expand = false, fill = false;
 	
 	this()
 	{
-		super(Orientation.VERTICAL, 10);
+		super(Orientation.VERTICAL, globalPadding);
 		
 		myScaleButton = new MyScaleButton();
-		packStart(myScaleButton, false, false, 0);
+		packStart(myScaleButton, expand, fill, localPadding);
 		
 	} // this()
 
@@ -80,6 +83,7 @@ class MyScaleButton : ScaleButton
 
 	Adjustment adjustment;
 	double initialValue = 5;
+
 	double pageIncrement = 1;
 	double pageSize = 0;
 	
@@ -91,9 +95,11 @@ class MyScaleButton : ScaleButton
 	
 	this()
 	{
+		double compensateForWinBug = initialValue + 1;
+		
 		super(IconSize.BUTTON, minimum, maximum, step, icons);
 		
-		adjustment = new Adjustment(initialValue + 1, minimum, maximum, step, pageIncrement, pageSize);
+		adjustment = new Adjustment(compensateForWinBug, minimum, maximum, step, pageIncrement, pageSize);
 		setAdjustment(adjustment);
 		setValue(initialValue);
 //		addOnValueChanged(&valueChanged);

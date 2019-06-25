@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// GtkD VolumeButton example
 
 import std.stdio;
 
@@ -26,7 +26,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Test Rig with VolumeButton";
+	string title = "VolumeButton Example";
 	int borderWidth = 10;
 	int width = 250;
 	int height = 175;
@@ -44,7 +44,7 @@ class TestRigWindow : MainWindow
 		
 		showAll();
 
-	} // this() CONSTRUCTOR
+	} // this()
 	
 		
 	void quitApp(Widget widget)
@@ -60,13 +60,15 @@ class TestRigWindow : MainWindow
 class AppBox : Box
 {
 	MyVolumeButton myVolumeButton;
+	int localPadding = 0, globalPadding = 10;
+	bool expand = false, fill = false;
 	
 	this()
 	{
-		super(Orientation.VERTICAL, 10);
+		super(Orientation.VERTICAL, globalPadding);
 		
 		myVolumeButton = new MyVolumeButton();
-		packStart(myVolumeButton, false, false, 0);
+		packStart(myVolumeButton, expand, fill, localPadding);
 		
 	} // this()
 
@@ -86,9 +88,11 @@ class MyVolumeButton : VolumeButton
 	
 	this()
 	{
+		double compensateForWinBug = initialValue + 1;
+		
 		super();
 		
-		adjustment = new Adjustment(initialValue + 1, minimum, maximum, step, pageIncrement, pageSize);
+		adjustment = new Adjustment(compensateForWinBug, minimum, maximum, step, pageIncrement, pageSize);
 		setAdjustment(adjustment);
 		setValue(initialValue);
 		addOnValueChanged(&valueChanged);
