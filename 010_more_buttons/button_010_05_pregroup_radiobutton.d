@@ -29,7 +29,6 @@ class TestRigWindow : MainWindow
 	this()
 	{
 		super(title);
-		setDefaultSize(500, 140);
 	
 		radioBox = new RadioBox();
 		add(radioBox);

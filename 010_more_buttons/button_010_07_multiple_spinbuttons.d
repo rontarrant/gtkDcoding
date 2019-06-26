@@ -25,7 +25,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Test Rig with SpinButtons";
+	string title = "SpinButtons";
 	AppBox appBox;
 	
 	this()
@@ -99,7 +99,7 @@ class DoubleSpinButton : SpinButton
 
 	void valueChanged(SpinButton sb)
 	{
-		writeln("Double", getValue());
+		writeln("Double: ", getValue());
 		
 	} // valueChanged()
 
@@ -140,7 +140,7 @@ class FloatSpinButton : SpinButton
 
 	void valueChanged(SpinButton sb)
 	{
-		writeln("Float Standard", getValue());
+		writeln("Float Standard: ", getValue());
 		
 	} // valueChanged()
 
@@ -182,7 +182,7 @@ class PrecisionSpinButton : SpinButton
 
 	void valueChanged(SpinButton sb)
 	{
-		writeln("Float Precision", getValue());
+		writeln("Float Precision: ", getValue());
 		
 	} // valueChanged()
 
