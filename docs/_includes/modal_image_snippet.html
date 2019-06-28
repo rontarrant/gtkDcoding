@@ -1,0 +1,115 @@
+<!--
+ * Filenames to change:
+ * 	line 28: filename of screenshot image
+ * 	line 70: filename of terminal image
+ * 	line 112: filename of sample code
+ * 	
+ *	Modal things to remember:
+ *		line 28 must be of the form: "img0", "img1", "img2", "img3", etc.
+ *		line 42 must match line 28
+ *		line 33 must be of the form: "img01", "img11", "img22", "img33", etc.
+ *		line 43 must match line 33
+ *		modal ID follow image ID naming conventions
+ *		
+ *		line 28: image ID
+ *		line 31: modal ID
+ *		line 33: modal image ID
+ *		line 39: modal ID
+ *		line 42: image ID 
+ *		line 43: modal image ID
+-->
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/002_button/button_002_07.png" alt="Current example output">
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">
+				<span class="close">&times;</span>
+				<img class="modal-content" id="img00">
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");
+			var modalImg = document.getElementById("img00");
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img4" src="/images/screenshots/002_button/button_002_07_term.png" alt="Current example terminal output">
+
+			<!-- Modal for terminal shot -->
+			<div id="modal4" class="modal">
+				<span class="close4">&times;</span>
+				<img class="modal-content" id="img44">
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal4");
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img4");
+			var modalImg = document.getElementById("img44");
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close4")[0];
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_07_bool_callback.d" target="_blank">here</a>.
+	</div>
+</div>
+
