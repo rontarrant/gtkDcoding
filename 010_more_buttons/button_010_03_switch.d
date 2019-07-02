@@ -5,7 +5,9 @@ import std.stdio;
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Widget;
+import gtk.Box;
 import gtk.Switch;
+import gtk.Label;
 
 void main(string[] args)
 {
@@ -24,7 +26,7 @@ class TestRigWindow : MainWindow
 {
 	string title = "Switch Example";
 	string byeBye = "Bye-bye";
-	MySwitch lightSwitch;
+	AppBox appBox;
 
 	
 	this()
@@ -32,8 +34,8 @@ class TestRigWindow : MainWindow
 		super(title);
 		addOnDestroy(&quitApp);
 		
-		lightSwitch = new MySwitch();
-		add(lightSwitch);
+		appBox = new AppBox();
+		add(appBox);
 		
 		showAll();
 		
@@ -53,9 +55,25 @@ class TestRigWindow : MainWindow
 } // class TestRigWindow
 
 
+class AppBox : Box
+{
+	MySwitch mySwitch;
+	int globalPadding = 10, localPadding = 5;
+		
+	this()
+	{
+		super(Orientation.HORIZONTAL, globalPadding);
+		
+		mySwitch = new MySwitch();
+		packStart(mySwitch, false, false, localPadding);
+
+	} // this()
+
+} // class AppBox
+
+
 class MySwitch : Switch
 {
-	
 	this()
 	{
 		super();

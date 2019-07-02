@@ -27,7 +27,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Multiple Menus Example";
+	string title = "Dialog: Help - About";
 
 	this()
 	{
