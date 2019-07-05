@@ -150,9 +150,9 @@ Until next time, make the gods of coding smile upon you and your work.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/05/24/0038-file-save-dialog.html">Previous: Saving a File</a>
+	<a href="/2019/05/24/0038-file-save-dialog.html">Previous: Saving a File</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/05/31/0040-messagedialog.html">Next: MessageDialog</a>
+	<a href="/2019/05/31/0040-messagedialog.html">Next: MessageDialog</a>
 </div>
 <BR>

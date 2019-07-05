@@ -162,6 +162,6 @@ Until then, happy D-coding and may the widgets be with you.
 
 <BR>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/01/15/0001-imperative-test-rig.html">Next: Introduction to the Test Rig</a>
+	<a href="/2019/01/15/0001-imperative-test-rig.html">Next: Introduction to the Test Rig</a>
 </div>
 <BR>

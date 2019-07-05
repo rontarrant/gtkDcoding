@@ -251,9 +251,9 @@ Now, since this looks to be the longest blog post I've done to date, pay no atte
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/04/23/0029-radiomenuitem.html">Previous: RadioMenuItem</a>
+	<a href="/2019/04/23/0029-radiomenuitem.html">Previous: RadioMenuItem</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/04/30/0031-imagemenuitem.html">Next: ImageMenuItem</a>
+	<a href="/2019/04/30/0031-imagemenuitem.html">Next: ImageMenuItem</a>
 </div>
 <BR>

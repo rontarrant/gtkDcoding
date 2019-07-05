@@ -160,9 +160,9 @@ We'll get into all this eventually, but for now, you have a more-or-less compreh
 And that’s the lowdown on *GTK*’s version of the **Model-View-Controller** architectural pattern. Next time, we’ll start off with the simplest of the widgets that follow this paradigm, The `ComboBoxText`. See you then.
 
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/06/25/0047-scalebutton-and-volumebutton.html">Previous: ScaleButton & VolumeButton</a>
+	<a href="/2019/06/25/0047-scalebutton-and-volumebutton.html">Previous: ScaleButton & VolumeButton</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/07/02/0049-mvc-ii-comboboxtext.html">Next: ComboBoxText</a>
+	<a href="/2019/07/02/0049-mvc-ii-comboboxtext.html">Next: ComboBoxText</a>
 </div>
 <br>

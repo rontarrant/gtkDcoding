@@ -116,9 +116,9 @@ Bye, now.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/04/12/0026-menu-basics.html">Previous: Menu Basics</a>
+	<a href="/2019/04/12/0026-menu-basics.html">Previous: Menu Basics</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/04/19/0028-checkmenuitems.html">Next: CheckMenuItem</a>
+	<a href="/2019/04/19/0028-checkmenuitems.html">Next: CheckMenuItem</a>
 </div>
 <BR>

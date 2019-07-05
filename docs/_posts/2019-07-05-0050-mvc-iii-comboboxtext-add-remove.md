@@ -169,6 +169,6 @@ Next time, we’ll take a look at the `ComboBox` and look at populating it with 
 Until then…
 
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/07/02/0049-mvc-ii-comboboxtext.html">Previous: ComboBoxText</a>
+	<a href="/2019/07/02/0049-mvc-ii-comboboxtext.html">Previous: ComboBoxText</a>
 </div>
 <br>

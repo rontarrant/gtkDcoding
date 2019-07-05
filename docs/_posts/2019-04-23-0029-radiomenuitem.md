@@ -133,9 +133,9 @@ And that’s it for this time, but we’ll be back with the practical example on
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/04/19/0028-checkmenuitems.html">Previous: CheckMenuItem</a>
+	<a href="/2019/04/19/0028-checkmenuitems.html">Previous: CheckMenuItem</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/04/26/0030-radiomenuitem-practical.html">Next: Practical RadioMenuItem</a>
+	<a href="/2019/04/26/0030-radiomenuitem-practical.html">Next: Practical RadioMenuItem</a>
 </div>
 <BR>

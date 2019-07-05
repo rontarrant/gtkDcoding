@@ -275,9 +275,9 @@ See you next time for *Part II*.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/06/04/0041-colorchooserdialog.html">Previous: ColorChooserDialog</a>
+	<a href="/2019/06/04/0041-colorchooserdialog.html">Previous: ColorChooserDialog</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/06/11/0043-custom-dialog-ii.html">Next: Dialog Action Area</a>
+	<a href="/2019/06/11/0043-custom-dialog-ii.html">Next: Dialog Action Area</a>
 </div>
 <BR>

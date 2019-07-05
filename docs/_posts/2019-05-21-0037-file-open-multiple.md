@@ -80,9 +80,9 @@ Next time, we'll tackle a `Dialog` for saving files. Until then...
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/05/17/0036-file-open-dialogs.html">Previous: Open File Dialog</a>
+	<a href="/2019/05/17/0036-file-open-dialogs.html">Previous: Open File Dialog</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/05/24/0038-file-save-dialog.html">Next: Save File Dialog</a>
+	<a href="/2019/05/24/0038-file-save-dialog.html">Next: Save File Dialog</a>
 </div>
 <BR>

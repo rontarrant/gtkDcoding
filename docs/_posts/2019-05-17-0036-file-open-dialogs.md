@@ -122,9 +122,9 @@ That’s it for today. Next time, we’ll tackle opening multiple files. Until t
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/05/14/0035-help-about-dialog.html">Previous: About Dialog</a>
+	<a href="/2019/05/14/0035-help-about-dialog.html">Previous: About Dialog</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/05/21/0037-file-open-multiple.html">Next: Dialog - Open Multiple Filesas</a>
+	<a href="/2019/05/21/0037-file-open-multiple.html">Next: Dialog - Open Multiple Filesas</a>
 </div>
 <BR>

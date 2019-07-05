@@ -152,9 +152,9 @@ And so we wrap up another *gtkDcoding* blog post with this: May your bugs only n
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/03/31/x0002-gtkd-in-a-linux-environment.html">Previous: GtkD Linux</a>
+	<a href="/2019/03/31/x0002-gtkd-in-a-linux-environment.html">Previous: GtkD Linux</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/04/05/0024-switch-and-light-switch.html">Next: Switch</a>
+	<a href="/2019/04/05/0024-switch-and-light-switch.html">Next: Switch</a>
 </div>
 <BR>

@@ -106,9 +106,9 @@ Take care and see you next time.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/05/31/0040-messagedialog.html">Previous: MessageDialog</a>
+	<a href="/2019/05/31/0040-messagedialog.html">Previous: MessageDialog</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/06/07/0042-custom-dialog-i.html">Next: Dialog Aesthetics</a>
+	<a href="/2019/06/07/0042-custom-dialog-i.html">Next: Dialog Aesthetics</a>
 </div>
 <BR>

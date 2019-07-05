@@ -47,9 +47,9 @@ Okay, a short one this time. Until next time, keep those cards and letters comin
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/01/29/0005-window-size.html">Previous: Size a Window</a>
+	<a href="/2019/01/29/0005-window-size.html">Previous: Size a Window</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/02/05/0007-button-release-and-reorganizing-the-code.html">Next: Button Release</a>
+	<a href="/2019/02/05/0007-button-release-and-reorganizing-the-code.html">Next: Button Release</a>
 </div>
 <BR>

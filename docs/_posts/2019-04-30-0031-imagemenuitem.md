@@ -148,9 +148,9 @@ And here we are at the end of another *gtkDcoding* blog post. May you never get 
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/04/26/0030-radiomenuitem-practical.html">Previous: Practical RadioMenuItem</a>
+	<a href="/2019/04/26/0030-radiomenuitem-practical.html">Previous: Practical RadioMenuItem</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/05/03/0032-accelerator-keys.html">Next: Accelerator Keys</a>
+	<a href="/2019/05/03/0032-accelerator-keys.html">Next: Accelerator Keys</a>
 </div>
 <BR>

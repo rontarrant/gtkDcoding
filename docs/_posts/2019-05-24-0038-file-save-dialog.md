@@ -188,9 +188,9 @@ Until then.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/05/21/0037-file-open-multiple.html">Previous: Dialog - Open Multiple Files</a>
+	<a href="/2019/05/21/0037-file-open-multiple.html">Previous: Dialog - Open Multiple Files</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/05/28/0039-file-save-as-dialog.html">Next: SaveAs Dialog</a>
+	<a href="/2019/05/28/0039-file-save-as-dialog.html">Next: SaveAs Dialog</a>
 </div>
 <BR>

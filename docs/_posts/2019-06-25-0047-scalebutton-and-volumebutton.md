@@ -167,9 +167,9 @@ I left a bunch of different icon sets commented out in the code file so you have
 And there you go, the `ScaleButton` and the `VolumeButton` in party hats. Stay happy, keep coding, and see you next time.
 
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/06/21/0046-the-spinbutton.html">Previous: SpinButton</a>
+	<a href="/2019/06/21/0046-the-spinbutton.html">Previous: SpinButton</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/06/28/0048-mvc-i-introduction.html">Next: Introduction to the Model-View-Controller</a>
+	<a href="/2019/06/28/0048-mvc-i-introduction.html">Next: Introduction to the Model-View-Controller</a>
 </div>
 <br>

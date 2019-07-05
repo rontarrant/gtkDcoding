@@ -152,9 +152,9 @@ Okay, well that was fun. Keep those cards and letters coming in and I’ll see y
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/03/22/0020-image-buttons.html">Previous: Image Buttons</a>
+	<a href="/2019/03/22/0020-image-buttons.html">Previous: Image Buttons</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/03/29/0022-grids.html">Next: Grids</a>
+	<a href="/2019/03/29/0022-grids.html">Next: Grids</a>
 </div>
 <BR>

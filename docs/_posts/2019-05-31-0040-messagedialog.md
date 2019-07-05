@@ -140,9 +140,9 @@ Bye, now.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/05/28/0039-file-save-as-dialog.html">Previous: SaveAs Dialog</a>
+	<a href="/2019/05/28/0039-file-save-as-dialog.html">Previous: SaveAs Dialog</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/06/04/0041-colorchooserdialog.html">Next: ColorChooserDialog</a>
+	<a href="/2019/06/04/0041-colorchooserdialog.html">Next: ColorChooserDialog</a>
 </div>
 <BR>

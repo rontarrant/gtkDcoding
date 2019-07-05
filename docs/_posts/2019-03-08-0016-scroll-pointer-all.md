@@ -91,9 +91,9 @@ And so we come to the end of another blog post. Be kind to each other and we’l
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/03/05/0015-enter-leave.html">Previous: Entering and Leaving</a>
+	<a href="/2019/03/05/0015-enter-leave.html">Previous: Entering and Leaving</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/03/12/0017-change-pointer.html">Next: Mouse Pointer</a>
+	<a href="/2019/03/12/0017-change-pointer.html">Next: Mouse Pointer</a>
 </div>
 <BR>

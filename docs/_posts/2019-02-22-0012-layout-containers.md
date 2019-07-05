@@ -104,9 +104,9 @@ Bye, now.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/02/19/0011-callback-chains.html">Previous: Callback Chains</a>
+	<a href="/2019/02/19/0011-callback-chains.html">Previous: Callback Chains</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/02/26/0013-scrolled-layout.html">Next: Scrolled Layout</a>
+	<a href="/2019/02/26/0013-scrolled-layout.html">Next: Scrolled Layout</a>
 </div>
 <BR>

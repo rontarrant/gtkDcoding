@@ -135,9 +135,9 @@ So, that’s the `Dialog`’s action area. Next time we finish up this mini-seri
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/06/07/0042-custom-dialog-i.html">Previous: Dialog Aesthetics</a>
+	<a href="/2019/06/07/0042-custom-dialog-i.html">Previous: Dialog Aesthetics</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/06/14/0044-custom-dialog-iii.html">Next: A Fancy Dialog</a>
+	<a href="/2019/06/14/0044-custom-dialog-iii.html">Next: A Fancy Dialog</a>
 </div>
 <BR>

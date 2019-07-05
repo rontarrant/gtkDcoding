@@ -147,9 +147,9 @@ And that’s all for this time. Next time, we’ll continue this discussion whil
 See you then.
 
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/06/28/0048-mvc-i-introduction.html">Previous: MVC - Introduction</a>
+	<a href="/2019/06/28/0048-mvc-i-introduction.html">Previous: MVC - Introduction</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/07/05/0050-mvc-iii-comboboxtext-add-remove.html">Next: ComboBoxText - Add & Remove</a>
+	<a href="/2019/07/05/0050-mvc-iii-comboboxtext-add-remove.html">Next: ComboBoxText - Add & Remove</a>
 </div>
 <br>

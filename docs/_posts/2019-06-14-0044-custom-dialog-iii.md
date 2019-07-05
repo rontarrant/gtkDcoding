@@ -166,9 +166,9 @@ And remember: *semper ubi sub-ubi*.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/06/11/0043-custom-dialog-ii.html">Previous: Dialog Action Area</a>
+	<a href="/2019/06/11/0043-custom-dialog-ii.html">Previous: Dialog Action Area</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/06/18/0045-split-a-window-into-panes.html">Next: Split a Window into Panes</a>
+	<a href="/2019/06/18/0045-split-a-window-into-panes.html">Next: Split a Window into Panes</a>
 </div>
 <BR>

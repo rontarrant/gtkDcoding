@@ -270,9 +270,9 @@ And that’s it for another *gtkDcoding* blog post. Until next time…
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/05/07/0033-fake-image-menu-and-accel.html">Previous: Fake ImageMenuItem</a>
+	<a href="/2019/05/07/0033-fake-image-menu-and-accel.html">Previous: Fake ImageMenuItem</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/05/14/0035-help-about-dialog.html">Next: Dialog I: About Dialog</a>
+	<a href="/2019/05/14/0035-help-about-dialog.html">Next: Dialog I: About Dialog</a>
 </div>
 <BR>

@@ -120,9 +120,9 @@ So, happy D-coding and may the Widgets be with you, as always.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/03/08/0016-scroll-pointer-all.html">Previous: Scrollwheel, etc.</a>
+	<a href="/2019/03/08/0016-scroll-pointer-all.html">Previous: Scrollwheel, etc.</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/03/15/0018-variations-on-a-text-entry.html">Next: Text Entry Variations</a>
+	<a href="/2019/03/15/0018-variations-on-a-text-entry.html">Next: Text Entry Variations</a>
 </div>
 <BR>

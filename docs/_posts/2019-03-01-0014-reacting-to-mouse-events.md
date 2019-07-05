@@ -104,9 +104,9 @@ Next time, we’ll dig into some more mouse events. Until then, happy D-coding a
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/02/26/0013-scrolled-layout.html">Previous: Scrolled Layout</a>
+	<a href="/2019/02/26/0013-scrolled-layout.html">Previous: Scrolled Layout</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/03/05/0015-enter-leave.html">Next: Entering and Leaving</a>
+	<a href="/2019/03/05/0015-enter-leave.html">Next: Entering and Leaving</a>
 </div>
 <BR>

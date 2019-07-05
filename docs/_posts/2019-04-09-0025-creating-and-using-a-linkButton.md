@@ -100,9 +100,9 @@ And that’s it for this time, a short post for a short day. Come on back again 
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/04/05/0024-switch-and-light-switch.html">Previous: Switch</a>
+	<a href="/2019/04/05/0024-switch-and-light-switch.html">Previous: Switch</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/04/12/0026-menu-basics.html">Next: Menu Basics</a>
+	<a href="/2019/04/12/0026-menu-basics.html">Next: Menu Basics</a>
 </div>
 <BR>

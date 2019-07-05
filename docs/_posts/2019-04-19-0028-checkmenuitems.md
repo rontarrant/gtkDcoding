@@ -222,9 +222,9 @@ Until then, happy coding, happy hunting, happy birthday, or happy New Year, what
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/04/16/0027-mnemonic-shortcut-key.html">Previous: Mnemonics</a>
+	<a href="/2019/04/16/0027-mnemonic-shortcut-key.html">Previous: Mnemonics</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/04/23/0029-radiomenuitem.html">Next: RadioMenuItem</a>
+	<a href="/2019/04/23/0029-radiomenuitem.html">Next: RadioMenuItem</a>
 </div>
 <BR>

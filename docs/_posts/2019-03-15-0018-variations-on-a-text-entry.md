@@ -126,9 +126,9 @@ Next time, we’ll continue with two more variations on the `Entry` widget. Unti
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/03/12/0017-change-pointer.html">Previous: Mouse Pointer</a>
+	<a href="/2019/03/12/0017-change-pointer.html">Previous: Mouse Pointer</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/03/19/0019-disappearing-text-entry.html">Next: Disappearing Text Entry</a>
+	<a href="/2019/03/19/0019-disappearing-text-entry.html">Next: Disappearing Text Entry</a>
 </div>
 <BR>

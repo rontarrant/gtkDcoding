@@ -182,9 +182,9 @@ Thanks for reading and do please come back for the next post. Until then...
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/04/30/0031-imagemenuitem.html">Previous: ImageMenuItem</a>
+	<a href="/2019/04/30/0031-imagemenuitem.html">Previous: ImageMenuItem</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/05/07/0033-fake-image-menu-and-accel.html">Next: Fake ImageMenuItem</a>
+	<a href="/2019/05/07/0033-fake-image-menu-and-accel.html">Next: Fake ImageMenuItem</a>
 </div>
 <BR>

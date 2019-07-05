@@ -147,9 +147,9 @@ Until next time… bye.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/05/10/0034-accelgroup-singleton.html">Previous: AccelGroup Singleton</a>
+	<a href="/2019/05/10/0034-accelgroup-singleton.html">Previous: AccelGroup Singleton</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/05/17/0036-file-open-dialogs.html">Next: Open File Dialog</a>
+	<a href="/2019/05/17/0036-file-open-dialogs.html">Next: Open File Dialog</a>
 </div>
 <BR>

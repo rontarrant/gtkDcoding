@@ -78,9 +78,9 @@ Next time, I’ll introduce you to images on buttons and how to swap them. Until
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/03/15/0018-variations-on-a-text-entry.html">Previous: Text Entry Variations</a>
+	<a href="/2019/03/15/0018-variations-on-a-text-entry.html">Previous: Text Entry Variations</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/03/22/0020-image-buttons.html">Next: Image Buttons</a>
+	<a href="/2019/03/22/0020-image-buttons.html">Next: Image Buttons</a>
 </div>
 <BR>

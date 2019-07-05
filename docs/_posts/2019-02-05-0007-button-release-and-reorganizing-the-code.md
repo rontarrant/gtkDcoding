@@ -127,9 +127,9 @@ And that’s all for now. Be with them widgets and happy D-coding.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/02/01/0006-position-a-window.html">Previous: Position a Window</a>
+	<a href="/2019/02/01/0006-position-a-window.html">Previous: Position a Window</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/02/08/0008-callbacks.html">Next: Callbacks</a>
+	<a href="/2019/02/08/0008-callbacks.html">Next: Callbacks</a>
 </div>
 <BR>

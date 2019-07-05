@@ -155,9 +155,9 @@ Until then...
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/05/03/0032-accelerator-keys.html">Previous: Accelerator Keys</a>
+	<a href="/2019/05/03/0032-accelerator-keys.html">Previous: Accelerator Keys</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/05/10/0034-accelgroup-singleton.html">Next: AccelGroup Singleton</a>
+	<a href="/2019/05/10/0034-accelgroup-singleton.html">Next: AccelGroup Singleton</a>
 </div>
 <BR>

@@ -106,9 +106,9 @@ Two for the price of one, a scrolled layout and a tooltip. The coolness just amp
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/02/22/0012-layout-containers.html">Previous: Layout Containers</a>
+	<a href="/2019/02/22/0012-layout-containers.html">Previous: Layout Containers</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/03/01/0014-reacting-to-mouse-events.html">Next: Mouse Events</a>
+	<a href="/2019/03/01/0014-reacting-to-mouse-events.html">Next: Mouse Events</a>
 </div>
 <BR>

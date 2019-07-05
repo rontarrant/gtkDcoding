@@ -107,9 +107,9 @@ Until next time, happy D-coding and may your Widgets always find their way home.
 
 <BR>
 <div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/04/02/0023-radio-and-color-buttons.html">Previous: Radio and Color Buttons</a>
+	<a href="/2019/04/02/0023-radio-and-color-buttons.html">Previous: Radio and Color Buttons</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/04/09/0025-creating-and-using-a-linkbutton.html">Next: LinkButton</a>
+	<a href="/2019/04/09/0025-creating-and-using-a-linkbutton.html">Next: LinkButton</a>
 </div>
 <BR>
