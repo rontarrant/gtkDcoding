@@ -16,7 +16,99 @@ If you haven’t settled on an editor with support for *D*, I’d like to make a
 
 ## The Test Rig Code
 
-The code file for this entry is available [here](https://github.com/rontarrant/gtkDcoding/blob/master/001_window/test_rig_001_01_imperative.d).
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/001_window/test_rig_001_01.png" alt="Current example output">
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																								<!-- modal# -->
+				<span class="close0">&times;</span>																					<!-- close# -->
+				<img class="modal-content" id="img00">																					<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");																			// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");																				// img#
+			var modalImg = document.getElementById("img00");																		// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];															// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/001_window/test_rig_001_01_term.png" alt="Current example terminal output">
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																												<!-- modal# -->
+				<span class="close1">&times;</span>																										<!-- close# -->
+				<img class="modal-content" id="img11">																									<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																							// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																								// img#
+			var modalImg = document.getElementById("img11");																						// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];																				// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																																<!-- filename (below)-->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/test_rig_001_01_imperative.d" target="_blank">here</a>.
+	</div>
+</div>
 
 This version of the test rig is written in the imperative paradigm. There’s a second one we’ll look at next time that’s written for OOP. And now here’s a breakdown of the test rig code:
 
@@ -63,13 +155,6 @@ This line creates the window the user will see when the application is run. This
 	testRigWindow.addOnDestroy(delegate void(Widget w) {quitApp();});
 
 This line breaks down as:
-
-<figure class="right">
-	<img src="/images/test_rig_000_01_imperative.png" alt="Me" style="width: 150px; height: 172px;">
-	<figcaption>
-	The TestRig Window in all it's glory.
-	</figcaption>
-</figure>
 
 - `testRigWindow.addOnDestroy()` makes a call to the window’s destructor (opposite of constructor) and interrupts it, allowing us to wedge in another function call of our own before the window dies,
 - `quitApp()` is the function we want called before the window is destroyed,
@@ -126,11 +211,11 @@ That’s it for this lesson. We’ve got *D* and *GtkD* installed and we’ve do
 
 Next time, we’ll look at the OOP version of the test rig and build our first button. Until then, happy *D*-coding and may the widgets be with you.
 
-<BR>
-<div style="float: left;">
-	<a href="https://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html">Previous: Introduction to GtkDcoding</a>
+<div class="previous-next-div">
+	<div style="float: left;">
+		<a href="/2019/01/11/0000-introduction-to-gtkDcoding.html">Previous: Introduction to GtkDcoding</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/01/18/0002-oop-test-rig.html">Next: OOP Test Rig Breakdown</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/01/18/0002-oop-test-rig.html">Next: OOP Test Rig Breakdown</a>
-</div>
-<BR>

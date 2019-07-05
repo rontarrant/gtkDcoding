@@ -185,7 +185,6 @@ And just for fun, I’ve included [a third code file](https://github.com/rontarr
 
 That’s it for this time around. Have a great day.
 
-<BR>
 <div style="float: left;">
 	<a href="https://gtkdcoding.com/2019/06/18/0045-split-a-window-into-panes.html">Previous: Split a Window into Panes</a>
 </div>
