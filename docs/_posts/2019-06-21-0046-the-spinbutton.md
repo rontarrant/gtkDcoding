@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-## 0047 – SpinButton
+## 0046 – SpinButton
 
 This one’s both easy and tricky. Let me explain…
 
