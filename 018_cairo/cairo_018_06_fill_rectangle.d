@@ -1,3 +1,5 @@
+// Cairo: Filled Rectangle
+
 import std.stdio;
 import std.conv;
 

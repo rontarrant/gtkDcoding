@@ -1,4 +1,4 @@
-// put text in a DrawingArea
+// Cairo: Toy Text
 
 import std.stdio;
 

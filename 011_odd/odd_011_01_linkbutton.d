@@ -1,4 +1,4 @@
-// LinkButton widget
+// LinkButton without Text
 
 import std.stdio;
 
@@ -21,7 +21,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "LinkButton example";
+	string title = "LinkButton without Text";
 	string link = "http://gtkDcoding.com";
 	string message = "The text entry box holds: ";
 	LinkButton linkButton;

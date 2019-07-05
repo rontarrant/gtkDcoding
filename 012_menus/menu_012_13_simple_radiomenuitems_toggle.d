@@ -1,3 +1,5 @@
+// RadioMenuItems - on Observer
+
 import std.stdio;
 
 import gtk.MainWindow;
@@ -27,7 +29,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "RadioMenuItems Example";
+	string title = "RadioMenuItems - no Observer";
 
 	this()
 	{

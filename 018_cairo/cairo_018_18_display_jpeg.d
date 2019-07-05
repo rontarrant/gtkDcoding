@@ -1,3 +1,5 @@
+// Cairo: Display JPeg
+
 import std.stdio;
 
 import gtk.MainWindow;

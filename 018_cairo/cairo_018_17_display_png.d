@@ -1,3 +1,5 @@
+// Display PNG
+
 import std.stdio;
 
 import gtk.MainWindow;

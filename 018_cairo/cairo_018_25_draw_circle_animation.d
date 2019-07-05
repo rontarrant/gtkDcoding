@@ -1,4 +1,4 @@
-// Cairo: Draw an arc
+// Cairo: Animte Drawing a Circle
 
 import std.stdio;
 import std.conv;

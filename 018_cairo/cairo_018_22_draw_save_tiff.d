@@ -1,3 +1,5 @@
+// Cairo: Draw and Save a TIFF
+
 import std.stdio;
 import std.conv;
 
@@ -24,7 +26,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Cairo Draw and Save a TIFF";
+	string title = "Cairo: Draw and Save a TIFF";
 	AppBox appBox;
 	
 	this()

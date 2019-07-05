@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// Switch Light ON/OFF with Color Changes
 
 import std.stdio;
 
@@ -37,7 +37,7 @@ class TestRigWindow : MainWindow
 		
 		showAll();
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 		
 	void quitApp(Widget widget)
@@ -48,8 +48,6 @@ class TestRigWindow : MainWindow
 		
 	} // quitApp()
 
-
-	
 } // class TestRigWindow
 
 
@@ -117,15 +115,17 @@ class LightBulb : ColorButton
 {
 	bool state; // ON or OFF
 	RGBA defaultOffColor, offColor, defaultOnColor, onColor;
+	float redOff = .75, greenOff = .75, blueOff = .75, alphaOff = 1.0;
+	float redOn = 1.0, greenOn = .9803, blueOn = .7686, alphaOn = 1.0; 
 	
 	this()
 	{
 		super();
 
-		defaultOffColor = new RGBA(.75, .75, .75, 1.0); // mid-gray
+		defaultOffColor = new RGBA(redOff, greenOff, blueOff, alphaOff); // mid-gray
 		offColor = defaultOffColor;
 
-		defaultOnColor = new RGBA(1.0, .9803, .7686);
+		defaultOnColor = new RGBA(redOn, greenOn, blueOn, alphaOn);
 		onColor = defaultOnColor;
 		
 		addOnColorSet(&setColor);
@@ -212,7 +212,6 @@ class ResetButton : Button
 		{
 			lightBulb.setRgba(lightBulb.offColor);
 		}
-
 	
 	} // reset()
 	

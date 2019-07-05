@@ -1,4 +1,4 @@
-// LinkButton widget
+// LinkButton with Text
 
 import std.stdio;
 
@@ -22,7 +22,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "LinkButton example";
+	string title = "LinkButton with Text";
 	string link = "http://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html";
 	string linkText = "GTK D-coding";
 	string message = "The text entry box holds: ";

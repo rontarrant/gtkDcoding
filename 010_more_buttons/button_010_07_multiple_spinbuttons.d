@@ -25,7 +25,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "SpinButtons";
+	string title = "Multiple SpinButtons";
 	AppBox appBox;
 	
 	this()

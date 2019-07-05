@@ -1,4 +1,4 @@
-// paned window example
+// Paned Window - Horizontal
 
 import std.stdio;
 
@@ -24,7 +24,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
+	string title = "Paned Window - Horizontal";
 	string byeBye = "Bye-bye";
 	string message = "Hello GtkD World!";
 	

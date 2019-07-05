@@ -162,3 +162,7 @@ And that’s the lowdown on *GTK*’s version of the **Model-View-Controller** a
 <div style="float: left;">
 	<a href="https://gtkdcoding.com/2019/06/25/0047-scalebutton-and-volumebutton.html">Previous: ScaleButton & VolumeButton</a>
 </div>
+<div style="float: right;">
+	<a href="https://gtkdcoding.com/2019/07/02/0049-mvc-ii-comboboxtext.html">Next: ComboBoxText</a>
+</div>
+<br>

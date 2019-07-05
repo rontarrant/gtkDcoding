@@ -41,7 +41,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "RadioMenuItems Example";
+	string title = "RadioMenuItems - Observed";
 	ObservedFeaturesList observedList;
 
 	this()

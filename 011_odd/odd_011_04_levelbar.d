@@ -1,4 +1,4 @@
-// LevelBar widget
+// LevelBar
 
 import std.stdio;
 
@@ -22,7 +22,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "LevelBar example";
+	string title = "LevelBar Example";
 	LevelBar levelBar;
 	
 	this()

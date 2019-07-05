@@ -1,4 +1,4 @@
-// Minimal TreeView with one column
+// MVC Three-column ComboBox
 
 import std.stdio;
 

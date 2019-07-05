@@ -1,3 +1,5 @@
+// Cairo: Fill Background
+
 import std.stdio;
 import std.conv;
 
@@ -23,7 +25,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Fill Background";
+	string title = "Cairo: Fill Background";
 	AppBox appBox;
 	
 	this()

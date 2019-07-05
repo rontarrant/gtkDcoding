@@ -1,3 +1,5 @@
+// Cairo: Draw and Save a JPeg
+
 import std.stdio;
 import std.conv;
 
@@ -25,7 +27,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Cairo Draw and Save a JPeg";
+	string title = "Cairo: Draw and Save a JPeg";
 	AppBox appBox;
 	
 	this()

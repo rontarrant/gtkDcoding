@@ -1,4 +1,4 @@
-/*
+/* Menus with Accelerator Keys
  Diagram:
  
  MyMenuBar
@@ -46,7 +46,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Multiple Menus Example";
+	string title = "Menus with Accelerator Keys";
 	AccelGroup accelGroup;
 
 	this()

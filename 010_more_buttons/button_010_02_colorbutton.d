@@ -26,7 +26,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Test Rig OOP";
+	string title = "ColorButton";
 	string byeBye = "Bye, bye, y'all.";
 	ColorBox box;
 	
@@ -174,15 +174,15 @@ class ObservedColor                                                             
 	string message = "Color is now ";
 	RGBA color;
 	RGBA defaultColor;
+	float red = .75, green = .75, blue = .75, alpha = 1.0;
 	
 	this()
 	{
-		defaultColor = new RGBA(.75, .75, .75, 1.0);
+		defaultColor = new RGBA(red, green, blue, alpha);
 		setColor(defaultColor);
 		
 	} // this()
 	
-// end private
 	
 	public:
 	
@@ -191,7 +191,7 @@ class ObservedColor                                                             
 		color = extColor;
 		writeln(message, extColor);
 
-	} // toggleState()
+	} // setColor()
 
 
 	RGBA getColor()

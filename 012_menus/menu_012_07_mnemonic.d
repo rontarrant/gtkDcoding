@@ -1,3 +1,5 @@
+// MenuItem with a Mnemonic Shortcut Key
+
 import std.stdio;
 
 import gtk.MainWindow;
@@ -24,7 +26,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Menu Item with a Mnemonic Shortcut Key";
+	string title = "MenuItem with a Mnemonic Shortcut Key";
 
 	this()
 	{

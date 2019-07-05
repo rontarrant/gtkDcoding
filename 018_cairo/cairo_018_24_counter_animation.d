@@ -1,4 +1,4 @@
-// Cairo: Draw an arc
+// Cairo: Animate a Text Counter
 
 import std.stdio;
 import std.conv;

@@ -1,4 +1,4 @@
-// Minimal TreeView with one column
+// MVC One-column TreeView
 
 import std.stdio;
 

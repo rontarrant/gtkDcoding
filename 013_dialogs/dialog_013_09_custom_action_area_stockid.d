@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// Custom Action Area with StockID
 
 import std.stdio;
 

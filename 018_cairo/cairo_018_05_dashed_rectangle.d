@@ -1,4 +1,4 @@
-// dashed rectangle
+// Cairo: Dashed Rectangle
 
 import std.stdio;
 import std.conv;

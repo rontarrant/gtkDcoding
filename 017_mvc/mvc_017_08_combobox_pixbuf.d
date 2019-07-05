@@ -1,4 +1,4 @@
-// Minimal TreeView with one column
+// MVC ComboBox with Pixbuf
 
 import std.stdio;
 

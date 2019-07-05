@@ -35,7 +35,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "CheckMenuItem Example";
+	string title = "CheckMenuItem - Single";
 
 	this()
 	{

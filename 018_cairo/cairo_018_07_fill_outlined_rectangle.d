@@ -1,3 +1,5 @@
+// Cairo: Fill an Outlined Rectangle
+
 import std.stdio;
 import std.conv;
 

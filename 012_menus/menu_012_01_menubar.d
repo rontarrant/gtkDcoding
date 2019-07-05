@@ -31,7 +31,7 @@ class TestRigWindow : MainWindow
 {
 	TestBox testBox;
 	
-	string title = "Test Rig: Menu with no items";
+	string title = "Menu with no Items";
 	
 	this()
 	{

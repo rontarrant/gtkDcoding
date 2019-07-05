@@ -1,4 +1,4 @@
-/*
+/* Singleton AccelGroup
  Diagram:
  
  MyMenuBar
@@ -49,7 +49,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Multiple Menus Example";
+	string title = "Singleton AccelGroup";
 	S_AccelGroup s_AccelGroup;
 
 	this()

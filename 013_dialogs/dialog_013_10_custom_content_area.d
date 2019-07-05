@@ -1,4 +1,4 @@
-// Roll-yer-own Custom Dialog
+// Custom Content area Dialog
 
 import std.stdio;
 import std.typecons;

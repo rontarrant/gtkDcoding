@@ -170,5 +170,6 @@ And there you go, the `ScaleButton` and the `VolumeButton` in party hats. Stay h
 	<a href="https://gtkdcoding.com/2019/06/21/0046-the-spinbutton.html">Previous: SpinButton</a>
 </div>
 <div style="float: right;">
-	<a href="https://gtkdcoding.com/2019/06/25/0048-mvc-i-introduction.html">Next: Introduction to the Model-View-Controller</a>
+	<a href="https://gtkdcoding.com/2019/06/28/0048-mvc-i-introduction.html">Next: Introduction to the Model-View-Controller</a>
 </div>
+<br>

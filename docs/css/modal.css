@@ -4,7 +4,7 @@
  * And it's the same for the modal close buttons, too.
  */
 #img0, #img1, #img2, #img3, #img4, #img5, #img6, #img7,
-#img8, #img9, #img10, #img11, #img12, #img13, #img14
+#img8, #img9, #imga, #imgb, #imgc, #imgd, #imge
 {
 	border-radius: 5px;
 	cursor: pointer;
@@ -12,8 +12,8 @@
 }
 
 #img0:hover, #img1:hover, #img2:hover, #img3:hover, #img4:hover #img5:hover, #img6:hover,
-#img7:hover, #img8:hover, #img9:hover, #img10:hover, #img11:hover, #img12:hover, #img13:hover,
-#img14:hover
+#img7:hover, #img8:hover, #img9:hover, #imga:hover, #imgb:hover, #imgc:hover, #imgd:hover,
+#imge:hover
 {
 	opacity: 0.7;
 }
@@ -89,7 +89,7 @@
 
 /* The Close Button */
 .close0, .close1, .close2, .close3, .close4, .close5, .close6,
-.close7, .close8, .close9, .close10, .close11, .close12, .close13, .close14
+.close7, .close8, .close9, .closea, .closeb, .closec, .closed, .closee
 {
 	position: absolute;
 	top: 15px;
@@ -102,10 +102,10 @@
 
 .close0:hover, .close1:hover, .close2:hover, .close3:hover, .close4:hover,
 .close5:hover, .close6:hover, .close7:hover, .close8:hover, .close9:hover,
-.close10:hover, .close11:hover, .close12:hover, .close13:hover, .close14:hover,  
+.closea:hover, .closeb:hover, .closec:hover, .closed:hover, .closee:hover,  
 .close0:focus, .close1:focus, .close2:focus, .close3:focus, .close4:focus, 
 .close5:focus, .close6:focus, .close7:focus, .close8:focus, .close9:focus, 
-.close10:focus, .close11:focus, .close12:focus, .close13:focus, .close14:focus 
+.closea:focus, .closeb:focus, .closec:focus, .closed:focus, .closee:focus 
 {
 	color: #bbb;
 	text-decoration: none;

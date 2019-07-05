@@ -1,4 +1,4 @@
-// Test Rig Foundation for Learning GtkD Coding
+// GTK Switch Example
 
 import std.stdio;
 
@@ -27,7 +27,6 @@ class TestRigWindow : MainWindow
 	string title = "Switch Example";
 	string byeBye = "Bye-bye";
 	AppBox appBox;
-
 	
 	this()
 	{
@@ -39,8 +38,8 @@ class TestRigWindow : MainWindow
 		
 		showAll();
 		
-	} // this() CONSTRUCTOR
-	
+	} // this()
+		
 		
 	void quitApp(Widget widget)
 	{
@@ -49,7 +48,6 @@ class TestRigWindow : MainWindow
 		Main.quit();
 		
 	} // quitApp()
-
 
 	
 } // class TestRigWindow

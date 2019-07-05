@@ -1,4 +1,4 @@
-// Cairo: Draw an arc
+// Cairo: Animate a Flipbook
 
 import std.stdio;
 import std.conv;

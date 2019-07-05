@@ -1,4 +1,4 @@
-// ComboBox with one column containing strings
+// MVC ComboBox with ListStore - one column containing strings
 
 import std.stdio;
 

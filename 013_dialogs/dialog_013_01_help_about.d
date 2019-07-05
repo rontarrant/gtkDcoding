@@ -1,3 +1,5 @@
+// Dialog: Help - About
+
 import std.stdio;
 
 import gtk.MainWindow;

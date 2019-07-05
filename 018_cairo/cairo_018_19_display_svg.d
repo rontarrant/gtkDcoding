@@ -1,3 +1,5 @@
+// Display SVG
+
 import std.stdio;
 
 import gtk.MainWindow;
@@ -26,13 +28,13 @@ void main(string[] args)
 class TestRigWindow : MainWindow
 {
 	string title = "Display SVG";
-	
+	int svgWidth = 356, svgHeight = 356;
 	AppBox appBox;
 	
 	this()
 	{
 		super(title);
-		setSizeRequest(578, 525);
+		setSizeRequest(svgWidth, svgHeight);
 		
 		addOnDestroy(&quitApp);
 		
@@ -57,10 +59,11 @@ class TestRigWindow : MainWindow
 class AppBox : Box
 {
 	MyDrawingArea myDrawingArea;
+	int globalPadding = 10;
 	
 	this()
 	{
-		super(Orientation.VERTICAL, 10);
+		super(Orientation.VERTICAL, globalPadding);
 		
 		myDrawingArea = new MyDrawingArea();
 		
@@ -75,7 +78,7 @@ class MyDrawingArea : DrawingArea
 {
 	Pixbuf pixbuf;
 	Context context;
-	int x, y;
+	int x = 0, y = 0;
 	string filename = "./images/Envy.svg";
 	
 	this()
@@ -87,7 +90,7 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		context.setSourcePixbuf(pixbuf, 0, 0);
+		context.setSourcePixbuf(pixbuf, x, y);
 		context.paint();
 		
 		return(true);

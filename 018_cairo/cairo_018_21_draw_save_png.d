@@ -1,3 +1,5 @@
+// Cairo: Draw and Save a PNG
+
 import std.stdio;
 import std.conv;
 
@@ -24,7 +26,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Cairo Draw and Save a PNG";
+	string title = "Cairo: Draw and Save a PNG";
 	AppBox appBox;
 	
 	this()

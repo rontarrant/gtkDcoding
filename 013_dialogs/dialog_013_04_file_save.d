@@ -1,3 +1,5 @@
+// Save File Dialog
+
 import std.stdio;
 
 import gtk.MainWindow;
@@ -28,7 +30,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Save Dialog Example";
+	string title = "Save Dialog";
 
 	this()
 	{

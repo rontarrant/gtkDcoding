@@ -1,3 +1,5 @@
+// simple RadioButton Example
+
 import std.stdio;
 
 import gtk.Main;
@@ -141,8 +143,7 @@ class Observed
 		setState(extState);
 		
 	} // this()
-	
-// end private
+
 	
 	public:
 	
@@ -150,7 +151,7 @@ class Observed
 	{
 		observedState = extState;
 
-	} // toggleState()
+	} // setState()
 
 
 	string getState()

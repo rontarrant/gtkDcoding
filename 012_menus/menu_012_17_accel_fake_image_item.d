@@ -1,3 +1,4 @@
+// Fake an ImageMenuItem with an Accel Key
 import std.stdio;
 
 import gtk.MainWindow;

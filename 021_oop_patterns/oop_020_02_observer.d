@@ -1,4 +1,4 @@
-// an implementation of the observer class in D
+// a verbose implementation of the observer class in D
 import std.stdio;
 
 void main()

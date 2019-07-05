@@ -38,7 +38,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "CheckMenuItem Example";
+	string title = "CheckMenuItems - Multiple";
 	ObservedFeaturesList observedList;
 
 	this()

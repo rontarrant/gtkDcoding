@@ -1,3 +1,5 @@
+// Open Multiple Files
+
 import std.stdio;
 import std.conv;
 
@@ -29,7 +31,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Multiple Menus Example";
+	string title = "Open Multiple Files";
 
 	this()
 	{

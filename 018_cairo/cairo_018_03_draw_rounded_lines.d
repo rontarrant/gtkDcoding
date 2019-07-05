@@ -1,3 +1,5 @@
+// Cairo: Draw Lines with Rounded Ends
+
 import std.stdio;
 import std.conv;
 
@@ -23,7 +25,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Cairo: Draw Rounded Lines";
+	string title = "Cairo: Draw Lines with Rounded Ends";
 	AppBox appBox;
 	
 	this()
