@@ -15,10 +15,103 @@ Today’s code lays the foundation for this type of functionality.
 
 ## A Pane in the Window… Two, Really
 
-[The code file can be found here](https://github.com/rontarrant/gtkDcoding/blob/master/014_containers/container_014_01_paned.d).
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/014_containers/container_014_01.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00">															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/014_containers/container_014_01_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11">																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_containers/container_014_01_paned.d" target="_blank">here</a>.
+	</div>
+</div>
 
 A `Paned` container can have its child panes side by side or one below the other. And since we may want programmable access to manipulate the child widgets we put in these panes, I’ve created a class derived from `Paned` and called it `SideBySide`:
 
+{% highlight d %}
 	class SideBySide : Paned
 	{
 		Image child01, child02;
@@ -47,6 +140,7 @@ A `Paned` container can have its child panes side by side or one below the other
 		} // showDividerPosition()
 		
 	} // class SideBySide
+{% endhighlight %}
 
 This is just about as simple as it gets with `Paned` containers. We’ve got two child `Image` widgets, each tucked into its own pane.
 
@@ -61,14 +155,111 @@ Because there are only two panes in a `Paned` container, the functions for assig
 
 Or if you want to populate both in one go, you can do it with a single function:
 
+{% highlight d %}
 	add(child1, child2);
+{% endhighlight %}
 
 You could also use `pack1()` and `pack2()` if you prefer, but the behaviour will be different, so let’s look at that.
 
-## Paned Packing
+## Paned Packing (a Vertical Version)
 
-[Our second example](https://github.com/rontarrant/gtkDcoding/blob/master/014_containers/container_014_02_paned_pack.d) has a new derived class for a *vertical* `Paned` container:
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/014_containers/container_014_02.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22">														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
 
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/014_containers/container_014_02_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33">																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_containers/container_014_02_paned_pack.d" target="_blank">here</a>.
+	</div>
+</div>
+
+Our second example has a new derived class for a *vertical* `Paned` container:
+
+{% highlight d %}
 	class UppyDowny : Paned
 	{
 		Image child01, child02;
@@ -97,6 +288,7 @@ You could also use `pack1()` and `pack2()` if you prefer, but the behaviour will
 		} // showDividerPosition()
 		
 	} // class UppyDowny
+{% endhighlight %}
 
 Here are the differences between this example and the first:
 
@@ -121,12 +313,12 @@ The corollary is, if you want to mimic the behaviour of `add1()` and `add2()`, u
 
 And that’s pretty much it for now. See you next time.
 
-<BR>
-<div style="float: left;">
-	<a href="/2019/06/14/0044-custom-dialog-iii.html">Previous: A Fancy Dialog</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/06/14/0044-custom-dialog-iii.html">Previous: A Fancy Dialog</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/06/21/0046-the-spinbutton.html">Next: SpinButton</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/06/21/0046-the-spinbutton.html">Next: SpinButton</a>
-</div>
-<BR>
 

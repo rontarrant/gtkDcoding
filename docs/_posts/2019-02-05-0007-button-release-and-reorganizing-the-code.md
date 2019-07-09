@@ -9,16 +9,109 @@ author: Ron Tarrant
 
 # 0007 – Button Release & Reorganizing the Code
 
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/002_button/button_002_05.png" alt="Current example output">	<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																								<!-- modal# -->
+				<span class="close0">&times;</span>																					<!-- close# -->
+				<img class="modal-content" id="img00">																					<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");																			// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");																				// img#
+			var modalImg = document.getElementById("img00");																		// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];															// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/002_button/button_002_05_term.png" alt="Current example terminal output"> <!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																												<!-- modal# -->
+				<span class="close1">&times;</span>																										<!-- close# -->
+				<img class="modal-content" id="img11">																									<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																							// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																								// img#
+			var modalImg = document.getElementById("img11");																						// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];																				// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																																<!-- filename (below)-->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_05_release.d" target="_blank">here</a>.
+	</div>
+</div>
+
 We’ll be making small but significant changes to the code this time around. The last time we looked at buttons, ([Post 0004](http://gtkdcoding.com/2019/01/25/0004-oop-button.html)) we built everything from within the `main()` function. Further, we used the `onClicked` signal to get our button to do something.
 
 This time around, we’ll be building the button from within the test rig class so all we have to do in `main()` is create the test rig window and everything else will be done automatically.
-
-[Here’s the full code file](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_05_release.d).
 
 ## Changes in main()
 
 Take a look at the main function:
 
+{% highlight d %}
 	void main(string[] args)
 	{
 		Main.init(args);
@@ -28,15 +121,17 @@ Take a look at the main function:
 		Main.run();
 		
 	} // main()
+{% endhighlight %}
 
 Previously, the window’s title was defined at the top of `main()` and passed in as a string variable rather than a string. This time, there’s no window title because—in the interests of going full-on OOP—it’s been moved inside the `TestRigWindow` class.
 
 And you may also notice that we don’t even do a `testRigWindow.showAll()` here. It, too, has been moved inside the `TestRigWindow` class.
 
-## Changes in the `TestRigWindow` Class
+## Changes in the TestRigWindow Class
 
 And if all you looked at was the `main()` function, you might be led to believe this example didn’t do much. So, now let’s look at the `TestRigWindow` class:
 
+{% highlight d %}
 	class TestRigWindow : MainWindow
 	{
 		string windowTitle = "Test Rig";
@@ -63,6 +158,7 @@ And if all you looked at was the `main()` function, you might be led to believe 
 		} // quitApp()
 	
 	} // class myAppWindow
+{% endhighlight %}
 
 These changes are all about maximizing OOP-ness and to that end, anything that has to do with a particular object has been moved into the class definition for that object. That's why the missing window title shows up here as class data along with a `partingMessage` variable. Keeping all this where it's easily found is a good habit to get into.
 
@@ -86,10 +182,11 @@ We saw this approach to hooking up the close button back in the first blog entry
 
 And of course, the button is created here. Let’s move on.
 
-## The `MyButton` Class
+## The MyButton Class
 
 Here we go:
 
+{% highlight d %}
 	class MyButton : Button
 	{
 		string buttonText = "My Butt";
@@ -112,6 +209,7 @@ Here we go:
 		} // takeAction()
 		
 	} // class MyButton
+{% endhighlight %}
 
 As mentioned above, there’s the data right at the top. And looking at the constructor, there’s a different signal being hooked up here, `onButtonRelease`. It doesn’t seem like that big a change until you look at the callback definition.
 
@@ -125,11 +223,11 @@ Here we are at the end of another post. We covered a few interesting things here
 
 And that’s all for now. Be with them widgets and happy D-coding.
 
-<BR>
-<div style="float: left;">
-	<a href="/2019/02/01/0006-position-a-window.html">Previous: Position a Window</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/02/01/0006-position-a-window.html">Previous: Position a Window</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/02/08/0008-callbacks.html">Next: Callbacks</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/02/08/0008-callbacks.html">Next: Callbacks</a>
-</div>
-<BR>

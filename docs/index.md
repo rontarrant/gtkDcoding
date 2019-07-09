@@ -4,6 +4,9 @@
 
 layout: home
 ---
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/colors.css" />
 
 a site for sore skode
 

@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-## 0042 – Dialogs VIII - Customizing (1 of 3) - Aesthetics
+# 0042 – Dialogs VIII - Customizing (1 of 3) - Aesthetics
 
 Today we start a three-part series about building a `Dialog` from scratch.
 
@@ -17,14 +17,205 @@ There's a range of topics to cover, so I’ve split them up like this:
 - *Part II* covers user interaction, and
 - *Part III* brings it all together.
 
-There are two code example files today:
+There are two code example files today and they illustrate before and after states of using design principles.
 
-- [before there was design](https://github.com/rontarrant/gtkDcoding/blob/master/009_grid/grid_009_03_non_aesthetic_layout.d), and
-- [after aesthetics came along](https://github.com/rontarrant/gtkDcoding/blob/master/009_grid/grid_009_04_aesthetic_layout.d).
+The first one is...
 
-They illustrate before and after states of using design principles and I'll let you know right now, the only code quoted here is from the second one because... well, there's no point in showing the code for a bad layout, right? *Seeing* the bad layout will be traumatizing enough.
+## Life Before Aesthetics
 
-### Anatomy of a Dialog Window
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/009_grid/grid_009_03.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00">															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/009_grid/grid_009_03_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11">																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/009_grid/grid_009_03_non_aesthetic_layout.d" target="_blank">here</a>.
+	</div>
+</div>
+
+But I'll let you know right now, the only code quoted here is from the second one because... well, there's no point in showing the code for a bad layout, right? *Seeing* the bad layout will be traumatizing enough. So...
+
+## Life After we Study Design
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/009_grid/grid_009_04.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22">														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/009_grid/grid_009_04_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33">																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/009_grid/grid_009_04_aesthetic_layout.d" target="_blank">here</a>.
+	</div>
+</div>
+
+## Anatomy of a Dialog Window
 
 A custom `Dialog` has two areas you need to deal with:
 
@@ -35,7 +226,7 @@ It’s not complicated, but besides presenting information and soliciting user i
 
 But before we get to how the content area is built, I’d like to go over a few basics of how to make an appealing layout. This isn’t only about lining things up, but also keeping them from looking cramped and helping the user's eye see the important stuff.
 
-### A Brief Introduction to Design
+## A Brief Introduction to Design
 
 *Note: Be advised that when I speak of layout, I’m not talking about the `Layout` `Widget`. I’m talking about the design concept of layout.*
 
@@ -59,6 +250,7 @@ In design terms, alignment is:
 
 Anyone who’s used a word processor or desktop publishing application knows these terms, too, so I came up with this `enum`:
 
+{% highlight d %}
 	enum BoxJustify
 	{
 		LEFT = 0,
@@ -68,10 +260,11 @@ Anyone who’s used a word processor or desktop publishing application knows the
 		BOTTOM = 4,
 		
 	} // PaBoxJustify
+{% endhighlight %}
 
 This allows us to speak in designerly terms. And by the way, `CENTER` is used for either horizontal or vertical centering.
 
-### Padding vs. Border & Margin
+## Padding vs. Border & Margin
 
 There are at three ways to get extra space around a widget:
 
@@ -93,7 +286,7 @@ Technically, padding is inside the confines of the widget and border is outside,
 
 That means we can use the border property of any `Container`-derived `Widget` to get the control needed to make a layout look good.
 
-#### So what’s the margin for?
+### So what’s the margin for?
 
 One of the things designers discovered eons ago is that having the same amount of space at the top and bottom of a design doesn’t quite look right. A bit of extra space at the bottom makes things feel more balanced. And ‘feel’ is the right word because it’s an optical illusion, but such is the nature of the human mind.
 
@@ -111,10 +304,11 @@ Keep in mind that the border is the space between a `Container` and its parent, 
 
 We don’t need to bother with the spacing between a child widget and its `Box` container (and that's a good thing because most child `Widget`s won't give us that control anyway). Now let’s get into the classes…
 
-### The `HPadBox`
+## The HPadBox
 
 Here’s the initialization chunk:
 
+{% highlight d %}
 	class HPadBox : Box
 	{
 		private:
@@ -126,6 +320,7 @@ Here’s the initialization chunk:
 		int _borderWidth = 5;
 	
 		BoxJustify _pJustify;
+{% endhighlight %}
 
 We still have variables for `_globalPadding` and `_padding`, but they’re both set to `0` so they don’t get in the way... for now. *GTK 4.0* compliance will mean calls to the `Box` constructor will need one less argument, but we'll deal with that when 4.0 is released because for now, we still need them:
 
@@ -134,10 +329,11 @@ We still have variables for `_globalPadding` and `_padding`, but they’re both 
 
 The `_pJustify` variable will be one of values from the `BoxJustify` enum discussed in *A Lighting-fast Introduction to Design* above.
 
-### The Constructor
+## The Constructor
 
 Here's the meat-n-taters of this class:
- 
+
+{% highlight d %}
 		public:
 		this(Widget widget, BoxJustify pJustify)
 		{
@@ -164,6 +360,7 @@ Here's the meat-n-taters of this class:
 		} // this()
 		
 	} // class HPadBox
+{% endhighlight %}
 
 Because the constructor’s first argument is a `Widget`, it’ll accept whatever widget you wanna drop into it… a `Label`, an `Entry`, whatever. We’ll talk more about that mechanism in a moment, but first let’s finish off this justification stuff…
 
@@ -196,10 +393,11 @@ You can probably guess how this all pans out, but here it is in black-n-white: t
 
 This example doesn't have a `VPadBox`, but you've got the tools now to figure out how that would go together. Now let’s move on to the child widget used with `HPadBox`…
 
-### The `HPadLabel`
+## The HPadLabel
 
 This class is derived from the `HPadBox` class, but not the `Label` class. Instead, the Label becomes a property of the class and is passed to the super-class constructor where it’s treated as a generic, incoming `Widget`. *D* only allows a class to inherit from a single super-class, but this way we can sidestep that limitation and sneak in a second one... sort of:
 
+{% highlight d %}
 	class HPadLabel : HPadBox
 	{
 		Label label;
@@ -213,6 +411,7 @@ This class is derived from the `HPadBox` class, but not the `Label` class. Inste
 		} // this()
 		
 	} // class HPadLabel
+{% endhighlight %}
 
 And that takes care of keeping our widgets separated from each other within our GUI design. Now let’s look at how the entire design fends off border encroachment by the `Window`.
 
@@ -220,10 +419,11 @@ And that takes care of keeping our widgets separated from each other within our 
 
 *A `VPadBox` can be interpolated from the `HPadBox` by changing the name and switching `LEFT` to `TOP` and `RIGHT` to `BOTTOM`. Then you could derive a whole set of `VPadXxxx` widgets to go with it. And as usual, if you want to discuss any of this, I invite you to respond to one of the* GtkD *threads in the* Learn *section of the* D-lang *forum or start a thread on [GtkD.org](http://gtkd.org) (see the links below).*
 
-### The `PadGrid`
+## The PadGrid
 
 This is pretty straightforward:
 
+{% highlight d %}
 	class PadGrid : Grid
 	{
 		private:
@@ -254,6 +454,7 @@ This is pretty straightforward:
 		} // this()
 		
 	} // class PadGrid
+{% endhighlight %}
 
 The `_borderWidth` variable does the heavy lifting while `setMarginBottom()` adds the aesthetic touch.
 
@@ -272,12 +473,11 @@ Neither be stingy nor overzealous with border width or the bottom margin. Use gl
 
 See you next time for *Part II*.
 
-
-<BR>
-<div style="float: left;">
-	<a href="/2019/06/04/0041-colorchooserdialog.html">Previous: ColorChooserDialog</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/06/04/0041-colorchooserdialog.html">Previous: ColorChooserDialog</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/06/11/0043-custom-dialog-ii.html">Next: Dialog Action Area</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/06/11/0043-custom-dialog-ii.html">Next: Dialog Action Area</a>
-</div>
-<BR>

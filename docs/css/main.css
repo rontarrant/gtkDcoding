@@ -1,0 +1,73 @@
+/*
+ * INDEX PAGE ONLY
+ */
+
+/* list header */
+.post-list-heading
+{
+	background-image: linear-gradient(to right, rgba(0, 37, 195, 1.0), rgba(255, 255, 255, 1.0));
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 25px;
+	padding-top: 25px;
+	padding-right: 35px;
+	padding-bottom: 2px;
+	text-align: right;
+	color: black;
+}
+
+/* topic items on main page */
+.topic-div
+{
+	position: relative;
+	z-index: 10;
+	height: 50px; /* controls overall height of items in list */
+	margin-bottom: 5px;
+	margin-top: 5px;
+	width: 720px;
+}
+.post-list
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 0px;
+	padding-right: 20px;
+	padding-bottom: 0px;
+	text-align: left;
+	color: black;
+}
+.post-list-item
+{
+	padding-top: 0px;
+	padding-right: 5px;
+	padding-bottom: 0px;
+	text-align: right;
+	color: black;
+	z-index: 2;
+}
+.post-date
+{
+	font-size: 14px;
+	color: gray;
+}
+.post-link
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	z-index: 20;
+
+}
+.topic-span-icon
+{
+	position: absolute;
+	z-index: 4;
+	left: 100px;
+	top: 10px;
+}
+.topic-icon
+{
+	width: 60px;
+	height: 60px;
+}

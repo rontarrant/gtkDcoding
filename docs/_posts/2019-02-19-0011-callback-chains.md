@@ -9,10 +9,105 @@ author: Ron Tarrant
 
 ## 0011 - Callback Chains
 
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/002_button/button_002_08.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00">															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/002_button/button_002_08_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11">																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_08_multiple_signals.d" target="_blank">here</a>.
+	</div>
+</div>
+
 I mentioned in [post #0008](http://gtkdcoding.com/2019/02/08/0008-callbacks.html) that we’d look at callback chains and here we are. In blog [entry #0010](http://gtkdcoding.com/2019/02/15/0010-checkbutton.html), I covered setting up an observer pattern. Today we’ll have a bit of fun combining these two. All this code should seem quite familiar, so no need to fasten your seat belt. However, there is a surprise in store, so you still might wanna hold onto your hat...
 
 First, we’ll look at how multiple signals are chained together. It’s nothing fancy, just a few extra lines of code in the constructor of our derived button class:
 
+{% highlight d %}
 	this(string[] args)
 	{
 		super(label);
@@ -24,12 +119,11 @@ First, we’ll look at how multiple signals are chained together. It’s nothing
 		addOnButtonRelease(delegate bool(Event e, Widget w) { showArgs(args); return(false); });
 		
 	} // this()
+{% endhighlight %}
 
 No big deal. All you gotta do is tack on a bunch of signals. You can even, as done above, mix and match the callback definitions to suit your needs.
 
-But now let’s get to the interrupt-y bit…
-
-[Here is the code file](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_08_multiple_signals.d). 
+But now let’s talk about the interrupt-y bit…
 
 ### A Refresher
 
@@ -69,9 +163,103 @@ So only one signal is hooked up to the first event (`onPressed`), three are hook
 
 Now let's move on to example #2...
 
-## Observed and Observer `Button`s with Signals
+## Observed and Observer Buttons with Signals
 
-[Here's the second code file](https://github.com/rontarrant/gtkDcoding/blob/master/003_box/box_003_05_signal_chain.d).
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/003_box/box_003_05.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22">														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/003_box/box_003_05_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33">																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/003_box/box_003_05_signal_chain.d" target="_blank">here</a>.
+	</div>
+</div>
+
+This second example illustrates a signal chain.
 
 ### Another Refresher
 
@@ -81,6 +269,7 @@ An observer pattern lets one widget keep an eye on another and change its own be
 
 This time around, the `ObserverButton` keeps an eye on a `WatchedButton` derived from the `ToggleButton` class, very much like it did in the companion code for [entry #0010](http://gtkdcoding.com/2019/02/15/0010-checkbutton.html). But the constructor is busier:
 
+{% highlight d %}
 	this(WatchedButton extWatched)
 	{
 		super(label);
@@ -91,6 +280,7 @@ This time around, the `ObserverButton` keeps an eye on a `WatchedButton` derived
 		addOnButtonRelease(&endStatement);
 
 	} // this()
+{% endhighlight %}
 
 Lots of signals being hooked up. We’re keeping the hook-ups simple so we don’t get bogged down in details unnecessary to the objective, to interrupt the signal chain.
 
@@ -98,6 +288,7 @@ Lots of signals being hooked up. We’re keeping the hook-ups simple so we don�
 
 The first two callbacks do pretty standard things. They write messages to the command shell. It’s when we get to the third callback, `takeAction()`, that we see something interesting.
 
+{% highlight d %}
 	bool takeAction(Event event, Widget widget)
 	{
 		bool continueFlag = true;
@@ -118,11 +309,13 @@ The first two callbacks do pretty standard things. They write messages to the co
 		return(continueFlag);
 		
 	} // takeAction()
+{% endhighlight %}
 
 This is where the signal chain gets interrupted. We check the `WatchedButton` (remember, it’s a `ToggleButton` at heart) to see what its mode is. If the toggle is on, we change `takeAction()`’s return value to false. If it’s off, we change `takeAction()`’s return value to true. It almost seems backwards returning `false` if we’re not done with the signal chain, but the extra little message printed out for each mode state should help you clarify this in your mind. 
 
 Now take a look at this one (it should be no trouble to work out what’s going on here):
 
+{% highlight d %}
 	bool outputSomething(Event event, Widget widget)
 	{
 		write("observedState = ", watchedButton.getMode(), ": ");
@@ -139,6 +332,7 @@ Now take a look at this one (it should be no trouble to work out what’s going 
 		return(false);
 		
 	} // outputSomething()
+{% endhighlight %}
 
 Again, the state of the underlying `ToggleButton` is checked and this time, we spit out a different message depending on what mode state we find.
 
@@ -148,12 +342,11 @@ The `WatchedButton` class, derived as it is from a `ToggleButton`, is almost ide
 
 Yeah, for now, I think so. Happy D-coding and may the moon shine bright on your widgets tonight.
 
-
-<BR>
-<div style="float: left;">
-	<a href="/2019/02/15/0010-checkbutton.html">Previous: CheckButton</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/02/15/0010-checkbutton.html">Previous: CheckButton</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/02/22/0012-layout-containers.html">Next: Layout Containers</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/02/22/0012-layout-containers.html">Next: Layout Containers</a>
-</div>
-<BR>

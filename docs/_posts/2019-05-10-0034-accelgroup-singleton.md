@@ -7,7 +7,101 @@ author: Ron Tarrant
 
 ---
 
-## 0034 – Menus IX - AccelGroup as a Singleton
+# 0034 – Menus IX - AccelGroup as a Singleton
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/012_menus/menu_012_18.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00">															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/012_menus/menu_012_18_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11">																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_18_singleton_accel_menus.d" target="_blank">here</a>.
+	</div>
+</div>
 
 Something about how the `AccelGroup` was used in *gtkDcoding* blog post #32 ([*Adding Accelerator Keys to MenuItems*](http://gtkdcoding.com/2019/05/03/0032-accelerator-keys.html)) needs to be addressed. It’s this business of instantiating the `AccelGroup` at the top level (ie. `TestRigWindow`) and then passing it down through multiple layers of other UI objects until it gets to where it’s actually needed, in the `MenuItem` objects.
 
@@ -23,7 +117,7 @@ Because if we use a singleton class to hold the `AccelGroup`, we gain a few thin
 
 And for good measure, we'll cover some *Other Useful Stuff <sup>TM</sup>* as we go along.
 
-### The Singleton
+## The Singleton
 
 There’s a lot of discussion about whether or not the singleton should be taken out back and shot. All I will say is that, because it can *only* be instantiated once, no matter how many times we try, we avoid the ad infinitum passing down and this makes it an elegant solution for the AccelGroup.
 
@@ -31,6 +125,7 @@ Be aware, however, that we don’t instantiate in the normal way. But let's not 
 
 What we’re starting with to build our `S_AccelGroup` class can be found in [the D Wiki Low-lock Singleton example]( https://wiki.dlang.org/Low-Lock_Singleton_Pattern). And here’s what the basic class looks like:
 
+{% highlight d %}
 	class MySingleton
 	{
 	    private this() {}
@@ -59,6 +154,7 @@ What we’re starting with to build our `S_AccelGroup` class can be found in [th
 	        return(instance_);
 	    }
 	}
+{% endhighlight %}
 
 Seems complicated, right? Well, the only things we really need to know are:
 
@@ -69,6 +165,7 @@ Seems complicated, right? Well, the only things we really need to know are:
 
 So, after a few naming convention changes, our `S_AccelGroup` class (which you can find in [this example file right here](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/singleton/S_AccelGroup.d)) looks like this:
 
+{% highlight d %}
 	module singleton.S_AccelGroup;
 
 	import std.stdio;
@@ -119,13 +216,15 @@ So, after a few naming convention changes, our `S_AccelGroup` class (which you c
 		} // get()
 	
 	} // class S_AccelGroup
-
+{% endhighlight %}
 
 *Note: If you use this locally, don't forget to put this in its own sub-directory.*
  
 Right at the top, we have:
 
+{% highlight d %}
 	module S_AccelGroup;
+{% endhighlight %}
 
 Technically, you could put a similar statement at the top of every one of your `.d` files, turning them all into modules and it wouldn't really change anything for that code file, per se. What it does is give us a way to import it for those times when we want the code from one file available to another.
 
@@ -133,26 +232,33 @@ Technically, you could put a similar statement at the top of every one of your `
 
 The file needs to be saved as `S_AccelGroup.d` (the `module` name plus a `.d` extension) and just for kicks, I put it in its own sub-directory which means the path and filename in relation to our dev directory is:
 
+{% highlight d %}
 	./singleton/S_AccelGroup.d
+{% endhighlight %}
 
 Hold that thought as we go into the next section...
 
-### Other Useful Stuff #1: Using an External Class
+## Other Useful Stuff #1: Using an External Class
 
-To bring the external file into the mix for compiling/linking, we need an `import` statement which you’ll find near the top of [today’s primary code file](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_18_singleton_accel_menus.d). Any time the file you want to import is in a sub-directory, replace the slash (`/`) with a dot (`.`) in your import statement... like this:
+To bring the external file into the mix for compiling/linking, we need an `import` statement which you’ll find near the top of today’s primary code file. Any time the file you want to import is in a sub-directory, replace the slash (`/`) with a dot (`.`) in your import statement... like this:
 
+{% highlight d %}
 	import singleton.S_AccelGroup;
+{% endhighlight %}
 
 If I'd put this file in the same directory as our primary `.d` file, the import statement would look like this instead:
 
+{% highlight d %}
 	import S_AccelGroup;
+{% endhighlight %}
 
 Okay, now you can let go of that thought from the previous section.
 
-### Attaching the `S_AccelGroup` to the `MainWindow`
+## Attaching the S_AccelGroup to the MainWindow
 
 Just like with the stock `AccelGroup`, we need to attach it to the `MainWindow` which means our `TestRigWindow` class now looks like this:
 
+{% highlight d %}
 	class TestRigWindow : MainWindow
 	{
 		string title = "Multiple Menus Example";
@@ -184,6 +290,7 @@ Just like with the stock `AccelGroup`, we need to attach it to the `MainWindow` 
 		} // quitApp()
 		
 	} // class TestRigWindow
+{% endhighlight %}
 
 I’ll draw your attention to three things here:
 
@@ -191,10 +298,11 @@ I’ll draw your attention to three things here:
 - the constructor where we call `s_AccelGroup.get()` to instantiate, and
 - also in the constructor, where we `addAccelGroup()` to attach it to the window.
 
-### The Other End of Things: Inside the `MenuItem` Class
+## The Other End of Things: Inside the MenuItem Class
 
 For each `MenuItem` that has a hotkey, we rewrite its definition to look similar to this:
 
+{% highlight d %}
 	class NewFileItem : MenuItem
 	{
 		string itemLabel = "New";
@@ -216,6 +324,7 @@ For each `MenuItem` that has a hotkey, we rewrite its definition to look similar
 		} // doSomething()
 		
 	} // class NewFileItem
+{% endhighlight %}
 
 Again, we need three statements to set up and use the `S_AccelGroup`:
 
@@ -225,7 +334,9 @@ Again, we need three statements to set up and use the `S_AccelGroup`:
 
 And if you want to prove to yourself that all these `MenuItem`s really do use the same `S_AccelGroup`, add this line as the last statement in the constructors of a few of the `MenuItem`s:
 
+{% highlight d %}
 	writeln(&s_AccelGroup);
+{% endhighlight %}
 
 The address echoed to the terminal will be the same for each.
 
@@ -267,12 +378,11 @@ As an extra bonus today, we also went over how to split our code over more than 
 
 And that’s it for another *gtkDcoding* blog post. Until next time…
 
-
-<BR>
-<div style="float: left;">
-	<a href="/2019/05/07/0033-fake-image-menu-and-accel.html">Previous: Fake ImageMenuItem</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/05/07/0033-fake-image-menu-and-accel.html">Previous: Fake ImageMenuItem</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/05/14/0035-help-about-dialog.html">Next: Dialog I: About Dialog</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/05/14/0035-help-about-dialog.html">Next: Dialog I: About Dialog</a>
-</div>
-<BR>

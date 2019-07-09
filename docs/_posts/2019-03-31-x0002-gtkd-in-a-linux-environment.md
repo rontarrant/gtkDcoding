@@ -102,12 +102,11 @@ I hope you enjoyed this Blog eXtra. I'll continue to spring these on you from ti
  
 Until next time...
 
-
-<BR>
-<div style="float: left;">
-	<a href="/2019/03/29/0022-grids.html">Previous: Grids</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/03/29/0022-grids.html">Previous: Grids</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/04/02/0023-radio-and-color-buttons.html">Next: Radio and Color Buttons</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/04/02/0023-radio-and-color-buttons.html">Next: Radio and Color Buttons</a>
-</div>
-<BR>

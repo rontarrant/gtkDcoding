@@ -1,160 +1,53 @@
 /*
- * POST PAGE ONLY (see further down for other categories)
+ * used only on the main page
+ * Here, padding is different than on post pages.
  */
-
-.frame-header
-{
-	grid-area: header;
-}
-.frame-screenshot
-{
-	grid-area: screenshot;
-}
-.frame-terminal
-{
-	grid-area: terminal;
-}
-.frame-screen_caption
-{
-	grid-area: screencaption;
-}
-.frame-term_caption
-{
-	grid-area: termcaption;
-}
-.frame-footer
-{
-	float: right;
-	padding: 5px;
-}
-.screenshot-frame
-{
-	background-color: #eee;
-	z-index: 10;
-	display: grid;
-	grid-template-areas:
-		'header header'
-		'screenshot terminal'
-		'screencaption termcaption'
-		'frame-footer frame-footer';
-	grid-gap: 10px;
-	padding: 10px;
-	margin-bottom: 20px;
-}
-
-.inpage-frame
-{
-	background-color: #eee;
-	z-index: 10;
-	display: grid;
-	grid-template-areas:
-		'screenshot';
-	grid-gap: 10px;
-	margin-top: 10px;
-	margin-bottom: 20px;
-}
-
-.right
-{
-	float: right;
-	margin-left: 15px;
-}
-
-.center
-{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 20px;
-	margin-bottom: 25px;
-}
-
-.left
-{
-	float: left;
-	margin-right: 20px;
-	max-width: 305px;
-}
-
-figcaption
+h1, h2, h3, h4, h5
 {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
-	font-style: italic;
-}
-
-.previous-next-div
-{
-	position: relative;
-	z-index: 10;
-	height: 20px;
-	margin-bottom: 35px;
-	margin-top: 35px;
-	width: 720px;
-}
-
-/*
- * SHARED by posts and main page
- */
-
-h1
-{
-	background-color: #bbf;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 35px;
-	padding-top: 50px;
-	padding-left: 35px;
-	padding-bottom: 5px;
-	text-align: left;
-	color: black;
-}
-
-h2
-{
-	background-color: #bbf;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 25px;
-	padding-top: 25px;
-	padding-right: 35px;
-	padding-bottom: 2px;
 	text-align: right;
 	color: black;
 }
 
+h1
+{
+	font-size: 35px;
+	padding-top: 50px;
+	padding-left: 35px;
+	padding-bottom: 5px;
+}
+
+h2
+{
+	font-size: 25px;
+	padding-top: 25px;
+	padding-right: 35px;
+	padding-bottom: 2px;
+}
+
 h3
 {
-	background-color: #bbf;
-	font-family: Arial, Helvetica, sans-serif;
 	font-size: 20px;
 	font-style: italic;
 	padding-top: 15px;
 	padding-right: 20px;
 	padding-bottom: 4px;
-	text-align: right;
-	color: black;
 }
 
 h4
 {
-	background-color: #bbf;
-	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	font-style: italic;
 	padding-top: 10px;
 	padding-right: 20px;
 	padding-bottom: 3px;
-	text-align: right;
-	color: black;
 }
 h5
 {
-	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	font-style: italic;
 	font-weight: bold;
 	padding-top: 10px;
-	text-align: left;
-	color: black;
 	margin-bottom: -15px;
 }
 p, li
@@ -175,138 +68,4 @@ a:link
 a:visited
 {
 	color: purple;
-}
-/*
- * TOPIC HEADER BACKGROUND color gradients
- */
-.topic-color_window /* burnt orange */
-{
-	background-image: linear-gradient(to right, rgba(253, 176, 138, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_button /* yellow */
-{
-	background-image: linear-gradient(to right, rgba(253, 238, 138, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_box /* green */
-{
-	background-image: linear-gradient(to right, rgba(192, 253, 135, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_mouse /* light purple */
-{
-	background-image: linear-gradient(to right, rgba(138, 154, 253, 1), rgba(255, 255, 255, 1.0));
-}
-.topic-color_text /* tan */
-{
-	background-image: linear-gradient(to right, rgba(181, 138, 253, 1), rgba(255, 255, 255, 1.0));
-}
-.topic-color_image /* redish */
-{
-	background-image: linear-gradient(to right, rgba(253, 138, 138, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_odd /* aqua */
-{
-	background-image: linear-gradient(to right, rgba(138, 253, 211, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_menu /* lemon */
-{
-	background-image: linear-gradient(to right, rgba(249, 253, 138, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_dialog /* blue */
-{
-	background-image: linear-gradient(to right, rgba(138, 208, 253, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_linux /* hot pink */
-{
-	background-image: linear-gradient(to right, rgba(233, 138, 253, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_cairo /* chartreuse */
-{
-	background-image: linear-gradient(to right, rgba(253, 138, 208, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_mvc /* brown */
-{
-	background-image: linear-gradient(to right, rgba(189, 164, 121, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_oop /* gray */
-{
-	background-image: linear-gradient(to right, rgba(200, 200, 200, 1.0), rgba(255, 255, 255, 1.0));
-}
-.topic-color_default /* light gray */
-{
-	background-image: linear-gradient(to right, rgba(138, 249, 253, 1), rgba(255, 255, 255, 1.0));
-}
-
-
-/*
- * MAIN PAGE ONLY (everything from here down)
- */
-
-/* list header */
-.post-list-heading
-{
-	background-image: linear-gradient(to right, rgba(0, 37, 195, 1.0), rgba(255, 255, 255, 1.0));
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 25px;
-	padding-top: 25px;
-	padding-right: 35px;
-	padding-bottom: 2px;
-	text-align: right;
-	color: black;
-}
-
-/* topic items on main page */
-.topic-div
-{
-	position: relative;
-	z-index: 10;
-	height: 50px; /* controls overall height of items in list */
-	margin-bottom: 5px;
-	margin-top: 5px;
-	width: 720px;
-}
-.post-list
-{
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
-	font-style: italic;
-	padding-top: 0px;
-	padding-right: 20px;
-	padding-bottom: 0px;
-	text-align: left;
-	color: black;
-}
-.post-list-item
-{
-	padding-top: 0px;
-	padding-right: 5px;
-	padding-bottom: 0px;
-	text-align: right;
-	color: black;
-	z-index: 2;
-}
-.post-date
-{
-	font-size: 14px;
-	color: gray;
-}
-.post-link
-{
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 18px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	z-index: 20;
-
-}
-.topic-span-icon
-{
-	position: absolute;
-	z-index: 4;
-	left: 100px;
-	top: 10px;
-}
-.topic-icon
-{
-	width: 60px;
-	height: 60px;
 }

@@ -1,7 +1,7 @@
 ---
 title: "0000: Introduction to GtkDcoding"
-topic: default
 layout: post
+topic: default
 description: An introduction to GTK 3 and how it can be used to create Graphical User Interfaces (GUI) for applications - a D language tutorial.
 author: Ron Tarrant
 ---
@@ -11,8 +11,6 @@ author: Ron Tarrant
 *Where All This is Coming From…*
 
 Ever since the heyday of 8-bit computers and *Microsoft BASIC* — which was available on almost every one of them — programmers  have been pursuing the goal of cross-platform development… write once, compile for m/any. These days, there’s *Java* and *Electron* if you’re so inclined, but I prefer something that compiles to a native executable using a single programming language. When I found *D*, I realized I might just have found what I was looking for.
-
-<img class="right" src="/images/test_rig_000_01_imperative.png" alt="Me" style="width: 150px; height: 172px;">
 
 *GtkD* is a wrapper for *GTK+*, a GUI toolkit originally from the world of Linux, an almost-POSIX-compliant OS, but now available across a number of operating systems. That pretty much makes it perfect for my intentions. By learning how to use a single language compiler (*dmd2*) I can build and run applications on *Windows*, *Linux*, *Mac*, and *FreeBSD*. With *GTK+* thrown in, we’re looking at a single-code-base solution to cross-platform development.
 
@@ -115,8 +113,105 @@ for a 32-bit OS, it’ll be:
 
 And that should be that. You should be ready to dance the D-dance.
 
+## Base Test Rig
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/001_window/test_rig_000.png" alt="Current example output">	<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																								<!-- modal# -->
+				<span class="close0">&times;</span>																					<!-- close# -->
+				<img class="modal-content" id="img00">																					<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");																			// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");																				// img#
+			var modalImg = document.getElementById("img00");																		// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];															// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/001_window/test_rig_000_term.png" alt="Current example terminal output"> <!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																												<!-- modal# -->
+				<span class="close1">&times;</span>																										<!-- close# -->
+				<img class="modal-content" id="img11">																									<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																							// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																								// img#
+			var modalImg = document.getElementById("img11");																						// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];																				// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																																<!-- filename (below)-->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/test_rig_000_base.d" target="_blank">here</a>.
+	</div>
+</div>
+
 For now, you can copy this code (I highly suggest you type it out unless you’ve got an eidetic memory) and look for the compile instructions below:
 
+{% highlight d %}
 	import std.stdio;
 	
 	import gtk.MainWindow;
@@ -149,6 +244,7 @@ For now, you can copy this code (I highly suggest you type it out unless you’v
 		Main.quit();
 		
 	} // quitApp()
+{% endhighlight %}
 
 Save this as `test_rig_imperative.d` (or whatever you want, really) and compile it thusly:
 
@@ -160,8 +256,8 @@ And that’s it for now. Next time, we’ll break down the test rig code so you 
 
 Until then, happy D-coding and may the widgets be with you.
 
-<BR>
-<div style="float: right;">
-	<a href="/2019/01/15/0001-imperative-test-rig.html">Next: Introduction to the Test Rig</a>
+<div class="blog-nav">
+	<div style="float: right;">
+		<a href="/2019/01/15/0001-imperative-test-rig.html">Next: Introduction to the Test Rig</a>
+	</div>
 </div>
-<BR>

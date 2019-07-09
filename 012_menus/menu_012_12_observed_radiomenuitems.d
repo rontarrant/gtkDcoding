@@ -148,6 +148,7 @@ class FileMenu : Menu
 
 			featureItemArray ~= featureItem;
 			append(featureItem);
+			
 		}
 		
 		// this next line plus the foreach statement set the default

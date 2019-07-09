@@ -7,26 +7,122 @@ author: Ron Tarrant
 
 ---
 
+# 0024 - Switch and LightSwitch
 
-## 0024 - Switch and LightSwitch
+For today, we’ll be looking at two code files: 
 
-For today, we’ll be looking at two code files: [one showing off a Switch widget](https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_03_switch.d), and the other, [a derived class we'll call the LightSwitch](https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_04_switch_light.d).
+- one showing off a Switch widget, and
+- the other, a derived class we'll call the LightSwitch.
 
 And what we’ll be playing with is the GTK `Switch` widget. First, we’ll just get it up and running, then we’ll do something interesting with it. We’ll combine the `Switch` with some other widgets to create a light bulb with changeable colours and a reset button.
 
-### And Now, a Switch
+## And Now, a Switch
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/010_more_buttons/button_010_03.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00">															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/010_more_buttons/button_010_03_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11">																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_03_switch.d" target="_blank">here</a>.
+	</div>
+</div>
 
 I won’t bother going over the `TestRigWindow` stuff; I think we all know the ins and outs of that by now. So, let’s start with:
 
+{% highlight d %}
 	import gtk.Switch;
+{% endhighlight %}
 
 That’s the only extra import statement you’ll need for the first example, the plain-jane switch. Now let’s look at the class derived from the `Switch`:
 
+{% highlight d %}
 	class MySwitch : Switch
 	{
-		string label = "Lights";
-		string stateSetMessage = "State has been switched to: ";
-		
 		this()
 		{
 			super();
@@ -45,6 +141,7 @@ That’s the only extra import statement you’ll need for the first example, th
 		} // onStateSet()
 		
 	} // class MySwitch
+{% endhighlight %}
 
 For the most part, this is pretty standard stuff. We’ve seen derived classes before and we’ve seen signals hooked up, but what we haven’t seen is an argument list that seems out of order. Take a look at the `onStateSet()` function.
 
@@ -56,7 +153,101 @@ In the body of the callback… wait a minute. Why do we get a `state`, but then 
 
 It seems that whereas we have the convenience of getting the `state` packaged with the signal, we still have to muck around to keep things in sync. To do that, we call `setState()`.
 
-#### And Now for Something Completely LightBulb
+## And a LightBulb-ish Thing
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/010_more_buttons/button_010_04.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22">														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/010_more_buttons/button_010_04_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33">																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_04_switch_light.d" target="_blank">here</a>.
+	</div>
+</div>
 
 What’s a `Switch` without something to turn on or off?
 
@@ -68,17 +259,17 @@ To get this all happening, we want:
 
 The `Switch`, we already have from the first exercise. The light bulb can be made from a `ColorButton` widget and the reset button from a standard, vanilla-flavored `Button`. Let’s first take a quick look at the container these three will be crammed into.
 
-#### SwitchBox Class
+### SwitchBox Class
 
 As with earlier container examples, the `SwitchBox` is where we declare and define all the widgets. Because they’re all derived classes, the names won’t mean much for now. And all we really do here in the `SwitchBox` is build the buttons and stuff them in.
 
-#### LightSwitch Class
+### LightSwitch Class
 
 This class bears little resemblance to the `MySwitch` class of the previous example. For one thing, it has a reference pointer to the `LightBulb` class (which we’ll see in a moment) and this we set up by passing in the pointer during the constructor phase. In effect, what this does is allow the `LightSwitch` class to behave like an observer.
 
 Next, the `onStateSet()` function doesn’t just keep the signal state in sync with the internal state, it takes care of setting the colour of the `LightBulb` widget (remember that a `ColorButton` displays its colour on the button itself). And before it exits, it updates the state of the `LightBulb`’s switch as well so that all states match across both widgets.
 
-#### LightBulb Class
+### LightBulb Class
 
 This `ColorButton` is more elaborate than the last one we played with. Instead of just one colour and a default, it’s got an `onColor`, an `offColor`, and defaults for both. It’s a bit more to track and so the `LightBulb` takes on characteristics of the observed to match `LightSwitch`’s observer status.
 
@@ -92,7 +283,7 @@ The `setColor()` function is the callback as obviated by how we hooked up the `o
 
 Finally, we have the `reset()` function that restores default colours to both on and off states.
 
-#### ResetButton Class
+### ResetButton Class
 
 The last class we’ve defined also tracks the `LightBulb` object and works closely with the `reset()` function built into the `LightBulb`. First it calls the `LightBulb`’s `reset()` function, then to keep everything else in sync, it sets the `LightBulb`’s `onColor` and `offColor`.
 
@@ -104,12 +295,11 @@ Hope this was as interesting to read about as it was to research and write (both
 
 Until next time, happy D-coding and may your Widgets always find their way home.
 
-
-<BR>
-<div style="float: left;">
-	<a href="/2019/04/02/0023-radio-and-color-buttons.html">Previous: Radio and Color Buttons</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/04/02/0023-radio-and-color-buttons.html">Previous: Radio and Color Buttons</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/04/09/0025-creating-and-using-a-linkbutton.html">Next: LinkButton</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/04/09/0025-creating-and-using-a-linkbutton.html">Next: LinkButton</a>
-</div>
-<BR>

@@ -7,18 +7,111 @@ author: Ron Tarrant
 
 ---
 
-## 0041 – Dialogs VII - The ColorChooserDialog
+# 0041 – Dialogs VII - The ColorChooserDialog
 
-We’ve actually seen today’s topic widget before, but it was part-n-parcel of the `ColorButton`, so we didn’t really look at it because it was a behind-the-scenes kind of dialog.
+We’ve actually seen today’s topic widget before, but it was part-n-parcel of the `ColorButton`, so we didn’t really look at it because it was a behind-the-scenes kind of dialog. Today, though, we're gonna roll up our sleeves and see how this sucker works.
 
-Today, though, let’s take a closer look at it. [The code can be found here]( https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_013_07_ColorChooserDialog.d).
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/013_dialogs/dialog_013_07.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00">															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/013_dialogs/dialog_013_07_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11">																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_013_07_ColorChooserDialog.d" target="_blank">here</a>.
+	</div>
+</div>
 
 In this example, I’ve defined a `ColorChooserButton` based on a plain vanilla `Button` which, in effect, makes this newly-derived `ColorChooserButton` equivalent to the `ColorButton` we saw in [Blog Post #23]( http://gtkdcoding.com/2019/04/02/0023-radio-and-color-buttons.html) (and [the code file for that can be found here]( https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_02_colorbutton.d), if you care to have another look at it).
 
-### The Button that Opens the Dialog
+## The Button that Opens the Dialog
 
 However, there are differences, so let’s look at what we’ve got here in this new button: 
 
+{% highlight d %}
 	class ColorChooserButton : Button
 	{
 		private:
@@ -44,13 +137,15 @@ However, there are differences, so let’s look at what we’ve got here in this
 		} // doSomething()
 	
 	} // class: ColorChooserButton
+{% endhighlight %}
 
 Here—because we’re driving the boat, as it were—we have to declare our own dialog which we didn’t have to do with the `ColorButton`. And naturally, we’ve got to hook up a signal too, so that clicking on the button opens the dialog. Then there’s the whole modal rigmarole to deal with, so we have to pass a pointer to the parent window along to our dialog object…
 
-### And Now, the Dialog
+## And Now, the Dialog
 
 For which the code looketh thus like:
 
+{% highlight d %}
 	class MyColorChooserDialog : ColorChooserDialog
 	{
 		private:
@@ -77,6 +172,7 @@ For which the code looketh thus like:
 		} // doSomething()
 		
 	} // class MyColorChooserDialog
+{% endhighlight %}
 
 As you can see, this is a derivation of the `ColorChooserDialog`, mostly because I wanted to illustrate a couple of points:
 
@@ -89,7 +185,7 @@ So, what if you pick a new color, let’s say `rgb(245, 121, 0)`, a nice middle-
 
 Nope. It goes back to white.
 
-### Which is Best?
+## Which is Best?
 
 You may wonder which of these methods of picking a color is best, the `ColorChooserDialog` or the `ColorButton`… It depends on the circumstances you find yourself in while designing an application:
 
@@ -103,12 +199,11 @@ And that’s the `ColorChooserDialog`.
 
 Take care and see you next time.
 
-
-<BR>
-<div style="float: left;">
-	<a href="/2019/05/31/0040-messagedialog.html">Previous: MessageDialog</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/05/31/0040-messagedialog.html">Previous: MessageDialog</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/06/07/0042-custom-dialog-i.html">Next: Dialog Aesthetics</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/06/07/0042-custom-dialog-i.html">Next: Dialog Aesthetics</a>
-</div>
-<BR>

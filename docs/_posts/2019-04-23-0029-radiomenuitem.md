@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-## 0029 – Menus IV - The RadioMenuItem
+# 0029 – Menus IV - The RadioMenuItem
 
 Today we start on `RadioMenuItem`s with a simple example. Next time, we’ll carry on with a second example, but with a more practical bent.
 
@@ -28,12 +28,105 @@ But this simply means that, like with `RadioButton`s, we have to manage mutual e
 
 One to the first example…
 
-### A Simple RadioMenuItem
+## A Simple RadioMenuItem
 
-[Here’s the code file](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_11_simple_radiomenuitems.d).
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/012_menus/menu_012_11.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00">															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/012_menus/menu_012_11_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11">																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_11_simple_radiomenuitems.d" target="_blank">here</a>.
+	</div>
+</div>
 
 If we look at the `MyRadioMenuItem` class, right off the bat we can see some differences in how the constructors are set up compared to the `CheckMenuItem`:
 
+{% highlight d %}
 	class MyRadioMenuItem : RadioMenuItem
 	{
 		string message = "The setting state is: ";
@@ -71,6 +164,7 @@ If we look at the `MyRadioMenuItem` class, right off the bat we can see some dif
 		
 	
 	} // class MyRadioMenuItem
+{% endhighlight %}
 
 Firstly, this constructor is designed to build a generic `RadioMenuItem`  (as opposed to one with a function different from others in the same set) and to that end, it takes two arguments:
 
@@ -85,14 +179,111 @@ And as for the callback, we’re looking at a different approach to signal handl
 - go find the state of the `RadioMenuItem`, and finally
 - take action (or not) based on that state.
 
-Note: The `onToggle` signal also works as can be seen in [this bonus example which differs only in which signal is used](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_13_simple_radiomenuitems_toggle.d).
+## RadioMenuItem with a Different Signal
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/012_menus/menu_012_13.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22">														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/012_menus/menu_012_13_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33">																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_13_simple_radiomenuitems_toggle.d" target="_blank">here</a>.
+	</div>
+</div>
+
+Note: The `onToggle` signal also works as can be seen in this bonus example which differs only in which signal is used.
 
 Now let’s look at the `FileMenu` class…
 
-#### FileMenu Class
+### FileMenu Class
 
 Here’s what it looks like:
 
+{% highlight d %}
 	class FileMenu : Menu
 	{
 		MyRadioMenuItem radioItem01, radioItem02, radioItem03;
@@ -114,7 +305,7 @@ Here’s what it looks like:
 		} // this()
 		
 	} // class FileMenu
-
+{% endhighlight %}
 
 We’ve worked with the `ListSG group` before, but perhaps without realizing it. If you look back at [the example code for a RadioButton](https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_01_radiobutton.d), you’ll see that the group is not named up front like it is here. Instead, it's declared and defined somewhere in the inner workings of the first `RadioButton`'s constructor and we only see it as a member of the `radioItem01` object.
 
@@ -130,12 +321,11 @@ And is there a difference? Not really. It's just another option. In fact, you ma
 
 And that’s it for this time, but we’ll be back with the practical example on Tuesday. See you then.
 
-
-<BR>
-<div style="float: left;">
-	<a href="/2019/04/19/0028-checkmenuitems.html">Previous: CheckMenuItem</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/04/19/0028-checkmenuitems.html">Previous: CheckMenuItem</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/04/26/0030-radiomenuitem-practical.html">Next: Practical RadioMenuItem</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/04/26/0030-radiomenuitem-practical.html">Next: Practical RadioMenuItem</a>
-</div>
-<BR>

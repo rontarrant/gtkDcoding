@@ -7,16 +7,113 @@ author: Ron Tarrant
 
 ---
 
-## 0033 – Menus VIII - An Image, a Label and an AccelKey
+# 0033 – Menus VIII - An Image, a Label and an AccelKey
 
-Remember how I said that the *GTK* `ImageMenuItem` was deprecated? Well, with it went the easy way to add an accelerator key to a `MenuItem` with an image.
+Remember how I said that the *GTK* `ImageMenuItem` was deprecated? Well, with it went the easy way to add an accelerator key to a `MenuItem` that also has an image.
 
-Well, whether it's useful or not, we can fake it. [Here the code](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_17_accel_fake_image_item.d) and here goes nothing…
+Well, whether it's useful or not, we can fake it, so here goes nothing…
 
-### Don’t Forget to Add `AccelGroup` to Your `Window`
+## Fake ImageMenuItem Accel Key
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/012_menus/menu_012_17.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00">															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/012_menus/menu_012_17_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11">																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_17_accel_fake_image_item.d" target="_blank">here</a>.
+	</div>
+</div>
+
+## Don’t Forget to Add AccelGroup to Your Window
 
 Because if you do forget, this isn't gonna work. Here’s `TestRigWindow`’s constructor (we saw this last time, but here's a refresher):
 
+{% highlight d %}
 	this()
 	{
 		super(title);
@@ -32,15 +129,19 @@ Because if you do forget, this isn't gonna work. Here’s `TestRigWindow`’s co
 		showAll();
 			
 	} // this()
+{% endhighlight %}
 
 Such an important line:
 
+{% highlight d %}
 	addAccelGroup(accelGroup);
+{% endhighlight %}
 
-#### Add the `FileMenu`
+### Add the FileMenu
 
 This really hasn’t changed since last time we did a fake image `MenuItem`:
 
+{% highlight d %}
 	class FileMenu : Menu
 	{
 		FakeImageMenuItem appleItem;
@@ -60,11 +161,13 @@ This really hasn’t changed since last time we did a fake image `MenuItem`:
 		
 		
 	} // class FileMenu
+{% endhighlight %}
 
-#### The All-new `FakeImageMenuItem`
+### The All-new FakeImageMenuItem
 
 This is the mouthful of code you’ll need to chew on to get this working:
 
+{% highlight d %}
 	class FakeImageMenuItem : MenuItem
 	{
 		string actionMessage = "You have added one (1) apple to your cart.";
@@ -104,12 +207,15 @@ This is the mouthful of code you’ll need to chew on to get this working:
 		} // exit()
 		
 	} // class FakeImageMenuItem
+{% endhighlight %}
 
 There’s a lot going on here, but skipping over the bits we’ve covered in earlier posts, here’s what’s new or unusual:
 
 First is this line:
 
+{% highlight d %}
 	addOnActivate(&reportStuff);
+{% endhighlight %}
 
 I bring this to your attention because in the previous example of accelerator keys, we didn’t use this line. But this time, we do and we’ll see why in a moment.
 
@@ -122,8 +228,10 @@ After that we:
 
 *Not* a `Label`, an `AccelLabel`. And why? Because we have to do these extra bits of twiddling to get this to work:
 
+{% highlight d %}
 	accelLabel.setXalign(0.0);
 	accelLabel.setAccelWidget(this);
+{% endhighlight %}
 
 And those functions are only available with the `AccelLabel`.
 
@@ -133,7 +241,9 @@ And then the `AccelLabel` needs to know which `Widget` to pair up with. In this 
 
 Now with this line, we get to the other half of why we still need to hook up the signal:
 
+{% highlight d %}
 	addAccelerator("activate", accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+{% endhighlight %}
 
 When we added accelerators in the previous example, last post (which I’ve also done in this example with the `Exit` `MenuItem` so you have both close to hand for comparison) we did it via an overloaded call to the super-class constructor.
 
@@ -141,8 +251,10 @@ But here, we can’t because the work is split up between several widgets. So we
 
 Now another crucial thing to bear in mind: When you pack the `Image` and the `AccelLabel` into the `Box`, you have to `add()` the image and `packEnd()` the `AccelLabel`, which is these lines:
 
+{% highlight d %}
 	imageMenuBox.add(image);
 	imageMenuBox.packEnd(accelLabel, true, true, 0);
+{% endhighlight %}
 
 ## Conclusion
 
@@ -152,12 +264,11 @@ And that just about sums up today’s exploration of accelerator keys and imager
 
 Until then...
 
-
-<BR>
-<div style="float: left;">
-	<a href="/2019/05/03/0032-accelerator-keys.html">Previous: Accelerator Keys</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/05/03/0032-accelerator-keys.html">Previous: Accelerator Keys</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/05/10/0034-accelgroup-singleton.html">Next: AccelGroup Singleton</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/05/10/0034-accelgroup-singleton.html">Next: AccelGroup Singleton</a>
-</div>
-<BR>

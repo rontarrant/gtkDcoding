@@ -7,13 +7,105 @@ author: Ron Tarrant
 
 ---
 
-## 0028 – Menus III - CheckMenuItems
+# 0028 – Menus III - CheckMenuItems
 
 Today we’ll cover another type of `MenuItem`, the `CheckMenuItem`. This post is longer than usual because after doing the simple version, I wanted to do a multiple `CheckMenuItem` version as well and that led to a whole can of worms dumped on my desktop. Anyway, let’s get on with it…
 
-### Single CheckMenuItem
+## Single CheckMenuItem
 
-[Here’s the first example file]( https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_09_single_checkmenuitem.d).
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/012_menus/menu_012_09.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00">															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/012_menus/menu_012_09_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11">																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_09_single_checkmenuitem.d" target="_blank">here</a>.
+	</div>
+</div>
 
 For the most part, this is very much the same as other `MenuItem`s. It’s created by calling for a new `CheckMenuItem` and it’s appended to a `Menu` in the same way, but where it strays from the norm is:
 
@@ -24,6 +116,7 @@ The beauty of this last point is that we can set up the callback to perform two 
 
 The simplest way to write the callback is to check the state of the `CheckBox` with `getActive()` and decide what to do from there:
 
+{% highlight d %}
 	void choose(CheckMenuItem mi)
 	{
 		if(getActive() == true)
@@ -36,17 +129,113 @@ The simplest way to write the callback is to check the state of the `CheckBox` w
 		}
 		
 	} // choose()
+{% endhighlight %}
 
 While digging into this widget, I found myself unable to resist doing a more complex version with multiple `CheckMenuItem`s, so here we go...
 
-### Multiple CheckMenuItems and Tracking Their States
+## Multiple CheckMenuItems and Tracking Their States
 
-[Here’s the code file]( https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_10_multiple_checkmenuitems.d), but before we look at the `CheckMenuItem`s themselves…
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/012_menus/menu_012_10.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22">														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/012_menus/menu_012_10_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33">																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_012_10_multiple_checkmenuitems.d" target="_blank">here</a>.
+	</div>
+</div>
+
+Before we look at the `CheckMenuItem`s themselves…
 
 ### The ObservedFeaturesList Object
 
 This example spotlights an imaginary object and the features controlled with the `CheckMenuItem`s. Here’s the code to define this imaginary object:
 
+{% highlight d %}
 	class ObservedFeaturesList
 	{
 		bool[string] features;
@@ -82,6 +271,7 @@ This example spotlights an imaginary object and the features controlled with the
 		} // listFeatures()
 		
 	} // class ObservedFeaturesList
+{% endhighlight %}
 
 This is a different approach than we’ve taken before. This class keeps track of:
 
@@ -95,10 +285,11 @@ Also, the key names are used as labels when creating the `CheckMenuItem`s, so th
 
 This `ObservedFeaturesList` object is instantiated in…
 
-### Back to the Top
+## Back to the Top
 
 Jumping back to the `TextRigWindow` class, we see some changes to our usual code:
 
+{% highlight d %}
 	class TestRigWindow : MainWindow
 	{
 		string title = "CheckMenuItem Example";
@@ -129,13 +320,15 @@ Jumping back to the `TextRigWindow` class, we see some changes to our usual code
 		} // quitApp()
 		
 	} // TestRigWindow
+{% endhighlight %}
 
 Because all of the `CheckMenuItem`s need access to the `ObservedFeaturesList` and I also wanted to duplicate `Exit` `MenuItem` action when the user clicks the window’s *Close* button, I created the observed object here and passed it down through the hierarchy.
 
-### The FileMenu Class
+## The FileMenu Class
 
 Here, because the `CheckMenuItem`s are all so similar, we can get away grabbing the names (`itemKey`) from within a `foreach` loop to create the items:
 
+{% highlight d %}
 	class FileMenu : Menu
 	{
 		FeatureCheckMenuItem[] featureItemArray;
@@ -159,6 +352,7 @@ Here, because the `CheckMenuItem`s are all so similar, we can get away grabbing 
 		} // this()
 	
 	} // class FileMenu
+{% endhighlight %}
 
 Note that when using an associative array with a `foreach` loop, we need to name a pair of iterators, a `key` and a `value`, as well as the associative array even though we don't actually use `itemValue`. Within the loop, we do the standard stuff:
 
@@ -171,10 +365,11 @@ Once we’re done with those, it’s back to adding the `exitItem` in the usual 
 
 One last bit to look at…
 
-### The `FeatureCheckMenuItem` Class
+## The FeatureCheckMenuItem Class
 
 There’s a little more going on here than with other types of `MenuItem`. Here’s the code:
 
+{% highlight d %}
 	class FeatureCheckMenuItem : CheckMenuItem
 	{
 		string labelText;
@@ -206,6 +401,7 @@ There’s a little more going on here than with other types of `MenuItem`. Here�
 		} // toggleFeature()
 		
 	} // class FeatureCheckMenuItem
+{% endhighlight %}
 
 Because the individual `CheckMenuItem`s differ only in label text, we can get away with this being a generic class and deal with the naming step up in the `FileMenu` class we just looked at. The constructor gets access to the `ObservedFeaturesList` object like everyone else.
 
@@ -219,12 +415,11 @@ Next time, we’ll do pretty much the same thing except with `RadioMenuItem`s. H
 
 Until then, happy coding, happy hunting, happy birthday, or happy New Year, whatever’s your poison.
 
-
-<BR>
-<div style="float: left;">
-	<a href="/2019/04/16/0027-mnemonic-shortcut-key.html">Previous: Mnemonics</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/04/16/0027-mnemonic-shortcut-key.html">Previous: Mnemonics</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/04/23/0029-radiomenuitem.html">Next: RadioMenuItem</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/04/23/0029-radiomenuitem.html">Next: RadioMenuItem</a>
-</div>
-<BR>

@@ -21,14 +21,107 @@ As promised, this time around we talk about the `Dialog`’s *Content Area* and 
 
 The *Action Area* used in this example uses an array of roll-yer-own `Button` `Label` text strings. ‘Nuff said. And now…
 
-### The *Content Area*
+## The *Content Area*
 
-[Here’s the code example file]( https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_013_10_custom_content_area.d).
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/013_dialogs/dialog_013_10.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00">															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/013_dialogs/dialog_013_10_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11">																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_013_10_custom_content_area.d" target="_blank">here</a>.
+	</div>
+</div>
 
 The first thing to know about the *Content Area* is that it’s just an ordinary `Box` jammed into the top section of the `Dialog`. Knowing that, we just isolate the `Content Area` so we can address it directly, then treat it like any other `Box`. It takes a couple of steps to get there, but it works, so why not?
 
 In the constructor, we instantiate the `Dialog`, then call a function named `farmOutContent()` to do the dirty work:
 
+{% highlight d %}
 	this(Window parentWindow)
 	{
 		_parentWindow = parentWindow;
@@ -40,9 +133,11 @@ In the constructor, we instantiate the `Dialog`, then call a function named `far
 		destroy();
 		
 	} // this()
+{% endhighlight %}
 
 And here’s that farming function which really just gives us a convenient handle to grab our `Box` and hand it around:
 
+{% highlight d %}
 	void farmOutContent()
 	{
 		// FARM it out to AreaContent class
@@ -50,11 +145,13 @@ And here’s that farming function which really just gives us a convenient handl
 		areaContent = new AreaContent(contentArea);
 		
 	} // farmOutContent()
+{% endhighlight %}
 
 It may seem redundant to have variables for both `areaContent` and `contentArea`, but keep in mind that one's a `Box` and the other is a customized `ContentArea` object which contains that `Box` we grabbed from the the `Dialog`. The fact that we're passing `contentArea` to the `AreaContent` class's constructor is a dead giveaway. It's the same technique we used for defining *Part I*'s `HPadBox`. And the `AreaContent` object wraps the handle.
 
 And here’s where it all gets wrapped up in a nice, neat... um... object:
 
+{% highlight d %}
 	class AreaContent
 	{
 		private:
@@ -70,6 +167,16 @@ And here’s where it all gets wrapped up in a nice, neat... um... object:
 			_contentArea.showAll();
 	
 		} // this()
+{% endhighlight %}
+
+<div class="inpage-frame">
+	<figure class="left">
+		<img src="/images/diagrams/013_dialog/dialog_013_10_grid_diagram.png" alt="Simple guide to laying out a dialog" style="size: 75%;">
+		<figcaption>
+			Figure 1: A simple diagram for laying out a dialog
+		</figcaption>
+	</figure>
+</div>
 
 The `_contentArea` property is defined as a `Box` (note that we don't need to call `cast()` for this to work) and it gets assigned to the `Box` pointer passed into the constructor. The constructor goes on to create our padded `Grid` (the `PadGrid` class) and stuffs that into the *Content Area*.
 
@@ -102,10 +209,9 @@ Naturally, the constructor takes all these properties, instantiates all the `Lab
 
 And like when we were dealing with menus, it’s always a good idea to draw a diagram of your `Grid` layout to more easily keep track of what's going on.
 
-![Something like this will do]( https://github.com/rontarrant/gtkDcoding/blob/master/images/grid_diagram.jpg).
-
 And one function in the `NewImageDataGrid` will be of interest. It looks like this:
 
+{% highlight d %}
 	Tuple!(string, int, int, int) getData()
 	{
 		_filename = filenameEntry.getText();
@@ -117,6 +223,7 @@ And one function in the `NewImageDataGrid` will be of interest. It looks like th
 		return(tuple(_filename, _width, _height, _resolution));
 		
 	} // getData()
+{% endhighlight %}
 
 What you’re looking at is some *D*-specific coolness. To get the user-supplied data out of the `Entry`s, we’re dealing with two kinds of data, a string and a handful of integers. We use *D*’s `Tuple(S, I, I, I)` construct to declare a mixed return value and `tuple()` to put it together before handing it to the `return()` statement.
 
@@ -126,10 +233,11 @@ Using this as a model, you can grab any combination of mixed data from the user,
 
 Now, let’s skip back to the `NewImageDialog`’s callback function… well, part of it, anyway…
 
-### Retrieving the User-supplied Data
+## Retrieving the User-supplied Data
 
 To handle the `Button`s in the action area, I set up a `switch()` statement inside the `doSomething()` callback. Here’s one relevant bit of that `switch`/`case` code. And for convenience, [here's the entire file again if you don't wanna scroll back up to the link]( https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_013_10_custom_content_area.d)):
 
+{% highlight d %}
 	case ResponseType.OK:
 		writeln("Creating new image file with these specs:");
 		
@@ -140,6 +248,7 @@ To handle the `Button`s in the action area, I set up a `switch()` statement insi
 		}
 		
 	break;
+{% endhighlight %}
 
 If the user clicked on the *OK* button in the *Action Area*, we step through each item in the `tuple` returned by `getData()` and print it to the terminal. Naturally, you’d wanna do this differently in an application, perhaps more like this:
 
@@ -163,12 +272,11 @@ May you have as much fun creating your own custom `Dialog`s as I did coming up w
 
 And remember: *semper ubi sub-ubi*.
 
-
-<BR>
-<div style="float: left;">
-	<a href="/2019/06/11/0043-custom-dialog-ii.html">Previous: Dialog Action Area</a>
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/06/11/0043-custom-dialog-ii.html">Previous: Dialog Action Area</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/06/18/0045-split-a-window-into-panes.html">Next: Split a Window into Panes</a>
+	</div>
 </div>
-<div style="float: right;">
-	<a href="/2019/06/18/0045-split-a-window-into-panes.html">Next: Split a Window into Panes</a>
-</div>
-<BR>

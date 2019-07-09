@@ -4,6 +4,8 @@ layout: default
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
 	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
 		{% if page.topic == 'window' %}
 			<link rel="stylesheet" href="/css/window.css" />
 		{% elsif page.topic == 'button' %}
@@ -35,6 +37,7 @@ layout: default
 		{% endif %}
 		
 		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
 		
 		{% if page.keywords %}
 			<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">

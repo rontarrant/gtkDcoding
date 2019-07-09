@@ -114,33 +114,43 @@ This version of the test rig is written in the imperative paradigm. There’s a 
 
 ### Imports
 
+{% highlight d %}
 	import std.stdio;
 	import gtk.MainWindow;
 	import gtk.Main;
 	import gtk.Widget;
+{% endhighlight %}
 
 Import statements are how *D* pulls things in from other files.
 
 ### main()
 
+{% highlight d %}
 	void main(string[] args)
+{% endhighlight %}
 
 Just like *C*, *D* demands a `main()` function unless you’re building a library. This one is defined as:
 
 - having no return value, and
 - takes an array of strings as arguments from the command line.
-	
+
+{% highlight d %}
 	{
-	
+{% endhighlight %}
+
 Yup, there’s that opening curly brace on a line all by itself, just like I said it would be. You all know what it means, so let’s just carry on.
 
 ### Initialization
 
+{% highlight d %}
 	Main.init(args);
+{% endhighlight %}
 
 This calls the `init()` function in *GtkD*’s `Main` module. Command line arguments are passed along. We’ll see why sometime down the road.
 
+{% highlight d %}
 	MainWindow testRigWindow = new MainWindow("Test Rig");
+{% endhighlight %}
 
 This line creates the window the user will see when the application is run. This is the breakdown:
 
@@ -152,7 +162,9 @@ This line creates the window the user will see when the application is run. This
 
 ### Window Close Button
 
+{% highlight d %}
 	testRigWindow.addOnDestroy(delegate void(Widget w) {quitApp();});
+{% endhighlight %}
 
 This line breaks down as:
 
@@ -166,38 +178,53 @@ This line breaks down as:
 
 ### Classic Greeting
 
+{% highlight d %}
 	writeln("Hello GtkD");
+{% endhighlight %}
 
 This just spits a line out to the command shell with a classic-style greeting.
 
 ### Show the Window and its Contents
 
+{% highlight d %}
 	testRigWindow.showAll();
+{% endhighlight %}
 
 We now make another call to the window object to show itself.
 
 ### Start the Main Loop		
+
+{% highlight d %}
 	Main.run();
+{% endhighlight %}
 
 And here we hand control over to *GTK*’s main loop. In a nutshell, the main loop will keep running until it gets a signal to act on from our application.
-	
+
+{% highlight d %}
 	} // main()
+{% endhighlight %}
 
 And this is the end of the `main()` function. I like to mark the ends of all functions with a comment stating the function’s name in case it’s off screen. No point scrolling back up if I don’t have to.
 
 ### Callback Function
 
+{% highlight d %}
 	void quitApp()
+{% endhighlight %}
 
 Here we define the `quitApp()` function to have no return value.
 
+{% highlight d %}
 	writeln("Bye.");
+{% endhighlight %}
 
 Just to show that we’ve truly interrupted the window’s destroy function, this line spits out another quick message to the command shell.
 
 ### Clean up and Go
 
+{% highlight d %}
 	Main.quit();
+{% endhighlight %}
 
 And lastly, after we’ve done all we wanna do (perhaps warn the user that the end is nigh) we hand over to Main’s `quit()` function. This makes sure our application makes a clean exit.
 
@@ -211,7 +238,7 @@ That’s it for this lesson. We’ve got *D* and *GtkD* installed and we’ve do
 
 Next time, we’ll look at the OOP version of the test rig and build our first button. Until then, happy *D*-coding and may the widgets be with you.
 
-<div class="previous-next-div">
+<div class="blog-nav">
 	<div style="float: left;">
 		<a href="/2019/01/11/0000-introduction-to-gtkDcoding.html">Previous: Introduction to GtkDcoding</a>
 	</div>
