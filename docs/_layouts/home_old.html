@@ -1,0 +1,230 @@
+---
+layout: default
+---
+
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+		{%- if site.posts.size > 0 -%}
+			<ul class="post-list">
+    			<h2 class="post-list-heading">{{ page.list_title | default: "Musings of a GtkD Coder" }}</h2>
+	 			{%- for post in site.posts -%}
+					<li>
+					{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+						{% if post.topic == 'window' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_window post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/window.png">
+								</span>
+							</div>
+
+<!--						<span class="post-meta">{{ post.date | date: date_format }}</span>
+							<h3 class="topic_window">
+							<a class="post-link" href="{{ post.url | relative_url }}">
+							<img src="/images/signs/window-small.png" alt="Window" style="width: 50px; height: 70px;"> 
+							{{ post.title | escape }}
+							</a>
+							</h3>
+							{%- if site.show_excerpts -%}
+								{{ post.excerpt }}
+							{%- endif -%}-->
+
+						{% elsif post.topic == 'button' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_button post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/button.png">
+								</span>
+							</div>
+						
+						{% elsif post.topic == 'box' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_box post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/box.png">
+								</span>
+							</div>
+						
+						{% elsif post.topic == 'mouse' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_mouse post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/mouse.png">
+								</span>
+							</div>
+						
+						{% elsif post.topic == 'text' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_text post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/text.png">
+								</span>
+							</div>
+						
+						{% elsif post.topic == 'image' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_image post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/image.png">
+								</span>
+							</div>
+						
+						{% elsif post.topic == 'linux' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_linux post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/linux.png">
+								</span>
+							</div>
+						
+						{% elsif post.topic == 'odd' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_odd post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/odd.png">
+								</span>
+							</div>
+						
+						 {% elsif post.topic == 'menu' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_menu post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/menu.png">
+								</span>
+							</div>
+						
+						{% elsif post.topic == 'dialog' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_dialog post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/dialog.png">
+								</span>
+							</div>
+						
+						{% elsif post.topic == 'mvc' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_mvc post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/mvc.png">
+								</span>
+							</div>
+						
+						{% elsif post.topic == 'cairo' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_cairo post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/cairo.png">
+								</span>
+							</div>
+						
+						{% elsif post.topic == 'oop' %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_oop post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/oop.png">
+								</span>
+							</div>
+						
+						{% else %}
+							<div class="topic-div">
+								<span class="post-date"> {{ post.date | date: date_format }}
+									<h3 class="topic-color_default post-list-item">
+										<a class="post-link" href="{{ post.url | relative_url }}"</a>
+											{{ post.title | escape }}
+										</a>
+									</h3>
+								</span>
+								<span class="topic-span-icon">
+									<img class="topic-icon" src="/images/topics/default.png">
+								</span>
+							</div>
+					{% endif %}
+					</li>
+				{%- endfor -%}
+			</ul>
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  {%- endif -%}
+
+</div>

@@ -1,0 +1,347 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+		
+		{% if page.keywords %}
+			<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">
+		{% endif %}
+		<p class="post-meta">
+		<time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+			{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+			{{ page.date | date: date_format }}
+		</time>
+			{%- if page.author -%}
+			• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+	      {%- endif -%}</p>
+	</header>
+
+	{% assign window_links = "" | split: ',' %}
+	{% assign window_titles = "" | split: ',' %}
+	{% assign window_dates = "" | split: ',' %}
+	
+	{% assign button_links = "" | split: ',' %}
+	{% assign button_titles = "" | split: ',' %}
+	{% assign button_dates = "" | split: ',' %}
+	
+	{% assign box_links = "" | split: ',' %}
+	{% assign box_titles = "" | split: ',' %}
+	{% assign box_dates = "" | split: ',' %}
+	
+	{% assign mouse_links = "" | split: ',' %}
+	{% assign mouse_titles = "" | split: ',' %}
+	{% assign mouse_dates = "" | split: ',' %}
+	
+	{% assign text_links = "" | split: ',' %}
+	{% assign text_titles = "" | split: ',' %}
+	{% assign text_dates = "" | split: ',' %}
+	
+	{% assign image_links = "" | split: ',' %}
+	{% assign image_titles = "" | split: ',' %}
+	{% assign image_dates = "" | split: ',' %}
+	
+	{% assign linux_links = "" | split: ',' %}
+	{% assign linux_titles = "" | split: ',' %}
+	{% assign linux_dates = "" | split: ',' %}
+	
+	{% assign odd_links = "" | split: ',' %}
+	{% assign odd_titles = "" | split: ',' %}
+	{% assign odd_dates = "" | split: ',' %}
+	
+	{% assign menu_links = "" | split: ',' %}
+	{% assign menu_titles = "" | split: ',' %}
+	{% assign menu_dates = "" | split: ',' %}
+	
+	{% assign dialog_links = "" | split: ',' %}
+	{% assign dialog_titles = "" | split: ',' %}
+	{% assign dialog_dates = "" | split: ',' %}
+	
+	{% assign mvc_links = "" | split: ',' %}
+	{% assign mvc_titles = "" | split: ',' %}
+	{% assign mvc_dates = "" | split: ',' %}
+	
+	{% assign cairo_links = "" | split: ',' %}
+	{% assign cairo_titles = "" | split: ',' %}
+	{% assign cairo_dates = "" | split: ',' %}
+	
+	{% assign oop_links = "" | split: ',' %}
+	{% assign oop_titles = "" | split: ',' %}
+	{% assign oop_dates = "" | split: ',' %}
+	
+	{% assign default_links = "" | split: ',' %}
+	{% assign default_titles = "" | split: ',' %}
+	{% assign default_dates = "" | split: ',' %}
+
+	<div class="post-content e-content" itemprop="articleBody">
+		{{ content }}
+		
+		<!-- topics menu goes here -->
+		{%- if site.posts.size > 0 -%}
+ 			{%- for post in site.posts reversed -%}
+				{% if post.topic == 'window' %}
+					{% assign window_links = window_links | push: post.url %}
+					{% assign window_titles = window_titles | push: post.title %}
+					{% assign window_dates = window_dates | push: post.date %}
+				 {% elsif post.topic == 'button' %}
+					{% assign button_links = button_links | push: post.url %}
+					{% assign button_titles = button_titles | push: post.title %}
+					{% assign button_dates = button_dates | push: post.date %}
+				{% elsif post.topic == 'box' %}
+					{% assign box_links = box_links | push: post.url %}
+					{% assign box_titles = box_titles | push: post.title %}
+					{% assign box_dates = box_dates | push: post.date %}
+				{% elsif post.topic == 'mouse' %}
+					{% assign mouse_links = mouse_links | push: post.url %}
+					{% assign mouse_titles = mouse_titles | push: post.title %}
+					{% assign mouse_dates = mouse_dates | push: post.date %}
+				{% elsif post.topic == 'text' %}
+					{% assign text_links = text_links | push: post.url %}
+					{% assign text_titles = text_titles | push: post.title %}
+					{% assign text_dates = text_dates | push: post.date %}
+				{% elsif post.topic == 'image' %}
+					{% assign image_links = image_links | push: post.url %}
+					{% assign image_titles = image_titles | push: post.title %}
+					{% assign image_dates = image_dates | push: post.date %}
+				{% elsif post.topic == 'linux' %}
+					{% assign linux_links = linux_links | push: post.url %}
+					{% assign linux_titles = linux_titles | push: post.title %}
+					{% assign linux_dates = linux_dates | push: post.date %}
+				{% elsif post.topic == 'odd' %}
+					{% assign odd_links = odd_links | push: post.url %}
+					{% assign odd_titles = odd_titles | push: post.title %}
+					{% assign odd_dates = odd_dates | push: post.date %}
+				 {% elsif post.topic == 'menu' %}
+					{% assign menu_links = menu_links | push: post.url %}
+					{% assign menu_titles = menu_titles | push: post.title %}
+					{% assign menu_dates = menu_dates | push: post.date %}
+				{% elsif post.topic == 'dialog' %}
+					{% assign dialog_links = dialog_links | push: post.url %}
+					{% assign dialog_titles = dialog_titles | push: post.title %}
+					{% assign dialog_dates = dialog_dates | push: post.date %}
+				{% elsif post.topic == 'mvc' %}
+					{% assign mvc_links = mvc_links | push: post.url %}
+					{% assign mvc_titles = mvc_titles | push: post.title %}
+					{% assign mvc_dates = mvc_dates | push: post.date %}
+				{% elsif post.topic == 'cairo' %}
+					{% assign cairo_links = cairo_links | push: post.url %}
+					{% assign cairo_titles = cairo_titles | push: post.title %}
+					{% assign cairo_dates = cairo_dates | push: post.date %}
+				{% elsif post.topic == 'oop' %}
+					{% assign oop_links = oop_links | push: post.url %}
+					{% assign oop_titles = oop_titles | push: post.title %}
+					{% assign oop_dates = oop_dates | push: post.date %}
+				{% else %}
+					{% assign default_links = default_links | push: post.url %}					
+					{% assign default_titles = default_titles | push: post.title %}
+					{% assign default_dates = default_dates | push: post.date %}
+				{% endif %}
+			{%- endfor -%}
+		{%- endif -%}
+		<!-- individual topic links go here -->
+		<!-- default topics -->
+		{% if default_links.size > 0 %}
+			{% for post in default_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ default_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_default post-list-item">
+							<a class="post-link" href="{{ default_links[forloop.index] | relative_url }}"</a>
+								{{ default_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+				<br>
+			{% endfor %}
+		{% endif %}
+		<!-- window topics -->
+		{% if window_links.size > 0 %}
+			{% for post in window_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ window_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_window post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ window_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- button topics -->
+		{% if button_links.size > 0 %}
+			{% for post in button_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ button_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_button post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ button_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- box topics -->
+		{% if box_links.size > 0 %}
+			{% for post in box_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ box_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_box post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ box_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- mouse topics -->
+		{% if mouse_links.size > 0 %}
+			{% for post in mouse_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ mouse_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_mouse post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ mouse_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- text topics -->
+		{% if text_links.size > 0 %}
+			{% for post in text_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ text_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_text post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ text_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- image topics -->
+		{% if image_links.size > 0 %}
+			{% for post in image_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ image_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_image post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ image_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- linux topics -->
+		{% if linux_links.size > 0 %}
+			{% for post in linux_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ linux_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_linux post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ linux_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- odd topics -->
+		{% if odd_links.size > 0 %}
+			{% for post in odd_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ odd_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_odd post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ odd_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- menu topics -->
+		{% if menu_links.size > 0 %}
+			{% for post in menu_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ menu_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_menu post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ menu_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- dialog topics -->
+		{% if dialog_links.size > 0 %}
+			{% for post in dialog_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ dialog_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_dialog post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ dialog_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- mvc topics -->
+		{% if mvc_links.size > 0 %}
+			{% for post in mvc_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ mvc_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_mvc post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ mvc_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- cairo topics -->
+		{% if cairo_links.size > 0 %}
+			{% for post in cairo_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ cairo_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_cairo post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ cairo_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+		<!-- oop topics -->
+		{% if oop_links.size > 0 %}
+			{% for post in oop_links %}
+				<div class="topic-div">
+					<span class="post-date"> {{ oop_dates[forloop.index] | date: date_format }}
+						<h3 class="topic-color_oop post-list-item">
+							<a class="post-link" href="{{ post | relative_url }}"</a>
+								{{ oop_titles[forloop.index] | escape }}
+							</a>
+						</h3>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
+
+		{%- include post-footer.html -%}
+	</div>
+
+	<a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>

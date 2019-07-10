@@ -1,6 +1,6 @@
 ---
 title: "0013: Scrolled Layout"
-topic: box
+topic: container
 layout: post
 description: How to scroll the contents of a GTK Layout container - a D language tutorial.
 author: Ron Tarrant

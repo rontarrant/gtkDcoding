@@ -1,6 +1,7 @@
 ---
 title: "X0001: gtkDcoding Blog Extra"
 layout: post
+topic: general
 description: How to use the GTK+ Inspector to see what your code's up to.
 author: Ron Tarrant
 

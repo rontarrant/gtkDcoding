@@ -11,7 +11,7 @@
 {
 	background-image: linear-gradient(to right, rgba(243, 213, 163, 1.0), rgba(255, 255, 255, 1.0));
 }
-.topic-color_box /* green */
+.topic-color_container /* green */
 {
 	background-image: linear-gradient(to right, rgba(85, 243, 85, 1.0), rgba(255, 255, 255, 1.0));
 }
@@ -55,7 +55,7 @@
 {
 	background-image: linear-gradient(to right, rgba(211, 137, 91, 1), rgba(255, 255, 255, 1.0));
 }
-.topic-color_default /* light gray */
+.topic-color_general /* light gray */
 {
 	background-image: linear-gradient(to right, rgba(92, 236, 241, 1), rgba(255, 255, 255, 1.0));
 }

@@ -1,7 +1,7 @@
 ---
 title: "0000: Introduction to GtkDcoding"
 layout: post
-topic: default
+topic: general
 description: An introduction to GTK 3 and how it can be used to create Graphical User Interfaces (GUI) for applications - a D language tutorial.
 author: Ron Tarrant
 ---
