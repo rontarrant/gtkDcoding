@@ -222,7 +222,7 @@ For now, though, this is what happens in the first stage of the constructor:
 
 #### Stage 2: Initializing the Model
 
-Not a bid deal, we just:
+Not a big deal, we just:
 
 - assign a local pointer to the `ListStore`,
 - use `setModel()` to tell the `ComboBox` where to look for its data, and
