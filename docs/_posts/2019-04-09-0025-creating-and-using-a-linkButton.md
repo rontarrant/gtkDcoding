@@ -285,7 +285,7 @@ It’s all in the arguments sent to `LinkButton`’s constructor:
 
 On the downside, the `LinkButton` spits out a warning to the *Command Prompt* window every time you use it. My research has turned up no reasonable explanation and it’s been going on since the release of *GTK 3.0*. The good news is that the message is of no consequence and it seems safe to ignore.
 
-And that’s it for this time, a short post for a short day. Come on back again sometime.
+And that’s it for this time, a short post for a short day. Come on back sometime and we'll do this again.
 
 <div class="blog-nav">
 	<div style="float: left;">

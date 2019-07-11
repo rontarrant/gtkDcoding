@@ -14,7 +14,7 @@ For today, we’ll be looking at two code files:
 - one showing off a Switch widget, and
 - the other, a derived class we'll call the LightSwitch.
 
-And what we’ll be playing with is the GTK `Switch` widget. First, we’ll just get it up and running, then we’ll do something interesting with it. We’ll combine the `Switch` with some other widgets to create a light bulb with changeable colours and a reset button.
+And what we’ll be playing with is the GTK `Switch` widget. First, we’ll get it up and running, then we’ll do something interesting with it. We’ll combine the `Switch` with some other widgets to create a light bulb with changeable colours and a reset button.
 
 ## And Now, a Switch
 
