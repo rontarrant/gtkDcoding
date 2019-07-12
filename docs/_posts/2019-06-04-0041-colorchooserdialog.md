@@ -105,7 +105,7 @@ We’ve actually seen today’s topic widget before, but it was part-n-parcel of
 	</div>
 </div>
 
-In this example, I’ve defined a `ColorChooserButton` based on a plain vanilla `Button` which, in effect, makes this newly-derived `ColorChooserButton` equivalent to the `ColorButton` we saw in [Blog Post #23]( http://gtkdcoding.com/2019/04/02/0023-radio-and-color-buttons.html) (and [the code file for that can be found here]( https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_02_colorbutton.d), if you care to have another look at it).
+In this example, I’ve defined a `ColorChooserButton` based on a plain vanilla `Button` which, in effect, makes this newly-derived `ColorChooserButton` equivalent to the `ColorButton` we saw in [Blog Post #23]( /2019/04/02/0023-radio-and-color-buttons.html) (and [the code file for that can be found here]( https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_02_colorbutton.d), if you care to have another look at it).
 
 ## The Button that Opens the Dialog
 

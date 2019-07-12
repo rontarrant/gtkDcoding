@@ -110,7 +110,7 @@ This time around, we’re going to change things up in two ways:
 	</div>
 </div>
 
-I talked about the two-column `ListStore` in [the introduction to this series]() and touched on the requirements for `ListStore`s in general [last time](), but here’s a brief review…
+I talked about the two-column `ListStore` in [the introduction to this series](/2019/06/28/0048-mvc-i-introduction.html) and touched on the requirements for `ListStore`s in general [last time](/2019/07/09/0051-mvc-iv-combobox-text.html), but here’s a brief review…
 
 A `ListStore` needs:
 

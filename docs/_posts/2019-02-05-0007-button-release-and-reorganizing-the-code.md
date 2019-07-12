@@ -103,7 +103,7 @@ author: Ron Tarrant
 	</div>
 </div>
 
-We’ll be making small but significant changes to the code this time around. The last time we looked at buttons, ([Post 0004](http://gtkdcoding.com/2019/01/25/0004-oop-button.html)) we built everything from within the `main()` function. Further, we used the `onClicked` signal to get our button to do something.
+We’ll be making small but significant changes to the code this time around. The last time we looked at buttons, ([Post 0004](/2019/01/25/0004-oop-button.html)) we built everything from within the `main()` function. Further, we used the `onClicked` signal to get our button to do something.
 
 This time around, we’ll be building the button from within the test rig class so all we have to do in `main()` is create the test rig window and everything else will be done automatically.
 
@@ -176,7 +176,7 @@ So now all operations appear in the most appropriate places:
 
 ### Different Signal for the Window’s Close Button
 
-We saw this approach to hooking up the close button back in the first blog entry and I talked about it a bit in [blog entry #0001](http://gtkdcoding.com/2019/01/15/0001-imperative-test-rig.html). It’s used here simply to keep us (me, mostly) from falling into a rut and as a reminder of how using it means defining the callback in a slightly different way. (Hint: look at the `quitApp()` definition with an eye toward counting arguments.)
+We saw this approach to hooking up the close button back in the first blog entry and I talked about it a bit in [blog entry #0001](/2019/01/15/0001-imperative-test-rig.html). It’s used here simply to keep us (me, mostly) from falling into a rut and as a reminder of how using it means defining the callback in a slightly different way. (Hint: look at the `quitApp()` definition with an eye toward counting arguments.)
 
 ### Initializing the Button
 

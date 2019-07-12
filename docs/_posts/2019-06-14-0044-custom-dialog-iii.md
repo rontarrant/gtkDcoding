@@ -13,8 +13,8 @@ A reminder...
 
 This collection of topics is split up like this:
 
-- *[Part I](http://gtkdcoding.com/2019/06/07/0042-custom-dialog-i.html)* (the time before last) deals with how to create an aesthetically-pleasing widget layout for a custom `Dialog`,
-- *[Part II](http://gtkdcoding.com/2019/06/11/0043-custom-dialog-ii.html)* (last time) covers user interaction, and
+- *[Part I](/2019/06/07/0042-custom-dialog-i.html)* (the time before last) deals with how to create an aesthetically-pleasing widget layout for a custom `Dialog`,
+- *[Part II](/2019/06/11/0043-custom-dialog-ii.html)* (last time) covers user interaction, and
 - *Part III* (this time) brings it all together.
 
 As promised, this time around we talk about the `Dialog`’s *Content Area* and wrap up by rolling our own *Action Area* and *Content Area* together into a fully-fledged custom `Dialog`. However, since we went over *Action Area* stuff last time and this example is only different in a few small way, I’m not going to discuss it here except to say:
@@ -182,7 +182,7 @@ The `_contentArea` property is defined as a `Box` (note that we don't need to ca
 
 And this is important: We have to call `_contentArea.showAll()` for the `Dialog` just as we do with a `MainWindow`. If we don't, the `Dialog` will appear without its *Content Area*.
 
-The `PadGrid` (see [*Part I*](http://gtkdcoding.com/2019/06/07/0042-custom-dialog-i.html) of this series if you haven’t already) has morphed into the `NewImageDataGrid` class (but only to support the paradigm present in the example) and contains all the bits and bobs for gathering data from the user. In this case, we’re gathering a file name, x and y dimensions, and the resolution of a new image to create. For the sake of brevity, I won’t reproduce the entire `NewImageDataGrid` here, but these are the properties it contains:
+The `PadGrid` (see [*Part I*](/2019/06/07/0042-custom-dialog-i.html) of this series if you haven’t already) has morphed into the `NewImageDataGrid` class (but only to support the paradigm present in the example) and contains all the bits and bobs for gathering data from the user. In this case, we’re gathering a file name, x and y dimensions, and the resolution of a new image to create. For the sake of brevity, I won’t reproduce the entire `NewImageDataGrid` here, but these are the properties it contains:
 
 - a `Label`, `Entry`, and *placeholder text* for the file name, and
 - a name `Label`, `Entry`, *placeholder text*, and units `Label` for each of these:

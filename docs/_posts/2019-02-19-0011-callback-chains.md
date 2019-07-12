@@ -103,7 +103,7 @@ author: Ron Tarrant
 	</div>
 </div>
 
-I mentioned in [post #0008](http://gtkdcoding.com/2019/02/08/0008-callbacks.html) that we’d look at callback chains and here we are. In blog [entry #0010](http://gtkdcoding.com/2019/02/15/0010-checkbutton.html), I covered setting up an observer pattern. Today we’ll have a bit of fun combining these two. All this code should seem quite familiar, so no need to fasten your seat belt. However, there is a surprise in store, so you still might wanna hold onto your hat...
+I mentioned in [post #0008](/2019/02/08/0008-callbacks.html) that we’d look at callback chains and here we are. In blog [entry #0010](/2019/02/15/0010-checkbutton.html), I covered setting up an observer pattern. Today we’ll have a bit of fun combining these two. All this code should seem quite familiar, so no need to fasten your seat belt. However, there is a surprise in store, so you still might wanna hold onto your hat...
 
 First, we’ll look at how multiple signals are chained together. It’s nothing fancy, just a few extra lines of code in the constructor of our derived button class:
 
@@ -267,7 +267,7 @@ An observer pattern lets one widget keep an eye on another and change its own be
 
 ### The Code
 
-This time around, the `ObserverButton` keeps an eye on a `WatchedButton` derived from the `ToggleButton` class, very much like it did in the companion code for [entry #0010](http://gtkdcoding.com/2019/02/15/0010-checkbutton.html). But the constructor is busier:
+This time around, the `ObserverButton` keeps an eye on a `WatchedButton` derived from the `ToggleButton` class, very much like it did in the companion code for [entry #0010](/2019/02/15/0010-checkbutton.html). But the constructor is busier:
 
 {% highlight d %}
 	this(WatchedButton extWatched)

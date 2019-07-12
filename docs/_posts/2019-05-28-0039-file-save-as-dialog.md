@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0039 – Dialogs V - Adding SaveAs, Filename in the Titlebar
 
-Since we covered [a lot of this stuff last time](http://gtkdcoding.com/2019/05/24/0038-file-save-dialog.html) when we talked about adding a `Save` `MenuItem`, I’ll just cover the differences…
+Since we covered [a lot of this stuff last time](/2019/05/24/0038-file-save-dialog.html) when we talked about adding a `Save` `MenuItem`, I’ll just cover the differences…
 
 ## Dialog for a FileSaveAs Item
 

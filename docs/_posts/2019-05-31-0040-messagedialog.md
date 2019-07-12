@@ -165,9 +165,9 @@ I just wanna take a moment to explain this flag business. More and more in our e
 
 ## Where to Find Flags
 
-If you need the names and values of these flags, you can find them in the generated wrapper code files spit out by the *GtkD* build script on *Windows* (following the local configuration guide in [Blog Post #0000 – Introduction to gtkDcoding](http://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html)) which is in a folder named `generated\gtkd`. Where these folders reside may depend on where you downloaded the *GtkD* package or where you unzipped it and ran the `Build.d` script.
+If you need the names and values of these flags, you can find them in the generated wrapper code files spit out by the *GtkD* build script on *Windows* (following the local configuration guide in [Blog Post #0000 – Introduction to gtkDcoding](/2019/01/11/0000-introduction-to-gtkDcoding.html)) which is in a folder named `generated\gtkd`. Where these folders reside may depend on where you downloaded the *GtkD* package or where you unzipped it and ran the `Build.d` script.
 
-On *Linux*,  if you followed the guide in [Blog Post #X0002 - GtkD Linux Development Environment](http://gtkdcoding.com/2019/03/31/x0002-gtkd-in-a-linux-environment.html) you can find them in `/usr/include/dmd/gtkd3/gtk/c/types.d`.
+On *Linux*,  if you followed the guide in [Blog Post #X0002 - GtkD Linux Development Environment](/2019/03/31/x0002-gtkd-in-a-linux-environment.html) you can find them in `/usr/include/dmd/gtkd3/gtk/c/types.d`.
 
 That's where the files will be found. More specifically, the flags are defined as enums in files (mostly) named types.d although some can be found in other wrapper code files named `XxxxXxxxT.d` or `XxxxxXxxxxIF.d` where `XxxxxXxxxx` is the camel-case name of a widget template or interface.
 
