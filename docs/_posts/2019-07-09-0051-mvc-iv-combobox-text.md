@@ -284,4 +284,7 @@ See you next time when we tackle a `ComboBox` with integers.
 	<div style="float: left;">
 		<a href="/2019/07/05/0050-mvc-iii-comboboxtext-add-remove.html">Previous: MVC - ComboBoxText - Add & Remove</a>
 	</div>
+	<div style="float: right;">
+		<a href="/2019/07/12/0052-mvc-v-int-combobox.html">Next: ComboBox with Integers</a>
+	</div>
 </div>
