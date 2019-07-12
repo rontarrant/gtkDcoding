@@ -143,13 +143,16 @@ Yup, there’s that opening curly brace on a line all by itself, just like I sai
 ### Initialization
 
 {% highlight d %}
+	string windowTitle = "Test Rig";
+	string message = "Hello GtkD Imperative World";
+
 	Main.init(args);
 {% endhighlight %}
 
-This calls the `init()` function in *GtkD*’s `Main` module. Command line arguments are passed along. We’ll see why sometime down the road.
+After a couple of string variables get set, the last line calls the `init()` function in *GtkD*’s `Main` module. Command line arguments are passed along. We’ll see why sometime down the road.
 
 {% highlight d %}
-	MainWindow testRigWindow = new MainWindow("Test Rig");
+	MainWindow testRigWindow = new MainWindow(windowTitle);
 {% endhighlight %}
 
 This line creates the window the user will see when the application is run. This is the breakdown:
@@ -157,8 +160,8 @@ This line creates the window the user will see when the application is run. This
 - `MainWindow` (the first time) names the variable type
 - `MainWindow` (the second time) is the constructor function call,
 - `testRigWindow` is the variable name we’re assigning to the window created,
-- `“Test Rig”` is the window title, and
-- new speaks for itself.
+- `windowTitle` is one of the string variables we instantiated earlier, this one being the window title, and
+- `new` speaks for itself.
 
 ### Window Close Button
 
@@ -179,10 +182,10 @@ This line breaks down as:
 ### Classic Greeting
 
 {% highlight d %}
-	writeln("Hello GtkD");
+	writeln(message);
 {% endhighlight %}
 
-This just spits a line out to the command shell with a classic-style greeting.
+This just spits a line out to the command shell with a classic-style greeting using the other instantiated string from the top of `main()`.
 
 ### Show the Window and its Contents
 
@@ -215,10 +218,12 @@ And this is the end of the `main()` function. I like to mark the ends of all fun
 Here we define the `quitApp()` function to have no return value.
 
 {% highlight d %}
-	writeln("Bye.");
+	string exitMessage = "Bye.";
+
+	writeln(exitMessage);
 {% endhighlight %}
 
-Just to show that we’ve truly interrupted the window’s destroy function, this line spits out another quick message to the command shell.
+These two lines are straightforward, a string is instantiated and used by `writeln()` to show that we’ve truly interrupted the window’s destroy function, and it does so by spitting out another quick message to the command shell.
 
 ### Clean up and Go
 
