@@ -1,4 +1,4 @@
-// OOP Test Rig Reorganized (all others now comply to this standard)
+// Description of example
 
 import std.stdio;
 
@@ -22,7 +22,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Test Rig";
+	string title = "<Insert Title>";
 	AppBox appBox;
 	
 	this()
@@ -53,7 +53,8 @@ class TestRigWindow : MainWindow
 
 class AppBox : Box
 {
-	int globalPadding = 10;
+	bool expand = false, fill = false;
+	uint globalPadding = 10;
 	// add child object and variable definitions here
 	
 	this()
@@ -62,8 +63,8 @@ class AppBox : Box
 		
 		// instantiate child objects here
 		
-		// packStart(<child object>, false, false, 0); // LEFT justify
-		// packEnd(<child object>, false, false, 0); // RIGHT justify
+		// packStart(<child object>, expand, fill, padding); // LEFT justify
+		// packEnd(<child object>, expand, fill, padding); // RIGHT justify
 		
 	} // this()
 
