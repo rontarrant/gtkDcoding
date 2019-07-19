@@ -411,4 +411,7 @@ And that wraps up our look at `ComboBox`es with images. Next time we’ll start 
 	<div style="float: left;">
 		<a href="/2019/07/12/0052-mvc-v-int-combobox.html">Previous: ComboBox with Integers</a>
 	</div>
+	<div style="float: right;">
+		<a href="/2019/07/19/0054-mvc-vii-treeview-basics.html">Next: TreeView Basics</a>
+	</div>
 </div>

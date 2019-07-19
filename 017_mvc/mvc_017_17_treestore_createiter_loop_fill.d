@@ -172,27 +172,19 @@ class FamilyTreeStore : TreeStore
 			string parentTitle = parentHeaders[i];
 			string[] childFamily = children[i];
 
-			parentIter = append(null); // append an empty row to the top level and get an iter back
+			parentIter = createIter(); // append an empty row to the top level and get an iter back
 			setValue(parentIter, 0, parentTitle);
 
 			for(int j = 0; j < childFamily.length; j++)
 			{
-				append(childIter, parentIter); // passing in parentIter makes this a child row
+				childIter = createIter(parentIter); // passing in parentIter makes this a child row
 
 				string child = children[i][j];
 				setValue(childIter, 1, child);
 			
-				report(child);
 			}
 		}
 		
 	} // this()
-
-
-	void report(string child)
-	{
-		writeln(", child: ", child);
-		
-	} // report()
 
 } // class FamilyTreeStore

@@ -1,3 +1,4 @@
+// MVC TreeStore Basics I
 
 import std.stdio;
 import std.string;
@@ -10,13 +11,8 @@ import gtk.ScrolledWindow;
 import gtk.TreeView;
 import gtk.TreeStore;
 import gtk.TreeIter;
-import gtk.TreePath;
 import gtk.TreeViewColumn;
 import gtk.CellRendererText;
-import pango.PgCairoFontMap;
-import pango.PgFontMap;
-import pango.PgFontFamily;
-import pango.PgFontDescription;
 
 void main(string[] args)
 {
@@ -33,7 +29,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "MVC TreeStore - Multi-level View";
+	string title = "MVC TreeStore - Hierarchy Basics";
 	AppBox appBox;
 	int minimumWidth, naturalWidth, minimumHeight, naturalHeight;
 	
@@ -163,10 +159,10 @@ class DemoTreeStore : TreeStore
 	{
 		super([GType.STRING, GType.STRING]);
 
-		parentIter = append(null); // append an empty row to the top level and get an iter back
+		parentIter = createIter(); // append an empty row to the top level and get an iter back
 		setValue(parentIter, 0, parentRowString);
 
-		append(childIter, parentIter); // passing in parentIter makes this a child row
+		childIter = createIter(parentIter); // passing in parentIter makes this a child row
 		setValue(childIter, 1, childRowString);
 		
 	} // this()
