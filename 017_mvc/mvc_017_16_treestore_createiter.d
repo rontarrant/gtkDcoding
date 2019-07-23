@@ -1,4 +1,5 @@
-// MVC TreeStore Basics I
+// MVC - a TreeStore example with a single parent and single child in the model,
+// populated using createIter().
 
 import std.stdio;
 import std.string;

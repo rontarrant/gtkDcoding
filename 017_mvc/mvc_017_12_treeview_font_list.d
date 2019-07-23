@@ -19,8 +19,6 @@ import pango.PgFontMap;
 import pango.PgFontFamily;
 import pango.PgFontDescription;
 
-import singleton.S_FontList;
-
 void main(string[] args)
 {
 	TestRigWindow testRigWindow;
@@ -167,6 +165,7 @@ class FontTreeView : TreeView
 		// do any more digging, just echo the string to the terminal.
 		auto value = fontListStore.getValue(treeIter, columnNumber);
 		writeln("cell contains: ", value.getString());
+		writeln(); // a blank line to separate each report
 		
 	} // onRowActivated()
 	

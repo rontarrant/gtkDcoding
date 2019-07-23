@@ -327,4 +327,9 @@ Next time around we’ll look at a second multi-column `TreeView` example which 
 	<div style="float: left;">
 		<a href="/2019/07/16/0053-mvc-vi-image-combobox.html">Previous: A ComboBox with Images</a>
 	</div>
+<!--
+	<div style="float: right;">
+		<a href="/2019/07/23/0055-mvc-viii-dynamically-loading-a-treeview.html">Next: TreeView - Dynamic Population</a>
+	</div>
+-->
 </div>

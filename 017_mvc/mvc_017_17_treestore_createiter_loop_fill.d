@@ -1,3 +1,4 @@
+// MVC - a TreeStore example using createIter() in a loop to populate the model
 
 import std.stdio;
 import std.string;

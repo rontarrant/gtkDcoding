@@ -1,3 +1,4 @@
+// MVC - a TreeStore example using append() to populate the model
 
 import std.stdio;
 import std.string;
