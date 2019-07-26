@@ -341,9 +341,7 @@ Until then, happy computing.
 	<div style="float: left;">
 		<a href="/2019/07/19/0054-mvc-vii-treeview-basics.html">Previous: TreeView Basics</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/07/26/0056-mvc-ix-a-combobox-with-flair.html">Next: A ComboBox with Flair</a>
 	</div>
--->
 </div>
