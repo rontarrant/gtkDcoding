@@ -1,26 +1,17 @@
 ---
-title: 0054 – MVC VII – TreeView Basics
+title: 0059 – Cairo III – Circles and Arcs
 layout: post
-topic: mvc
-description: GTK Tutorial - introduction to TreeView, ListStore, and TreeViewColumn.
+topic: cairo
+description: GTK Tutorial on drawing circles and arcs with Cairo.
 author: Ron Tarrant
 
 ---
 
-# 0054 – MVC VII – TreeView Basics
+# 0059 – Cairo III – Circles and Arcs
 
-We’ve all been told that the `TreeView` is a complex and difficult beast to tame, but it’s not so hard once you've got a few bits of information at your fingertips. And in the previous six instalments of this series, most of those bits have been presented which means it should come as no big surprise that...
+Let’s jump right in and look at…
 
-There are only three things we need to understand in order to make a `TreeView` work:
-
-- a `ListStore` holds the data and acts as a `TreeModel`,
-- the `TreeViewColumn` controls the content and look of a column inside...
--  the `TreeView`, and…
-
-That’s it.
-
-
-## A Single-column TreeView
+## Drawing a Circle
 
 <div class="screenshot-frame">
 	<div class="frame-header">
@@ -28,7 +19,7 @@ That’s it.
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/017_mvc/mvc_017_10.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/018_cairo/cairo_018_09.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -70,7 +61,7 @@ That’s it.
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/017_mvc/mvc_017_10_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/018_cairo/cairo_018_09_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -112,102 +103,58 @@ That’s it.
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_10_treeview_1_column.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_09_draw_circle.d" target="_blank">here</a>.
 	</div>
 </div>
 
-The TreeView class looks like this:
+
+The essence of circle drawing is this:
 
 {% highlight d %}
-	class SignTreeView : TreeView
+	bool onDraw(Scoped!Context context, Widget w)
 	{
-		SignTreeViewColumn signTreeViewColumn;
-		SignListStore signListStore;
-		
-		this()
-		{
-			super();
+		context.setLineWidth(3);
+		context.arc(330, 160, 40, 0, 2 * 3.1415);
+		context.stroke();
 			
-			signListStore = new SignListStore();
-			setModel(signListStore);
+		return(true);
 			
-			signTreeViewColumn = new SignTreeViewColumn();
-			appendColumn(signTreeViewColumn);
-			
-		} // this()
-		
-	} // class SignTreeView
+	} // onDraw()
 {% endhighlight d %}
 
-Once the `TreeView` is instantiated by calling the super-class constructor, we set up and assign the `Model`/Store (`signListStore`), then instantiate and append one or more `TreeViewColumn`s.
+And even though you might expect a `circle()` function, we actually use `arc()`… and since an arc is just an incomplete circle, well… there you go.
 
-## The ListStore
+### The Arguments
 
-The `ListStore` is used the same way with a `TreeView` as it was with the `ComboBox` and so we have:
+They are:
 
-{% highlight d %}
-	class SignListStore : ListStore
-	{
-		string[] items = ["bike", "bump", "cow", "deer", "crumbling cliff", "man with a stop sign", "skidding vehicle"];
-		TreeIter treeIter;
-		
-		this()
-		{
-			super([GType.STRING]);
-			
-			for(int i; i < items.length; i++)
-			{
-				string message = items[i];
-				treeIter = createIter();
-				setValue(treeIter, 0, message);
-			}
-	
-		} // this()
-	
-	} // class SignListStore
-{% endhighlight d %}
+- x position of the circle’s center,
+- y position of the circle’s center,
+- the radius,
+- the point along the circle where we start drawing, and
+- the point along the circle where we stop drawing.
 
-This is the exact same `SignListStore` we used with a `ComboBox` in [an earlier example]( https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_06_combobox_liststore.d), thus illustrating how the same data can be used in different ways by different `Widget`s.
+Those last two arguments are in radians. That’s why the point where we stop drawing is two times PI.
 
-And that just leaves…
+### The *Wikipedia*/*Cairo* Anomaly
 
-## The TreeViewColumn
+When I first started exploring the `arc()` function, I wasn’t getting the results I expected. My confusion was twofold:
 
-Which looks like this:
+- I had assumed that 0 degrees (and therefore 0.0 radians) was true north like it is on a compass, and
+- I also assumed that, like a compass, degrees increase in a clockwise direction around the circle.
 
-{% highlight d %}
-	class SignTreeViewColumn : TreeViewColumn
-	{
-		CellRendererText cellRendererText;
-		string columnTitle = "Sign Message";
-		string attributeType = "text";
-		int columnNumber = 0; // numbering starts at '0'
-	
-		this()
-		{
-			cellRendererText = new CellRendererText();
-			
-			super(columnTitle, cellRendererText, attributeType, columnNumber);
-			
-		} // this()
-	
-	} // class SignTreeViewColumn
-{% endhighlight d %}
+So, I *Google*d radians and read the *Wikipedia* page. However, their conversion chart showed 0 to the east, compass-wise, and both degrees and radians increasing counterclockwise.
 
-When we populated a `ComboBox`, a `CellRenderer` was packed directly into the `ComboBox`. But with a `TreeView`:
+Eventually, I realized that *Cairo* agreed with *Wikipedia* one count, but not both.
 
-- each `TreeViewColumn` takes care of its own `CellRenderer`(s), and
-- is appended to the `TreeView` as we saw earlier when we looked at the `TreeView` class itself. 
+So, here’s the straight dope on radians according to *Cairo*:
 
-So, it's here in the `TreeViewColumn` constructor we deal with such things as:
+- 0 is to the east (compass east), and
+- radians increase in value in a clockwise direction.
 
-- instantiating the `CellRenderer`,
-- assigning a column number, and
-- defining the column type as `“text”`.
+Not being much of a mathematician, I have no idea why 0 faces east and I certainly don’t know why *Wikipedia*’s conversion chart goes the wrong way (whether we’re talking *Cairo* or boxing a compass) but so you won’t have to fiddle with either of those paradigms, I redid the conversion chart so it accurately reflects *Cairo*’s `arc()` function requirements:
 
-On top of that, we also name the column (`columnTitle`) and give it a number. And that's pretty much it.
-
-## Two-column TreeView
+## Drawing an Arc
 
 <div class="screenshot-frame">
 	<div class="frame-header">
@@ -215,7 +162,7 @@ On top of that, we also name the column (`columnTitle`) and give it a number. An
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/017_mvc/mvc_017_11.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/018_cairo/cairo_018_10.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -257,7 +204,7 @@ On top of that, we also name the column (`columnTitle`) and give it a number. An
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/017_mvc/mvc_017_11_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="/images/screenshots/018_cairo/cairo_018_10_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->
@@ -299,37 +246,41 @@ On top of that, we also name the column (`columnTitle`) and give it a number. An
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_11_treeview_2_column.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_10_draw_arc.d" target="_blank">here</a>.
 	</div>
 </div>
 
-You only have to do two things differently with a two-column `TreeView`:
+You’re may be ahead of me on this one, but drawing an arc is the same as drawing a circle except that the start and end points are closer together :
 
-- add another column (naturally), and
-- decide if you want the column(s) sort-able.
+{% highlight d %}
+	bool onDraw(Scoped!Context context, Widget w)
+	{
+		float x = 320, y = 180;
+		float radius = 40, startAngle = 0.7, endAngle = 2.44;
+	
+	 	// draw the arc
+		context.setLineWidth(3);
+		context.arc(x, y, radius, startAngle, endAngle);
+		context.stroke();
+	
+		return(true);
+			
+	} // onDraw()
+{% endhighlight d %}
 
-And that means:
-- in the `SignTreeView` class, we `appendColumn()` the second column,
-- in one or both `TreeViewColumn` classes, we `setSortColumnId()` with the number of the column (starting from `0`), and
-- in the `ListStore`, we add a second array of data.
-
-### Using ListStore's set() Instead of setValue()
-
-As mentioned in [Blog Post #0053](http://gtkdcoding.com/2019/07/16/0053-mvc-vi-image-combobox.html), as long as we’re using strings and only strings, we can get away with using `set()`. But it’s meant as a shorthand way of dealing with a single data type, the string. This means that even if you’re using numbers (which are rendered as text by `ComboBox` and `TreeView`) we still have to use `setValue()`.
+If you consult the conversion chart, you’ll see that the arc starts at about 40 degrees (south-southeast in *Cairo*’s version of the universe) and goes to 140 degrees. And remember, drawing is done in a clockwise direction, so even though it’s right to left, it’s still clockwise.
 
 ## Conclusion
 
-And that’s the basics of using the `TreeView`… create a storage model, whip up a `TreeView`, and stuff a column in there.
-
-Next time around we’ll look at a second multi-column `TreeView` example which is dynamically loaded rather than using roll-yer-own arrays.
+Next time, we’ll continue on and cover fills, then have a bit of fun with arcs.
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/2019/07/16/0053-mvc-vi-image-combobox.html">Previous: A ComboBox with Images</a>
+		<a href="/2019/08/02/0058-cairo-ii-rectangles.html">Previous: Cairo Rectangles</a>
 	</div>
 <!--
 	<div style="float: right;">
-		<a href="/2019/07/23/0055-mvc-viii-dynamically-loading-a-treeview.html">Next: TreeView - Dynamic Population</a>
+		<a href="/2019/08/09/0060-cairo-iv-fill-arc-cartoon-mouth.html">Next: Cairo Arc Fill & Precision Drawing</a>
 	</div>
 -->
 </div>

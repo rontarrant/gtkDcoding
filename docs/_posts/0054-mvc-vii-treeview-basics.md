@@ -137,7 +137,7 @@ The TreeView class looks like this:
 		} // this()
 		
 	} // class SignTreeView
-{% endhighlight d %}
+{% endhighlight %}
 
 Once the `TreeView` is instantiated by calling the super-class constructor, we set up and assign the `Model`/Store (`signListStore`), then instantiate and append one or more `TreeViewColumn`s.
 
@@ -165,7 +165,7 @@ The `ListStore` is used the same way with a `TreeView` as it was with the `Combo
 		} // this()
 	
 	} // class SignListStore
-{% endhighlight d %}
+{% endhighlight %}
 
 This is the exact same `SignListStore` we used with a `ComboBox` in [an earlier example]( https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_06_combobox_liststore.d), thus illustrating how the same data can be used in different ways by different `Widget`s.
 
@@ -192,7 +192,7 @@ Which looks like this:
 		} // this()
 	
 	} // class SignTreeViewColumn
-{% endhighlight d %}
+{% endhighlight %}
 
 When we populated a `ComboBox`, a `CellRenderer` was packed directly into the `ComboBox`. But with a `TreeView`:
 
@@ -327,9 +327,9 @@ Next time around we’ll look at a second multi-column `TreeView` example which 
 	<div style="float: left;">
 		<a href="/2019/07/16/0053-mvc-vi-image-combobox.html">Previous: A ComboBox with Images</a>
 	</div>
-<!--
+
 	<div style="float: right;">
 		<a href="/2019/07/23/0055-mvc-viii-dynamically-loading-a-treeview.html">Next: TreeView - Dynamic Population</a>
 	</div>
--->
+
 </div>

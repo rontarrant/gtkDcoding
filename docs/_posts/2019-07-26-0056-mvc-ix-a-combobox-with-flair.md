@@ -446,9 +446,7 @@ Until next time, happy computing.
 	<div style="float: left;">
 		<a href="/2019/07/23/0055-mvc-viii-dynamically-loading-a-treeview.html">Previous: TreeView - Dynamic Population</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/07/30/0057-cairo-i-the-basics.html">Next: Introduction to Cairo Drawing</a>
 	</div>
--->
 </div>
