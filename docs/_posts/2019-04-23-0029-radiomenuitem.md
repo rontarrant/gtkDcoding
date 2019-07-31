@@ -313,7 +313,7 @@ But, in the current case, a non-instantiated `ListSG group` is declared in the `
 
 And is there a difference? Not really. It's just another option. In fact, you may think you can pass `group` as an argument to `radioItem02` and `radioItem03`, but if you do, their constructors assume it's undefined and overwrite it. The result is that you end up with each `RadioMenuItem` in its own private group instead of being part of a set.
 
-*Aside: This process of passing an undefined group to the first `RadioMenuItem` also works with `RadioButton` as can be seen in [this bonus code example](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_17_pregroup_radiobutton.d). Look in these areas to see the changes:*
+*Aside: This process of passing an undefined group to the first `RadioMenuItem` also works with `RadioButton` as can be seen in [this bonus code example](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_17_pregroup_radiobuttons.d). Look in these areas to see the changes:*
 
 - the import statements for `import glib.ListSG`,
 - the `RadioBox` class, and
