@@ -19,7 +19,7 @@ Because the `ScaleButton` is the more involved of these two, I’m going to star
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/010_more_buttons/button_010_10.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/002_button/button_002_22.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -61,7 +61,7 @@ Because the `ScaleButton` is the more involved of these two, I’m going to star
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/010_more_buttons/button_010_10_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/002_button/button_002_22_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -103,7 +103,7 @@ Because the `ScaleButton` is the more involved of these two, I’m going to star
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_10_volume.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_22_volume.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -174,7 +174,7 @@ Anyway, so much for the `VolumeButton`. Let’s look at its parent…
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/010_more_buttons/button_010_09.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/002_button/button_002_21.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -216,7 +216,7 @@ Anyway, so much for the `VolumeButton`. Let’s look at its parent…
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/010_more_buttons/button_010_09_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="/images/screenshots/002_button/button_002_21_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->
@@ -258,7 +258,7 @@ Anyway, so much for the `VolumeButton`. Let’s look at its parent…
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_09_scale.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_21_scale.d" target="_blank">here</a>.
 	</div>
 </div>
 

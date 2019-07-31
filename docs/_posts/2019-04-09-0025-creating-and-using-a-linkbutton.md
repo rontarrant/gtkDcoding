@@ -19,7 +19,7 @@ Today’s buttons are simple, a button to click to follow a link and another one
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/011_odd/odd_011_01.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/002_button/button_002_10.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -61,7 +61,7 @@ Today’s buttons are simple, a button to click to follow a link and another one
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/011_odd/odd_011_01_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/002_button/button_002_10_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -157,7 +157,7 @@ That ain’t gonna look so pretty on a button, so you might instead consider…
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/011_odd/odd_011_02.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/002_button/button_002_11.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -199,7 +199,7 @@ That ain’t gonna look so pretty on a button, so you might instead consider…
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/011_odd/odd_011_02_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="/images/screenshots/002_button/button_002_11_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->
