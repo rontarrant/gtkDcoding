@@ -309,11 +309,11 @@ Here’s what it looks like:
 
 We’ve worked with the `ListSG group` before, but perhaps without realizing it. If you look back at [the example code for a RadioButton](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_13_radiobutton.d), you’ll see that the group is not named up front like it is here. Instead, it's declared and defined somewhere in the inner workings of the first `RadioButton`'s constructor and we only see it as a member of the `radioItem01` object.
 
-But, in the current case, a non-instantiated `ListSG group` is declared in the `FileMenu` object (which is coming up next in this discussion) and passed along to the superclass's constructor. Internally, as far as the superclass is concerned, nothing's all that different. It still does the heavy lifting and it still stores group as a member variable in `radioItem01`. The only thing that changed was how the group variable started out. In the earlier example, it was created by the superclass. This time, it starts as a local variable here in the FileMenu object.
+But, in the current case, a non-instantiated `ListSG group` is declared in the `FileMenu` object (which is coming up next in this discussion) and passed along to the super-class's constructor. Internally, as far as the super-class is concerned, nothing's all that different. It still does the heavy lifting and it still stores `group` as a member variable in `radioItem01`. The only thing that changed was how the `group` variable started out. In the earlier example, it was created by the super-class. This time, it starts as a local variable here in the `FileMenu` object.
 
 And is there a difference? Not really. It's just another option. In fact, you may think you can pass `group` as an argument to `radioItem02` and `radioItem03`, but if you do, their constructors assume it's undefined and overwrite it. The result is that you end up with each `RadioMenuItem` in its own private group instead of being part of a set.
 
-*Aside: This process of passing an undefined group to the first `RadioMenuItem` also works with `RadioButton` as can be seen in [this bonus code example](https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_05_pregroup_radiobutton.d). Look in these areas to see the changes:*
+*Aside: This process of passing an undefined group to the first `RadioMenuItem` also works with `RadioButton` as can be seen in [this bonus code example](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_17_pregroup_radiobutton.d). Look in these areas to see the changes:*
 
 - the import statements for `import glib.ListSG`,
 - the `RadioBox` class, and
