@@ -1,5 +1,5 @@
 ---
-title: 0046 - SpinButton
+title: "0046: SpinButton"
 topic: button
 layout: post
 description: How to use the GTK SpinButton.
@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0047 – SpinButton
+# 0047: SpinButton
 
 This one’s both easy and tricky. Let me explain…
 
