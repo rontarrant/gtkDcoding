@@ -1,5 +1,5 @@
 ---
-title: 0052 – MVC V – A ComboBox with Integers
+title: "0052: MVC V – A ComboBox with Integers"
 layout: post
 topic: mvc
 description: Tutorial on creating a ComboBox with integers.

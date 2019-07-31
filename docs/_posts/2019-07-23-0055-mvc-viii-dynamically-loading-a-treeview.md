@@ -1,5 +1,5 @@
 ---
-title: 0055 – MVC VIII – Dynamically Loading a TreeView
+title: "0055: MVC VIII – Dynamically Loading a TreeView"
 layout: post
 topic: mvc
 description: GTK Tutorial on how to dynamically load a TreeView.

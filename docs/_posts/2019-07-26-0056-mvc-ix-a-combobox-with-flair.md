@@ -1,5 +1,5 @@
 ---
-title: 0056 – MVC IX – A Fancy ComboBox
+title: "0056: MVC IX – A Fancy ComboBox"
 layout: post
 topic: mvc
 description: GTK Tutorial - customize a ComboBox with images and text.

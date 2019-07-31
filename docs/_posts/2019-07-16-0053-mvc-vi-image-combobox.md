@@ -1,5 +1,5 @@
 ---
-title: 0053 – MVC VI – A ComboBox with Images
+title: "0053: MVC VI – A ComboBox with Images"
 layout: post
 topic: mvc
 description: Tutorial on using a ComboBox with images.

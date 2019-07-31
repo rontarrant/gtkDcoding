@@ -1,5 +1,5 @@
 ---
-title: 0057 – Cairo I – The Basics of Drawing
+title: "0057: Cairo I – The Basics of Drawing"
 layout: post
 topic: cairo
 description: GTK Tutorial - introduction to drawing with Cairo.

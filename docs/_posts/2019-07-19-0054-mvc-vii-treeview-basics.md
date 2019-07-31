@@ -1,5 +1,5 @@
 ---
-title: 0054 – MVC VII – TreeView Basics
+title: "0054: MVC VII – TreeView Basics"
 layout: post
 topic: mvc
 description: GTK Tutorial - introduction to TreeView, ListStore, and TreeViewColumn.

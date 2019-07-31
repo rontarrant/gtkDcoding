@@ -1,5 +1,5 @@
 ---
-title: 0050 – MVC Part III – ComboBoxText - Adding and Removing Items
+title: "0050: MVC Part III – ComboBoxText - Adding and Removing Items"
 layout: post
 topic: mvc
 description: A demonstration of how to add and remove items from the GTK ComboBoxText.

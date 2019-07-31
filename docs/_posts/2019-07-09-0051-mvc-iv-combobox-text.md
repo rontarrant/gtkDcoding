@@ -1,5 +1,5 @@
 ---
-title: 0051 – MVC IV – A ComboBox with Text
+title: "0051: MVC IV – A ComboBox with Text"
 topic: mvc
 layout: post
 description: A tutorial on reproducing the GTK ComboBoxText using a ComboBox and a ListStore.
