@@ -23,19 +23,15 @@ void main(string[] args)
 class TestRigWindow : MainWindow
 {
 	string title = "LevelBar Example";
-	LevelBar levelBar;
+	StrengthLevelBar strengthLevelBar;
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(&endProgram);
 		
-		levelBar = new LevelBar();
-		levelBar.addOffsetValue("myValue", 0.5);
-//		levelBar.setWidth(300);
-//		levelBar.setHeight(100);
-		
-		add(levelBar);
+		strengthLevelBar = new StrengthLevelBar();
+		add(strengthLevelBar);
 		
 		showAll();
 		
@@ -49,3 +45,20 @@ class TestRigWindow : MainWindow
 	} // endProgram()
 	
 } // class TestRigWindow
+
+
+class StrengthLevelBar : LevelBar
+{
+	double initialValue = 0.5;
+	int width = 200, height = 10;
+	
+	this()
+	{
+		// super() is called via constructor chaining and so it's implied
+		setWidth(width);
+		setHeight(height);
+		setValue(initialValue);
+		
+	} // this()
+
+} // class StrengthLevelBar

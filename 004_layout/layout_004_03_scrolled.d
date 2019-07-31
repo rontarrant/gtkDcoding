@@ -25,6 +25,7 @@ class TestRigWindow : MainWindow
 {
 	string title = "ScrolledWindow Example";
 	int windowWidth = 200, windowHeight = 200;
+	MyScrolledWindow myScrolledWindow;
 	
 	this()
 	{
@@ -32,12 +33,9 @@ class TestRigWindow : MainWindow
 		addOnDestroy(delegate void(Widget w) { quitApp(); } );
 		setSizeRequest(windowWidth, windowHeight);
 		
-		ScrolledWindow scrolledWindow = new ScrolledWindow();
-		add(scrolledWindow);
+		myScrolledWindow = new MyScrolledWindow();
+		add(myScrolledWindow);
 		
-		auto myLayout = new MyLayout();
-		scrolledWindow.add(myLayout);
-
 		showAll();
 
 	} // this()
@@ -54,6 +52,20 @@ class TestRigWindow : MainWindow
 	} // quitApp()
 
 } // class TestRigWindow
+
+
+class MyScrolledWindow : ScrolledWindow
+{
+	MyLayout myLayout;
+	
+	this()
+	{
+		myLayout = new MyLayout();
+		add(myLayout);
+	
+	} // this()
+
+} // class MyScrolledWindow
 
 
 class MyLayout : Layout
