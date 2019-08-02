@@ -444,9 +444,7 @@ Next time we continue with *Cairo* and look at rectangles. Until then…
 	<div style="float: left;">
 		<a href="/2019/07/26/0056-mvc-ix-a-combobox-with-flair.html">Previous: ComboBox with Flair</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/02/0058-cairo-ii-rectangles.html">Next: Cairo Rectangles</a>
 	</div>
--->
 </div>
