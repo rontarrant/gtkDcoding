@@ -1,6 +1,6 @@
 ---
 title: "0045: Split a Window into Panes"
-topic: window
+topic: container
 layout: post
 description: How to use the GTK Paned class to split a window into panes.
 author: Ron Tarrant
