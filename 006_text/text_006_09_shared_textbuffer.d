@@ -59,14 +59,22 @@ class AppBox : Box
 	bool expand = true, fill = true;
 	uint globalPadding = 10, localPadding = 5;
 	ScrolledTextWindow scrolledTextWindow;
+	TextView masterTextView;
+	DependentTextView dependentTextView;
+	TextBuffer sharedTextBuffer;
 	
 	this()
 	{
 		super(Orientation.VERTICAL, globalPadding);
 		
 		scrolledTextWindow = new ScrolledTextWindow();
-		
 		packStart(scrolledTextWindow, expand, fill, localPadding); // TOP justify
+		
+		// grab the TextBuffer pointer
+		masterTextView = cast(TextView)scrolledTextWindow.getChild();
+		sharedTextBuffer = masterTextView.getBuffer();
+		dependentTextView = new DependentTextView(sharedTextBuffer);
+		packStart(dependentTextView, expand, fill, localPadding);
 		
 	} // this()
 
@@ -103,3 +111,14 @@ class MyTextView : TextView
 	} // this()
 
 } // class MyTextView
+
+
+class DependentTextView : TextView
+{
+	this(TextBuffer sharedTextBuffer)
+	{
+		super(sharedTextBuffer);
+		
+	} // this()
+	
+} // class DependentTextView
