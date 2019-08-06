@@ -631,9 +631,7 @@ And that’s all we’ll do with rectangles for now. Next time we dig into circl
 	<div style="float: left;">
 		<a href="/2019/07/30/0057-cairo-i-the-basics.html">Previous: Introduction to Cairo Drawing</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/06/0059-cairo-iii-circles-and-arcs.html">Next: Cairo Circles and Arcs</a>
 	</div>
--->
 </div>
