@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0043 – Dialogs IX - Customizing (2 of 3) - Action Area
+# 0043: Dialogs IX - Customizing (2 of 3) - Action Area
 
 A reminder...
 

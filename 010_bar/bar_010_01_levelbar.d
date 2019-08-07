@@ -55,8 +55,7 @@ class StrengthLevelBar : LevelBar
 	this()
 	{
 		// super() is called via constructor chaining and so it's implied
-		setWidth(width);
-		setHeight(height);
+
 		setValue(initialValue);
 		
 	} // this()

@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0029 – Menus IV - The RadioMenuItem
+# 0029: Menus IV - The RadioMenuItem
 
 Today we start on `RadioMenuItem`s with a simple example. Next time, we’ll carry on with a second example, but with a more practical bent.
 

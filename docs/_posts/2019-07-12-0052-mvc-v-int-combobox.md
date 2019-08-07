@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-## 0052 – MVC V – A ComboBox with Integers
+## 0052: MVC V – A ComboBox with Integers
 
 This time around, we’re going to change things up in two ways:
 

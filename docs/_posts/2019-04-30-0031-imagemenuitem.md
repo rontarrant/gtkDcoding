@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0031 – Menus VI - Image on a Menu
+# 0031: Menus VI - Image on a Menu
 
 The *GTK* `ImageMenuItem` has been deprecated, but…
 

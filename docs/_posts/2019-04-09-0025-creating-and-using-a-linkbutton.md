@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0025 - Creating and Using a LinkButton
+# 0025: Creating and Using a LinkButton
 
 Today’s buttons are simple, a button to click to follow a link and another one with a pretty face and a link. So, what’s the difference?
 

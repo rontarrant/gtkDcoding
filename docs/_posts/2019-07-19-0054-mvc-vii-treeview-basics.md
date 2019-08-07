@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0054 – MVC VII – TreeView Basics
+# 0054: MVC VII – TreeView Basics
 
 We’ve all been told that the `TreeView` is a complex and difficult beast to tame, but it’s not so hard once you've got a few bits of information at your fingertips. And in the previous six instalments of this series, most of those bits have been presented which means it should come as no big surprise that...
 

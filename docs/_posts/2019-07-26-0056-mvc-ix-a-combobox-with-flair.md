@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0056 – MVC IX – A Fancy ComboBox
+# 0056: MVC IX – A Fancy ComboBox
 
 <div class="screenshot-frame">
 	<div class="frame-header">

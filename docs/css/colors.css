@@ -27,7 +27,7 @@
 {
 	background-image: linear-gradient(to right, rgba(243, 116, 196, 1), rgba(255, 255, 255, 1.0));
 }
-.topic-color_odd /* aqua */
+.topic-color_bar /* aqua */
 {
 	background-image: linear-gradient(to right, rgba(123, 174, 195, 1), rgba(255, 255, 255, 1.0));
 }

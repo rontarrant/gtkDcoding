@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0042 – Dialogs VIII - Customizing (1 of 3) - Aesthetics
+# 0042: Dialogs VIII - Customizing (1 of 3) - Aesthetics
 
 Today we start a three-part series about building a `Dialog` from scratch.
 

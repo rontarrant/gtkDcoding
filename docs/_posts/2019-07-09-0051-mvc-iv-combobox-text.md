@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0051 – MVC IV – The ComboBox with Text
+# 0051: MVC IV – The ComboBox with Text
 
 <div class="screenshot-frame">
 	<div class="frame-header">

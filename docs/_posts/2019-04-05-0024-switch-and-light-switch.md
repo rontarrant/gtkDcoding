@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0024 - Switch and LightSwitch
+# 0024: Switch and LightSwitch
 
 For today, we’ll be looking at two code files: 
 

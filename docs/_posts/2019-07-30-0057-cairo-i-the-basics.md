@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0057 – Cairo I – The Basics of Drawing
+# 0057: Cairo I – The Basics of Drawing
 
 Today we're going to put the MVC series aside for a few weeks while we dive into another series on a topic near and dear to my heart… graphics. We’ll start simple and get more complicated as we go. But first, we need to look at some foundation stuff…
 

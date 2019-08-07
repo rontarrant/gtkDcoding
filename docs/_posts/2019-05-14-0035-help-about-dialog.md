@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-## 0035 – Dialogs I - The About Dialog
+## 0035: Dialogs I - The About Dialog
 
 <div class="screenshot-frame">
 	<div class="frame-header">

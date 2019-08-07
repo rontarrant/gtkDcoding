@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0059 – Cairo III – Circles and Arcs
+# 0059: Cairo III – Circles and Arcs
 
 Let’s jump right in and look at…
 

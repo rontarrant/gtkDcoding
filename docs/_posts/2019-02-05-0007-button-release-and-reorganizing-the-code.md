@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0007 – Button Release & Reorganizing the Code
+# 0007: Button Release & Reorganizing the Code
 
 <div class="screenshot-frame">
 	<div class="frame-header">

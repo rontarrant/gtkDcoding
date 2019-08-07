@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0053 - MVC VI - A ComboBox with Images
+# 0053: MVC VI - A ComboBox with Images
 
 <div class="screenshot-frame">
 	<div class="frame-header">

@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0055 – MVC VIII – Dynamically Loading a TreeView
+# 0055: MVC VIII – Dynamically Loading a TreeView
 
 <div class="screenshot-frame">
 	<div class="frame-header">

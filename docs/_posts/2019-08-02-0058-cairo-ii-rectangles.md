@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0058 – Cairo II – Rectangles
+# 0058: Cairo II – Rectangles
 
 Picking up from last time, let's continue looking at basic draw operations. Because these procedures consist of just a few statements each—and all else being the same—we’ll just examine the callback functions for each example.
 

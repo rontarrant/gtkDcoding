@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0034 – Menus IX - AccelGroup as a Singleton
+# 0034: Menus IX - AccelGroup as a Singleton
 
 <div class="screenshot-frame">
 	<div class="frame-header">

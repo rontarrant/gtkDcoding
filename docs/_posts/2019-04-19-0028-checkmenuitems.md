@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0028 – Menus III - CheckMenuItems
+# 0028: Menus III - CheckMenuItems
 
 Today we’ll cover another type of `MenuItem`, the `CheckMenuItem`. This post is longer than usual because after doing the simple version, I wanted to do a multiple `CheckMenuItem` version as well and that led to a whole can of worms dumped on my desktop. Anyway, let’s get on with it…
 

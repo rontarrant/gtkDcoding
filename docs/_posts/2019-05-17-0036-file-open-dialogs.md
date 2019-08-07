@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0036 – Dialogs II - Opening a Single File
+# 0036: Dialogs II - Opening a Single File
 
 Today we’re working with a more useful dialog, one that opens a file.
 

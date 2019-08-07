@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0049 – MVC Part II – the ComboBoxText<br> - a Few Simple Examples
+# 0049: MVC Part II – the ComboBoxText<br> - a Few Simple Examples
 
 Continuing from last time…
 

@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0032 – Menus VII - Adding Accelerator Keys to MenuItems
+# 0032: Menus VII - Adding Accelerator Keys to MenuItems
 
 <div class="screenshot-frame">
 	<div class="frame-header">

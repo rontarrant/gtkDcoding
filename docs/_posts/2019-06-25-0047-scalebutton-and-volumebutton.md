@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0047 – The ScaleButton and VolumeButton
+# 0047: The ScaleButton and VolumeButton
 
 Because the `ScaleButton` is the more involved of these two, I’m going to start with...
 

@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0018 - Variations on a Text Entry Widget
+# 0018: Variations on a Text Entry Widget
 
 ## The Simple Entry
 
