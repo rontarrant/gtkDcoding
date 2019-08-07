@@ -29,7 +29,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "<Insert Title>";
+	string title = "Statusbar Signal";
 	AppBox appBox;
 	
 	this()
@@ -119,10 +119,12 @@ class MyDrawingArea : DrawingArea
 			if(event.motion.y < currentY)
 			{
 				_myStatusbar.push(_myStatusbar.contextIDUp, "Mouse position: " ~ format("%s, %s", event.motion.x, event.motion.y));
+				_myStatusbar.directionLabel.setText(_myStatusbar.contextDescriptionUp);
 			}
 			else
 			{
 				_myStatusbar.push(_myStatusbar.contextIDDown, "Mouse position: " ~ format("%s, %s", event.motion.x, event.motion.y));
+				_myStatusbar.directionLabel.setText(_myStatusbar.contextDescriptionDown);
 			}
 
 			currentY = event.motion.y;

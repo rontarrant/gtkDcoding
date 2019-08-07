@@ -27,7 +27,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "<Insert Title>";
+	string title = "Simple Statusbar";
 	AppBox appBox;
 	
 	this()
