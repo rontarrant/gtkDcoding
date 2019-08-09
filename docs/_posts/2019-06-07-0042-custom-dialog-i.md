@@ -327,7 +327,7 @@ We still have variables for `_globalPadding` and `_padding`, but they’re both 
 - the `Box` constructor still expects global padding, and
 - the `packStart()` or `packEnd()` functions expect local padding.
 
-The `_pJustify` variable will be one of values from the `BoxJustify` enum discussed in *A Lighting-fast Introduction to Design* above.
+The `_pJustify` variable will be one of the values from the `BoxJustify` enum discussed in *A Lighting-fast Introduction to Design* above.
 
 ## The Constructor
 
