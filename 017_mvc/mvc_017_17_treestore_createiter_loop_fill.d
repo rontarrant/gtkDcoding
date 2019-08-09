@@ -34,7 +34,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "MVC TreeStore - Multi-level Family";
+	string title = "TreeStore (loop fill)";
 	AppBox appBox;
 	int minimumWidth, naturalWidth, minimumHeight, naturalHeight;
 	

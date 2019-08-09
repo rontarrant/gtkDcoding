@@ -31,7 +31,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Multi-level TreeStore";
+	string title = "TreeStore (multi-level)";
 	AppBox appBox;
 	
 	this()

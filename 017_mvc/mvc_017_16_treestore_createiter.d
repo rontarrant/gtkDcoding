@@ -30,7 +30,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "MVC TreeStore - Hierarchy Basics";
+	string title = "TreeStore (createIter)";
 	AppBox appBox;
 	int minimumWidth, naturalWidth, minimumHeight, naturalHeight;
 	

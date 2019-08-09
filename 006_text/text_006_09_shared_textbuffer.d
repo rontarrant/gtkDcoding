@@ -25,7 +25,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "<Insert Title>";
+	string title = "Textview Shared Buffer";
 	AppBox appBox;
 	
 	this()

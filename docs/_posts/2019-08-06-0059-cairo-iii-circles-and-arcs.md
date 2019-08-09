@@ -287,9 +287,7 @@ Next time, we’ll continue on and cover fills, then double back and have a bit 
 	<div style="float: left;">
 		<a href="/2019/08/02/0058-cairo-ii-rectangles.html">Previous: Cairo Rectangles</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/09/0060-cairo-iv-fill-arc-cartoon-mouth.html">Next: Cairo Arc Fill & Precision Drawing</a>
 	</div>
--->
 </div>
