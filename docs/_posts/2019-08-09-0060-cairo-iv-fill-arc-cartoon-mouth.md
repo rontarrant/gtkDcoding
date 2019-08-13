@@ -538,9 +538,7 @@ And that’s about it for curves. Next time, we’ll dig into what’s referred 
 	<div style="float: left;">
 		<a href="/2019/08/06/0059-cairo-iii-circles-and-arcs.html">Previous: Cairo Circles and Arcs</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/13/0061-cairo-v-toy-text-image-formats.html">Next: Cairo Toy Text & Image Formats</a>
 	</div>
--->
 </div>
