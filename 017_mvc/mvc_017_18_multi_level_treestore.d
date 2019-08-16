@@ -38,7 +38,7 @@ class TestRigWindow : MainWindow
 	{
 		super(title);
 		addOnDestroy(&quitApp);
-		setDefaultSize(250, 280);
+		setDefaultSize(300, 280);
 
 		appBox = new AppBox();
 		add(appBox);

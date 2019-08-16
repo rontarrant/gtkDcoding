@@ -41,7 +41,7 @@ class TestRigWindow : MainWindow
 	this()
 	{
 		super(title);
-		setSizeRequest(250, 250);
+		setSizeRequest(300, 250);
 		
 		addOnDestroy(&quitApp);
 		

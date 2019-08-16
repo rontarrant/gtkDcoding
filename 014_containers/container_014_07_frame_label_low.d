@@ -83,7 +83,7 @@ class FrameLow : Frame
 	private:
 	string titleLabel = "Coordinates";
 	FrameChildGrid frameChildGrid;
-	float xAlign = 0.03, yAlign = 0.0;
+	float xAlign = 0.05, yAlign = 0.0;
 	
 	public:
 	this()

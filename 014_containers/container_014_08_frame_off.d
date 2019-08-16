@@ -1,6 +1,7 @@
 // Description of example
 
 import std.stdio;
+import std.string;
 
 import gtk.MainWindow;
 import gtk.Main;
@@ -189,22 +190,11 @@ class XSpinButton : HPadBox
 		spinButton = new SpinButton(minimum, maximum, step);
 		adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
 		spinButton.setAdjustment(adjustment);
-		spinButton.addOnValueChanged(&valueChanged);
 		
 		super(spinButton, pJustify);
 		
 	} // this()
 	
-	
-	void valueChanged(SpinButton sb)
-	{
-		if(sb.getValue() == minimum)
-		{
-			writeln(sb.getValue());
-		}
-		
-	} // valueChanged()
-
 } // class XSpinButton
 
 
@@ -226,18 +216,10 @@ class YSpinButton : HPadBox
 		spinButton = new SpinButton(minimum, maximum, step);
 		adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
 		spinButton.setAdjustment(adjustment);
-		spinButton.addOnValueChanged(&valueChanged);
 		
 		super(spinButton, pJustify);
 		
 	} // this()
-	
-	
-	void valueChanged(SpinButton sb)
-	{
-		writeln(sb.getValue());
-		
-	} // valueChanged()
 	
 } // class YSpinButton
 
