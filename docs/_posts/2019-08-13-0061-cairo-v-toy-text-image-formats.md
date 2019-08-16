@@ -338,9 +338,7 @@ And you don’t wanna miss that, right?
 	<div style="float: left;">
 		<a href="/2019/08/09/0060-cairo-iv-fill-arc-cartoon-mouth.html">Previous: Cairo Arc Fill & Precision Drawing</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/16/0062-cairo-vi-load-display-images.html">Next: Cairo Load & Display Images</a>
 	</div>
--->
 </div>
