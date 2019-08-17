@@ -125,36 +125,36 @@ Be aware, however, that we don’t instantiate in the normal way. But let's not 
 
 What we’re starting with to build our `S_AccelGroup` class can be found in [the D Wiki Low-lock Singleton example]( https://wiki.dlang.org/Low-Lock_Singleton_Pattern). And here’s what the basic class looks like:
 
-{% highlight d %}
-	class MySingleton
-	{
-	    private this() {}
-	
-	    // Cache instantiation flag in thread-local bool
-	    private static bool instantiated_;
-	
-	    // Thread global
-	    private __gshared MySingleton instance_;
-	
-	    static MySingleton get()
-	    {
-	        if(!instantiated_)
-	        {
-	            synchronized(MySingleton.classinfo)
-	            {
-	                if(!instance_)
-	                {
-	                    instance_ = new MySingleton();
-	                }
-	
-	                instantiated_ = true;
-	            }
-	        }
-	
-	        return(instance_);
-	    }
-	}
-{% endhighlight %}
+```d
+class MySingleton
+{
+    private this() {}
+
+    // Cache instantiation flag in thread-local bool
+    private static bool instantiated_;
+
+    // Thread global
+    private __gshared MySingleton instance_;
+
+    static MySingleton get()
+    {
+        if(!instantiated_)
+        {
+            synchronized(MySingleton.classinfo)
+            {
+                if(!instance_)
+                {
+                    instance_ = new MySingleton();
+                }
+
+                instantiated_ = true;
+            }
+        }
+
+        return(instance_);
+    }
+}
+```
 
 Seems complicated, right? Well, the only things we really need to know are:
 
@@ -165,66 +165,66 @@ Seems complicated, right? Well, the only things we really need to know are:
 
 So, after a few naming convention changes, our `S_AccelGroup` class (which you can find in [this example file right here](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/singleton/S_AccelGroup.d)) looks like this:
 
-{% highlight d %}
-	module singleton.S_AccelGroup;
+```d
+module singleton.S_AccelGroup;
 
-	import std.stdio;
-	
-	import gtk.AccelGroup;
-	
-	class S_AccelGroup : AccelGroup
+import std.stdio;
+
+import gtk.AccelGroup;
+
+class S_AccelGroup : AccelGroup
+{
+	private:
+	// Cache instantiation flag in thread-local bool
+	static bool instantiated_;
+
+	// Thread global
+	__gshared S_AccelGroup instance_;
+
+	this()
 	{
-		private:
-		// Cache instantiation flag in thread-local bool
-		static bool instantiated_;
+		super();
+
+	} // this()
+
+	public:
 	
-		// Thread global
-		__gshared S_AccelGroup instance_;
-	
-		this()
-		{
-			super();
-	
-		} // this()
-	
-		public:
+	static S_AccelGroup get()
+	{
+		write("getting...");
 		
-		static S_AccelGroup get()
+		if(!instantiated_)
 		{
-			write("getting...");
-			
-			if(!instantiated_)
+			synchronized(S_AccelGroup.classinfo)
 			{
-				synchronized(S_AccelGroup.classinfo)
+				if(!instance_)
 				{
-					if(!instance_)
-					{
-						instance_ = new S_AccelGroup();
-						writeln("creating");
-					}
-	
-					instantiated_ = true;
+					instance_ = new S_AccelGroup();
+					writeln("creating");
 				}
+
+				instantiated_ = true;
 			}
-			else
-			{
-				writeln("not created");
-			}
-	
-			return(instance_);
-			
-		} // get()
-	
-	} // class S_AccelGroup
-{% endhighlight %}
+		}
+		else
+		{
+			writeln("not created");
+		}
+
+		return(instance_);
+		
+	} // get()
+
+} // class S_AccelGroup
+```
 
 *Note: If you use this locally, don't forget to put this in its own sub-directory.*
  
 Right at the top, we have:
 
-{% highlight d %}
-	module S_AccelGroup;
-{% endhighlight %}
+```d
+module S_AccelGroup;
+```
 
 Technically, you could put a similar statement at the top of every one of your `.d` files, turning them all into modules and it wouldn't really change anything for that code file, per se. What it does is give us a way to import it for those times when we want the code from one file available to another.
 
@@ -232,9 +232,9 @@ Technically, you could put a similar statement at the top of every one of your `
 
 The file needs to be saved as `S_AccelGroup.d` (the `module` name plus a `.d` extension) and just for kicks, I put it in its own sub-directory which means the path and filename in relation to our dev directory is:
 
-{% highlight d %}
-	./singleton/S_AccelGroup.d
-{% endhighlight %}
+```d
+./singleton/S_AccelGroup.d
+```
 
 Hold that thought as we go into the next section...
 
@@ -242,15 +242,15 @@ Hold that thought as we go into the next section...
 
 To bring the external file into the mix for compiling/linking, we need an `import` statement which you’ll find near the top of today’s primary code file. Any time the file you want to import is in a sub-directory, replace the slash (`/`) with a dot (`.`) in your import statement... like this:
 
-{% highlight d %}
-	import singleton.S_AccelGroup;
-{% endhighlight %}
+```d
+import singleton.S_AccelGroup;
+```
 
 If I'd put this file in the same directory as our primary `.d` file, the import statement would look like this instead:
 
-{% highlight d %}
-	import S_AccelGroup;
-{% endhighlight %}
+```d
+import S_AccelGroup;
+```
 
 Okay, now you can let go of that thought from the previous section.
 
@@ -258,39 +258,39 @@ Okay, now you can let go of that thought from the previous section.
 
 Just like with the stock `AccelGroup`, we need to attach it to the `MainWindow` which means our `TestRigWindow` class now looks like this:
 
-{% highlight d %}
-	class TestRigWindow : MainWindow
+```d
+class TestRigWindow : MainWindow
+{
+	string title = "Multiple Menus Example";
+	S_AccelGroup s_AccelGroup;
+
+	this()
 	{
-		string title = "Multiple Menus Example";
-		S_AccelGroup s_AccelGroup;
-	
-		this()
-		{
-			super(title);
-			setDefaultSize(640, 480);
-			addOnDestroy(&quitApp);
-	
-			s_AccelGroup = s_AccelGroup.get();
-			addAccelGroup(s_AccelGroup);
-	
-			AppBox appBox = new AppBox();
-			add(appBox);
-			
-			showAll();
-			
-		} // this()
+		super(title);
+		setDefaultSize(640, 480);
+		addOnDestroy(&quitApp);
+
+		s_AccelGroup = s_AccelGroup.get();
+		addAccelGroup(s_AccelGroup);
+
+		AppBox appBox = new AppBox();
+		add(appBox);
 		
+		showAll();
 		
-		void quitApp(Widget w)
-		{
-			// do other quit stuff here if necessary
-			
-			Main.quit();
-			
-		} // quitApp()
+	} // this()
+	
+	
+	void quitApp(Widget w)
+	{
+		// do other quit stuff here if necessary
 		
-	} // class TestRigWindow
-{% endhighlight %}
+		Main.quit();
+		
+	} // quitApp()
+	
+} // class TestRigWindow
+```
 
 I’ll draw your attention to three things here:
 
@@ -302,29 +302,29 @@ I’ll draw your attention to three things here:
 
 For each `MenuItem` that has a hotkey, we rewrite its definition to look similar to this:
 
-{% highlight d %}
-	class NewFileItem : MenuItem
+```d
+class NewFileItem : MenuItem
+{
+	string itemLabel = "New";
+	char accelKey = 'n';
+	S_AccelGroup s_AccelGroup;
+	   
+	this()
 	{
-		string itemLabel = "New";
-		char accelKey = 'n';
-		S_AccelGroup s_AccelGroup;
-		   
-		this()
-		{
-			s_AccelGroup = s_AccelGroup.get();
-			super(&doSomething, itemLabel, "activate", false, s_AccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
-			
-		} // this()
+		s_AccelGroup = s_AccelGroup.get();
+		super(&doSomething, itemLabel, "activate", false, s_AccelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 		
+	} // this()
+	
+	
+	void doSomething(MenuItem mi)
+	{
+		writeln("New file created.");
 		
-		void doSomething(MenuItem mi)
-		{
-			writeln("New file created.");
-			
-		} // doSomething()
-		
-	} // class NewFileItem
-{% endhighlight %}
+	} // doSomething()
+	
+} // class NewFileItem
+```
 
 Again, we need three statements to set up and use the `S_AccelGroup`:
 
@@ -334,9 +334,9 @@ Again, we need three statements to set up and use the `S_AccelGroup`:
 
 And if you want to prove to yourself that all these `MenuItem`s really do use the same `S_AccelGroup`, add this line as the last statement in the constructors of a few of the `MenuItem`s:
 
-{% highlight d %}
+```d
 	writeln(&s_AccelGroup);
-{% endhighlight %}
+```
 
 The address echoed to the terminal will be the same for each.
 
@@ -344,19 +344,27 @@ The address echoed to the terminal will be the same for each.
 
 When you go to compile this, because our code is now in two separate files, you’ll need to add the `–i` switch on the command line. Here's the Windows version:
 
-	dmd –de –w –m64 –Lgtkd.lib –i <filename>.d
+```
+dmd –de –w –m64 –Lgtkd.lib –i <filename>.d
+```
 
 It’s the same in Linux, just add `–i` to whatever compile command you usually use:
 
-	dmd -de -w -m64  -i -I/usr/include/dmd/gtkd3 -L-L/usr/lib/x86_64-linux-gnu -L-L/usr/lib/i386-linux-gnu -L-l:libgtkd-3.so -L-l:libdl.so.2 -L--no-warn-search-mismatch -defaultlib=libphobos2.so <code-filename>.d -of<executable-filename>
+```
+dmd -de -w -m64  -i -I/usr/include/dmd/gtkd3 -L-L/usr/lib/x86_64-linux-gnu -L-L/usr/lib/i386-linux-gnu -L-l:libgtkd-3.so -L-l:libdl.so.2 -L--no-warn-search-mismatch -defaultlib=libphobos2.so <code-filename>.d -of<executable-filename>
+```
 
 or the short form:
 
-	dmd -de -w -m64  -i `pkg-config --cflags --libs gtkd-3` <code-filename>.d -of<executable-filename>
+```
+dmd -de -w -m64  -i `pkg-config --cflags --libs gtkd-3` <code-filename>.d -of<executable-filename>
+```
 
 or the alias:
 
-	dbuild -i <code_filename>.d
+```
+dbuild -i <code_filename>.d
+```
 
 ## Conclusion
 

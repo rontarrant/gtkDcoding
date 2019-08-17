@@ -116,20 +116,20 @@ The beauty of this last point is that we can set up the callback to perform two 
 
 The simplest way to write the callback is to check the state of the `CheckBox` with `getActive()` and decide what to do from there:
 
-{% highlight d %}
-	void choose(CheckMenuItem mi)
+```d
+void choose(CheckMenuItem mi)
+{
+	if(getActive() == true)
 	{
-		if(getActive() == true)
-		{
-			keepItFancy();
-		}
-		else
-		{
-			makeItPlain();
-		}
-		
-	} // choose()
-{% endhighlight %}
+		keepItFancy();
+	}
+	else
+	{
+		makeItPlain();
+	}
+	
+} // choose()
+```
 
 While digging into this widget, I found myself unable to resist doing a more complex version with multiple `CheckMenuItem`s, so here we go...
 
@@ -235,43 +235,43 @@ Before we look at the `CheckMenuItem`s themselves…
 
 This example spotlights an imaginary object and the features controlled with the `CheckMenuItem`s. Here’s the code to define this imaginary object:
 
-{% highlight d %}
-	class ObservedFeaturesList
+```d
+class ObservedFeaturesList
+{
+	bool[string] features;
+
+	this()
 	{
-		bool[string] features;
+		features = ["Fancy" : true, "Fortified" : false, "Extra Large" : false, "Soft & Fluffy" : true];
+		
+	} // this()
 	
-		this()
+	
+	void setFeature(string featureName, bool state)
+	{
+		features[featureName] = state;
+		
+	} // setFeature()
+	
+	
+	bool getFeature(string featureName)
+	{
+		return(features[featureName]);
+		
+	} // getFeature()
+	
+	
+	void listFeatures()
+	{
+		foreach(name, feature; features)
 		{
-			features = ["Fancy" : true, "Fortified" : false, "Extra Large" : false, "Soft & Fluffy" : true];
-			
-		} // this()
+			writeln(name, " = ", feature);
+		}
 		
-		
-		void setFeature(string featureName, bool state)
-		{
-			features[featureName] = state;
-			
-		} // setFeature()
-		
-		
-		bool getFeature(string featureName)
-		{
-			return(features[featureName]);
-			
-		} // getFeature()
-		
-		
-		void listFeatures()
-		{
-			foreach(name, feature; features)
-			{
-				writeln(name, " = ", feature);
-			}
-			
-		} // listFeatures()
-		
-	} // class ObservedFeaturesList
-{% endhighlight %}
+	} // listFeatures()
+	
+} // class ObservedFeaturesList
+```
 
 This is a different approach than we’ve taken before. This class keeps track of:
 
@@ -289,38 +289,38 @@ This `ObservedFeaturesList` object is instantiated in…
 
 Jumping back to the `TextRigWindow` class, we see some changes to our usual code:
 
-{% highlight d %}
-	class TestRigWindow : MainWindow
+```d
+class TestRigWindow : MainWindow
+{
+	string title = "CheckMenuItem Example";
+	ObservedFeaturesList observedList;
+
+	this()
 	{
-		string title = "CheckMenuItem Example";
-		ObservedFeaturesList observedList;
+		super(title);
+		setDefaultSize(640, 480);
+		addOnDestroy(&quitApp);
+
+		observedList = new ObservedFeaturesList();
+		
+		AppBox appBox = new AppBox(observedList);
+		add(appBox);
+		
+		showAll();
+		
+	} // this()
 	
-		this()
-		{
-			super(title);
-			setDefaultSize(640, 480);
-			addOnDestroy(&quitApp);
 	
-			observedList = new ObservedFeaturesList();
-			
-			AppBox appBox = new AppBox(observedList);
-			add(appBox);
-			
-			showAll();
-			
-		} // this()
+	void quitApp(Widget w)
+	{
+		observedList.listFeatures();
 		
+		Main.quit();
 		
-		void quitApp(Widget w)
-		{
-			observedList.listFeatures();
-			
-			Main.quit();
-			
-		} // quitApp()
-		
-	} // TestRigWindow
-{% endhighlight %}
+	} // quitApp()
+	
+} // TestRigWindow
+```
 
 Because all of the `CheckMenuItem`s need access to the `ObservedFeaturesList` and I also wanted to duplicate `Exit` `MenuItem` action when the user clicks the window’s *Close* button, I created the observed object here and passed it down through the hierarchy.
 
@@ -328,31 +328,31 @@ Because all of the `CheckMenuItem`s need access to the `ObservedFeaturesList` an
 
 Here, because the `CheckMenuItem`s are all so similar, we can get away grabbing the names (`itemKey`) from within a `foreach` loop to create the items:
 
-{% highlight d %}
-	class FileMenu : Menu
-	{
-		FeatureCheckMenuItem[] featureItemArray;
-		FeatureCheckMenuItem featureItem;
-		ExitItem exitItem;
-		
-		this(ObservedFeaturesList extObservedList)
-		{
-			super();
-			
-			foreach(itemKey, itemValue; extObservedList.features)
-			{
-				featureItem = new FeatureCheckMenuItem(extObservedList, itemKey);
-				featureItemArray ~= featureItem;
-				append(featureItem);
-			}
-			
-			exitItem = new ExitItem(extObservedList);
-			append(exitItem);
-			
-		} // this()
+```d
+class FileMenu : Menu
+{
+	FeatureCheckMenuItem[] featureItemArray;
+	FeatureCheckMenuItem featureItem;
+	ExitItem exitItem;
 	
-	} // class FileMenu
-{% endhighlight %}
+	this(ObservedFeaturesList extObservedList)
+	{
+		super();
+		
+		foreach(itemKey, itemValue; extObservedList.features)
+		{
+			featureItem = new FeatureCheckMenuItem(extObservedList, itemKey);
+			featureItemArray ~= featureItem;
+			append(featureItem);
+		}
+		
+		exitItem = new ExitItem(extObservedList);
+		append(exitItem);
+		
+	} // this()
+
+} // class FileMenu
+```
 
 Note that when using an associative array with a `foreach` loop, we need to name a pair of iterators, a `key` and a `value`, as well as the associative array even though we don't actually use `itemValue`. Within the loop, we do the standard stuff:
 
@@ -369,45 +369,47 @@ One last bit to look at…
 
 There’s a little more going on here than with other types of `MenuItem`. Here’s the code:
 
-{% highlight d %}
-	class FeatureCheckMenuItem : CheckMenuItem
+```d
+class FeatureCheckMenuItem : CheckMenuItem
+{
+	string labelText;
+	ObservedFeaturesList observedList;
+   
+	this(ObservedFeaturesList extObservedList, string extLabelText)
 	{
-		string labelText;
-		ObservedFeaturesList observedList;
-	   
-		this(ObservedFeaturesList extObservedList, string extLabelText)
-		{
-			labelText = extLabelText;
-			super(labelText);
+		labelText = extLabelText;
+		super(labelText);
+
+		observedList = extObservedList;
+		addOnToggled(&toggleFeature);
+		setActive(observedList.getFeature(labelText));
+		
+	} // this()
 	
-			observedList = extObservedList;
-			addOnToggled(&toggleFeature);
-			setActive(observedList.getFeature(labelText));
-			
-		} // this()
-		
-		
-		void toggleFeature(CheckMenuItem mi)
+	
+	void toggleFeature(CheckMenuItem mi)
+	{
+		if(getActive() == true)
 		{
-			if(getActive() == true)
-			{
-				observedList.setFeature(labelText, true);
-			}
-			else
-			{
-				observedList.setFeature(labelText, false);
-			}
-			
-		} // toggleFeature()
+			observedList.setFeature(labelText, true);
+		}
+		else
+		{
+			observedList.setFeature(labelText, false);
+		}
 		
-	} // class FeatureCheckMenuItem
-{% endhighlight %}
+	} // toggleFeature()
+	
+} // class FeatureCheckMenuItem
+```
 
 Because the individual `CheckMenuItem`s differ only in label text, we can get away with this being a generic class and deal with the naming step up in the `FileMenu` class we just looked at. The constructor gets access to the `ObservedFeaturesList` object like everyone else.
 
 After calling the super-class constructor and setting a couple of local variables, the callback is attached and then we come to:
 
-	setActive(observedList.getFeature(labelText));
+```d
+setActive(observedList.getFeature(labelText));
+```
 
 As mentioned above in the section on The `ObservedFeaturesList` object, this function defers the decision about the `CheckMenuItem`’s state to the observed list object.
 

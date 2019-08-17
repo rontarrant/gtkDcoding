@@ -111,41 +111,43 @@ At its simplest, a `LinkButton` has a link that takes the user to a website. And
 
 And because this example is so simple, I’ve dumped it all into the `TestRigWindow` object:
 
-{% highlight d %}
-	class TestRigWindow : MainWindow
+```d
+class TestRigWindow : MainWindow
+{
+	string title = "LinkButton without Text";
+	string link = "http://gtkDcoding.com";
+	string message = "The text entry box holds: ";
+	LinkButton linkButton;
+	
+	this()
 	{
-		string title = "LinkButton without Text";
-		string link = "http://gtkDcoding.com";
-		string message = "The text entry box holds: ";
-		LinkButton linkButton;
+		super(title);
+		addOnDestroy(&endProgram);
 		
-		this()
-		{
-			super(title);
-			addOnDestroy(&endProgram);
-			
-			linkButton = new LinkButton(link);
-			add(linkButton);
-			
-			showAll();
-			
-		} // this()
+		linkButton = new LinkButton(link);
+		add(linkButton);
 		
+		showAll();
 		
-		void endProgram(Widget w)
-		{
-			writeln(message, linkButton.getUri());
-			
-		} // endProgram()
+	} // this()
+	
+	
+	void endProgram(Widget w)
+	{
+		writeln(message, linkButton.getUri());
 		
-	} // class TestRigWindow
-{% endhighlight %}
+	} // endProgram()
+	
+} // class TestRigWindow
+```
 
 Nothing to it, really, define the link, instantiate the `LinkButton` object, add it, and the rest is taken care of for you. You won’t have to figure out anything else because it hooks into the OS to grab the default browser and passes it the URL.
 
 But what if you don’t want the URL to show on the button? Perhaps your URL is something long and ugly or you want to take the user to a specific page that would end up looking like:
 
-	http://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html
+```
+http://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html
+```
 
 That ain’t gonna look so pretty on a button, so you might instead consider…
 
@@ -247,36 +249,36 @@ That ain’t gonna look so pretty on a button, so you might instead consider…
 
 Not a lot changes:
 
-{% highlight d %}
-	class TestRigWindow : MainWindow
-	{
-		string title = "LinkButton with Text";
-		string link = "http://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html";
-		string linkText = "GTK D-coding";
-		string message = "The text entry box holds: ";
-		LinkButton linkButton;
-		
-		this()
-		{
-			super(title);
-			addOnDestroy(&endProgram);
-			
-			linkButton = new LinkButton(link, linkText);
-			add(linkButton);
-			
-			showAll();
+```d
+class TestRigWindow : MainWindow
+{
+	string title = "LinkButton with Text";
+	string link = "http://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html";
+	string linkText = "GTK D-coding";
+	string message = "The text entry box holds: ";
+	LinkButton linkButton;
 	
-		} // this()
+	this()
+	{
+		super(title);
+		addOnDestroy(&endProgram);
 		
+		linkButton = new LinkButton(link, linkText);
+		add(linkButton);
 		
-		void endProgram(Widget w)
-		{
-			writeln(message, linkButton.getUri());
-			
-		} // endProgram()
+		showAll();
+
+	} // this()
+	
+	
+	void endProgram(Widget w)
+	{
+		writeln(message, linkButton.getUri());
 		
-	} // class TestRigWindow
-{% endhighlight %}
+	} // endProgram()
+	
+} // class TestRigWindow
+```
 
 It’s all in the arguments sent to `LinkButton`’s constructor:
 

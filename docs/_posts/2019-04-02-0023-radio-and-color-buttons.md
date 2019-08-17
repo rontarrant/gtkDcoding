@@ -111,48 +111,48 @@ As with so many other widgets, stuffing a set of `RadioButton`s into a `Box` mak
 
 So, let’s look at the `RadioBox`, a child class born of the `Box`:
 
-{% highlight d %}
-	class RadioBox : Box
+```d
+class RadioBox : Box
+{
+	int padding = 5;
+	Observed observed = new Observed(null);
+	MyRadioButton button1, button2, button3;
+	ActionButton actionButton;
+	
+	this()
 	{
-		int padding = 5;
-		Observed observed = new Observed(null);
-		MyRadioButton button1, button2, button3;
-		ActionButton actionButton;
+		super(Orientation.VERTICAL, padding);
 		
-		this()
-		{
-			super(Orientation.VERTICAL, padding);
-			
-			button1 = new MyRadioButton("button 1", observed);
-			
-			button2 = new MyRadioButton("button 2", observed);
-			button2.setGroup(button1.getGroup());
-			
-			button3 = new MyRadioButton("button 3", observed);
-			button3.setGroup(button1.getGroup());
-			
-			setActiveButton(button2);
+		button1 = new MyRadioButton("button 1", observed);
+		
+		button2 = new MyRadioButton("button 2", observed);
+		button2.setGroup(button1.getGroup());
+		
+		button3 = new MyRadioButton("button 3", observed);
+		button3.setGroup(button1.getGroup());
+		
+		setActiveButton(button2);
 
-			actionButton = new ActionButton(observed);
-			
-			add(button1);
-			add(button2);
-			add(button3);
-			add(actionButton);
-			
-		} // this()
+		actionButton = new ActionButton(observed);
 		
+		add(button1);
+		add(button2);
+		add(button3);
+		add(actionButton);
 		
-		void setActiveButton(Button button)
-		{
-			// set which button is active on start-up
-			observed.setState(button2.getLabel()); // initial state
-			button2.setActive(true);  // set AFTER all buttons are instantiated
-			
-		} // setActiveButton()
-****
-	} // class Radiobox
-{% endhighlight %}
+	} // this()
+	
+	
+	void setActiveButton(Button button)
+	{
+		// set which button is active on start-up
+		observed.setState(button2.getLabel()); // initial state
+		button2.setActive(true);  // set AFTER all buttons are instantiated
+		
+	} // setActiveButton()
+
+} // class Radiobox
+```
 
 ### RadioBox: An Observation Point
 
@@ -293,41 +293,41 @@ And everything else is stuff we’ve seen before. A quick browser through the co
 
 There are two places where notable differences show up. One is in the construction of the `ObservedColor` class:
 
-{% highlight d %}
-	class ObservedColor                                                             // *** NOTE *** r, g, b, a = 0.00 - 1.0
+```d
+class ObservedColor                                                             // *** NOTE *** r, g, b, a = 0.00 - 1.0
+{
+	private:
+	string message = "Color is now ";
+	RGBA color;
+	RGBA defaultColor;
+	float red = .75, green = .75, blue = .75, alpha = 1.0;
+	
+	this()
 	{
-		private:
-		string message = "Color is now ";
-		RGBA color;
-		RGBA defaultColor;
-		float red = .75, green = .75, blue = .75, alpha = 1.0;
+		defaultColor = new RGBA(red, green, blue, alpha);
+		setColor(defaultColor);
 		
-		this()
-		{
-			defaultColor = new RGBA(red, green, blue, alpha);
-			setColor(defaultColor);
-			
-		} // this()
-		
-		
-		public:
-		
-		void setColor(RGBA extColor)
-		{
-			color = extColor;
-			writeln(message, extColor);
-	
-		} // setColor()
+	} // this()
 	
 	
-		RGBA getColor()
-		{
-			return(color);
-			
-		} // getColor()
+	public:
 	
-	} // class ObservedColor
-{% endhighlight %}
+	void setColor(RGBA extColor)
+	{
+		color = extColor;
+		writeln(message, extColor);
+
+	} // setColor()
+
+
+	RGBA getColor()
+	{
+		return(color);
+		
+	} // getColor()
+
+} // class ObservedColor
+```
 
 In earlier `Observed` objects, we used strings to keep track of state, but here we’re storing the actual `RGBA` objects themselves (ie. the colors) within the `Observed` object. This gives us a central location to store colors that’s accessible to any object in the `ColorBox`.
 

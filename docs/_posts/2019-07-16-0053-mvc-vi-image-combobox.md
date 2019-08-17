@@ -111,36 +111,36 @@ So, we’ve done a two-column `ListStore`, how about one with four columns? And 
 
 Here’s the initialization section:
 
-{% highlight d %}
-	class SignListStore : ListStore
+```d
+class SignListStore : ListStore
+{
+	string[] items = ["bike", "bump", "cow", "deer", "crumbling cliff", "man with a stop sign", "skidding vehicle"];
+	int[] signNumbers = [1, 2, 3, 4, 5, 6, 7];
+	string[] images = ["_images/bicycle.png",
+			"_images/bump.png", 
+			"_images/cattle.png", 
+			"_images/deer.png", 
+			"_images/falling_rocks.png", 
+			"_images/road_crew.png", 
+			"_images/slippery_road.png"];
+	string[] descriptions = ["Bicycles present",
+				"Bump ahead",
+				"Cattle crossing",
+				"Deer crossing",
+				"Falling rocks ahead",
+				"Road crew ahead",
+				"Slippery when wet"];
+	enum Column
 	{
-		string[] items = ["bike", "bump", "cow", "deer", "crumbling cliff", "man with a stop sign", "skidding vehicle"];
-		int[] signNumbers = [1, 2, 3, 4, 5, 6, 7];
-		string[] images = ["_images/bicycle.png",
-				"_images/bump.png", 
-				"_images/cattle.png", 
-				"_images/deer.png", 
-				"_images/falling_rocks.png", 
-				"_images/road_crew.png", 
-				"_images/slippery_road.png"];
-		string[] descriptions = ["Bicycles present",
-					"Bump ahead",
-					"Cattle crossing",
-					"Deer crossing",
-					"Falling rocks ahead",
-					"Road crew ahead",
-					"Slippery when wet"];
-		enum Column
-		{
-			THEME_COLUMN = 0,
-			NUMBER_COLUMN = 1,
-			IMAGE_COLUMN = 2,
-			DESCRIPTION_COLUMN = 3
-			
-		} // enum Column
+		THEME_COLUMN = 0,
+		NUMBER_COLUMN = 1,
+		IMAGE_COLUMN = 2,
+		DESCRIPTION_COLUMN = 3
 		
-		TreeIter treeIter;
-{% endhighlight %}
+	} // enum Column
+	
+	TreeIter treeIter;
+```
 
 And the definitions for the four columns mean we’re working with:
 
@@ -153,53 +153,53 @@ You’ll also notice there’s an `enum` (`Column`) and we’ll see in a moment 
 
 Making the `Column enum` part of `SignListStore` means that anywhere we can access the `ListStore`, we’ll be able to access these static column values. And if you take a peek at the `AppBox` class...
 
-{% highlight d %}
-	class AppBox : Box
-	{
-		SignComboBox signComboBox;
-		SignListStore signListStore;
-		
-		this()
-		{
-			super(Orientation.VERTICAL, 10);
-			
-			signListStore = new SignListStore();
-			signComboBox = new SignComboBox(signListStore);
-			packStart(signComboBox, false, false, 0);
-			
-		} // this()
+```d
+class AppBox : Box
+{
+	SignComboBox signComboBox;
+	SignListStore signListStore;
 	
-	} // class AppBox
-{% endhighlight %}
+	this()
+	{
+		super(Orientation.VERTICAL, 10);
+		
+		signListStore = new SignListStore();
+		signComboBox = new SignComboBox(signListStore);
+		packStart(signComboBox, false, false, 0);
+		
+	} // this()
+
+} // class AppBox
+```
 
  ... you'll see that a pointer to `signListStore` is passed into the `SignComboBox` constructor.
 
 Now let’s look at the `SignListStore` constructor:
 
-{% highlight d %}
-	this()
+```d
+this()
+{
+	string item, imageName, description;
+	int number;
+
+	super([GType.STRING, GType.INT, Pixbuf.getType(), GType.STRING]);
+		
+	for(int i; i < items.length; i++)
 	{
-		string item, imageName, description;
-		int number;
-	
-		super([GType.STRING, GType.INT, Pixbuf.getType(), GType.STRING]);
+		item = items[i];
+		number = signNumbers[i];
+		imageName = images[i];
+		description = descriptions[i];
 			
-		for(int i; i < items.length; i++)
-		{
-			item = items[i];
-			number = signNumbers[i];
-			imageName = images[i];
-			description = descriptions[i];
-				
-			treeIter = createIter();
-			setValue(treeIter, Column.THEME_COLUMN, item);
-			setValue(treeIter, Column.NUMBER_COLUMN, number);
-			setValue(treeIter, Column.IMAGE_COLUMN, new Pixbuf(imageName));
-			setValue(treeIter, Column.DESCRIPTION_COLUMN, description);
-		}
-	
-	} // this()
-{% endhighlight %}
+		treeIter = createIter();
+		setValue(treeIter, Column.THEME_COLUMN, item);
+		setValue(treeIter, Column.NUMBER_COLUMN, number);
+		setValue(treeIter, Column.IMAGE_COLUMN, new Pixbuf(imageName));
+		setValue(treeIter, Column.DESCRIPTION_COLUMN, description);
+	}
+
+} // this()
+```
 
 The first thing I’ll point out is the array we’re passing to `super()`. See that `Pixbuf.getType()` argument? It needs a bit of explanation, so here goes…
 
@@ -207,33 +207,35 @@ The first thing I’ll point out is the array we’re passing to `super()`. See 
 
 Any visible *GTK*/*GDK*/*Pango* object class—such as `Pixbuf`, `Color`, `RBGA`, `PgFontDescription`, along with a whole raft of others—can be used as `ListStore` column data types. Some—like `Color`, `RBGA`, and `PgFontDescription`—can do no more than decorate other columns, but others—like the `Pixbuf`—can be visible in the `ComboBox`. And we get the correct type to pass to the `ListStore` constructor by asking the data class—not an instantiation of the class, but the base class itself—what type it is, kind of a “who goes there” approach:
 
-	Pixbuf.getType()
+```d
+Pixbuf.getType()
+```
 
 And that does the job. Include that right in the array we pass to the super-class constructor and it’s accepted as just another `GType`.
 
 *Note: Because `getType()` is a function call, it can’t be read at compile time, so we can’t predefine the array like we can if the columns all hold standard `GTypes`. The entire array has to be written out as it’s passed to the super-class constructor:*
 
-{% highlight d %}
-	super([GType.STRING, GType.INT, Pixbuf.getType(), GType.STRING]);
-{% endhighlight %}
+```d
+super([GType.STRING, GType.INT, Pixbuf.getType(), GType.STRING]);
+```
 
 And the `for()` loop that calls `setValue()` can now stuff everything into the `ListStore`:
 
-{% highlight d %}
-	for(int i; i < items.length; i++)
-	{
-		item = items[i];
-		number = signNumbers[i];
-		imageName = images[i];
-		description = descriptions[i];
-				
-		treeIter = createIter();
-		setValue(treeIter, Column.THEME_COLUMN, item);
-		setValue(treeIter, Column.NUMBER_COLUMN, number);
-		setValue(treeIter, Column.IMAGE_COLUMN, new Pixbuf(imageName));
-		setValue(treeIter, Column.DESCRIPTION_COLUMN, description);
-	}
-{% endhighlight %}
+```d
+for(int i; i < items.length; i++)
+{
+	item = items[i];
+	number = signNumbers[i];
+	imageName = images[i];
+	description = descriptions[i];
+			
+	treeIter = createIter();
+	setValue(treeIter, Column.THEME_COLUMN, item);
+	setValue(treeIter, Column.NUMBER_COLUMN, number);
+	setValue(treeIter, Column.IMAGE_COLUMN, new Pixbuf(imageName));
+	setValue(treeIter, Column.DESCRIPTION_COLUMN, description);
+}
+```
 
 Two things of note here:
 
@@ -248,17 +250,17 @@ Rather than reproduce the entire `SignComboBox` class here, we’ll just look at
 
 Because we want to show images instead of text, we need to declare a `CellRendererPixbuf` in the initialization section of the `SignComboBox` class:
 
-{% highlight d %}
-	CellRendererPixbuf cellRendererPixbuf;
-{% endhighlight %}
+```d
+CellRendererPixbuf cellRendererPixbuf;
+```
 
 And in the constructor we have the instantiation, the packing, and the adding of attributes:
 
-{% highlight d %}
-	cellRendererPixbuf = new CellRendererPixbuf();
-	packStart(cellRendererPixbuf, false);
-	addAttribute(cellRendererPixbuf, "pixbuf", _signListStore.Column.IMAGE_COLUMN);
-{% endhighlight %}
+```d
+cellRendererPixbuf = new CellRendererPixbuf();
+packStart(cellRendererPixbuf, false);
+addAttribute(cellRendererPixbuf, "pixbuf", _signListStore.Column.IMAGE_COLUMN);
+```
 
 You’ll note that whereas with the `CellRendererText` we used `“text”` as an attribute name, here we use `“pixbuf”` for the `CellRendererPixbuf`. Stands to reason, right?
 
@@ -270,9 +272,9 @@ As we encounter each type of `CellRenderer`, we’ll cover which property/attrib
 
 The other thing to note about the call to `addAttribute()` is its last argument:
 
-{% highlight d %}
-	_signListStore.Column.IMAGE_COLUMN
-{% endhighlight %}
+```d
+_signListStore.Column.IMAGE_COLUMN
+```
 
 This is the second (and final) use of the `Column` enum and it's why the `Column enum` was made part of the `SignListStore` class. A pointer to the store itself gets passed into the `SignComboBox` constructor, so we have access to it here without any major fiddling around.
 
@@ -378,19 +380,19 @@ This post is running a bit long, but this example really won’t take much expla
 
 There are only two difference between this example and the last. One's in the constructor and it's merely how many `CellRenderer`s we stuff into the `SignComboBox`. It happens in these lines in the constructor:
 
-{% highlight d %}
-	cellRendererInt = new CellRendererText();
-	packStart(cellRendererInt, false);
-	addAttribute(cellRendererInt, "text", _signListStore.Column.NUMBER_COLUMN);
-		
-	cellRendererText = new CellRendererText();
-	packStart(cellRendererText, false);
-	addAttribute(cellRendererText, "text", _signListStore.Column.THEME_COLUMN);
+```d
+cellRendererInt = new CellRendererText();
+packStart(cellRendererInt, false);
+addAttribute(cellRendererInt, "text", _signListStore.Column.NUMBER_COLUMN);
 	
-	cellRendererPixbuf = new CellRendererPixbuf();
-	packStart(cellRendererPixbuf, false);
-	addAttribute(cellRendererPixbuf, "pixbuf", _signListStore.Column.IMAGE_COLUMN);
-{% endhighlight %}
+cellRendererText = new CellRendererText();
+packStart(cellRendererText, false);
+addAttribute(cellRendererText, "text", _signListStore.Column.THEME_COLUMN);
+
+cellRendererPixbuf = new CellRendererPixbuf();
+packStart(cellRendererPixbuf, false);
+addAttribute(cellRendererPixbuf, "pixbuf", _signListStore.Column.IMAGE_COLUMN);
+```
 
 The `ComboBox` is derived from the Bin class and so all we have to do is pack in three `CellRenderer`s, making sure we use an appropriate attribute (in this case, `“text”` for the first two columns and `“pixbuf”` for the last) and make sure they're pointing to columns with matching data.
 

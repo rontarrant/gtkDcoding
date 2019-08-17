@@ -109,56 +109,56 @@ Because the `ScaleButton` is the more involved of these two, I’m going to star
 
 As with our previous example of the `SpinButton`, nothing really changes at the top of the file except a couple of import statements:
 
-{% highlight d %}
-	import gtk.VolumeButton;
-	import gtk.ScaleButton;
-	import gtk.Adjustment;
-{% endhighlight %}
+```d
+import gtk.VolumeButton;
+import gtk.ScaleButton;
+import gtk.Adjustment;
+```
 
 and the class derived from the `VolumeButton`:
 
-{% highlight d %}
-	class MyVolumeButton : VolumeButton
+```d
+class MyVolumeButton : VolumeButton
+{
+	double minimum = 0;
+	double maximum = 10;
+	double step = 1;
+
+	Adjustment adjustment;
+	double initialValue = 7;
+	double pageIncrement = 1;
+	double pageSize = 1;
+	
+	this()
 	{
-		double minimum = 0;
-		double maximum = 10;
-		double step = 1;
-	
-		Adjustment adjustment;
-		double initialValue = 7;
-		double pageIncrement = 1;
-		double pageSize = 1;
+		double compensateForWinBug = initialValue + 1;
+		super();
 		
-		this()
-		{
-			double compensateForWinBug = initialValue + 1;
-			super();
-			
-			adjustment = new Adjustment(compensateForWinBug, minimum, maximum, step, pageIncrement, pageSize);
-			setAdjustment(adjustment);
-			setValue(initialValue);
-			addOnValueChanged(&valueChanged);
-			
-		} // this()
+		adjustment = new Adjustment(compensateForWinBug, minimum, maximum, step, pageIncrement, pageSize);
+		setAdjustment(adjustment);
+		setValue(initialValue);
+		addOnValueChanged(&valueChanged);
 		
-		
-		void valueChanged(double value, ScaleButton sb)
-		{
-			writeln(getValue());
-			
-		} // valueChanged()
+	} // this()
 	
 	
-	} // class MyVolumeButton
-{% endhighlight %}
+	void valueChanged(double value, ScaleButton sb)
+	{
+		writeln(getValue());
+		
+	} // valueChanged()
+
+
+} // class MyVolumeButton
+```
 
 As before, we have to set up an `Adjustment` object in the constructor, but you’ll notice there’s an extra step.
 
 When we instantiate the `Adjustment`, the initial value is set to `compensateForWinBug` which is evaluated as `initialValue + 1` and later, it’s set again:
 
-{% highlight d %}
+```d
       setValue(initialValue);
-{% endhighlight %}
+```
 
 This is because the *Windows* version of *GTK* has a bug that—at runtime—causes the wrong icon to be shown initially when using the `ScaleButton` or its child, the `VolumeButton`. And the workaround is to set the `Adjustment`’s initial value and then change it right away before the user sees it.
 
@@ -276,15 +276,21 @@ Two things to remember...
 
 First, you’ll wanna know where they are. On *Windows*:
 
-	C:\Program Files\GTK3-Runtime Win64\share\icons
+```
+C:\Program Files\GTK3-Runtime Win64\share\icons
+```
 
 or here:
 
-	C:\Program Files\GTK3-Runtime\share\icons
+```
+C:\Program Files\GTK3-Runtime\share\icons
+```
 
 On Linux:
 
-	/usr/share/icons
+```
+/usr/share/icons
+```
 
 Second, the icons used for buttons are the 16x16 set.
 
@@ -294,48 +300,48 @@ Second, the icons used for buttons are the 16x16 set.
 
 As before, only one segment of this code file is different (and, truth be told, not all that different):
 
-{% highlight d %}
-	class MyScaleButton : ScaleButton
-	{
-		double minimum = 0;
-		double maximum = 10;
-		double step = 1;
-	
-		Adjustment adjustment;
-		double initialValue = 5;
-	
-		double pageIncrement = 1;
-		double pageSize = 0;
-		
-	//	string[] icons = ["audio-volume-muted", "audio-volume-high", "audio-volume-low", "audio-volume-medium"];
-		string[] icons = ["face-crying", "face-laugh", "face-embarrassed", "face-sad", "face-plain", "face-smirk", "face-smile"];
-	//	string[] icons = ["face-crying", "face-laugh", "face-plain"];
-	//	string[] icons = ["face-crying", "face-laugh"];
-	//	string[] icons = ["face-plain"];
-		
-		this()
-		{
-			double compensateForWinBug = initialValue + 1;
+```d
+class MyScaleButton : ScaleButton
+{
+	double minimum = 0;
+	double maximum = 10;
+	double step = 1;
 
-			super(IconSize.BUTTON, minimum, maximum, step, icons);
-			
-			adjustment = new Adjustment(compensateForWinBug, minimum, maximum, step, pageIncrement, pageSize);
-			setAdjustment(adjustment);
-			setValue(initialValue);
-	//		addOnValueChanged(&valueChanged);
-			
-		} // this()
+	Adjustment adjustment;
+	double initialValue = 5;
+
+	double pageIncrement = 1;
+	double pageSize = 0;
+	
+//	string[] icons = ["audio-volume-muted", "audio-volume-high", "audio-volume-low", "audio-volume-medium"];
+	string[] icons = ["face-crying", "face-laugh", "face-embarrassed", "face-sad", "face-plain", "face-smirk", "face-smile"];
+//	string[] icons = ["face-crying", "face-laugh", "face-plain"];
+//	string[] icons = ["face-crying", "face-laugh"];
+//	string[] icons = ["face-plain"];
+	
+	this()
+	{
+		double compensateForWinBug = initialValue + 1;
+
+		super(IconSize.BUTTON, minimum, maximum, step, icons);
 		
+		adjustment = new Adjustment(compensateForWinBug, minimum, maximum, step, pageIncrement, pageSize);
+		setAdjustment(adjustment);
+		setValue(initialValue);
+//		addOnValueChanged(&valueChanged);
 		
-		void valueChanged(ScaleButton sb)
-		{
-			writeln(getValue());
-			
-		} // valueChanged()
+	} // this()
 	
 	
-	} // class MyScaleButton
-{% endhighlight %}
+	void valueChanged(ScaleButton sb)
+	{
+		writeln(getValue());
+		
+	} // valueChanged()
+
+
+} // class MyScaleButton
+```
 
 As with the `VolumeButton`, we have to set and then reset the initial value so the proper icon is displayed on start-up, but now let's talk about this icon stuff…
 

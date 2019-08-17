@@ -72,10 +72,10 @@ class AppBox : Box
 
 class MyDrawingArea : DrawingArea
 {
-	double x = 25.6,  y = 128.0;
-	double x1 = 102.4, y1 = 230.4,
-			 x2 = 153.6, y2 = 25.6,
-			 x3 = 230.4, y3 = 128.0;
+	double xStart = 25,  yStart = 128;
+	double xControlPoint1 = 230, yControlPoint1 = 128,
+			 xControlPoint2 = 230, yControlPoint2 = 50,
+			 xEndPoint = 230, yEndPoint = 50;
 
 	this()
 	{
@@ -89,8 +89,8 @@ class MyDrawingArea : DrawingArea
 		// set up and draw a cubic Bezier
 		context.setLineWidth(3);
 		context.setSourceRgb(0.3, 0.2, 0.1);
-		context.moveTo(x, y);
-		context.curveTo(x1, y1, x2, y2, x3, y3);
+		context.moveTo(xStart, yStart);
+		context.curveTo(xControlPoint1, yControlPoint1, xControlPoint2, yControlPoint2, xEndPoint, yEndPoint);
 		context.stroke();
 
 		return(true);

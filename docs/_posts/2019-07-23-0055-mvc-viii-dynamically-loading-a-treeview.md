@@ -115,26 +115,26 @@ And now, let's dig in and start by talking about...
 
 To get all this working takes a whole mess of imports:
 
-{% highlight d %}
-	import std.stdio;
-	import std.math;
-	
-	import gtk.MainWindow;
-	import gtk.Main;
-	import gtk.Widget;
-	import gtk.Box;
-	import gtk.ScrolledWindow;
-	import gtk.TreeView;
-	import gtk.ListStore;
-	import gtk.TreeIter;
-	import gtk.TreePath;
-	import gtk.TreeViewColumn;
-	import gtk.CellRendererText;
-	import pango.PgCairoFontMap;
-	import pango.PgFontMap;
-	import pango.PgFontFamily;
-	import pango.PgFontDescription;
-{% endhighlight d %}
+```d
+import std.stdio;
+import std.math;
+
+import gtk.MainWindow;
+import gtk.Main;
+import gtk.Widget;
+import gtk.Box;
+import gtk.ScrolledWindow;
+import gtk.TreeView;
+import gtk.ListStore;
+import gtk.TreeIter;
+import gtk.TreePath;
+import gtk.TreeViewColumn;
+import gtk.CellRendererText;
+import pango.PgCairoFontMap;
+import pango.PgFontMap;
+import pango.PgFontFamily;
+import pango.PgFontDescription;
+```
 
 Now, since the `TreeView` and `TreeViewColumn`s are pretty much the same as what we’ve done (by now) so many times before, I’ll just comment on things that are different.
 
@@ -142,10 +142,10 @@ Now, since the `TreeView` and `TreeViewColumn`s are pretty much the same as what
 
 The constructor is very much the same as what we’ve seen before and only departs from that norm with this:
 
-{% highlight d %}
-	fontFamilyColumn = new FontFamilyColumn(fontListStore);
-	appendColumn(fontFamilyColumn);
-{% endhighlight d %}
+```d
+fontFamilyColumn = new FontFamilyColumn(fontListStore);
+appendColumn(fontFamilyColumn);
+```
 
 The zeroth column constructor (`FontFamilyColumn`) needs access to the `fontListStore` so it can pass along data from the `PgFontDescriptions` in the Model to its `CellRenderer` as it displays the names of the fonts.
 
@@ -153,46 +153,46 @@ The zeroth column constructor (`FontFamilyColumn`) needs access to the `fontList
 
 The other thing that's done here in the constructor is, we hook up a callback to react whenever the user double-clicks on a cell in the `TreeView`. The signal is `onRowActivated` and the hook-up is the simple one we've used so often:
 
-{% highlight d %}
+```d
 	addOnRowActivated(&onRowActivated);
-{% endhighlight d %}
+```
 
 The purpose of the callback is to report which cell has been clicked and it looks like this:
 
-{% highlight d %}
-	void onRowActivated(TreePath treePath, TreeViewColumn tvc, TreeView tv)
+```d
+void onRowActivated(TreePath treePath, TreeViewColumn tvc, TreeView tv)
+{
+	int columnNumber;
+	TreeIter treeIter = new TreeIter(fontListStore, treePath);
+		
+	// find the column number...
+	if(tvc.getTitle() == "Font Family")
 	{
-		int columnNumber;
-		TreeIter treeIter = new TreeIter(fontListStore, treePath);
-			
-		// find the column number...
-		if(tvc.getTitle() == "Font Family")
-		{
-			columnNumber = 0;
-		}
-		else if(tvc.getTitle() == "Size")
-		{
-			columnNumber = 1;
-		}
-		else if(tvc.getTitle() == "Pango Units")
-		{
-			columnNumber = 2;
-		}
-		else if(tvc.getTitle() == "Style")
-		{
-			columnNumber = 3;
-		}
-		else if(tvc.getTitle() == "Weight")
-		{
-			columnNumber = 4;
-		}
-	
-		writeln("TreePath (row): ", treePath, " columnNumber: ", columnNumber);
-		writeln(); // a blank line to separate each report
+		columnNumber = 0;
+	}
+	else if(tvc.getTitle() == "Size")
+	{
+		columnNumber = 1;
+	}
+	else if(tvc.getTitle() == "Pango Units")
+	{
+		columnNumber = 2;
+	}
+	else if(tvc.getTitle() == "Style")
+	{
+		columnNumber = 3;
+	}
+	else if(tvc.getTitle() == "Weight")
+	{
+		columnNumber = 4;
+	}
 
-		auto value = fontListStore.getValue(treeIter, columnNumber);
-		writeln("cell contains: ", value.getString());
-{% endhighlight d %}
+	writeln("TreePath (row): ", treePath, " columnNumber: ", columnNumber);
+	writeln(); // a blank line to separate each report
+
+	auto value = fontListStore.getValue(treeIter, columnNumber);
+	writeln("cell contains: ", value.getString());
+```
 
 And here’s what it does:
 
@@ -206,24 +206,24 @@ And here’s what it does:
 
 This class is a bit different from others we’ve used, starting with the initialization section:
 
-{% highlight d %}
-	class FontListStore : ListStore
+```d
+class FontListStore : ListStore
+{
+	SysFontListPango sysFontListPango;
+	PgFontDescription[] fontList;
+	TreeIter treeIter;
+	
+	enum Column
 	{
-		SysFontListPango sysFontListPango;
-		PgFontDescription[] fontList;
-		TreeIter treeIter;
+		FAMILY = 0,
+		SIZE,
+		PANGO_SIZE,
+		STYLE,
+		WEIGHT,
+		FONT_DESC
 		
-		enum Column
-		{
-			FAMILY = 0,
-			SIZE,
-			PANGO_SIZE,
-			STYLE,
-			WEIGHT,
-			FONT_DESC
-			
-		} // enum Column
-{% endhighlight d %}
+	} // enum Column
+```
 
  We’re only working with one array, the `fontList` which is an array of *Pango* font descriptions.
 
@@ -231,28 +231,28 @@ In the `Column` `enum`, we take advantage of *D*’s `enum` auto-numbering which
 
 ### The FontListStore Constructor
 
-{% highlight d %}
-	this()
+```d
+this()
+{
+	super([GType.STRING, GType.STRING, GType.STRING, GType.STRING, GType.STRING, PgFontDescription.getType()]);
+
+	sysFontListPango = new SysFontListPango();
+	fontList = sysFontListPango.getList();
+		
+	foreach(font; fontList)
 	{
-		super([GType.STRING, GType.STRING, GType.STRING, GType.STRING, GType.STRING, PgFontDescription.getType()]);
-	
-		sysFontListPango = new SysFontListPango();
-		fontList = sysFontListPango.getList();
+		treeIter = createIter();
 			
-		foreach(font; fontList)
-		{
-			treeIter = createIter();
-				
-			setValue(treeIter, 0, font.getFamily());
-			setValue(treeIter, 1, font.getSize() / 1024);
-			setValue(treeIter, 2, font.getSize());
-			setValue(treeIter, 3, font.getStyle());
-			setValue(treeIter, 4, font.getWeight());
-			setValue(treeIter, 5, font);
-		}
-	
-	} // this()
-{% endhighlight d %}
+		setValue(treeIter, 0, font.getFamily());
+		setValue(treeIter, 1, font.getSize() / 1024);
+		setValue(treeIter, 2, font.getSize());
+		setValue(treeIter, 3, font.getStyle());
+		setValue(treeIter, 4, font.getWeight());
+		setValue(treeIter, 5, font);
+	}
+
+} // this()
+```
 
 I'll throw in a quick reminder here that  text and numbers are both rendered as strings—which explains the first five `GType`s in the array passed to the super-class constructor. But you’ll notice the last item in the array self-identifies using `PgFontDescription.getType()`.
 
@@ -266,44 +266,44 @@ Then we:
 
 Here's the constructor (*note: all variables starting with an underscore (_) are private to this class and so is `counter`*):
 
-{% highlight d %}
-	this()
-	{	
-		_pgFontMap = PgCairoFontMap.getDefault();
-		_pgFontMap.listFamilies(_pgFontFamilies);
+```d
+this()
+{	
+	_pgFontMap = PgCairoFontMap.getDefault();
+	_pgFontMap.listFamilies(_pgFontFamilies);
 
-		counter = 1;
-		
-		foreach(_font; _pgFontFamilies)
-		{
-			_fontDesc = new PgFontDescription(_font.getName(), _fontSize);
-			_pgFontDescriptions ~= _fontDesc;
-
-			if(fmod(counter, 4) == 0)
-			{
-				varyFontBySize();
-			}
-
-			if(fmod(counter, 5) == 0)
-			{
-				varyFontByWeight(PangoWeight.BOLD);
-			}
-			else if(fmod(counter, 6) == 0)
-			{
-				varyFontByWeight(PangoWeight.THIN);
-			}
-
-			_fontSize++;
-			counter++;
+	counter = 1;
 	
-			if(_fontSize > 19)
-			{
-					_fontSize = 9;
-			}
+	foreach(_font; _pgFontFamilies)
+	{
+		_fontDesc = new PgFontDescription(_font.getName(), _fontSize);
+		_pgFontDescriptions ~= _fontDesc;
+
+		if(fmod(counter, 4) == 0)
+		{
+			varyFontBySize();
 		}
 
-	} // this()
-{% endhighlight d %}
+		if(fmod(counter, 5) == 0)
+		{
+			varyFontByWeight(PangoWeight.BOLD);
+		}
+		else if(fmod(counter, 6) == 0)
+		{
+			varyFontByWeight(PangoWeight.THIN);
+		}
+
+		_fontSize++;
+		counter++;
+
+		if(_fontSize > 19)
+		{
+				_fontSize = 9;
+		}
+	}
+
+} // this()
+```
 
 We grab a list of fonts from the system and use it to create a *Pango* `FontMap` (referred to as a `PgFontMap`). From the `PgFontMap` (essentially just a list of font names) the constructor uses a `foreach()` loop to create the array of `PgFontDescriptions`.
 

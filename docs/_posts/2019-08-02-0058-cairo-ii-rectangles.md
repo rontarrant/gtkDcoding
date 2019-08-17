@@ -112,18 +112,18 @@ So, let’s start with rectangles.
 
 This first example is pretty much like the line-drawing example except we don’t have to make multiple calls to the lineTo() function. Instead, it’s just one call to rectangle():
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setLineWidth(1);
-		context.setSourceRgba(0.1, 0.2, 0.3, 0.8);
-		context.rectangle(x, y, width, height);
-		context.stroke();
-	
-		return(true);
-			
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setLineWidth(1);
+	context.setSourceRgba(0.1, 0.2, 0.3, 0.8);
+	context.rectangle(x, y, width, height);
+	context.stroke();
+
+	return(true);
+		
+} // onDraw()
+```
 
 The rectangle() arguments are as they seem, x and y coordinates of the upper-left corner, followed by the width and height.
 
@@ -226,20 +226,20 @@ The rectangle() arguments are as they seem, x and y coordinates of the upper-lef
 
 With this example, we need to do a bit more prep before we get down to the drawing:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		double[] dashPattern = [10, 20, 30, 40];
-		context.setLineWidth(3);
-		context.setSourceRgba(0.1, 0.2, 0.3, 0.8);
-		context.rectangle(150, 100, 340, 170);
-		context.setDash(dashPattern, 0);
-		context.stroke();
-		
-		return(true);
-		
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	double[] dashPattern = [10, 20, 30, 40];
+	context.setLineWidth(3);
+	context.setSourceRgba(0.1, 0.2, 0.3, 0.8);
+	context.rectangle(150, 100, 340, 170);
+	context.setDash(dashPattern, 0);
+	context.stroke();
+	
+	return(true);
+	
+} // onDraw()
+```
 
 The dash pattern is an array of doubles and can be summed up as:
 
@@ -354,17 +354,17 @@ The dash pattern is an array of doubles and can be summed up as:
 
 The callback for filling a rectangle looks like this:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setSourceRgb(0.541, 0.835, 0.886);
-		context.rectangle(150, 100, 340, 170);
-		context.fill();
-	
-		return(true);
-			
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setSourceRgb(0.541, 0.835, 0.886);
+	context.rectangle(150, 100, 340, 170);
+	context.fill();
+
+	return(true);
+		
+} // onDraw()
+```
 
 No mystery here, just substitute context.fill() for context.stroke() and if you want to have the rectangle outlined and filled…
 
@@ -467,24 +467,24 @@ No mystery here, just substitute context.fill() for context.stroke() and if you 
 
 For a filled and outlined rectangle, the callback will look like this:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		// outline
-		context.setLineWidth(3);
-		context.setSourceRgba(0.25, 0.25, 0.25, 1.0);
-		context.rectangle(150, 100, 340, 170);
-		context.stroke();
-			
-		// fill
-		context.setSourceRgba(0.945, 1.00, 0.694, 1.0); // yellow
-		context.rectangle(150, 100, 340, 170);
-		context.fill();
-	
-	       return(true);
-	       
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	// outline
+	context.setLineWidth(3);
+	context.setSourceRgba(0.25, 0.25, 0.25, 1.0);
+	context.rectangle(150, 100, 340, 170);
+	context.stroke();
+		
+	// fill
+	context.setSourceRgba(0.945, 1.00, 0.694, 1.0); // yellow
+	context.rectangle(150, 100, 340, 170);
+	context.fill();
+
+       return(true);
+       
+} // onDraw()
+```
 
 And finally, let’s look at…
 
@@ -586,34 +586,34 @@ And finally, let’s look at…
 
 The callback is:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	int i;
+	
+	// middle gray background
+	context.setSourceRgba(0.75, 0.75, 0.75, 1.0);
+	context.paint();
+	
+	// draw the blue line
+	context.setLineWidth(20);
+	context.setSourceRgba(0.384, 0.914, 0.976, 1.0);
+	context.moveTo(10, 166);
+	context.lineTo(630, 166);
+	context.stroke();
+	
+	// 10 yellow rectangles with graduating transparency
+	for(i = 0; i < 11; i++)
 	{
-		int i;
-		
-		// middle gray background
-		context.setSourceRgba(0.75, 0.75, 0.75, 1.0);
-		context.paint();
-		
-		// draw the blue line
-		context.setLineWidth(20);
-		context.setSourceRgba(0.384, 0.914, 0.976, 1.0);
-		context.moveTo(10, 166);
-		context.lineTo(630, 166);
-		context.stroke();
-		
-		// 10 yellow rectangles with graduating transparency
-		for(i = 0; i < 11; i++)
-		{
-			context.setSourceRgba(0.965, 1.0, 0.0, (i * 0.1));
-			context.rectangle((i * 56), 150, 32, 32);
-			context.fill();
-		}
-		
-		return(true);
-		
-	} // onDraw()
-{% endhighlight d %}
+		context.setSourceRgba(0.965, 1.0, 0.0, (i * 0.1));
+		context.rectangle((i * 56), 150, 32, 32);
+		context.fill();
+	}
+	
+	return(true);
+	
+} // onDraw()
+```
 
 What we’re doing here is:
 

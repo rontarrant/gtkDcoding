@@ -119,36 +119,36 @@ You might think the `ComboBox` would be the simpler of the two, but `ComboBoxTex
 
 As usual, our first example of a `ComboBoxText` is instantiated inside an `AppBox` which, in turn, is instantiated inside a `TestRigWindow`, so we don't need to look at those. The class we’re looking at first is this:
 
-{% highlight d %}
-	class DayComboBoxText : ComboBoxText
+```d
+class DayComboBoxText : ComboBoxText
+{
+	private:
+	string[] days = ["yesterday", "today", "tomorrow"];
+	bool entryOn = false;
+	
+	public:
+	this()
 	{
-		private:
-		string[] days = ["yesterday", "today", "tomorrow"];
-		bool entryOn = false;
+		super(entryOn);
 		
-		public:
-		this()
+		foreach(day; days)
 		{
-			super(entryOn);
-			
-			foreach(day; days)
-			{
-				appendText(day);
-			}
-	
-			addOnChanged(&doSomething);
-			
-		} // this()
+			appendText(day);
+		}
+
+		addOnChanged(&doSomething);
 		
-		
-		void doSomething(ComboBoxText cbt)
-		{
-			writeln(getActiveText());
-			
-		} // doSomething()
+	} // this()
 	
-	} // class DayComboBoxText
-{% endhighlight %}
+	
+	void doSomething(ComboBoxText cbt)
+	{
+		writeln(getActiveText());
+		
+	} // doSomething()
+
+} // class DayComboBoxText
+```
 
 Not a lot to look at here… Call the super-class constructor, `appendText()` a bunch of strings, and we’ve got a working widget.
 
@@ -256,9 +256,9 @@ By default, the `ComboBox` and the `ComboBoxText` both assume you want an `Entry
 
 The difference between example #1 and example #2, a `ComboBoxText` with a pre-selected item, is minimal. We just add a single line of code to the constructor:
 
-{% highlight d %}
+```d
 	setActive(0);
-{% endhighlight %}
+```
 
 And that’s all it takes to have one of our list items selected and showing on start-up. Just so you know, `0` is an index into the list of items, so we could also have set it to `1` or `2`.
 
@@ -360,18 +360,18 @@ And that’s all it takes to have one of our list items selected and showing on 
 
 Now we get to the `Entry`fied version with example #3, a `ComboBoxText` with an `Entry`. These examples are all really the same code with a few changes, so we’ll skip right to them. For starters, here’s the initialization section:
 
-{% highlight d %}
-	string[] days = ["yesterday", "today", "tomorrow"];
-	bool entryOn = true;
-{% endhighlight %}
+```d
+string[] days = ["yesterday", "today", "tomorrow"];
+bool entryOn = true;
+```
 
 The `entryOn` variable is, of course, now true which makes the `Entry` appear.
 
 In the constructor, there’s a new line of code hooking up a second signal/callback:
 
-{% highlight d %}
-	addOnKeyRelease(&onKeyRelease);
-{% endhighlight %}
+```d
+addOnKeyRelease(&onKeyRelease);
+```
 
 And we’ll talk about that in a moment. For now, I wanna talk about…
 
@@ -386,16 +386,16 @@ If we don’t help it distinguish between these two actions, the callback will b
 
 When the `onChanged` signal’s callback is triggered, the first thing we'll do is check which item is active:
 
-{% highlight d %}
-	void onChanged(ComboBoxText cbt)
+```d
+void onChanged(ComboBoxText cbt)
+{
+	if(getIndex(getActiveText()) !is -1)
 	{
-		if(getIndex(getActiveText()) !is -1)
-		{
-			writeln("this is a list item: ", getActiveText());
-		}
-	
-	} // onChanged()
-{% endhighlight %}
+		writeln("this is a list item: ", getActiveText());
+	}
+
+} // onChanged()
+```
 
 If the index is any number from `0` and up, that tells us the text currently in the `Entry` is an item from the drop-down. But, if we get an index of `-1`, the text only exists in the `Entry` which that tells us the `onChanged` signal is reacting to the user typing.
 
@@ -410,25 +410,25 @@ Once you’ve compiled the code, the following actions will be demonstrated:
 
 And speaking of which, let’s look at the `onKeyRelease` callback:
 
-{% highlight d %}
-	bool onKeyRelease(Event event, Widget w)
+```d
+bool onKeyRelease(Event event, Widget w)
+{
+	bool stopHereFlag = true;
+	
+	if(event.type == EventType.KEY_RELEASE)
 	{
-		bool stopHereFlag = true;
+		GdkEventKey* keyEvent = event.key;
 		
-		if(event.type == EventType.KEY_RELEASE)
+		if(keyEvent.keyval == GdkKeysyms.GDK_Return)
 		{
-			GdkEventKey* keyEvent = event.key;
-			
-			if(keyEvent.keyval == GdkKeysyms.GDK_Return)
-			{
-				writeln("onKeyRelease: ", getActiveText());			
-			}
+			writeln("onKeyRelease: ", getActiveText());			
 		}
+	}
 
-		return(stopHereFlag);
-		
-	} // onKeyRelease()
-{% endhighlight %}
+	return(stopHereFlag);
+	
+} // onKeyRelease()
+```
 
 As mentioned, it’s triggered when the user hits the *Enter* key. In actuality, it goes off every time a key is pressed, but we use the `if()` statement to ignore everything except *Enter*.
 

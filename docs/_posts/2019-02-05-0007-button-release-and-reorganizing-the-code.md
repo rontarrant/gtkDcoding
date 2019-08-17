@@ -111,17 +111,17 @@ This time around, we’ll be building the button from within the test rig class 
 
 Take a look at the main function:
 
-{% highlight d %}
-	void main(string[] args)
-	{
-		Main.init(args);
-		TestRigWindow myTestRig = new TestRigWindow();
-		
-		// give control over to gtkD.
-		Main.run();
-		
-	} // main()
-{% endhighlight %}
+```d
+void main(string[] args)
+{
+	Main.init(args);
+	TestRigWindow myTestRig = new TestRigWindow();
+	
+	// give control over to gtkD.
+	Main.run();
+	
+} // main()
+```
 
 Previously, the window’s title was defined at the top of `main()` and passed in as a string variable rather than a string. This time, there’s no window title because—in the interests of going full-on OOP—it’s been moved inside the `TestRigWindow` class.
 
@@ -131,34 +131,34 @@ And you may also notice that we don’t even do a `testRigWindow.showAll()` here
 
 And if all you looked at was the `main()` function, you might be led to believe this example didn’t do much. So, now let’s look at the `TestRigWindow` class:
 
-{% highlight d %}
-	class TestRigWindow : MainWindow
-	{
-		string windowTitle = "Test Rig";
-		string departingMessage = "Bye.";
-		
-		this(/* NO ARGS */)
-		{
-			// window
-			super(windowTitle);
-			addOnDestroy(delegate void(Widget w) { quitApp(); } );
-			
-			// a button that does something
-			MyButton myButt = new MyButton(buttonCaption);
-			add(myButt);
-			
-		} // this()
-		
-		
-		void quitApp()
-		{
-			writeln(departingMessage);
-			Main.quit();
-			
-		} // quitApp()
+```d
+class TestRigWindow : MainWindow
+{
+	string windowTitle = "Test Rig";
+	string departingMessage = "Bye.";
 	
-	} // class myAppWindow
-{% endhighlight %}
+	this(/* NO ARGS */)
+	{
+		// window
+		super(windowTitle);
+		addOnDestroy(delegate void(Widget w) { quitApp(); } );
+		
+		// a button that does something
+		MyButton myButt = new MyButton(buttonCaption);
+		add(myButt);
+		
+	} // this()
+	
+	
+	void quitApp()
+	{
+		writeln(departingMessage);
+		Main.quit();
+		
+	} // quitApp()
+
+} // class myAppWindow
+```
 
 These changes are all about maximizing OOP-ness and to that end, anything that has to do with a particular object has been moved into the class definition for that object. That's why the missing window title shows up here as class data along with a `partingMessage` variable. Keeping all this where it's easily found is a good habit to get into.
 
@@ -186,30 +186,30 @@ And of course, the button is created here. Let’s move on.
 
 Here we go:
 
-{% highlight d %}
-	class MyButton : Button
+```d
+class MyButton : Button
+{
+	string buttonText = "My Butt";
+	string actionMessage = "Action was taken.";
+	
+	this()
 	{
-		string buttonText = "My Butt";
-		string actionMessage = "Action was taken.";
+		super(buttonText);
+		addOnButtonRelease(&takeAction);
 		
-		this()
-		{
-			super(buttonText);
-			addOnButtonRelease(&takeAction);
-			
-		} // this()
+	} // this()
+	
+	
+	bool takeAction(Event event, Widget widget)
+	{
+		writeln(actionMessage);
 		
+		return(false);
 		
-		bool takeAction(Event event, Widget widget)
-		{
-			writeln(actionMessage);
-			
-			return(false);
-			
-		} // takeAction()
-		
-	} // class MyButton
-{% endhighlight %}
+	} // takeAction()
+	
+} // class MyButton
+```
 
 As mentioned above, there’s the data right at the top. And looking at the constructor, there’s a different signal being hooked up here, `onButtonRelease`. It doesn’t seem like that big a change until you look at the callback definition.
 

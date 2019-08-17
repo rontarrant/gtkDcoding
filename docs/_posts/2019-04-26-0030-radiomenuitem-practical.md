@@ -123,15 +123,15 @@ Most of the differences (compared to the `CheckMenuItem` example) are in the con
 
 ### Chunk #1
 
-{% highlight d %}
-	class FileMenu : Menu
-	{
-		FeatureRadioMenuItem[] featureItemArray;
-		FeatureRadioMenuItem featureItem;
-		ExitItem exitItem;
-		
-		ListSG group;
-{% endhighlight %}
+```d
+class FileMenu : Menu
+{
+	FeatureRadioMenuItem[] featureItemArray;
+	FeatureRadioMenuItem featureItem;
+	ExitItem exitItem;
+	
+	ListSG group;
+```
 
 - Instead of giving each item it’s own name here, we’re creating an array (naming is deferred and we'll see that in a moment),
 - the `featureItem` string will serve as a temporary name within the `foreach` loop used to create the items, and
@@ -139,27 +139,27 @@ Most of the differences (compared to the `CheckMenuItem` example) are in the con
 
 ### Chunk #2
 
-{% highlight d %}
-	this(ObservedFeaturesList extObservedList)
+```d
+this(ObservedFeaturesList extObservedList)
+{
+	super();
+
+	foreach(itemName; extObservedList.featureNames)
 	{
-		super();
-
-		foreach(itemName; extObservedList.featureNames)
+		if(itemName == extObservedList.featureNames[0])
 		{
-			if(itemName == extObservedList.featureNames[0])
-			{
-				featureItem = new FeatureRadioMenuItem(group, extObservedList, itemName);
-				group = featureItem.getGroup();
-			}
-			else
-			{
-				featureItem = new FeatureRadioMenuItem(group, extObservedList, itemName);
-			}
-
-			featureItemArray ~= featureItem;
-			append(featureItem);
+			featureItem = new FeatureRadioMenuItem(group, extObservedList, itemName);
+			group = featureItem.getGroup();
 		}
-{% endhighlight %}
+		else
+		{
+			featureItem = new FeatureRadioMenuItem(group, extObservedList, itemName);
+		}
+
+		featureItemArray ~= featureItem;
+		append(featureItem);
+	}
+```
 
 This is the first part of the constructor and includes the `foreach` loop used to create the `RadioMenuItem`s. We step through the `featureNames` string array (a part of the `ObservedFeatureList` object) to get label text for each item. The strings in `featureNames` decide the item names, and the number of strings decides how many items will be in the set.
 
@@ -170,28 +170,28 @@ This is the first part of the constructor and includes the `foreach` loop used t
 
 ### Chunk #3
 
-{% highlight d %}
-			extObservedList.setFeatureDefault();
-			
-			foreach(item; featureItemArray)
-			{
-				if(item.getLabel() == extObservedList.getDefaultFeature())
-				{
-					item.setActive(true);
-				}
-				else
-				{
-					item.setActive(false);
-				}
-			}
-	
-			exitItem = new ExitItem(extObservedList);
-			append(exitItem);
-			
-		} // this()
+```d
+		extObservedList.setFeatureDefault();
 		
-	} // class FileMenu
-{% endhighlight %}
+		foreach(item; featureItemArray)
+		{
+			if(item.getLabel() == extObservedList.getDefaultFeature())
+			{
+				item.setActive(true);
+			}
+			else
+			{
+				item.setActive(false);
+			}
+		}
+
+		exitItem = new ExitItem(extObservedList);
+		append(exitItem);
+		
+	} // this()
+	
+} // class FileMenu
+```
 
 This part is where we set the default item and make sure the states of all items in `ObservedFeaturesList` agree with the `RadioMenuItem` set.
 
@@ -199,12 +199,12 @@ Since these things take place in the `ObservedFeaturesList` class, we’ll cover
 
 Finally, we drop the `ExitItem` onto the end of the menu and bail:
 
-{% highlight d %}
-	exitItem = new ExitItem(extObservedList);
-	append(exitItem);
-			
-	} // this()
-{% endhighlight %}
+```d
+exitItem = new ExitItem(extObservedList);
+append(exitItem);
+		
+} // this()
+```
 
 Now let’s look at…
 
@@ -214,13 +214,13 @@ Again, we’ll look at this in chunks…
 
 ### Chunk #1
 
-{% highlight d %}
-	class ObservedFeaturesList
-	{
-		bool[string] features;
-		string[] featureNames;
-		string defaultFeatureName;
-{% endhighlight %}
+```d
+class ObservedFeaturesList
+{
+	bool[string] features;
+	string[] featureNames;
+	string defaultFeatureName;
+```
 
 These variables are:
 
@@ -230,14 +230,14 @@ These variables are:
 
 ### Chunk #2
 
-{% highlight d %}
-	this()
-	{
-		defaultFeatureName = "Large";
-		featureNames = ["Small", "Medium", "Large", "Extra Large"];
-		
-	} // this()
-{% endhighlight %}
+```d
+this()
+{
+	defaultFeatureName = "Large";
+	featureNames = ["Small", "Medium", "Large", "Extra Large"];
+	
+} // this()
+```
 
 Earlier I mentioned that the naming of `RadioMenuItem`s is deferred. Well, this is where it's done. All we do in the constructor is define which item will be the default and then fill in the array naming all the `RadioMenuItem`s in the set. This list can be extended or truncated to change the number of items in the set.
 
@@ -245,119 +245,119 @@ Earlier I mentioned that the naming of `RadioMenuItem`s is deferred. Well, this 
 
 ### Chunk #3
 
-{% highlight d %}
-	void setFeatureDefault()
+```d
+void setFeatureDefault()
+{
+	for(int i = 0; i < featureNames.length; i++)
 	{
-		for(int i = 0; i < featureNames.length; i++)
+		string featureName = featureNames[i];
+		
+		if(featureName == defaultFeatureName)
 		{
-			string featureName = featureNames[i];
-			
-			if(featureName == defaultFeatureName)
-			{
-				features[featureName] = true;
-			}
-			else
-			{
-				features[featureName] = false;
-			}
+			features[featureName] = true;
 		}
+		else
+		{
+			features[featureName] = false;
+		}
+	}
 
-	} // setFeatureDefault()
-{% endhighlight %}
+} // setFeatureDefault()
+```
 
 This is the function called from `FileMenu`’s constructor, the one that—as the name implies—sorts out which `RadioMenuItem` will be turned on by default.
 
 ### Chunk #4
 
-{% highlight d %}
-	void setFeature(string featureName)
+```d
+void setFeature(string featureName)
+{
+	foreach(feature, state; features)
 	{
-		foreach(feature, state; features)
+		if(feature == featureName)
 		{
-			if(feature == featureName)
-			{
-				features[feature] = true;
-			}
-			else
-			{
-				features[feature] = false;
-			}
+			features[feature] = true;
 		}
-		
-	} // setFeature()
-{% endhighlight %}
+		else
+		{
+			features[feature] = false;
+		}
+	}
+	
+} // setFeature()
+```
 
 When an item in the set is selected by the user, this function is called by the callback to keep the `ObservedFeaturesList` in sync with the state of the `RadioMenuItem` set.
 
 ### Chunk #5
 
-{% highlight d %}
-		string getDefaultFeature()
+```d
+	string getDefaultFeature()
+	{
+		return(defaultFeatureName);
+	}	
+	
+	
+	bool getFeature(string featureName)
+	{
+		return(features[featureName]);
+		
+	} // getFeature()
+	
+	
+	void listFeatures()
+	{
+		foreach(name, feature; features)
 		{
-			return(defaultFeatureName);
-		}	
+			writeln(name, " = ", feature);
+		}
 		
-		
-		bool getFeature(string featureName)
-		{
-			return(features[featureName]);
-			
-		} // getFeature()
-		
-		
-		void listFeatures()
-		{
-			foreach(name, feature; features)
-			{
-				writeln(name, " = ", feature);
-			}
-			
-		} // listFeatures()
-		
-	} // class ObservedFeaturesList
-{% endhighlight %}
+	} // listFeatures()
+	
+} // class ObservedFeaturesList
+```
 
 These functions do the following:
 
 - `getDefaultFeature() `is called from the second half of `FileMenu`’s constructor to sync up the flags in the `features` associative array with the state of the `RadioMenuItem` set, and
 - `getFeatureState()` is unused in this example, but is here as a placeholder. It returns the Boolean value of the named feature. It can be tested like this (perhaps from somewhere near the end of the `setFeature()` function):
 
-{% highlight d %}
-	writeln("The state of ", featureName, ": ", getFeatureState(featureName));
-{% endhighlight %}
+```d
+writeln("The state of ", featureName, ": ", getFeatureState(featureName));
+```
 
 ## And Finally: the FeatureRadioMenuItem Class
 
 This is a lot of stuff we’ve seen before, but one thing I’d like to point out is this: The callback is triggered whether the `RadioMenuItem` is going into an *on* state or an *off* state. That’s why there’s also an `if` statement in there to test the state of the `RadioMenuItem`. I would assume you could also have an `else` for doing some type of clean-up or what-have-you when an item is deselected.
 
-{% highlight d %}
-	class FeatureRadioMenuItem : RadioMenuItem
+```d
+class FeatureRadioMenuItem : RadioMenuItem
+{
+	string labelText;
+	ObservedFeaturesList observedList;
+   
+	this(ListSG group, ObservedFeaturesList extObservedList, string extLabelText)
 	{
-		string labelText;
-		ObservedFeaturesList observedList;
-	   
-		this(ListSG group, ObservedFeaturesList extObservedList, string extLabelText)
-		{
-			labelText = extLabelText;
-			super(group, labelText);
+		labelText = extLabelText;
+		super(group, labelText);
+
+		observedList = extObservedList;
+		addOnToggled(&toggleFeature);
+		
+	} // this()
 	
-			observedList = extObservedList;
-			addOnToggled(&toggleFeature);
-			
-		} // this()
-		
-		
-		void toggleFeature(CheckMenuItem mi)
+	
+	void toggleFeature(CheckMenuItem mi)
+	{
+		if(getActive() == true)
 		{
-			if(getActive() == true)
-			{
-				observedList.setFeature(labelText);
-			}
-			
-		} // toggleFeature()
+			observedList.setFeature(labelText);
+		}
 		
-	} // class FeatureRadioMenuItem
-{% endhighlight %}
+	} // toggleFeature()
+	
+} // class FeatureRadioMenuItem
+```
 
 We could also have used the `onActivate` signal instead of `onToggled`, but the results are pretty much the same either way.
 

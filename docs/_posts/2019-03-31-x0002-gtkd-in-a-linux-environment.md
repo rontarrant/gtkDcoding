@@ -26,33 +26,45 @@ Note: You can just copy and paste these commands into a shell to avoid mistyping
 
 First, let's establish access to the repository:
 
-    sudo wget https://netcologne.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
+```
+sudo wget https://netcologne.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
+```
 
 Second, set things up so apt-get won't complain about repositories that may not adhere 100% to its security protocols:
 
-    sudo apt-get update --allow-insecure-repositories && sudo apt-get -y --allow-unauthenticated install --reinstall d-apt-keyring && sudo apt-get update
+```
+sudo apt-get update --allow-insecure-repositories && sudo apt-get -y --allow-unauthenticated install --reinstall d-apt-keyring && sudo apt-get update
+```
 
 Third, we do the actual installation (this does everything, the D language, GtkD wrappers and libraries, docs, the works):
 
-	sudo apt-get install dmd-compiler dmd-doc libgtkd3-dev libgtkd3-doc
+```
+sudo apt-get install dmd-compiler dmd-doc libgtkd3-dev libgtkd3-doc
+```
 
 And one more command to install dmd-tools (which installs some coolness we'll talk about some day):
 
-	sudo apt-get install dmd-tools
-	
+```
+sudo apt-get install dmd-tools
+```
+
 You should now have a working development environment for D and GtkD.
 
 ### One Way to Build
 
 We're almost ready to compile some code, but first we need to find the wrappers and the static and/or shared gtk libraries. Open a shell and issue this command:
 
+```
 pkg-config --cflags --libs gtkd-3
+```
 
 What pkg-config does is query the list of installed software and find out which directories these things got stuffed into. But it does more than that. By including the `--cflags` directive, we get compiler flags we can copy and hand over to dmd.
 
 So, navigate to a directory containing one of the GtkD code files and type this:
 
-    dmd -de -w -m64  -I/usr/include/dmd/gtkd3 -L-L/usr/lib/x86_64-linux-gnu -L-L/usr/lib/i386-linux-gnu -L-l:libgtkd-3.so -L-l:libdl.so.2 -L--no-warn-search-mismatch -defaultlib=libphobos2.so <code-filename>.d -of<executable-filename>
+```
+dmd -de -w -m64  -I/usr/include/dmd/gtkd3 -L-L/usr/lib/x86_64-linux-gnu -L-L/usr/lib/i386-linux-gnu -L-l:libgtkd-3.so -L-l:libdl.so.2 -L--no-warn-search-mismatch -defaultlib=libphobos2.so <code-filename>.d -of<executable-filename>
+```
 
 Well, that was fun, although it's a bit much to type every time. Let's save some wear and tear on our fingers by finding...
 
@@ -60,7 +72,9 @@ Well, that was fun, although it's a bit much to type every time. Let's save some
 
 It turns out that if we surround that pkg-config command with back-ticks, we can use its output as arguments to dmd like this: 
 
-	dmd -de -w -m64  `pkg-config --cflags --libs gtkd-3` <code-filename>.d -of<executable-filename>
+```
+dmd -de -w -m64  `pkg-config --cflags --libs gtkd-3` <code-filename>.d -of<executable-filename>
+```
 
 Better, but this being Linux, we can pull a Bash trick to make it even easier.
 
@@ -68,27 +82,37 @@ Better, but this being Linux, we can pull a Bash trick to make it even easier.
 
 A default installation of *Linux Mint 19.1 xfce* doesn't have a `.bash_aliases` file, but creating one is not big deal:
 
-	touch ~/.bash_aliases
+```
+touch ~/.bash_aliases
+```
 
 Default permissions will work, so no need to mess with `chmod`. Then all you need to do is fire up an editor and add this:
 
-    # D compiler command line alias for building with shared libraries
-    alias dbuild="dmd -de -w -m64 `pkg-config --cflags --libs gtkd-3`"
-    
-    # D compiler command alias for building with static libraries
-    alias dbuild_static="dmd `pkg-config --cflags --libs gtkd-3-static`"
+```
+# D compiler command line alias for building with shared libraries
+alias dbuild="dmd -de -w -m64 `pkg-config --cflags --libs gtkd-3`"
+
+# D compiler command alias for building with static libraries
+alias dbuild_static="dmd `pkg-config --cflags --libs gtkd-3-static`"
+```
 
 After saving `.bash_aliases`, open a new shell (any shell opened before these aliases are added won’t recognize these aliases) and type either:
 
-	dbuild <code_filename>.d
+```
+dbuild <code_filename>.d
+```
 
 or
 
-	dbuild_static <code_filename>.d
+```
+dbuild_static <code_filename>.d
+```
 
 And if you want the executable filename to be different from the code filename, just add this to the end of either of the above:
 
-	-of<executable_filename>
+```
+-of<executable_filename>
+```
 
 ### Conclusion
 

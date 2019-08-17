@@ -114,17 +114,17 @@ Their use is straightforward.
 
 We need quite a list of imports to do this:
 
-{% highlight d %}
-	import std.stdio;
+```d
+import std.stdio;
 
-	import gtk.MainWindow;
-	import gtk.Main;
-	import gtk.Widget;
-	import gtk.Button;
-	import gdk.Event;
-	import gdk.Cursor;
-	import gtk.Layout;
-{% endhighlight %}
+import gtk.MainWindow;
+import gtk.Main;
+import gtk.Widget;
+import gtk.Button;
+import gdk.Event;
+import gdk.Cursor;
+import gtk.Layout;
+```
 
 The most obvious new addition is `gdk.Cursor` (as before, note the ‘*d*’ in ‘*gdk*’). But in this example, the `Cursor` class is only needed for instantiation. The `CursorType` enum is found in `gtk.c.types` as mentioned in the comment below the import statements.
 
@@ -134,71 +134,71 @@ And there’s quite an array of cursor shapes available, too, all that you’d e
 
 I made an arbitrary change to how the buttons are added. Because there are three, I stuffed them into an array of `Button`s and used a `foreach()` to pop them into the `Layout`, increasing the `y` location each time by 80 pixels:
 
-{% highlight d %}
-	this()
+```d
+this()
+{
+	super(null, null);
+	
+	HandButton handButton = new HandButton();
+	HeartButton heartButton = new HeartButton();
+	GumbyButton gumbyButton = new GumbyButton();
+
+	buttons = [handButton, heartButton, gumbyButton];
+	
+	foreach(button; buttons)
 	{
-		super(null, null);
-		
-		HandButton handButton = new HandButton();
-		HeartButton heartButton = new HeartButton();
-		GumbyButton gumbyButton = new GumbyButton();
+		put(button, x, y);
+		y += spacing;
+	}
 
-		buttons = [handButton, heartButton, gumbyButton];
-		
-		foreach(button; buttons)
-		{
-			put(button, x, y);
-			y += spacing;
-		}
-
-	} // this()
-{% endhighlight %}
+} // this()
+```
 
 Because they're widgets at heart, we can declare the array as an array of widgets as is done at the top of the `MyLayout` class:
 
-{% highlight d %}
-	Widget[] buttons;
-{% endhighlight %}
+```d
+Widget[] buttons;
+```
 
 We could also have made this an array of buttons, but it's good to keep in mind that we can include other widgets in an array like this and get them into the GUI without writing out individual `put()` statements.
 
 With minor differences, all three derived button classes are the same, so we’ll examine only one. And since Gumby (probably a registered trademark) is the more cartoon-like, let’s go there:
 
-{% highlight d %}
-	class GumbyButton : Button
+```d
+class GumbyButton : Button
+{
+	string title = "Gumby Over";
+	
+	this()
 	{
-		string title = "Gumby Over";
+		super(title);
 		
-		this()
-		{
-			super(title);
-			
-			addOnEnterNotify(&onEnter);
-			addOnLeaveNotify(&onLeave);
-			
-		} // this()
+		addOnEnterNotify(&onEnter);
+		addOnLeaveNotify(&onLeave);
 		
+	} // this()
 	
-		public bool onEnter(Event event, Widget widget)
-		{
-			Cursor myCursor = new Cursor(CursorType.GUMBY);
-			setCursor(myCursor);
-	
-			return(true);
-			
-		} // onEnter()
-	
-	
-		public bool onLeave(Event event, Widget widget)
-		{
-			resetCursor();
-	
-			return(true);
-			
-		} // onLeave()
-	
-	} // class GumbyButton
-{% endhighlight %}
+
+	public bool onEnter(Event event, Widget widget)
+	{
+		Cursor myCursor = new Cursor(CursorType.GUMBY);
+		setCursor(myCursor);
+
+		return(true);
+		
+	} // onEnter()
+
+
+	public bool onLeave(Event event, Widget widget)
+	{
+		resetCursor();
+
+		return(true);
+		
+	} // onLeave()
+
+} // class GumbyButton
+```
 
 ### Disecting Gumby
 

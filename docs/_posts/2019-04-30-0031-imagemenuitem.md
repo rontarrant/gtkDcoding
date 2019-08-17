@@ -113,32 +113,32 @@ As it turns out (surprise, surprise) a `MenuItem` is actually a container, so ad
 
 Only one part of the source is significantly different, so we’ll concentrate on that. Just because the `ImageMenuItem` has been deprecated doesn’t stop us from faking it like this:
 
-{% highlight d %}
-	class FakeImageMenuItem : MenuItem
+```d
+class FakeImageMenuItem : MenuItem
+{
+	string actionMessage = "You have added one (1) apple to your cart.";
+	ImageMenuBox imageMenuBox;
+   
+	this()
 	{
-		string actionMessage = "You have added one (1) apple to your cart.";
-		ImageMenuBox imageMenuBox;
-	   
-		this()
-		{
-			super();
-			
-			imageMenuBox = new ImageMenuBox();
-			add(imageMenuBox);
-			
-			addOnActivate(&reportStuff);
-			
-		} // this()
+		super();
 		
+		imageMenuBox = new ImageMenuBox();
+		add(imageMenuBox);
 		
-		void reportStuff(MenuItem mi)
-		{
-			writeln(actionMessage);
-			
-		} // exit()
+		addOnActivate(&reportStuff);
 		
-	} // class FakeImageMenuItem
-{% endhighlight %}
+	} // this()
+	
+	
+	void reportStuff(MenuItem mi)
+	{
+		writeln(actionMessage);
+		
+	} // exit()
+	
+} // class FakeImageMenuItem
+```
 
 The defined variables at the top are pretty obvious:
 
@@ -153,28 +153,28 @@ This callback is nothing unusual, so let’s look at where all that `Box` stuffi
 
 And here it is:
 
-{% highlight d %}
-	class ImageMenuBox : Box
+```d
+class ImageMenuBox : Box
+{
+	string imageLabelText = "Buy an Apple";
+	string imageFilename = "images/apples.jpg";
+	Image image;
+	Label label;
+	
+	this()
 	{
-		string imageLabelText = "Buy an Apple";
-		string imageFilename = "images/apples.jpg";
-		Image image;
-		Label label;
+		super(Orientation.HORIZONTAL, 0); // no padding
 		
-		this()
-		{
-			super(Orientation.HORIZONTAL, 0); // no padding
-			
-			image = new Image(imageFilename);
-			label = new Label(imageLabelText);
-	
-			packStart(image, true, true, 0);
-			packStart(label, true, true, 0);
-			
-		}
-	
-	} // class ImageMenuBox
-{% endhighlight %}
+		image = new Image(imageFilename);
+		label = new Label(imageLabelText);
+
+		packStart(image, true, true, 0);
+		packStart(label, true, true, 0);
+		
+	}
+
+} // class ImageMenuBox
+```
 
 In the initialization phase, we define an `Image` and a `Label` to stuff into the `Box`. Once they’re instantiated in the constructor, we pack them in and that’s that.
 
@@ -280,28 +280,28 @@ This second example shows that using stock icons instead of images is also possi
 
 This is pretty much the same as using an image, code-wise, although I would like to point out where the icons are and which ones are usable under these circumstances. Let’s start with the code and go from there:
 
-{% highlight d %}
-	class IconMenuBox : Box
+```d
+class IconMenuBox : Box
+{
+	string menuLabelText = "Buy a _Plane";
+	Image icon;
+	string iconName = "airplane-mode-symbolic";
+	Label label;	
+	
+	this()
 	{
-		string menuLabelText = "Buy a _Plane";
-		Image icon;
-		string iconName = "airplane-mode-symbolic";
-		Label label;	
+		super(Orientation.HORIZONTAL, 0); // no padding 'cause we're on a menu
 		
-		this()
-		{
-			super(Orientation.HORIZONTAL, 0); // no padding 'cause we're on a menu
-			
-			icon = new Image(iconName, IconSize.MENU);
-			label = new Label(menuLabelText);
-	
-			packStart(icon, true, true, 0);
-			packStart(label, true, true, 0);
-			
-		}
-	
-	} // class IconMenuBox
-{% endhighlight %}
+		icon = new Image(iconName, IconSize.MENU);
+		label = new Label(menuLabelText);
+
+		packStart(icon, true, true, 0);
+		packStart(label, true, true, 0);
+		
+	}
+
+} // class IconMenuBox
+```
 
 See? Nothing earth-shattering or (really) all that different, so let's talk about the nitty-gritty details...
   
@@ -311,15 +311,21 @@ Okay, there are a few things you need to know…
 
 **First**, you’ll wanna know where the icons live so you can look at them and decide which you wanna use. On *Windows*, you’ll find them either here:
 
-	C:\Program Files\GTK3-Runtime Win64\share\icons
+```
+C:\Program Files\GTK3-Runtime Win64\share\icons
+```
 
 or here:
 
-	C:\Program Files\GTK3-Runtime\share\icons
+```
+C:\Program Files\GTK3-Runtime\share\icons
+```
 
 On *Linux*, icons are part of the desktop theme system and you’ll find them here:
 
-	/usr/share/icons
+```
+/usr/share/icons
+```
 
 You'll have to drill down into one of the theme directories to see the actual icons.
 

@@ -111,33 +111,33 @@ In this example, I’ve defined a `ColorChooserButton` based on a plain vanilla 
 
 However, there are differences, so let’s look at what we’ve got here in this new button: 
 
-{% highlight d %}
-	class ColorChooserButton : Button
-	{
-		private:
-		string labelText = "Ask for a Color";
-		
-		MyColorChooserDialog colorChooserDialog;
-		Window _parentWindow;
-		
-		public:
-		this(Window parentWindow)
-		{
-			super(labelText);
-			addOnClicked(&doSomething);
-			_parentWindow = parentWindow;
-			
-		} // this()
-		
-		
-		void doSomething(Button b)
-		{
-			colorChooserDialog = new MyColorChooserDialog(_parentWindow);
-			
-		} // doSomething()
+```d
+class ColorChooserButton : Button
+{
+	private:
+	string labelText = "Ask for a Color";
 	
-	} // class: ColorChooserButton
-{% endhighlight %}
+	MyColorChooserDialog colorChooserDialog;
+	Window _parentWindow;
+	
+	public:
+	this(Window parentWindow)
+	{
+		super(labelText);
+		addOnClicked(&doSomething);
+		_parentWindow = parentWindow;
+		
+	} // this()
+	
+	
+	void doSomething(Button b)
+	{
+		colorChooserDialog = new MyColorChooserDialog(_parentWindow);
+		
+	} // doSomething()
+
+} // class: ColorChooserButton
+```
 
 Here—because we’re driving the boat, as it were—we have to declare our own dialog which we didn’t have to do with the `ColorButton`. And naturally, we’ve got to hook up a signal too, so that clicking on the button opens the dialog. Then there’s the whole modal rigmarole to deal with, so we have to pass a pointer to the parent window along to our dialog object…
 
@@ -145,34 +145,34 @@ Here—because we’re driving the boat, as it were—we have to declare our own
 
 For which the code looketh thus like:
 
-{% highlight d %}
-	class MyColorChooserDialog : ColorChooserDialog
+```d
+class MyColorChooserDialog : ColorChooserDialog
+{
+	private:
+	string title = "I am the Chooser";
+	DialogFlags flags = GtkDialogFlags.MODAL;
+	RGBA selectedColor;
+
+	public:
+	this(Window _parentWindow)
 	{
-		private:
-		string title = "I am the Chooser";
-		DialogFlags flags = GtkDialogFlags.MODAL;
-		RGBA selectedColor;
-	
-		public:
-		this(Window _parentWindow)
-		{
-			super(title, _parentWindow);
-			addOnResponse(&doSomething);
-			run(); // no response ID because this dialog ignores it
-			destroy();
-			
-		} // this()
-	
-		protected:
-		void doSomething(int response, Dialog d)
-		{
-			getRgba(selectedColor);
-			writeln("New color selection: ", selectedColor);
-			
-		} // doSomething()
+		super(title, _parentWindow);
+		addOnResponse(&doSomething);
+		run(); // no response ID because this dialog ignores it
+		destroy();
 		
-	} // class MyColorChooserDialog
-{% endhighlight %}
+	} // this()
+
+	protected:
+	void doSomething(int response, Dialog d)
+	{
+		getRgba(selectedColor);
+		writeln("New color selection: ", selectedColor);
+		
+	} // doSomething()
+	
+} // class MyColorChooserDialog
+```
 
 As you can see, this is a derivation of the `ColorChooserDialog`, mostly because I wanted to illustrate a couple of points:
 

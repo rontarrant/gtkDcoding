@@ -111,37 +111,37 @@ It’s possible to roll your own scrolling layout by creating *Adjustment* widge
 
 Because there really isn’t any need for a class derived from *ScrolledWindow*, we’ll stuff it into the *TestRigWindow* class:
 
-{% highlight d %}
-	class TestRigWindow : MainWindow
+```d
+class TestRigWindow : MainWindow
+{
+	string title = "Test Rig";
+	
+	this()
 	{
-		string title = "Test Rig";
+		super(title);
+		addOnDestroy(delegate void(Widget w) { quitApp(); } );
+		setSizeRequest(200, 200);
 		
-		this()
-		{
-			super(title);
-			addOnDestroy(delegate void(Widget w) { quitApp(); } );
-			setSizeRequest(200, 200);
-			
-			ScrolledWindow scrolledWindow = new ScrolledWindow();
-			add(scrolledWindow);
-			
-			auto myLayout = new MyLayout();
-			scrolledWindow.add(myLayout);
-	
-			showAll();
-	
-		} // this() CONSTRUCTOR
+		ScrolledWindow scrolledWindow = new ScrolledWindow();
+		add(scrolledWindow);
 		
-		
-		void quitApp()
-		{
-			writeln("Bye.");
-			Main.quit();
-			
-		} // quitApp()
+		auto myLayout = new MyLayout();
+		scrolledWindow.add(myLayout);
+
+		showAll();
+
+	} // this() CONSTRUCTOR
 	
-	} // class myAppWindow
-{% endhighlight %}
+	
+	void quitApp()
+	{
+		writeln("Bye.");
+		Main.quit();
+		
+	} // quitApp()
+
+} // class myAppWindow
+```
 
 Nothing out of the ordinary here. Create the *ScrolledWindow* object, add it to the *TestRigWindow*, then create the *Layout* and stuff it into the *ScrolledWindow*.
 
@@ -247,33 +247,33 @@ And since that didn’t take much time or effort, let’s look at another exampl
 
 In *GTK*, it used to be that tooltips took a lot of time and effort to figure out and put into practice, but by the time version 3.x came along, things had changed. Now tooltips are built right in at the generic *Widget* level, so now it's like falling off a skateboard, anyone can do it. So, let’s look at the derived *Button* class to see how it’s done:
 
-{% highlight d %}
-	class TooltipButton : Button
+```d
+class TooltipButton : Button
+{
+	this()
 	{
-		this()
-		{
-			super();
-	
-			// a rotated label
-			RotatedLabel myRotatedLabel = new RotatedLabel();
-			add(myRotatedLabel);
-	
-			addOnClicked(delegate void(_) { doSomething(); } );
-	
-			setHasTooltip(true);
-			setTooltipText(myRotatedLabel.getText() ~ "\nClick me and see what happens.");
-	
-		} // this()
-	
-	
-		void doSomething()
-		{
-			writeln("Action from a rotated button...");
-			
-		} // doSomething()
+		super();
+
+		// a rotated label
+		RotatedLabel myRotatedLabel = new RotatedLabel();
+		add(myRotatedLabel);
+
+		addOnClicked(delegate void(_) { doSomething(); } );
+
+		setHasTooltip(true);
+		setTooltipText(myRotatedLabel.getText() ~ "\nClick me and see what happens.");
+
+	} // this()
+
+
+	void doSomething()
+	{
+		writeln("Action from a rotated button...");
 		
-	} // class TooltipButton
-{% endhighlight %}
+	} // doSomething()
+	
+} // class TooltipButton
+```
 
 This is so easy compared to the original way. All you have to do is:
 

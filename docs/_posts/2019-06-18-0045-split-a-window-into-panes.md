@@ -111,36 +111,36 @@ Today’s code lays the foundation for this type of functionality.
 
 A `Paned` container can have its child panes side by side or one below the other. And since we may want programmable access to manipulate the child widgets we put in these panes, I’ve created a class derived from `Paned` and called it `SideBySide`:
 
-{% highlight d %}
-	class SideBySide : Paned
+```d
+class SideBySide : Paned
+{
+	Image child01, child02;
+	
+	this()
 	{
-		Image child01, child02;
+		super(Orientation.HORIZONTAL);
 		
-		this()
-		{
-			super(Orientation.HORIZONTAL);
-			
-			auto child01 = new Image("images/e_blues_open.jpg"); 
-			add1(child01);
-			
-			auto child02 = new Image("images/guitar_bridge.jpg");
-			add2(child02);
-			
-			addOnButtonRelease(&showDividerPosition);
-			
-		} // this()
+		auto child01 = new Image("images/e_blues_open.jpg"); 
+		add1(child01);
 		
+		auto child02 = new Image("images/guitar_bridge.jpg");
+		add2(child02);
 		
-		public bool showDividerPosition(Event event, Widget widget)
-		{
-			writeln("The divider is set to: ", getPosition());
-			
-			return(true);
-			
-		} // showDividerPosition()
+		addOnButtonRelease(&showDividerPosition);
 		
-	} // class SideBySide
-{% endhighlight %}
+	} // this()
+	
+	
+	public bool showDividerPosition(Event event, Widget widget)
+	{
+		writeln("The divider is set to: ", getPosition());
+		
+		return(true);
+		
+	} // showDividerPosition()
+	
+} // class SideBySide
+```
 
 This is just about as simple as it gets with `Paned` containers. We’ve got two child `Image` widgets, each tucked into its own pane.
 
@@ -155,9 +155,9 @@ Because there are only two panes in a `Paned` container, the functions for assig
 
 Or if you want to populate both in one go, you can do it with a single function:
 
-{% highlight d %}
-	add(child1, child2);
-{% endhighlight %}
+```d
+add(child1, child2);
+```
 
 You could also use `pack1()` and `pack2()` if you prefer, but the behaviour will be different, so let’s look at that.
 
@@ -259,36 +259,36 @@ You could also use `pack1()` and `pack2()` if you prefer, but the behaviour will
 
 Our second example has a new derived class for a *vertical* `Paned` container:
 
-{% highlight d %}
-	class UppyDowny : Paned
+```d
+class UppyDowny : Paned
+{
+	Image child01, child02;
+	
+	this()
 	{
-		Image child01, child02;
+		super(Orientation.VERTICAL);
 		
-		this()
-		{
-			super(Orientation.VERTICAL);
-			
-			auto child01 = new Image("images/e_blues_open.jpg"); 
-			pack1(child01, true, false);
-			
-			auto child02 = new Image("images/guitar_bridge_alt.jpg");
-			pack2(child02, false, true);
-			
-			addOnButtonRelease(&showDividerPosition);
-			
-		} // this()
+		auto child01 = new Image("images/e_blues_open.jpg"); 
+		pack1(child01, true, false);
 		
+		auto child02 = new Image("images/guitar_bridge_alt.jpg");
+		pack2(child02, false, true);
 		
-		public bool showDividerPosition(Event event, Widget widget)
-		{
-			writeln("The divider is set to: ", getPosition());
-			
-			return(true);
-			
-		} // showDividerPosition()
+		addOnButtonRelease(&showDividerPosition);
 		
-	} // class UppyDowny
-{% endhighlight %}
+	} // this()
+	
+	
+	public bool showDividerPosition(Event event, Widget widget)
+	{
+		writeln("The divider is set to: ", getPosition());
+		
+		return(true);
+		
+	} // showDividerPosition()
+	
+} // class UppyDowny
+```
 
 Here are the differences between this example and the first:
 

@@ -121,53 +121,53 @@ The first thing to know about the *Content Area* is that it’s just an ordinary
 
 In the constructor, we instantiate the `Dialog`, then call a function named `farmOutContent()` to do the dirty work:
 
-{% highlight d %}
-	this(Window parentWindow)
-	{
-		_parentWindow = parentWindow;
-		super(titleText, _parentWindow, flags, buttonLabels, responseTypes);
-		farmOutContent();
-		
-		addOnResponse(&doSomething);
-		run();
-		destroy();
-		
-	} // this()
-{% endhighlight %}
+```d
+this(Window parentWindow)
+{
+	_parentWindow = parentWindow;
+	super(titleText, _parentWindow, flags, buttonLabels, responseTypes);
+	farmOutContent();
+	
+	addOnResponse(&doSomething);
+	run();
+	destroy();
+	
+} // this()
+```
 
 And here’s that farming function which really just gives us a convenient handle to grab our `Box` and hand it around:
 
-{% highlight d %}
-	void farmOutContent()
-	{
-		// FARM it out to AreaContent class
-		contentArea = getContentArea();
-		areaContent = new AreaContent(contentArea);
-		
-	} // farmOutContent()
-{% endhighlight %}
+```d
+void farmOutContent()
+{
+	// FARM it out to AreaContent class
+	contentArea = getContentArea();
+	areaContent = new AreaContent(contentArea);
+	
+} // farmOutContent()
+```
 
 It may seem redundant to have variables for both `areaContent` and `contentArea`, but keep in mind that one's a `Box` and the other is a customized `ContentArea` object which contains that `Box` we grabbed from the the `Dialog`. The fact that we're passing `contentArea` to the `AreaContent` class's constructor is a dead giveaway. It's the same technique we used for defining *Part I*'s `HPadBox`. And the `AreaContent` object wraps the handle.
 
 And here’s where it all gets wrapped up in a nice, neat... um... object:
 
-{% highlight d %}
-	class AreaContent
-	{
-		private:
-		Box _contentArea;
-		PadGrid _padGrid; 
-		
-		public:
-		this(Box contentArea)
-		{
-			_contentArea = contentArea;
-			_padGrid = new PadGrid();
-			_contentArea.add(_padGrid);
-			_contentArea.showAll();
+```d
+class AreaContent
+{
+	private:
+	Box _contentArea;
+	PadGrid _padGrid; 
 	
-		} // this()
-{% endhighlight %}
+	public:
+	this(Box contentArea)
+	{
+		_contentArea = contentArea;
+		_padGrid = new PadGrid();
+		_contentArea.add(_padGrid);
+		_contentArea.showAll();
+
+	} // this()
+```
 
 <div class="inpage-frame">
 	<figure class="left">
@@ -211,19 +211,19 @@ And like when we were dealing with menus, it’s always a good idea to draw a di
 
 And one function in the `NewImageDataGrid` will be of interest. It looks like this:
 
-{% highlight d %}
-	Tuple!(string, int, int, int) getData()
-	{
-		_filename = filenameEntry.getText();
-		_width = to!int(widthEntry.getText());
-		_height = to!int(heightEntry.getText());
-		_resolution = to!int(resolutionEntry.getText());
-		
-		// build an associative array of user-supplied data
-		return(tuple(_filename, _width, _height, _resolution));
-		
-	} // getData()
-{% endhighlight %}
+```d
+Tuple!(string, int, int, int) getData()
+{
+	_filename = filenameEntry.getText();
+	_width = to!int(widthEntry.getText());
+	_height = to!int(heightEntry.getText());
+	_resolution = to!int(resolutionEntry.getText());
+	
+	// build an associative array of user-supplied data
+	return(tuple(_filename, _width, _height, _resolution));
+	
+} // getData()
+```
 
 What you’re looking at is some *D*-specific coolness. To get the user-supplied data out of the `Entry`s, we’re dealing with two kinds of data, a string and a handful of integers. We use *D*’s `Tuple(S, I, I, I)` construct to declare a mixed return value and `tuple()` to put it together before handing it to the `return()` statement.
 
@@ -237,25 +237,27 @@ Now, let’s skip back to the `NewImageDialog`’s callback function… well, pa
 
 To handle the `Button`s in the action area, I set up a `switch()` statement inside the `doSomething()` callback. Here’s one relevant bit of that `switch`/`case` code. And for convenience, [here's the entire file again if you don't wanna scroll back up to the link]( https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_013_10_custom_content_area.d)):
 
-{% highlight d %}
-	case ResponseType.OK:
-		writeln("Creating new image file with these specs:");
+```d
+case ResponseType.OK:
+	writeln("Creating new image file with these specs:");
+	
+	foreach(item; areaContent.getNewImageDataGrid.getData())
+	{
+		writeln("data item: ", item);
 		
-		foreach(item; areaContent.getNewImageDataGrid.getData())
-		{
-			writeln("data item: ", item);
-			
-		}
-		
-	break;
-{% endhighlight %}
+	}
+	
+break;
+```
 
 If the user clicked on the *OK* button in the *Action Area*, we step through each item in the `tuple` returned by `getData()` and print it to the terminal. Naturally, you’d wanna do this differently in an application, perhaps more like this:
 
-	writeln("filename: ", areaContent.getNewImageDataGrid.getData()[0]);
-	writeln("width: ", areaContent.getNewImageDataGrid.getData()[1]);
-	writeln("height: ", areaContent.getNewImageDataGrid.getData()[2]);
-	writeln("resolution: ", areaContent.getNewImageDataGrid.getData()[3]);
+```d
+writeln("filename: ", areaContent.getNewImageDataGrid.getData()[0]);
+writeln("width: ", areaContent.getNewImageDataGrid.getData()[1]);
+writeln("height: ", areaContent.getNewImageDataGrid.getData()[2]);
+writeln("resolution: ", areaContent.getNewImageDataGrid.getData()[3]);
+```
 
 So you can work with the variables independently of each other.
 

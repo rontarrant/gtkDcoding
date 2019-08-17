@@ -111,43 +111,43 @@ Of course, when you compare the `FileSaveItem` to the `FileSaveAsItem`, most of 
 
 But there is one bigger change in the callback:
 
-{% highlight d %}
-	void doSomething(MenuItem mi)
+```d
+void doSomething(MenuItem mi)
+	{
+		int response;
+		FileChooserAction action = FileChooserAction.SAVE;
+
+		filename = _filenameEntry.getText();
+
+		FileChooserDialog dialog = new FileChooserDialog("Save a File", _parentWindow, action, null, null);
+		dialog.setCurrentName(_filenameEntry.getText());
+		response = dialog.run();
+
+		if(response == ResponseType.OK)
 		{
-			int response;
-			FileChooserAction action = FileChooserAction.SAVE;
-	
-			filename = _filenameEntry.getText();
-	
-			FileChooserDialog dialog = new FileChooserDialog("Save a File", _parentWindow, action, null, null);
-			dialog.setCurrentName(_filenameEntry.getText());
-			response = dialog.run();
-	
-			if(response == ResponseType.OK)
-			{
-				filename = dialog.getFilename();
-				saveAsFile();
-			}
-			else
-			{
-				writeln("cancelled.");
-			}
-	
-			dialog.destroy();		
-	
-			_filenameEntry.setText(filename);
-			_parentWindow.setTitle(filename);
-	
-		} // doSomething()
-{% endhighlight %}
+			filename = dialog.getFilename();
+			saveAsFile();
+		}
+		else
+		{
+			writeln("cancelled.");
+		}
+
+		dialog.destroy();		
+
+		_filenameEntry.setText(filename);
+		_parentWindow.setTitle(filename);
+
+	} // doSomething()
+```
 
 In the `FileSaveItem`, there’s a long `if`/`else` block which doesn’t show up here. Nothing in the else block is needed, so it’s just gone, but everything that was in the `if` block is now executed unconditionally. The only real differences are in the statements. As mentioned, `saveFile()` is now `saveAsFile()`, etc.
 
 Except for this line:
 
-{% highlight d %}
-	_parentWindow.setTitle(filename);
-{% endhighlight %}
+```d
+_parentWindow.setTitle(filename);
+```
 
 And that brings us to our second topic…
 
@@ -155,64 +155,64 @@ And that brings us to our second topic…
 
 To examine this thoroughly, let’s start back at the `TestRigWindow` class. In the initialization section this:
 
-{% highlight d %}
-	string title = “Save Dialog Example”;
-{% endhighlight %}
+```d
+string title = “Save Dialog Example”;
+```
 
 is now:
 
-{% highlight d %}
-	string title = “”;
-{% endhighlight %}
+```d
+string title = “”;
+```
 
 And that’s because the initial window title is now set elsewhere, in the `TextEntry` class:
 
-{% highlight d %}
-	class TextEntry : Entry
-	{
-		private:
-		string defaultFilename = "Untitled";
-		Window _parentWindow;
-{% endhighlight %}
+```d
+class TextEntry : Entry
+{
+	private:
+	string defaultFilename = "Untitled";
+	Window _parentWindow;
+```
 
 As before, the `defaultFilename` is set to `“Untitled”`, but since we have that reference to the window (`_parentWindow`), we use it in the `TextEntry`'s constructor:
 
-{% highlight d %}
-		public:
-		this(Window parentWindow)
-		{
-			super(defaultFilename);
-			addOnActivate(&changeFilename);
-			
-			_parentWindow = parentWindow;
-			_parentWindow.setTitle(defaultFilename);
-			
-		} // this()
-{% endhighlight %}
+```d
+public:
+this(Window parentWindow)
+{
+	super(defaultFilename);
+	addOnActivate(&changeFilename);
+	
+	_parentWindow = parentWindow;
+	_parentWindow.setTitle(defaultFilename);
+	
+} // this()
+```
 
 So if you decide to change the default file name, it’s set in both the `TextEntry` and the titlebar with this one string.
 
 We do refer to it once more, though, in `changeFilename()`:
 
-{% highlight d %}
-		void changeFilename(Entry e)
+```d
+	void changeFilename(Entry e)
+	{
+		if(getText() == null)
 		{
-			if(getText() == null)
-			{
-				writeln("The filename is an empty string. Resetting to default: Untitled.");
-				setText(defaultFilename);
-			}
-			else
-			{
-				writeln("Filename has changed to: ", getText());
-			}
-	
-			_parentWindow.setTitle(getText());
-	
-		} // changeFilename()
-	
-	} // class TextEntry
-{% endhighlight %}
+			writeln("The filename is an empty string. Resetting to default: Untitled.");
+			setText(defaultFilename);
+		}
+		else
+		{
+			writeln("Filename has changed to: ", getText());
+		}
+
+		_parentWindow.setTitle(getText());
+
+	} // changeFilename()
+
+} // class TextEntry
+```
 
 And thus we keep the titlebar in sync with the `TextEntry`.
 
@@ -220,27 +220,27 @@ And thus we keep the titlebar in sync with the `TextEntry`.
 
 The other changes between this and the previous example show up in the `FileMenu` class:
 
-{% highlight d %}
-	class FileMenu : Menu
-	{
-		FileSaveItem fileSaveItem;
-		FileSaveAsItem fileSaveAsItem;
-		
-		// arg: an array of items
-		this(Window parentWindow, TextEntry filenameEntry)
-		{
-			super();
-			
-			fileSaveItem = new FileSaveItem(parentWindow, filenameEntry);
-			append(fileSaveItem);
+```d
+class FileMenu : Menu
+{
+	FileSaveItem fileSaveItem;
+	FileSaveAsItem fileSaveAsItem;
 	
-			fileSaveAsItem = new FileSaveAsItem(parentWindow, filenameEntry);
-			append(fileSaveAsItem);
-			
-		} // this()
+	// arg: an array of items
+	this(Window parentWindow, TextEntry filenameEntry)
+	{
+		super();
 		
-	} // class FileMenu
-{% endhighlight %}
+		fileSaveItem = new FileSaveItem(parentWindow, filenameEntry);
+		append(fileSaveItem);
+
+		fileSaveAsItem = new FileSaveAsItem(parentWindow, filenameEntry);
+		append(fileSaveAsItem);
+		
+	} // this()
+	
+} // class FileMenu
+```
 
 And those changes are simply declaring and instantiating the `FileSaveAsItem` and then appending it to `FileMenu`.
 

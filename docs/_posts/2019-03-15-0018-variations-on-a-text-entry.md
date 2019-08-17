@@ -109,16 +109,16 @@ Let’s move away from buttons for the moment, both mouse and GUI, and look at t
 
 This is pretty much the easiest widget to use and the code amounts to this:
 
-{% highlight d %}
-	entry = new Entry();
-	add(entry); // depending on the container type, of course
-{% endhighlight %}
+```d
+entry = new Entry();
+add(entry); // depending on the container type, of course
+```
 
 And to bring the entered text into your program is dead simple:
 
-{% highlight d %}
-	entry.getText()
-{% endhighlight %}
+```d
+entry.getText()
+```
 
 Assign it to a variable, stick it in a `writeln()` function, whatever’s your poison.
 
@@ -222,47 +222,47 @@ Moving right along…
 
 Sometimes, you may want the user to enter text, but once it’s entered, you don’t want it changed. In this example, I’ve set up a `CheckButton` to control editability:
 
-{% highlight d %}
-	class EntryBox : Box
-	{
-		int globalPadding = 5;
-		Entry entry;
-		CheckButton checkButton;
-		string checkText = "Editable";
-		
-		this()
-		{
-			super(Orientation.VERTICAL, globalPadding);
-			entry = new Entry();
-			entry.setEditable(false);
-			
-			checkButton = new CheckButton(checkText);
-			checkButton.addOnToggled(&entryEditable);
-			checkButton.setActive(false);
-					
-			add(entry);
-			add(checkButton);
-			
-		} // this()
-		
-		
-		void entryEditable(ToggleButton button)
-		{
-			entry.setEditable(button.getActive());
-			
-			if(button.getActive() == true)
-			{
-				writeln(checkText);
-			}
-			else
-			{
-				writeln("Not ", checkText);
-			}
-			
-		} // entryEditable()
+```d
+class EntryBox : Box
+{
+	int globalPadding = 5;
+	Entry entry;
+	CheckButton checkButton;
+	string checkText = "Editable";
 	
-	} // class EntryBox
-{% endhighlight %}
+	this()
+	{
+		super(Orientation.VERTICAL, globalPadding);
+		entry = new Entry();
+		entry.setEditable(false);
+		
+		checkButton = new CheckButton(checkText);
+		checkButton.addOnToggled(&entryEditable);
+		checkButton.setActive(false);
+				
+		add(entry);
+		add(checkButton);
+		
+	} // this()
+	
+	
+	void entryEditable(ToggleButton button)
+	{
+		entry.setEditable(button.getActive());
+		
+		if(button.getActive() == true)
+		{
+			writeln(checkText);
+		}
+		else
+		{
+			writeln("Not ", checkText);
+		}
+		
+	} // entryEditable()
+
+} // class EntryBox
+```
 
 Rather than sub-classing the `Entry` and `CheckButton`, I used a sub-class of `Box` as a way to track the data and hand it around as needed. In effect, the `Box` acts as a parent handing out the goodies.
 
@@ -366,49 +366,49 @@ Note that both the `Entry` and `CheckButton` states are set to `false` which mea
 
 Now let’s think about what else text `Entry` widgets are used for. One thing that comes to mind is collecting login information. In our third example, we’ll mimic a login with a `Username` field left in the clear (readable, in other words) and an obscured `Password` field. The `LoginBox` class serves as the parent handing out candy, so we need an extra `Entry` widget with `Visibility` set to `false`, which means our constructor now looks like this:
 
-{% highlight d %}
-	this()
-	{
-		super(Orientation.VERTICAL, globalPadding);
+```d
+this()
+{
+	super(Orientation.VERTICAL, globalPadding);
 
-		usernameEntry = new Entry();
-		passwordEntry = new Entry();
-		passwordEntry.setVisibility(false);
-		
-		checkButton = new CheckButton(checkText);
-		checkButton.addOnToggled(&passwordVisibility);
-		checkButton.setActive(false);
-		
-		add(usernameEntry);
-		add(passwordEntry);
-		add(checkButton);
-		
-	} // this()
-{% endhighlight %}
+	usernameEntry = new Entry();
+	passwordEntry = new Entry();
+	passwordEntry.setVisibility(false);
+	
+	checkButton = new CheckButton(checkText);
+	checkButton.addOnToggled(&passwordVisibility);
+	checkButton.setActive(false);
+	
+	add(usernameEntry);
+	add(passwordEntry);
+	add(checkButton);
+	
+} // this()
+```
 
 We set `Visibility` to `false` for the `Password` `Entry` and then in the callback function `passwordVisibility()`, we make allowances for finding either `true` or `false`:
 
-{% highlight d %}
-	void passwordVisibility(ToggleButton button)
+```d
+void passwordVisibility(ToggleButton button)
+{
+	string messageEnd;
+	
+	bool answer = button.getActive();
+	
+	if(button.getActive() == true)
 	{
-		string messageEnd;
-		
-		bool answer = button.getActive();
-		
-		if(button.getActive() == true)
-		{
-			messageEnd = " I can shoulder-surf your password.";
-		}
-		else
-		{
-			messageEnd = " I canNOT shoulder-surf your password.";
-		}
-		
-		passwordEntry.setVisibility(button.getActive());
-		writeln("With ", button.getLabel(), " set to ", button.getActive(), messageEnd);
-		
-	} // passwordVisibility()
-{% endhighlight %}
+		messageEnd = " I can shoulder-surf your password.";
+	}
+	else
+	{
+		messageEnd = " I canNOT shoulder-surf your password.";
+	}
+	
+	passwordEntry.setVisibility(button.getActive());
+	writeln("With ", button.getLabel(), " set to ", button.getActive(), messageEnd);
+	
+} // passwordVisibility()
+```
 
 And just before the callback finishes up, we cobble together a message for the user about computer security. I could tell you what the messages say, but I think it’ll be more educational if you compile the code for the obfuscated Entry example and run it yourself.
 

@@ -24,20 +24,20 @@ But if you’re just writing utilities and applications for your own use, then h
 
 ## Put that Widget Down
 
-{% highlight d %}
-	class MyLayout : Layout
+```d
+class MyLayout : Layout
+{
+	this()
 	{
-		this()
-		{
-			super(null, null);
-	
-			RotatedButton rotatedButton = new RotatedButton();
-			put(rotatedButton, 10, 10);
-			
-		} // this()
+		super(null, null);
+
+		RotatedButton rotatedButton = new RotatedButton();
+		put(rotatedButton, 10, 10);
 		
-	} // class MyLayout
-{% endhighlight %}
+	} // this()
+	
+} // class MyLayout
+```
 
 Like the `Box` we used in earlier examples, the derived `Layout` is mostly about getting the kids under control. The big difference here is that we don’t rely on the container to work out where things go. Instead, we use the `put()` function which takes a pointer to the child widget as well as the x and y coordinates where you want it placed.
 
@@ -141,29 +141,29 @@ Another drawback of using a `Layout`, and therefore the `put()` function, is tha
 
 And here’s that rotated button I mentioned earlier:
 
-{% highlight d %}
-	class RotatedButton : Button
+```d
+class RotatedButton : Button
+{
+	this()
 	{
-		this()
-		{
-			super();
-			
-			RotatedLabel rotatedLabel = new RotatedLabel();
-			
-			addOnClicked(delegate void(_) { doSomething(); } );
-			add(rotatedLabel);
-			
-		} // this()
+		super();
+		
+		RotatedLabel rotatedLabel = new RotatedLabel();
+		
+		addOnClicked(delegate void(_) { doSomething(); } );
+		add(rotatedLabel);
+		
+	} // this()
+
 	
+	void doSomething()
+	{
+		writeln("Action from a rotated button...");
 		
-		void doSomething()
-		{
-			writeln("Action from a rotated button...");
-			
-		} // doSomething()
-		
-	} // class rotatedButton
-{% endhighlight %}
+	} // doSomething()
+	
+} // class rotatedButton
+```
 
 Of course, there’s nothing here to indicate it’s at a non-standard angle. Nope, it’s all pretty straightforward here. So, where is the angle set?
 
@@ -171,21 +171,21 @@ Of course, there’s nothing here to indicate it’s at a non-standard angle. No
 
 The rotation is in here with the `setAngle()` function:
 
-{% highlight d %}
-	class RotatedLabel : Label
+```d
+class RotatedLabel : Label
+{
+	string rotatedText = "My Rotated Label on a Button";
+	
+	this()
 	{
-		string rotatedText = "My Rotated Label on a Button";
+		super(rotatedText);
 		
-		this()
-		{
-			super(rotatedText);
-			
-			setAngle(90);
-			
-		} // this()
+		setAngle(90);
 		
-	} // class RotatedLabel
-{% endhighlight %}
+	} // this()
+	
+} // class RotatedLabel
+```
 
 It’s done this way because `setAngle()` is only found in the Label widget. But whatever gets the job done, right? There’s a lot of that in GUI design.
 

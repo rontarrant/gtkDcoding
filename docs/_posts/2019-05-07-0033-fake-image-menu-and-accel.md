@@ -113,109 +113,109 @@ Well, whether it's useful or not, we can fake it, so here goes nothing…
 
 Because if you do forget, this isn't gonna work. Here’s `TestRigWindow`’s constructor (we saw this last time, but here's a refresher):
 
-{% highlight d %}
-	this()
-	{
-		super(title);
-		setDefaultSize(640, 480);
-		addOnDestroy(&quitApp);
-	
-		accelGroup = new AccelGroup();
-		addAccelGroup(accelGroup);
-			
-		AppBox appBox = new AppBox(accelGroup);
-		add(appBox);
-			
-		showAll();
-			
-	} // this()
-{% endhighlight %}
+```d
+this()
+{
+	super(title);
+	setDefaultSize(640, 480);
+	addOnDestroy(&quitApp);
+
+	accelGroup = new AccelGroup();
+	addAccelGroup(accelGroup);
+		
+	AppBox appBox = new AppBox(accelGroup);
+	add(appBox);
+		
+	showAll();
+		
+} // this()
+```
 
 Such an important line:
 
-{% highlight d %}
-	addAccelGroup(accelGroup);
-{% endhighlight %}
+```d
+addAccelGroup(accelGroup);
+```
 
 ### Add the FileMenu
 
 This really hasn’t changed since last time we did a fake image `MenuItem`:
 
-{% highlight d %}
-	class FileMenu : Menu
-	{
-		FakeImageMenuItem appleItem;
-		ExitMenuItem exitMenuItem;
-		
-		this(AccelGroup accelGroup)
-		{
-			super();
-			
-			appleItem = new FakeImageMenuItem(accelGroup);
-			append(appleItem);
-			
-			exitMenuItem = new ExitMenuItem(accelGroup);
-			append(exitMenuItem);
+```d
+class FileMenu : Menu
+{
+	FakeImageMenuItem appleItem;
+	ExitMenuItem exitMenuItem;
 	
-		} // this()
+	this(AccelGroup accelGroup)
+	{
+		super();
 		
+		appleItem = new FakeImageMenuItem(accelGroup);
+		append(appleItem);
 		
-	} // class FileMenu
-{% endhighlight %}
+		exitMenuItem = new ExitMenuItem(accelGroup);
+		append(exitMenuItem);
+
+	} // this()
+	
+	
+} // class FileMenu
+```
 
 ### The All-new FakeImageMenuItem
 
 This is the mouthful of code you’ll need to chew on to get this working:
 
-{% highlight d %}
-	class FakeImageMenuItem : MenuItem
+```d
+class FakeImageMenuItem : MenuItem
+{
+	string actionMessage = "You have added one (1) apple to your cart.";
+	Box imageMenuBox;
+	string labelText = "Buy an Apple";
+	string imageFilename = "images/apples.jpg";
+	Image image;
+	AccelLabel accelLabel;
+	char accelKey = 'a';
+   
+	this(AccelGroup accelGroup)
 	{
-		string actionMessage = "You have added one (1) apple to your cart.";
-		Box imageMenuBox;
-		string labelText = "Buy an Apple";
-		string imageFilename = "images/apples.jpg";
-		Image image;
-		AccelLabel accelLabel;
-		char accelKey = 'a';
-	   
-		this(AccelGroup accelGroup)
-		{
-			super();
-			addOnActivate(&reportStuff);
-					
-			imageMenuBox = new Box(Orientation.HORIZONTAL, 0);
-			add(imageMenuBox);
+		super();
+		addOnActivate(&reportStuff);
+				
+		imageMenuBox = new Box(Orientation.HORIZONTAL, 0);
+		add(imageMenuBox);
+
+		image = new Image(imageFilename);
+
+		accelLabel = new AccelLabel(labelText);
+		accelLabel.setXalign(0.0);
+		accelLabel.setAccelWidget(this);
+		
+		addAccelerator("activate", accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+
+		imageMenuBox.add(image);
+		imageMenuBox.packEnd(accelLabel, true, true, 0);
 	
-			image = new Image(imageFilename);
+	} // this()
 	
-			accelLabel = new AccelLabel(labelText);
-			accelLabel.setXalign(0.0);
-			accelLabel.setAccelWidget(this);
-			
-			addAccelerator("activate", accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
 	
-			imageMenuBox.add(image);
-			imageMenuBox.packEnd(accelLabel, true, true, 0);
+	void reportStuff(MenuItem mi)
+	{
+		writeln(actionMessage);
 		
-		} // this()
-		
-		
-		void reportStuff(MenuItem mi)
-		{
-			writeln(actionMessage);
-			
-		} // exit()
-		
-	} // class FakeImageMenuItem
-{% endhighlight %}
+	} // exit()
+	
+} // class FakeImageMenuItem
+```
 
 There’s a lot going on here, but skipping over the bits we’ve covered in earlier posts, here’s what’s new or unusual:
 
 First is this line:
 
-{% highlight d %}
-	addOnActivate(&reportStuff);
-{% endhighlight %}
+```d
+addOnActivate(&reportStuff);
+```
 
 I bring this to your attention because in the previous example of accelerator keys, we didn’t use this line. But this time, we do and we’ll see why in a moment.
 
@@ -228,10 +228,10 @@ After that we:
 
 *Not* a `Label`, an `AccelLabel`. And why? Because we have to do these extra bits of twiddling to get this to work:
 
-{% highlight d %}
-	accelLabel.setXalign(0.0);
-	accelLabel.setAccelWidget(this);
-{% endhighlight %}
+```d
+accelLabel.setXalign(0.0);
+accelLabel.setAccelWidget(this);
+```
 
 And those functions are only available with the `AccelLabel`.
 
@@ -241,9 +241,9 @@ And then the `AccelLabel` needs to know which `Widget` to pair up with. In this 
 
 Now with this line, we get to the other half of why we still need to hook up the signal:
 
-{% highlight d %}
-	addAccelerator("activate", accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
-{% endhighlight %}
+```d
+addAccelerator("activate", accelGroup, accelKey, ModifierType.CONTROL_MASK, AccelFlags.VISIBLE);
+```
 
 When we added accelerators in the previous example, last post (which I’ve also done in this example with the `Exit` `MenuItem` so you have both close to hand for comparison) we did it via an overloaded call to the super-class constructor.
 
@@ -251,10 +251,10 @@ But here, we can’t because the work is split up between several widgets. So we
 
 Now another crucial thing to bear in mind: When you pack the `Image` and the `AccelLabel` into the `Box`, you have to `add()` the image and `packEnd()` the `AccelLabel`, which is these lines:
 
-{% highlight d %}
-	imageMenuBox.add(image);
-	imageMenuBox.packEnd(accelLabel, true, true, 0);
-{% endhighlight %}
+```d
+imageMenuBox.add(image);
+imageMenuBox.packEnd(accelLabel, true, true, 0);
+```
 
 ## Conclusion
 

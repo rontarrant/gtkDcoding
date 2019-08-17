@@ -250,17 +250,17 @@ In design terms, alignment is:
 
 Anyone who’s used a word processor or desktop publishing application knows these terms, too, so I came up with this `enum`:
 
-{% highlight d %}
-	enum BoxJustify
-	{
-		LEFT = 0,
-		RIGHT = 1,
-		CENTER = 2,
-		TOP = 3,
-		BOTTOM = 4,
-		
-	} // PaBoxJustify
-{% endhighlight %}
+```d
+enum BoxJustify
+{
+	LEFT = 0,
+	RIGHT = 1,
+	CENTER = 2,
+	TOP = 3,
+	BOTTOM = 4,
+	
+} // PaBoxJustify
+```
 
 This allows us to speak in designerly terms. And by the way, `CENTER` is used for either horizontal or vertical centering.
 
@@ -308,19 +308,19 @@ We don’t need to bother with the spacing between a child widget and its `Box` 
 
 Here’s the initialization chunk:
 
-{% highlight d %}
-	class HPadBox : Box
-	{
-		private:
-		Widget _widget;
-		int _globalPadding = 0;
-		int _padding = 0;
-		bool fill = false;
-		bool expand = false;
-		int _borderWidth = 5;
-	
-		BoxJustify _pJustify;
-{% endhighlight %}
+```d
+class HPadBox : Box
+{
+	private:
+	Widget _widget;
+	int _globalPadding = 0;
+	int _padding = 0;
+	bool fill = false;
+	bool expand = false;
+	int _borderWidth = 5;
+
+	BoxJustify _pJustify;
+```
 
 We still have variables for `_globalPadding` and `_padding`, but they’re both set to `0` so they don’t get in the way... for now. *GTK 4.0* compliance will mean calls to the `Box` constructor will need one less argument, but we'll deal with that when 4.0 is released because for now, we still need them:
 
@@ -333,34 +333,34 @@ The `_pJustify` variable will be one of the values from the `BoxJustify` enum di
 
 Here's the meat-n-taters of this class:
 
-{% highlight d %}
-		public:
-		this(Widget widget, BoxJustify pJustify)
-		{
-			_widget = widget;
-			_pJustify = pJustify;
-			
-			super(Orientation.HORIZONTAL, _globalPadding);
-	
-			if(_pJustify == BoxJustify.LEFT)
-			{
-				packStart(_widget, expand, fill, _padding);
-			}
-			else if(_pJustify == BoxJustify.RIGHT)
-			{
-				packEnd(_widget, expand, fill, _padding);
-			}
-			else
-			{
-				add(_widget);
-			}	
-			
-			setBorderWidth(_borderWidth);
-	
-		} // this()
+```d
+	public:
+	this(Widget widget, BoxJustify pJustify)
+	{
+		_widget = widget;
+		_pJustify = pJustify;
 		
-	} // class HPadBox
-{% endhighlight %}
+		super(Orientation.HORIZONTAL, _globalPadding);
+
+		if(_pJustify == BoxJustify.LEFT)
+		{
+			packStart(_widget, expand, fill, _padding);
+		}
+		else if(_pJustify == BoxJustify.RIGHT)
+		{
+			packEnd(_widget, expand, fill, _padding);
+		}
+		else
+		{
+			add(_widget);
+		}	
+		
+		setBorderWidth(_borderWidth);
+
+	} // this()
+	
+} // class HPadBox
+```
 
 Because the constructor’s first argument is a `Widget`, it’ll accept whatever widget you wanna drop into it… a `Label`, an `Entry`, whatever. We’ll talk more about that mechanism in a moment, but first let’s finish off this justification stuff…
 
@@ -397,21 +397,21 @@ This example doesn't have a `VPadBox`, but you've got the tools now to figure ou
 
 This class is derived from the `HPadBox` class, but not the `Label` class. Instead, the Label becomes a property of the class and is passed to the super-class constructor where it’s treated as a generic, incoming `Widget`. *D* only allows a class to inherit from a single super-class, but this way we can sidestep that limitation and sneak in a second one... sort of:
 
-{% highlight d %}
-	class HPadLabel : HPadBox
+```d
+class HPadLabel : HPadBox
+{
+	Label label;
+	
+	this(string text, BoxJustify pJustify)
 	{
-		Label label;
+		label = new Label(text);
 		
-		this(string text, BoxJustify pJustify)
-		{
-			label = new Label(text);
-			
-			super(label, pJustify);
-			
-		} // this()
+		super(label, pJustify);
 		
-	} // class HPadLabel
-{% endhighlight %}
+	} // this()
+	
+} // class HPadLabel
+```
 
 And that takes care of keeping our widgets separated from each other within our GUI design. Now let’s look at how the entire design fends off border encroachment by the `Window`.
 
@@ -423,38 +423,38 @@ And that takes care of keeping our widgets separated from each other within our 
 
 This is pretty straightforward:
 
-{% highlight d %}
-	class PadGrid : Grid
+```d
+class PadGrid : Grid
+{
+	private:
+	int _borderWidth = 10;
+	HPadLabel zeroZero, oneZero, zeroOne, oneOne;
+	
+	public:
+	this()
 	{
-		private:
-		int _borderWidth = 10;
-		HPadLabel zeroZero, oneZero, zeroOne, oneOne;
+		super();
+		setBorderWidth(_borderWidth);
+		setMarginBottom(10);
+
+		// row 0
+		zeroZero = new HPadLabel("this is a long bit of text", BoxJustify.RIGHT);
+		attach(zeroZero, 0, 0, 1, 1);
 		
-		public:
-		this()
-		{
-			super();
-			setBorderWidth(_borderWidth);
-			setMarginBottom(10);
-	
-			// row 0
-			zeroZero = new HPadLabel("this is a long bit of text", BoxJustify.RIGHT);
-			attach(zeroZero, 0, 0, 1, 1);
-			
-			oneZero = new HPadLabel("cell 1, 0", BoxJustify.LEFT);
-			attach(oneZero, 1, 0, 1, 1);
-	
-			// row 1
-			zeroOne = new HPadLabel("and this is shorter", BoxJustify.RIGHT);
-			attach(zeroOne, 0, 1, 1, 1);
-					
-			oneOne = new HPadLabel("cell 1, 1", BoxJustify.LEFT);
-			attach(oneOne, 1, 1, 1, 1);
-			
-		} // this()
+		oneZero = new HPadLabel("cell 1, 0", BoxJustify.LEFT);
+		attach(oneZero, 1, 0, 1, 1);
+
+		// row 1
+		zeroOne = new HPadLabel("and this is shorter", BoxJustify.RIGHT);
+		attach(zeroOne, 0, 1, 1, 1);
+				
+		oneOne = new HPadLabel("cell 1, 1", BoxJustify.LEFT);
+		attach(oneOne, 1, 1, 1, 1);
 		
-	} // class PadGrid
-{% endhighlight %}
+	} // this()
+	
+} // class PadGrid
+```
 
 The `_borderWidth` variable does the heavy lifting while `setMarginBottom()` adds the aesthetic touch.
 

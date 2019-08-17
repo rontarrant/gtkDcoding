@@ -122,35 +122,35 @@ We’re still dealing with code that’s very much the same as all other *Cairo*
 
 First, the constructor:
 
-{% highlight d %}
-	this()
-	{
-		surface = ImageSurface.createFromPng(filename);
-		addOnDraw(&onDraw);
-		
-	} // this()
-{% endhighlight d %}
+```d
+this()
+{
+	surface = ImageSurface.createFromPng(filename);
+	addOnDraw(&onDraw);
+	
+} // this()
+```
 
 Here, we need to create a `Surface` and pass it a file name, both of which are declared in the initialization section of the `MyDrawingArea` class:
 
-{% highlight d %}
-	Surface surface;
-	string filename = "./images/foundlings.png";
-	int xOffset = 0, yOffset = 0;
-{% endhighlight d %}
+```d
+Surface surface;
+string filename = "./images/foundlings.png";
+int xOffset = 0, yOffset = 0;
+```
 
 And when we get to the callback, here’s what happens:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setSourceSurface(surface, xOffset, yOffset);
-		context.paint();
-		
-		return(true);
-		
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setSourceSurface(surface, xOffset, yOffset);
+	context.paint();
+	
+	return(true);
+	
+} // onDraw()
+```
 
 The `Context` needs to associate itself with the `Surface` we created and because we want the entire Surface, we pass it `xOffset` and `yOffset` (coordinates for the upper-left corner) both with values of `0`.
 
@@ -260,11 +260,11 @@ The next method of loading an image can also be used with PNG format, but it wil
 
 This time, our initialization section gets a bit longer:
 
-{% highlight d %}
-	Pixbuf pixbuf;
-	int xOffset = 20, yOffset = 20;
-	string filename = "./images/guitar_bridge.jpg";
-{% endhighlight d %}
+```d
+Pixbuf pixbuf;
+int xOffset = 20, yOffset = 20;
+string filename = "./images/guitar_bridge.jpg";
+```
 
 Instead of a `Surface`, we’ll be working with a `Pixbuf`. I also gave non-zero values to `xOffset` and `yOffset` because there are times when we don’t want the image to be loaded in the top-left corner. `xOffset` and `yOffset` take care of that, placing the image’s upper-left corner in a specific spot in the window.
 
@@ -272,27 +272,27 @@ In the call to `setSizeRequest()` in the `TestRigWindow` constructor, I made the
 
 The constructor looks like this:
 
-{% highlight d %}
-	this()
-	{
-		pixbuf = new Pixbuf(filename);
-		addOnDraw(&onDraw);
-		
-	} // this()
-{% endhighlight d %}
+```d
+this()
+{
+	pixbuf = new Pixbuf(filename);
+	addOnDraw(&onDraw);
+	
+} // this()
+```
 
 This is actually simpler than the first method we looked at. There’s no `Surface` in the middle of things. It's there; we just don't have to deal with it. We just load that image right into the `Pixbuf` and that makes it possible, in the callback, to do this:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setSourcePixbuf(pixbuf, xOffset, yOffset);
-		context.paint();
-		
-		return(true);
-		
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setSourcePixbuf(pixbuf, xOffset, yOffset);
+	context.paint();
+	
+	return(true);
+	
+} // onDraw()
+```
 
 Substitute a call to `setSourcePixbuf()` for the call to `setSourceSurface()` we used before and from there’s it’s all the same.
 
@@ -400,36 +400,36 @@ As you may guess, this is identical to the second method we used…
 
 The initialization section:
 
-{% highlight d %}
-	Pixbuf pixbuf;
-	Context context;
-	int xOffset, yOffset;
-	string filename = "./images/Envy.svg";
-{% endhighlight d %}
+```d
+Pixbuf pixbuf;
+Context context;
+int xOffset, yOffset;
+string filename = "./images/Envy.svg";
+```
 
 The constructor:
 
-{% highlight d %}
-	this()
-	{
-		pixbuf = new Pixbuf(filename);
-		addOnDraw(&onDraw);
-		
-	} // this()
-{% endhighlight d %}
+```
+this()
+{
+	pixbuf = new Pixbuf(filename);
+	addOnDraw(&onDraw);
+	
+} // this()
+```
 
 And the callback:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setSourcePixbuf(pixbuf, xOffset, yOffset);
-		context.paint();
-		
-		return(true);
-		
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setSourcePixbuf(pixbuf, xOffset, yOffset);
+	context.paint();
+	
+	return(true);
+	
+} // onDraw()
+```
 
 And, of course, this method also works for BMP, GIF, TIFF, and any of the other formats we found in the [list formats example](https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_16_list_formats.d).
 

@@ -113,27 +113,27 @@ There are two ways to set up a keyboard shortcut for a `MenuItem`. Both start wi
 
 The code for creating the NewFileItem with its shortcut key uses the two-step process for hooking up the mnemonic and looks like this:
 
-{% highlight d %}
-	class NewFileItem : MenuItem
+```d
+class NewFileItem : MenuItem
+{
+	string newFileLabel = "_New";
+   
+	this()
 	{
-		string newFileLabel = "_New";
-	   
-		this()
-		{
-			super(newFileLabel, true); // true turns on the mnemonic
-			addOnActivate(&newFile);
-			
-		} // this()
+		super(newFileLabel, true); // true turns on the mnemonic
+		addOnActivate(&newFile);
 		
+	} // this()
+	
+	
+	void newFile(MenuItem mi)
+	{
+		writeln("New file created.");
 		
-		void newFile(MenuItem mi)
-		{
-			writeln("New file created.");
-			
-		} // newFile()
-		
-	} // class NewFileItem
-{% endhighlight %}
+	} // newFile()
+	
+} // class NewFileItem
+```
 
 There are two things here that are different from our earlier examples:
 
@@ -148,24 +148,24 @@ And from there, it’s business as usual. Except that…
 
 The `FileMenuHeader` also has a mnemonic. Have a peek:
 
-{% highlight d %}
-	class FileMenuHeader : MenuItem
+```d
+class FileMenuHeader : MenuItem
+{
+	string headerTitle = "_File";
+	FileMenu fileMenu;
+	
+	this()
 	{
-		string headerTitle = "_File";
-		FileMenu fileMenu;
+		super(headerTitle);
 		
-		this()
-		{
-			super(headerTitle);
-			
-			fileMenu = new FileMenu();
-			setSubmenu(fileMenu);
-			
-			
-		} // this()
+		fileMenu = new FileMenu();
+		setSubmenu(fileMenu);
 		
-	} // class FileMenu
-{% endhighlight %}
+		
+	} // this()
+	
+} // class FileMenu
+```
 
 If you want a mnemonic on a `MenuItem`, you need a mnemonic on the `Menu`, too. It won’t show when your application is running (more’s the pity) and you don’t need to turn it on by passing a Boolean to the `MenuItem` that acts as a menu header, but the underscore does have to be there.
 
@@ -173,26 +173,26 @@ If you want a mnemonic on a `MenuItem`, you need a mnemonic on the `Menu`, too. 
 
 With this method, a pointer to the callback is passed to the super-class along with the mnemonic label text and the Boolean switch:
 
-{% highlight d %}
-	class ExitItem : MenuItem
+```d
+class ExitItem : MenuItem
+{
+	string exitLabel = "E_xit";
+   
+	this()
 	{
-		string exitLabel = "E_xit";
-	   
-		this()
-		{
-			super(&exit, exitLabel, true);
-			
-		} // this()
+		super(&exit, exitLabel, true);
 		
+	} // this()
+	
+	
+	void exit(MenuItem mi)
+	{
+		Main.quit();
 		
-		void exit(MenuItem mi)
-		{
-			Main.quit();
-			
-		} // exit()
-		
-	} // class ExitItem
-{% endhighlight %}
+	} // exit()
+	
+} // class ExitItem
+```
 
 Notice also that the underscore isn’t under the first letter in the Label text, indicating that any one of the letters in the text `Label` can be used as the shortcut key.
 
@@ -200,8 +200,10 @@ Notice also that the underscore isn’t under the first letter in the Label text
 
 This is just about the easiest thing to do in *GtkD*. Pick the spot for the separator and:
 
-	SeparatorMenuItem separator = new SeparatorMenuItem();
-	append(separator);
+```d
+SeparatorMenuItem separator = new SeparatorMenuItem();
+append(separator);
+```
 
 <div class="screenshot-frame">
 	<div class="frame-header">

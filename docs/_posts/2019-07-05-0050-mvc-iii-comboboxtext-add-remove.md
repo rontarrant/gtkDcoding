@@ -111,36 +111,36 @@ In this first example, we’ll look at…
 
 For this functionality, we need to put an extra `Button` in our UI and, of course, that’s done in the `AppBox` class:
 
-{% highlight d %}
-	class AppBox : Box
+```d
+class AppBox : Box
+{
+	DayComboBoxText dayComboBoxText;
+	AddToComboButton addToComboButton;
+	
+	this()
 	{
-		DayComboBoxText dayComboBoxText;
-		AddToComboButton addToComboButton;
+		super(Orientation.HORIZONTAL, 10);
 		
-		this()
-		{
-			super(Orientation.HORIZONTAL, 10);
-			
-			dayComboBoxText = new DayComboBoxText();
-			packStart(dayComboBoxText, false, false, 0);
-			
-			addToComboButton = new AddToComboButton(dayComboBoxText);
-			packEnd(addToComboButton, false, false, 0);
-			
-			writeln("Type something into the Entry, then hit the Add button.");
-			writeln("You can also hit Enter to echo the contents of the Entry to the terminal, but this action doesn't add the contents to the list.");
-	
-		} // this()
-	
-	} // class AppBox
-{% endhighlight %}
+		dayComboBoxText = new DayComboBoxText();
+		packStart(dayComboBoxText, false, false, 0);
+		
+		addToComboButton = new AddToComboButton(dayComboBoxText);
+		packEnd(addToComboButton, false, false, 0);
+		
+		writeln("Type something into the Entry, then hit the Add button.");
+		writeln("You can also hit Enter to echo the contents of the Entry to the terminal, but this action doesn't add the contents to the list.");
+
+	} // this()
+
+} // class AppBox
+```
 
 I’ll draw your attention to these lines:
 
-{% highlight d %}
-	addToComboButton = new AddToComboButton(dayComboBoxText);
-	packEnd(addToComboButton, false, false, 0);
-{% endhighlight %}
+```d
+addToComboButton = new AddToComboButton(dayComboBoxText);
+packEnd(addToComboButton, false, false, 0);
+```
 
 The only unusual thing is passing in the `dayComboBoxText` object so the *Add* `Button` has access to its data. No worries, right? We’ve done this kind of thing a few times by now.
 
@@ -152,46 +152,46 @@ Now let’s look at…
 
 Which looks like this:
 
-{% highlight d %}
-	class AddToComboButton : Button
+```d
+class AddToComboButton : Button
+{
+	private:
+	ComboBoxText _comboBoxText;
+	Entry _entry;
+	string _entryText, buttonText = "Add";
+	
+	public:
+	this(ComboBoxText comboBoxText)
 	{
-		private:
-		ComboBoxText _comboBoxText;
-		Entry _entry;
-		string _entryText, buttonText = "Add";
+		super(buttonText);
 		
-		public:
-		this(ComboBoxText comboBoxText)
-		{
-			super(buttonText);
-			
-			_comboBoxText = comboBoxText;
-			_entry = cast(Entry)_comboBoxText.getChild();
+		_comboBoxText = comboBoxText;
+		_entry = cast(Entry)_comboBoxText.getChild();
+
+		addOnReleased(&doSomething);		
+		
+	} // this()
 	
-			addOnReleased(&doSomething);		
-			
-		} // this()
-		
-		
-		void doSomething(Button b)
-		{
-			_entryText = _entry.getText();
-			
-			if(_comboBoxText.getIndex(_entryText) is -1)
-			{
-				_comboBoxText.appendText(_entryText);
-				writeln(_entryText, " is now on the list.");
-			}
-			else
-			{
-				writeln(_entryText, " is already on the list.");
-			}
-			
 	
-		} // doSomething()
+	void doSomething(Button b)
+	{
+		_entryText = _entry.getText();
 		
-	} // class AddToComboButton
-{% endhighlight %}
+		if(_comboBoxText.getIndex(_entryText) is -1)
+		{
+			_comboBoxText.appendText(_entryText);
+			writeln(_entryText, " is now on the list.");
+		}
+		else
+		{
+			writeln(_entryText, " is already on the list.");
+		}
+		
+
+	} // doSomething()
+	
+} // class AddToComboButton
+```
 
 Because we need to grab the text from the `Entry`, as mentioned before, we need access and we get that in the constructor by assigning `_comboBoxText` and `_entry`. The first assignment (`_comboBoxText`) isn’t strictly necessary, but it lends clarity to the `cast()` call. And maybe we’ll think of some other reason we need this sometime down the road.
 
@@ -301,50 +301,50 @@ A quick note: There are three ways we can add items to the list:
 
 This example looks pretty much the same as the last except it’s got a *Remove* `Button` that looks like this:
 
-{% highlight d %}
-	class RemoveFromComboButton : Button
+```d
+class RemoveFromComboButton : Button
+{
+	private:
+	ComboBoxText _comboBoxText;
+	Entry _entry;
+	string _entryText, buttonText = "Delete";
+	
+	public:
+	this(ComboBoxText comboBoxText)
 	{
-		private:
-		ComboBoxText _comboBoxText;
-		Entry _entry;
-		string _entryText, buttonText = "Delete";
+		super(buttonText);
 		
-		public:
-		this(ComboBoxText comboBoxText)
-		{
-			super(buttonText);
-			
-			_comboBoxText = comboBoxText;
-			_entry = cast(Entry) _comboBoxText.getChild();
+		_comboBoxText = comboBoxText;
+		_entry = cast(Entry) _comboBoxText.getChild();
+
+		addOnReleased(&doSomething);		
+		
+	} // this()
 	
-			addOnReleased(&doSomething);		
-			
-		} // this()
-		
-		
-		void doSomething(Button b)
-		{
-			int activeTextIndex;
-			
-			_entryText = _entry.getText();
-			activeTextIndex = _comboBoxText.getIndex(_entryText);
-			
-			if(activeTextIndex !is -1)
-			{
-				_comboBoxText.remove(activeTextIndex);
-				writeln(_entryText, " has been removed.");
-				_comboBoxText.setActive(0);
-			}
-			else
-			{
-				writeln("Cannot complete operation. '", _entryText, "' isn't on the list.");
-			}
-			
 	
-		} // doSomething()
+	void doSomething(Button b)
+	{
+		int activeTextIndex;
 		
-	} // class RemoveFromComboButton
-{% endhighlight %}
+		_entryText = _entry.getText();
+		activeTextIndex = _comboBoxText.getIndex(_entryText);
+		
+		if(activeTextIndex !is -1)
+		{
+			_comboBoxText.remove(activeTextIndex);
+			writeln(_entryText, " has been removed.");
+			_comboBoxText.setActive(0);
+		}
+		else
+		{
+			writeln("Cannot complete operation. '", _entryText, "' isn't on the list.");
+		}
+		
+
+	} // doSomething()
+	
+} // class RemoveFromComboButton
+```
 
 Removing, as can be seen in the `if()` statement inside the `doSomthing()` function, is a two-stage process:
 
@@ -353,9 +353,9 @@ Removing, as can be seen in the `if()` statement inside the `doSomthing()` funct
 
 There is a third line of code that’s just as important, though:
 
-{% highlight d %}
-	_comboBoxText.setActive(0);
-{% endhighlight %}
+```d
+_comboBoxText.setActive(0);
+```
 
 Why? Because if we don’t reset the active item, the just-deleted text is still sitting in the `Entry`. Depending on circumstances, you may want to comment this line out so the text is left there to serve as a quick-n-dirty ‘undo’ function. All the user would have to do is hit the *Add* `Button` and the item goes right back on the list.
 

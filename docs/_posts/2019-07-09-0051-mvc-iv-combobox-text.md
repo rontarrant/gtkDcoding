@@ -111,27 +111,27 @@ So… unlike the `ComboBoxText`—which you more or less just throw strings at�
 
 We start with a `ListStore` class:
 
-{% highlight d %}
-	class SignListStore : ListStore
+```d
+class SignListStore : ListStore
+{
+	string[] items = ["bike", "bump", "cow", "deer", "crumbling cliff", "man with a stop sign", "skidding vehicle"];
+	TreeIter treeIter;
+	
+	this()
 	{
-		string[] items = ["bike", "bump", "cow", "deer", "crumbling cliff", "man with a stop sign", "skidding vehicle"];
-		TreeIter treeIter;
+		super([GType.STRING]);
 		
-		this()
+		for(int i; i < items.length; i++)
 		{
-			super([GType.STRING]);
-			
-			for(int i; i < items.length; i++)
-			{
-				string message = items[i];
-				treeIter = createIter();
-				setValue(treeIter, 0, message);
-			}
-	
-		} // this()
-	
-	} // class SignListStore
-{% endhighlight %}
+			string message = items[i];
+			treeIter = createIter();
+			setValue(treeIter, 0, message);
+		}
+
+	} // this()
+
+} // class SignListStore
+```
 
 Now, there are similarities. We still have a string array, but how we handle it is quite different.
 
@@ -157,16 +157,16 @@ Let’s look at the `SignComboBox` a bit at a time starting with…
 
 ### The Initialization Chunk
 
-{% highlight d %}
-	class SignComboBox : ComboBox
-	{
-		private:
-		bool entryOn = false;
-		SignListStore _signListStore;
-		CellRendererText cellRendererText;
-		int visibleColumn = 0;
-		int activeItem = 0;
-{% endhighlight %}
+```d
+class SignComboBox : ComboBox
+{
+	private:
+	bool entryOn = false;
+	SignListStore _signListStore;
+	CellRendererText cellRendererText;
+	int visibleColumn = 0;
+	int activeItem = 0;
+```
 
 Here’s what these are:
 
@@ -180,26 +180,26 @@ We’ll talk more about the `visibleColumn` variable and `CellRenderer`s of vari
 
 ### The Constructor
 
-{% highlight d %}
-	public:
-	this(SignListStore signListStore)
-	{
-		super(entryOn);
-		
-		// set up the ComboBox's column to render text
-		cellRendererText = new CellRendererText();
-		packStart(cellRendererText, false);
-		addAttribute(cellRendererText, "text", visibleColumn);
-		
-		// set up and bring in the store
-		_signListStore = signListStore;
-		setModel(_signListStore);
-		setActive(activeItem);
-		
-		addOnChanged(&doSomething);
-		
-	} // this()
-{% endhighlight %}
+```d
+public:
+this(SignListStore signListStore)
+{
+	super(entryOn);
+	
+	// set up the ComboBox's column to render text
+	cellRendererText = new CellRendererText();
+	packStart(cellRendererText, false);
+	addAttribute(cellRendererText, "text", visibleColumn);
+	
+	// set up and bring in the store
+	_signListStore = signListStore;
+	setModel(_signListStore);
+	setActive(activeItem);
+	
+	addOnChanged(&doSomething);
+	
+} // this()
+```
 
 After the instantiation of the super-class, we have three stages to this constructor:
 
@@ -234,22 +234,22 @@ Moving on…
 
 And the last line of the constructor hooks up the callback signal, but that's straightforward, so let's look at the callback code itself:
 
-{% highlight d %}
-	void doSomething(ComboBox cb)
+```d
+void doSomething(ComboBox cb)
+{
+	string data;
+	TreeIter treeIter;
+
+	write("index of selection: ", getActive(), ", ");
+	
+	if(getActiveIter(treeIter) == true)
 	{
-		string data;
-		TreeIter treeIter;
+		data = getModel().getValueString(treeIter, 0);
+		writeln("data: ", data);
+	}
 
-		write("index of selection: ", getActive(), ", ");
-		
-		if(getActiveIter(treeIter) == true)
-		{
-			data = getModel().getValueString(treeIter, 0);
-			writeln("data: ", data);
-		}
-
-	} // doSomething()
-{% endhighlight %}
+} // doSomething()
+```
 
 Again, we define a `TreeIter` which we’ll go over in a moment.
 
@@ -257,7 +257,9 @@ The first action we take is to get the index of the currently-selected item. Thi
 
 which is where we use the `TreeIter`, not to stuff data into the `ListStore`, but to retrieve it. The `getActiveIter()` function returns a Boolean to indicate success or failure, so we can predicate further action on whether or not the `TreeIter` gets initialized here. And yes, it’s one of those *D*-language situations where the function definition looks like this:
 
-	public bool getActiveIter(out TreeIter iter)
+```d
+public bool getActiveIter(out TreeIter iter)
+```
 
 And if you don’t yet know, that’s *D*’s way of asking a function to assign value to an argument. And to make things easy for this worker function, *D* has the ability to hand it the argument using the `out` qualifier.
 
@@ -267,10 +269,10 @@ Anyway, if the `TreeIter` gets instantiated by `getActiveIter()`, we then:
 
 It looks and sounds far more complex than it actually is. We could have done the same thing like this:
 
-{% highlight d %}
-       model = getModel();
-       data = model.getValueString(treeIter, 0);
-{% endhighlight %}
+```d
+   model = getModel();
+   data = model.getValueString(treeIter, 0);
+```
 
 But, whatever. From there, we can do whatever we want with the fetched data. In this case, we just echo it to the terminal.
 

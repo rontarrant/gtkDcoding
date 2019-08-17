@@ -107,19 +107,19 @@ I mentioned in [post #0008](/2019/02/08/0008-callbacks.html) that we’d look at
 
 First, we’ll look at how multiple signals are chained together. It’s nothing fancy, just a few extra lines of code in the constructor of our derived button class:
 
-{% highlight d %}
-	this(string[] args)
-	{
-		super(label);
+```d
+this(string[] args)
+{
+	super(label);
+
+	addOnClicked(&onClicked);
+	addOnPressed(&onPressed);
+	addOnReleased(&onReleased);
+	addOnButtonRelease(&onRelease);
+	addOnButtonRelease(delegate bool(Event e, Widget w) { showArgs(args); return(false); });
 	
-		addOnClicked(&onClicked);
-		addOnPressed(&onPressed);
-		addOnReleased(&onReleased);
-		addOnButtonRelease(&onRelease);
-		addOnButtonRelease(delegate bool(Event e, Widget w) { showArgs(args); return(false); });
-		
-	} // this()
-{% endhighlight %}
+} // this()
+```
 
 No big deal. All you gotta do is tack on a bunch of signals. You can even, as done above, mix and match the callback definitions to suit your needs.
 
@@ -269,18 +269,18 @@ An observer pattern lets one widget keep an eye on another and change its own be
 
 This time around, the `ObserverButton` keeps an eye on a `WatchedButton` derived from the `ToggleButton` class, very much like it did in the companion code for [entry #0010](/2019/02/15/0010-checkbutton.html). But the constructor is busier:
 
-{% highlight d %}
-	this(WatchedButton extWatched)
-	{
-		super(label);
-		watchedButton = extWatched;
-		addOnButtonRelease(&takeAction);
-		addOnButtonRelease(&outputSomething);
-		addOnButtonRelease(&clickReport);
-		addOnButtonRelease(&endStatement);
+```d
+this(WatchedButton extWatched)
+{
+	super(label);
+	watchedButton = extWatched;
+	addOnButtonRelease(&takeAction);
+	addOnButtonRelease(&outputSomething);
+	addOnButtonRelease(&clickReport);
+	addOnButtonRelease(&endStatement);
 
-	} // this()
-{% endhighlight %}
+} // this()
+```
 
 Lots of signals being hooked up. We’re keeping the hook-ups simple so we don’t get bogged down in details unnecessary to the objective, to interrupt the signal chain.
 
@@ -288,51 +288,51 @@ Lots of signals being hooked up. We’re keeping the hook-ups simple so we don�
 
 The first two callbacks do pretty standard things. They write messages to the command shell. It’s when we get to the third callback, `takeAction()`, that we see something interesting.
 
-{% highlight d %}
-	bool takeAction(Event event, Widget widget)
+```d
+bool takeAction(Event event, Widget widget)
+{
+	bool continueFlag = true;
+	
+	writeln("Action was taken.");
+	
+	if(watchedButton.getMode() == true)
 	{
-		bool continueFlag = true;
-		
-		writeln("Action was taken.");
-		
-		if(watchedButton.getMode() == true)
-		{
-			continueFlag = false;
-			writeln("A value of 'false' keeps the signal chain going.");
-		}
-		else
-		{
-			continueFlag = true;
-			writeln("A value of 'true' tells the chain its work is done.\n");
-		}
+		continueFlag = false;
+		writeln("A value of 'false' keeps the signal chain going.");
+	}
+	else
+	{
+		continueFlag = true;
+		writeln("A value of 'true' tells the chain its work is done.\n");
+	}
 
-		return(continueFlag);
-		
-	} // takeAction()
-{% endhighlight %}
+	return(continueFlag);
+	
+} // takeAction()
+```
 
 This is where the signal chain gets interrupted. We check the `WatchedButton` (remember, it’s a `ToggleButton` at heart) to see what its mode is. If the toggle is on, we change `takeAction()`’s return value to false. If it’s off, we change `takeAction()`’s return value to true. It almost seems backwards returning `false` if we’re not done with the signal chain, but the extra little message printed out for each mode state should help you clarify this in your mind. 
 
 Now take a look at this one (it should be no trouble to work out what’s going on here):
 
-{% highlight d %}
-	bool outputSomething(Event event, Widget widget)
+```d
+bool outputSomething(Event event, Widget widget)
+{
+	write("observedState = ", watchedButton.getMode(), ": ");
+	
+	if(watchedButton.getMode()) // if it's 'true'
 	{
-		write("observedState = ", watchedButton.getMode(), ": ");
-		
-		if(watchedButton.getMode()) // if it's 'true'
-		{
-			writeln("Walls make good neighbours, eh.");
-		}
-		else
-		{
-			writeln("Berlin doesn't like walls.");
-		}
+		writeln("Walls make good neighbours, eh.");
+	}
+	else
+	{
+		writeln("Berlin doesn't like walls.");
+	}
 
-		return(false);
-		
-	} // outputSomething()
-{% endhighlight %}
+	return(false);
+	
+} // outputSomething()
+```
 
 Again, the state of the underlying `ToggleButton` is checked and this time, we spit out a different message depending on what mode state we find.
 

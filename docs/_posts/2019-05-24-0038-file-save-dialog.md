@@ -111,45 +111,45 @@ Today's dialog example illustrating *File > Save* is very much like [the one we 
 
 To the top-level window, I added a `TextEntry` class derived from the `Entry` widget so the file name can be seen and changes easily tracked. Let’s look at it a bit at a time. Here’s the first part:
 
-{% highlight d %}
-	class TextEntry : Entry
+```d
+class TextEntry : Entry
+{
+	private:
+	string _defaultFilename = "Untitled";
+	Window _parentWindow;
+	
+	public:
+	this(Window parentWindow)
 	{
-		private:
-		string _defaultFilename = "Untitled";
-		Window _parentWindow;
+		super(_defaultFilename);
+		addOnActivate(&changeFilename);
 		
-		public:
-		this(Window parentWindow)
-		{
-			super(_defaultFilename);
-			addOnActivate(&changeFilename);
-			
-			_parentWindow = parentWindow;
-			
-		} // this()
-{% endhighlight %}
+		_parentWindow = parentWindow;
+		
+	} // this()
+```
 
 You’ll note that, in preparation for breaking these classes out into their own modules, variable names are private. They each have a leading underscore, a convention that sets up an association between local and incoming variables that hold the same values or pointers.
 
 The public section starts with the constructor which does nothing we haven’t seen before, although I will call your attention to the `addOnActivate()` call. This sets up a signal so that any time the `TextEntry` has focus and the user hits the Enter key, the callback is triggered. Speaking of which, here’s the callback:
 
-{% highlight d %}
-		void changeFilename(Entry e)
+```d
+	void changeFilename(Entry e)
+	{
+		if(getText() == null)
 		{
-			if(getText() == null)
-			{
-				writeln("The file name is an empty string. Resetting to default: Untitled.");
-				setText(_defaultFilename);
-			}
-			else
-			{
-				writeln("Filename has changed to: ", getText());
-			}
-			
-		} // changeFilename()
-	
-	} // class TextEntry
-{% endhighlight %}
+			writeln("The file name is an empty string. Resetting to default: Untitled.");
+			setText(_defaultFilename);
+		}
+		else
+		{
+			writeln("Filename has changed to: ", getText());
+		}
+		
+	} // changeFilename()
+
+} // class TextEntry
+```
 
 The callback first ensures that the file name isn't empty (the `if` statement) and if that's the case, echoes it to the terminal (the `else`), but that's all. The rest we take care of in the `FileSaveItem` object… which we’ll talk about now.
 
@@ -157,16 +157,16 @@ The callback first ensures that the file name isn't empty (the `if` statement) a
 
 This class is a bit long, so we’ll look at it in chunks, starting with the initialization section:
 
-{% highlight d %}
-	class FileSaveItem : MenuItem
-	{
-		private:
-		string itemLabel = "Save";
-		FileChooserDialog fileChooserDialog;
-		Window _parentWindow;
-		string filename;
-		TextEntry _filenameEntry;
-{% endhighlight %}
+```d
+class FileSaveItem : MenuItem
+{
+	private:
+	string itemLabel = "Save";
+	FileChooserDialog fileChooserDialog;
+	Window _parentWindow;
+	string filename;
+	TextEntry _filenameEntry;
+```
 
 Same as with the `FileOpenItem`, we’ve got:
 
@@ -185,17 +185,17 @@ And, of course, `_filenameEntry` will be dealt with here in a second, so let’s
 
 ### The FileSaveItem Constructor
 
-{% highlight d %}
-	public:
-	this(Window parentWindow, TextEntry filenameEntry)
-	{
-		super(itemLabel);
-		addOnActivate(&doSomething);
-		_parentWindow = parentWindow;
-		_filenameEntry = filenameEntry;
-		
-	} // this()
-{% endhighlight %}
+```d
+public:
+this(Window parentWindow, TextEntry filenameEntry)
+{
+	super(itemLabel);
+	addOnActivate(&doSomething);
+	_parentWindow = parentWindow;
+	_filenameEntry = filenameEntry;
+	
+} // this()
+```
 
 Nothing unexpected here. We bring in the parent window and the `TextEntry` pointer and, after calling the super-class constructor and adding a signal, we assign these local copies of these variables.
 
@@ -203,55 +203,55 @@ Nothing unexpected here. We bring in the parent window and the `TextEntry` point
 
 But here in the callback is where changes are more apparent, starting with:
 
-{% highlight d %}
-	private:
-	void doSomething(MenuItem mi)
-	{
-		int response;
-		FileChooserAction action = FileChooserAction.SAVE;
-		filename = _filenameEntry.getText();
-{% endhighlight %}
+```d
+private:
+void doSomething(MenuItem mi)
+{
+	int response;
+	FileChooserAction action = FileChooserAction.SAVE;
+	filename = _filenameEntry.getText();
+```
 
 The big change here (as expected) is in the `action` variable which is now set to `FileChooserAction.SAVE` instead of `FileChooserAction.OPEN`. We also need that reference to the `TextEntry` object (`_filenameEntry`) so we can `getText()` and `setText()` from here.
 
 Now the next chunk:
 
-{% highlight d %}
-		if(filename == "Untitled")
-		{
-			FileChooserDialog dialog = new FileChooserDialog("Save a File", _parentWindow, action, null, null);
+```d
+if(filename == "Untitled")
+{
+	FileChooserDialog dialog = new FileChooserDialog("Save a File", _parentWindow, action, null, null);
 
-			dialog.setCurrentName(_filenameEntry.getText());
-			response = dialog.run();
-			
-			if(response == ResponseType.OK)
-			{
-				filename = dialog.getFilename();
-				saveFile();
-			}
-			else
-			{
-				writeln("cancelled.");
-			}
+	dialog.setCurrentName(_filenameEntry.getText());
+	response = dialog.run();
 	
-			dialog.destroy();		
-		}
-{% endhighlight %}
+	if(response == ResponseType.OK)
+	{
+		filename = dialog.getFilename();
+		saveFile();
+	}
+	else
+	{
+		writeln("cancelled.");
+	}
+
+	dialog.destroy();		
+}
+```
 
 Earlier, when we were looking at the `TextEntry` class, I mentioned that the `filename` string, unless empty, is set and reset here in the `FileSaveItem` class. This `if` block is where that’s done. If `filename` is `“Untitled”`, we instantiate and open the dialog, get the response, and then test it the same way we did with the `FileOpenItem` before destroying the dialog.
 
 Now the `else` block:
 
-{% highlight d %}
-		else
-		{
-			saveFile();
-		}
+```d
+	else
+	{
+		saveFile();
+	}
 
-		_filenameEntry.setText(filename);
-				
-	} // doSomething()
-{% endhighlight %}
+	_filenameEntry.setText(filename);
+			
+} // doSomething()
+```
 
 This compliment to the above `if` block mock-saves the file with whatever text is found in the `TextEntry`. In a real application, we'd make sure we're working with a fully-qualified file and path for the OS we're running before the actual save. Among other things, we'd make sure the file extension (if any) was in there and matched the file contents.
 
@@ -265,27 +265,27 @@ And at the very end of the callback, we make sure the file name in the `TextEntr
 
 Just one thing I'd like to point out here... the `filenameEntry` pointer is passed to the menuBar, the object at the top of the menu hierarchy, so it can be passed down from object to object until it reaches the `FileSaveItem`.
 
-{% highlight d %}
-	class AppBox : Box
+```d
+class AppBox : Box
+{
+	int padding = 10;
+	MyMenuBar menuBar;
+	TextEntry filenameEntry;
+	
+	this(Window parentWindow)
 	{
-		int padding = 10;
-		MyMenuBar menuBar;
-		TextEntry filenameEntry;
+		super(Orientation.VERTICAL, padding);
+
+		filenameEntry = new TextEntry(parentWindow);
+		menuBar = new MyMenuBar(parentWindow, filenameEntry);
+
+		packStart(menuBar, false, false, 0);
+		packStart(filenameEntry, false, false, 0);		
 		
-		this(Window parentWindow)
-		{
-			super(Orientation.VERTICAL, padding);
+	} // this()
 	
-			filenameEntry = new TextEntry(parentWindow);
-			menuBar = new MyMenuBar(parentWindow, filenameEntry);
-	
-			packStart(menuBar, false, false, 0);
-			packStart(filenameEntry, false, false, 0);		
-			
-		} // this()
-		
-	} // class AppBox
-{% endhighlight %}
+} // class AppBox
+```
 
 ## Conclusion
 

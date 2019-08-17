@@ -135,25 +135,25 @@ How it’s calculated:
 
 And when you roll all that up into a callback, it looks like this:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		getAllocation(size);
-		
-		// set the font, size, and color
-		context.selectFontFace("Comic Sans MS", CairoFontSlant.NORMAL, CairoFontWeight.NORMAL);
-		context.setFontSize(35);
-		context.setSourceRgb(0.0, 0.0, 1.0);
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	getAllocation(size);
 	
-		// find the dimensions of the text so we can center it
-		context.textExtents("Hello World", &extents);
-		context.moveTo(size.width / 2 - extents.width / 2, size.height / 2 - extents.height / 2);
-		context.showText("Hello World");
-					
-		return(true);
-			
-	} // onDraw()
-{% endhighlight d %}
+	// set the font, size, and color
+	context.selectFontFace("Comic Sans MS", CairoFontSlant.NORMAL, CairoFontWeight.NORMAL);
+	context.setFontSize(35);
+	context.setSourceRgb(0.0, 0.0, 1.0);
+
+	// find the dimensions of the text so we can center it
+	context.textExtents("Hello World", &extents);
+	context.moveTo(size.width / 2 - extents.width / 2, size.height / 2 - extents.height / 2);
+	context.showText("Hello World");
+				
+	return(true);
+		
+} // onDraw()
+```
 
 `Cairo`’s toy text API always left-justifies text, so if we want to center it or right justify, we’re on our own as the above calculations show. But then, this API isn’t about getting fancy; for that, we have *Pango* which we’ll deal with sometime down the road.
 
@@ -161,10 +161,10 @@ And when you roll all that up into a callback, it looks like this:
 
 The only other thing we need to do is initialize a couple of variables at the top of the class:
 
-{% highlight d %}
-	GtkAllocation size;
-	cairo_text_extents_t extents;
-{% endhighlight d %}
+```d
+GtkAllocation size;
+cairo_text_extents_t extents;
+```
 
 Now let’s move on and do some preliminary work for the up-coming mini-series within the *Cairo* series, loading and saving images, which is what we’ll do in the next post.
 
@@ -269,12 +269,12 @@ Now let’s move on and do some preliminary work for the up-coming mini-series w
 
 We’re going to need a few extra bits and bobs of data to get this to work. Besides a `GtkAllocation` to retrieve `DrawingArea` dimensions, we also need:
 
-{% highlight d %}
-	Pixbuf pixbuf;
-	ListSG formatList;
-	PixbufFormat pixbufFormat;
-	PixbufFormat[] pixbufFormats;
-{% endhighlight d %}
+```d
+Pixbuf pixbuf;
+ListSG formatList;
+PixbufFormat pixbufFormat;
+PixbufFormat[] pixbufFormats;
+```
 
 Here’s what they are and why we need them:
 
@@ -286,13 +286,13 @@ The callback is a bit involved, so let’s look at it in chunks… although not 
 
 ### Callback Chunk #1
 
-{% highlight d %}
-	getAllocation(size);
-	pixbuf = getFromSurface(context.getTarget(), 0, 0, size.width, size.height);
-	
-	formatList = pixbuf.getFormats();
-	pixbufFormats = formatList.toArray!PixbufFormat();
-{% endhighlight d %}
+```d
+getAllocation(size);
+pixbuf = getFromSurface(context.getTarget(), 0, 0, size.width, size.height);
+
+formatList = pixbuf.getFormats();
+pixbufFormats = formatList.toArray!PixbufFormat();
+```
 
 What we’re doing here is:
 
@@ -310,15 +310,15 @@ Now, we’ve already looked at how to set of a font with size, color and all tha
 
 The code that digs the format names out of the `PixbufFormat` array and writes them to screen looks like this:
 
-{% highlight d %}
-	foreach(pixbufFormat; pixbufFormats)
-	{
-		context.moveTo(40, y);
-		format = pixbufFormat.getName();
-		context.showText(format);
-		y += 30;
-	}
-{% endhighlight d %}
+```d
+foreach(pixbufFormat; pixbufFormats)
+{
+	context.moveTo(40, y);
+	format = pixbufFormat.getName();
+	context.showText(format);
+	y += 30;
+}
+```
 
 What we have here is:
 
