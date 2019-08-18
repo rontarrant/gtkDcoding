@@ -10,97 +10,97 @@ author: Ron Tarrant
 # 0040: Dialogs VI - The MessageDialog
 
 <div class="screenshot-frame">
-	<div class="frame-header">
-		Results of this example:
-	</div>
-	<div class="frame-screenshot">
-		<figure>
-			<img id="img0" src="/images/screenshots/013_dialogs/dialog_013_06.png" alt="Current example output">		<!-- img# -->
-			
-			<!-- Modal for screenshot -->
-			<div id="modal0" class="modal">																	<!-- modal# -->
-				<span class="close0">&times;</span>															<!-- close# -->
-				<img class="modal-content" id="img00">															<!-- img## -->
-				<div id="caption"></div>
-			</div>
-			
-			<script>
-			// Get the modal
-			var modal = document.getElementById("modal0");														// modal#
-			
-			// Get the image and insert it inside the modal - use its "alt" text as a caption
-			var img = document.getElementById("img0");															// img#
-			var modalImg = document.getElementById("img00");													// img##
-			var captionText = document.getElementById("caption");
+   <div class="frame-header">
+      Results of this example:
+   </div>
+   <div class="frame-screenshot">
+      <figure>
+         <img id="img0" src="/images/screenshots/013_dialogs/dialog_013_06.png" alt="Current example output">      <!-- img# -->
+         
+         <!-- Modal for screenshot -->
+         <div id="modal0" class="modal">                                                   <!-- modal# -->
+            <span class="close0">&times;</span>                                             <!-- close# -->
+            <img class="modal-content" id="img00">                                             <!-- img## -->
+            <div id="caption"></div>
+         </div>
+         
+         <script>
+         // Get the modal
+         var modal = document.getElementById("modal0");                                          // modal#
+         
+         // Get the image and insert it inside the modal - use its "alt" text as a caption
+         var img = document.getElementById("img0");                                             // img#
+         var modalImg = document.getElementById("img00");                                       // img##
+         var captionText = document.getElementById("caption");
 
-			img.onclick = function()
-			{
-			  modal.style.display = "block";
-			  modalImg.src = this.src;
-			  captionText.innerHTML = this.alt;
-			}
-			
-			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName("close0")[0];											// close#
-			
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function()
-			{ 
-				modal.style.display = "none";
-			}
-			</script>
-			<figcaption>
-			Current example output
-			</figcaption>
-		</figure>
-	</div>
+         img.onclick = function()
+         {
+           modal.style.display = "block";
+           modalImg.src = this.src;
+           captionText.innerHTML = this.alt;
+         }
+         
+         // Get the <span> element that closes the modal
+         var span = document.getElementsByClassName("close0")[0];                                 // close#
+         
+         // When the user clicks on <span> (x), close the modal
+         span.onclick = function()
+         { 
+            modal.style.display = "none";
+         }
+         </script>
+         <figcaption>
+         Current example output
+         </figcaption>
+      </figure>
+   </div>
 
-	<div class="frame-terminal">
-		<figure class="right">
-			<img id="img1" src="/images/screenshots/013_dialogs/dialog_013_06_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+   <div class="frame-terminal">
+      <figure class="right">
+         <img id="img1" src="/images/screenshots/013_dialogs/dialog_013_06_term.png" alt="Current example terminal output">      <!-- img#, filename -->
 
-			<!-- Modal for terminal shot -->
-			<div id="modal1" class="modal">																				<!-- modal# -->
-				<span class="close1">&times;</span>																		<!-- close# -->
-				<img class="modal-content" id="img11">																		<!-- img## -->
-				<div id="caption"></div>
-			</div>
-			
-			<script>
-			// Get the modal
-			var modal = document.getElementById("modal1");																	// modal#
-			
-			// Get the image and insert it inside the modal - use its "alt" text as a caption
-			var img = document.getElementById("img1");																		// img#
-			var modalImg = document.getElementById("img11");																// img##
-			var captionText = document.getElementById("caption");
+         <!-- Modal for terminal shot -->
+         <div id="modal1" class="modal">                                                            <!-- modal# -->
+            <span class="close1">&times;</span>                                                      <!-- close# -->
+            <img class="modal-content" id="img11">                                                      <!-- img## -->
+            <div id="caption"></div>
+         </div>
+         
+         <script>
+         // Get the modal
+         var modal = document.getElementById("modal1");                                                   // modal#
+         
+         // Get the image and insert it inside the modal - use its "alt" text as a caption
+         var img = document.getElementById("img1");                                                      // img#
+         var modalImg = document.getElementById("img11");                                                // img##
+         var captionText = document.getElementById("caption");
 
-			img.onclick = function()
-			{
-			  modal.style.display = "block";
-			  modalImg.src = this.src;
-			  captionText.innerHTML = this.alt;
-			}
-			
-			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName("close1")[0];														// close#
-			
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function()
-			{ 
-				modal.style.display = "none";
-			}
-			</script>
+         img.onclick = function()
+         {
+           modal.style.display = "block";
+           modalImg.src = this.src;
+           captionText.innerHTML = this.alt;
+         }
+         
+         // Get the <span> element that closes the modal
+         var span = document.getElementsByClassName("close1")[0];                                          // close#
+         
+         // When the user clicks on <span> (x), close the modal
+         span.onclick = function()
+         { 
+            modal.style.display = "none";
+         }
+         </script>
 
-			<figcaption>
-				Current example terminal output (click for enlarged view)
-			</figcaption>
-		</figure>
-	</div>
+         <figcaption>
+            Current example terminal output (click for enlarged view)
+         </figcaption>
+      </figure>
+   </div>
 
-	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_013_06_message.d" target="_blank">here</a>.
-	</div>
+   <div class="frame-footer">                                                                        <!-- ------------- filename (below) --------- -->
+      The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_013_06_message.d" target="_blank">here</a>.
+   </div>
 </div>
 
 As usual, take a gander at the import statements to see what’s changed there.
@@ -110,13 +110,13 @@ Most of the code in the example files, lately, has been support code, stuff need
 ```d
 class ClicheMessageDialog : MessageDialog
 {
-	GtkDialogFlags flags = GtkDialogFlags.MODAL;
-	MessageType messageType = MessageType.INFO;
-	ButtonsType buttonType = ButtonsType.OK;
-	int responseID;
-	string messageText = "It was a cliché love triangle,\nIt was heaven on Earth, but with hell to pay.\nA cliché love triangle,\nThey're as common as dirt, or so they say,\nA cliché love triangle,\nHe went off half-cocked and got blown away.";
+   GtkDialogFlags flags = GtkDialogFlags.MODAL;
+   MessageType messageType = MessageType.INFO;
+   ButtonsType buttonType = ButtonsType.OK;
+   int responseID;
+   string messageText = "It was a cliché love triangle,\nIt was heaven on Earth, but with hell to pay.\nA cliché love triangle,\nThey're as common as dirt, or so they say,\nA cliché love triangle,\nHe went off half-cocked and got blown away.";
 ```
-	
+   
 ## Initializations
 
 I’m going to do things a little out of order here. We’ll talk about those flags in a moment, but the rest of this section is straightforward. We’ve got a `responseID` which a `Dialog` always needs and the fairly long message to stuff into the `MessageDialog`.
@@ -126,13 +126,13 @@ I’m going to do things a little out of order here. We’ll talk about those fl
 ```d
 this(Window _parentWindow)
 {
-	super(_parentWindow, flags, messageType, buttonType, messageText);
-	setTitle("Alert the User:");
-	setSizeRequest(200, 150);
-	addOnResponse(&doSomething);
-	run();
-	destroy();
-	
+   super(_parentWindow, flags, messageType, buttonType, messageText);
+   setTitle("Alert the User:");
+   setSizeRequest(200, 150);
+   addOnResponse(&doSomething);
+   run();
+   destroy();
+   
 } // this()
 ```
 
@@ -143,12 +143,12 @@ The point is, because of the derivation, we can do all this stuff in the constru
 ## The Callback
 
 ```d
-	void doSomething(int response, Dialog d)
-	{
-		writeln("Dialog closed.");
-		
-	} // doSomething()
-	
+   void doSomething(int response, Dialog d)
+   {
+      writeln("Dialog closed.");
+      
+   } // doSomething()
+   
 } // class ClicheMessageDialog
 ```
 
@@ -197,13 +197,13 @@ Another thing I’ve been meaning to talk about for a while is function inherita
 ```d
 this(Window _parentWindow)
 {
-	super(_parentWindow, flags, messageType, buttonType, messageText);
-	setTitle("Alert the User:");
-	setSizeRequest(200, 150);
-	addOnResponse(&doSomething);
-	run();
-	destroy();
-	
+   super(_parentWindow, flags, messageType, buttonType, messageText);
+   setTitle("Alert the User:");
+   setSizeRequest(200, 150);
+   addOnResponse(&doSomething);
+   run();
+   destroy();
+   
 } // this()
 ```
 
@@ -244,10 +244,10 @@ And that’s it for yet another episode of *gtkDcoding*. Tune in next time when 
 Bye, now.
 
 <div class="blog-nav">
-	<div style="float: left;">
-		<a href="/2019/05/28/0039-file-save-as-dialog.html">Previous: SaveAs Dialog</a>
-	</div>
-	<div style="float: right;">
-		<a href="/2019/06/04/0041-colorchooserdialog.html">Next: ColorChooserDialog</a>
-	</div>
+   <div style="float: left;">
+      <a href="/2019/05/28/0039-file-save-as-dialog.html">Previous: SaveAs Dialog</a>
+   </div>
+   <div style="float: right;">
+      <a href="/2019/06/04/0041-colorchooserdialog.html">Next: ColorChooserDialog</a>
+   </div>
 </div>
