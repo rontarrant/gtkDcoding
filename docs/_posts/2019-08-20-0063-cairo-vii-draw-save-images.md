@@ -144,7 +144,9 @@ The `Pixbuf` is the buffer we’re going to stuff the image into as we prepare t
 - `jpegOptionValues`: an array of values for each of the save options,
 - `xOrigin`, `yOrigin`: the offset from the top-left corner of the `DrawingArea`.
 
-Note: If `xOffset` and `yOffset` are non-zero, we won’t be saving the entire image.
+*Note: If `xOffset` and `yOffset` are non-zero, we won’t be saving the entire image.*
+
+*Note 2: The last two arguments to the `getFromSurface()` call (see the `onDraw()` snippet below), if less than the width and height of the `Surface`, will also save less than the entire image. Taking these two notes together, I'm sure you arrived at the conclusion that you can save any rectangular area of the Surface you choose.*
 
 I haven’t bothered with width and height variables here because these examples all save the entire `DrawingArea` and so we use the width and height fields from the `GtkAllocation` as we’ll see in a moment.
 
