@@ -332,7 +332,7 @@ So the differences here (compared to our first example) are:
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img4" src="/images/screenshots/018_cairo/cairo_018.png" alt="Current example output">		<!-- img# -->
+			<img id="img4" src="/images/screenshots/018_cairo/cairo_018_22.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal4" class="modal">																<!-- modal# -->
@@ -374,7 +374,7 @@ So the differences here (compared to our first example) are:
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img5" src="/images/screenshots/018_cairo/cairo_018_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img5" src="/images/screenshots/018_cairo/cairo_018_22_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal5" class="modal">																			<!-- modal# -->
@@ -416,7 +416,7 @@ So the differences here (compared to our first example) are:
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_draw_save_tiff.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_22_draw_save_tiff.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
@@ -458,7 +458,7 @@ if(pixbuf.savev("./rectangle_hw.tiff", "tiff", tiffOptions, tiffOptionValues))
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img6" src="/images/screenshots/018_cairo/cairo_018.png" alt="Current example output">		<!-- img# -->
+			<img id="img6" src="/images/screenshots/018_cairo/cairo_018_23.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal6" class="modal">																<!-- modal# -->
@@ -500,7 +500,7 @@ if(pixbuf.savev("./rectangle_hw.tiff", "tiff", tiffOptions, tiffOptionValues))
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img7" src="/images/screenshots/018_cairo/cairo_018_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img7" src="/images/screenshots/018_cairo/cairo_018_23_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal7" class="modal">																			<!-- modal# -->
@@ -542,7 +542,7 @@ if(pixbuf.savev("./rectangle_hw.tiff", "tiff", tiffOptions, tiffOptionValues))
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_draw_save_bmp.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_23_draw_save_bmp.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for fourth (4th) occurrence of application and terminal screenshots on a single page -->
