@@ -27,7 +27,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Cairo: Cubic Bezier Follow Mouse";
+	string title = "Cairo: Draw Cubic Bezier with Mouse";
 	AppBox appBox;
 	
 	this()
@@ -76,16 +76,19 @@ class MyDrawingArea : DrawingArea
 {
 	Timeout _timeout;
 	int fps = 1000 / 24; // 24 frames per second
+	bool dragAndDraw = false;
 	double xStart = 25, yStart = 128;
-	double xEnd, yEnd;
-	double controlPointY1 = 128, controlPointX2 = 25; // s/a yStart, xStart (respectively)
-	double controlPointX1, controlPointY2; // will be set to yEnd, xEnd (respectively)
+	double controlPointX1 = 153, controlPointY1 = 230,
+		 	 controlPointX2 = 25, controlPointY2 = 25,
+			 xEnd, yEnd;
 
 	this()
 	{
 		addOnDraw(&onDraw);
 		addOnMotionNotify(&onMotion);
-		
+		addOnButtonPress(&onButtonPress);
+		addOnButtonRelease(&onButtonRelease);
+
 	} // this()
 
 
@@ -111,6 +114,50 @@ class MyDrawingArea : DrawingArea
 	} // onMotion()
 
 	
+	public bool onButtonPress(Event event, Widget widget)
+	{
+		bool returnValue = false;
+
+		// Turn on context canvas redraw. Click-n-hold a mouse button to start
+		// drawing a cubic Bezier and as long as the mouse button is depressed,
+		// the end point of the curve will follow the mouse pointer. Let go, and
+		// the Bezier will freeze in place.
+		dragAndDraw = true;
+
+		if(event.type == EventType.BUTTON_PRESS)
+		{
+			GdkEventButton* mouseEvent = event.button;
+			xStart = event.button.x;
+			yStart = event.button.y;
+			
+			returnValue = true;
+		}
+
+		return(returnValue);
+		
+	} // onButtonPress()
+
+
+	public bool onButtonRelease(Event event, Widget widget)
+	{
+		bool value = false;
+		
+		if(event.type == EventType.BUTTON_RELEASE)
+		{
+			GdkEventButton* buttonEvent = event.button;
+			xEnd = event.button.x;
+			yEnd = event.button.y;
+			value = true;
+		}
+
+		// When the mouse button is released, stop redrawing the context canvas.
+		dragAndDraw = false;
+
+		return(value);
+		
+	} // onButtonRelease()
+
+
 	bool onDraw(Scoped!Context context, Widget w)
 	{
 		if(_timeout is null)
@@ -118,12 +165,15 @@ class MyDrawingArea : DrawingArea
 			_timeout = new Timeout(fps, &onFrameElapsed, false);
 		}
 
-		// set up and draw a cubic Bezier
-		context.setLineWidth(3);
-		context.setSourceRgb(0.3, 0.2, 0.1);
-		context.moveTo(xStart, yStart);
-		context.curveTo(controlPointX1, controlPointY1, controlPointX2, controlPointY2, xEnd, yEnd);
-		context.stroke();
+		if(dragAndDraw == true)
+		{
+			// set up and draw a cubic Bezier
+			context.setLineWidth(3);
+			context.setSourceRgb(0.3, 0.2, 0.1);
+			context.moveTo(xStart, yStart);
+			context.curveTo(controlPointX1, controlPointY1, controlPointX2, controlPointY2, xEnd, yEnd);
+			context.stroke();
+		}
 
 		return(true);
 		
@@ -135,7 +185,10 @@ class MyDrawingArea : DrawingArea
 		GtkAllocation size;
 		getAllocation(size);
 		
-		queueDrawArea(size.x, size.y, size.width, size.height);
+		if(dragAndDraw == true)
+		{
+			queueDrawArea(size.x, size.y, size.width, size.height);
+		}
 		
 		return(true);
 		

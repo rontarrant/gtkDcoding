@@ -443,9 +443,7 @@ Until then.
 	<div style="float: left;">
 		<a href="/2019/08/13/0061-cairo-v-toy-text-image-formats.html">Previous: Cairo Toy Text & Image Formats</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/20/0063-cairo-vii-draw-save-images.html">Next: Cairo Draw & Save Images</a>
 	</div>
--->
 </div>

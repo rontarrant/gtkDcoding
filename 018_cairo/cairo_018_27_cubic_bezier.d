@@ -25,7 +25,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Cairo: Draw a Curve";
+	string title = "Cairo: Draw a Cubic Bezier Curve";
 	AppBox appBox;
 	
 	this()
@@ -73,9 +73,7 @@ class AppBox : Box
 class MyDrawingArea : DrawingArea
 {
 	double xStart = 25,  yStart = 128;
-	double xControlPoint1 = 230, yControlPoint1 = 128,
-			 xControlPoint2 = 230, yControlPoint2 = 50,
-			 xEndPoint = 230, yEndPoint = 50;
+	double xEnd = 230, yEnd = 50;
 
 	this()
 	{
@@ -86,11 +84,14 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
+		double xControlPoint1 = xEnd, yControlPoint1 = yStart;
+		double xControlPoint2 = xStart, yControlPoint2 = yEnd;
+
 		// set up and draw a cubic Bezier
 		context.setLineWidth(3);
 		context.setSourceRgb(0.3, 0.2, 0.1);
 		context.moveTo(xStart, yStart);
-		context.curveTo(xControlPoint1, yControlPoint1, xControlPoint2, yControlPoint2, xEndPoint, yEndPoint);
+		context.curveTo(xControlPoint1, yControlPoint1, xControlPoint2, yControlPoint2, xEnd, yEnd);
 		context.stroke();
 
 		return(true);

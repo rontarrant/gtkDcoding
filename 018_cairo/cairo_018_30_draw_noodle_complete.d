@@ -76,7 +76,7 @@ class MyDrawingArea : DrawingArea
 {
 	Timeout _timeout;
 	int fps = 1000 / 24; // 24 frames per second
-	bool doDrawing = false;
+	bool dragAndDraw = false;
 	double xStart = 25, yStart = 128;
 	double controlPointX1 = 153, controlPointY1 = 230,
 		 	 controlPointX2 = 25, controlPointY2 = 25,
@@ -119,7 +119,7 @@ class MyDrawingArea : DrawingArea
 		bool returnValue = false;
 
 		// tell Cairo it can start drawing
-		doDrawing = true;
+		dragAndDraw = true;
 
 		if(event.type == EventType.BUTTON_PRESS)
 		{
@@ -147,7 +147,7 @@ class MyDrawingArea : DrawingArea
 			value = true;
 		}
 
-		doDrawing = false;
+		dragAndDraw = false;
 
 		return(value);
 		
@@ -161,7 +161,7 @@ class MyDrawingArea : DrawingArea
 			_timeout = new Timeout(fps, &onFrameElapsed, false);
 		}
 
-		if(doDrawing == true)
+		if(dragAndDraw == true)
 		{
 			// set up and draw a cubic Bezier
 			context.setLineWidth(3);
@@ -181,7 +181,7 @@ class MyDrawingArea : DrawingArea
 		GtkAllocation size;
 		getAllocation(size);
 		
-		if(doDrawing == true)
+		if(dragAndDraw == true)
 		{
 			queueDrawArea(size.x, size.y, size.width, size.height);
 		}
