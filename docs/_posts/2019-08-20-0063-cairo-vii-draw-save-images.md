@@ -15,7 +15,7 @@ So, this time we’re going to draw some images and then save them.
 
 In fact, because all these images are just a rectangle with text overlaid, I’m not even going to go over how they’re drawn. I’ll just say this one thing…
 
-If you want a draw operation to be on top of another—like text overlaid on a rectangle, for instance—foreground draw operations need to be done after background draw operations. You probably sorted that out on your own, but there it is anyway.
+If you want a draw operation to be on top of another—like text overlaid on a rectangle, for instance—foreground draw operations need to be done *after* background draw operations. You probably sorted that out on your own, but there it is anyway.
 
 ## Saving Images – Basic Procedure
 
@@ -205,7 +205,7 @@ And that’s all there is to it.
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/018_cairo/cairo_018.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/018_cairo/cairo_018_21.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -247,7 +247,7 @@ And that’s all there is to it.
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/018_cairo/cairo_018_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="/images/screenshots/018_cairo/cairo_018_21_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->
@@ -289,7 +289,7 @@ And that’s all there is to it.
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_draw_save_png.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_21_draw_save_png.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screenshots on a single page -->
