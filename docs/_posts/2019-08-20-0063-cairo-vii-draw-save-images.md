@@ -148,7 +148,7 @@ The `Pixbuf` is the buffer we’re going to stuff the image into as we prepare t
 
 *Note 2: The last two arguments to the `getFromSurface()` call (see the `onDraw()` snippet below), if less than the width and height of the `Surface`, will also save less than the entire image. Taking these two notes together, I'm sure you arrived at the conclusion that you can save any rectangular area of the Surface you choose.*
 
-I haven’t bothered with width and height variables here because these examples all save the entire `DrawingArea` and so we use the width and height fields from the `GtkAllocation` as we’ll see in a moment.
+I haven’t bothered with width and height variables here because these examples all save the entire `DrawingArea` and so we use the `width` and `height` fields from the `GtkAllocation` as we’ll see in a moment.
 
 The constructor is so mundane as to warrant skipping in this discussion… so we shall.
 
@@ -184,13 +184,13 @@ bool onDraw(Scoped!Context context, Widget w)
 And here’s what’s happening:
 
 - get the size of the `DrawingArea` with `getAllocation(size)`,
-- grab either the entire `Surface` or a subsurface (by supplying a non-zero offset) and stuff it into a buffer (that’s the `Pixbuf`),
+- grab either the entire `Surface` or a subsurface (by supplying a non-zero offset and/or a width and height less than the `Surface`'s `width` and `height`) and stuff it into a buffer (that’s the `Pixbuf`),
 - set up the *JPeg* save options and their values, and
 - call `Pixbuf.savev()` to save the image.
 
 ### Save Options for JPeg
 
-- "icc-profile" - the complete ICC profile encoded into base64
+- "icc-profile" - the complete ICC profile encoded into base64 (which, you'll note, I didn't bother with)
 - "quality" - 0 … 100
 - “x-dpi” - dots per inch (reasonable values: 50 to 300)
 - “y-dpi” - dots per inch (same as x-dpi: 50 to 300)
@@ -313,8 +313,9 @@ if(pixbuf.savev("./rectangle_hw.png", "png", pngOptions, pngOptionValues))
 
 So the differences here (compared to our first example) are:
 
-- set up the PNG save options, and
-- the values for each.
+- set up the PNG save options,
+- the values for each, and
+- save with the `.png` file extension.
 
 ### Save Options for PNG
 
