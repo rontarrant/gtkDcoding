@@ -127,7 +127,7 @@ for a 32-bit OS, it’ll be:
 C:\D\dmd2\windows\lib\
 ```
 
-###Troubleshooting Build.d
+### Troubleshooting Build.d
 
 If you get a message saying that `msvcr100.dll` cannot be found, you'll have to do a little extra. This usually happens when, during the installation of DMD, you opt for Visual Studio support, but you don't actually install (or already have installed) Visual Studio.
 
