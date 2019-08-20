@@ -129,7 +129,7 @@ C:\D\dmd2\windows\lib\
 
 ### Troubleshooting Build.d
 
-If you get a message saying that `msvcr100.dll` cannot be found, you'll have to do a little extra. This usually happens when, during the installation of DMD, you opt for Visual Studio support, but you don't actually install (or already have installed) Visual Studio.
+If you get a message saying that `msvcr100.dll` cannot be found, you'll have to do a little extra. This usually happens when, during the installation of *DMD*, you opt for *Visual Studio* support, but you don't actually install (or already have installed) *Visual Studio*.
 
 Anyway, if this error appears, go to the [Visual Studio Redistribute Package download page](https://www.microsoft.com/en-us/download/confirmation.aspx?id=14632), download the appropriate version, and install it. Then you should be good to go.
 
