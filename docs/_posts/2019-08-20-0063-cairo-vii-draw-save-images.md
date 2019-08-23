@@ -568,9 +568,7 @@ And thatâ€™s most of what there is to saving images using Cairo. Next time, weâ€
 	<div style="float: left;">
 		<a href="/2019/08/16/0062-cairo-vi-load-display-images.html">Previous: Cairo Load & Display Images</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/23/0064-cairo-vii-drawingarea-animation.html">Next: Cairo DrawingArea Animation</a>
 	</div>
--->
 </div>
