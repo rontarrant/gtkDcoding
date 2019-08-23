@@ -21,7 +21,7 @@ When animating on a `DrawingArea`, the drawing is done more or less the same way
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/018_cairo/cairo_018_24.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/018_cairo/cairo_018_24.gif" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -193,7 +193,7 @@ We don’t have to set up a `for()` loop because the `Timeout` repeats 24 times 
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/018_cairo/cairo_018_25.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/018_cairo/cairo_018_25.gif" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -333,7 +333,7 @@ Pretty simple. And, of course, you could do any other drawing in there as well. 
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img4" src="/images/screenshots/018_cairo/cairo_018_26.png" alt="Current example output">		<!-- img# -->
+			<img id="img4" src="/images/screenshots/018_cairo/cairo_018_26.gif" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal4" class="modal">																<!-- modal# -->
