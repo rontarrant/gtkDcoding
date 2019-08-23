@@ -1,5 +1,5 @@
 ---
-title: 0051 – MVC IV – A ComboBox with Text
+title: "0051: MVC IV – A ComboBox with Text"
 topic: mvc
 layout: post
 description: A tutorial on reproducing the GTK ComboBoxText using a ComboBox and a ListStore.
@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0051 – MVC IV – The ComboBox with Text
+# 0051: MVC IV – The ComboBox with Text
 
 <div class="screenshot-frame">
 	<div class="frame-header">

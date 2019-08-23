@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0006 - Position a Window
+# 0006: Position a Window
 
 <div class="screenshot-frame">
 	<div class="frame-header">

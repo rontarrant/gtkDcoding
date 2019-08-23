@@ -1,5 +1,5 @@
 ---
-title: 0053 – MVC VI – A ComboBox with Images
+title: "0053: MVC VI – A ComboBox with Images"
 layout: post
 topic: mvc
 description: Tutorial on using a ComboBox with images.
@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0053 - MVC VI - A ComboBox with Images
+# 0053: MVC VI - A ComboBox with Images
 
 <div class="screenshot-frame">
 	<div class="frame-header">

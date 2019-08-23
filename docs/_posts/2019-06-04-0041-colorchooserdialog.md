@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0041 – Dialogs VII - The ColorChooserDialog
+# 0041: Dialogs VII - The ColorChooserDialog
 
 We’ve actually seen today’s topic widget before, but it was part-n-parcel of the `ColorButton`, so we didn’t really look at it because it was a behind-the-scenes kind of dialog. Today, though, we're gonna roll up our sleeves and see how this sucker works.
 

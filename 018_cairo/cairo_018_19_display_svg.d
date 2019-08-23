@@ -78,7 +78,7 @@ class MyDrawingArea : DrawingArea
 {
 	Pixbuf pixbuf;
 	Context context;
-	int x = 0, y = 0;
+	int xOffset = 0, yOffset = 0;
 	string filename = "./images/Envy.svg";
 	
 	this()
@@ -90,7 +90,7 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		context.setSourcePixbuf(pixbuf, x, y);
+		context.setSourcePixbuf(pixbuf, xOffset, yOffset);
 		context.paint();
 		
 		return(true);

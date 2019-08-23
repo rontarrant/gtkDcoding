@@ -54,7 +54,7 @@ class TestRigWindow : MainWindow
 class AppBox : Box
 {
 	bool expand = false, fill = false;
-	uint globalPadding = 10;
+	uint globalPadding = 10, localPadding = 5;
 	// add child object and variable definitions here
 	
 	this()
@@ -63,8 +63,8 @@ class AppBox : Box
 		
 		// instantiate child objects here
 		
-		// packStart(<child object>, expand, fill, padding); // LEFT justify
-		// packEnd(<child object>, expand, fill, padding); // RIGHT justify
+		// packStart(<child object>, expand, fill, localPadding); // LEFT justify
+		// packEnd(<child object>, expand, fill, localPadding); // RIGHT justify
 		
 	} // this()
 

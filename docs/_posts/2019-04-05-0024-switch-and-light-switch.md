@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0024 - Switch and LightSwitch
+# 0024: Switch and LightSwitch
 
 For today, we’ll be looking at two code files: 
 
@@ -24,7 +24,7 @@ And what we’ll be playing with is the GTK `Switch` widget. First, we’ll get 
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/010_more_buttons/button_010_03.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/002_button/button_002_15.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -66,7 +66,7 @@ And what we’ll be playing with is the GTK `Switch` widget. First, we’ll get 
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/010_more_buttons/button_010_03_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/002_button/button_002_15_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -108,7 +108,7 @@ And what we’ll be playing with is the GTK `Switch` widget. First, we’ll get 
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_03_switch.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_15_switch.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -161,7 +161,7 @@ It seems that whereas we have the convenience of getting the `state` packaged wi
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/010_more_buttons/button_010_04.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/002_button/button_002_16.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -203,7 +203,7 @@ It seems that whereas we have the convenience of getting the `state` packaged wi
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/010_more_buttons/button_010_04_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="/images/screenshots/002_button/button_002_16_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->
@@ -245,7 +245,7 @@ It seems that whereas we have the convenience of getting the `state` packaged wi
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_04_switch_light.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_16_switch_light.d" target="_blank">here</a>.
 	</div>
 </div>
 

@@ -1,13 +1,13 @@
 ---
 title: "0045: Split a Window into Panes"
-topic: window
+topic: container
 layout: post
 description: How to use the GTK Paned class to split a window into panes.
 author: Ron Tarrant
 
 ---
 
-# 0045 - Split a Window into Panes
+# 0045: Split a Window into Panes
 
 There will be times when you’ll need a window separated into two areas with a handle to adjust the division between them. For instance, a file manager has a directory/folder tree on the left and the contents of a selected directory on the right and as I’m sure you’re aware, if you dig deep enough into a directory hierarchy, you have to widen the left-hand area so you can see the full path which is why it's handy to have that adjustment handle between the two panes.
 

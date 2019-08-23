@@ -1,5 +1,5 @@
 ---
-title: 0054 – MVC VII – TreeView Basics
+title: "0054: MVC VII – TreeView Basics"
 layout: post
 topic: mvc
 description: GTK Tutorial - introduction to TreeView, ListStore, and TreeViewColumn.
@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0054 – MVC VII – TreeView Basics
+# 0054: MVC VII – TreeView Basics
 
 We’ve all been told that the `TreeView` is a complex and difficult beast to tame, but it’s not so hard once you've got a few bits of information at your fingertips. And in the previous six instalments of this series, most of those bits have been presented which means it should come as no big surprise that...
 
@@ -137,7 +137,7 @@ The TreeView class looks like this:
 		} // this()
 		
 	} // class SignTreeView
-{% endhighlight %}
+{% endhighlight d %}
 
 Once the `TreeView` is instantiated by calling the super-class constructor, we set up and assign the `Model`/Store (`signListStore`), then instantiate and append one or more `TreeViewColumn`s.
 
@@ -165,7 +165,7 @@ The `ListStore` is used the same way with a `TreeView` as it was with the `Combo
 		} // this()
 	
 	} // class SignListStore
-{% endhighlight %}
+{% endhighlight d %}
 
 This is the exact same `SignListStore` we used with a `ComboBox` in [an earlier example]( https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_06_combobox_liststore.d), thus illustrating how the same data can be used in different ways by different `Widget`s.
 
@@ -192,7 +192,7 @@ Which looks like this:
 		} // this()
 	
 	} // class SignTreeViewColumn
-{% endhighlight %}
+{% endhighlight d %}
 
 When we populated a `ComboBox`, a `CellRenderer` was packed directly into the `ComboBox`. But with a `TreeView`:
 

@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0033 – Menus VIII - An Image, a Label and an AccelKey
+# 0033: Menus VIII - An Image, a Label and an AccelKey
 
 Remember how I said that the *GTK* `ImageMenuItem` was deprecated? Well, with it went the easy way to add an accelerator key to a `MenuItem` that also has an image.
 

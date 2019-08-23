@@ -34,7 +34,7 @@ class TestRigWindow : MainWindow
 	this()
 	{
 		super(title);
-		setSizeRequest(600, 337);
+		setSizeRequest(640, 387);
 		
 		addOnDestroy(&quitApp);
 		
@@ -76,7 +76,7 @@ class AppBox : Box
 class MyDrawingArea : DrawingArea
 {
 	Pixbuf pixbuf;
-	int x = 20, y = 40;
+	int xOffset = 20, yOffset = 20;
 	string filename = "./images/guitar_bridge.jpg";
 	
 	this()
@@ -88,7 +88,7 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		context.setSourcePixbuf(pixbuf, x, y);
+		context.setSourcePixbuf(pixbuf, xOffset, yOffset);
 		context.paint();
 		
 		return(true);

@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0017 - Changing the Mouse Pointer
+# 0017: Changing the Mouse Pointer
 
 
 <div class="screenshot-frame">

@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0030 – Menus V - A More Practical RadioMenuItem
+# 0030: Menus V - A More Practical RadioMenuItem
 
 <div class="screenshot-frame">
 	<div class="frame-header">

@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0013 - Scrolled Layout
+# 0013: Scrolled Layout
 
 This time around, we’ll be looking at how to do a...
 

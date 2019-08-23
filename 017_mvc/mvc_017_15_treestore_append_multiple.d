@@ -34,14 +34,14 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "MVC TreeStore - Multi-level Family";
+	string title = "TreeStore (multi-append)";
 	AppBox appBox;
 	int minimumWidth, naturalWidth, minimumHeight, naturalHeight;
 	
 	this()
 	{
 		super(title);
-		setSizeRequest(250, 250);
+		setSizeRequest(300, 250);
 		
 		addOnDestroy(&quitApp);
 		

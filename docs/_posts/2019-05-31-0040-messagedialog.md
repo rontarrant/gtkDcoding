@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0040 – Dialogs VI - The MessageDialog
+# 0040: Dialogs VI - The MessageDialog
 
 <div class="screenshot-frame">
 	<div class="frame-header">

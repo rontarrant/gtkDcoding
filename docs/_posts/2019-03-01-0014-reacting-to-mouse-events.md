@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0014 - Reacting to Mouse Events
+# 0014: Reacting to Mouse Events
 
 Now we start down the road toward full control of what happens when the user fiddles with mouse buttons. Sometimes we want to trigger something when a mouse button is pressed, but other times (more often, really) we want to react when the mouse button is released. This is the accepted norm in most GUI designs, so let’s not rock the boat until we have good reason to. And today, we have no excuse.
 

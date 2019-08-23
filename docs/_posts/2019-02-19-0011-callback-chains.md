@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-## 0011 - Callback Chains
+## 0011: Callback Chains
 
 <div class="screenshot-frame">
 	<div class="frame-header">

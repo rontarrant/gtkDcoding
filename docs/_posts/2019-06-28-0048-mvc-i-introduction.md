@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0048 – MVC Part I - Introduction to the Model-View-Controller
+# 0048: MVC Part I - Introduction to the Model-View-Controller
 
 Before we start…
 

@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0027 – Menus II - Mnemonics (Shortcut Keys)
+# 0027: Menus II - Mnemonics (Shortcut Keys)
 
 Today, we’ll cover two quick subjects, adding keyboard shortcuts to `MenuItem`s and separating menus into two areas. Let’s get at it.
 

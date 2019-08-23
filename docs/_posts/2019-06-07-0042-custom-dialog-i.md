@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0042 – Dialogs VIII - Customizing (1 of 3) - Aesthetics
+# 0042: Dialogs VIII - Customizing (1 of 3) - Aesthetics
 
 Today we start a three-part series about building a `Dialog` from scratch.
 
@@ -327,7 +327,7 @@ We still have variables for `_globalPadding` and `_padding`, but they’re both 
 - the `Box` constructor still expects global padding, and
 - the `packStart()` or `packEnd()` functions expect local padding.
 
-The `_pJustify` variable will be one of values from the `BoxJustify` enum discussed in *A Lighting-fast Introduction to Design* above.
+The `_pJustify` variable will be one of the values from the `BoxJustify` enum discussed in *A Lighting-fast Introduction to Design* above.
 
 ## The Constructor
 

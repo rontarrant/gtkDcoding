@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-## X0002 - GtkD Linux Development Environment
+## X0002: GtkD Linux Development Environment
 
 Okay, hold onto your hat, because we’re gonna install and test a D language development environment on Linux.
 

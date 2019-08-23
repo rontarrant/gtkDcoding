@@ -27,7 +27,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Cairo: Animte Drawing a Circle";
+	string title = "Cairo: Animate Drawing a Circle";
 	int width = 640, height = 360; 
 	AppBox appBox;
 	

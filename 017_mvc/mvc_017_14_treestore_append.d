@@ -30,14 +30,14 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "MVC TreeStore - Hierarchy Basics";
+	string title = "TreeStore (append)";
 	AppBox appBox;
 	int minimumWidth, naturalWidth, minimumHeight, naturalHeight;
 	
 	this()
 	{
 		super(title);
-		setSizeRequest(250, 200);
+		setSizeRequest(300, 200);
 		
 		addOnDestroy(&quitApp);
 		

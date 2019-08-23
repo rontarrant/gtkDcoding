@@ -75,6 +75,7 @@ class MyDrawingArea : DrawingArea
 {
 	Surface surface;
 	string filename = "./images/foundlings.png";
+	int xOffset = 0, yOffset = 0;
 	
 	this()
 	{
@@ -85,7 +86,7 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		context.setSourceSurface(surface, 0, 0);
+		context.setSourceSurface(surface, xOffset, yOffset);
 		context.paint();
 		
 		return(true);
