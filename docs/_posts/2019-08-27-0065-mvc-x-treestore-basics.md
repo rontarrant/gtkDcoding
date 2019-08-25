@@ -7,14 +7,14 @@ author: Ron Tarrant
 
 ---
 
-#0065: MVC X – TreeStore Basics
+# 0065: MVC X – TreeStore Basics
 
 About a month ago, we broke away from *MVC* to talk about drawing with *Cairo*. Time to go back and pick up where we left off…
 
-##TreeStore Modeling with append()
+## TreeStore Modeling with append()
 
 <!-- 0, 1 -->
-<!-- first occurrence of application and terminal screenshots on a single page -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
 <div class="screenshot-frame">
 	<div class="frame-header">
 		Results of this example:
@@ -108,12 +108,14 @@ About a month ago, we broke away from *MVC* to talk about drawing with *Cairo*. 
 		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_14_treestore_append.d" target="_blank">here</a>.
 	</div>
 </div>
-<!-- end of snippet for first (1st) occurrence of application and terminal screenshots on a single page -->
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
 
-The `TreeStore`, as mentioned in the introduction to this series, isn’t populated in quite the same way as a `ListStore`. There’s all that hierarchy stuff to contend with, but it really boils down to this:
+As mentioned in [the introduction to this series](/2019/06/28/0048-mvc-i-introduction.html), the `TreeStore` isn’t populated in quite the same way as a `ListStore`. There’s all that hierarchy stuff to contend with, but the process really boils down to just this:
 
 - create a row iter, and
 - use that iter to create a child row iter.
+
+And if you wanna add a grandchild, do the same process with the child and etc all the way down to the most distant offspring.
 
 Of course, we also have to populate the rows as we go along, so that changes our process to:
 
@@ -125,27 +127,27 @@ There are two approaches to this process, one uses `append()` and `prepend()`, t
 
 To do a simple population of a parent and child, we just:
 
-{% highlight d %}
-	class DemoTreeStore : TreeStore
+```d
+class DemoTreeStore : TreeStore
+{
+	TreeIter parentIter, childIter;
+	string parentRowString = "Parent";
+	string childRowString = "Child";
+	 
+	this()
 	{
-		TreeIter parentIter, childIter;
-		string parentRowString = "Parent";
-		string childRowString = "Child";
-		 
-		this()
-		{
-			super([GType.STRING, GType.STRING]);
-	
-			parentIter = append(null);
-			setValue(parentIter, 0, parentRowString);
-	
-			childIter = append(parentIter);
-			setValue(childIter, 1, childRowString);
-			
-		} // this()
+		super([GType.STRING, GType.STRING]);
+
+		parentIter = append(null);
+		setValue(parentIter, 0, parentRowString);
+
+		childIter = append(parentIter);
+		setValue(childIter, 1, childRowString);
 		
-	} // class DemoTreeStore
-{% endhighlight d %}
+	} // this()
+	
+} // class DemoTreeStore
+```
 
 So, looking at the constructor, it starts off the same as a `ListStore`, call the super-class constructor and pass it an array of types, one for each column.
 
@@ -153,14 +155,14 @@ But then we make a call to `append()` to set up the parent row. As you can see, 
 
 But, one thing we can’t do with `append(`) is populate the row, so we still need to do that with `setValue()`.
 
-Next, we make another call to `append(`), this time passing it the `parentIter` `append()` created the first time. This gives us two things:
+Next, we make another call to `append(`), this time passing it the `parentIter` created the first time. This gives us two things:
 
 - a second `TreeIter`, and
 - a parent/child relationship between the first `TreeIter` and the second.
 
 In effect, this approach allows us to use whatever `TreeIter` is returned by `append(`) to create the next generation of rows, going from parent to child to grandchild, etc.
 
-##TreeStore with Multiple Top-level Rows
+## TreeStore with Multiple Top-level Rows
 
 <!-- 2, 3 -->
 <!-- second occurrence of application and terminal screenshots on a single page -->
@@ -254,52 +256,52 @@ In effect, this approach allows us to use whatever `TreeIter` is returned by `ap
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_15_append_multiple.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_15_treestore_append_multiple.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screenshots on a single page -->
 
 For completeness sake, here’s a second example that adds multiple children to each of three top-level rows. The relevant code looks like this:
 
-{% highlight d %}
-	this()
-	{
-		super([GType.STRING, GType.STRING]);
+```d
+this()
+{
+	super([GType.STRING, GType.STRING]);
 
-		parentIter = append(null); // first header row
-		setValue(parentIter, parentColumn, "Mom #1");
-		
-		append(childIter, parentIter);
-		setValue(childIter, childColumn, "Kid #1");
-		append(childIter, parentIter);
-		setValue(childIter, childColumn, "Kid #2");
+	parentIter = append(null); // first header row
+	setValue(parentIter, parentColumn, "Mom #1");
+	
+	append(childIter, parentIter);
+	setValue(childIter, childColumn, "Kid #1");
+	append(childIter, parentIter);
+	setValue(childIter, childColumn, "Kid #2");
 
-		parentIter = append(null); // first header row
-		setValue(parentIter, parentColumn, "Dad #1");
-		
-		append(childIter, parentIter);
-		setValue(childIter, childColumn, "Kid #3");
-		append(childIter, parentIter);
-		setValue(childIter, childColumn, "Kid #4");
+	parentIter = append(null); // first header row
+	setValue(parentIter, parentColumn, "Dad #1");
+	
+	append(childIter, parentIter);
+	setValue(childIter, childColumn, "Kid #3");
+	append(childIter, parentIter);
+	setValue(childIter, childColumn, "Kid #4");
 
-		parentIter = append(null); // first header row
-		setValue(parentIter, parentColumn, "Mom #2");
-		
-		append(childIter, parentIter);
-		setValue(childIter, childColumn, "Kid #5");
-		append(childIter, parentIter);
-		setValue(childIter, childColumn, "Kid #6");
-		append(childIter, parentIter);
-		setValue(childIter, childColumn, "Kid #7");
-		
-	} // this()
-{% endhighlight d %}
+	parentIter = append(null); // first header row
+	setValue(parentIter, parentColumn, "Mom #2");
+	
+	append(childIter, parentIter);
+	setValue(childIter, childColumn, "Kid #5");
+	append(childIter, parentIter);
+	setValue(childIter, childColumn, "Kid #6");
+	append(childIter, parentIter);
+	setValue(childIter, childColumn, "Kid #7");
+	
+} // this()
+```
 
 This should be straightforward to work out… we’re appending a parent row followed by the children of that parent, then moving on to the next parent.
 
 But I mentioned earlier that there’s a second way to do this, so let’s look at that…
 
-##TreeStore Modeling with createIter()
+## TreeStore Modeling with createIter()
 
 <!-- 4, 5 -->
 <!-- third occurrence of application and terminal screenshots on a single page -->
@@ -309,7 +311,7 @@ But I mentioned earlier that there’s a second way to do this, so let’s look 
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img4" src="/images/screenshots/018_mvc_mvc_018_16.png" alt="Current example output">		<!-- img# -->
+			<img id="img4" src="/images/screenshots/017_mvc/mvc_017_16.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal4" class="modal">																<!-- modal# -->
@@ -351,7 +353,7 @@ But I mentioned earlier that there’s a second way to do this, so let’s look 
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img5" src="/images/screenshots/018_mvc_mvc_018_16_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img5" src="/images/screenshots/017_mvc/mvc_017_16_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal5" class="modal">																			<!-- modal# -->
@@ -400,31 +402,31 @@ But I mentioned earlier that there’s a second way to do this, so let’s look 
 
 The main difference here is that `createIter()` doesn’t need a null to know it’s creating a top-level row. Have a look:
 
-{% highlight d %}
-	class DemoTreeStore : TreeStore
+```d
+class DemoTreeStore : TreeStore
+{
+	TreeIter parentIter, childIter;
+	string parentRowString = "Parent";
+	string childRowString = "Child";
+	 
+	this()
 	{
-		TreeIter parentIter, childIter;
-		string parentRowString = "Parent";
-		string childRowString = "Child";
-		 
-		this()
-		{
-			super([GType.STRING, GType.STRING]);
-	
-			parentIter = createIter();
-			setValue(parentIter, 0, parentRowString);
-	
-			childIter = createIter(parentIter);
-			setValue(childIter, 1, childRowString);
-			
-		} // this()
+		super([GType.STRING, GType.STRING]);
+
+		parentIter = createIter();
+		setValue(parentIter, 0, parentRowString);
+
+		childIter = createIter(parentIter);
+		setValue(childIter, 1, childRowString);
 		
-	} // class DemoTreeStore
-{% endhighlight d %}
+	} // this()
+	
+} // class DemoTreeStore
+```
 
 Everything is done exactly the same way and in the same order with just that simple substitution, `append()` becomes `creatIter()`, and as mentioned, no null pointer passed to `createIter()`.
 
-##Populating a TreeStore in a Loop with createIter()
+## Populating a TreeStore in a Loop with createIter()
 
 <!-- 6, 7 -->
 <!-- third occurrence of application and terminal screenshots on a single page -->
@@ -434,7 +436,7 @@ Everything is done exactly the same way and in the same order with just that sim
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img6" src="/images/screenshots/018_mvc/mvc_018_17.png" alt="Current example output">		<!-- img# -->
+			<img id="img6" src="/images/screenshots/017_mvc/mvc_017_17.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal6" class="modal">																<!-- modal# -->
@@ -476,7 +478,7 @@ Everything is done exactly the same way and in the same order with just that sim
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img7" src="/images/screenshots/018_mvc/mvc_018_17_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img7" src="/images/screenshots/017_mvc/mvc_017_17_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal7" class="modal">																			<!-- modal# -->
@@ -523,46 +525,46 @@ Everything is done exactly the same way and in the same order with just that sim
 </div>
 <!-- end of snippet for fourth (4th) occurrence of application and terminal screen shots on a single page -->
 
-One last example today and uses `createIter()` as we just did, but take what we did with the multiple top-level rows example and shoving all that into a `for()` loop. Relevant code:
+One last example today and it uses `createIter()` as we just did, but takes what we did with the multiple top-level rows example and shoves it into a `for()` loop. Relevant code:
 
-{% highlight d %}
-	this()
+```d
+this()
+{
+	super([GType.STRING, GType.STRING]);
+
+	for(int i = 0; i < parentHeaders.length; i++)
 	{
-		super([GType.STRING, GType.STRING]);
+		string parentTitle = parentHeaders[i];
+		string[] childFamily = children[i];
 
-		for(int i = 0; i < parentHeaders.length; i++)
+		parentIter = createIter(); // append an empty row to the top level and get an iter back
+		setValue(parentIter, 0, parentTitle);
+
+		for(int j = 0; j < childFamily.length; j++)
 		{
-			string parentTitle = parentHeaders[i];
-			string[] childFamily = children[i];
+			childIter = createIter(parentIter); // passing in parentIter makes this a child row
 
-			parentIter = createIter(); // append an empty row to the top level and get an iter back
-			setValue(parentIter, 0, parentTitle);
-
-			for(int j = 0; j < childFamily.length; j++)
-			{
-				childIter = createIter(parentIter); // passing in parentIter makes this a child row
-
-				string child = children[i][j];
-				setValue(childIter, 1, child);
-			
-			}
-		}
+			string child = children[i][j];
+			setValue(childIter, 1, child);
 		
-	} // this()
-{% endhighlight d %}
+		}
+	}
+	
+} // this()
+```
 
 No real surprises here. In the outside for() loop…
 
 - the parent iter is created as an empty row,
 - its label is stuffed in there with `setValue()`,
 - then the inner `for()` loop kicks in and…
-o creates the `childIter` by passing in the parent iter,
-o picks the appropriate string from the children array of string arrays, and
-o does a `setValue()` to fill in the children.
+	- creates the `childIter` by passing in `parentIter`,
+	- picks the appropriate string from the children array of string arrays, and
+	- does a `setValue()` to fill in the children.
 
-##Conclusion
+## Conclusion
 
-And that’s the basics of the `TreeStore` class. Next time, we’ll dig deeper and get some serious stuff happening.
+And that’s the basics of the `TreeStore` class.
 
 <div class="blog-nav">
 	<div style="float: left;">

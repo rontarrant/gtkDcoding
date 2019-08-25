@@ -69,11 +69,15 @@ So go ahead and get those installed and I’ll wait here…
 
 There are two more things we need to do before we can get down to it. Open the directory (folder, in Windows speak) where the `dmd` binary lives. If you accepted the defaults, it’ll be in:
 
-	C:\D\dmd2\windows\bin\
+```
+C:\D\dmd2\windows\bin\
+```
 
 Find the file:
 
-       sc.ini
+```
+sc.ini
+```
 
 and open it in a text editor.
 
@@ -81,35 +85,53 @@ Look for the `[Environment]` section’s `DFLAGS` variable and:
 
 - type a space at the end of the line,
 - copy and paste (or type) this after the space, including the quotes:
-	
-	`"-I%@P%\..\..\src\gtkd"`
+
+```
+"-I%@P%\..\..\src\gtkd"
+```
 
 Now you need to copy the *GtkD* wrapper files to where the compiler can find them:
 
 - unzip [GtkD-3.9.zip](https://gtkd.org/Downloads/sources/GtkD-3.9.0.zip) (the version numbers may differ by the time you read this, but that’s fine),
 - from the `gtkd-3.9\generated` directory, copy the `gtkd` directory to:
 
-	C:\D\dmd2\src\
+```
+C:\D\dmd2\src\
+```
 
 Thirdly, you’ll build and install the *GtkD* library…
 
 Open a command prompt and make your way to where you unzipped `GtkD-3.9` (you’re in the right place if typing `dir` shows you a file named `Build.d`), and build the library with the command:
 
-	rdmd –m64 Build.d
+```
+rdmd –m64 Build.d
+```
 
 unless you’re on a 32-bit OS, then use:
 
-	rdmd Build.d
+```
+rdmd Build.d
+```
 
 without the 64-bit flag,
 
 Two .lib files will appear right there in the top level directory. Copy them to:
 
-	C:\D\dmd2\windows\lib64\
+```
+C:\D\dmd2\windows\lib64\
+```
 
 for a 32-bit OS, it’ll be:
 
-	C:\D\dmd2\windows\lib\
+```
+C:\D\dmd2\windows\lib\
+```
+
+### Troubleshooting Build.d
+
+If you get a message saying that `msvcr100.dll` cannot be found, you'll have to do a little extra. This usually happens when, during the installation of *DMD*, you opt for *Visual Studio* support, but you don't actually install (or already have installed) *Visual Studio*.
+
+Anyway, if this error appears, go to the [Visual Studio Redistribute Package download page](https://www.microsoft.com/en-us/download/confirmation.aspx?id=14632), download the appropriate version, and install it. Then you should be good to go.
 
 And that should be that. You should be ready to dance the D-dance.
 
@@ -211,44 +233,46 @@ And that should be that. You should be ready to dance the D-dance.
 
 For now, you can copy this code (I highly suggest you type it out unless you’ve got an eidetic memory) and look for the compile instructions below:
 
-{% highlight d %}
-	import std.stdio;
+```d
+import std.stdio;
+
+import gtk.MainWindow;
+import gtk.Main;
+import gtk.Widget;
+
+void main(string[] args)
+{
+	Main.init(args);
+	MainWindow testRigWindow = new MainWindow("Test Rig");
+	testRigWindow.addOnDestroy(delegate void(Widget w) { quitApp(); } );
 	
-	import gtk.MainWindow;
-	import gtk.Main;
-	import gtk.Widget;
-	
-	void main(string[] args)
-	{
-		Main.init(args);
-		MainWindow testRigWindow = new MainWindow("Test Rig");
-		testRigWindow.addOnDestroy(delegate void(Widget w) { quitApp(); } );
+	writeln("Hello GtkD Imperative");
+
+	// Show the window and its contents...
+	testRigWindow.showAll();
 		
-		writeln("Hello GtkD Imperative");
+	// give control over to the gtkD .
+	Main.run();
 	
-		// Show the window and its contents...
-		testRigWindow.showAll();
-			
-		// give control over to the gtkD .
-		Main.run();
-		
-	} // main()
+} // main()
+
+
+void quitApp()
+{
+	// This exists in case we want to do anything
+	// before exiting such as warn the user to
+	// save work.
+	writeln("Bye.");
+	Main.quit();
 	
-	
-	void quitApp()
-	{
-		// This exists in case we want to do anything
-		// before exiting such as warn the user to
-		// save work.
-		writeln("Bye.");
-		Main.quit();
-		
-	} // quitApp()
-{% endhighlight %}
+} // quitApp()
+```
 
 Save this as `test_rig_imperative.d` (or whatever you want, really) and compile it thusly:
 
-	dmd –de –w –m64 –Lgtkd.lib test_rig_imperative.d
+```
+dmd –de –w –m64 –Lgtkd.lib test_rig_imperative.d
+```
 
 After correcting typos so the compiler finishes, type the name without an extension (or you can include the .exe extension if you’re on Windows) to run it.
 

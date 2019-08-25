@@ -126,45 +126,45 @@ One to the first example…
 
 If we look at the `MyRadioMenuItem` class, right off the bat we can see some differences in how the constructors are set up compared to the `CheckMenuItem`:
 
-{% highlight d %}
-	class MyRadioMenuItem : RadioMenuItem
+```d
+class MyRadioMenuItem : RadioMenuItem
+{
+	string message = "The setting state is: ";
+	
+	this(ListSG group, string radioLabel)
 	{
-		string message = "The setting state is: ";
+		super(group, radioLabel);
+		addOnActivate(&choose);
 		
-		this(ListSG group, string radioLabel)
+	} // this()
+	
+	
+	void choose(MenuItem mi)
+	{
+		bool radioMenuItemState;
+		
+		radioMenuItemState = getActive();
+		
+		if(radioMenuItemState == true)
 		{
-			super(group, radioLabel);
-			addOnActivate(&choose);
-			
-		} // this()
-		
-		
-		void choose(MenuItem mi)
-		{
-			bool radioMenuItemState;
-			
-			radioMenuItemState = getActive();
-			
-			if(radioMenuItemState == true)
-			{
-				writeln(getLabel(), " : active");
-				workingCallback();
-			}
-			else
-			{
-				writeln(getLabel(), " : inactive. ");
-			}
+			writeln(getLabel(), " : active");
+			workingCallback();
 		}
-	
-		void workingCallback()
+		else
 		{
-			writeln("Callback called from ", getLabel());
-			
-		} // workingCallback()
+			writeln(getLabel(), " : inactive. ");
+		}
+	}
+
+	void workingCallback()
+	{
+		writeln("Callback called from ", getLabel());
 		
+	} // workingCallback()
 	
-	} // class MyRadioMenuItem
-{% endhighlight %}
+
+} // class MyRadioMenuItem
+```
 
 Firstly, this constructor is designed to build a generic `RadioMenuItem`  (as opposed to one with a function different from others in the same set) and to that end, it takes two arguments:
 
@@ -283,29 +283,29 @@ Now let’s look at the `FileMenu` class…
 
 Here’s what it looks like:
 
-{% highlight d %}
-	class FileMenu : Menu
-	{
-		MyRadioMenuItem radioItem01, radioItem02, radioItem03;
-		ListSG group;
-		
-		this()
-		{
-			super();
-			
-			radioItem01 = new MyRadioMenuItem(group, "Radio 01");
+```d
+class FileMenu : Menu
+{
+	MyRadioMenuItem radioItem01, radioItem02, radioItem03;
+	ListSG group;
 	
-			radioItem02 = new MyRadioMenuItem(radioItem01.getGroup(), "Radio 02");
-			radioItem03 = new MyRadioMenuItem(radioItem01.getGroup(), "Radio 03");
-			
-			append(radioItem01);
-			append(radioItem02);
-			append(radioItem03);
-			
-		} // this()
+	this()
+	{
+		super();
 		
-	} // class FileMenu
-{% endhighlight %}
+		radioItem01 = new MyRadioMenuItem(group, "Radio 01");
+
+		radioItem02 = new MyRadioMenuItem(radioItem01.getGroup(), "Radio 02");
+		radioItem03 = new MyRadioMenuItem(radioItem01.getGroup(), "Radio 03");
+		
+		append(radioItem01);
+		append(radioItem02);
+		append(radioItem03);
+		
+	} // this()
+	
+} // class FileMenu
+```
 
 We’ve worked with the `ListSG group` before, but perhaps without realizing it. If you look back at [the example code for a RadioButton](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_002_13_radiobutton.d), you’ll see that the group is not named up front like it is here. Instead, it's declared and defined somewhere in the inner workings of the first `RadioButton`'s constructor and we only see it as a member of the `radioItem01` object.
 

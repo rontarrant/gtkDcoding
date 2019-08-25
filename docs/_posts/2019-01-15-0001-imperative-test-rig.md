@@ -114,46 +114,46 @@ This version of the test rig is written in the imperative paradigm. There’s a 
 
 ### Imports
 
-{% highlight d %}
-	import std.stdio;
-	import gtk.MainWindow;
-	import gtk.Main;
-	import gtk.Widget;
-{% endhighlight %}
+```d
+import std.stdio;
+import gtk.MainWindow;
+import gtk.Main;
+import gtk.Widget;
+```
 
 Import statements are how *D* pulls things in from other files.
 
 ### main()
 
-{% highlight d %}
-	void main(string[] args)
-{% endhighlight %}
+```d
+void main(string[] args)
+```
 
 Just like *C*, *D* demands a `main()` function unless you’re building a library. This one is defined as:
 
 - having no return value, and
 - takes an array of strings as arguments from the command line.
 
-{% highlight d %}
-	{
-{% endhighlight %}
+```d
+{
+```
 
 Yup, there’s that opening curly brace on a line all by itself, just like I said it would be. You all know what it means, so let’s just carry on.
 
 ### Initialization
 
-{% highlight d %}
-	string windowTitle = "Test Rig";
-	string message = "Hello GtkD Imperative World";
+```d
+string windowTitle = "Test Rig";
+string message = "Hello GtkD Imperative World";
 
-	Main.init(args);
-{% endhighlight %}
+Main.init(args);
+```
 
 After a couple of string variables get set, the last line calls the `init()` function in *GtkD*’s `Main` module. Command line arguments are passed along. We’ll see why sometime down the road.
 
-{% highlight d %}
-	MainWindow testRigWindow = new MainWindow(windowTitle);
-{% endhighlight %}
+```d
+MainWindow testRigWindow = new MainWindow(windowTitle);
+```
 
 This line creates the window the user will see when the application is run. This is the breakdown:
 
@@ -165,9 +165,9 @@ This line creates the window the user will see when the application is run. This
 
 ### Window Close Button
 
-{% highlight d %}
-	testRigWindow.addOnDestroy(delegate void(Widget w) {quitApp();});
-{% endhighlight %}
+```d
+testRigWindow.addOnDestroy(delegate void(Widget w) {quitApp();});
+```
 
 This line breaks down as:
 
@@ -181,61 +181,63 @@ This line breaks down as:
 
 ### Classic Greeting
 
-{% highlight d %}
-	writeln(message);
-{% endhighlight %}
+```d
+writeln(message);
+```
 
 This just spits a line out to the command shell with a classic-style greeting using the other instantiated string from the top of `main()`.
 
 ### Show the Window and its Contents
 
-{% highlight d %}
-	testRigWindow.showAll();
-{% endhighlight %}
+```d
+testRigWindow.showAll();
+```
 
 We now make another call to the window object to show itself.
 
 ### Start the Main Loop		
 
-{% highlight d %}
-	Main.run();
-{% endhighlight %}
+```d
+Main.run();
+```
 
 And here we hand control over to *GTK*’s main loop. In a nutshell, the main loop will keep running until it gets a signal to act on from our application.
 
-{% highlight d %}
-	} // main()
-{% endhighlight %}
+```d
+} // main()
+```
 
 And this is the end of the `main()` function. I like to mark the ends of all functions with a comment stating the function’s name in case it’s off screen. No point scrolling back up if I don’t have to.
 
 ### Callback Function
 
-{% highlight d %}
-	void quitApp()
-{% endhighlight %}
+```d
+void quitApp()
+```
 
 Here we define the `quitApp()` function to have no return value.
 
-{% highlight d %}
-	string exitMessage = "Bye.";
+```d
+string exitMessage = "Bye.";
 
-	writeln(exitMessage);
-{% endhighlight %}
+writeln(exitMessage);
+```
 
 These two lines are straightforward, a string is instantiated and used by `writeln()` to show that we’ve truly interrupted the window’s destroy function, and it does so by spitting out another quick message to the command shell.
 
 ### Clean up and Go
 
-{% highlight d %}
-	Main.quit();
-{% endhighlight %}
+```d
+Main.quit();
+```
 
 And lastly, after we’ve done all we wanna do (perhaps warn the user that the end is nigh) we hand over to Main’s `quit()` function. This makes sure our application makes a clean exit.
 
 As with the last example (and with all of them, really) to compile:
 
-	dmd -de -w -m64 -Lgtkd.lib <filename>.d
+```
+dmd -de -w -m64 -Lgtkd.lib <filename>.d
+```
 
 ### Conclusion
 

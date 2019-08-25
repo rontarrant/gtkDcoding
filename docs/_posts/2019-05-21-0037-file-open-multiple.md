@@ -111,10 +111,10 @@ Whereas last time we used a dialog to open a single file, this time we’ll do t
 
 On top of the extra imports we did with the version for opening a single file, we’ve got two more this time:
 
-{% highlight d %}
-	import sdt.conv;
-	import glib.ListSG;
-{% endhighlight %}
+```d
+import sdt.conv;
+import glib.ListSG;
+```
 
 You’ll see when we get there, but for now just know that these are needed for converting the singly-linked list of `ListSG` nodes to an array of strings… which will end up being our list of file names.
 
@@ -124,56 +124,56 @@ Now, let’s skip to where the differences are between this example and the last
 
 Nothing changes until after we define the dialog, then we have this line:
 
-{% highlight d %}
-	dialog.setSelectMultiple(true);
-{% endhighlight %}
+```d
+dialog.setSelectMultiple(true);
+```
 
 It’s sandwiched between the line that defines the dialog and the one that opens it. *And* it's is the line that tells the dialog to expect multiple-selection of file names while it’s open.
 
 The next difference is inside the `if` statement block:
 
-{% highlight d %}
-	if(response == ResponseType.OK)
+```d
+if(response == ResponseType.OK)
+{
+	ListSG list = dialog.getFilenames();
+		
+	if(list.next is null)
 	{
-		ListSG list = dialog.getFilenames();
+		openFile(to!string(cast(char*)list.data));
+	}
+	else
+	{
+		fileList = list.toArray!string();
 			
-		if(list.next is null)
+		foreach(string filename; fileList)
 		{
-			openFile(to!string(cast(char*)list.data));
-		}
-		else
-		{
-			fileList = list.toArray!string();
-				
-			foreach(string filename; fileList)
-			{
-				openFile(filename);
-			}
+			openFile(filename);
 		}
 	}
-{% endhighlight %}
+}
+```
 
 The `if` still does the same test. Do we have an `OK` response? But from there, it veers off to call a different dialog function with a different return value:
 
-{% highlight d %}
-	ListSG list = dialog.getFilenames();
-{% endhighlight %}
+```d
+ListSG list = dialog.getFilenames();
+```
 
 The list is the singly-linked list we talked about a moment ago.
 
 The next step is to deal with the possibility that the user only selected one file even though multi-select is available:
 
-{% highlight d %}
-	if(list.next is null)
-{% endhighlight %}
+```d
+if(list.next is null)
+```
 
 If only one file name is selected and we don't do this test, things could get ugly when we ask `list.toArray()` to chew on our list of files.
 
 Carrying on, if `list.next` isn’t `null`, then we have a true list which we process in the `else` part of the block:
 
-{% highlight d %}
-	fileList = list.toArray!string();
-{% endhighlight %}
+```d
+fileList = list.toArray!string();
+```
 
 This statement is why we imported `std.conv`. It converts the `ListSG`’s `char*` to an array of strings, each element of which will be a full-path file name. (Compile and run the example, then watch terminal output to see this in action.) 
 

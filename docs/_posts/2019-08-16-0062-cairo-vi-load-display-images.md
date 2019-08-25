@@ -13,11 +13,11 @@ Loading images in *GTK* isn’t difficult, but it takes on two different forms d
 
 On the other hand, once the image is loaded, displaying it is a piece of cake.
 
-Today we look at three examples covering both ways of loading files:
+Today we look at three examples covering both ways of loading files, two that display bitmap images and one for a structured drawing:
 
 - loading and displaying a PNG with `createFromPng()`,
 - loading and displaying a JPeg with `setSourcePixbuf()`, and
-- loading and displaying a TIFF, also using `setSourcePixbuf()`.
+- loading and displaying an SVG, also using `setSourcePixbuf()`.
 
 ## PNG – Load and Display
 
@@ -118,44 +118,45 @@ Today we look at three examples covering both ways of loading files:
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screenshots on a single page -->
 
-We’re still dealing with code that’s very much the same as all other *Cairo* operations we’ve done so far and again, but this time around, we have changes in the constructor as well as the callback.
+We’re still dealing with code that’s very much the same as all other *Cairo* operations we’ve done so far and—as one might expect—we have changes in the constructor as well as the callback.
 
 First, the constructor:
 
-{% highlight d %}
-	this()
-	{
-		surface = ImageSurface.createFromPng(filename);
-		addOnDraw(&onDraw);
-		
-	} // this()
-{% endhighlight d %}
+```d
+this()
+{
+	surface = ImageSurface.createFromPng(filename);
+	addOnDraw(&onDraw);
+	
+} // this()
+```
 
 Here, we need to create a `Surface` and pass it a file name, both of which are declared in the initialization section of the `MyDrawingArea` class:
 
-{% highlight d %}
-	Surface surface;
-	string filename = "./images/foundlings.png";
-{% endhighlight d %}
+```d
+Surface surface;
+string filename = "./images/foundlings.png";
+int xOffset = 0, yOffset = 0;
+```
 
 And when we get to the callback, here’s what happens:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setSourceSurface(surface, 0, 0);
-		context.paint();
-		
-		return(true);
-		
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setSourceSurface(surface, xOffset, yOffset);
+	context.paint();
+	
+	return(true);
+	
+} // onDraw()
+```
 
-The `Context` needs to associate itself with the `Surface` we created and because we want the entire Surface, we pass it `x` and `y` both with values of `0`.
+The `Context` needs to associate itself with the `Surface` we created and because we want the entire Surface, we pass it `xOffset` and `yOffset` (coordinates for the upper-left corner) both with values of `0`.
 
 And that’s all there is to it.
 
-The next method of loading an image can also be used with PNG format, but it will also work with every image format supported by *GTK*.
+The next method of loading an image can also be used with PNG format, but it will also work with every other image format supported by *GTK*.
 
 ## JPeg – Load and Display
 
@@ -259,39 +260,39 @@ The next method of loading an image can also be used with PNG format, but it wil
 
 This time, our initialization section gets a bit longer:
 
-{% highlight d %}
-	Pixbuf pixbuf;
-	int xOffset = 20, yOffset = 20;
-	string filename = "./images/guitar_bridge.jpg;
-{% endhighlight d %}
+```d
+Pixbuf pixbuf;
+int xOffset = 20, yOffset = 20;
+string filename = "./images/guitar_bridge.jpg";
+```
 
-Instead of a `Surface`, we’ll be working with a `Pixbuf`. I also brought the values of `xOffset` and `yOffset` into this section because there are times when we don’t want the image to be loaded in the top-left corner. `xOffset` and `yOffset` take care of that, placing the image’s upper-left corner in a specific spot in the window.
+Instead of a `Surface`, we’ll be working with a `Pixbuf`. I also gave non-zero values to `xOffset` and `yOffset` because there are times when we don’t want the image to be loaded in the top-left corner. `xOffset` and `yOffset` take care of that, placing the image’s upper-left corner in a specific spot in the window.
 
 In the call to `setSizeRequest()` in the `TestRigWindow` constructor, I made the window 40 pixels wider and 50 pixels taller than the photograph so that the offset leaves a border around the image. Note, too, that the bottom border is wider than the rest, adhering to the aesthetic we talked about in [the Grid examples](https://github.com/rontarrant/gtkDcoding/blob/master/009_grid/grid_009_04_aesthetic_layout.d).
 
 The constructor looks like this:
 
-{% highlight d %}
-	this()
-	{
-		pixbuf = new Pixbuf(filename);
-		addOnDraw(&onDraw);
-		
-	} // this()
-{% endhighlight d %}
+```d
+this()
+{
+	pixbuf = new Pixbuf(filename);
+	addOnDraw(&onDraw);
+	
+} // this()
+```
 
 This is actually simpler than the first method we looked at. There’s no `Surface` in the middle of things. It's there; we just don't have to deal with it. We just load that image right into the `Pixbuf` and that makes it possible, in the callback, to do this:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setSourcePixbuf(pixbuf, xOffset, yOffset);
-		context.paint();
-		
-		return(true);
-		
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setSourcePixbuf(pixbuf, xOffset, yOffset);
+	context.paint();
+	
+	return(true);
+	
+} // onDraw()
+```
 
 Substitute a call to `setSourcePixbuf()` for the call to `setSourceSurface()` we used before and from there’s it’s all the same.
 
@@ -305,7 +306,7 @@ Substitute a call to `setSourcePixbuf()` for the call to `setSourceSurface()` we
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img4" src="/images/screenshots/018_cairo/cairo_018.png" alt="Current example output">		<!-- img# -->
+			<img id="img4" src="/images/screenshots/018_cairo/cairo_018_19.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal4" class="modal">																<!-- modal# -->
@@ -347,7 +348,7 @@ Substitute a call to `setSourcePixbuf()` for the call to `setSourceSurface()` we
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img5" src="/images/screenshots/018_cairo/cairo_018_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img5" src="/images/screenshots/018_cairo/cairo_018_19_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal5" class="modal">																			<!-- modal# -->
@@ -389,7 +390,7 @@ Substitute a call to `setSourcePixbuf()` for the call to `setSourceSurface()` we
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_display_svg.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_19_display_svg.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
@@ -399,36 +400,36 @@ As you may guess, this is identical to the second method we used…
 
 The initialization section:
 
-{% highlight d %}
-	Pixbuf pixbuf;
-	Context context;
-	int x, y;
-	string filename = "./images/Envy.svg";
-{% endhighlight d %}
+```d
+Pixbuf pixbuf;
+Context context;
+int xOffset, yOffset;
+string filename = "./images/Envy.svg";
+```
 
 The constructor:
 
-{% highlight d %}
-	this()
-	{
-		pixbuf = new Pixbuf(filename);
-		addOnDraw(&onDraw);
-		
-	} // this()
-{% endhighlight d %}
+```
+this()
+{
+	pixbuf = new Pixbuf(filename);
+	addOnDraw(&onDraw);
+	
+} // this()
+```
 
 And the callback:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setSourcePixbuf(pixbuf, 0, 0);
-		context.paint();
-		
-		return(true);
-		
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setSourcePixbuf(pixbuf, xOffset, yOffset);
+	context.paint();
+	
+	return(true);
+	
+} // onDraw()
+```
 
 And, of course, this method also works for BMP, GIF, TIFF, and any of the other formats we found in the [list formats example](https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_16_list_formats.d).
 
@@ -442,9 +443,7 @@ Until then.
 	<div style="float: left;">
 		<a href="/2019/08/13/0061-cairo-v-toy-text-image-formats.html">Previous: Cairo Toy Text & Image Formats</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/20/0063-cairo-vii-draw-save-images.html">Next: Cairo Draw & Save Images</a>
 	</div>
--->
 </div>

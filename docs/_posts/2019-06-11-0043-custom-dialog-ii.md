@@ -132,62 +132,62 @@ In this example, we’re supplying our own button names.
 
 Here’s the first chunk of the `ScratchDialog` class:
 
-{% highlight d %}
-	class ScratchDialog : Dialog
-	{
-		private:
-		DialogFlags flags = DialogFlags.MODAL;
-		ResponseType[] responseTypes = [ResponseType.YES, ResponseType.NO, ResponseType.ACCEPT];
-		
-		string[] buttonLabels = ["Yes", "No", "In the Barrel"];
-		string titleText = "Do you know where the monkey is?";
-{% endhighlight %}
+```d
+class ScratchDialog : Dialog
+{
+	private:
+	DialogFlags flags = DialogFlags.MODAL;
+	ResponseType[] responseTypes = [ResponseType.YES, ResponseType.NO, ResponseType.ACCEPT];
+	
+	string[] buttonLabels = ["Yes", "No", "In the Barrel"];
+	string titleText = "Do you know where the monkey is?";
+```
 
 We’ve used the `DialogFlag`s type in every `Dialog` example we’ve done to date and it’s mostly useful to make the `Dialog` stay in front of its parent window (that modal stuff) so let’s take a quick look at…
 
 The constructor:
 
-{% highlight d %}
-	public:
-	this(Window _parentWindow)
-	{
-		super(titleText, _parentWindow, flags, buttonLabels, responseTypes);
-		addOnResponse(&doSomething);
-		run();
-		destroy();
-		
-	} // this()
-{% endhighlight %}
+```d
+public:
+this(Window _parentWindow)
+{
+	super(titleText, _parentWindow, flags, buttonLabels, responseTypes);
+	addOnResponse(&doSomething);
+	run();
+	destroy();
+	
+} // this()
+```
 
 Again, it’s pretty much what we’ve used before. So where does this example differ? Right here in the callback function:
 
-{% highlight d %}
-		private:
-		void doSomething(int response, Dialog d)
+```d
+	private:
+	void doSomething(int response, Dialog d)
+	{
+		switch(response)
 		{
-			switch(response)
-			{
-				case ResponseType.YES:
-					writeln("So, you know where the monkey is.");
-				break;
-				
-				case ResponseType.NO:
-					writeln("You don't know where the monkey is.");
-				break;
-				
-				case ResponseType.ACCEPT:
-					writeln("That's a bit on the nose, a monkey in a barrel.");
-				break;
-				
-				default:
-					writeln("Dialog closed.");
-				break;
-			}
+			case ResponseType.YES:
+				writeln("So, you know where the monkey is.");
+			break;
 			
-		} // doSomething()
+			case ResponseType.NO:
+				writeln("You don't know where the monkey is.");
+			break;
+			
+			case ResponseType.ACCEPT:
+				writeln("That's a bit on the nose, a monkey in a barrel.");
+			break;
+			
+			default:
+				writeln("Dialog closed.");
+			break;
+		}
 		
-	} // class ScratchDialog
-{% endhighlight %}
+	} // doSomething()
+	
+} // class ScratchDialog
+```
 
 Like in other `Dialog` examples, we test the response and look for a match. The difference is we have more options and so a switch/case statement is substituted for if/else.
 
@@ -291,15 +291,15 @@ Okay, perhaps that didn’t turn out to be as exciting as it might have been, so
 
 In this example using `StockID`s, you might think because we’re not naming buttons, it’s less work, but it’s about the same:
 
-{% highlight d %}
-	class StockButtonDialog : Dialog
-	{
-		GtkDialogFlags flags = GtkDialogFlags.MODAL;
-		MessageType messageType = MessageType.INFO;
-		StockID[] stockIDs = [StockID.CONNECT, StockID.DISCONNECT];
-		ResponseType[] responseTypes = [ResponseType.YES, ResponseType.NO];
-		string titleText = "Connect or disconnect?";
-{% endhighlight %}
+```d
+class StockButtonDialog : Dialog
+{
+	GtkDialogFlags flags = GtkDialogFlags.MODAL;
+	MessageType messageType = MessageType.INFO;
+	StockID[] stockIDs = [StockID.CONNECT, StockID.DISCONNECT];
+	ResponseType[] responseTypes = [ResponseType.YES, ResponseType.NO];
+	string titleText = "Connect or disconnect?";
+```
 
 Again, you can look in `/generated/gtkd/gtk/c/types.d` for the full list of `StockID`s and there are tons of them. *But!* A lot of them are deprecated, so to lessen the burden of weeding out the ones that aren't, I copied the still-current ones into [another file that you can download if you wish]( https://github.com/rontarrant/gtkDcoding/blob/master/downloads/StockID_precated.d). 
 
@@ -307,16 +307,16 @@ Once you’ve picked out your button names, as before, just instantiate an array
 
 ### The Constructor
 
-{% highlight d %}
-	this(Window _parentWindow)
-	{
-		super(titleText, _parentWindow, flags, stockIDs, responseTypes);
-		addOnResponse(&doSomething);
-		run();
-		destroy();
-		
-	} // this()
-{% endhighlight %}
+```d
+this(Window _parentWindow)
+{
+	super(titleText, _parentWindow, flags, stockIDs, responseTypes);
+	addOnResponse(&doSomething);
+	run();
+	destroy();
+	
+} // this()
+```
 
 The only significant difference in the constructor is that we pass in an array of `StockID` types instead of `buttonLabel` names.
 

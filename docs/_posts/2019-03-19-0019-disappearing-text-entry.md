@@ -112,36 +112,36 @@ Because the `TextRigWindow` class does a drill-down into the Entry to grab the t
 
 Firstly, we’re stuffing our two widgets—a text `Entry` and a `CheckButton`—into a Box and because we want to do that drill-down I mentioned, the `Box` will be manifested in the `EntryBox` class. This allows us, as we’ve done before, to use variables to access the widgets in the `Box`:
 
-{% highlight d %}
-	Entry entry;
-	CheckButton checkButton;
-{% endhighlight %}
+```d
+Entry entry;
+CheckButton checkButton;
+```
 
 We also have the padding and the `CheckButton` label text here:
 
-{% highlight d %}
-	int padding = 5;
-	string checkText = "Visible";
-{% endhighlight %}
+```d
+int padding = 5;
+string checkText = "Visible";
+```
 
 The constructor is very much the same as so many other example we’ve already examined:
 
-{% highlight d %}
-	this()
-	{
-		super(Orientation.VERTICAL, padding);
-		
-		entry = new Entry();
-		
-		checkButton = new CheckButton(checkText);
-		checkButton.addOnToggled(&entryVisible);
-		checkButton.setActive(true);
-				
-		add(entry);
-		add(checkButton);
-		
-	} // this()
-{% endhighlight %}
+```d
+this()
+{
+	super(Orientation.VERTICAL, padding);
+	
+	entry = new Entry();
+	
+	checkButton = new CheckButton(checkText);
+	checkButton.addOnToggled(&entryVisible);
+	checkButton.setActive(true);
+			
+	add(entry);
+	add(checkButton);
+	
+} // this()
+```
 
 First we create the `Box`, passing along the orientation and padding we want, the create the widgets. Hook up the `onToggled` signal and set the default state of the `CheckButton` so it’s checked. Dump them into the box and off we go.
 
@@ -256,13 +256,13 @@ But all I’ve talked about here is just what the `FontButton` does. What about 
 
 It’s so dead simple as to be almost laughable. The only thing I’ll point out is that the `TestRigWindow`’s `endProgram()` function grabs the currently-selected font along with it’s weight and size and dumps all this info to the command shell.
 
-{% highlight d %}
-	void endProgram(Widget w)
-	{
-		writeln("The text entry box holds: ", fontButton.getFontName());
-		
-	} // endProgram()
-{% endhighlight %}
+```d
+void endProgram(Widget w)
+{
+	writeln("The text entry box holds: ", fontButton.getFontName());
+	
+} // endProgram()
+```
 
 And that’s two down.
 

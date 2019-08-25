@@ -115,9 +115,9 @@ Onward to the particulars…
 
 We need to add something to our list of imports:
 
-{% highlight d %}
-	import gtk.FileChooseDialog;
-{% endhighlight %}
+```d
+import gtk.FileChooseDialog;
+```
 
 That’ll get us access to a pre-rolled *GTK* file dialog. It’s won’t be specific to the OS you’re running (with the possible exception of *Linux*) but it'll work and that's what counts, so let’s carry on.
 
@@ -127,28 +127,28 @@ Since we went over how the window is handed down in [the previous post](/2019/05
 
 We’ll look at this in chunks. Here’s the first chunk:
 
-{% highlight d %}
-	class FileOpenItem : MenuItem
-	{
-		string itemLabel = "Open";
-		FileChooserDialog fileChooserDialog;
-		Window parentWindow;
-{% endhighlight %}
+```d
+class FileOpenItem : MenuItem
+{
+	string itemLabel = "Open";
+	FileChooserDialog fileChooserDialog;
+	Window parentWindow;
+```
 
 Before the constructor, we define two new variables:
 
 - the dialog, and
 - the window we’re going modal on.
 
-{% highlight d %}
-		this(Window extParentWindow)
-		{
-			super(itemLabel);
-			addOnActivate(&doSomething);
-			parentWindow = extParentWindow;
-			
-		} // this()
-{% endhighlight %}
+```d
+this(Window extParentWindow)
+{
+	super(itemLabel);
+	addOnActivate(&doSomething);
+	parentWindow = extParentWindow;
+	
+} // this()
+```
 
 Then in the constructor, we:
 
@@ -160,30 +160,30 @@ Then in the constructor, we:
 
 Now let’s look at this `MenuItem`’s workhorse function:
 
-{% highlight d %}
-	void doSomething(MenuItem mi)
+```d
+void doSomething(MenuItem mi)
+{
+	int response;
+	string filename;
+	FileChooserAction action = FileChooserAction.OPEN;
+	
+	FileChooserDialog dialog = new FileChooserDialog("Open a File", parentWindow, action, null, null);
+	response = dialog.run();
+	
+	if(response == ResponseType.OK)
 	{
-		int response;
-		string filename;
-		FileChooserAction action = FileChooserAction.OPEN;
-		
-		FileChooserDialog dialog = new FileChooserDialog("Open a File", parentWindow, action, null, null);
-		response = dialog.run();
-		
-		if(response == ResponseType.OK)
-		{
-			filename = dialog.getFilename();
-			openFile(filename);
-		}
-		else
-		{
-			writeln("cancelled.");
-		}
+		filename = dialog.getFilename();
+		openFile(filename);
+	}
+	else
+	{
+		writeln("cancelled.");
+	}
 
-		dialog.destroy();
-		
-	} // doSomething()
-{% endhighlight %}
+	dialog.destroy();
+	
+} // doSomething()
+```
 
 We set up a few variables before we get going:
 
@@ -209,15 +209,15 @@ First, we make sure the user didn’t cancel by checking against `ResponseType.O
 
 So, if the user selected a file, we grab it using `dialog.getFilename()` and pass it along to the `openFile()` function.
 
-{% highlight d %}
-		void openFile(string filename)
-		{
-			writeln("file to open: ", filename);
-			
-		} // openFile()
+```d
+	void openFile(string filename)
+	{
+		writeln("file to open: ", filename);
 		
-	} // class FileOpenItem
-{% endhighlight %}
+	} // openFile()
+	
+} // class FileOpenItem
+```
 
 Had this been a production-ready example, we’d do something besides spit out the filename to the terminal.
 

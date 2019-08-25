@@ -10,13 +10,13 @@ author: Ron Tarrant
 # 0040: Dialogs VI - The MessageDialog
 
 <div class="screenshot-frame">
-	<div class="frame-header">
-		Results of this example:
-	</div>
-	<div class="frame-screenshot">
-		<figure>
-			<img id="img0" src="/images/screenshots/013_dialogs/dialog_013_06.png" alt="Current example output">		<!-- img# -->
-			
+   <div class="frame-header">
+      Results of this example:
+   </div>
+   <div class="frame-screenshot">
+      <figure>
+         <img id="img0" src="/images/screenshots/013_dialogs/dialog_013_06.png" alt="Current example output">      <!-- img# -->
+         
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
 				<span class="close0">&times;</span>															<!-- close# -->
@@ -107,15 +107,15 @@ As usual, take a gander at the import statements to see what’s changed there.
 
 Most of the code in the example files, lately, has been support code, stuff needed so we can get at the topic of the day. Like this time, except for the `ClicheMessageDialog` (derived from `MessageDialog`) we’ve seen all this before, so let’s get right to the different bit:
 
-{% highlight d %}
-	class ClicheMessageDialog : MessageDialog
-	{
-		GtkDialogFlags flags = GtkDialogFlags.MODAL;
-		MessageType messageType = MessageType.INFO;
-		ButtonsType buttonType = ButtonsType.OK;
-		int responseID;
-		string messageText = "It was a cliché love triangle,\nIt was heaven on Earth, but with hell to pay.\nA cliché love triangle,\nThey're as common as dirt, or so they say,\nA cliché love triangle,\nHe went off half-cocked and got blown away.";
-{% endhighlight %}
+```d
+class ClicheMessageDialog : MessageDialog
+{
+	GtkDialogFlags flags = GtkDialogFlags.MODAL;
+	MessageType messageType = MessageType.INFO;
+	ButtonsType buttonType = ButtonsType.OK;
+	int responseID;
+	string messageText = "It was a cliché love triangle,\nIt was heaven on Earth, but with hell to pay.\nA cliché love triangle,\nThey're as common as dirt, or so they say,\nA cliché love triangle,\nHe went off half-cocked and got blown away.";
+```
 	
 ## Initializations
 
@@ -123,18 +123,18 @@ I’m going to do things a little out of order here. We’ll talk about those fl
 
 ## The Constructor
 
-{% highlight d %}
-		this(Window _parentWindow)
-		{
-			super(_parentWindow, flags, messageType, buttonType, messageText);
-			setTitle("Alert the User:");
-			setSizeRequest(200, 150);
-			addOnResponse(&doSomething);
-			run();
-			destroy();
-			
-		} // this()
-{% endhighlight %}
+```d
+this(Window _parentWindow)
+{
+	super(_parentWindow, flags, messageType, buttonType, messageText);
+	setTitle("Alert the User:");
+	setSizeRequest(200, 150);
+	addOnResponse(&doSomething);
+	run();
+	destroy();
+	
+} // this()
+```
 
 Unlike the other `Dialog`s we’ve worked with so far, we’ve derived a new class and so the constructor passes the list of arguments to the super-class. I did it this way to cut back on cumbersome function calls to the `MessageDialog`. If we did this without the derived class, instead of `setTitle()`, `setSizeRequest()`, etc. we’d be calling `myMessageDialog.setTitle()`, yada-yada-yada.
 
@@ -142,15 +142,15 @@ The point is, because of the derivation, we can do all this stuff in the constru
 
 ## The Callback
 
-{% highlight d %}
-		void doSomething(int response, Dialog d)
-		{
-			writeln("Dialog closed.");
-			
-		} // doSomething()
+```d
+	void doSomething(int response, Dialog d)
+	{
+		writeln("Dialog closed.");
 		
-	} // class ClicheMessageDialog
-{% endhighlight %}
+	} // doSomething()
+	
+} // class ClicheMessageDialog
+```
 
 Nothing really worth talking about here. We’ve been here, done that, and (I don’t know about you, but I’ve) got the T-shirt.
 
@@ -177,10 +177,10 @@ If you’ve never done this before, it could be a bit of a head-scratcher, but o
 
 My first thought was that an `enum` is an `int` type variable and ultimately, that may be so, but you don’t initialize them that way. Instead, you declare them using the name of the `enum`, like this:
 
-{% highlight d %}
-	GtkDialogFlags flags = GtkDialogFlags.MODAL;
-	MessageType messageType = MessageType.INFO;
-{% endhighlight %}
+```d
+GtkDialogFlags flags = GtkDialogFlags.MODAL;
+MessageType messageType = MessageType.INFO;
+```
 
 From there, you can use the `flags` and `messageType` variables the same way you use any other.
 
@@ -194,18 +194,18 @@ And a note of caution: `GtkDialogFlags` and `GioDialogFlags` are both aliased to
 
 Another thing I’ve been meaning to talk about for a while is function inheritance. When a class is derived from another, it naturally inherits all the functions of the parent class. If you take another look at the constructor, you’ll see several examples:
 
-{% highlight d %}
-	this(Window _parentWindow)
-	{
-		super(_parentWindow, flags, messageType, buttonType, messageText);
-		setTitle("Alert the User:");
-		setSizeRequest(200, 150);
-		addOnResponse(&doSomething);
-		run();
-		destroy();
-		
-	} // this()
-{% endhighlight %}
+```d
+this(Window _parentWindow)
+{
+	super(_parentWindow, flags, messageType, buttonType, messageText);
+	setTitle("Alert the User:");
+	setSizeRequest(200, 150);
+	addOnResponse(&doSomething);
+	run();
+	destroy();
+	
+} // this()
+```
 
 - `setTitle()` is inherited from the `Window` class,
 - `setSizeRequest()` – also from `Window`,
@@ -219,21 +219,21 @@ Keep that in mind when you wanna do some extra little thing with a widget. Take 
 
 We talked earlier about a folder named `generated` and it’s sub-folder `gtkd` (or on *Linux*: `/usr/include/dmd/gtkd3/`) If you look at any of the wrapper modules found there, you’ll see something like (this is from `generated\gtkd\gtk\MessageDialog.d`):
 
-{% highlight d %}
-	class MessageDialog : Dialog
-{% endhighlight %}
+```d
+class MessageDialog : Dialog
+```
 
 `MessageDialog` inherits from `Dialog`. Now if you look at `Dialog.d`, you’ll see:
 
-{% highlight d %}
-	class Dialog : Window
-{% endhighlight %}
+```d
+class Dialog : Window
+```
 
 And in `Window.d`:
 
-{% highlight d %}
-	class Window : Bin
-{% endhighlight %}
+```d
+class Window : Bin
+```
 
 And `Bin` inherits from `Container`, etc., etc. Thus you can trace your way back to `Widget` and you’ll then know all the most useful functions inherited from, and therefore usable as you write your code.
 

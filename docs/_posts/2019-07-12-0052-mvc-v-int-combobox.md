@@ -119,36 +119,36 @@ A `ListStore` needs:
 
 So what we did last time, we just do it twice to get two columns. And what’s the second column for if we don’t see it in the `ComboBox`? Whatever extra data you may want to have associated with the items that do show. Here’s the `DayListStore` class:
 
-{% highlight d %}
-	class DayListStore : ListStore
+```d
+class DayListStore : ListStore
+{
+	string[] days = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	int[] dayNumbers = [1, 2, 3, 4, 5, 6, 7];
+	GType[] columnTypes = [GType.STRING, GType.INT];
+	TreeIter treeIter;
+	int dayColumn = 0, numberColumn = 1;
+
+	this()
 	{
-		string[] days = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-		int[] dayNumbers = [1, 2, 3, 4, 5, 6, 7];
-		GType[] columnTypes = [GType.STRING, GType.INT];
-		TreeIter treeIter;
-		int dayColumn = 0, numberColumn = 1;
-	
-		this()
+		string day;
+		int number;
+		
+		super(columnTypes);
+		
+		for(int i; i < days.length; i++)
 		{
-			string day;
-			int number;
+			day = days[i];
+			number = lettersInDays[i];
 			
-			super(columnTypes);
-			
-			for(int i; i < days.length; i++)
-			{
-				day = days[i];
-				number = lettersInDays[i];
-				
-				treeIter = createIter();
-				setValue(treeIter, dayColumn, day);
-				setValue(treeIter, numberColumn, number);
-			}
-	
-		} // this()
-	
-	} // class DayListStore
-{% endhighlight %}
+			treeIter = createIter();
+			setValue(treeIter, dayColumn, day);
+			setValue(treeIter, numberColumn, number);
+		}
+
+	} // this()
+
+} // class DayListStore
+```
 
 We have three arrays in the initialization section:
 
@@ -162,16 +162,16 @@ The constructor is pretty much the same as before except that in the `for()` loo
 
 In the initialization section of the `DayComboBox`, we have:
 
-{% highlight d %}
-	class DayComboBox : ComboBox
-	{
-		private:
-		bool entryOn = false;
-		DayListStore _dayListStore;
-		CellRendererText cellRendererText;
-		int visibleColumn = 1;
-		int activeItem = 0;
-{% endhighlight %}
+```d
+class DayComboBox : ComboBox
+{
+	private:
+	bool entryOn = false;
+	DayListStore _dayListStore;
+	CellRendererText cellRendererText;
+	int visibleColumn = 1;
+	int activeItem = 0;
+```
 
 A couple of things I’ll point out here…
 
@@ -179,17 +179,17 @@ First...
 
 Even though the data in our `ListStore` is integers, we’re using a `CellRendererText`. We follow through in the initialization section where we declare it:
 
-{% highlight d %}
-	CellRendererText cellRendererText;
-{% endhighlight %}
+```d
+CellRendererText cellRendererText;
+```
 
 And in these three lines from the constructor where we instantiate it, pack it into the `ComboBox`, and deal with the attributes:
 
-{% highlight d %}
-	cellRendererText = new CellRendererText();
-	packStart(cellRendererText, false);
-	addAttribute(cellRendererText, "text", visibleColumn);
-{% endhighlight %}
+```d
+cellRendererText = new CellRendererText();
+packStart(cellRendererText, false);
+addAttribute(cellRendererText, "text", visibleColumn);
+```
 
 Second…
 

@@ -118,26 +118,26 @@ That’s it.
 
 The TreeView class looks like this:
 
-{% highlight d %}
-	class SignTreeView : TreeView
+```d
+class SignTreeView : TreeView
+{
+	SignTreeViewColumn signTreeViewColumn;
+	SignListStore signListStore;
+	
+	this()
 	{
-		SignTreeViewColumn signTreeViewColumn;
-		SignListStore signListStore;
+		super();
 		
-		this()
-		{
-			super();
-			
-			signListStore = new SignListStore();
-			setModel(signListStore);
-			
-			signTreeViewColumn = new SignTreeViewColumn();
-			appendColumn(signTreeViewColumn);
-			
-		} // this()
+		signListStore = new SignListStore();
+		setModel(signListStore);
 		
-	} // class SignTreeView
-{% endhighlight d %}
+		signTreeViewColumn = new SignTreeViewColumn();
+		appendColumn(signTreeViewColumn);
+		
+	} // this()
+	
+} // class SignTreeView
+```
 
 Once the `TreeView` is instantiated by calling the super-class constructor, we set up and assign the `Model`/Store (`signListStore`), then instantiate and append one or more `TreeViewColumn`s.
 
@@ -145,27 +145,27 @@ Once the `TreeView` is instantiated by calling the super-class constructor, we s
 
 The `ListStore` is used the same way with a `TreeView` as it was with the `ComboBox` and so we have:
 
-{% highlight d %}
-	class SignListStore : ListStore
+```d
+class SignListStore : ListStore
+{
+	string[] items = ["bike", "bump", "cow", "deer", "crumbling cliff", "man with a stop sign", "skidding vehicle"];
+	TreeIter treeIter;
+	
+	this()
 	{
-		string[] items = ["bike", "bump", "cow", "deer", "crumbling cliff", "man with a stop sign", "skidding vehicle"];
-		TreeIter treeIter;
+		super([GType.STRING]);
 		
-		this()
+		for(int i; i < items.length; i++)
 		{
-			super([GType.STRING]);
-			
-			for(int i; i < items.length; i++)
-			{
-				string message = items[i];
-				treeIter = createIter();
-				setValue(treeIter, 0, message);
-			}
-	
-		} // this()
-	
-	} // class SignListStore
-{% endhighlight d %}
+			string message = items[i];
+			treeIter = createIter();
+			setValue(treeIter, 0, message);
+		}
+
+	} // this()
+
+} // class SignListStore
+```
 
 This is the exact same `SignListStore` we used with a `ComboBox` in [an earlier example]( https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_06_combobox_liststore.d), thus illustrating how the same data can be used in different ways by different `Widget`s.
 
@@ -175,24 +175,24 @@ And that just leaves…
 
 Which looks like this:
 
-{% highlight d %}
-	class SignTreeViewColumn : TreeViewColumn
+```d
+class SignTreeViewColumn : TreeViewColumn
+{
+	CellRendererText cellRendererText;
+	string columnTitle = "Sign Message";
+	string attributeType = "text";
+	int columnNumber = 0; // numbering starts at '0'
+
+	this()
 	{
-		CellRendererText cellRendererText;
-		string columnTitle = "Sign Message";
-		string attributeType = "text";
-		int columnNumber = 0; // numbering starts at '0'
-	
-		this()
-		{
-			cellRendererText = new CellRendererText();
-			
-			super(columnTitle, cellRendererText, attributeType, columnNumber);
-			
-		} // this()
-	
-	} // class SignTreeViewColumn
-{% endhighlight d %}
+		cellRendererText = new CellRendererText();
+		
+		super(columnTitle, cellRendererText, attributeType, columnNumber);
+		
+	} // this()
+
+} // class SignTreeViewColumn
+```
 
 When we populated a `ComboBox`, a `CellRenderer` was packed directly into the `ComboBox`. But with a `TreeView`:
 
@@ -327,9 +327,7 @@ Next time around we’ll look at a second multi-column `TreeView` example which 
 	<div style="float: left;">
 		<a href="/2019/07/16/0053-mvc-vi-image-combobox.html">Previous: A ComboBox with Images</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/07/23/0055-mvc-viii-dynamically-loading-a-treeview.html">Next: TreeView - Dynamic Population</a>
 	</div>
--->
 </div>

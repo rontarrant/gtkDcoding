@@ -114,7 +114,7 @@ To get the `TextView` into a `Window` in any kind of useful way also means using
 
 So, we stuff a `ScrolledWindow` into our usual `AppBox`, and stuff the `TextView` into the `ScrolledWindow`… like this:
 
-{% highlight d %}
+```d
 class AppBox : Box
 {
 	bool expand = true, fill = true;
@@ -148,7 +148,7 @@ class ScrolledTextWindow : ScrolledWindow
 	} // this()
 	
 } // class ScrolledTextWindow
-{% endhighlight %}
+```
 
 ###TextBuffer
 
@@ -160,7 +160,7 @@ We don’t have to instantiate the `TextBuffer` because the `TextView` already h
 
 But in this example, we’ll do it the simplest way:
 
-{% highlight d %}
+```d
 class MyTextView : TextView
 {
 	TextBuffer textBuffer;
@@ -175,7 +175,7 @@ class MyTextView : TextView
 	} // this()
 
 } // class MyTextView
-{% endhighlight %}
+```
 
 Within the `MyTextView` constructor, a quick call to `getBuffer()` gives us access and from there, we give it some content with `setText()`.
 
@@ -282,7 +282,7 @@ But for thoroughness sake, let’s also look at a shared `TextBuffer`…
 
 Now, this gets a bit more complex. At some point in the hierarchy, we’ve got to establish a pointer to the first `TextView`'s `TextBuffer` and pass it along to the others. I decided to do this at the `AppBox` level which makes the most sense to me:
 
-{% highlight d %}
+```d
 class AppBox : Box
 {
 	bool expand = true, fill = true;
@@ -308,13 +308,13 @@ class AppBox : Box
 	} // this()
 
 } // class AppBox
-{% endhighlight %}
+```
 
 Grabbing a pointer to the first `TextView`'s `TextBuffer` proves to be a two-step operation because the result of `getChild()` has to be `cast()` as a `TextView`. If not, the result is a generic `Widget` which doesn't give us access to the `TextView`'s `getBuffer()` function.
 
 And to complete this multi-association, the `DependentTextView` class looks like this:
 
-{% highlight d %}
+```d
 class DependentTextView : TextView
 {
 	this(TextBuffer sharedTextBuffer)
@@ -324,7 +324,7 @@ class DependentTextView : TextView
 	} // this()
 	
 } // class DependentTextView
-{% endhighlight %}
+```
 
 At this level, things are dead simple. The constructor takes the `TextBuffer` pointer as an argument and passes it along to the super-constructor.
 

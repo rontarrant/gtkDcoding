@@ -110,21 +110,21 @@ This is a continuation of our Cairo briefs…
 
 This is the callback:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		float x = 320, y = 180, radius = 40;
-	       float start = 0.7, finish = 2.44;
-			
-	 	// draw the arc
-		context.setLineWidth(3);
-		context.arc(x, y, radius, start, finish);
-		context.fill();
-	
-		return(true);
-			
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	float x = 320, y = 180, radius = 40;
+       float start = 0.7, finish = 2.44;
+		
+ 	// draw the arc
+	context.setLineWidth(3);
+	context.arc(x, y, radius, start, finish);
+	context.fill();
+
+	return(true);
+		
+} // onDraw()
+```
 
 This is like the other `arc()` calls, but followed with a `fill()` command instead of `stroke()`.
 
@@ -229,33 +229,33 @@ But we can also do some interesting stuff by issuing a bunch of `arc()` calls in
 
 The cartoon smile is done like this:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		float xPos1 = 213, yPos1 = 160, xPos2, yPos2;
-		float xPos3, yPos3, radius1 = 40, radius2 = 10;
-		
-		// draw the first arc (the mouth shape)
-		context.setLineWidth(3);
-		context.arc(xPos1, yPos1, radius1, 0.7, 2.44);
-		context.stroke();
-		// find the right corner of the mouth shape
-		xPos2 = xPos1 + cos(0.7) * radius1;
-		yPos2 = yPos1 + sin(0.7) * radius1;
-		// draw the second arc
-		context.arc(xPos2, yPos2, radius2, 4.2, 0.7);
-		context.stroke();
-		// find the left corner of the mouth shape
-		xPos3 = xPos1 + cos(2.44) * radius1;
-		yPos3 = yPos1 + sin(2.44) * radius1;
-		// draw the third arc
-		context.arc(xPos3, yPos3, radius2, 2.6, 5.6);
-		context.stroke();
-		
-		return(true);
-		
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	float xPos1 = 213, yPos1 = 160, xPos2, yPos2;
+	float xPos3, yPos3, radius1 = 40, radius2 = 10;
+	
+	// draw the first arc (the mouth shape)
+	context.setLineWidth(3);
+	context.arc(xPos1, yPos1, radius1, 0.7, 2.44);
+	context.stroke();
+	// find the right corner of the mouth shape
+	xPos2 = xPos1 + cos(0.7) * radius1;
+	yPos2 = yPos1 + sin(0.7) * radius1;
+	// draw the second arc
+	context.arc(xPos2, yPos2, radius2, 4.2, 0.7);
+	context.stroke();
+	// find the left corner of the mouth shape
+	xPos3 = xPos1 + cos(2.44) * radius1;
+	yPos3 = yPos1 + sin(2.44) * radius1;
+	// draw the third arc
+	context.arc(xPos3, yPos3, radius2, 2.6, 5.6);
+	context.stroke();
+	
+	return(true);
+	
+} // onDraw()
+```
 
 ### The X and Y Positions
 
@@ -267,19 +267,19 @@ These are the centers of our three circles around which we’ll draw three arcs.
 
 Finding the end of an arc is pretty straightforward. Looking back at the start angle of the mouth arc and the radius, we calculate the right corner of the mouth like this:
 
-{% highlight d %}
-	xPos2 = xPos1 + cos(0.7) * radius1;
-	yPos2 = yPos1 + sin(0.7) * radius1;
-{% endhighlight d %}
+```d
+xPos2 = xPos1 + cos(0.7) * radius1;
+yPos2 = yPos1 + sin(0.7) * radius1;
+```
 
 I’ll throw in a quick reminder that arcs are drawn in a clockwise direction which is why this calculation yields `xPos2`/`yPos2`, the right corner.
 
 Same for the left corner except we use the end position of the arc:
 
-{% highlight d %}
-	xPos3 = xPos1 + cos(2.44) * radius1;
-	yPos3 = yPos1 + sin(2.44) * radius1;
-{% endhighlight d %}
+```d
+xPos3 = xPos1 + cos(2.44) * radius1;
+yPos3 = yPos1 + sin(2.44) * radius1;
+```
 
 Follow each of those pairs of calculations with a call to arc() with a smaller radius and we’re done.
 
@@ -493,7 +493,6 @@ They're the start and end points of the 'smile' arc and they're in radians. A qu
 </div>
 <!-- end of snippet for fourth (4th) occurrence of application and terminal screenshots on a single page -->
 
-
 In *Cairo* terms, the difference between an arc and curve is:
 
 - an arc uses a center ‘anchor’ point as a base and two positions around a circle as start and end points, whereas
@@ -538,9 +537,7 @@ And that’s about it for curves. Next time, we’ll dig into what’s referred 
 	<div style="float: left;">
 		<a href="/2019/08/06/0059-cairo-iii-circles-and-arcs.html">Previous: Cairo Circles and Arcs</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/13/0061-cairo-v-toy-text-image-formats.html">Next: Cairo Toy Text & Image Formats</a>
 	</div>
--->
 </div>

@@ -211,9 +211,9 @@ But since these examples—button press and button release—are so similar, we'
 
 Yeah, I’m not talking about this year’s Volvo or Toyota, but an import statement… this, to be exact:
 
-{% highlight d %}
-	import gdk.Event;
-{% endhighlight %}
+```d
+import gdk.Event;
+```
 
 We’ve seen the first one before, but I’ve included it here to remind everyone that it’s imported from the `gdk` side of things, not `gtk`.
 
@@ -232,39 +232,39 @@ Just below that import statement is a comment to let you know where we find `Eve
 
 First, let’s look at the constructor:
 
-{% highlight d %}
-	this()
-	{
-		super(title);
-		addOnDestroy(delegate void(Widget w) { quitApp(); } );
-		
-		addOnButtonPress(&onMousePress);
-		
-		showAll();
-		
-	} // this()
-{% endhighlight %}
+```d
+this()
+{
+	super(title);
+	addOnDestroy(delegate void(Widget w) { quitApp(); } );
+	
+	addOnButtonPress(&onMousePress);
+	
+	showAll();
+	
+} // this()
+```
 
 The change of note is the call to `addOnButtonPress()`. This hooks our `onMousePress()` function to the `BUTTON_PRESS` event.
 
 And that function looks like this:
 
-{% highlight d %}
-	public bool onMousePress(Event event, Widget widget)
+```d
+public bool onMousePress(Event event, Widget widget)
+{
+	bool value = false;
+	
+	if(event.type == EventType.BUTTON_PRESS)
 	{
-		bool value = false;
-		
-		if(event.type == EventType.BUTTON_PRESS)
-		{
-			GdkEventButton* mouseEvent = event.button;
-			pressReport(mouseEvent.button);
-			value = true;
-		}
+		GdkEventButton* mouseEvent = event.button;
+		pressReport(mouseEvent.button);
+		value = true;
+	}
 
-		return(value);
-		
-	} // onMousePress()
-{% endhighlight %}
+	return(value);
+	
+} // onMousePress()
+```
 
 Notice the function definition. We’re not returning a void, but a Boolean. And the arguments have changed, too. We’re passing in an event as well as the originating `Widget`, in this case it’s the Window underlying our `TestRigWindow` derivative.
 
@@ -276,23 +276,23 @@ All that stuff about a value that’s returned from this function has to do with
 
 You’ve likely noticed the call to pressReport() and here’s that function:
 
-{% highlight d %}
-	void pressReport(uint mouseButtonNumber)
-	{
-		writeln("Button # ", mouseButtonNumber, action);
+```d
+void pressReport(uint mouseButtonNumber)
+{
+	writeln("Button # ", mouseButtonNumber, action);
 
-	} // pressReport()
-{% endhighlight %}
+} // pressReport()
+```
 
 I put this in here mostly to illustrate that mouse buttons are identified by *unsigned integers*, something we may need to know sometime down the road.
 
 And that variable *action*? It’s a string defined at the top of `TestRigWindow`. Here is a list of the variables defined there:
 
-{% highlight d %}
-	string title = "Test Rig";
-	string buy = "Bye";
-	string action = " was pressed.";
-{% endhighlight %}
+```d
+string title = "Test Rig";
+string buy = "Bye";
+string action = " was pressed.";
+```
 
 Nothing out of the ordinary except for the playful misspellings.
 

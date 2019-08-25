@@ -114,7 +114,7 @@ But even more interesting is that you can stuff other things into the `Box`.
 
 So, I whipped up an example with a second message. All it took was a `Separator` and a second Label which changed the `MyStatusbar` class to this:
 
-{% highlight d %}
+```d
 class MyStatusbar : Statusbar
 {
 	Separator separatorV1;
@@ -142,7 +142,7 @@ class MyStatusbar : Statusbar
 	} // this()
 
 } // class MyStatusBar
-{% endhighlight %}
+```
 
 Thing to keep in mind when stuffing extra widgets into the `Statusbar`:
 
@@ -153,7 +153,7 @@ Thing to keep in mind when stuffing extra widgets into the `Statusbar`:
 
 The last two points are illustrated by the `onMotion()` callback in `MyDrawingArea`:
 
-{% highlight d %}
+```d
 public bool onMotion(Event event, Widget widget)
 {
 	// make sure we're not reacting to the wrong event
@@ -177,7 +177,7 @@ public bool onMotion(Event event, Widget widget)
 	return(true);
 		
 } // onMotion()
-{% endhighlight %}
+```
 
 Notice that because the `Statusbar` is monitoring and reporting on `Event`s in the `DrawingArea`, both of these `Label`s have to be updated by this callback. But, we do have one more example to look at…
 
@@ -282,13 +282,13 @@ Notice that because the `Statusbar` is monitoring and reporting on `Event`s in t
 
 The `Statusbar` signal, unless we import information from other application objects, only allows access to whatever the `Statusbar` itself incorporates. The most obvious bit of data is the context ID, so we add a second `Separator` and a third `Label` to the `MyStatusbar` constructor and then hook up the signal:
 
-{% highlight d %}
+```d
 addOnTextPushed(&doSomething);
-{% endhighlight %}
+```
 
 Then we can write a callback to handle the data we glean from the `Statusbar`:
 
-{% highlight d %}
+```d
 void doSomething(uint contextID, string statusMessage, Statusbar statusbar)
 {
 	string message = format("Context ID: %d", contextID); 
@@ -296,7 +296,7 @@ void doSomething(uint contextID, string statusMessage, Statusbar statusbar)
 	directionLabel.setText(contextDescriptionDown);
 
 } // doSomething()
-{% endhighlight %}
+```
 
 Now the `Statusbar` as three sections:
 
@@ -310,12 +310,11 @@ And that’s just about everything I can think of to do with the lowly `Statusba
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/2019/09/06/0070-statusbar.html">Previos: Statusbar Basics</a>
+		<a href="/2019/09/06/0070-statusbar.html">Previous: Statusbar Basics</a>
 	</div>
 <!--
 	<div style="float: right;">
-		<a href="/2019/09/06/0072-?????????.html">Next: ???????????</a>
+		<a href="/2019/09/20/0072-frame-part-i.html">Next: Frames, Part I</a>
 	</div>
 -->
 </div>
-

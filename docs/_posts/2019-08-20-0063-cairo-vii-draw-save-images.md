@@ -11,22 +11,24 @@ author: Ron Tarrant
 
 So, this time we’re going to draw some images and then save them.
 
-***Warning**: These images are not high art. (You’ve now been officially cautioned.)*
+***Warning**: These images are* not *high art and may or may not cause harm to your artistic sensibilities. (You’ve now been officially cautioned.)*
 
-In fact, because all these images are just a rectangle with text overlaid, I’m not even going to go over how they’re drawn. I’ll just say this one thing…
+In fact, because each of these images is no more than a rectangle with text slapped on top, I’m not even going to go over how they’re drawn (we've been there before, after all). I’ll just say this one thing…
 
-If you want a draw operation to be on top of another—like text overlaid on a rectangle, for instance—foreground draw operations need to be done after background draw operations. You probably sorted that out on your own, but there it is anyway.
+If you want one draw operation to be in front of another—such as text overlaid on a rectangle, like in this case—foreground draw operations need to be done *after* background draw operations. You probably sorted that out on your own, but there it is anyway.
 
 ## Saving Images – Basic Procedure
 
-Every time we save an image, we carry out the same set of operations:
+Every time we save an image, we carry out the same steps:
 
-- find the size of the `DrawingArea`,
-- grab the area of the `DrawingArea`’s `Surface` that we want to save and stuff it into a buffer,
-- set up the save options and option values for the image (this is different for each format), and
+- use a `GtkAllocation` to get the size of the `DrawingArea`,
+- create a `Pixbuf` (image buffer, in other words),
+- copy a rectangular chunk of the `DrawingArea` into the `Pixbuf`,
+- set up the image's save options,
+- set the values for those options (which are different for each format), and
 - save the image.
 
-But since each has their own save options, we’ll look at a bunch of them starting with…
+But since each image format has its own—often different—save options, we’ll look at each individually starting with…
 
 ## Saving a JPeg
 
@@ -129,66 +131,56 @@ But since each has their own save options, we’ll look at a bunch of them start
 
 Here’s the initialization section:
 
-{% highlight d %}
-	GtkAllocation size;
-	Pixbuf pixbuf;
-	string[] jpegOptions, jpegOptionValues;
-	int xOffset = 0, yOffset = 0;
-{% endhighlight d %}
+```d
+GtkAllocation size;
+Pixbuf pixbuf;
+string[] jpegOptions, jpegOptionValues;
+int xOffset = 0, yOffset = 0;
+```
 
-We used a `GtkAllocation` object before, the main purpose of which is to get the size allocated to a `Widget`—in this case, the `DrawingArea`—so we don’t have to guess.
+Everything mentioned above is accounted for here except that I haven’t bothered with width and height variables. Why? Because these examples all save the entire `DrawingArea` and so we use the `width` and `height` fields from the `GtkAllocation` as we’ll see in a moment.
 
-The `Pixbuf` is the buffer we’re going to stuff the image into as we prepare to save and the rest are pretty obvious:
-
-- `jpegOptions`: an array of save options,
-- `jpegOptionValues`: an array of values for each of the save options,
-- `xOrigin`, `yOrigin`: the offset from the top-left corner of the `DrawingArea`.
-
-Note: If `xOffset` and `yOffset` are non-zero, we won’t be saving the entire image.
-
-I haven’t bothered with width and height variables here because these examples all save the entire `DrawingArea` and so we use the width and height fields from the `GtkAllocation` as we’ll see in a moment.
-
-The constructor is so mundane as to warrant skipping in this discussion… so we shall.
+The constructor is so mundane as to warrant skipping over it in this discussion… so we shall.
 
 As for the callback, we’ll leave out the drawing bit and go right for the meat:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	// set up and draw a rectangle
+	// (see code file)
+
+	// set up and draw text
+	// (see code file)
+
+	getAllocation(size); // grab the widget's size as allocated by its parent
+	pixbuf = getFromSurface(context.getTarget(), xOffset, yOffset, size.width, size.height); // the contents of the surface go into the buffer
+
+	// prep and write JPEG file
+	jpegOptions = ["quality"]; 
+	jpegOptionValues = ["100"];
+
+	if(pixbuf.savev("./rectangle_hw.jpg", "jpeg", jpegOptions, jpegOptionValues))
 	{
-		// set up and draw a rectangle
-		// (see code file)
-
-		// set up and draw text
-		// (see code file)
-
-		getAllocation(size); // grab the widget's size as allocated by its parent
-		pixbuf = getFromSurface(context.getTarget(), xOffset, yOffset, size.width, size.height); // the contents of the surface go into the buffer
-
-		// prep and write JPEG file
-		jpegOptions = ["quality"]; 
-		jpegOptionValues = ["100"];
-
-		if(pixbuf.savev("./rectangle_hw.jpg", "jpeg", jpegOptions, jpegOptionValues))
-		{
-			writeln("JPEG was successfully saved.");
-			
-		}
-
-		return(true);
+		writeln("JPEG was successfully saved.");
 		
-	} // onDraw()
-{% endhighlight d %}
+	}
 
-And here’s what’s happening:
+	return(true);
+	
+} // onDraw()
+```
+
+And there you see the steps we talked about above:
 
 - get the size of the `DrawingArea` with `getAllocation(size)`,
-- grab either the entire `Surface` or a subsurface (by supplying a non-zero offset) and stuff it into a buffer (that’s the `Pixbuf`),
+- grab the `Surface` (or a subsurface by supplying non-zero offset and/or a width and height less than the `Surface`'s full `width` and `height`) and stuff it into a `Pixbuf`,
 - set up the *JPeg* save options and their values, and
 - call `Pixbuf.savev()` to save the image.
 
 ### Save Options for JPeg
 
-- "icc-profile" - the complete ICC profile encoded into base64
+- "icc-profile" - the complete ICC profile encoded into base64 (which, you'll note, I didn't bother with)
 - "quality" - 0 … 100
 - “x-dpi” - dots per inch (reasonable values: 50 to 300)
 - “y-dpi” - dots per inch (same as x-dpi: 50 to 300)
@@ -205,7 +197,7 @@ And that’s all there is to it.
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/018_cairo/cairo_018.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/018_cairo/cairo_018_21.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -247,7 +239,7 @@ And that’s all there is to it.
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/018_cairo/cairo_018_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="/images/screenshots/018_cairo/cairo_018_21_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->
@@ -289,7 +281,7 @@ And that’s all there is to it.
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_draw_save_png.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_21_draw_save_png.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screenshots on a single page -->
@@ -297,22 +289,23 @@ And that’s all there is to it.
 
 Since everything else is the same, let’s skip right to the part of the callback that does the saving:
 
-{% highlight d %}
-	// prep and write to a PNG
-	pngOptions = ["x-dpi", "y-dpi", "compression"];
-	pngOptionValues = ["150", "150", "1"];
-		
-	if(pixbuf.savev("./rectangle_hw.png", "png", pngOptions, pngOptionValues))
-	{
-		writeln("PNG was successfully saved.");
-		
-	}
-{% endhighlight d %}
+```d
+// prep and write to a PNG
+pngOptions = ["x-dpi", "y-dpi", "compression"];
+pngOptionValues = ["150", "150", "1"];
+	
+if(pixbuf.savev("./rectangle_hw.png", "png", pngOptions, pngOptionValues))
+{
+	writeln("PNG was successfully saved.");
+	
+}
+```
 
 So the differences here (compared to our first example) are:
 
-- set up the PNG save options, and
-- the values for each.
+- set up the PNG save options,
+- assign values for each option, and
+- save with the `.png` file extension.
 
 ### Save Options for PNG
 
@@ -332,7 +325,7 @@ So the differences here (compared to our first example) are:
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img4" src="/images/screenshots/018_cairo/cairo_018.png" alt="Current example output">		<!-- img# -->
+			<img id="img4" src="/images/screenshots/018_cairo/cairo_018_22.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal4" class="modal">																<!-- modal# -->
@@ -374,7 +367,7 @@ So the differences here (compared to our first example) are:
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img5" src="/images/screenshots/018_cairo/cairo_018_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img5" src="/images/screenshots/018_cairo/cairo_018_22_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal5" class="modal">																			<!-- modal# -->
@@ -416,7 +409,7 @@ So the differences here (compared to our first example) are:
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_draw_save_tiff.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_22_draw_save_tiff.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
@@ -424,16 +417,16 @@ So the differences here (compared to our first example) are:
 
 As with the others, just set up the options and save:
 
-{% highlight d %}
-	tiffOptions = ["bits-per-sample", "compression"];
-	tiffOptionValues = ["8", "1"];
+```d
+tiffOptions = ["bits-per-sample", "compression"];
+tiffOptionValues = ["8", "1"];
+	
+if(pixbuf.savev("./rectangle_hw.tiff", "tiff", tiffOptions, tiffOptionValues))
+{
+	writeln("TIFF was successfully saved.");
 		
-	if(pixbuf.savev("./rectangle_hw.tiff", "tiff", tiffOptions, tiffOptionValues))
-	{
-		writeln("TIFF was successfully saved.");
-			
-	}
-{% endhighlight d %}
+}
+```
 
 ### Save Options for TIFF
 
@@ -458,7 +451,7 @@ As with the others, just set up the options and save:
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img6" src="/images/screenshots/018_cairo/cairo_018.png" alt="Current example output">		<!-- img# -->
+			<img id="img6" src="/images/screenshots/018_cairo/cairo_018_23.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal6" class="modal">																<!-- modal# -->
@@ -500,7 +493,7 @@ As with the others, just set up the options and save:
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img7" src="/images/screenshots/018_cairo/cairo_018_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img7" src="/images/screenshots/018_cairo/cairo_018_23_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal7" class="modal">																			<!-- modal# -->
@@ -542,20 +535,20 @@ As with the others, just set up the options and save:
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_draw_save_bmp.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_23_draw_save_bmp.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for fourth (4th) occurrence of application and terminal screenshots on a single page -->
 
 Everything’s the same, but there are no listed options so you have to pass in two empty arrays like this:
 
-{% highlight d %}
-	if(pixbuf.savev("./rectangle_hw.bmp", "bmp", [], []))
-	{
-		writeln("BMP was successfully saved.");
-			
-	}
-{% endhighlight d %}
+```d
+if(pixbuf.savev("./rectangle_hw.bmp", "bmp", [], []))
+{
+	writeln("BMP was successfully saved.");
+		
+}
+```
 
 ## Conclusion
 

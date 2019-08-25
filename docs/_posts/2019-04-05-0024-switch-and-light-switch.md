@@ -114,34 +114,34 @@ And what we’ll be playing with is the GTK `Switch` widget. First, we’ll get 
 
 I won’t bother going over the `TestRigWindow` stuff; I think we all know the ins and outs of that by now. So, let’s start with:
 
-{% highlight d %}
-	import gtk.Switch;
-{% endhighlight %}
+```d
+import gtk.Switch;
+```
 
 That’s the only extra import statement you’ll need for the first example, the plain-jane switch. Now let’s look at the class derived from the `Switch`:
 
-{% highlight d %}
-	class MySwitch : Switch
+```d
+class MySwitch : Switch
+{
+	this()
 	{
-		this()
-		{
-			super();
-			addOnStateSet(&onStateSet);
-			
-		} // this()
-	
-	
-		bool onStateSet(bool state, Switch s)
-		{
-			setState(state);
-			writeln("State set is: ", getState(), " and state is: ", state);
-			
-			return(true);
-			
-		} // onStateSet()
+		super();
+		addOnStateSet(&onStateSet);
 		
-	} // class MySwitch
-{% endhighlight %}
+	} // this()
+
+
+	bool onStateSet(bool state, Switch s)
+	{
+		setState(state);
+		writeln("State set is: ", getState(), " and state is: ", state);
+		
+		return(true);
+		
+	} // onStateSet()
+	
+} // class MySwitch
+```
 
 For the most part, this is pretty standard stuff. We’ve seen derived classes before and we’ve seen signals hooked up, but what we haven’t seen is an argument list that seems out of order. Take a look at the `onStateSet()` function.
 

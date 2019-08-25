@@ -126,10 +126,10 @@ But I wanted to bring a little something to the table, so I reworked them as a s
 First, we declare the variables:
 
 ```d
-	private:
-	TreeIter parentIterAsia, childIterChina, childIterJapan;
-	TreeIter parentIterEurope, childIterUK, childIterFrance;
-	TreeIter parentIterNorthAmerica, childIterCanada, childIterUSA;
+private:
+TreeIter parentIterAsia, childIterChina, childIterJapan;
+TreeIter parentIterEurope, childIterUK, childIterFrance;
+TreeIter parentIterNorthAmerica, childIterCanada, childIterUSA;
 ```
 
 Then in the constructor, we lay out the Model:

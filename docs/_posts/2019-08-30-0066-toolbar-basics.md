@@ -7,27 +7,27 @@ author: Ron Tarrant
 
 ---
 
-#0066: Toolbar Basics
+# 0066: Toolbar Basics
 
-The old way of doing a *GTK* Toolbar has fallen by the wayside, mostly because the `StockID`s used to put icons in a `ToolButton` are almost all deprecated. At least, all the standard `StockID`s such as `COPY`, `CUT`, `PASTE`, etc. are all being left behind.
+The old way of doing a *GTK* `Toolbar` has fallen by the wayside, mostly because the `StockID`s once used to put icons in a `ToolButton` are almost all deprecated. At least, all the standard `StockID`s such as `COPY`, `CUT`, `PASTE`, etc. are all being left behind.
 
 So, that leaves us with two choices, either the `IconTheme` route—which looks daunting—or rolling our own… sort of. Because everything we need to know to use the second option has been covered already, I’ve chosen to go that route.
 
-And just to put your mind at rest, we still get a usable Toolbar that looks like a `Toolbar`. And there’s really no bad news here. We also get to use custom images on our `ToolButton`s.
+And just to put your mind at rest, we still get a usable `Toolbar` that looks like a `Toolbar`. And there’s really no bad news here. We also get to use custom images on our `ToolButton`s.
 
 So without further ado, here’s…
 
-##The Basics of Building a Toolbar
+## The Basics of Building a Toolbar
 
 <!-- 0, 1 -->
-<!-- first occurrence of application and terminal screenshots on a single page -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
 <div class="screenshot-frame">
 	<div class="frame-header">
 		Results of this example:
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/010_toolbar/toolbar_010_01.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/010_bar/bar_010_02.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -69,7 +69,7 @@ So without further ado, here’s…
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/010_toolbar/toolbar_010_01_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/010_bar/bar_010_02_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -111,38 +111,46 @@ So without further ado, here’s…
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/010_toolbar/toolbar_010_01_basic.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/010_bar/bar_010_02_toolbar_basic.d" target="_blank">here</a>.
 	</div>
 </div>
-<!-- end of snippet for first (1st) occurrence of application and terminal screenshots on a single page -->
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
 
-The idea is to instantiate a standard `Button`, stuff it into a `ToolButton` along with a text string to act as a Label, and `insert()` the `ToolButton` into the `Toolbar`. And from a theoretical (as well as technical) point of view, that’s all there is to it.
+Before we start, I'll mention that a `ToolButton` is a container that holds a standard `Button` and a standard `Label`.
 
-###A Standard Button
+To populate a `Toolbar`:
+
+- build one or more `ToolButton`s,
+- stuff the `ToolButton`(s) with standard `Button`s and text strings to be passed along to the `Label`(s), and
+- `insert()` the `ToolButton` into the `Toolbar`.
+
+And that’s all there is to it.
+
+### A Standard Button
 
 Would look like this:
 
 ```d
-	class PasteButton : Button
-	{
-		Image image;
-		string imageFilename = "images/edit-paste-symbolic.symbolic.png";
-			
-		this()
-		{
-			super();
-			
-			image = new Image(imageFilename);
-			add(image);
-			
-		} // this()
+class PasteButton : Button
+{
+	Image image;
+	string imageFilename = "images/edit-paste-symbolic.symbolic.png";
 		
-	} // class PasteButton
+	this()
+	{
+		super();
+		
+		image = new Image(imageFilename);
+		add(image);
+		
+	} // this()
+	
+} // class PasteButton
 ```
 
 And it gets stuffed into…
 
-###The ToolButton
+### The ToolButton
 
 Which looks like this:
 
@@ -170,11 +178,11 @@ class PasteToolButton : ToolButton
 } // class PasteToolButton
 ```
 
-Notice that this is where we hook up the signal. If you try hooking it up to the embedded `Button`, it’ll get lost in the hierarchy because `ToolButton` doesn’t inherit the `getChild()` function.
+Notice that this is where we hook up the signal. If you try hooking it up to the embedded `Button`, it’ll get lost in the hierarchy because `ToolButton` doesn’t inherit the `getChild()` function. Also, clicking on the embedded `Label` is addressed automatically when we hook up the `ToolButton`'s signal.
 
 *Note: There are two other overloads of the `ToolButton` constructor, but as mentioned earlier, because the `StockID` enum has been deprecated, they won’t do much to future-proof applications. And since* GTK 4.0 *is just around the corner, we’re better off leaving them alone.*
 
-###The Toolbar Class
+### The Toolbar Class
 
 Here’s what it looks like:
 
@@ -232,13 +240,15 @@ class AppBox : Box
 } // class AppBox
 ```
 
-Although, you’ll want to give the `Box` an `Orientation.VERTICA`L… unless you’re going for a unique layout, that is.
+Although, you’ll want to give the `Box` an `Orientation.VERTICAL`… unless you’re going for a unique layout, that is.
 
-##Conclusion
+## Conclusion
 
 And those are the mysteries of the `Toolbar`.
 
 Later on, we’ll look at how to hook up `ToolButton`s to the singleton `AccelGroup` we built for a `Menu` system so we have a `ToolButton`, `MenuItem` and accelerator key all calling a single callback.
+
+But next time, we'll look at the `Expander`.
 
 <div class="blog-nav">
 	<div style="float: left;">

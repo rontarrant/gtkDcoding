@@ -107,38 +107,38 @@ This one’s both easy and tricky. Let me explain…
 
 Having a gander at the first example, you’ll see that the only new-ish bit is this:
 
-{% highlight d %}
-	class MySpinButton : SpinButton
+```d
+class MySpinButton : SpinButton
+{
+	double minimum = -50;
+	double maximum = 50;
+	double step = 2;
+
+	Adjustment adjustment;
+	double initialValue = 4;
+	double pageIncrement = 8;
+	double pageSize = 0;
+	
+	this()
 	{
-		double minimum = -50;
-		double maximum = 50;
-		double step = 2;
-	
-		Adjustment adjustment;
-		double initialValue = 4;
-		double pageIncrement = 8;
-		double pageSize = 0;
+		super(minimum, maximum, step);
 		
-		this()
-		{
-			super(minimum, maximum, step);
-			
-			adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
-			setAdjustment(adjustment);
-			addOnValueChanged(&valueChanged);
-			
-		} // this()
+		adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
+		setAdjustment(adjustment);
+		addOnValueChanged(&valueChanged);
 		
-		
-		void valueChanged(SpinButton sb)
-		{
-			writeln(getValue());
-			
-		} // valueChanged()
+	} // this()
 	
 	
-	} // class MySpinButton
-{% endhighlight %}
+	void valueChanged(SpinButton sb)
+	{
+		writeln(getValue());
+		
+	} // valueChanged()
+
+
+} // class MySpinButton
+```
 
 One thing to notice here is that the `SpinButton` doesn’t work alone. It needs…
 
@@ -267,47 +267,47 @@ With a `SpinButton`, the `Adjustment`'s `pageSize` is best set to ‘0.’
 
 In our second example, you’ll find (among others) the `FloatSpinButton` class:
 
-{% highlight d %}
-	class FloatSpinButton : SpinButton
+```d
+class FloatSpinButton : SpinButton
+{
+	float minimum = -1.0;
+	float maximum = 1.0;
+	double step = .1;
+
+	Adjustment adjustment;
+	float initialValue = 0.0;
+	float pageIncrement = 0.5;
+	float pageSize = 0.0;
+	
+	this()
 	{
-		float minimum = -1.0;
-		float maximum = 1.0;
-		double step = .1;
-	
-		Adjustment adjustment;
-		float initialValue = 0.0;
-		float pageIncrement = 0.5;
-		float pageSize = 0.0;
+		super(minimum, maximum, step);
+		adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
+		setAdjustment(adjustment);
+		setWrap(true);
 		
-		this()
-		{
-			super(minimum, maximum, step);
-			adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
-			setAdjustment(adjustment);
-			setWrap(true);
-			
-			addOnValueChanged(&valueChanged);
-	//		addOnOutput(&outputValue);
-			
-		} // this()
-	
-		void valueChanged(SpinButton sb)
-		{
-			writeln("Float Standard", getValue());
-			
-		} // valueChanged()
-	
+		addOnValueChanged(&valueChanged);
+//		addOnOutput(&outputValue);
 		
-		bool outputValue(SpinButton sb)
-		{
-			writeln("Float Standard: ", getValue());
-			
-			return(false);
-			
-		} // outputValue()
+	} // this()
+
+	void valueChanged(SpinButton sb)
+	{
+		writeln("Float Standard", getValue());
 		
-	} // class FloatSpinButton
-{% endhighlight %}
+	} // valueChanged()
+
+	
+	bool outputValue(SpinButton sb)
+	{
+		writeln("Float Standard: ", getValue());
+		
+		return(false);
+		
+	} // outputValue()
+	
+} // class FloatSpinButton
+```
 
 The objective here is to use and show floating point values. But, notice that all the initialized parameters for the `Adjustment` are floats except for `step`. This is because of an oddity in the `Adjustment` object that seems to take two different forms, but rather than bore you with a long explanation, I’ll just give you the short version and jump right to the workaround for the current use-case…
 
@@ -339,31 +339,31 @@ So, rule of thumb for using the `SpinButton` or any other widget using the `Adju
 
 Now have a look at the first chunk of the `PrecisionSpinButton` class:
 
-{% highlight d %}
-	class PrecisionSpinButton : SpinButton
+```d
+class PrecisionSpinButton : SpinButton
+{
+	double minimum = -1.0;
+	double maximum = 1.0;
+	double step = .001;
+	uint precision = 3;
+
+	Adjustment adjustment;
+	double initialValue = 0.0;
+	double pageIncrement = 0.01;
+	double pageSize = 0.0;
+	
+	this()
 	{
-		double minimum = -1.0;
-		double maximum = 1.0;
-		double step = .001;
-		uint precision = 3;
-	
-		Adjustment adjustment;
-		double initialValue = 0.0;
-		double pageIncrement = 0.01;
-		double pageSize = 0.0;
+		super(minimum, maximum, step);
+		adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
+		setAdjustment(adjustment);
+		setDigits(precision);
+
+		addOnValueChanged(&valueChanged); // NO double-fire
+//		addOnOutput(&outputValue); // double-fire
 		
-		this()
-		{
-			super(minimum, maximum, step);
-			adjustment = new Adjustment(initialValue, minimum, maximum, step, pageIncrement, pageSize);
-			setAdjustment(adjustment);
-			setDigits(precision);
-	
-			addOnValueChanged(&valueChanged); // NO double-fire
-	//		addOnOutput(&outputValue); // double-fire
-			
-		} // this()
-{% endhighlight %}
+	} // this()
+```
 
 In the initialization section, we’ve got another variable: `precision`.
 

@@ -116,27 +116,27 @@ This widget was mostly invented so programmers could reanimate dead things like 
 
 There is baggage, however. We need to build a colour from scratch before we engage the `EventBox`’s `overrideBackgroundColor()` function. Here’s what all that looks like:
 
-{% highlight d %}
-	class RedLabel : EventBox
+```d
+class RedLabel : EventBox
+{
+	Label label;
+	RGBA redishColor;
+	// extra spaces at start and end so it doesn't look crowded
+	string labelText = "  Label with Red Background  ";
+	
+	this()
 	{
-		Label label;
-		RGBA redishColor;
-		// extra spaces at start and end so it doesn't look crowded
-		string labelText = "  Label with Red Background  ";
+		super();
+		label = new Label(labelText);
+		redishColor = new RGBA(1.0, 0.420, 0.557, 1.0);
+		overrideBackgroundColor(StateFlags.NORMAL, redishColor);
 		
-		this()
-		{
-			super();
-			label = new Label(labelText);
-			redishColor = new RGBA(1.0, 0.420, 0.557, 1.0);
-			overrideBackgroundColor(StateFlags.NORMAL, redishColor);
-			
-			add(label);
-			
-		} // this()
+		add(label);
 		
-	} // class RedLabel
-{% endhighlight %}
+	} // this()
+	
+} // class RedLabel
+```
 
 You’ll notice that we’re deriving a new class from the `EventBox`. We could go a step further down the OOP trail and do this up as an interface and derive the `RedLabel` from there, leaving us with a pattern for creating `Label`s of other colours down the road. But for now, this’ll do.
 
@@ -261,77 +261,77 @@ Moving right along...
 
 That’s this thing:
 
-{% highlight d %}
-	class MarkupSwitchButton : Button
+```d
+class MarkupSwitchButton : Button
+{
+	MarkupLabel muLabel;
+	
+	this()
 	{
-		MarkupLabel muLabel;
+		super();
+		muLabel = new MarkupLabel();
+		add(muLabel);
 		
-		this()
-		{
-			super();
-			muLabel = new MarkupLabel();
-			add(muLabel);
-			
-			addOnClicked(&switchStuff);
-	
-		} // this()
-	
-	
-		void switchStuff(Button b)
-		{
-			muLabel.markupSwitch();
-			
-		} // switchStuff()
+		addOnClicked(&switchStuff);
+
+	} // this()
+
+
+	void switchStuff(Button b)
+	{
+		muLabel.markupSwitch();
 		
-	} // class MarkupSwitchButton
-{% endhighlight %}
+	} // switchStuff()
+	
+} // class MarkupSwitchButton
+```
 
 The class is based on a `Button` and we drop in the fancied-up `Label`. Then we point the callback at the `markupSwitch()` function, a member function of the `MarkupLabel` class… which looks like this:
 
-{% highlight d %}
-	class MarkupLabel : Label
+```d
+class MarkupLabel : Label
+{
+	string markupText = "<i>Fancy</i> <b>Schmancy</b>";
+	string onMessage = "Markup is ON.";
+	string offMessage = "Markup is OFF.";
+	string currentStateMessage;
+	
+	this()
 	{
-		string markupText = "<i>Fancy</i> <b>Schmancy</b>";
-		string onMessage = "Markup is ON.";
-		string offMessage = "Markup is OFF.";
-		string currentStateMessage;
+		super(markupText);
+		setUseMarkup(true);
+		currentStateMessage = onMessage;
+		markupState();
 		
-		this()
+	} // this()
+	
+	// a function to turn markup on and off
+	void markupSwitch()
+	{
+		if(getUseMarkup() == true)
 		{
-			super(markupText);
+			setUseMarkup(false);
+			currentStateMessage = offMessage;
+		}
+		else
+		{
 			setUseMarkup(true);
 			currentStateMessage = onMessage;
-			markupState();
-			
-		} // this()
-		
-		// a function to turn markup on and off
-		void markupSwitch()
-		{
-			if(getUseMarkup() == true)
-			{
-				setUseMarkup(false);
-				currentStateMessage = offMessage;
-			}
-			else
-			{
-				setUseMarkup(true);
-				currentStateMessage = onMessage;
-			}
+		}
+
+		markupState();
+
+	} // markupSwitch()
 	
-			markupState();
 	
-		} // markupSwitch()
+	void markupState()
+	{
+		writeln(currentStateMessage);
 		
-		
-		void markupState()
-		{
-			writeln(currentStateMessage);
-			
-		} // markupState()
-	
-	} // class MarkupLabel
-{% endhighlight %}
+	} // markupState()
+
+} // class MarkupLabel
+```
 
 Most of this (as is usual by now) is standard stuff. Some notable exceptions being:
 

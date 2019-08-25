@@ -21,7 +21,7 @@ When animating on a `DrawingArea`, the drawing is done more or less the same way
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/018_cairo/cairo_018_24.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/018_cairo/cairo_018_24.gif" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -114,17 +114,17 @@ In this first example, we’ll slap down the numbers 1 through 24 in sequence an
 
 Here’s the initialization section of the `MyDrawingArea` object:
 
-{% highlight d %}
-	Timeout _timeout;
-	int number = 1;
-	int fps = 1000 / 24; // 24 frames per second
-{% endhighlight d %}
+```d
+Timeout _timeout;
+int number = 1;
+int fps = 1000 / 24; // 24 frames per second
+```
 
 The `Timeout` class is part of `glib`, so it’s imported with:
 
-{% highlight d %}
-	import glib.Timeout;
-{% endhighlight d %}
+```d
+import glib.Timeout;
+```
 
 at the top of the file.
 
@@ -137,12 +137,12 @@ And the `fps` variable is an easy way to set the frames per second. Timing is in
 
 Setting up the `Timeout` is the first thing you do in the callback and it’s done like this:
 
-{% highlight d %}
-	if(_timeout is null)
-	{
-		_timeout = new Timeout(fps, &onFrameElapsed, false);
-	}
-{% endhighlight d %}
+```d
+if(_timeout is null)
+{
+	_timeout = new Timeout(fps, &onFrameElapsed, false);
+}
+```
 
 The `Timeout` object acts very much like a signal hook up. In our example, once the `Timeout` is instantiated:
 
@@ -152,32 +152,32 @@ The `Timeout` object acts very much like a signal hook up. In our example, once 
 
 And here’s what `Timeout`’s “callback” looks like:
 
-{% highlight d %}
-	bool onFrameElapsed()
-	{
-		GtkAllocation size;
-		getAllocation(size);
-			
-		queueDrawArea(size.x, size.y, size.width, size.height);
-			
-		return(true);
+```d
+bool onFrameElapsed()
+{
+	GtkAllocation size;
+	getAllocation(size);
 		
-	} // onFrameElapsed()
-{% endhighlight d %}
+	queueDrawArea(size.x, size.y, size.width, size.height);
+		
+	return(true);
+	
+} // onFrameElapsed()
+```
 
-We grab a `GtkAllocation` like we have before so we can get the dimensions of the `DrawingArea`, then use those dimensions to redraw. We could, if we wanted, refresh only a small portion of the `DrawingArea`, but it’s a rare case that needs such attention to detail.
+We grab a `GtkAllocation` like we have before so we can get the dimensions of the `DrawingArea`, then use those dimensions to redraw. We could, if we wanted, refresh only a small portion of the `DrawingArea`, but we'll talk more about that another time.
 
 As for the actual drawing itself, we do this:
 
-{% highlight d %}
-	if(number > 24) // number range: 1 - 24
-	{
-		number = 1;
-	}
+```d
+if(number > 24) // number range: 1 - 24
+{
+	number = 1;
+}
 
-	context.showText(number.to!string());
-	number++;
-{% endhighlight d %}
+context.showText(number.to!string());
+number++;
+```
 
 And that’s in the `onDraw` callback… which is the real callback attached to the `DrawingArea` as opposed to the sort-of callback attached to the `Timeout`.
 
@@ -193,7 +193,7 @@ We don’t have to set up a `for()` loop because the `Timeout` repeats 24 times 
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/018_cairo/cairo_018_25.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/018_cairo/cairo_018_25.gif" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -284,40 +284,40 @@ We don’t have to set up a `for()` loop because the `Timeout` repeats 24 times 
 
 This example is very similar to redrawing text. In the initialization section we have:
 
-{% highlight d %}
-	Timeout _timeout;
-	float arcLength = PI / 12;
-	int fps = 1000 / 12; // 12 frames per second
-{% endhighlight d %}
+```d
+Timeout _timeout;
+float arcLength = PI / 12;
+int fps = 1000 / 12; // 12 frames per second
+```
 
 This time, we’re running at 12 frames per second. The length of arc we’ll draw each frame is `PI / 12` and because we’re working in radians and a full circle is `2PI`, that means our circle will be redrawn once every two seconds.
 
 The `onFrameElapsed()` `Timeout` callback is the same as before, so let’s have a gander at the `onDraw` callback:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	if(_timeout is null)
 	{
-		if(_timeout is null)
-		{
-			_timeout = new Timeout(fps, &onFrameElapsed, false);
-			
-		}
+		_timeout = new Timeout(fps, &onFrameElapsed, false);
 		
-		if(arcLength > (PI * 2))
-		{
-			arcLength = PI / 12;
-		}
+	}
+	
+	if(arcLength > (PI * 2))
+	{
+		arcLength = PI / 12;
+	}
 
-		arcLength += (PI / 12);
+	arcLength += (PI / 12);
 
-		context.setLineWidth(3);
-		context.arc(320, 180, 40, 0, arcLength);
-		context.stroke(); // and draw
-		
-		return(true);
-		
-	} // onDraw()
-{% endhighlight d %}
+	context.setLineWidth(3);
+	context.arc(320, 180, 40, 0, arcLength);
+	context.stroke(); // and draw
+	
+	return(true);
+	
+} // onDraw()
+```
 
 The action starts with the `if()` statement when we measure out a length of arc to draw, then add it to the length of arc we already have. Then we set up the line width, set up the `arc()` function and do the stroke.
 
@@ -333,7 +333,7 @@ Pretty simple. And, of course, you could do any other drawing in there as well. 
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img4" src="/images/screenshots/018_cairo/cairo_018_26.png" alt="Current example output">		<!-- img# -->
+			<img id="img4" src="/images/screenshots/018_cairo/cairo_018_26.gif" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal4" class="modal">																<!-- modal# -->
@@ -424,38 +424,38 @@ Pretty simple. And, of course, you could do any other drawing in there as well. 
 
 And now for the *pièce de resistance*, loading a bunch of frames and flipping through them at 12 fps… which simulates shooting on twos. That’s animator parlance meaning that each image is shot twice and played back at 24 fps. Anyway, here’s the initialization section:
 
-{% highlight d %}
-	int currentFrame = 0;
-	int fps = 1000 / 12; // 6 frames per second
-	Timeout _timeout;
-	Pixbuf[] pixbufs;
-	int numberOfFrames = 75;
-{% endhighlight d %}
+```d
+int currentFrame = 0;
+int fps = 1000 / 12; // 6 frames per second
+Timeout _timeout;
+Pixbuf[] pixbufs;
+int numberOfFrames = 75;
+```
 
 This time around, we’re going to keep track of our current frame. And there’s also an array of `Pixbuf`s to store all the individual images that will be our frames.
 
 The constructor plays a bigger part in things this time:
 
-{% highlight d %}
-	this()
+```d
+this()
+{
+	for(int i = 0; i < numberOfFrames; i++)
 	{
-		for(int i = 0; i < numberOfFrames; i++)
+		if(i < 10)
 		{
-			if(i < 10)
-			{
-				pixbufs ~= new Pixbuf("./images/sequence/one00" ~ i.to!string() ~ ".tif");
-			}
-			else
-			{
-				pixbufs ~= new Pixbuf("./images/sequence/one0" ~ i.to!string() ~ ".tif");
-			}
-	
-		} // for()
-			
-		addOnDraw(&onDraw);
-			
-	} // this()
-{% endhighlight d %}
+			pixbufs ~= new Pixbuf("./images/sequence/one00" ~ i.to!string() ~ ".tif");
+		}
+		else
+		{
+			pixbufs ~= new Pixbuf("./images/sequence/one0" ~ i.to!string() ~ ".tif");
+		}
+
+	} // for()
+		
+	addOnDraw(&onDraw);
+		
+} // this()
+```
 
 The `for()` loop loads all the frames and inside that, we build the file names through string concatenation (which is less trouble than copying an pasting a whole crap-load of file names into an array).
 
@@ -463,29 +463,29 @@ Once the files are all loaded snug into their `Pixbuf`s, we hook up the signal a
 
 Again, the `Timeout`’s callback is the same, so here’s the `onDraw` callback:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	if(_timeout is null)
 	{
-		if(_timeout is null)
-		{
-			_timeout = new Timeout(fps, &onFrameElapsed, false);
-				
-		}
+		_timeout = new Timeout(fps, &onFrameElapsed, false);
 			
-		context.setSourcePixbuf(pixbufs[currentFrame], 0, 0);
-		context.paint();
-			
-		currentFrame += 1;
-			
-		if(currentFrame >= numberOfFrames)
-		{
-			currentFrame = 0;
-		}
-			
-		return(true);
-			
-	} // onDraw()
-{% endhighlight d %}
+	}
+		
+	context.setSourcePixbuf(pixbufs[currentFrame], 0, 0);
+	context.paint();
+		
+	currentFrame += 1;
+		
+	if(currentFrame >= numberOfFrames)
+	{
+		currentFrame = 0;
+	}
+		
+	return(true);
+		
+} // onDraw()
+```
 
 So here we:
 

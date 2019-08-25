@@ -110,17 +110,17 @@ Let’s jump right in and look at…
 
 The essence of circle drawing is this:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setLineWidth(3);
-		context.arc(330, 160, 40, 0, 2 * 3.1415);
-		context.stroke();
-			
-		return(true);
-			
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setLineWidth(3);
+	context.arc(330, 160, 40, 0, 2 * 3.1415);
+	context.stroke();
+		
+	return(true);
+		
+} // onDraw()
+```
 
 And even though you might expect a `circle()` function, we actually use `arc()`… and since an arc is just an incomplete circle, well… there you go.
 
@@ -261,21 +261,21 @@ So I took the liberty of reproducing the conversion chart so it accurately refle
 
 You may be ahead of me on this one, but drawing an arc is the same as drawing a circle except that the start and end points stop short of describing the entire circle:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		float x = 320, y = 180;
-		float radius = 40, startAngle = 0.7, endAngle = 2.44;
-	
-	 	// draw the arc
-		context.setLineWidth(3);
-		context.arc(x, y, radius, startAngle, endAngle);
-		context.stroke();
-	
-		return(true);
-			
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	float x = 320, y = 180;
+	float radius = 40, startAngle = 0.7, endAngle = 2.44;
+
+ 	// draw the arc
+	context.setLineWidth(3);
+	context.arc(x, y, radius, startAngle, endAngle);
+	context.stroke();
+
+	return(true);
+		
+} // onDraw()
+```
 
 If you consult the conversion chart, you’ll see that the arc starts at about 40 degrees (south-southeast in *Cairo*’s version of the universe) and goes to 140 degrees. And remember, drawing is done in a clockwise direction, so even though the start point is to the right of the end point (effectively, right to left) it’s still a clockwise `stroke()`.
 

@@ -15,10 +15,10 @@ Today we're going to put the MVC series aside for a few weeks while we dive into
 
 To do anything with *Cairo*, you need to add these two lines to your list of import statements:
 
-{% highlight d %}
-	import cairo.Context;
-	import gtk.DrawingArea;
-{% endhighlight d %}
+```d
+import cairo.Context;
+import gtk.DrawingArea;
+```
 
 Perhaps surprisingly, you won’t need to add a lot more to this list for most *Cairo* operations.
 
@@ -26,18 +26,18 @@ Perhaps surprisingly, you won’t need to add a lot more to this list for most *
 
 Yup, it’s like an overhead projector. You prep whatever you’re going to show off to one side, then slap it onto the projector to shine it on the wall. Same thing here, and setting them up? Nothing to it:
 
-{% highlight d %}
-	class MyDrawingArea : DrawingArea
+```d
+class MyDrawingArea : DrawingArea
+{
+	//               R   G    B    Alpha
+	float[] rgba = [0.3, 0.6, 0.2, 0.9];
+	
+	this()
 	{
-		//               R   G    B    Alpha
-		float[] rgba = [0.3, 0.6, 0.2, 0.9];
+		addOnDraw(&onDraw);
 		
-		this()
-		{
-			addOnDraw(&onDraw);
-			
-		} // this()
-{% endhighlight d %}
+	} // this()
+```
 
 Ignoring the `rgbaColor` array for the moment, to prepare a `DrawingArea`, you just:
 
@@ -151,16 +151,16 @@ But to show this, we need an example, so let’s start with something simple lik
 
 Let's start by looking at the callback function... which is where the fill is done:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setSourceRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
-		context.paint();
-	
-		return(true);
-			
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setSourceRgba(rgba[0], rgba[1], rgba[2], rgba[3]);
+	context.paint();
+
+	return(true);
+		
+} // onDraw()
+```
 
 Here, all we do is:
 
@@ -272,18 +272,18 @@ Now let’s look at a second simple example…
 
 The only thing different about this line-drawing example compared to the fill example is the callback function:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setLineWidth(3);
-		context.moveTo(100, 45);
-		context.lineTo(249, 249);
-		context.stroke();
-			
-		return(true);
-			
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setLineWidth(3);
+	context.moveTo(100, 45);
+	context.lineTo(249, 249);
+	context.stroke();
+		
+	return(true);
+		
+} // onDraw()
+```
 
 In this operation, we do four things:
 
@@ -393,22 +393,22 @@ But what if you want to draw…
 
 In this third, multi-line example, we just add a few preparatory commands to get the Context set up:
 
-{% highlight d %}
-	bool onDraw(Scoped!Context context, Widget w)
-	{
-		context.setLineWidth(10);
-		context.setLineCap(CairoLineCap.ROUND);	
-		context.setLineJoin(CairoLineJoin.ROUND);
-		context.moveTo(10, 10);
-		context.lineTo(249, 249);
-		context.lineTo(450, 15);
-		context.lineTo(450, 249);
-		context.stroke();
-			
-		return(true);
-			
-	} // onDraw()
-{% endhighlight d %}
+```d
+bool onDraw(Scoped!Context context, Widget w)
+{
+	context.setLineWidth(10);
+	context.setLineCap(CairoLineCap.ROUND);	
+	context.setLineJoin(CairoLineJoin.ROUND);
+	context.moveTo(10, 10);
+	context.lineTo(249, 249);
+	context.lineTo(450, 15);
+	context.lineTo(450, 249);
+	context.stroke();
+		
+	return(true);
+		
+} // onDraw()
+```
 
 It’s mostly just more of what we’ve already been doing, but there are two new lines in there that make the ends and angles of the lines rounded.
 
@@ -426,13 +426,13 @@ And the options for `setLineJoin()` are:
 
 One other note: The set of `lineTo()` calls will draw a continuous line with three legs. If instead you want two separate lines, you would change the second `lineTo()` call to a `moveTo()` like this:
 
-{% highlight d %}
-	context.moveTo(10, 10);
-	context.lineTo(249, 249);
-	context.moveTo(450, 15);
-	context.lineTo(450, 249);
-	context.stroke();
-{% endhighlight d %}
+```d
+context.moveTo(10, 10);
+context.lineTo(249, 249);
+context.moveTo(450, 15);
+context.lineTo(450, 249);
+context.stroke();
+```
 
 ## Conclusion
 
