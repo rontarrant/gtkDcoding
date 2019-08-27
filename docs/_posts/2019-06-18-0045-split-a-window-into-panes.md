@@ -21,7 +21,7 @@ Today’s code lays the foundation for this type of functionality.
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/014_containers/container_014_01.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/014_container/container_014_01.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -63,7 +63,7 @@ Today’s code lays the foundation for this type of functionality.
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/014_containers/container_014_01_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/014_container/container_014_01_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -105,7 +105,7 @@ Today’s code lays the foundation for this type of functionality.
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_containers/container_014_01_paned.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_014_01_paned.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -169,7 +169,7 @@ You could also use `pack1()` and `pack2()` if you prefer, but the behaviour will
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/014_containers/container_014_02.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/014_container/container_014_02.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -211,7 +211,7 @@ You could also use `pack1()` and `pack2()` if you prefer, but the behaviour will
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/014_containers/container_014_02_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="/images/screenshots/014_container/container_014_02_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->
@@ -253,7 +253,7 @@ You could also use `pack1()` and `pack2()` if you prefer, but the behaviour will
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_containers/container_014_02_paned_pack.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_014_02_paned_pack.d" target="_blank">here</a>.
 	</div>
 </div>
 
