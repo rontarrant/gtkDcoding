@@ -503,9 +503,7 @@ Next time we’ll… dive back into the MVC series and look at the `TreeStore` t
 	<div style="float: left;">
 		<a href="/2019/08/20/0063-cairo-vii-draw-save-images.html">Previous: Cairo Draw & Save Images</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/27/0065-mvc-x-treestore-basics.html">Next: MVC - TreeStore Basics</a>
 	</div>
--->
 </div>
