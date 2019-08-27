@@ -1,4 +1,4 @@
-// Paned Window - Horizontal
+// Paned Window - Horizontal style
 
 import std.stdio;
 
