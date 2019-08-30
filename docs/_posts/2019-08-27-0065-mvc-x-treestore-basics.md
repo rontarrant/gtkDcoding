@@ -576,9 +576,7 @@ And that’s the basics of the `TreeStore` class.
 	<div style="float: left;">
 		<a href="/2019/08/23/0064-cairo-vii-drawingarea-animation.html">Previous: Cairo DrawingArea Animation</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/08/30/0066-toolbar-basics.html">Next: Toolbar Basics</a>
 	</div>
--->
 </div>
