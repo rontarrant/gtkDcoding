@@ -1,5 +1,5 @@
 ---
-title: "0066: Toolbar Basics"
+title: "0066: How to Tool Up a Toolbar"
 layout: post
 topic: bar
 description: GTK Tutorial on building a Toolbar.
@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0066: Toolbar Basics
+# 0066: How to Tool Up a Toolbar
 
 The old way of doing a *GTK* `Toolbar` is falling out of favour, mostly because the `StockID`s (such as `COPY`, `CUT`, `PASTE`, etc.) once used to put icons in a `ToolButton` are all deprecated.
 
