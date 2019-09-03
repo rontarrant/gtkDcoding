@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0067: The Expander
 
-Today’s widget example is similar to a `TreeView` with a `TreeStore` model, but is much simpler to use. Of course, if we want to use it to its full potential, it’ll take a bit more preparation, code-wise, but let’s start with the dead-simple version and go from there.
+Today’s widget example is similar to a `TreeView` with a `TreeStore` model, but with only two hierarchy levels, a parent with a single child. It's also much simpler to use, but if we want to use it to its full potential, we'll need to do more preparation, code-wise, but let’s start with the dead-simple version and go from there.
 
 ## A Simple Expander
 
@@ -111,7 +111,7 @@ Today’s widget example is similar to a `TreeView` with a `TreeStore` model, bu
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
 
 
-For those times when you need to hide/show things, but you don’t want the full-on features of a `ComboBox` or a `TreeView` backed by a `TreeStore`, the `Expander` may be just what you need. And it doe the job without all the overhead of either `ComboBox` or `TreeView`. You can just stuff one into your top-level window’s `AppBox` (assuming you’re using the OOP paradigm we’ve been working with for almost everything in this blog) like this:
+For those times when you need to hide/show things, but you don’t want the full-on features of a `ComboBox` or a `TreeView` backed by a `TreeStore`, the `Expander` may be just the ticket. And it does the job without all the overhead of either. You can simply stuff one into a container (such as an `AppBox`) like this:
 
 ```d
 class AppBox : Box
@@ -153,18 +153,18 @@ class MyExpander : Expander
 } // class MyExpander
 ```
 
-The `Expander` is derived from the `Bin` widget which means working with `add()` and `remove()` to stuff things in and yank them out.
+The `Expander` is derived from the `Bin` widget which means working with `add()` and `remove()` to stuff things in and—if necessary—yank them out.
 
 The only thing we haven’t seen before is the call to the `Expander` constructor whose arguments are:
 
 - `label` – the child you want to reveal when the `Expander` is expanded, and
 - `isMnemonic` – a *Boolean* that controls whether or not the user can hit an **Alt**+**key** combination to expand/contract the `Expander`.
 
-Can’t get much simpler than that, but you can get more complicated if you want more than a single widget in the child container.
+Can’t get much simpler than that, but you can get more complicated if you want to reveal more than a single widget when the child container is visible.
 
 ### A Note about the getExpanded() Function
 
-Naturally, if you want to trigger a callback, you’ll be working with the `onActivate` signal, but like the flow of electricity out there in the real world, it works the opposite of what you may expect.
+Naturally, if you want to trigger a callback, you’ll be working with the `onActivate` signal, but like any engineer will say about the flow of electricity in the real world: it works the opposite of what you may expect.
 
 Hooking up the signal is the same as always, but polling `getExpanded()` to find the `Expander`’s state means the callback will need to be written like this:
 
@@ -189,11 +189,107 @@ Intuitively you might think expanded means the `Expander` is… well, expanded, 
 
 ## A More Crowded Expander
 
-<screenshots 2>
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/014_container/container_014_04.png" alt="Current example output">		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22">														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
 
-To stuff more widgets into an `Expander`’s child area, I opted for the `Grid` as a container. Stick a `Grid` in there and follow the guidelines I laid out in the post covering customized `Dialog` windows and you should have no trouble getting a decent layout happening.
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
 
-Here’s the derived `Grid` I used (it’s based on the `PadGrid` from the custom `Dialog` example):
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/014_container/container_014_04_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33">																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_014_04_extended_expander.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+
+To stuff more widgets into an `Expander`’s child area, I opted for the `Grid` as a container. Stick a `Grid` in there and follow [the guidelines I laid out in the post covering customized `Dialog` windows](/2019/06/07/0042-custom-dialog-i.html) and you should have no trouble getting a decent layout happening.
+
+Here’s the derived `Grid` I used (it’s based on the `PadGrid` from [the custom `Dialog` example](https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_013_10_custom_content_area.d)):
 
 ```d
 class ExpanderChildGrid : Grid
@@ -222,7 +318,7 @@ class ExpanderChildGrid : Grid
 } // class ExpanderChildGrid
 ```
 
-The other thing I changed when I borrowed this piece of code was ‘`pJustify`’ became ‘`bJustify`’ just because it makes more sense, considering that it’s a `BoxJustify` variable. (I don’t remember why I originally called it ‘`pJustify`,’ but likely because I first called it 'PadJustify'. Not important, but there it is.)
+When I borrowed this piece of code, the other thing I changed was that ‘`pJustify`’ became ‘`bJustify`’ because it makes more sense... considering that it’s a `BoxJustify` variable. (I don’t remember why I originally called it ‘`pJustify`,’ but likely because I first called it 'PadJustify'. Not important, but there it is.)
 
 If you also grab the `PadLabel` and `HPadBox` classes from the custom `Dialog` example, along with the `BoxJustify` enum, you’ll be all set to cram whatever you want into the `Expander`’s child `Bin`.
 

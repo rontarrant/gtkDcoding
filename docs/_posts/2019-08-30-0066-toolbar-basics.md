@@ -253,9 +253,7 @@ And next time around, we'll look at the `Expander`.
 	<div style="float: left;">
 		<a href="/2019/08/27/0065-mvc-x-treestore-basics.html">Previous: MVC - TreeStore Basics</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/09/03/0067-mvc-xii-expander.html">Next: MVC - Expander</a>
 	</div>
--->
 </div>
