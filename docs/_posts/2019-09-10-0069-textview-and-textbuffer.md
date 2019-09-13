@@ -340,9 +340,7 @@ Happy coding.
 	<div style="float: left;">
 		<a href="/2019/09/06/0068-multi-level-treestore.html">Previous: Multi-level TreeStore</a>
 	</div>
-<!--
 	<div style="float: right;">
-		<a href="/2019/09/06/0070-statusbar.html">Next: Statusbar Basics</a>
+		<a href="/2019/09/13/0070-statusbar.html">Next: Statusbar Basics</a>
 	</div>
--->
 </div>
