@@ -9,6 +9,9 @@ import gtk.Widget;
 import gtk.Button;
 import gtk.Label;
 
+import gtk.StyleContext;
+import gtk.CssProvider;
+
 void main(string[] args)
 {
 	Main.init(args);
@@ -24,14 +27,11 @@ class TestRigWindow : MainWindow
 {
 	string windowTitle = "CSS & Button Labels";
 	AppBox appBox;
-	CSS css;
 	
 	this()
 	{
 		super(windowTitle);
 		addOnDestroy(&quitApp);
-		
-		css = new CSS(); // enable CSS
 		
 		appBox = new AppBox();
 		add(appBox);
@@ -88,10 +88,13 @@ class AppBox : Box
 
 class CSSButton : Button
 {
+	CSS css;
+	
 	this(string textLabel, string cssName)
 	{
 		super(textLabel);
 		setName(cssName);
+		css = new CSS(getStyleContext());
 		
 	} // this()
 	
@@ -100,34 +103,30 @@ class CSSButton : Button
 
 class CSSLabel : Label
 {
+	CSS css;
+	
 	this(string textLabel, string cssName)
 	{
 		super(textLabel);
 		setName(cssName);
+		css = new CSS(getStyleContext());
 		
 	} // this()
 	
 } // class CSSLabel
 
 
-class CSS
+class CSS // GTK4 compliant
 {
-	import gdk.Display;
-	import gdk.Screen;
-	import gtk.StyleContext;
-	import gtk.CssProvider;
-	
+	CssProvider provider;
 	string cssPath = "./css/button_label.css";
 
-	this()
+	this(StyleContext styleContext)
 	{
-		CssProvider provider = new CssProvider();
+		provider = new CssProvider();
 		provider.loadFromPath(cssPath);
+		styleContext.addProvider(provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 		
-		Display display = Display.getDefault();
-		Screen screen = display.getDefaultScreen();
-		StyleContext.addProviderForScreen(screen, provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-	} // this()
-
-} // CSS
+	} // this()	
+	
+} // class CSS
