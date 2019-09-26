@@ -6,12 +6,10 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Box;
 import gtk.Widget;
-import gtk.Label;
 import gtk.Notebook;
+import gtk.Label;
 import gtk.TextView;
 import gtk.TextBuffer;
-import gdk.RGBA;
-import gtk.EventBox;
 import gtk.CssProvider;
 import gtk.StyleContext;
 
@@ -30,7 +28,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Notebook Demo - Simple";
+	string title = "Notebook Demo - Multiple Tabs";
 	AppBox appBox;
 	
 	this()
@@ -82,18 +80,26 @@ class MyNotebook : Notebook
 {
 	CSS css; // need to see tab shapes against the bg
 	PositionType tabPosition = PositionType.TOP;
-	Label _label;
-	TabTextView _tabTextView;
+	Label tabLabelOne, tabLabelTwo, tabLabelThree;
+	TabTextView tabTextViewOne, tabTextViewTwo, tabTextViewThree;
 	
 	this()
 	{
 		super();
 		setTabPos(tabPosition);
 		css = new CSS(getStyleContext());
-		
-		_label = new Label("Demo Tab");
-		_tabTextView = new TabTextView();
-		appendPage(_tabTextView, _label);
+
+		tabTextViewOne = new TabTextView("Now is the witness of our discontinent.");
+		tabLabelOne = new Label("Tab One");
+		appendPage(tabTextViewOne, tabLabelOne);
+
+		tabTextViewTwo = new TabTextView("Four stores and seven pounds ago...");
+		tabLabelTwo = new Label("Tab Two");
+		appendPage(tabTextViewTwo, tabLabelTwo);
+
+		tabTextViewThree = new TabTextView("Help me open yon cantelope.");
+		tabLabelThree = new Label("Tab Three");
+		appendPage(tabTextViewThree, tabLabelThree);
 		
 	} // this()
 	
@@ -103,10 +109,9 @@ class MyNotebook : Notebook
 class TabTextView : TextView
 {
 	TextBuffer textBuffer;
-	string content = "Now is the English of our discontent.";
 	int width = 400, height = 350;
 	
-	this()
+	this(string content)
 	{
 		super();
 		setSizeRequest(width, height);
@@ -123,10 +128,19 @@ class CSS // GTK4 compliant
 	CssProvider provider;
 	string cssPath = "./css/visible_tabs.css";
 
+	string myCSS = "notebook
+						{
+							background-color: #f2f2f2;
+						}
+						tab
+						{
+							background-color: #f2f2f2;
+						}";
+
 	this(StyleContext styleContext)
 	{
 		provider = new CssProvider();
-		provider.loadFromPath(cssPath);
+		provider.loadFromData(myCSS);
 		styleContext.addProvider(provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 		
 	} // this()	

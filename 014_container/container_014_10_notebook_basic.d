@@ -79,24 +79,24 @@ class MyNotebook : Notebook
 	PositionType tabPosition = PositionType.TOP;
 	string tabLabel = "Demo Tab";
 	int tabIndex;
-	Label myTabLabel;
-	MyTextView myTextview;
+	Label _label;
+	TabTextView _tabTextView;
 	
 	this()
 	{
 		super();
 		setTabPos(tabPosition);
 
-		myTabLabel = new Label(tabLabel);
-		myTextview = new MyTextView();
-		tabIndex = appendPage(myTextview, myTabLabel);
+		_label = new Label(tabLabel);
+		_tabTextView = new TabTextView();
+		tabIndex = appendPage(_tabTextView, _label);
 				
 	} // this()
 	
 } // class MyNotebook
 
 
-class MyTextView : TextView
+class TabTextView : TextView
 {
 	TextBuffer textBuffer;
 	string content = "Now is the English of our discontent.";
@@ -111,4 +111,4 @@ class MyTextView : TextView
 		
 	} // this()
 
-} // class MyTextView
+} // class TabTextView

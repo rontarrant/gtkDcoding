@@ -7,11 +7,13 @@ import gtk.Main;
 import gtk.Box;
 import gtk.Widget;
 import gtk.Label;
-import gtk.Button;
-import gtk.Image;
 import gtk.Notebook;
 import gtk.TextView;
 import gtk.TextBuffer;
+import gdk.RGBA;
+import gtk.EventBox;
+import gtk.CssProvider;
+import gtk.StyleContext;
 
 void main(string[] args)
 {
@@ -28,7 +30,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Notebook Demo - Tab with Close Button";
+	string title = "Notebook Demo - Simple";
 	AppBox appBox;
 	
 	this()
@@ -59,14 +61,13 @@ class TestRigWindow : MainWindow
 
 class AppBox : Box
 {
-	Orientation orientation = Orientation.VERTICAL;
 	bool expand = false, fill = false;
 	uint globalPadding = 10, localPadding = 5;
 	MyNotebook myNotebook;
 	
 	this()
 	{
-		super(orientation, globalPadding);
+		super(Orientation.VERTICAL, globalPadding);
 		
 		myNotebook = new MyNotebook();
 		
@@ -79,71 +80,30 @@ class AppBox : Box
 
 class MyNotebook : Notebook
 {
+	CSS css; // need to see tab shapes against the bg
 	PositionType tabPosition = PositionType.TOP;
-	int tabIndex;
-	MyTextView myTextview;
-	TabBox myTab;
+	Label _label;
+	TabTextView tabTextView;
 	
 	this()
 	{
 		super();
 		setTabPos(tabPosition);
-
-		myTab = new TabBox();
-		myTextview = new MyTextView();
-		tabIndex = appendPage(myTextview, myTab);
-		showAll();
+		css = new CSS(getStyleContext());
+		
+		_label = new Label("Demo Tab");
+		tabTextView = new TabTextView();
+		appendPage(tabTextView, _label);
 		
 	} // this()
 	
 } // class MyNotebook
 
 
-class TabBox : Box
-{
-	Label label;
-	CloseButton closeButton;
-	string labelText = "Tab with Close";
-	Orientation orientation = Orientation.HORIZONTAL;
-	bool expand = false, fill = false;
-	uint globalPadding = 10, localPadding = 5;
-
-	this()
-	{
-		super(orientation, globalPadding);
-		
-		label = new Label(labelText);
-		packStart(label, expand, fill, localPadding);
-		
-		closeButton = new CloseButton();
-		packStart(closeButton, expand, fill, localPadding);
-		
-		showAll();
-		
-	} // this()
-	
-} // class TabBox
-
-
-class CloseButton : Button
-{
-	bool focusOnClick = false;
-	Image closeButtonImage;
-	
-	this()
-	{
-		closeButtonImage = new Image("images/window-close.png");
-		add(closeButtonImage);
-		
-	} // this()
-	
-} // class CloseButton
-
-
-class MyTextView : TextView
+class TabTextView : TextView
 {
 	TextBuffer textBuffer;
-	string content = "Now is the winter of our discontinence.";
+	string content = "Now is the English of our discontent.";
 	int width = 400, height = 350;
 	
 	this()
@@ -155,4 +115,29 @@ class MyTextView : TextView
 		
 	} // this()
 
-} // class MyTextView
+} // class TabTextView
+
+
+class CSS // GTK4 compliant
+{
+	CssProvider provider;
+	string cssPath = "./css/visible_tabs.css";
+
+	string myCSS = "notebook
+						{
+							background-color: #f2f2f2;
+						}
+						tab
+						{
+							background-color: #f2f2f2;
+						}";
+
+	this(StyleContext styleContext)
+	{
+		provider = new CssProvider();
+		provider.loadFromData(myCSS);
+		styleContext.addProvider(provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		
+	} // this()	
+	
+} // class CSS

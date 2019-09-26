@@ -28,7 +28,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Notebook Demo - Simple";
+	string title = "Notebook - Reorder Tabs";
 	AppBox appBox;
 	
 	this()
@@ -80,10 +80,8 @@ class MyNotebook : Notebook
 {
 	CSS css; // need to see tab shapes against the bg
 	PositionType tabPosition = PositionType.TOP;
-	string tabLabelOne = "Tab One", tabLabelTwo = "Tab Two", tabLabelThree = "Tab Three";
-	Label myTabLabelOne, myTabLabelTwo, myTabLabelThree;
-	int tabIndex;
-	MyTextView myTextViewOne, myTextViewTwo, myTextViewThree;
+	Label tabLabelOne, tabLabelTwo, tabLabelThree;
+	TabTextView textViewOne, textViewTwo, textViewThree;
 	
 	this()
 	{
@@ -91,27 +89,27 @@ class MyNotebook : Notebook
 		setTabPos(tabPosition);
 		css = new CSS(getStyleContext());
 
-		myTextViewOne = new MyTextView("Now is the witness of our discontinent.");
-		myTabLabelOne = new Label(tabLabelOne);
-		tabIndex = appendPage(myTextViewOne, tabLabelOne);
-//		setTabReorderable(myTextViewOne, true);
+		textViewOne = new TabTextView("Now is the witness of our discontinent.");
+		tabLabelOne = new Label("Tab One");
+		appendPage(textViewOne, tabLabelOne);
+		setTabReorderable(textViewOne, true);
 
-		myTextViewTwo = new MyTextView("Four stores and seven pounds ago...");
-		myTabLabelTwo = new Label(tabLabelTwo);
-		tabIndex = appendPage(myTextViewTwo, tabLabelTwo);
-//		setTabReorderable(myTextViewTwo, true);
+		textViewTwo = new TabTextView("Four stores and seven pounds ago...");
+		tabLabelTwo = new Label("Tab Two");
+		appendPage(textViewTwo, tabLabelTwo);
+		setTabReorderable(textViewTwo, true);
 
-		myTextViewThree = new MyTextView("Help me open yon cantelope.");
-		myTabLabelThree = new Label(tabLabelThree);
-		tabIndex = appendPage(myTextViewThree, tabLabelThree);
-//		setTabReorderable(myTextViewThree, true);
+		textViewThree = new TabTextView("Help me open yon cantelope.");
+		tabLabelThree = new Label("Tab Three");
+		appendPage(textViewThree, tabLabelThree);
+		setTabReorderable(textViewThree, true);
 		
 	} // this()
 	
 } // class MyNotebook
 
 
-class MyTextView : TextView
+class TabTextView : TextView
 {
 	TextBuffer textBuffer;
 	int width = 400, height = 350;
@@ -125,7 +123,7 @@ class MyTextView : TextView
 		
 	} // this()
 
-} // class MyTextView
+} // class TabTextView
 
 
 class CSS // GTK4 compliant
@@ -133,10 +131,19 @@ class CSS // GTK4 compliant
 	CssProvider provider;
 	string cssPath = "./css/visible_tabs.css";
 
+	string myCSS = "notebook
+						{
+							background-color: #f2f2f2;
+						}
+						tab
+						{
+							background-color: #f2f2f2;
+						}";
+
 	this(StyleContext styleContext)
 	{
 		provider = new CssProvider();
-		provider.loadFromPath(cssPath);
+		provider.loadFromData(myCSS);
 		styleContext.addProvider(provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 		
 	} // this()	
