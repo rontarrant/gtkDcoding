@@ -121,7 +121,6 @@ class TabTextView : TextView
 class CSS // GTK4 compliant
 {
 	CssProvider provider;
-	string cssPath = "./css/visible_tabs.css";
 
 	enum NOTEBOOK_CSS = "notebook
 						{
