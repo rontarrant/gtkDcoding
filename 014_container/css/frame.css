@@ -1,7 +1,7 @@
 border
 {
-/* border-style: solid; */
-/*	border-style: outset; */
+	border-style: outset;
 /*	border-style: inset; */
-	border-style: none;
+/*	border-style: solid; */
+/*	border-style: none; */
 }

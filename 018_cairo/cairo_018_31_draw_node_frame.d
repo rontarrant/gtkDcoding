@@ -118,8 +118,8 @@ class DragNode
 
 		nodeShape = new NodeShape(x, y, width, height);
 		nodeShape.draw(context);
-//		nodeTerminalIn = new NodeTerminalIn(context, _xOrigin, _yOrigin + (height * .33));
-//		nodeTerminalOut = new NodeTerminalOut(context, _xOrigin + width, _yOrigin + (height * .66));
+		nodeTerminalIn = new NodeTerminalIn(context, _xOrigin, _yOrigin + (height * .33));
+		nodeTerminalOut = new NodeTerminalOut(context, _xOrigin + width, _yOrigin + (height * .66));
 			
 	} // this()
 

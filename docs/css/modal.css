@@ -4,7 +4,8 @@
  * And it's the same for the modal close buttons, too.
  */
 #img0, #img1, #img2, #img3, #img4, #img5, #img6, #img7,
-#img8, #img9, #imga, #imgb, #imgc, #imgd, #imge
+#img8, #img9, #imga, #imgb, #imgc, #imgd, #imge,
+#diagram0, #diagram1, #diagram2, #diagram3, #diagram4, #diagram5
 {
 	border-radius: 5px;
 	cursor: pointer;
@@ -14,12 +15,30 @@
 #img0:hover, #img1:hover, #img2:hover, #img3:hover, #img4:hover #img5:hover, #img6:hover,
 #img7:hover, #img8:hover, #img9:hover, #imga:hover, #imgb:hover, #imgc:hover, #imgd:hover,
 #imge:hover
+#diagram0:hover, #diagram1:hover, #diagram2:hover,
+#diagram3:hover, #diagram4:hover, #diagram5:hover
+
 {
 	opacity: 0.7;
 }
 
 /* The Modal (background) */
 .modal
+{
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+/* The Modal (background) */
+.diagram-modal
 {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
@@ -89,7 +108,9 @@
 
 /* The Close Button */
 .close0, .close1, .close2, .close3, .close4, .close5, .close6,
-.close7, .close8, .close9, .closea, .closeb, .closec, .closed, .closee
+.close7, .close8, .close9, .closea, .closeb, .closec, .closed, .closee,
+.diagram-close0, .diagram-close1, .diagram-close2, .diagram-close3,
+.diagram-close4, .diagram-close5
 {
 	position: absolute;
 	top: 15px;
@@ -105,7 +126,9 @@
 .closea:hover, .closeb:hover, .closec:hover, .closed:hover, .closee:hover,  
 .close0:focus, .close1:focus, .close2:focus, .close3:focus, .close4:focus, 
 .close5:focus, .close6:focus, .close7:focus, .close8:focus, .close9:focus, 
-.closea:focus, .closeb:focus, .closec:focus, .closed:focus, .closee:focus 
+.closea:focus, .closeb:focus, .closec:focus, .closed:focus, .closee:focus,
+.diagram-close0:focus, .diagram-close1:focus, .diagram-close2:focus,
+.diagram-close3:focus, .diagram-close4:focus, .diagram-close5:focus
 {
 	color: #bbb;
 	text-decoration: none;

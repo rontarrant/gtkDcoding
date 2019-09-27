@@ -78,7 +78,6 @@ class MyNotebook : Notebook
 {
 	PositionType tabPosition = PositionType.TOP;
 	string tabLabel = "Demo Tab";
-	int tabIndex;
 	Label _label;
 	TabTextView _tabTextView;
 	
@@ -89,7 +88,7 @@ class MyNotebook : Notebook
 
 		_label = new Label(tabLabel);
 		_tabTextView = new TabTextView();
-		tabIndex = appendPage(_tabTextView, _label);
+		appendPage(_tabTextView, _label);
 				
 	} // this()
 	

@@ -11,16 +11,16 @@ import gtk.Adjustment;
 import gtk.Label;
 import gtk.SpinButton;
 import gtk.Grid;
+import gtk.CssProvider;
+import gtk.StyleContext;
 
 void main(string[] args)
 {
-	CSS css;
 	TestRigWindow testRigWindow;
 	
 	Main.init(args);
 
 	testRigWindow = new TestRigWindow();
-	css = new CSS(); // enable CSS
 
 	Main.run();
 	
@@ -85,6 +85,7 @@ class AppBox : Box
 class FrameOn : Frame
 {
 	private:
+	CSS css;
 	string titleLabel = "Coordinates";
 	FrameChildGrid frameChildGrid;
 	float xAlign = 0.05, yAlign = 0.5;
@@ -93,6 +94,8 @@ class FrameOn : Frame
 	this()
 	{
 		super(titleLabel);
+		css = new CSS(getStyleContext());
+
 		setLabelAlign(xAlign, yAlign);
 		frameChildGrid = new FrameChildGrid();
 		add(frameChildGrid);
@@ -298,24 +301,17 @@ enum BoxJustify
 } // BoxJustify
 
 
-class CSS
+class CSS // GTK4 compliant
 {
-	import gdk.Display;
-	import gdk.Screen;
-	import gtk.StyleContext;
-	import gtk.CssProvider;
-	
+	CssProvider provider;
 	string cssPath = "./css/frame.css";
 
-	this()
+	this(StyleContext styleContext)
 	{
-		CssProvider provider = new CssProvider();
+		provider = new CssProvider();
 		provider.loadFromPath(cssPath);
+		styleContext.addProvider(provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 		
-		Display display = Display.getDefault();
-		Screen screen = display.getDefaultScreen();
-		StyleContext.addProviderForScreen(screen, provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-	} // this()
-
-} // CSS
+	} // this()	
+	
+} // class CSS
