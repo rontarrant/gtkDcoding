@@ -23,52 +23,14 @@ This is a UI element that caught my imagination a few years ago when I first saw
 
 And in *Blender*, it looks like this:
 
-<!-- 0 -->
-<!-- zereoth occurrence of a diagram on a single page -->
-<div>
-	<div class="diagram-frame">
-		<figure class="left">
-			<img id="diagram0" src="/images/diagrams/018_cairo/blender_nodes_and_noodles.png" alt="Figure 1: Blender's Nodes-n-noodles in action">		<!-- img# -->
-			
-			<!-- Modal for image -->
-			<div id="diagram-modal0" class="modal">																	<!-- modal# -->
-				<span class="diagram-close0">&times;</span>															<!-- close# -->
-				<img class="modal-content" id="diagram00">															<!-- img## -->
-				<div id="caption0">Figure 1: Blender's Nodes-n-noodles in action</div>
-			</div>
-			
-			<script>
-			// Get the modal
-			var modal = document.getElementById("diagram-modal0");														// modal#
-			
-			// Get the image and insert it inside the modal - use its "alt" text as a caption
-			var img = document.getElementById("diagram0");															// img#
-			var modalImg = document.getElementById("diagram00");													// img##
-			var captionText = document.getElementById("caption0");
-
-			img.onclick = function()
-			{
-			  modal.style.display = "block";
-			  modalImg.src = this.src;
-			  captionText.innerHTML = this.alt;
-			}
-			
-			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName("diagram-close0")[0];											// close#
-			
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function()
-			{ 
-				modal.style.display = "none";
-			}
-			</script>
-			<figcaption>
-			Figure 1: Blender's Nodes-n-noodles in action
-			</figcaption>
-		</figure>
-	</div>
+<div class="inpage-frame">
+	<figure class="left">
+		<img src="/images/diagrams/018_cairo/blender_nodes_and_noodles.png" alt="Figure 1: Model/View/Controller and the User" style="width: 279px; height: 167px;">
+		<figcaption>
+			Figure 1: Model/View/Controller and the User
+		</figcaption>
+	</figure>
 </div>
-<!-- end of snippet for zereoth occurrence of a diagram on a single page -->
 
 Blender opted for straight noodles, but we're going a different way... Bezier curves.
 
@@ -187,52 +149,14 @@ We’ve actually talked about the basics of this technique before in [Blog Post 
 
 ### Opposing Control Points
 
-<!-- 1 -->
-<!-- first occurrence of a diagram on a single page -->
-<div>
-	<div class="diagram-frame">
-		<figure class="left">
-			<img id="diagram1" src="/images/diagrams/018_cairo/opposing_control_points.png" alt="Figure 2: Opposing Control Points vs. Opposing Surface Normals">		<!-- diagram# & caption text -->
-			
-			<!-- Modal for image -->
-			<div id="diagram-modal1" class="modal">																	<!-- modal# -->
-				<span class="diagram-close1">&times;</span>															<!-- close# -->
-				<img class="modal-content" id="diagram11">															<!-- diagram## -->
-				<div id="caption1">Figure 2: Opposing Control Points vs. Opposing Surface Normals</div>												<!-- caption# & caption text -->
-			</div>
-			
-			<script>
-			// Get the modal
-			var modal = document.getElementById("diagram-modal1");														// modal#
-			
-			// Get the image and insert it inside the modal - use its "alt" text as a caption
-			var img = document.getElementById("diagram1");															// diagram#
-			var modalImg = document.getElementById("diagram11");													// diagram##
-			var captionText = document.getElementById("caption1");
-
-			img.onclick = function()
-			{
-			  modal.style.display = "block";
-			  modalImg.src = this.src;
-			  captionText.innerHTML = this.alt;
-			}
-			
-			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName("diagram-close1")[0];											// close#
-			
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function()
-			{ 
-				modal.style.display = "none";
-			}
-			</script>
-			<figcaption>
-			Figure 2: Opposing Control Points vs. Opposing Surface Normals			<!-- caption text -->
-			</figcaption>
-		</figure>
-	</div>
+<div class="inpage-frame">
+	<figure class="left">
+		<img src="/images/diagrams/018_cairo/opposing_control_points.png" alt="Figure 1: Model/View/Controller and the User" style="width: 250px; height: 174px;">
+		<figcaption>
+			Figure 1: Model/View/Controller and the User
+		</figcaption>
+	</figure>
 </div>
-<!-- end of snippet for first (1st) occurrence of a diagram on a single page -->
 
 This type of cubic Bezier curve is easy to draw. Given that a *Cairo* curve is drawn using four sets of coordinates—start point, first control point, second control point, and the end point—we just need keep these things in mind:
 
@@ -246,67 +170,19 @@ The second control point’s coordinates work out to be:
 -  x is the same as the start point’s x position, and
 - y is the same as the end point’s y position.
 
-This, of course, requires that the control points describe surface normals for the two nodes being connected. In a nutshell (if you’re unfamiliar with the concept of a *surface normal*) it's a perpendicular line radiating from a surface. In 2D graphics, it looks like this:
-
-<!-- 2 -->
-<!-- second occurrence of a diagram on a single page -->
-<div>
-	<div class="diagram-frame">
-		<figure class="left">
-			<img id="diagram2" src="/images/diagrams/018_cairo/opposing_surface_normals.png" alt="Figure 3: Opposing Surface Normals">		<!-- diagram# & caption text -->
-			
-			<!-- Modal for image -->
-			<div id="diagram-modal2" class="modal">																	<!-- modal# -->
-				<span class="diagram-close2">&times;</span>															<!-- close# -->
-				<img class="modal-content" id="diagram22">															<!-- diagram## -->
-				<div id="caption2">Figure 3: Opposing Surface Normals</div>						<!-- caption# & caption text -->
-			</div>
-			
-			<script>
-			// Get the modal
-			var modal = document.getElementById("diagram-modal2");														// modal#
-			
-			// Get the image and insert it inside the modal - use its "alt" text as a caption
-			var img = document.getElementById("diagram2");															// diagram#
-			var modalImg = document.getElementById("diagram22");													// diagram##
-			var captionText = document.getElementById("caption2");												// caption#
-
-			img.onclick = function()
-			{
-			  modal.style.display = "block";
-			  modalImg.src = this.src;
-			  captionText.innerHTML = this.alt;
-			}
-			
-			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName("diagram-close2")[0];											// close#
-			
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function()
-			{ 
-				modal.style.display = "none";
-			}
-			</script>
-			<figcaption>
-			Figure 3: Opposing Surface Normals																					<!-- caption text -->
-			</figcaption>
-		</figure>
-	</div>
+<div class="inpage-frame">
+	<figure class="right">
+		<img src="/images/diagrams/018_cairo/opposing_surface_normals.png" alt="Figure 1: Model/View/Controller and the User" style="width: 250px; height: 174px;">
+		<figcaption>
+			Figure 1: Model/View/Controller and the User
+		</figcaption>
+	</figure>
 </div>
-<!-- end of snippet for second occurrence of a diagram on a single page -->
+
+This, of course, requires that the control points describe surface normals for the two nodes being connected. In a nutshell (if you’re unfamiliar with the concept of a *surface normal*) it's a perpendicular line radiating from a surface. In 2D graphics, it looks like this:
 
 So, when we draw the cubic Bezier curve, we—in fact—only need the start and end coordinates and the coordinates for the control points can be extrapolated.
 
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
 <BR>
 
 ### The DrawingArea Code
