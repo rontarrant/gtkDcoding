@@ -1,4 +1,4 @@
-// Description of example
+// Notebook - Reorder Tabs
 
 import std.stdio;
 

@@ -1,4 +1,4 @@
-// Description of example
+// Notebook Demo - One Tab - enum CSS
 
 import std.stdio;
 
@@ -30,7 +30,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Notebook Demo - Simple";
+	string title = "Notebook Demo - Simple enum CSS";
 	AppBox appBox;
 	
 	this()

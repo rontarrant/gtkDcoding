@@ -1,4 +1,4 @@
-// Description of example
+// Notebook - Tabs with Images
 
 import std.stdio;
 
@@ -28,7 +28,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Notebook Demo - Multiple Tabs";
+	string title = "Notebook - Tabs with Images";
 	AppBox appBox;
 	
 	this()

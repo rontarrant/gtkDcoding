@@ -1,4 +1,4 @@
-// Description of example
+// Notebook - All Signals
 
 import std.stdio;
 import std.conv;
@@ -32,7 +32,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Notebook - Reorder Tabs";
+	string title = "Notebook - All Signals";
 	AppBox appBox;
 	
 	this()

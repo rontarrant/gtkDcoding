@@ -1,4 +1,4 @@
-// Description of example
+// Notebook - Add & Remove Tabs
 
 import std.stdio;
 import std.conv;
@@ -32,7 +32,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Notebook Demo - Simple";
+	string title = "Notebook - Add & Remove Tabs";
 	AppBox appBox;
 	
 	this()
@@ -191,6 +191,7 @@ writeln("page added: ", _lastPageNumber);
 		
 		page = getCurrentPage();
 		removePage(page);
+writeln("page removed: ", page);
 				
 	} // deletePage()
 

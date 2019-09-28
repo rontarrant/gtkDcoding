@@ -1,4 +1,4 @@
-// Description of example
+// Notebook - Multiple Custom Tabs
 
 import std.stdio;
 import std.conv;
@@ -159,7 +159,7 @@ class TabDrawingArea : DrawingArea
 	{
 		_tabNumber = tabNumber;
 		_notebook = notebook;
-		_labelText = labelText;
+		_labelText = labelText ~ " " ~ _tabNumber.to!string();
 		
 		radians = PI / 180.0;
 

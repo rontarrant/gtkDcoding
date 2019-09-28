@@ -1,4 +1,4 @@
-// Description of example
+// Notebook Demo - One Tab
 
 import std.stdio;
 

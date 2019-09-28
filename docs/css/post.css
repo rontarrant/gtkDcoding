@@ -9,6 +9,11 @@ pre
 	tab-size:      3;
 }
 
+.diagram-frame
+{
+	grid-area: screenshot;
+}
+
 .frame-header
 {
 	grid-area: header;
@@ -49,7 +54,15 @@ pre
 	grid-gap: 10px;
 }
 
-/* page to page navigation */
+.inpage-frame
+{
+	background-color: #eee;
+	z-index: 10;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	border: 20px;
+}
+
 .blog-nav
 {
 	background-color: #eee;
@@ -70,7 +83,7 @@ pre
 {
 	float: left;
 	margin-right: 20px;
-	max-width: 350px;
+	max-width: 305px;
 }
 
 figcaption
