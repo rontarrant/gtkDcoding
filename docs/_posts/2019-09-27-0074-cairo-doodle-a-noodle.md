@@ -74,18 +74,6 @@ Blender opted for straight noodles, but we're going a different way... Bezier cu
 
 This UI concept opens up a lot of possibilities. In fact, the *Blender Foundation* has decided to use this nodes-n-noodles approach wherever possible in *Blender*. It’s intuitive and easy to use. And in *Cairo*, it’s almost ridiculously simple to implement because all the heavy lifting goes on behind the scenes.
 
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-
 ## How This Miniseries Will Play Out
 
 We’ll look at this in three phases…
