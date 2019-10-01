@@ -230,9 +230,7 @@ And that’s step one/phase one of drawing a noodle. Next time, we’ll carry on
 	<div style="float: left;">
 		<a href="/2019/09/24/0073-frame-part-ii.html">Previous: Frames, Part II</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/09/24/0073-????????????.html">Next: ?????????</a>
 	</div>
--->
 </div>
