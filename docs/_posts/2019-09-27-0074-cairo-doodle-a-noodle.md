@@ -231,6 +231,6 @@ And that’s step one/phase one of drawing a noodle. Next time, we’ll carry on
 		<a href="/2019/09/24/0073-frame-part-ii.html">Previous: Frames, Part II</a>
 	</div>
 	<div style="float: right;">
-		<a href="/2019/09/24/0073-????????????.html">Next: ?????????</a>
+		<a href="/2019/10/01/0075-cairo-x-mouse-noodle.html">Next: Noodling with the Mouse</a>
 	</div>
 </div>
