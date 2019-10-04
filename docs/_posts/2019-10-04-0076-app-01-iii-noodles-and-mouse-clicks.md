@@ -378,7 +378,7 @@ Until then.
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/2019/10/01/0075-cairo-x-mouse-noodle.html">Previous: Mouse Noodle</a>
+		<a href="/2019/10/01/0075-app-01-ii-mouse-noodle.html">Previous: Mouse Noodle</a>
 	</div>
 <!--
 	<div style="float: right;">
