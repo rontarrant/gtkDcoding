@@ -25,7 +25,7 @@ And in *Blender*, it looks like this:
 
 <div class="inpage-frame">
 	<figure class="left">
-		<img src="/images/diagrams/018_cairo/blender_nodes_and_noodles.png" alt="Figure 1: Model/View/Controller and the User" style="width: 279px; height: 167px;">
+		<img src="/images/diagrams/020_app/blender_nodes_and_noodles.png" alt="Figure 1: Model/View/Controller and the User" style="width: 279px; height: 167px;">
 		<figcaption>
 			Figure 1: Model/View/Controller and the User
 		</figcaption>
@@ -56,7 +56,7 @@ Third, we’ll bring nodes and noodles together. We’ll be able to connect the 
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/018_cairo/cairo_018_27.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/020_app/app_020_01_01.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -98,7 +98,7 @@ Third, we’ll bring nodes and noodles together. We’ll be able to connect the 
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/018_cairo/cairo_018_27_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/020_app/app_020_01_01_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -140,7 +140,7 @@ Third, we’ll bring nodes and noodles together. We’ll be able to connect the 
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_27_cubic_bezier.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/020_app/app_020_01_01_cubic_bezier.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -151,7 +151,7 @@ We’ve actually talked about the basics of this technique before in [Blog Post 
 
 <div class="inpage-frame">
 	<figure class="left">
-		<img src="/images/diagrams/018_cairo/opposing_control_points.png" alt="Figure 1: Model/View/Controller and the User" style="width: 250px; height: 174px;">
+		<img src="/images/diagrams/020_app/opposing_control_points.png" alt="Figure 1: Model/View/Controller and the User" style="width: 250px; height: 174px;">
 		<figcaption>
 			Figure 1: Model/View/Controller and the User
 		</figcaption>
@@ -172,7 +172,7 @@ The second control point’s coordinates work out to be:
 
 <div class="inpage-frame">
 	<figure class="right">
-		<img src="/images/diagrams/018_cairo/opposing_surface_normals.png" alt="Figure 1: Model/View/Controller and the User" style="width: 250px; height: 174px;">
+		<img src="/images/diagrams/020_app/opposing_surface_normals.png" alt="Figure 1: Model/View/Controller and the User" style="width: 250px; height: 174px;">
 		<figcaption>
 			Figure 1: Model/View/Controller and the User
 		</figcaption>

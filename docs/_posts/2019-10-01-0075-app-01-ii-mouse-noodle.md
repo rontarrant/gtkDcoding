@@ -21,7 +21,7 @@ We’re still working our way through *Phase One* of this nodes-n-noodles concep
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/018_cairo/cairo_018_28.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/020_app/app_020_01_02.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -63,7 +63,7 @@ We’re still working our way through *Phase One* of this nodes-n-noodles concep
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/018_cairo/cairo_018_28_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/020_app/app_020_01_02_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -105,7 +105,7 @@ We’re still working our way through *Phase One* of this nodes-n-noodles concep
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_28_cubic_bezier_follow_mouse.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/020_app/app_020_01_02_cubic_bezier_follow_mouse.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -250,9 +250,7 @@ Next time, we’ll take another step wherein a mouse button is clicked to start 
 	<div style="float: left;">
 		<a href="/2019/09/27/0074-cairo-doodle-a-noodle.html">Previous: Doodle a Noodle</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/10/04/0076-cairo-xi-noodles-and-mouse-clicks.html">Next: Noodles and Mouse Clicks</a>
 	</div>
--->
 </div>
