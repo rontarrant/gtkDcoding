@@ -380,9 +380,7 @@ Until then.
 	<div style="float: left;">
 		<a href="/2019/10/01/0075-app-01-ii-mouse-noodle.html">Previous: Mouse Noodle</a>
 	</div>
-<!--
 	<div style="float: right;">
-		<a href="/2019/10/08/0077-?????????????.html">Next: ?????????????</a>
+		<a href="/2019/10/08/0077-notebook-i-basics.html">Next: Notebook - The Basics</a>
 	</div>
--->
 </div>
