@@ -23,6 +23,10 @@
 {
 	background-image: linear-gradient(to right, rgba(222, 139, 243, 1), rgba(255, 255, 255, 1.0));
 }
+.topic-color_nodes /* tan */
+{
+	background-image: linear-gradient(to right, rgba(140, 2, 2, 1), rgba(255, 255, 255, 1.0));
+}
 .topic-color_image /* redish */
 {
 	background-image: linear-gradient(to right, rgba(243, 116, 196, 1), rgba(255, 255, 255, 1.0));

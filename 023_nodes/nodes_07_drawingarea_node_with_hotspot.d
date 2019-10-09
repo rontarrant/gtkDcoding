@@ -1,4 +1,4 @@
-// Cairo: Draw Lines with Rounded Ends
+// Nodes - Setting up Hotspots
 
 import std.stdio;
 import std.conv;
@@ -33,7 +33,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Nodes - Stage 1";
+	string title = "Nodes - Hotspots";
 	AppBox appBox;
 	
 	this()
@@ -100,9 +100,16 @@ class MoveableNode : DrawingArea
 	TerminalInStatus terminalInStatus; // appearance of the input terminal's status block
 	NodeTerminalOut nodeTerminalOut; // appearance of the output terminal
 	TerminalOutStatus terminalOutStatus; // appearance of the output terminal's status block
-	int width = 113, height = 102;
-	int xOrigin = 5, yOrigin = 1; // location of the DrawingArea 
 	
+	bool _dragOn = false;
+	bool _connectToIn = false, _connectToOut = false;
+	double[string] dragArea;
+	double[string] inHotspot;
+	double[string] outHotspot;
+	int width = 113, height = 102;
+	double _xOffset = 0, _yOffset = 0;
+	double xOrigin = 5, yOrigin = 1; // location of the DrawingArea 
+
 	this()
 	{
 		nodeShape = new NodeShape();
@@ -113,6 +120,9 @@ class MoveableNode : DrawingArea
 		nodeHandle = new NodeHandle();
 		addOnDraw(&onDraw);
 		
+		addOnButtonPress(&onButtonPress);
+		addOnButtonRelease(&onButtonRelease);
+
 	} // this()
 	
 	
@@ -123,16 +133,121 @@ class MoveableNode : DrawingArea
 		// call sub-objects' draw routines?
 		nodeShape.draw(context);
 		nodeTerminalIn.draw(context);
-		nodeTerminalOut.draw(context);
-		nodeHandle.draw(context);
 		terminalInStatus.draw(context);
+		nodeTerminalOut.draw(context);
 		terminalOutStatus.draw(context);
+		nodeHandle.draw(context);
 		
+		dragArea = ["left" : 13, "top" : 9, "right" : 99, "bottom" : 30];
+		inHotspot = ["left" : 0, "top" : 27, "right" : 10, "bottom" : 38];
+		outHotspot = ["left" : 100, "top" : 60, "right" : 110, "bottom" : 70];
+
 		return(true);
 		
 	} // onDraw()
 
 
+	void setOffset(double xOffset, double yOffset)
+	{
+		_xOffset = xOffset;
+		_yOffset = yOffset;
+		
+	} // getOffset()
+	
+	
+	bool onButtonPress(Event event, Widget widget)
+	{
+		double xMouse, yMouse;
+		GdkEventButton* buttonEvent = event.button;
+		int button1 = 1;
+		
+		xMouse = buttonEvent.x;
+		yMouse = buttonEvent.y;
+
+		// restrict active areas to terminal connections and the dragbar
+		if(xMouse > dragArea["left"] && xMouse < dragArea["right"] && yMouse > dragArea["top"] && yMouse < dragArea["bottom"])
+		{
+			_dragOn = true;
+			
+			if(buttonEvent.button is button1) // ModifierType.BUTTON1_MASK
+			{
+				// dragArea
+				setOffset(cast(int)event.button.x, cast(int)event.button.y);
+				GdkEventButton* mouseEvent = event.button;
+				dragAreaActive(xMouse, yMouse);
+			}
+		}
+		else if(xMouse > inHotspot["left"] && xMouse < inHotspot["right"] && yMouse > inHotspot["top"] && yMouse < inHotspot["bottom"])
+		{
+			_connectToIn = true;
+			
+			if(buttonEvent.button is button1) // ModifierType.BUTTON1_MASK
+			{
+				// inHotspot
+				setOffset(cast(int)event.button.x, cast(int)event.button.y);
+				GdkEventButton* mouseEvent = event.button;
+				terminalInActive(xMouse, yMouse);
+			}
+		}
+		else if(xMouse > outHotspot["left"] && xMouse < outHotspot["right"] && yMouse > outHotspot["top"] && yMouse < outHotspot["bottom"])
+		{
+			_connectToOut = true;
+			
+			if(buttonEvent.button is button1) // ModifierType.BUTTON1_MASK
+			{
+				// inHotspot
+				setOffset(cast(int)event.button.x, cast(int)event.button.y);
+				GdkEventButton* mouseEvent = event.button;
+				terminalOutActive(xMouse, yMouse);
+			}
+		}
+	
+		return(true);
+		
+	} // onButtonPress()
+
+
+	void dragAreaActive(double xMouse, double yMouse)
+	{
+		// see if the mouse is in the drag area 
+		writeln("dragArea: xMouse = ", xMouse, " yMouse = ", yMouse);
+		
+		// do something, then unset the flag
+		_dragOn = false;
+
+	} // dragAreaActive()
+	
+
+	void terminalInActive(double xMouse, double yMouse)
+	{
+		// see if the mouse is in the drag area 
+		writeln("inHotspot: xMouse = ", xMouse, " yMouse = ", yMouse);
+		
+		// do something, then unset the flag
+		_connectToIn = false;
+		
+	} // dragAreaActive()
+	
+
+	void terminalOutActive(double xMouse, double yMouse)
+	{
+		// see if the mouse is in the drag area 
+		writeln("outHotspot: xMouse = ", xMouse, " yMouse = ", yMouse);
+		
+		// do something, then unset the flag
+		_connectToOut = false;
+		
+	} // dragAreaActive()
+	
+
+	bool onButtonRelease(Event e, Widget w)
+	{
+		// this is a stub... in case we need it later
+
+		return(true);
+		
+	} // onButtonRelease()
+	
 } // class MoveableNode
 
 
@@ -144,8 +259,8 @@ class NodeShape
 	double xRight, xLeft, yUpper, yLower;
 	double[] northEastArc, southEastArc, southWestArc, northWestArc;
 	double lineWidth = 2;
-	double[] rimRGBA = [0.5, 0.1, 0.5, 1.0];
-	double[] fillRGBA = [0.518, 0.820, 0.471, 1.0];
+	double[] rimRGBA = [0.129, 0.243, 0.608, 1.0];
+	double[] fillRGBA = [0.686, 0.776, 0.914, 1.0];
 
 	this()
 	{
@@ -196,8 +311,8 @@ class NodeHandle
 	double xRight, xLeft, yUpper, yLower;
 	double[] northEastArc, southEastArc, southWestArc, northWestArc;
 	double lineWidth = 2;
-	double[] rimRGBA = [0.5, 0.1, 0.5, 1.0];
-	double[] fillRGBA = [0.418, 0.720, 0.371, 1.0];
+	double[] rimRGBA = [0.129, 0.243, 0.608, 1.0];
+	double[] fillRGBA = [0.667, 0.933, 1.0, 1.0];
 
 
 	this()
@@ -243,8 +358,8 @@ class NodeHandle
 
 class NodeTerminalIn : NodeTerminal
 {
-	double[] _rimRGBA = [0.5, 0.0, 0.0, 1.0];
-	double[] _fillRGBA = [0.9, 0.606, 0.004, 1.0];
+	double[] _rimRGBA = [0.129, 0.243, 0.608, 1.0];
+	double[] _fillRGBA = [1.0, 0.706, 0.004, 1.0];
 	int _xOffset = 6, _yOffset = 34;
 	
 	this()
@@ -258,8 +373,8 @@ class NodeTerminalIn : NodeTerminal
 
 class NodeTerminalOut : NodeTerminal
 {
-	double[] _rimRGBA = [0.5, 0.0, 0.0, 1.0];
-	double[] _fillRGBA = [0.888, 0.888, 0.051, 1.0];
+	double[] _rimRGBA = [0.129, 0.243, 0.608, 1.0];
+	double[] _fillRGBA = [0.988, 0.988, 0.051, 1.0];
 	int _xOffset = 105, _yOffset = 66;
 	
 	this()
@@ -313,8 +428,8 @@ class NodeTerminal
 class TerminalInStatus : TerminalStatus
 {
 	int _xOffset = 13, _yOffset = 40;
-	double[] _rimRGBA = [0.5, 0.0, 0.0, 1.0];
-	double[] _fillRGBA = [1.0, 0.606, 0.004, 1.0];
+	double[] _rimRGBA = [0.129, 0.243, 0.608, 1.0];
+	double[] _fillRGBA = [0.988, 0.902, 0.690, 1.0];
 
 	this()
 	{
@@ -328,8 +443,8 @@ class TerminalInStatus : TerminalStatus
 class TerminalOutStatus : TerminalStatus
 {
 	int _xOffset = 42, _yOffset = 73;
-	double[] _rimRGBA = [0.5, 0.0, 0.0, 1.0];
-	double[] _fillRGBA = [0.988, 0.988, 0.051, 1.0];
+	double[] _rimRGBA = [0.129, 0.243, 0.608, 1.0];
+	double[] _fillRGBA = [0.984, 0.984, 0.718, 1.0];
 
 	this()
 	{
@@ -348,8 +463,8 @@ class TerminalStatus
 	double xRight, xLeft, yUpper, yLower;
 	double[] northEastArc, southEastArc, southWestArc, northWestArc;
 	double lineWidth = 2;
-	double[] _rimRGBA = [0.5, 0.1, 0.5, 1.0];
-	double[] _fillRGBA = [0.418, 0.720, 0.371, 1.0];
+	double[] _rimRGBA;
+	double[] _fillRGBA;
 
 
 	this(int xOffset, int yOffset, double[] fillRGBA, double[] rimRGBA)

@@ -1,4 +1,4 @@
-// Notebook Demo - One Tab
+// Notebook Demo - using internal CSS to make tabs visible
 
 import std.stdio;
 
@@ -30,7 +30,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Notebook Demo - Simple";
+	string title = "Notebook - Internal CSS";
 	AppBox appBox;
 	
 	this()

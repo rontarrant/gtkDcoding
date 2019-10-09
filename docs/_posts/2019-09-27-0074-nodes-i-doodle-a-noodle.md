@@ -1,5 +1,5 @@
 ---
-title: "0074: Cairo IX – Doodle a Noodle"
+title: "0074: Nodes-n-noodles I – Doodle a Noodle"
 layout: post
 topic: cairo
 description: GTK Tutorial covering drawing a cubic Bezier curve on a DrawingArea.
@@ -7,11 +7,9 @@ author: Ron Tarrant
 
 ---
 
-# 0074: Cairo IX – Nodes and Noodles
+# 0074: Nodes-n-noodles I – Doodle a Noodle
 
-This post is the beginning of another *Cairo* miniseries and, for want of a better name, this miniseries shall be called…
-
-## Doodle a Noodle
+This post is the beginning of another new series and, for want of a better name, it shall be called... well... it's right there in the title: *Nodes-n-noodles*.
 
 But what are these nodes and noodles of which I speak?
 
@@ -25,7 +23,7 @@ And in *Blender*, it looks like this:
 
 <div class="inpage-frame">
 	<figure class="left">
-		<img src="/images/diagrams/020_app/blender_nodes_and_noodles.png" alt="Figure 1: Model/View/Controller and the User" style="width: 279px; height: 167px;">
+		<img src="/images/diagrams/023_nodes/blender_nodes_and_noodles.png" alt="Figure 1: Model/View/Controller and the User" style="width: 279px; height: 167px;">
 		<figcaption>
 			Figure 1: Model/View/Controller and the User
 		</figcaption>
@@ -56,7 +54,7 @@ Third, we’ll bring nodes and noodles together. We’ll be able to connect the 
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/020_app/app_020_01_01.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/023_nodes/nodes_023_01.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -98,7 +96,7 @@ Third, we’ll bring nodes and noodles together. We’ll be able to connect the 
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/020_app/app_020_01_01_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/023_nodes/nodes_023_01_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -140,7 +138,7 @@ Third, we’ll bring nodes and noodles together. We’ll be able to connect the 
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/020_app/app_020_01_01_cubic_bezier.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/023_nodes/nodes_023_01_cubic_bezier.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -151,7 +149,7 @@ We’ve actually talked about the basics of this technique before in [Blog Post 
 
 <div class="inpage-frame">
 	<figure class="left">
-		<img src="/images/diagrams/020_app/opposing_control_points.png" alt="Figure 1: Model/View/Controller and the User" style="width: 250px; height: 174px;">
+		<img src="/images/diagrams/023_nodes/opposing_control_points.png" alt="Figure 1: Model/View/Controller and the User" style="width: 250px; height: 174px;">
 		<figcaption>
 			Figure 1: Model/View/Controller and the User
 		</figcaption>
@@ -172,7 +170,7 @@ The second control point’s coordinates work out to be:
 
 <div class="inpage-frame">
 	<figure class="right">
-		<img src="/images/diagrams/020_app/opposing_surface_normals.png" alt="Figure 1: Model/View/Controller and the User" style="width: 250px; height: 174px;">
+		<img src="/images/diagrams/023_nodes/opposing_surface_normals.png" alt="Figure 1: Model/View/Controller and the User" style="width: 250px; height: 174px;">
 		<figcaption>
 			Figure 1: Model/View/Controller and the User
 		</figcaption>
@@ -231,6 +229,6 @@ And that’s step one/phase one of drawing a noodle. Next time, we’ll carry on
 		<a href="/2019/09/24/0073-frame-part-ii.html">Previous: Frames, Part II</a>
 	</div>
 	<div style="float: right;">
-		<a href="/2019/10/01/0075-app-01-ii-mouse-noodle.html">Next: Noodling with the Mouse</a>
+		<a href="/2019/10/01/0075-nodes-ii-mouse-noodle.html">Next: Noodling with the Mouse</a>
 	</div>
 </div>

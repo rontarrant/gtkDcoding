@@ -1,5 +1,5 @@
 ---
-title: "0076: Cairo XI – Noodles and Mouse Clicks"
+title: "0076: Nodes-n-noodles III – Noodles and Mouse Clicks"
 layout: post
 topic: cairo
 description: GTK Tutorial covering drawing a cubic Bezier curve on a DrawingArea.
@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0076: Cairo XI – Noodles and Mouse Clicks
+# 0076: Nodes-n-noodles III – Noodles and Mouse Clicks
 
 We’re up to step three as we work towards drawing a noodle with the mouse.
 
@@ -23,7 +23,7 @@ This time, we’re going to toss out the hard-coded starting coordinates for the
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/020_app/app_020_01_03.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/023_nodes/nodes_023_03.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -65,7 +65,7 @@ This time, we’re going to toss out the hard-coded starting coordinates for the
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/020_app/app_020_01_03_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/023_nodes/nodes_023_03_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -107,7 +107,7 @@ This time, we’re going to toss out the hard-coded starting coordinates for the
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/020_app/app_020_01_03_cubic_bezier_set_xy_start_with_mouse.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/023_nodes/nodes_023_03_cubic_bezier_set_xy_start_with_mouse.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -205,7 +205,7 @@ Our example code, when run, will now have a drag-n-drop feel. The cubic *Bezier*
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/020_app/app_020_01_04.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/023_nodes/nodes_023_04.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -247,7 +247,7 @@ Our example code, when run, will now have a drag-n-drop feel. The cubic *Bezier*
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/020_app/app_020_01_04_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="/images/screenshots/023_nodes/nodes_023_04_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->
@@ -289,7 +289,7 @@ Our example code, when run, will now have a drag-n-drop feel. The cubic *Bezier*
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/020_app/app_020_01_04_draw_noodle_complete.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/023_nodes/nodes_023_04_draw_noodle_complete.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
@@ -378,7 +378,7 @@ Until then.
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/2019/10/01/0075-app-01-ii-mouse-noodle.html">Previous: Mouse Noodle</a>
+		<a href="/2019/10/01/0075-nodes-ii-mouse-noodle.html">Previous: Mouse Noodle</a>
 	</div>
 	<div style="float: right;">
 		<a href="/2019/10/08/0077-notebook-i-basics.html">Next: Notebook - The Basics</a>

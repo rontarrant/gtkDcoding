@@ -496,7 +496,7 @@ Until then, be nice to each other.
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/2019/10/04/0076-app-01-iii-noodles-and-mouse-clicks.html">Previous: Noodles and Mouse Clicks</a>
+		<a href="/2019/10/04/0076-nodes-iii-noodles-and-mouse-clicks.html">Previous: Noodles and Mouse Clicks</a>
 	</div>
 <!--
 	<div style="float: right;">
