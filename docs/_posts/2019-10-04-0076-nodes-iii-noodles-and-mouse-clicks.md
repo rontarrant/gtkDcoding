@@ -1,7 +1,7 @@
 ---
 title: "0076: Nodes-n-noodles III – Noodles and Mouse Clicks"
 layout: post
-topic: cairo
+topic: nodes
 description: GTK Tutorial covering drawing a cubic Bezier curve on a DrawingArea.
 author: Ron Tarrant
 
