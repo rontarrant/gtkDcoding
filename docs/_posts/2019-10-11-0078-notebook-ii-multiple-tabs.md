@@ -1,19 +1,19 @@
 ---
-title: "0077: Notebook I – The Basics"
+title: "0078: Notebook II – Multiple Tabs, Reordering & Image Tabs"
 layout: post
 topic: container
-description: GTK Tutorial covering the basics of using a Notebook.
+description: This GTK Tutorial covers using multiple tabs in a Notebook.
 author: Ron Tarrant
 
 ---
 
-# 0077: Notebook I – The Basics
+# 0078: Notebook II – Multiple Tabs, Reordering & Image Tabs
 
-Today, we’ll be digging into the *GTK* `Notebook`, the basic widget used to build a multi-document interface (MDI). Each tab in a `Notebook` can contain pretty much whatever you want from a text document to a 2D or 3D graphic, even a visual representation of an audio file or JBC&#153; (Just a Bunch of Controls).
+A single tab in a `Notebook` has limited value, so today we’ll start by adding more. Then we'll look at how to turn on the reorder mechanism, and finish off by replacing the `Label` contained in the tab with an `Image`.
 
-But, enough buildup. Let’s get to it.
+Because the `CSS` we worked with last time gave us fully-visible tabs, let’s continue with that for now.
 
-## A Single-tab Notebook
+## Multiple Tabs
 
 <!-- 0, 1 -->
 <!-- first occurrence of application and terminal screen shots on a single page -->
@@ -23,7 +23,7 @@ But, enough buildup. Let’s get to it.
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/014_container/container_014_10.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="/images/screenshots/014_container/container_014_13.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -65,7 +65,7 @@ But, enough buildup. Let’s get to it.
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/014_container/container_014_10_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/014_container/container_014_13_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -107,87 +107,48 @@ But, enough buildup. Let’s get to it.
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_014_10_notebook_basic.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_014_13_notebook_multi_tab.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
 
-Before we construct a `Notebook`, we need to decide where the tabs will go:
-- `PositionType.LEFT`,
-- `PositionType.RIGHT`,
-- `PositionType.TOP`, or
-- `PositionType.BOTTOM`.
-
-And, yeah, that’s the entire list of options available in the `PositionType enum`.
-
-Let’s set up a derived class:
+Not much has to change to have more tabs. Just add more strings for tab names, more `Label`s, and more `TextView`s… or whatever you’re cramming in there. Your class preamble might look like this:
 
 ```d
-class MyNotebook : Notebook
-{
-	PositionType tabPosition = PositionType.TOP;
-	string tabLabel = "Demo Tab";
-	Label myTabLabel;
-	MyTextView myTextview;
-	
-	this()
-	{
-		super();
-		setTabPos(tabPosition);
-
-		myTabLabel = new Label(tabLabel);
-		myTextview = new MyTextView();
-		appendPage(myTextview, myTabLabel);
-				
-	} // this()
-	
-} // class MyNotebook
+CSS css; // need to see tab shapes against the bg
+PositionType tabPosition = PositionType.TOP;
+Label tabLabelOne, tabLabelTwo, tabLabelThree;
+string textOne = "Tab One", textTwo = "Tab Two", textThree = "Tab Three";
+TabTextView tabTextViewOne, tabTextViewTwo, tabTextViewThree;
 ```
 
-### Class Attributes
+And the constructor might resemble this:
 
-In the attributes list, we find our tab position followed by a bunch of other (pretty-much) self-explanatory stuff, but here’s a quick run-down, anyway:
+```d
+this()
+{
+	super();
+	setTabPos(tabPosition);
+	css = new CSS(getStyleContext());
 
-- a string for the tab’s `Label`,
-- the actual `Label` we’ll stuff into the tab, and
-- a derivative of a `TextView` that we’ll stuff into the tab’s work area/page.
+	tabTextViewOne = new TabTextView("Now is the witness of our discontinent.");
+	tabLabelOne = new Label(textOne);
+	appendPage(tabTextViewOne, tabLabelOne);
 
-### The Constructor
+	tabTextViewTwo = new TabTextView("Four stores and seven pounds ago...");
+	tabLabelTwo = new Label(textTwo);
+	appendPage(tabTextViewTwo, tabLabelTwo);
 
-Still following the code snippet above, after calling the super-constructor, we:
+	tabTextViewThree = new TabTextView("Help me open yon cantelope.");
+	tabLabelThree = new Label(textThree);
+	appendPage(tabTextViewThree, tabLabelThree);
+		
+} // this()
+```
 
-- set the tabs to appear at the top,
-- instantiate the `Label` and `TextView` derivatives, and finally,
-- call the `appendPage()` function to cram everything in there.
+Now, let's move on to...
 
-I won’t go over the `TextView` or the `Label` derivative classes here since we’ve talked about those many times in earlier posts.
-
-And that is all there is to it.
-
-### But Wait…
-
-When you compile and run this demo (in *Windows*, at least) you’ll notice that the tab’s `Label` text shows along with a little blue bar underneath so we know it’s selected, but there’s no visible tab background. It doesn’t even have an outline.
-
-Of course, if you’ve already been messing around with themes other than the default *GTK* theme available on *Windows*, your tabs might already be visible. But for those of us who haven’t, this brings us to explore a couple of solutions.
-
-## Making Tabs Visible in Windows 10: the Universal Method
-
-One way to go about this is to change the theme for all *GTK* apps. This is not a well-documented process, but a quick-n-dirty solution is to give your `GTK` apps a win32 theme. It’s not the best solution because it gives everything a *Windows 7* look. It also spits out warnings on the command line. One workaround for that is don't run your app from the command line, which may or may not be appealing.
-
-Either way, here’s what you do:
-
-- as administrator, open `C:\Program Files\Gtk-Runtime\etc\gtk-3.0\settings.ini`,
-- find all lines starting with `gtk` and comment them out by typing an octothorp (#) at the begining of each (you could delete them if you want, but by commenting them out, you can easily revert... which I'm sure you will once you see the results),
-- go to a new line and add this: `gtk-theme-name=win32`
-- save and close the file.
-
-Now you can open any of your GTK apps/demos and travel back in time to the *Windows 7* era.
-
-Like I said, it’s not the best solution, but you end up with visible tabs.
-
-And here’s another way to go about it…
-
-## Making Tabs Visible: the Application-level Method
+## Reordering Tabs
 
 <!-- 2, 3 -->
 <!-- second occurrence of application and terminal screen shots on a single page -->
@@ -197,7 +158,7 @@ And here’s another way to go about it…
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/014_container/container_014_11.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="/images/screenshots/014_container/container_014_14.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -239,7 +200,7 @@ And here’s another way to go about it…
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/014_container/container_014_11_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="/images/screenshots/014_container/container_014_14_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->
@@ -281,86 +242,60 @@ And here’s another way to go about it…
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_014_11_notebook_with_visible_tab.d" target="_blank">here</a>.
-	</div>
-	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The CSS file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/css/visible_tabs.css" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_014_14_notebook_reorder_tabs.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
 
-This isn’t an ideal solution either because we don’t get control over such things as the shape of the tabs, but we do get some control… and it looks better than a *Windows 7* theme superimposed onto a *Windows 10* application.
-
-##### A Call for Participation
-<BR>
-
-I haven't tried this on *Linux* (or any other OS) but I'm sure it'll work. If anyone tries it, please tell us about your results (see list of contact options at the bottom of this page).
-
-##### (now, back to our show)
-<BR>
-
-If you recall, we covered how to decorate widgets using *CSS* in [Blog Post #0073](/2019/09/24/0073-frame-part-ii.html) when we were talking about the `Frame` widget and what we did there can be adapted here. Below is the *CSS* class we used before, but with `cssPath` set to the file we're working with for this demo:
+This is easy, too. All we have to do is add one line each time we add a tab:
 
 ```d
-class CSS // GTK4 compliant
-{
-	CssProvider provider;
-	string cssPath = "./css/visible_tabs.css";
+setTabReorderable(textViewOne, true);
+```
 
-	this(StyleContext styleContext)
-	{
-		provider = new CssProvider();
-		provider.loadFromPath(cssPath);
-		styleContext.addProvider(provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-		
-	} // this()	
+Which means our `Notebook` class might look like this:
+
+```d
+class MyNotebook : Notebook
+{
+	CSS css; // need to see tab shapes against the bg
+	PositionType tabPosition = PositionType.TOP;
+	Label tabLabelOne, tabLabelTwo, tabLabelThree;
+	TabTextView textViewOne, textViewTwo, textViewThree;
 	
-} // class CSS
+	this()
+	{
+		super();
+		setTabPos(tabPosition);
+		css = new CSS(getStyleContext());
+
+		textViewOne = new TabTextView("Now is the witness of our discontinent.");
+		tabLabelOne = new Label("Tab One");
+		appendPage(textViewOne, tabLabelOne);
+		setTabReorderable(textViewOne, true);
+
+		textViewTwo = new TabTextView("Four stores and seven pounds ago...");
+		tabLabelTwo = new Label("Tab Two");
+		appendPage(textViewTwo, tabLabelTwo);
+		setTabReorderable(textViewTwo, true);
+
+		textViewThree = new TabTextView("Help me open yon cantelope.");
+		tabLabelThree = new Label("Tab Three");
+		appendPage(textViewThree, tabLabelThree);
+		setTabReorderable(textViewThree, true);
+		
+	} // this()
+	
+} // class MyNotebook
 ```
 
-So, like before, we’ll:
+No big deal.
 
-- create a *CSS* class (this time, specifically for tabs), and
-- attach it to the `Notebook`’s `StyleContext`.
+You may wonder what would happen if you set some tabs to be reorderable while leaving others as is. It turns out, the non-reorderable tabs still move around, but only to get out of the way of the other tabs. Rather than actually being unmovable, they become passive-resistant, refusing any direct manipulation, but giving in if another tab needs it to move aside.
 
-### Changes to Class Attributes
+Now, let's look at what can be done to give tabs a bit more visual appeal.
 
-For each `Widget` where we want *CSS* styling, we add this line in the class preamble:
-
-```d
-CSS css;
-```
-
-The we go to...
-
-### The Constructor
-
-Here, we add this line:
-
-```d
-css = new CSS(getStyleContext());
-```
-
-And remember, this also has to be done in the constructor for each widget where CSS will be used.
-
-One more thing to look at...
-
-### The visible_tabs.css File
-
-The file is short-n-sweet:
-
-```css
-tab
-{
-	background-color: #f2f2f2;
-}
-```
-
-The *CSS Name* for tabs is `tab` and we just need to set the color.
-
-But, there's one more way to go about this, one that appeals to me because we bring the *CSS* selector inside our *D* code file where it can't get misplaced.
-
-## Embedding CSS in D
+## Images in Tabs
 
 <!-- 4, 5 -->
 <!-- third occurrence of application and terminal screen shots on a single page -->
@@ -370,7 +305,7 @@ But, there's one more way to go about this, one that appeals to me because we br
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img4" src="/images/screenshots/014_container/container_014_12.png" alt="Current example output">		<!-- img# -->
+			<img id="img4" src="/images/screenshots/014_container/container_014_15.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal4" class="modal">																<!-- modal# -->
@@ -412,7 +347,7 @@ But, there's one more way to go about this, one that appeals to me because we br
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img5" src="/images/screenshots/014_container/container_014_12_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img5" src="/images/screenshots/014_container/container_014_15_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal5" class="modal">																			<!-- modal# -->
@@ -454,51 +389,81 @@ But, there's one more way to go about this, one that appeals to me because we br
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_014_12_notebook_internal_css_tab.d" target="_blank">here</a>.
-	</div>
-	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		A variation of the example using an enum <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_014_12a_notebook_internal_css_enum_tab.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_014_15_notebook_tab_images.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screen shots on a single page -->
 
-The *CSS* selector can be a `string` or an `enum` (follow the second code link above and look for the CSS class at the bottom of the file) and it’s associated with the `CssProvider` using `loadFromData()` instead of `loadFromPath()`. A quick rewrite of the `CSS` class makes this happen:
+Here's the breakdown of what needs to be done:
+
+In the preamble, we declare an `Image` widget for each tab:
 
 ```d
-class CSS // GTK4 compliant
-{
-	CssProvider provider;
-	string myCSS = "tab { background-color: #f2f2f2; }";
-
-	this(StyleContext styleContext)
-	{
-		provider = new CssProvider();
-		provider.loadFromData(myCSS);
-		styleContext.addProvider(provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-		
-	} // this()	
-	
-} // class CSS
+Image tabImageOne, tabImageTwo, tabImageThree;
 ```
 
-Nothing has to change in the class(s) using the `CSS`.
+In the constructor, we instantiate them:
+
+```d
+tabImageOne = new Image("images/green-man.png");
+```
+
+And append each `Image` to the tab just like we would a `Label`:
+
+```d
+appendPage(tabTextViewOne, tabImageOne);
+```
+
+Here’s how the `MyNotebook` class might look taking this approach:
+
+```d
+class MyNotebook : Notebook
+{
+	CSS css; // need to see tab shapes against the bg
+	PositionType tabPosition = PositionType.TOP;
+	Image tabImageOne, tabImageTwo, tabImageThree;
+	TabTextView tabTextViewOne, tabTextViewTwo, tabTextViewThree;
+	
+	this()
+	{
+		super();
+		setTabPos(tabPosition);
+		css = new CSS(getStyleContext());
+
+		tabTextViewOne = new TabTextView("Now is the witness of our discontinent.");
+		tabImageOne = new Image("images/green-man.png");
+		appendPage(tabTextViewOne, tabImageOne);
+		setTabReorderable(tabTextViewOne, true);
+
+		tabTextViewTwo = new TabTextView("Four stores and seven pounds ago...");
+		tabImageTwo = new Image("images/yellow-man.png");
+		appendPage(tabTextViewTwo, tabImageTwo);
+		setTabReorderable(tabTextViewTwo, true);
+
+		tabTextViewThree = new TabTextView("Help me open yon cantelope.");
+		tabImageThree = new Image("images/whisk.png");
+		appendPage(tabTextViewThree, tabImageThree);
+		setTabReorderable(tabTextViewThree, true);
+		
+	} // this()
+	
+} // class MyNotebook
+```
+
+And, voila, we’ve got reorder-able custom tabs.
 
 ## Conclusion
 
-Next time, we’ll carry on and look at multiple tabs (why else are we playing around with tabs?) and eventually get into:
+Another thing I got to wondering about while preparing these demos was this: is it possible to draw a more elegantly-shaped tab without resorting to an `Image`? As it turns out, the answer is yes, but there is a gotcha to consider. We’ll talk about that next time when we get to some real roll-up-your-sleeves customization.
 
-- reordering tabs,
-- customized tabs (wherein we draw our own tab shapes from scratch),
-- adding and removing tabs, and
-- signals associated with the `Notebook` widget and its tabs/pages.
-
-Until then, be nice to each other.
+Until then...
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/2019/10/04/0076-nodes-iii-noodles-and-mouse-clicks.html">Previous: Noodles and Mouse Clicks</a>
+		<a href="/2019/10/08/0077-notebook-i-basics.html">Previous: Notebook I - The Basics</a>
 	</div>
+<!--
 	<div style="float: right;">
-		<a href="/2019/10/11/0078-notebook-ii-multiple-tabs.html">Next: Notebook II - Multiple Tabs</a>
+		<a href="/2019/10/15/0079-notebook-iii-custom-tabs-1.html">Next: Notebook III - Custom Tabs 1</a>
 	</div>
-</div>
+-->
