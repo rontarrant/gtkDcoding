@@ -462,8 +462,7 @@ Until then...
 	<div style="float: left;">
 		<a href="/2019/10/08/0077-notebook-i-basics.html">Previous: Notebook I - The Basics</a>
 	</div>
-<!--
 	<div style="float: right;">
-		<a href="/2019/10/15/0079-notebook-iii-custom-tabs-1.html">Next: Notebook III - Custom Tabs 1</a>
+		<a href="/2019/10/15/0079-notebook-iii-custom-tabs-i.html">Next: Notebook III - Custom Tabs Part I</a>
 	</div>
--->
+</div>
