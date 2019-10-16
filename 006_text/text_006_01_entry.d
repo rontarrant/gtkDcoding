@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Entry widget
 
 import std.stdio;

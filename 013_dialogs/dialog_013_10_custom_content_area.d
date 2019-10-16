@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Custom Content area Dialog
 
 import std.stdio;

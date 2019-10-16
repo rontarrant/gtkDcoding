@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Cairo: Animate a Text Counter
 
 import std.stdio;

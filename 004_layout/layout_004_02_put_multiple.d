@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Precision placement of multiple buttons using put()
 // Also shows the use of auto as a substitute for naming a class during instantiation.
 

@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // OOP Test Rig Base
 
 import std.stdio;

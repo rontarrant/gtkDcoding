@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Notebook demo #1 - a simple example
 
 import std.stdio;

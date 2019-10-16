@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Notebook - Working with Child Widgets
 
 import std.stdio;

@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // MVC ComboBox with Pixbuf
 
 import std.stdio;

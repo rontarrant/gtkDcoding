@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // retrieving text from an Entry
 
 import std.stdio;

@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Cairo: Toy Text
 
 import std.stdio;

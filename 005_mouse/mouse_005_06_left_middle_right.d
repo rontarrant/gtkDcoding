@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // distingish between left, middle and right mouse buttons
 
 import std.stdio;

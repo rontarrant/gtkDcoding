@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Custom Action Area with StockID
 
 import std.stdio;

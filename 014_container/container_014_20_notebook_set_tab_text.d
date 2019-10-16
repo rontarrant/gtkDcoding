@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Notebook - set tab text via selection in the TextView
 
 import std.stdio;

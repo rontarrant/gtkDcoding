@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Cairo: Draw Lines with Rounded Ends
 
 import std.stdio;
@@ -104,12 +106,15 @@ class MoveableNode : DrawingArea
 	
 	this()
 	{
+		setSizeRequest(width, height); // without this, nothing shows
+
 		nodeShape = new NodeShape();
 		nodeTerminalIn = new NodeTerminalIn();
 		terminalInStatus = new TerminalInStatus();
 		nodeTerminalOut = new NodeTerminalOut();
 		terminalOutStatus = new TerminalOutStatus();
 		nodeHandle = new NodeHandle();
+
 		addOnDraw(&onDraw);
 		
 	} // this()
@@ -117,15 +122,14 @@ class MoveableNode : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		setSizeRequest(width, height); // without this, nothing shows
 
 		// call sub-objects' draw routines?
 		nodeShape.draw(context);
 		nodeTerminalIn.draw(context);
-		nodeTerminalOut.draw(context);
-		nodeHandle.draw(context);
 		terminalInStatus.draw(context);
+		nodeTerminalOut.draw(context);
 		terminalOutStatus.draw(context);
+		nodeHandle.draw(context);
 		
 		return(true);
 		

@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Fake an ImageMenuItem with an Accel Key
 import std.stdio;
 

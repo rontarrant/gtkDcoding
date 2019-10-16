@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // ComboBoxText example #3 - ComboxBoxText with an Entry
 
 import std.stdio;

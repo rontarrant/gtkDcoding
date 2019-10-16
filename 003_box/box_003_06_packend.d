@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // using a box to get more buttons in the window, but
 // with the Box.packEnd() function
 

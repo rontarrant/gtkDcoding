@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Imperative Test Rig Foundation for Learning GtkD Coding
 
 import std.stdio;

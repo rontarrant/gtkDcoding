@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // the window itself is sensitive to mouse button clicks.
 // distingish between left, middle, and right mouse buttons
 // also track where the mouse is within the window.

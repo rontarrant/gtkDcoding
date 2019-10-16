@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // MVC - a TreeStore example with a single parent and single child, populating
 // the model with append().
 

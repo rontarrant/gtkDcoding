@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // A more complex Expander example with multiple children
 
 import std.stdio;

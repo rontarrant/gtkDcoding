@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // ComboBoxText example #5 - add or remove Entry item from drop-down list
 
 import std.stdio;

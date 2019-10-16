@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // multi-level TreeStore - all in one
 
 import std.stdio;

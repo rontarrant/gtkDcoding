@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Cairo: Fill an Outlined Rectangle
 
 import std.stdio;

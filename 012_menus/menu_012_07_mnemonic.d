@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // MenuItem with a Mnemonic Shortcut Key
 
 import std.stdio;

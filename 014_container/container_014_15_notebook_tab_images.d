@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Notebook - Tabs with Images
 
 import std.stdio;

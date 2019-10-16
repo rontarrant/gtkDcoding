@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // illustrates how to interrupt the flow of signals 
 
 import std.stdio;

@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // MVC ComboBox with ListStore - one column containing strings
 
 import std.stdio;

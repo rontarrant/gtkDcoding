@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // hook up the mouse button press signal
 
 import std.stdio;

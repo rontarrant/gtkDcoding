@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Paned Window - Vertical
 
 import std.stdio;

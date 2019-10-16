@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Notebook Demo - One Tab - enum CSS
 
 import std.stdio;

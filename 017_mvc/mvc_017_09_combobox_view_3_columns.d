@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // MVC Three-column ComboBox
 
 import std.stdio;

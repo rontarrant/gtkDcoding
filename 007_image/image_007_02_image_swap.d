@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // switch Button Image each time it's clicked
 // a study in propagation/fall-through
 

@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Playing with the window's size requirements
 
 import std.stdio;

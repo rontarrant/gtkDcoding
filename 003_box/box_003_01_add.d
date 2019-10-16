@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // using a Box to get more buttons in the window
 // using the Box.add() function
 

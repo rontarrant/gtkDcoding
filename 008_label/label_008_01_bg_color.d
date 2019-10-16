@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // label with a colored background
 // has to be done by dropping the Label into an EventBox
 

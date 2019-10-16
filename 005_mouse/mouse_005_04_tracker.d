@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // hook up the onMotion signal and have it report its position within the window
 
 import std.stdio;

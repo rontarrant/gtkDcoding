@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // OOP Entry
 
 import std.stdio;

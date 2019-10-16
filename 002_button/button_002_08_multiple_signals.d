@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // connect multiple signals to a single button
 
 import std.stdio;

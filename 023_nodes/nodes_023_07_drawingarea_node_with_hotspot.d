@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Nodes - Setting up Hotspots
 
 import std.stdio;
@@ -101,17 +103,16 @@ class MoveableNode : DrawingArea
 	NodeTerminalOut nodeTerminalOut; // appearance of the output terminal
 	TerminalOutStatus terminalOutStatus; // appearance of the output terminal's status block
 	
-	bool _dragOn = false;
-	bool _connectToIn = false, _connectToOut = false;
+	int width = 113, height = 102;
+
 	double[string] dragArea;
 	double[string] inHotspot;
 	double[string] outHotspot;
-	int width = 113, height = 102;
-	double _xOffset = 0, _yOffset = 0;
-	double xOrigin = 5, yOrigin = 1; // location of the DrawingArea 
 
 	this()
 	{
+		setSizeRequest(width, height); // without this, nothing shows
+
 		nodeShape = new NodeShape();
 		nodeTerminalIn = new NodeTerminalIn();
 		terminalInStatus = new TerminalInStatus();
@@ -119,17 +120,18 @@ class MoveableNode : DrawingArea
 		terminalOutStatus = new TerminalOutStatus();
 		nodeHandle = new NodeHandle();
 		addOnDraw(&onDraw);
+
+		dragArea = ["left" : 13, "top" : 9, "right" : 99, "bottom" : 30];
+		inHotspot = ["left" : 0, "top" : 27, "right" : 10, "bottom" : 38];
+		outHotspot = ["left" : 100, "top" : 60, "right" : 110, "bottom" : 70];
 		
 		addOnButtonPress(&onButtonPress);
-		addOnButtonRelease(&onButtonRelease);
 
 	} // this()
 	
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		setSizeRequest(width, height); // without this, nothing shows
-
 		// call sub-objects' draw routines?
 		nodeShape.draw(context);
 		nodeTerminalIn.draw(context);
@@ -137,24 +139,12 @@ class MoveableNode : DrawingArea
 		nodeTerminalOut.draw(context);
 		terminalOutStatus.draw(context);
 		nodeHandle.draw(context);
-		
-		dragArea = ["left" : 13, "top" : 9, "right" : 99, "bottom" : 30];
-		inHotspot = ["left" : 0, "top" : 27, "right" : 10, "bottom" : 38];
-		outHotspot = ["left" : 100, "top" : 60, "right" : 110, "bottom" : 70];
 
 		return(true);
 		
 	} // onDraw()
 
 
-	void setOffset(double xOffset, double yOffset)
-	{
-		_xOffset = xOffset;
-		_yOffset = yOffset;
-		
-	} // getOffset()
-	
-	
 	bool onButtonPress(Event event, Widget widget)
 	{
 		double xMouse, yMouse;
@@ -167,36 +157,27 @@ class MoveableNode : DrawingArea
 		// restrict active areas to terminal connections and the dragbar
 		if(xMouse > dragArea["left"] && xMouse < dragArea["right"] && yMouse > dragArea["top"] && yMouse < dragArea["bottom"])
 		{
-			_dragOn = true;
-			
 			if(buttonEvent.button is button1) // ModifierType.BUTTON1_MASK
 			{
 				// dragArea
-				setOffset(cast(int)event.button.x, cast(int)event.button.y);
 				GdkEventButton* mouseEvent = event.button;
 				dragAreaActive(xMouse, yMouse);
 			}
 		}
 		else if(xMouse > inHotspot["left"] && xMouse < inHotspot["right"] && yMouse > inHotspot["top"] && yMouse < inHotspot["bottom"])
 		{
-			_connectToIn = true;
-			
 			if(buttonEvent.button is button1) // ModifierType.BUTTON1_MASK
 			{
 				// inHotspot
-				setOffset(cast(int)event.button.x, cast(int)event.button.y);
 				GdkEventButton* mouseEvent = event.button;
 				terminalInActive(xMouse, yMouse);
 			}
 		}
 		else if(xMouse > outHotspot["left"] && xMouse < outHotspot["right"] && yMouse > outHotspot["top"] && yMouse < outHotspot["bottom"])
 		{
-			_connectToOut = true;
-			
 			if(buttonEvent.button is button1) // ModifierType.BUTTON1_MASK
 			{
 				// inHotspot
-				setOffset(cast(int)event.button.x, cast(int)event.button.y);
 				GdkEventButton* mouseEvent = event.button;
 				terminalOutActive(xMouse, yMouse);
 			}
@@ -212,9 +193,6 @@ class MoveableNode : DrawingArea
 		// see if the mouse is in the drag area 
 		writeln("dragArea: xMouse = ", xMouse, " yMouse = ", yMouse);
 		
-		// do something, then unset the flag
-		_dragOn = false;
-
 	} // dragAreaActive()
 	
 
@@ -224,7 +202,6 @@ class MoveableNode : DrawingArea
 		writeln("inHotspot: xMouse = ", xMouse, " yMouse = ", yMouse);
 		
 		// do something, then unset the flag
-		_connectToIn = false;
 		
 	} // dragAreaActive()
 	
@@ -235,19 +212,10 @@ class MoveableNode : DrawingArea
 		writeln("outHotspot: xMouse = ", xMouse, " yMouse = ", yMouse);
 		
 		// do something, then unset the flag
-		_connectToOut = false;
 		
 	} // dragAreaActive()
 	
 
-	bool onButtonRelease(Event e, Widget w)
-	{
-		// this is a stub... in case we need it later
-
-		return(true);
-		
-	} // onButtonRelease()
-	
 } // class MoveableNode
 
 

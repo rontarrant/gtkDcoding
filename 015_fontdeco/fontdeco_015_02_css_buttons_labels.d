@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // CSS-enabled Labels & Buttons
 
 import std.stdio;

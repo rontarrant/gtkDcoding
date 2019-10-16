@@ -1,4 +1,6 @@
-// Description of example
+// This source code is in the public domain.
+
+// Reorganized Test Rig
 
 import std.stdio;
 

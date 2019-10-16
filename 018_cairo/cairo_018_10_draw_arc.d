@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Cairo: Draw an arc
 
 import std.stdio;

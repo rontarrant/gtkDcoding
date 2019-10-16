@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // non-readable Entry
 
 import std.stdio;

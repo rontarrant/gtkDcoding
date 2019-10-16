@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // change the mouse pointer to a different shape depending on which button it's on
 
 import std.stdio;

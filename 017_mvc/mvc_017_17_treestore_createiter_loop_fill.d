@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // MVC - a TreeStore example using createIter() in a loop to populate the model
 
 import std.stdio;

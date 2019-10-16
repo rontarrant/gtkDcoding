@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // ToggleButton with an observer
 
 import std.stdio;

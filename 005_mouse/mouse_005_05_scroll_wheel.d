@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // report what's happening with the mouse's scroll wheel
 
 import std.stdio;

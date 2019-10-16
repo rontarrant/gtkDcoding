@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // use the onButtonRelease signal instead of onClicked
 
 import std.stdio;

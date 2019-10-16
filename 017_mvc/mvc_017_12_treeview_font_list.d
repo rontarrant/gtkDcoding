@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // MVC Dynamically-loaded TreeView - List of System Fonts
 
 import std.stdio;

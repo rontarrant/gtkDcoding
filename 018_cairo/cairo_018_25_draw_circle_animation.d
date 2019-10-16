@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Cairo: Animte Drawing a Circle
 
 import std.stdio;

@@ -1,3 +1,7 @@
+// This source code is in the public domain.
+
+// add RadioButtons to a previously-existing ListSG group.
+
 import std.stdio;
 
 import gtk.Main;

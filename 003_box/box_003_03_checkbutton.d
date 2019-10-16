@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // example of a CheckButton
 // using an Observer pattern to keep two buttons in sync
 

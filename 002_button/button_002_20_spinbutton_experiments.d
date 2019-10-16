@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // SpinButton madness
 
 import std.stdio;

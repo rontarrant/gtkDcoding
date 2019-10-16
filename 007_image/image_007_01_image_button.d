@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // a Button with an Image
 
 import std.stdio;

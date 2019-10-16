@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Switch Light ON/OFF with Color Changes
 
 import std.stdio;

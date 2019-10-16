@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // ComboBox with two columns containing strings and integers
 
 import std.stdio;

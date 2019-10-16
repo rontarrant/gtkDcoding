@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Notebook - Add & Remove Tabs
 
 import std.stdio;

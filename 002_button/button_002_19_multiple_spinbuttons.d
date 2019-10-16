@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // SpinButtons - cardinal and float
 
 import std.stdio;

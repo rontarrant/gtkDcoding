@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Save File Dialog
 
 import std.stdio;

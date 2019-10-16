@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Notebook demo #2 - visible tabs
 
 import std.stdio;

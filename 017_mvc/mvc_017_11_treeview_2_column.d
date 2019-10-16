@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // MVC Two-column TreeView
 
 import std.stdio;

@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Display PNG
 
 import std.stdio;

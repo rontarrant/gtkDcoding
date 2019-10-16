@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // a button with a label containing markup that can be turned on or off
 
 import std.stdio;

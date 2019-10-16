@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Custom Dialog - using a string array for Button names in the Action Area
 
 import std.stdio;

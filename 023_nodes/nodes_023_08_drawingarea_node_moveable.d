@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Nodes - Fully-movable Nodes
 
 import std.stdio;
@@ -112,14 +114,15 @@ class MoveableNode : DrawingArea
 	NodeTerminalOut nodeTerminalOut; // appearance of the output terminal
 	TerminalOutStatus terminalOutStatus; // appearance of the output terminal's status block
 
-	bool _dragOn = false;
-	bool _connectToIn = false, _connectToOut = false;
+	int width = 113, height = 102;
+
 	double[string] dragArea;
 	double[string] inHotspot;
 	double[string] outHotspot;
-	int width = 113, height = 102;
+
 	double _xOffset = 0, _yOffset = 0;
-	int _width, _height;
+	bool _dragOn = false;
+	bool _connectToIn = false, _connectToOut = false;
 	double[] _nodePosition;
 	int _xIndex = 0, _yIndex = 1; // indices into the _nodePosition array
 	NodeLayout _nodeLayout;
@@ -128,6 +131,8 @@ class MoveableNode : DrawingArea
 	this(NodeLayout nodeLayout)
 	{
 		super();
+		setSizeRequest(width, height); // without this, nothing shows
+
 		setEvents(EventMask.POINTER_MOTION_MASK | EventMask.BUTTON1_MOTION_MASK);
 
 		_nodeLayout = nodeLayout;
@@ -175,15 +180,13 @@ class MoveableNode : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		setSizeRequest(width, height); // without this, nothing shows
-
 		// call sub-objects' draw routines?
 		nodeShape.draw(context);
 		nodeTerminalIn.draw(context);
-		nodeTerminalOut.draw(context);
-		nodeHandle.draw(context);
 		terminalInStatus.draw(context);
+		nodeTerminalOut.draw(context);
 		terminalOutStatus.draw(context);
+		nodeHandle.draw(context);
 		
 		return(true);
 		
@@ -192,11 +195,8 @@ class MoveableNode : DrawingArea
 
 	bool onMotionNotify(Event event, Widget widget)
 	{
-		double xMouse, yMouse;
 		double newX, newY, pointerX, pointerY;
 		GdkEventMotion* motionEvent = event.motion();
-		xMouse = motionEvent.x;
-		yMouse = motionEvent.y;
 
 		if((motionEvent.state == ModifierType.BUTTON1_MASK) && _dragOn == true) // ModifierType.BUTTON1_MASK
 		{
@@ -239,8 +239,6 @@ class MoveableNode : DrawingArea
 		
 		int button1 = 1;
 
-		setOffset(buttonEvent.x, buttonEvent.y);
-
 		// restrict active areas to terminal connections and the dragbar
 		if(xMouse > dragArea["left"] && xMouse < dragArea["right"] && yMouse > dragArea["top"] && yMouse < dragArea["bottom"])
 		{
@@ -272,7 +270,7 @@ class MoveableNode : DrawingArea
 			
 			if(buttonEvent.button is button1) // ModifierType.BUTTON1_MASK
 			{
-				// inHotspot
+				// outHotspot
 				setOffset(event.button.x, event.button.y);
 				GdkEventButton* mouseEvent = event.button;
 				terminalOutActive(xMouse, yMouse);

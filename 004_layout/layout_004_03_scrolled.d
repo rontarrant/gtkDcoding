@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // a ScrolledWindow example
 
 import std.stdio;

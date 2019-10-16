@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Entry widget with Editable turned on and off
 
 import std.stdio;

@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // esthetic layout example using a Grid
 
 import std.stdio;

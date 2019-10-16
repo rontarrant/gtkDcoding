@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Open a Single File Using a Dialog
 
 import std.stdio;

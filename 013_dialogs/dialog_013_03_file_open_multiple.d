@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Open Multiple Files
 
 import std.stdio;

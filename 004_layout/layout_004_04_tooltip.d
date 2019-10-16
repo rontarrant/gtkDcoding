@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Tooltip on a rotated button
 
 import std.stdio;

@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // LinkButton without std.stdio
 
 // import std.stdio;

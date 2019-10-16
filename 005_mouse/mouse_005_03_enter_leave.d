@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // hook two signals to a single button so it tells us which signal is being processed
 
 import std.stdio;

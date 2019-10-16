@@ -1,3 +1,5 @@
+// This source code is in the public domain.
+
 // Example of:
 //  a plain button
 //  coded in the OOP paradigm
