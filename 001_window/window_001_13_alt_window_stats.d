@@ -28,16 +28,15 @@ class TestRigWindow : MainWindow
 {
 	string title = "Centered Window";
 	AppBox appBox;
-	int xPosition, yPosition, width = 320, height = 400;
+	int xPosition, yPosition, width, height;
 	bool _isMaximized;
 	
 	this()
 	{
 		super(title);
 		addOnDestroy(&quitApp);
-		addOnCheckResize(&onCheckResize);
-		addOnConfigure(&onConfigure);
-
+		addOnConfigure(&onConfigureEvent);
+		
 		appBox = new AppBox(this);
 		add(appBox);
 		
@@ -50,7 +49,7 @@ class TestRigWindow : MainWindow
 	{
 		string exitMessage = "Save the window stats for next time the user runs this application.";
 		writeln(exitMessage);
-		writeln("xPosition: ", xPosition, ", yPosition: ", yPosition, ", width: ", width, ", height: ", height);
+		showWindowStats();
 		checkMaxState();
 		
 		Main.quit();
@@ -58,11 +57,19 @@ class TestRigWindow : MainWindow
 	} // quitApp()
 
 
-	void onCheckResize(Container container)
+	bool onConfigureEvent(GdkEventConfigure* event, Widget widget)
 	{
-		getSize(width, height);
+		int eventX, eventY, eventWidth, eventHeight;
+
+		if(event.type is EventType.CONFIGURE)
+		{
+			xPosition = eventX = event.x;
+			yPosition = eventY = event.y;
+			width = event.width;
+			height = event.height;
+		}
 		
-		if(isMaximized)
+		if(isMaximized())
 		{
 			_isMaximized = true;
 		}
@@ -71,21 +78,13 @@ class TestRigWindow : MainWindow
 			_isMaximized = false;
 		}
 
-		writeln("width: ", width, ", height: ", height);
-		checkMaxState();
-		
-	} // onCheckResize()
-	
-	bool onConfigure(Event event, Widget widget)
-	{
-		getPosition(xPosition, yPosition);
-		writeln("The window is positioned at: x = ", xPosition, ", y = ", yPosition);
-		
+		writeln("Window position - x: ", xPosition, ", y: ", yPosition, ", Window area - width: ", width, ", height: ", height);
+
 		return(false); // must be false or the window doesn't redraw properly.
 		
 	} // onConfigure()
-	
-	
+
+
 	void showWindowStats()
 	{
 		writeln("Window stats...");
@@ -94,7 +93,7 @@ class TestRigWindow : MainWindow
 		
 	} // showWindowStats()
 	
-	
+
 	void checkMaxState()
 	{
 		if(_isMaximized)
@@ -107,7 +106,7 @@ class TestRigWindow : MainWindow
 		}
 		
 	} // checkMaxState()
-	
+
 } // class TestRigWindow
 
 

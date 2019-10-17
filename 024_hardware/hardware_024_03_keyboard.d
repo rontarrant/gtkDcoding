@@ -61,8 +61,6 @@ class TestRigWindow : MainWindow
 		
 		pressedKey = keymap.keyvalName(eventKey.keyval);
 		writeln("The keyval is: ", eventKey.keyval, " which means the ", pressedKey, " was pressed.");
-		keys = keyboard.getNKeys();
-		writeln("Number of Keys: ", keys);
 
 		return(true);
 		

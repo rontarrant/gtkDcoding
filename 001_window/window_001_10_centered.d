@@ -30,12 +30,13 @@ class TestRigWindow : MainWindow
 	this()
 	{
 		super(title);
-		addOnDestroy(&quitApp);
 		setPosition(WindowPosition.CENTER);
 		
 		appBox = new AppBox();
 		add(appBox);
 		
+		addOnDestroy(&quitApp);
+
 		showAll();
 
 	} // this()
