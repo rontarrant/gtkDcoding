@@ -216,9 +216,7 @@ Over the next two blog posts, we’ll dig further into the customization code. U
 	<div style="float: left;">
 		<a href="/2019/10/11/0078-notebook-ii-multiple-tabs.html">Previous: Notebook II - Multiple Tabs</a>
 	</div>
-<!--
 	<div style="float: right;">
-		<a href="/2019/10/18/0080-notebook-iv-custom-tabs-2.html">Next: Notebook IV - Custom Tabs 2</a>
+		<a href="/2019/10/18/0080-notebook-iv-custom-tabs-ii.html">Next: Notebook IV - Custom Tabs II</a>
 	</div>
--->
 </div>
