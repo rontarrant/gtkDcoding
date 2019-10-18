@@ -176,7 +176,22 @@ In the `TabDrawingArea` constructor, we hooked up the `onButtonPress` signal to 
 
 Each time the user clicks on our customized tab, this callback triggers and, in turn, reaches back into the `Notebook` and calls `setCurrentPage()`. And what happens whenever the page is switched? The `onSwitchPage` signal is fired and that triggers the `Notebook`’s `onSwitchPage()` callback.
 
+<div class="inpage-frame">
+	<figure class="left">
+		<img src="/images/diagrams/014_container/active_tab_area.png" alt="Figure 1: Active tab areas" style="width: 294px; height: 231px;">
+		<figcaption>
+			Figure 1: Active tab areas
+		</figcaption>
+	</figure>
+</div>
+
 So, in effect, what we’ve done is harness one signal in one widget to fire another signal in another widget.
+
+Have another look at the drawing from Blog Post #79. Remember, we talked about coming up with a workaround so the user can click anywhere on the tab and get the same results?
+
+The onButtonPress callback is the final part of that solution to this dilemma.
+
+<BR>
 
 ## Conclusion
 
