@@ -1,3 +1,10 @@
+/+ dub.sdl:
+name "cairo_018_10_draw_arc"
+description "Drawing an Arc"
+homepage "https://gtkdcoding.com/2019/08/06/0059-cairo-iii-circles-and-arcs.html"
+license "public domain"
+dependency "gtk-d" version="~>3.9.0"
++/
 // This source code is in the public domain.
 
 // Cairo: Draw an arc

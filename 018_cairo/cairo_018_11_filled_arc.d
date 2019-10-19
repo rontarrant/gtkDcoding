@@ -1,3 +1,10 @@
+/+ dub.sdl:
+name "cairo_018_11_filled_arc"
+description "Filled Arc"
+homepage "https://gtkdcoding.com/2019/08/09/0060-cairo-iv-fill-arc-cartoon-mouth.html"
+license "public domain"
+dependency "gtk-d" version="~>3.9.0"
++/
 // This source code is in the public domain.
 
 // Cairo: Fill an arc
