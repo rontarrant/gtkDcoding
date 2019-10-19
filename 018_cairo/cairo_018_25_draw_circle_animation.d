@@ -1,3 +1,10 @@
+/+ dub.sdl:
+name "cairo_018_25_draw_circle_animation"
+description "Animating the Drawing of a Circle"
+homepage "https://gtkdcoding.com/2019/08/23/0064-cairo-vii-drawingarea-animation.html"
+license "public domain"
+dependency "gtk-d" version="~>3.9.0"
++/
 // This source code is in the public domain.
 
 // Cairo: Animte Drawing a Circle

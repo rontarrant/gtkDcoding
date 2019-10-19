@@ -1,3 +1,10 @@
+/+ dub.sdl:
+name "cairo_018_15_text"
+description "Cairo’s Toy Text API"
+homepage "https://gtkdcoding.com/2019/08/13/0061-cairo-v-toy-text-image-formats.html"
+license "public domain"
+dependency "gtk-d" version="~>3.9.0"
++/
 // This source code is in the public domain.
 
 // Cairo: Toy Text

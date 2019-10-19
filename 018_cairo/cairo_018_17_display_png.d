@@ -1,3 +1,10 @@
+/+ dub.sdl:
+name "cairo_018_17_display_png"
+description "PNG – Load and Display"
+homepage "https://gtkdcoding.com/2019/08/16/0062-cairo-vi-load-display-images.html"
+license "public domain"
+dependency "gtk-d" version="~>3.9.0"
++/
 // This source code is in the public domain.
 
 // Display PNG
