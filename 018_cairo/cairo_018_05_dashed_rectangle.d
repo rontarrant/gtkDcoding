@@ -1,3 +1,10 @@
+/+ dub.sdl:
+name "cairo_018_05_dashed_rectangle"
+description "The Dashed-line Rectangle"
+homepage "https://gtkdcoding.com/2019/08/02/0058-cairo-ii-rectangles.html"
+license "public domain"
+dependency "gtk-d" version="~>3.9.0"
++/
 // This source code is in the public domain.
 
 // Cairo: Dashed Rectangle
