@@ -198,7 +198,7 @@ this(string labelText, int tabNumber, Notebook notebook)
 } // this()
 ```
 
-Just ignore the first two lines (which were covered in [Part 2 of this series](/2019/10/18/0080-notebook-iv-custom-tabs-2.html)).
+Just ignore the first two lines (which were covered in [Part 2 of this series](/2019/10/18/0080-notebook-iv-custom-tabs-ii.html)).
 
 We did look at the third line before, but let me refresh your memory... This converts `_tabNumber` to a string so it can be concatenated onto the end of `_labelText`. This gives us a finalized string each time a `TabDrawingArea` is instantiated with both text and a tab number.
 
