@@ -187,9 +187,9 @@ Each time the user clicks on our customized tab, this callback triggers and, in 
 
 So, in effect, what we’ve done is harness one signal in one widget to fire another signal in another widget.
 
-Have another look at the drawing from Blog Post #79. Remember, we talked about coming up with a workaround so the user can click anywhere on the tab and get the same results?
+Have another look at the drawing from [Blog Post #79](/2019/10/15/0079-notebook-iii-custom-tabs-i.html). Remember, we talked about coming up with a workaround so the user can click anywhere on the tab and get the same results?
 
-The onButtonPress callback is the final part of that solution to this dilemma.
+The `onButtonPress` callback is the final part of that solution to this dilemma.
 
 <BR>
 
@@ -201,9 +201,7 @@ In the third and final installment for this mini-series, we'll look at the drawi
 	<div style="float: left;">
 		<a href="/2019/10/15/0079-notebook-iii-custom-tabs-i.html">Previous: Notebook III - Custom Tabs I</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/10/22/0081-notebook-v-custom-tabs-iii.html">Next: Notebook V - Custom Tabs III</a>
 	</div>
--->
 </div>
