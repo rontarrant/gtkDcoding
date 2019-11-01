@@ -269,9 +269,7 @@ Until then, happy coding.
 	<div style="float: left;">
 		<a href="/2019/10/22/0081-notebook-v-custom-tabs-iii.html">Previous: Notebook V - Custom Tabs II</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/10/29/0083-notebook-vii-notebook-all-signals.html">Next: Notebook VIII - A Snoot Full of Signals</a>
 	</div>
--->
 </div>

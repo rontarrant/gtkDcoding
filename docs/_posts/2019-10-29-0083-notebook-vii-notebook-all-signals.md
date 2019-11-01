@@ -188,9 +188,7 @@ Until then, happy coding.
 	<div style="float: left;">
 		<a href="/2019/10/25/0082-notebook-vi-add-remove-tabs.html">Previous: Notebook VI - Add and Remove Tabs</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/11/01/0084-notebook-viii-child-widgets.html">Next: Notebook VIII - Child Widgets</a>
 	</div>
--->
 </div>

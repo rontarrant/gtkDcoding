@@ -312,9 +312,7 @@ Until then, have fun.
 	<div style="float: left;">
 		<a href="/2019/10/18/0080-notebook-iv-custom-tabs-ii.html">Previous: Notebook IV - Custom Tabs II</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/10/25/0082-notebook-vi-add-remove-tabs.html">Next: Notebook VI - Add & Remove Tabs</a>
 	</div>
--->
 </div>
