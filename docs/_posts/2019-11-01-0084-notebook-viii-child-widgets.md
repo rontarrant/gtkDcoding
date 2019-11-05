@@ -336,9 +336,7 @@ Until then, have fun.
 	<div style="float: left;">
 		<a href="/2019/10/29/0083-notebook-vii-notebook-all-signals.html">Previous: Notebook VII - A Snoot Full of Signals</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/11/05/0085-nodes-iv-node-drawing.html">Next: Nodes IV - Drawing a Node</a>
 	</div>
--->
 </div>
