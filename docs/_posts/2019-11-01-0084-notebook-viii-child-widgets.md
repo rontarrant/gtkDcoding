@@ -2,7 +2,7 @@
 title: "0084: Notebook VIII – Child Widgets"
 layout: post
 topic: container
-description: This GTK Tutorial covers using child widgets in a Notebook.
+description: This GTK Tutorial covers accessing child widgets in a Notebook.
 author: Ron Tarrant
 
 ---
