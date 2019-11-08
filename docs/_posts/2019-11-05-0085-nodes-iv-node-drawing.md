@@ -2,7 +2,7 @@
 title: "0085: Nodes-n-noodles, Part IV – Drawing a Node"
 layout: post
 topic: nodes
-description: This GTK Tutorial covers drawing a simple node for a node-n-noodles demo.
+description: This GTK Tutorial covers drawing a basic node for a node-n-noodles demo.
 author: Ron Tarrant
 
 ---
@@ -238,9 +238,7 @@ See you next time.
 	<div style="float: left;">
 		<a href="/2019/11/01/0084-notebook-viii-child-widgets.html">Previous: Notebook VIII - Child Widgets</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/11/08/0086-nodes-v-node-drawing-routines.html">Next: Nodes V - Node Drawing Routines</a>
 	</div>
--->
 </div>
