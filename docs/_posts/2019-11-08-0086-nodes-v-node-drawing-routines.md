@@ -272,7 +272,7 @@ Everything else is very much like what we covered in earlier posts for *Cairo* d
 
 ## Conclusion
 
-Full disclosure: I didn’t start with the image of the node and develop the drawing routines from it. I started with a hand-drawn node, went to an *Inkscape* drawing, then developed the drawing routines. Once I got the kinks ironed out and the code was working, I did a screenshot and created the image file from there. So, in fact, I put the cart before the horse. (Don’t tell anyone.)
+Full disclosure: I didn’t start with the image of the node and develop the drawing routines from it. I started with a hand-drawn node, went to an *Inkscape* drawing, then developed the drawing routines. Once I got the kinks ironed out and the code was working, I did a screen shot and created the image file from there. So, in fact, I put the cart before the horse. (Don’t tell anyone.)
 
 Next time, we’ll get into hotspots. See you then.
 
@@ -281,9 +281,7 @@ Next time, we’ll get into hotspots. See you then.
 	<div style="float: left;">
 		<a href="/2019/11/05/0085-nodes-iv-node-drawing.html">Previous: Node IV -Drawing Routines</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/11/12/0087-nodes-vi-hotspots.html">Next: Nodes VI - Hotspots</a>
 	</div>
--->
 </div>
