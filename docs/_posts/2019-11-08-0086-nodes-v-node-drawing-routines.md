@@ -281,7 +281,9 @@ Next time, we’ll get into hotspots. See you then.
 	<div style="float: left;">
 		<a href="/2019/11/05/0085-nodes-iv-node-drawing.html">Previous: Node IV -Drawing Routines</a>
 	</div>
+<!--
 	<div style="float: right;">
 		<a href="/2019/11/12/0087-nodes-vi-hotspots.html">Next: Nodes VI - Hotspots</a>
 	</div>
+-->
 </div>
