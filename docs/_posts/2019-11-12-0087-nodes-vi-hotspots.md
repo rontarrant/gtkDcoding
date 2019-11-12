@@ -254,7 +254,7 @@ Of all the values in this struct, what we want are the `x` and `y` variables whi
 
 <div class="inpage-frame">
 	<figure class="right">
-		<img src="/images/diagrams/023_nodes/event_hierarchy.png" alt="Figure 1: button variables at two levels in the hierarchy" style="width: 454px; height: 175px;">
+		<img src="/images/diagrams/023_nodes/event_hierarchy.png" alt="Figure 1: button variables at two levels in the hierarchy" style="width: 454px; height: 148px;">
 		<figcaption>
 			Figure 1: button variables at two levels in the hierarchy
 		</figcaption>
