@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0060: Cairo IV – Filled Arc, Precision Drawing, and Curves
 
-This is a continuation of our Cairo briefs…
+This is a continuation of our Cairo briefs...
 
 ## Filled Arc
 
@@ -128,7 +128,7 @@ bool onDraw(Scoped!Context context, Widget w)
 
 This is like the other `arc()` calls, but followed with a `fill()` command instead of `stroke()`.
 
-But we can also do some interesting stuff by issuing a bunch of `arc()` calls interspersed with `moveTo()`’s and such like…
+But we can also do some interesting stuff by issuing a bunch of `arc()` calls interspersed with `moveTo()`’s and such like...
 
 ## A Cartoon Smile with Arcs
 
@@ -502,11 +502,11 @@ So how does the `curveTo()` function know where to start the curve?
 
 There are three rules governing placement of `curveTo()`’s starting x/y position:
 
-1) It’s set beforehand with `moveTo()`,
-2) if no `moveTo()` call precedes `curveTo()`, the first control point doubles as a starting point, or
-3) it uses the end point of a previously-drawn line, arc, or curve.
+1. It’s set beforehand with `moveTo()`,
+2. if no `moveTo()` call precedes `curveTo()`, the first control point doubles as a starting point, or
+3. it uses the end point of a previously-drawn line, arc, or curve.
 
-When you look at the code for our two example files, which are a single curve, and two curves joined together, you’ll note that the curve in the first example is repeated in the second, but the resulting curves are quite different. But, looking back at the rules, it’s easy to see why…
+When you look at the code for our two example files, which are a single curve, and two curves joined together, you’ll note that the curve in the first example is repeated in the second, but the resulting curves are quite different. But, looking back at the rules, it’s easy to see why...
 
 Comparing the two curve-drawing examples...
 
