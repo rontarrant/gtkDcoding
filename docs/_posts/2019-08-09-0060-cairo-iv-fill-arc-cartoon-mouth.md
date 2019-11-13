@@ -510,7 +510,7 @@ When you look at the code for our two example files, which are a single curve, a
 
 Comparing the two curve-drawing examples...
 
-In the first example, the starting x/y position is pass to `curveTo()` and because it's not preceded by a `moveTo()` call, it's also where drawing actually starts.
+In the first example, the starting x/y position is passed to `curveTo()` and because it's not preceded by a `moveTo()` call, it's also where the drawing actually starts.
 
 In the second example, however, the first call to `curveTo()` *is* preceded by a `moveTo()` which means the `moveTo()` decides where drawing starts. Here's how the two examples play out:
 
