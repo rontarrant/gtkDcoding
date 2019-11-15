@@ -310,9 +310,7 @@ See you then.
 	<div style="float: left;">
 		<a href="/2019/11/08/0086-nodes-v-node-drawing-routines.html">Previous: Node V - Drawing Routines</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/11/15/0088-nodes-vii-its-alive.html">Next: Nodes VII - It's Alive!</a>
 	</div>
--->
 </div>
