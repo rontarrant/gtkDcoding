@@ -328,11 +328,11 @@ Until then, have a happy and contented coding life.
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/2019/11/12/0087-nodes-vi-hotspots.html">Previous: Node VI - Hotspots</a>
+		<a href="/2019/11/12/0088-nodes-vii-its-alive.html">Previous: Node VI - Hotspots</a>
 	</div>
 <!--
 	<div style="float: right;">
-		<a href="/2019/11/19/0089-titlebar-icons.html">Next: Windows - Titlebar Icons</a>
+		<a href="/2019/11/19/0090-titlebar-icons.html">Next: Windows - Titlebar Icons</a>
 	</div>
 -->
 </div>
