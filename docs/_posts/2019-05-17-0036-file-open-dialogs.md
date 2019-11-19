@@ -109,7 +109,7 @@ But we’re concentrating on just the surface stuff here. Latter in this series,
 	</div>
 </div>
 
-Onward to the particulars…
+Onward to the particulars...
 
 ## Imports
 
@@ -121,7 +121,7 @@ import gtk.FileChooseDialog;
 
 That’ll get us access to a pre-rolled *GTK* file dialog. It’s won’t be specific to the OS you’re running (with the possible exception of *Linux*) but it'll work and that's what counts, so let’s carry on.
 
-Since we went over how the window is handed down in [the previous post](/2019/05/14/0035-help-about-dialog.html), there’s no need to cover it again. So, let’s just get to the business of the day…
+Since we went over how the window is handed down in [the previous post](/2019/05/14/0035-help-about-dialog.html), there’s no need to cover it again. So, let’s just get to the business of the day...
 
 ## The FileOpenItem
 
@@ -223,7 +223,7 @@ Had this been a production-ready example, we’d do something besides spit out t
 
 ## Conclusion
 
-That’s it for today. Next time, we’ll tackle opening multiple files. Until then…
+That’s it for today. Next time, we’ll tackle opening multiple files. Until then...
 
 <div class="blog-nav">
 	<div style="float: left;">

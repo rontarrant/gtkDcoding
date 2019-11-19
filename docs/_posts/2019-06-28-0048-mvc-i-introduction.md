@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0048: MVC Part I - Introduction to the Model-View-Controller
 
-Before we start…
+Before we start...
 
 <div class="inpage-frame">
 	<figure class="left">
@@ -20,11 +20,11 @@ Before we start…
 	</figure>
 </div>
 
-There won’t be any code examples today, just lots of theory. Yeah, it'll be a lot to take in, but you might consider it a reference to use over the next four weeks as we wade through all this stuff. So, without further ado…
+There won’t be any code examples today, just lots of theory. Yeah, it'll be a lot to take in, but you might consider it a reference to use over the next four weeks as we wade through all this stuff. So, without further ado...
 
 Today begins an exploration of a bunch of *GTK* widgets that use the **Model-View-Controller** (**MVC**) architectural pattern. In case you don’t know, in an **MVC** system, the user is presented with a UI to **Control** data in a **Model** which then updates the **View** (the UI). It’s a circular and flexible system wherein the **View** shows either some or all of the data stored in the **Model**. Also, a single behind-the-scenes **Model** can have its data displayed in more than one **View**, either simultaneously or by switching out one **View** for another.
 
-Let’s look at these pieces one at a time starting with…
+Let’s look at these pieces one at a time starting with...
 
 ## The Model
 
@@ -39,7 +39,7 @@ Let’s look at these pieces one at a time starting with…
 
 ‘**Model**’ is just another way of saying, “a system for storing data.” At its simplest, a `Model` is a single column—say, the days of the week. But if we add more columns showing a T-shirt color for each day, the number of words written per day, or whatever other data you may need to track, the `Model` now has columns and rows which constitutes a table. So in short, a `Model` is a table for storing data.
 
-In *GTK* parlance, a **Model** is referred to as a `TreeModel` but, we rarely deal with the `TreeModel` directly unless we’re getting down-n-dirty. Instead, we instantiate one of the two storage objects derived from it…
+In *GTK* parlance, a **Model** is referred to as a `TreeModel` but, we rarely deal with the `TreeModel` directly unless we’re getting down-n-dirty. Instead, we instantiate one of the two storage objects derived from it...
 
 ## The ListStore and TreeStore
 
@@ -57,16 +57,16 @@ In a nutshell, these two classes are expressions of the `TreeModel` with the fol
 - the `ListStore` is a flat `TreeModel` with no hierarchy—a plain table as is shown in *Figure 2* above, in other words, and
 - the `TreeStore` is a hierarchical `TreeModel` and its rows may contain descendant rows (see *Figure 3* below).
 
-If it helps… the `TreeStore` is like a file browser in that any level can contain files and directories and those directories may contain other files and directories, etc., etc., ad infinitum.
+If it helps... the `TreeStore` is like a file browser in that any level can contain files and directories and those directories may contain other files and directories, etc., etc., ad infinitum.
 
 ## The Controller – Data Access Widgets
 
-Because `TreeModel`s have rows and columns, we access the data as… well, rows or columns. To access columns, we have one widget, the `TreeViewColumn`, but for accessing rows, we have two:  
+Because `TreeModel`s have rows and columns, we access the data as... well, rows or columns. To access columns, we have one widget, the `TreeViewColumn`, but for accessing rows, we have two:  
 
 - the `TreeIter`, and
 - the `TreePath`.
 
-And there's a subtle, but important, difference between the two…
+And there's a subtle, but important, difference between the two...
 
 ### The TreeIter
 

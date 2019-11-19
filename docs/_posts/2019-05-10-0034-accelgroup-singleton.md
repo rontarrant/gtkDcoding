@@ -384,7 +384,7 @@ As an extra bonus today, we also went over how to split our code over more than 
 - `import` it into your primary code file just as you would any other library or wrapper, and
 - use the `–i` flag when compiling.
 
-And that’s it for another *gtkDcoding* blog post. Until next time…
+And that’s it for another *gtkDcoding* blog post. Until next time...
 
 <div class="blog-nav">
 	<div style="float: left;">

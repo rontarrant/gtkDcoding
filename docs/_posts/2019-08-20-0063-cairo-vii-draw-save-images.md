@@ -13,7 +13,7 @@ So, this time we’re going to draw some images and then save them.
 
 ***Warning**: These images are* not *high art and may or may not cause harm to your artistic sensibilities. (You’ve now been officially cautioned.)*
 
-In fact, because all these images are just a rectangle with text overlaid, I’m not even going to go over how they’re drawn. I’ll just say this one thing…
+In fact, because all these images are just a rectangle with text overlaid, I’m not even going to go over how they’re drawn. I’ll just say this one thing...
 
 If you want a draw operation to be on top of another—like text overlaid on a rectangle, for instance—foreground draw operations need to be done *after* background draw operations. You probably sorted that out on your own, but there it is anyway.
 
@@ -26,7 +26,7 @@ Every time we save an image, we carry out the same set of operations:
 - set up the save options and option values for the image (this is different for each format), and
 - save the image.
 
-But since each has their own save options, we’ll look at each individually starting with…
+But since each has their own save options, we’ll look at each individually starting with...
 
 ## Saving a JPeg
 
@@ -150,7 +150,7 @@ The `Pixbuf` is the buffer we’re going to stuff the image into as we prepare t
 
 I haven’t bothered with width and height variables here because these examples all save the entire `DrawingArea` and so we use the `width` and `height` fields from the `GtkAllocation` as we’ll see in a moment.
 
-The constructor is so mundane as to warrant skipping in this discussion… so we shall.
+The constructor is so mundane as to warrant skipping in this discussion... so we shall.
 
 As for the callback, we’ll leave out the drawing bit and go right for the meat:
 
@@ -191,7 +191,7 @@ And here’s what’s happening:
 ### Save Options for JPeg
 
 - "icc-profile" - the complete ICC profile encoded into base64 (which, you'll note, I didn't bother with)
-- "quality" - 0 … 100
+- "quality" - 0 ... 100
 - “x-dpi” - dots per inch (reasonable values: 50 to 300)
 - “y-dpi” - dots per inch (same as x-dpi: 50 to 300)
 
@@ -322,7 +322,7 @@ So the differences here (compared to our first example) are:
 - "x-dpi"	dots per inch (reasonable range is 50 to 300)
 - "y-dpi"	dots per inch (same as x-dpi: 50 to 300)
 - "tEXt::key" - an ASCII string of length 1 – 79, UTF-8 encoded strings
-- "compression" - 0 … 9
+- "compression" - 0 ... 9
 - "icc-profile"	- the complete ICC profile encoded into base64
 
 ## Saving a TIFF

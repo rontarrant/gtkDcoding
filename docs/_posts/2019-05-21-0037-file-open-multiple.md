@@ -116,9 +116,9 @@ import sdt.conv;
 import glib.ListSG;
 ```
 
-You’ll see when we get there, but for now just know that these are needed for converting the singly-linked list of `ListSG` nodes to an array of strings… which will end up being our list of file names.
+You’ll see when we get there, but for now just know that these are needed for converting the singly-linked list of `ListSG` nodes to an array of strings... which will end up being our list of file names.
 
-Now, let’s skip to where the differences are between this example and the last…
+Now, let’s skip to where the differences are between this example and the last...
 
 ### The Callback
 

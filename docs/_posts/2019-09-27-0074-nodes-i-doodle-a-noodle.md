@@ -36,7 +36,7 @@ This UI concept opens up a lot of possibilities. In fact, the *Blender Foundatio
 
 ## How This Miniseries Will Play Out
 
-We’ll look at this in three phases…
+We’ll look at this in three phases...
 
 First, we’ll start with simply drawing a noodle using a cubic Bezier curve, then work towards controlling the drawing of the curve with the mouse.
 
@@ -143,7 +143,7 @@ Third, we’ll bring nodes and noodles together. We’ll be able to connect the 
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
 
-We’ve actually talked about the basics of this technique before in [Blog Post #60](/2019/08/09/0060-cairo-iv-fill-arc-cartoon-mouth.html). All we’re really doing is drawing a curve, but this time we’re taking a few more things into consideration…
+We’ve actually talked about the basics of this technique before in [Blog Post #60](/2019/08/09/0060-cairo-iv-fill-arc-cartoon-mouth.html). All we’re really doing is drawing a curve, but this time we’re taking a few more things into consideration...
 
 ### Opposing Control Points
 

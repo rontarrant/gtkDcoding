@@ -26,7 +26,7 @@ the `RadioMenuItem` inheritance chain is shorter:
 
 But this simply means that, like with `RadioButton`s, we have to manage mutual exclusion or we could end up with the whole set of radio items turned on (or off) at the same time. If that's the functionality we need, we'd be better off with `CheckMenuItem`s. If you follow the methods laid out in the examples we look at this time and next, that won’t be a problem.
 
-One to the first example…
+One to the first example...
 
 ## A Simple RadioMenuItem
 
@@ -277,7 +277,7 @@ And as for the callback, we’re looking at a different approach to signal handl
 
 Note: The `onToggle` signal also works as can be seen in this bonus example which differs only in which signal is used.
 
-Now let’s look at the `FileMenu` class…
+Now let’s look at the `FileMenu` class...
 
 ### FileMenu Class
 

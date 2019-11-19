@@ -112,7 +112,7 @@ Because the `CSS` we worked with last time gave us fully-visible tabs, let’s c
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
 
-Not much has to change to have more tabs. Just add more strings for tab names, more `Label`s, and more `TextView`s… or whatever you’re cramming in there. Your class preamble might look like this:
+Not much has to change to have more tabs. Just add more strings for tab names, more `Label`s, and more `TextView`s... or whatever you’re cramming in there. Your class preamble might look like this:
 
 ```d
 CSS css; // need to see tab shapes against the bg

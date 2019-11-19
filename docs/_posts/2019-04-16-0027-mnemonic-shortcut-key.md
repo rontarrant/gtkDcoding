@@ -144,7 +144,7 @@ The extra argument (`true`) tells the super-class constructor to turn on the mne
 
 The underscore (`_`) decides which key, combined with ***Alt***, will activate the `MenuItem`.
 
-And from there, it’s business as usual. Except that…
+And from there, it’s business as usual. Except that...
 
 The `FileMenuHeader` also has a mnemonic. Have a peek:
 
@@ -303,7 +303,7 @@ No muss, fuss, or foaming at the mouth.
 
 ## Conclusion
 
-Well, that’s that. Mnemonic shortcut keys and separators… Yup.
+Well, that’s that. Mnemonic shortcut keys and separators... Yup.
 
 Bye, now.
 

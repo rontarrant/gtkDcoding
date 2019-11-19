@@ -13,7 +13,7 @@ There will be times when you’ll need a window separated into two areas with a 
 
 Today’s code lays the foundation for this type of functionality.
 
-## A Pane in the Window… Two, Really
+## A Pane in the Window... Two, Really
 
 <div class="screenshot-frame">
 	<div class="frame-header">
@@ -297,7 +297,7 @@ Here are the differences between this example and the first:
 	- the child `Widget`,
 	- a `bool` to determine whether or not the child will expand when the divider handle is moved away from it, and
 	- another `bool` to control whether or not the child `Widget` will shrink when the handle is moved toward it.
-- when you move the divider handle in the first example, each image slides out of the way as the handle is moved toward it, but…
+- when you move the divider handle in the first example, each image slides out of the way as the handle is moved toward it, but...
 - in the second example, only the guitar bridge image moves.
 
 Note also that even though the panes expand or contract as you move the handle, the `Image`s aren’t resizing. So, it’s just the panes that change size, not their contents.

@@ -158,7 +158,7 @@ First, we set up local copies of the values being passed in, define `radians`, t
 
 ### Signals and Communications
 
-This is it, the solution to passing a mouse click from the child widget to the `Notebook` tab. Remember in [Blog Post #79](/2019/10/15/0079-notebook-iii-custom-tabs-i.html) when we talked about harnessing the `onSwitchPage` signal? Well, here’s the other half of that equation…
+This is it, the solution to passing a mouse click from the child widget to the `Notebook` tab. Remember in [Blog Post #79](/2019/10/15/0079-notebook-iii-custom-tabs-i.html) when we talked about harnessing the `onSwitchPage` signal? Well, here’s the other half of that equation...
 
 In the `TabDrawingArea` constructor, we hooked up the `onButtonPress` signal to trigger this callback:
 

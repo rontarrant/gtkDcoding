@@ -247,7 +247,7 @@ Again, we have to dig a bit to find the data we want: the direction the mouse wh
 </div>
 
 
-Let’s throw caution to the wind and put a `Button` back in the window, just one, and give it something interesting to do…
+Let’s throw caution to the wind and put a `Button` back in the window, just one, and give it something interesting to do...
 
 When I was writing out these examples, I’d forgotten I’d already talked about differentiating between mouse buttons, so I wrote this one. This one, though, does process things in a different way:
 

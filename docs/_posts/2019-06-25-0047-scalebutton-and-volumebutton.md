@@ -164,7 +164,7 @@ This is because the *Windows* version of *GTK* has a bug that—at runtime—cau
 
 Also, because the value of `compensateForWinBug` depends on the value of another variable, we have to set it inside a function because the compiler won't know the value of that other variable at compile time. 
 
-Anyway, so much for the `VolumeButton`. Let’s look at its parent…
+Anyway, so much for the `VolumeButton`. Let’s look at its parent...
 
 ## The ScaleButton
 
@@ -343,7 +343,7 @@ class MyScaleButton : ScaleButton
 } // class MyScaleButton
 ```
 
-As with the `VolumeButton`, we have to set and then reset the initial value so the proper icon is displayed on start-up, but now let's talk about this icon stuff…
+As with the `VolumeButton`, we have to set and then reset the initial value so the proper icon is displayed on start-up, but now let's talk about this icon stuff...
 
 ### Defining an Icon Set
 

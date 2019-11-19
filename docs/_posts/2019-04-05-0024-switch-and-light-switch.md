@@ -149,7 +149,7 @@ First argument is a Boolean value called `state`. This is the first widget we’
 
 As usual, we can ignore the self-referential argument, `Switch s`. It’s the same as `Button b`, `Widget w`, or `Event e`, all of which we’ve ignored in setting up callbacks in the past.
 
-In the body of the callback… wait a minute. Why do we get a `state`, but then have to set it? Good question.
+In the body of the callback... wait a minute. Why do we get a `state`, but then have to set it? Good question.
 
 It seems that whereas we have the convenience of getting the `state` packaged with the signal, we still have to muck around to keep things in sync. To do that, we call `setState()`.
 

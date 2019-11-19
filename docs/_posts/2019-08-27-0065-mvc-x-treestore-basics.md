@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0065: MVC X – TreeStore Basics
 
-About a month ago, we broke away from *MVC* to talk about drawing with *Cairo*. Time to go back and pick up where we left off…
+About a month ago, we broke away from *MVC* to talk about drawing with *Cairo*. Time to go back and pick up where we left off...
 
 ## TreeStore Modeling with append()
 
@@ -303,9 +303,9 @@ this()
 } // this()
 ```
 
-This should be straightforward to work out… we’re appending a parent row followed by the children of that parent, then moving on to the next parent.
+This should be straightforward to work out... we’re appending a parent row followed by the children of that parent, then moving on to the next parent.
 
-But I mentioned earlier that there’s a second way to do this, so let’s look at that…
+But I mentioned earlier that there’s a second way to do this, so let’s look at that...
 
 ## TreeStore Modeling with createIter()
 
@@ -559,7 +559,7 @@ this()
 } // this()
 ```
 
-No real surprises here. In the outside `for()` loop…
+No real surprises here. In the outside `for()` loop...
 
 - the parent iter is created as an empty row,
 - its label is populated with `setValue()`,

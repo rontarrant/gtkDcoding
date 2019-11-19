@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0039: Dialogs V - Adding SaveAs, Filename in the Titlebar
 
-Since we covered [a lot of this stuff last time](/2019/05/24/0038-file-save-dialog.html) when we talked about adding a `Save` `MenuItem`, I’ll just cover the differences…
+Since we covered [a lot of this stuff last time](/2019/05/24/0038-file-save-dialog.html) when we talked about adding a `Save` `MenuItem`, I’ll just cover the differences...
 
 ## Dialog for a FileSaveAs Item
 
@@ -107,7 +107,7 @@ Since we covered [a lot of this stuff last time](/2019/05/24/0038-file-save-dial
 	</div>
 </div>
 
-Of course, when you compare the `FileSaveItem` to the `FileSaveAsItem`, most of the differences consist of adding “as…” or “As” to function names, the class name, and the string used to name the `MenuItem`.
+Of course, when you compare the `FileSaveItem` to the `FileSaveAsItem`, most of the differences consist of adding “as...” or “As” to function names, the class name, and the string used to name the `MenuItem`.
 
 But there is one bigger change in the callback:
 
@@ -149,7 +149,7 @@ Except for this line:
 _parentWindow.setTitle(filename);
 ```
 
-And that brings us to our second topic…
+And that brings us to our second topic...
 
 ## Filename Reflection in the Titlebar
 

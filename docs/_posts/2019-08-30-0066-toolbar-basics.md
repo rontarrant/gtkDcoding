@@ -11,11 +11,11 @@ author: Ron Tarrant
 
 The old way of doing a *GTK* `Toolbar` is falling out of favour, mostly because the `StockID`s (such as `COPY`, `CUT`, `PASTE`, etc.) once used to put icons in a `ToolButton` are all deprecated.
 
-So, that leaves us with two choices, either the `IconTheme` route—which looks daunting—or rolling our own… sort of. Because everything we need to know to use the second option has been covered already, I’ve chosen to go that route.
+So, that leaves us with two choices, either the `IconTheme` route—which looks daunting—or rolling our own... sort of. Because everything we need to know to use the second option has been covered already, I’ve chosen to go that route.
 
 But, there’s really no bad news here. We still get a usable `Toolbar` that looks like a `Toolbar` and we also get to use whatever images suit our purposes.
 
-So without further ado, here’s…
+So without further ado, here’s...
 
 ## The Basics of Building a Toolbar
 
@@ -148,7 +148,7 @@ class PasteButton : Button
 } // class PasteButton
 ```
 
-And it gets stuffed into…
+And it gets stuffed into...
 
 ### The ToolButton
 
@@ -210,7 +210,7 @@ class MyToolbar : Toolbar
 } // class MyToolbar
 ```
 
-Pretty straightforward… all we do is:
+Pretty straightforward... all we do is:
 
 - decide whether we want icons, text, or both and call `setStyle()` (options are, oddly enough: `ICONS`, `TEXT`, or `BOTH`),
 - instantiate a bunch of `ToolButton`s, and

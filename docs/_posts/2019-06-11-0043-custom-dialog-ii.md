@@ -17,11 +17,11 @@ This collection of topics is split up like this:
 - *Part II* (this one) covers user interaction, and
 - *Part III* (next time) brings it all together.
 
-Carrying on, we’ll talk about…
+Carrying on, we’ll talk about...
 
 ## The Action Area
 
-And as such, we’ll ignore everything else and just deal with buttons because that’s what the Action Area is all about. But before we get to examples, we need to look at…
+And as such, we’ll ignore everything else and just deal with buttons because that’s what the Action Area is all about. But before we get to examples, we need to look at...
 
 ## The ResponseType Flags
 
@@ -143,7 +143,7 @@ class ScratchDialog : Dialog
 	string titleText = "Do you know where the monkey is?";
 ```
 
-We’ve used the `DialogFlag`s type in every `Dialog` example we’ve done to date and it’s mostly useful to make the `Dialog` stay in front of its parent window (that modal stuff) so let’s take a quick look at…
+We’ve used the `DialogFlag`s type in every `Dialog` example we’ve done to date and it’s mostly useful to make the `Dialog` stay in front of its parent window (that modal stuff) so let’s take a quick look at...
 
 The constructor:
 
@@ -191,7 +191,7 @@ Again, it’s pretty much what we’ve used before. So where does this example d
 
 Like in other `Dialog` examples, we test the response and look for a match. The difference is we have more options and so a switch/case statement is substituted for if/else.
 
-Okay, perhaps that didn’t turn out to be as exciting as it might have been, so let’s just move right along…
+Okay, perhaps that didn’t turn out to be as exciting as it might have been, so let’s just move right along...
 
 ## Using StockIDs to get Predefined Buttons
 

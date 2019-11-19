@@ -15,7 +15,7 @@ There are only three things we need to understand in order to make a `TreeView` 
 
 - a `ListStore` holds the data and acts as a `TreeModel`,
 - the `TreeViewColumn` controls the content and look of a column inside...
--  the `TreeView`, and…
+-  the `TreeView`, and...
 
 That’s it.
 
@@ -169,7 +169,7 @@ class SignListStore : ListStore
 
 This is the exact same `SignListStore` we used with a `ComboBox` in [an earlier example]( https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_06_combobox_liststore.d), thus illustrating how the same data can be used in different ways by different `Widget`s.
 
-And that just leaves…
+And that just leaves...
 
 ## The TreeViewColumn
 
@@ -319,7 +319,7 @@ As mentioned in [Blog Post #0053](http://gtkdcoding.com/2019/07/16/0053-mvc-vi-i
 
 ## Conclusion
 
-And that’s the basics of using the `TreeView`… create a storage model, whip up a `TreeView`, and stuff a column in there.
+And that’s the basics of using the `TreeView`... create a storage model, whip up a `TreeView`, and stuff a column in there.
 
 Next time around we’ll look at a second multi-column `TreeView` example which is dynamically loaded rather than using roll-yer-own arrays.
 

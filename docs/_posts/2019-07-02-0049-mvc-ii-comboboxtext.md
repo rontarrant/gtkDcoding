@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0049: MVC Part II – the ComboBoxText<br> - a Few Simple Examples
 
-Continuing from last time…
+Continuing from last time...
 
 Of the two **Model**s used in *GTK*, the `TreeStore` and the `ListStore`, the latter is the least complex because it adheres to a flat data **Model**, so we’ll begin with that. As mentioned last time, *GTK* widgets that use a `ListStore` are:
 
@@ -17,7 +17,7 @@ Of the two **Model**s used in *GTK*, the `TreeStore` and the `ListStore`, the la
 - `ComboBoxText`, and
 - `TreeView`.
 
-Let’s start with the simplest of the bunch…
+Let’s start with the simplest of the bunch...
 
 ## The ComboBoxText (without Entry)
 
@@ -150,9 +150,9 @@ class DayComboBoxText : ComboBoxText
 } // class DayComboBoxText
 ```
 
-Not a lot to look at here… Call the super-class constructor, `appendText()` a bunch of strings, and we’ve got a working widget.
+Not a lot to look at here... Call the super-class constructor, `appendText()` a bunch of strings, and we’ve got a working widget.
 
-Also as usual, the `doSomething()` function is just a stubby little thing that shows how the widget signal `addOnChanged()` is harnessed. We’ll look more closely at that signal in a bit because it does have its foibles, but right now I want to draw your attention to the initialization section where we find…
+Also as usual, the `doSomething()` function is just a stubby little thing that shows how the widget signal `addOnChanged()` is harnessed. We’ll look more closely at that signal in a bit because it does have its foibles, but right now I want to draw your attention to the initialization section where we find...
 
 ### The entryOn Variable
 
@@ -373,11 +373,11 @@ In the constructor, there’s a new line of code hooking up a second signal/call
 addOnKeyRelease(&onKeyRelease);
 ```
 
-And we’ll talk about that in a moment. For now, I wanna talk about…
+And we’ll talk about that in a moment. For now, I wanna talk about...
 
 ### The Foible of the onChanged Signal
 
- Now we run headlong into that foible I mentioned earlier… The `onChanged` signal doesn’t distinguish between these two actions:
+ Now we run headlong into that foible I mentioned earlier... The `onChanged` signal doesn’t distinguish between these two actions:
 
 - typing in the `Entry`, and
 - selecting an item from the drop-down list.

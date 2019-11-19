@@ -105,7 +105,7 @@ author: Ron Tarrant
 
 Starting today, and for the next few weeks, we'll be looking at `Dialog` windows of various types. We'll get started with one of the simpler ones, the AboutDialog, but to make it more interesting, we'll toss in a `Pixbuf`.
 
-Let's get going by checking out…
+Let's get going by checking out...
 
 ### The Imports
 
@@ -116,14 +116,14 @@ import gtk.AboutDialog;
 import gdk.Pixbuf;
 ```
 
-Okay… `main()` is the same and we've seen `TestRigWindow` more than 30 times, and these aren't new, either:
+Okay... `main()` is the same and we've seen `TestRigWindow` more than 30 times, and these aren't new, either:
 
 - `AppBox`,
 - `MyMenuBar`,
 - `HelpHeader` (except for the name, anyway), and
 - `HelpMenu`.
 
-And that brings us to…
+And that brings us to...
 
 ### The AboutItem
 
@@ -147,7 +147,7 @@ AboutDialog aboutDialog;
 
 You could probably leave most of these strings empty, especially if you don't work with a team, but I filled all these in for demonstration purposes.
 
-But as I breezed through that list of classes that hadn’t changed, there actually was one change worth mentioning…
+But as I breezed through that list of classes that hadn’t changed, there actually was one change worth mentioning...
 
 #### Passing Down the Window
 
@@ -250,7 +250,7 @@ All this does is destroy everything we built. And if the `Dialog` gets opened ag
 
 And that was a quick look at a simple `Dialog`. As we go along, things could get complicated, especially when we dig into rolling our own dialog from scratch. Now, that will be an adventure.
 
-Until next time… bye.
+Until next time... bye.
 
 <div class="blog-nav">
 	<div style="float: left;">

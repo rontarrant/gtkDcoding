@@ -151,7 +151,7 @@ The public section starts with the constructor which does nothing we haven’t s
 } // class TextEntry
 ```
 
-The callback first ensures that the file name isn't empty (the `if` statement) and if that's the case, echoes it to the terminal (the `else`), but that's all. The rest we take care of in the `FileSaveItem` object… which we’ll talk about now.
+The callback first ensures that the file name isn't empty (the `if` statement) and if that's the case, echoes it to the terminal (the `else`), but that's all. The rest we take care of in the `FileSaveItem` object... which we’ll talk about now.
 
 ### The FileSaveItem
 
@@ -181,7 +181,7 @@ But then we also have:
 
 Strictly speaking, we don’t need the `filename` variable, but it’s more convenient than typing `filenameEntry.getText()` each time we need to refer to the current file name.
 
-And, of course, `_filenameEntry` will be dealt with here in a second, so let’s move on to…
+And, of course, `_filenameEntry` will be dealt with here in a second, so let’s move on to...
 
 ### The FileSaveItem Constructor
 
@@ -289,7 +289,7 @@ class AppBox : Box
 
 ## Conclusion
 
-And that’s how a simple `Save` item can be coded. Next time, we’ll add in `Save as…` and do something else that’s often done in applications, display the file name in the `Window` header and keep it current.
+And that’s how a simple `Save` item can be coded. Next time, we’ll add in `Save as...` and do something else that’s often done in applications, display the file name in the `Window` header and keep it current.
 
 Until then.
 

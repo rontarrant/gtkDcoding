@@ -19,7 +19,7 @@ This collection of topics is split up like this:
 
 As promised, this time around we talk about the `Dialog`’s *Content Area* and wrap up by rolling our own *Action Area* and *Content Area* together into a fully-fledged custom `Dialog`. However, since we went over *Action Area* stuff last time and this example is only different in a few small way, I’m not going to discuss it here except to say:
 
-The *Action Area* used in this example uses an array of roll-yer-own `Button` `Label` text strings. ‘Nuff said. And now…
+The *Action Area* used in this example uses an array of roll-yer-own `Button` `Label` text strings. ‘Nuff said. And now...
 
 ## The *Content Area*
 
@@ -231,7 +231,7 @@ What you’re looking at is some *D*-specific coolness. To get the user-supplied
 
 Using this as a model, you can grab any combination of mixed data from the user, package it up, and get it back to whatever caller needs it.
 
-Now, let’s skip back to the `NewImageDialog`’s callback function… well, part of it, anyway…
+Now, let’s skip back to the `NewImageDialog`’s callback function... well, part of it, anyway...
 
 ## Retrieving the User-supplied Data
 

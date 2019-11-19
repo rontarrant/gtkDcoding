@@ -110,7 +110,7 @@ This time around, we’re going to change things up in two ways:
 	</div>
 </div>
 
-I talked about the two-column `ListStore` in [the introduction to this series]() and touched on the requirements for `ListStore`s in general [last time](), but here’s a brief review…
+I talked about the two-column `ListStore` in [the introduction to this series]() and touched on the requirements for `ListStore`s in general [last time](), but here’s a brief review...
 
 A `ListStore` needs:
 
@@ -173,7 +173,7 @@ class DayComboBox : ComboBox
 	int activeItem = 0;
 ```
 
-A couple of things I’ll point out here…
+A couple of things I’ll point out here...
 
 First...
 
@@ -191,7 +191,7 @@ packStart(cellRendererText, false);
 addAttribute(cellRendererText, "text", visibleColumn);
 ```
 
-Second…
+Second...
 
 In the initialization section, the `visibleColumn` variable is set to `1`, not `0` as it was before. This is where the decision is made as to which column is shown in the `ComboBox`.
 

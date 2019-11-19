@@ -201,7 +201,7 @@ this()
 } // this()
 ```
 
-The first thing I’ll point out is the array we’re passing to `super()`. See that `Pixbuf.getType()` argument? It needs a bit of explanation, so here goes…
+The first thing I’ll point out is the array we’re passing to `super()`. See that `Pixbuf.getType()` argument? It needs a bit of explanation, so here goes...
 
 ### Non-GTypes
 
@@ -246,7 +246,7 @@ Two things of note here:
 
 ## The SignComboBox Class
 
-Rather than reproduce the entire `SignComboBox` class here, we’ll just look at the bits and pieces we haven’t seen before…
+Rather than reproduce the entire `SignComboBox` class here, we’ll just look at the bits and pieces we haven’t seen before...
 
 Because we want to show images instead of text, we need to declare a `CellRendererPixbuf` in the initialization section of the `SignComboBox` class:
 
@@ -376,7 +376,7 @@ This is the second (and final) use of the `Column` enum and it's why the `Column
 
 The [folder/directory of images](https://github.com/rontarrant/gtkDcoding/blob/master/downloads/_images.zip) is used with this example as well.
 
-This post is running a bit long, but this example really won’t take much explanation, so here goes…
+This post is running a bit long, but this example really won’t take much explanation, so here goes...
 
 There are only two difference between this example and the last. One's in the constructor and it's merely how many `CellRenderer`s we stuff into the `SignComboBox`. It happens in these lines in the constructor:
 

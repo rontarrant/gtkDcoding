@@ -141,13 +141,13 @@ bool onFrameElapsed()
 
 What it does is:
 
-- instantiate a `GtkAllocation` object from which we…
+- instantiate a `GtkAllocation` object from which we...
 - extract the size of the `DrawingArea`, and
 - call for a redraw.
 
 ### The Cubic Bezier’s Starting Point
 
-For now, we’ll use a hard-coded starting point and turn our attention to another problem…
+For now, we’ll use a hard-coded starting point and turn our attention to another problem...
 
 ### Grabbing the Mouse Pointer Position
 

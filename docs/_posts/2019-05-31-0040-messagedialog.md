@@ -154,7 +154,7 @@ The point is, because of the derivation, we can do all this stuff in the constru
 
 Nothing really worth talking about here. We’ve been here, done that, and (I don’t know about you, but I’ve) got the T-shirt.
 
-But now let’s backtrack and talk about…
+But now let’s backtrack and talk about...
 
 ## enum Constants as Variables
 

@@ -181,7 +181,7 @@ public bool onMotion(Event event, Widget widget)
 
 Notice that because the `Statusbar` is monitoring and reporting on `Event`s in the `DrawingArea`, both of these `Label`s have to be updated by this callback.
 
-Now, we have one more example to look at…
+Now, we have one more example to look at...
 
 ## The Statusbar’s Signal
 

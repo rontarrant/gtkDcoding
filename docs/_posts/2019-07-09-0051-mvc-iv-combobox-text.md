@@ -105,7 +105,7 @@ author: Ron Tarrant
 
 Today starts a mini-series within our **MVC** series in which we look at a simple `ComboBox` example to reproduce what we’ve already done with the `ComboBoxText`.
 
-So… unlike the `ComboBoxText`—which you more or less just throw strings at—the `ComboBox` needs an actual `Model` (ListStore or `TreeStore`) to draw text strings from. This is a little more work than it was with the `ComboBoxText`, so let’s dig in…
+So... unlike the `ComboBoxText`—which you more or less just throw strings at—the `ComboBox` needs an actual `Model` (ListStore or `TreeStore`) to draw text strings from. This is a little more work than it was with the `ComboBoxText`, so let’s dig in...
 
 ## The Model
 
@@ -153,7 +153,7 @@ The `setValue()` arguments are:
 
 The `ComboBox` acts as both **View** and **Control**. Keep in mind that it’s based on the `CellLayout` interface and so it a non-standard implementation of the **MVC** paradigm. But, no matter. The results are so similar, they make no real difference, so let’s carry on.
 
-Let’s look at the `SignComboBox` a bit at a time starting with…
+Let’s look at the `SignComboBox` a bit at a time starting with...
 
 ### The Initialization Chunk
 
@@ -228,7 +228,7 @@ Not a big deal, we just:
 - use `setModel()` to tell the `ComboBox` where to look for its data, and
 - pre-select one of the items, using `setActive()`, so the `ComboBox` shows a default value.
 
-Moving on…
+Moving on...
 
 ### Stage 3: The Callback
 
@@ -253,7 +253,7 @@ void doSomething(ComboBox cb)
 
 Again, we define a `TreeIter` which we’ll go over in a moment.
 
-The first action we take is to get the index of the currently-selected item. This is here purely for completeness sake. It really has nothing to do with the next step…
+The first action we take is to get the index of the currently-selected item. This is here purely for completeness sake. It really has nothing to do with the next step...
 
 which is where we use the `TreeIter`, not to stuff data into the `ListStore`, but to retrieve it. The `getActiveIter()` function returns a Boolean to indicate success or failure, so we can predicate further action on whether or not the `TreeIter` gets initialized here. And yes, it’s one of those *D*-language situations where the function definition looks like this:
 

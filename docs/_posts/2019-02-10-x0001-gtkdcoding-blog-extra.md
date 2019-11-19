@@ -21,7 +21,7 @@ Now you can open any GtkD application and `Ctrl-Shift-D` (how appropriate for us
 
 Click on any entity listed and the Inspector flashes that entity in your running application so you can make a visual association with the code.
 
-Any Inspector entity with a right-facing arrow can be expanded to show its children and again, click on any child widget and it’ll flash, too… to a point. If you’re drilling down through a menu, for instance, it’ll just keep flashing the top-level menu and once you get to the item level, it just ignore you.
+Any Inspector entity with a right-facing arrow can be expanded to show its children and again, click on any child widget and it’ll flash, too... to a point. If you’re drilling down through a menu, for instance, it’ll just keep flashing the top-level menu and once you get to the item level, it just ignore you.
 
 But if you’re exploring the hierarchy of widgets that remain on screen, it’ll keep on flashing the displayed entities all the way down to the bottom-most level.
 

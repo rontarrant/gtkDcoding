@@ -11,7 +11,7 @@ author: Ron Tarrant
 
 Remember how I said that the *GTK* `ImageMenuItem` was deprecated? Well, with it went the easy way to add an accelerator key to a `MenuItem` that also has an image.
 
-Well, whether it's useful or not, we can fake it, so here goes nothing…
+Well, whether it's useful or not, we can fake it, so here goes nothing...
 
 ## Fake ImageMenuItem Accel Key
 
@@ -224,7 +224,7 @@ After that we:
 - create the `Box`,
 - stuff the `Box` into the `MenuItem` (which is a container, right?),
 - we build an `Image`,
-- and a `Label`…
+- and a `Label`...
 
 *Not* a `Label`, an `AccelLabel`. And why? Because we have to do these extra bits of twiddling to get this to work:
 

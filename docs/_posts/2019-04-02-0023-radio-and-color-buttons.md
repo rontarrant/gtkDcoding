@@ -184,7 +184,7 @@ Familiar territory, this. Hook up the observed object, attach a signal and we’
 
 Same as with the `MyRadioButton`, we’ve seen all this before. At least, we’ve seen stuff like it.
 
-So, let’s move on to our next subject…
+So, let’s move on to our next subject...
 
 ## A ColorButton to Select Color
 

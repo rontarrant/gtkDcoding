@@ -123,7 +123,7 @@ this(string[] args)
 
 No big deal. All you gotta do is tack on a bunch of signals. You can even, as done above, mix and match the callback definitions to suit your needs.
 
-But now let’s talk about the interrupt-y bit…
+But now let’s talk about the interrupt-y bit...
 
 ### A Refresher
 

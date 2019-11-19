@@ -105,7 +105,7 @@ author: Ron Tarrant
 
 ## Imports
 
-First things first… We need the `AccelGroup` class and a couple of `enum`s, so we bring them in:
+First things first... We need the `AccelGroup` class and a couple of `enum`s, so we bring them in:
 
 ```d
 import gtk.AccelGroup;
@@ -126,7 +126,7 @@ Make note: That’s another **`gdk`** not `gtk` library and from that we get the
 - `CONTROL_MASK` (Control Key), and
 - `MOD1_MASK` (usually the Alt key).
 
-We’ll get to their use in a moment, but right now let’s take a quick look at…
+We’ll get to their use in a moment, but right now let’s take a quick look at...
 
 ## The AccelGroup
 

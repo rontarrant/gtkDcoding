@@ -1,5 +1,5 @@
 ---
-title: "0087: Nodes-n-noodles VI – Adding Hotspots"
+title: "0087: Nodes-n-noodles VI – Adding Hot Spots"
 layout: post
 topic: nodes
 description: This GTK Tutorial covers drawing node host spots for a node-n-noodles demo.
@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0087: Nodes-n-noodles VI – Adding Hotspots
+# 0087: Nodes-n-noodles VI – Adding Hot Spots
 
 Here's a look at what we're dealing with today. It may look the same as the previous couple of screen shots, but clicking on one of the node connectors (yellow or orange circles) or the light blue drag-bar area dumps a line to the terminal.
 

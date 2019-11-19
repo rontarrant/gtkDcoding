@@ -8,9 +8,9 @@ author: Ron Tarrant
 
 # 0000: Introduction to GtkDcoding
 
-*Where All This is Coming From…*
+*Where All This is Coming From...*
 
-Ever since the heyday of 8-bit computers and *Microsoft BASIC* — which was available on almost every one of them — programmers  have been pursuing the goal of cross-platform development… write once, compile for m/any. These days, there’s *Java* and *Electron* if you’re so inclined, but I prefer something that compiles to a native executable using a single programming language. When I found *D*, I realized I might just have found what I was looking for.
+Ever since the heyday of 8-bit computers and *Microsoft BASIC* — which was available on almost every one of them — programmers  have been pursuing the goal of cross-platform development... write once, compile for m/any. These days, there’s *Java* and *Electron* if you’re so inclined, but I prefer something that compiles to a native executable using a single programming language. When I found *D*, I realized I might just have found what I was looking for.
 
 *GtkD* is a wrapper for *GTK+*, a GUI toolkit originally from the world of Linux, an almost-POSIX-compliant OS, but now available across a number of operating systems. That pretty much makes it perfect for my intentions. By learning how to use a single language compiler (*dmd2*) I can build and run applications on *Windows*, *Linux*, *Mac*, and *FreeBSD*. With *GTK+* thrown in, we’re looking at a single-code-base solution to cross-platform development.
 
@@ -25,7 +25,7 @@ The third language I learned back in the day was *C* and I fell in love with its
 - meta-programming,
 - functional,
 - parallel, and
-- concurrent, but…
+- concurrent, but...
 
 I’m a sucker for object-oriented program development, so I'll be concentrating on that for the most part. I’ll start with a few imperative examples, but then it’ll be OOP all the way.
 
@@ -63,7 +63,7 @@ Install the reference compiler and the *GTK+* runtime. Best to accept the defaul
 - The *GTK+* runtime will install in `C:\Program Files\gtk-runtime`, and
 - The *D* compiler will install in `C:\D` although most of the action will be in `C:\D\dmd2`.
 
-So go ahead and get those installed and I’ll wait here…
+So go ahead and get those installed and I’ll wait here...
 
 ### Local Configuration
 
@@ -99,7 +99,7 @@ Now you need to copy the *GtkD* wrapper files to where the compiler can find the
 C:\D\dmd2\src\
 ```
 
-Thirdly, you’ll build and install the *GtkD* library…
+Thirdly, you’ll build and install the *GtkD* library...
 
 Open a command prompt and make your way to where you unzipped `GtkD-3.9` (you’re in the right place if typing `dir` shows you a file named `Build.d`), and build the library with the command:
 

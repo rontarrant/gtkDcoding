@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0028: Menus III - CheckMenuItems
 
-Today we’ll cover another type of `MenuItem`, the `CheckMenuItem`. This post is longer than usual because after doing the simple version, I wanted to do a multiple `CheckMenuItem` version as well and that led to a whole can of worms dumped on my desktop. Anyway, let’s get on with it…
+Today we’ll cover another type of `MenuItem`, the `CheckMenuItem`. This post is longer than usual because after doing the simple version, I wanted to do a multiple `CheckMenuItem` version as well and that led to a whole can of worms dumped on my desktop. Anyway, let’s get on with it...
 
 ## Single CheckMenuItem
 
@@ -229,7 +229,7 @@ While digging into this widget, I found myself unable to resist doing a more com
 	</div>
 </div>
 
-Before we look at the `CheckMenuItem`s themselves…
+Before we look at the `CheckMenuItem`s themselves...
 
 ### The ObservedFeaturesList Object
 
@@ -283,7 +283,7 @@ The `features` associative array is the only part of the code we need to fiddle 
 
 Also, the key names are used as labels when creating the `CheckMenuItem`s, so there’s another thing we only have to deal with here in this one place.
 
-This `ObservedFeaturesList` object is instantiated in…
+This `ObservedFeaturesList` object is instantiated in...
 
 ## Back to the Top
 
@@ -363,7 +363,7 @@ Note that when using an associative array with a `foreach` loop, we need to name
 
 Once we’re done with those, it’s back to adding the `exitItem` in the usual way.
 
-One last bit to look at…
+One last bit to look at...
 
 ## The FeatureCheckMenuItem Class
 

@@ -132,7 +132,7 @@ class AppBox : Box
 } // class AppBox
 ```
 
-Now you’ll notice I’m not using a bare-bones `Expander`, but all I’ve done is follow the convention I laid out for these blog examples and derive `MyExpander` from `Expander` so as to keep all the details in an easily-managed class/object… like this:
+Now you’ll notice I’m not using a bare-bones `Expander`, but all I’ve done is follow the convention I laid out for these blog examples and derive `MyExpander` from `Expander` so as to keep all the details in an easily-managed class/object... like this:
 
 ```d
 class MyExpander : Expander
@@ -185,7 +185,7 @@ Hooking up the signal is the same as always, but polling `getExpanded()` to find
 	} // doSomething()
 ```
 
-Intuitively you might think expanded means the `Expander` is… well, expanded, but it doesn’t. I don’t know if there’s a reason for this, but if I find out there is one, I’ll let you know.
+Intuitively you might think expanded means the `Expander` is... well, expanded, but it doesn’t. I don’t know if there’s a reason for this, but if I find out there is one, I’ll let you know.
 
 ## A More Crowded Expander
 
@@ -326,7 +326,7 @@ If you also grab the `PadLabel` and `HPadBox` classes from the custom `Dialog` e
 
 And there you have it, yet another way to hide child widgets inside a parent widget, this one seemingly with one foot in the `ComboBox` camp and the other in the `TreeView`/`TreeStore` camp and yet, easier to use than either.
 
-Hope you found this as revealing as I did (no pun intended… honest). Until next time.
+Hope you found this as revealing as I did (no pun intended... honest). Until next time.
 
 <div class="blog-nav">
 	<div style="float: left;">

@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0057: Cairo I – The Basics of Drawing
 
-Today we're going to put the MVC series aside for a few weeks while we dive into another series on a topic near and dear to my heart… graphics. We’ll start simple and get more complicated as we go. But first, we need to look at some foundation stuff…
+Today we're going to put the MVC series aside for a few weeks while we dive into another series on a topic near and dear to my heart... graphics. We’ll start simple and get more complicated as we go. But first, we need to look at some foundation stuff...
 
 ## The Imports
 
@@ -45,13 +45,13 @@ Ignoring the `rgbaColor` array for the moment, to prepare a `DrawingArea`, you j
 - write a callback function and
 - hook up the `onDraw` signal to call the callback.
 
-That’s it. But anything you plan to show with the `DrawingArea` ‘projector’ you’ll need to prep first. And you do that off-screen with the `DrawingArea`’s constant companion…
+That’s it. But anything you plan to show with the `DrawingArea` ‘projector’ you’ll need to prep first. And you do that off-screen with the `DrawingArea`’s constant companion...
 
 ## The Context
 
 This is like a paste-up board. You take bits and pieces of images, shapes, lines, etc., mix in some color and build the image you want to show on the `DrawingArea`. When it’s ready, you call one of the `Context`’s many functions to slap your results onto the `DrawingArea` projector.
 
-But to show this, we need an example, so let’s start with something simple like…
+But to show this, we need an example, so let’s start with something simple like...
 
 ## A Simple Fill
 
@@ -171,7 +171,7 @@ And that is *Cairo* drawing at its simplest.
 
 A Technical Note: You’ll notice the `onDraw()` function’s first argument is `Scoped!Context`. `Scoped!` is a *GtkD* reflection of `D`’s `scoped()` function and all it means is that the `Context` will be destroyed automatically when we’re done with it. It has to be done this way because it’s created automatically.
 
-Now let’s look at a second simple example…
+Now let’s look at a second simple example...
 
 ## Drawing a Line
 
@@ -292,7 +292,7 @@ In this operation, we do four things:
 - decide where the line will end, and
 - stroke it.
 
-But what if you want to draw…
+But what if you want to draw...
 
 ## Multiple Lines with Rounded Ends
 
@@ -438,7 +438,7 @@ context.stroke();
 
 So, to use a `DrawingArea`, we now know we need to instantiate it and hook up the `onDraw` signal. Also, we need a behind-the-scenes `Context` (automatically supplied in most cases) for preparing any drawing before it hits the `DrawingArea`.
 
-Next time we continue with *Cairo* and look at rectangles. Until then…
+Next time we continue with *Cairo* and look at rectangles. Until then...
 
 <div class="blog-nav">
 	<div style="float: left;">

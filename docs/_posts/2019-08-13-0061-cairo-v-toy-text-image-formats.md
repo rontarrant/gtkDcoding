@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0061: Cairo V – Toy Text API and Image Formats
 
-These two topics are related in that, after a short intro to *Cairo*’s toy text API, we use it to print a list of available image formats on our *GTK* window. So, let’s start with…
+These two topics are related in that, after a short intro to *Cairo*’s toy text API, we use it to print a list of available image formats on our *GTK* window. So, let’s start with...
 
 ## *Cairo*’s Toy Text API
 
@@ -278,11 +278,11 @@ PixbufFormat[] pixbufFormats;
 
 Here’s what they are and why we need them:
 
-- `pixbuf` is a buffer associated with a *Cairo* `Surface`… effectively, it’s an image buffer tied to the `DrawingArea`,
+- `pixbuf` is a buffer associated with a *Cairo* `Surface`... effectively, it’s an image buffer tied to the `DrawingArea`,
 - `formatList` is a singly-linked list of objects (`ListSG`), each of which can hold various types of data, in this case, each holds a string, the name of a format, and
 - `pixbufFormat` and `pixbufFormats` are there so we can use a `foreach()` loop to step through and get the names of the formats.
 
-The callback is a bit involved, so let’s look at it in chunks… although not all of this will be in the same order it appears in the code.
+The callback is a bit involved, so let’s look at it in chunks... although not all of this will be in the same order it appears in the code.
 
 ### Callback Chunk #1
 
@@ -297,14 +297,14 @@ pixbufFormats = formatList.toArray!PixbufFormat();
 What we’re doing here is:
 
 - `getAllocation()` gets us the size of the `DrawingArea`,
-- `getTarget()` (found inside the call to `getFromSurface()`) gets us the *Cairo* `Surface` which allows us to…
-- `getFromSource()` to grab the `Pixbuf`, and from that…
+- `getTarget()` (found inside the call to `getFromSurface()`) gets us the *Cairo* `Surface` which allows us to...
+- `getFromSource()` to grab the `Pixbuf`, and from that...
 - we can use `getFormats()` to get the linked list of format strings, and finally
 - use a bit of *D* magic in the form of `toArray!PixbufFormat()` to fill the `pixbufFormats` array.
 
-And what’s a `PixbufFormat`? It’s a class that keeps track of details of a `Pixbuf` format… its name, mime types, license associated with the image type, the file name extensions usually used for that image… all kinds of stuff. But for now, all we’re concerned with are the format names.
+And what’s a `PixbufFormat`? It’s a class that keeps track of details of a `Pixbuf` format... its name, mime types, license associated with the image type, the file name extensions usually used for that image... all kinds of stuff. But for now, all we’re concerned with are the format names.
 
-Now, we’ve already looked at how to set of a font with size, color and all that, so we’ll skip *Callback Chunk #2* and go to…
+Now, we’ve already looked at how to set of a font with size, color and all that, so we’ll skip *Callback Chunk #2* and go to...
 
 ### Callback Chunk #3
 

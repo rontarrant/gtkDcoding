@@ -151,7 +151,7 @@ For the callback, things should also be very familiar by now. It breaks down as:
 - we collect the state of the `CheckButton` and use it to set the `Entry`’s visibility, and
 - grab the button’s state once more to use as an index into the string array and make the message complete.
 
-That’s one down. Now let’s look at…
+That’s one down. Now let’s look at...
 
 ## The Font Button Example
 

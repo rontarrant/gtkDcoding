@@ -108,7 +108,7 @@ Whenever you create a *GTK* `Button` and slap text on it, even though it’s not
 </div>
 
 
-One thing you can’t do with a `Label` is give it a colored background… unless you stick the `Label` into an `EventBox`.
+One thing you can’t do with a `Label` is give it a colored background... unless you stick the `Label` into an `EventBox`.
 
 ## Abbreviated Intro to the EventBox
 
@@ -286,7 +286,7 @@ class MarkupSwitchButton : Button
 } // class MarkupSwitchButton
 ```
 
-The class is based on a `Button` and we drop in the fancied-up `Label`. Then we point the callback at the `markupSwitch()` function, a member function of the `MarkupLabel` class… which looks like this:
+The class is based on a `Button` and we drop in the fancied-up `Label`. Then we point the callback at the `markupSwitch()` function, a member function of the `MarkupLabel` class... which looks like this:
 
 ```d
 class MarkupLabel : Label

@@ -105,7 +105,7 @@ author: Ron Tarrant
 	</div>
 </div>
 
-Let’s move away from buttons for the moment, both mouse and GUI, and look at the `Entry` widget… yeah, the one used for gathering a small bit of text from the user.
+Let’s move away from buttons for the moment, both mouse and GUI, and look at the `Entry` widget... yeah, the one used for gathering a small bit of text from the user.
 
 This is pretty much the easiest widget to use and the code amounts to this:
 
@@ -122,7 +122,7 @@ entry.getText()
 
 Assign it to a variable, stick it in a `writeln()` function, whatever’s your poison.
 
-Moving right along…
+Moving right along...
 
 ## Non-editable Entry
 

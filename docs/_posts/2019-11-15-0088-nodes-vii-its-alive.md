@@ -231,11 +231,9 @@ Until then...
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/2019/11/12/0087-nodes-vi-hotspots.html">Previous: Node VI - Hotspots</a>
+		<a href="/2019/11/12/0087-nodes-vi-hotspots.html">Previous: Node VI - Hot Spots</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/11/19/0089-nodes-viii-its-alive-2.html">Next: Node VIII - It's Alive! (2)</a>
 	</div>
--->
 </div>

@@ -366,7 +366,7 @@ bool onDraw(Scoped!Context context, Widget w)
 } // onDraw()
 ```
 
-No mystery here, just substitute context.fill() for context.stroke() and if you want to have the rectangle outlined and filled…
+No mystery here, just substitute context.fill() for context.stroke() and if you want to have the rectangle outlined and filled...
 
 ## The Outlined and Filled Rectangle
 
@@ -486,7 +486,7 @@ bool onDraw(Scoped!Context context, Widget w)
 } // onDraw()
 ```
 
-And finally, let’s look at…
+And finally, let’s look at...
 
 ## A Transparency Example
 
@@ -618,14 +618,14 @@ bool onDraw(Scoped!Context context, Widget w)
 What we’re doing here is:
 
 -	filling the background with a middle gray color, and
--	drawing a thick blue line so we have something to see behind the…
+-	drawing a thick blue line so we have something to see behind the...
 -	10 transparent yellow cubes in the foreground.
 
 And there’s nothing all that mysterious about the code. The `for()` loop places the yellow cubes about 24 pixels apart along the x axis, increasing the opacity as it goes.
 
 ## Conclusion
 
-And that’s all we’ll do with rectangles for now. Next time we dig into circles and arcs. Until then…
+And that’s all we’ll do with rectangles for now. Next time we dig into circles and arcs. Until then...
 
 <div class="blog-nav">
 	<div style="float: left;">

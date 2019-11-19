@@ -11,7 +11,7 @@ author: Ron Tarrant
 
 Last time we got stuck into `ComboBoxText` widgets and this time we carry on by adding and deleting items that show up in the drop-down list.
 
-In this first example, we’ll look at…
+In this first example, we’ll look at...
 
 ## Adding an Item to a ComboBoxText
 
@@ -146,7 +146,7 @@ The only unusual thing is passing in the `dayComboBoxText` object so the *Add* `
 
 I used `writeln()` to echo a couple of lines to the terminal so you know what’s being demonstrated.
 
-Now let’s look at…
+Now let’s look at...
 
 ## The Add Button Class
 
@@ -363,7 +363,7 @@ Why? Because if we don’t reset the active item, the just-deleted text is still
 
 Next time, we’ll take a look at the `ComboBox` and look at populating it with various data types starting with text, then moving on to things like numbers, images, or whatever else fits into a `TreeModel`.
 
-Until then…
+Until then...
 
 <div class="blog-nav">
 	<div style="float: left;">

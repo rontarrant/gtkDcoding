@@ -139,7 +139,7 @@ class ColorChooserButton : Button
 } // class: ColorChooserButton
 ```
 
-Here—because we’re driving the boat, as it were—we have to declare our own dialog which we didn’t have to do with the `ColorButton`. And naturally, we’ve got to hook up a signal too, so that clicking on the button opens the dialog. Then there’s the whole modal rigmarole to deal with, so we have to pass a pointer to the parent window along to our dialog object…
+Here—because we’re driving the boat, as it were—we have to declare our own dialog which we didn’t have to do with the `ColorButton`. And naturally, we’ve got to hook up a signal too, so that clicking on the button opens the dialog. Then there’s the whole modal rigmarole to deal with, so we have to pass a pointer to the parent window along to our dialog object...
 
 ## And Now, the Dialog
 
@@ -187,7 +187,7 @@ Nope. It goes back to white.
 
 ## Which is Best?
 
-You may wonder which of these methods of picking a color is best, the `ColorChooserDialog` or the `ColorButton`… It depends on the circumstances you find yourself in while designing an application:
+You may wonder which of these methods of picking a color is best, the `ColorChooserDialog` or the `ColorButton`... It depends on the circumstances you find yourself in while designing an application:
 
 - if you plan to have access through a menu, you’ll want to use the dialog,
 - for access from menu, toolbar and button, again: dialog, but

@@ -149,7 +149,7 @@ But what if you don’t want the URL to show on the button? Perhaps your URL is 
 http://gtkdcoding.com/2019/01/11/0000-introduction-to-gtkDcoding.html
 ```
 
-That ain’t gonna look so pretty on a button, so you might instead consider…
+That ain’t gonna look so pretty on a button, so you might instead consider...
 
 ## A LinkButton with a Pretty Face
 

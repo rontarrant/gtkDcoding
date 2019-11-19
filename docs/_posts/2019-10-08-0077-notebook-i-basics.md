@@ -164,7 +164,7 @@ I won’t go over the `TextView` or the `Label` derivative classes here since we
 
 And that is all there is to it.
 
-### But Wait…
+### But Wait...
 
 When you compile and run this demo (in *Windows*, at least) you’ll notice that the tab’s `Label` text shows along with a little blue bar underneath so we know it’s selected, but there’s no visible tab background. It doesn’t even have an outline.
 
@@ -185,7 +185,7 @@ Now you can open any of your GTK apps/demos and travel back in time to the *Wind
 
 Like I said, it’s not the best solution, but you end up with visible tabs.
 
-And here’s another way to go about it…
+And here’s another way to go about it...
 
 ## Making Tabs Visible: the Application-level Method
 
@@ -289,7 +289,7 @@ And here’s another way to go about it…
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
 
-This isn’t an ideal solution either because we don’t get control over such things as the shape of the tabs, but we do get some control… and it looks better than a *Windows 7* theme superimposed onto a *Windows 10* application.
+This isn’t an ideal solution either because we don’t get control over such things as the shape of the tabs, but we do get some control... and it looks better than a *Windows 7* theme superimposed onto a *Windows 10* application.
 
 ##### A Call for Participation
 <BR>

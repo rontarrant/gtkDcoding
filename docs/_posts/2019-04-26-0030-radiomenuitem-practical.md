@@ -115,7 +115,7 @@ The differences are in:
 - where features are turned on or off during signal-handling/callback, and
 - (of course) we have mutual exclusivity here which we didn’t in the `CheckMenuItem` example.
 
-Let’s go through them…
+Let’s go through them...
 
 ## A Busier FileMenu Class
 
@@ -206,11 +206,11 @@ append(exitItem);
 } // this()
 ```
 
-Now let’s look at…
+Now let’s look at...
 
 ## Mutual Exclusion in the ObservedFeaturesList Class
 
-Again, we’ll look at this in chunks…
+Again, we’ll look at this in chunks...
 
 ### Chunk #1
 

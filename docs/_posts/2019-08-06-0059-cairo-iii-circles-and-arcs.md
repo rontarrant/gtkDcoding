@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0059: Cairo III – Circles and Arcs
 
-Let’s jump right in and look at…
+Let’s jump right in and look at...
 
 ## Drawing a Circle
 
@@ -122,7 +122,7 @@ bool onDraw(Scoped!Context context, Widget w)
 } // onDraw()
 ```
 
-And even though you might expect a `circle()` function, we actually use `arc()`… and since an arc is just an incomplete circle, well… there you go.
+And even though you might expect a `circle()` function, we actually use `arc()`... and since an arc is just an incomplete circle, well... there you go.
 
 The arguments to the `arc()` function are:
 

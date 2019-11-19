@@ -18,7 +18,7 @@ Today’s example files show:
 
 ## Why a Layout?
 
-Placing widgets in a container using absolute coordinates is discouraged. Why? If your application is translated into another language or the user fiddles with font settings at the OS level, the beauty and balance of your layout is going out the window… so to speak.
+Placing widgets in a container using absolute coordinates is discouraged. Why? If your application is translated into another language or the user fiddles with font settings at the OS level, the beauty and balance of your layout is going out the window... so to speak.
 
 But if you’re just writing utilities and applications for your own use, then hey: knock yourself out. (I do.) Anyway, it’s included here for completeness sake, so let’s get at it and since the `main()` function and the `TestRigWindow` class are the same as other examples, let’s look at the meat.
 

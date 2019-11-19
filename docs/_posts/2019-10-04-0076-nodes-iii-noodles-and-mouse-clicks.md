@@ -117,7 +117,7 @@ As implied above, this won’t be a complete solution, but we’re getting there
 - harness the `onButtonPress` signal so we know when the mouse button is pressed, and
 - set up and maintain a flag that will decide when the drawing routines will be called.
 
-### Harnessing the Mouse… Again
+### Harnessing the Mouse... Again
 
 We know how to harness mouse button presses from [Blog Post #0014](/2019/03/01/0014-reacting-to-mouse-events.html), specifically [the mouse button press example](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_005_01_press.d).
 
@@ -156,7 +156,7 @@ public bool onButtonPress(Event event, Widget widget)
 } // onButtonPress()
 ```
 
-One more little change…
+One more little change...
 
 ### Draw Flag
 
@@ -300,7 +300,7 @@ What we’ve been working toward all this time is this:
 - as the mouse moves, we see constant feedback as to how the curve looks, and
 - when we release the mouse button, the curve becomes static.
 
-To get there, we need to harness one more signal, `onButtonRelease`. And the purpose of this signal is so we know when to stop drawing… which is when we let go of the mouse button.
+To get there, we need to harness one more signal, `onButtonRelease`. And the purpose of this signal is so we know when to stop drawing... which is when we let go of the mouse button.
 
 So, once again, we add another signal hook-up to the constructor:
 
@@ -367,7 +367,7 @@ Here, we’re using the `dragAndDraw` flag to decide whether or not to queue up 
 - the `onButtonPress()` callback enables curve drawing,
 - as long as the mouse button is held down:
 	- curve drawing continues in the `onDraw()` callback, refreshing every 24th of a second, and
-	- as long as the mouse is moving, `onMotion()` continually updates the end position of the curve until…
+	- as long as the mouse is moving, `onMotion()` continually updates the end position of the curve until...
 - the mouse button is released and `onButtonRelease` turns off the drawing flag and the last mouse position reported by `onMotion()` becomes the final end point for the static curve.
 
 ## Conclusion

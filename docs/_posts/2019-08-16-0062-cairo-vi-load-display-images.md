@@ -396,7 +396,7 @@ Substitute a call to `setSourcePixbuf()` for the call to `setSourceSurface()` we
 <!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
 
 
-As you may guess, this is identical to the second method we used…
+As you may guess, this is identical to the second method we used...
 
 The initialization section:
 

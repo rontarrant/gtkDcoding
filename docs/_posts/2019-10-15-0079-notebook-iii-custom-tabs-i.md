@@ -206,7 +206,7 @@ This is just a `Box`. At the moment, we don’t really need this intermediary wi
 
 All this does is serve to contain a `DrawingArea`... which it does quite well.
 
-One thing I’ll point out here… this `Box` needs to make a call to `showAll()` so we get to see what’s in the `Box`. Without it, we'd be looking at a blank `DrawingArea`.
+One thing I’ll point out here... this `Box` needs to make a call to `showAll()` so we get to see what’s in the `Box`. Without it, we'd be looking at a blank `DrawingArea`.
 
 ## Conclusion
 

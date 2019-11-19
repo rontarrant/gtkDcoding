@@ -307,7 +307,7 @@ this()
 
 We grab a list of fonts from the system and use it to create a *Pango* `FontMap` (referred to as a `PgFontMap`). From the `PgFontMap` (essentially just a list of font names) the constructor uses a `foreach()` loop to create the array of `PgFontDescriptions`.
 
-And right in the middle of this, we see why `std.math` was imported…
+And right in the middle of this, we see why `std.math` was imported...
 
 The `fmod()` function is used three times so we can make:
 

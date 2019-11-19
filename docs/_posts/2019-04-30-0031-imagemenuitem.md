@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0031: Menus VI - Image on a Menu
 
-The *GTK* `ImageMenuItem` has been deprecated, but…
+The *GTK* `ImageMenuItem` has been deprecated, but...
 
 For crossing language barriers or giving your application visual appeal, nothing beats an image. So how can we stick one in a menu?
 
@@ -147,7 +147,7 @@ The defined variables at the top are pretty obvious:
 
 Then, just like a `Button`, we `add()` the `Image` and then set up a signal.
 
-This callback is nothing unusual, so let’s look at where all that `Box` stuffing was delegated to…
+This callback is nothing unusual, so let’s look at where all that `Box` stuffing was delegated to...
 
 ### The ImageMenuBox Class
 
@@ -307,7 +307,7 @@ See? Nothing earth-shattering or (really) all that different, so let's talk abou
   
 ### Icons
 
-Okay, there are a few things you need to know…
+Okay, there are a few things you need to know...
 
 **First**, you’ll wanna know where the icons live so you can look at them and decide which you wanna use. On *Windows*, you’ll find them either here:
 

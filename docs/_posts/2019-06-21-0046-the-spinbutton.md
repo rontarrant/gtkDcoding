@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0047: SpinButton
 
-This one’s both easy and tricky. Let me explain…
+This one’s both easy and tricky. Let me explain...
 
 <div class="screenshot-frame">
 	<div class="frame-header">
@@ -140,7 +140,7 @@ class MySpinButton : SpinButton
 } // class MySpinButton
 ```
 
-One thing to notice here is that the `SpinButton` doesn’t work alone. It needs…
+One thing to notice here is that the `SpinButton` doesn’t work alone. It needs...
 
 ## The Adjustment
 
@@ -150,7 +150,7 @@ Technically, the `Adjustment` isn’t a `Widget` because it’s derived directly
 
 - *the `Container` and its offspring:*
 	- *the `Layout`,*
-- *the `ScaleButton`, and its child…*
+- *the `ScaleButton`, and its child...*
 	- *the `VolumeButton`,*
 - *the `ScrolledWindow`, and*
 - *the `Viewport`.*
@@ -160,10 +160,10 @@ In short, anything that needs adjusting. And the `Adjustment` is also the most c
 At the top of the `MySpinButton` class definition, there’s a bunch of stuff initialized for use when instantiating the `Adjustment`, and as long as you keep these values sane, you’ll have very little trouble. These values are:
 
 - `minimum` and `maximum` – straightforward, these are the upper and lower limits of the spinner,
-- `step` – the increment added to or subtracted from the current value each time the spinner buttons are clicked… or—while the `SpinButton` has focus—each time the up and down arrow keys are pressed,
-- `initialValue` – again straightforward, and then there’s…
+- `step` – the increment added to or subtracted from the current value each time the spinner buttons are clicked... or—while the `SpinButton` has focus—each time the up and down arrow keys are pressed,
+- `initialValue` – again straightforward, and then there’s...
 - `pageIncrement` – how much is added to or subtracted from the spinner's current value when you hit the *Page-up* or *Page-down* keys, and
-- `pageSize`… Now, this is an odd one…
+- `pageSize`... Now, this is an odd one...
 
 ## Oddity of the pageSize Argument
 
@@ -309,7 +309,7 @@ class FloatSpinButton : SpinButton
 } // class FloatSpinButton
 ```
 
-The objective here is to use and show floating point values. But, notice that all the initialized parameters for the `Adjustment` are floats except for `step`. This is because of an oddity in the `Adjustment` object that seems to take two different forms, but rather than bore you with a long explanation, I’ll just give you the short version and jump right to the workaround for the current use-case…
+The objective here is to use and show floating point values. But, notice that all the initialized parameters for the `Adjustment` are floats except for `step`. This is because of an oddity in the `Adjustment` object that seems to take two different forms, but rather than bore you with a long explanation, I’ll just give you the short version and jump right to the workaround for the current use-case...
 
 The `SpinButton` has two signals you can hook up to:
 
@@ -332,7 +332,7 @@ For some reason, when combining certain variable types with a certain one or the
 
 So, rule of thumb for using the `SpinButton` or any other widget using the `Adjustment`:
 
-1. If you’re getting double signal firings with the `onValueChanged` signal, switch to the `onOutput` signal… and vice versa.
+1. If you’re getting double signal firings with the `onValueChanged` signal, switch to the `onOutput` signal... and vice versa.
 2. If switching signals doesn't help, try a different variable type (`int`, `byte`, `double`, `float`, etc.)
 
 ### Precision

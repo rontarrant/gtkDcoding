@@ -11,7 +11,7 @@ author: Ron Tarrant
 
 Now we start down the road toward full control of what happens when the user fiddles with mouse buttons. Sometimes we want to trigger something when a mouse button is pressed, but other times (more often, really) we want to react when the mouse button is released. This is the accepted norm in most GUI designs, so let’s not rock the boat until we have good reason to. And today, we have no excuse.
 
-We’ve gone back to an unadorned `TestRigWindow` for this series of examples because this isn’t about `Button` buttons, it’s about mouse buttons. To avoid any possible confusion when I say ‘button,’ I don’t want any buttons in the GUI and that way I won’t get mixed up… and neither will you.
+We’ve gone back to an unadorned `TestRigWindow` for this series of examples because this isn’t about `Button` buttons, it’s about mouse buttons. To avoid any possible confusion when I say ‘button,’ I don’t want any buttons in the GUI and that way I won’t get mixed up... and neither will you.
 
 But since these examples—button press and button release—are so similar, we'll talk about them both together.
 
@@ -209,7 +209,7 @@ But since these examples—button press and button release—are so similar, we'
 
 ## A New Import
 
-Yeah, I’m not talking about this year’s Volvo or Toyota, but an import statement… this, to be exact:
+Yeah, I’m not talking about this year’s Volvo or Toyota, but an import statement... this, to be exact:
 
 ```d
 import gdk.Event;
@@ -224,9 +224,9 @@ Just below that import statement is a comment to let you know where we find `Eve
 - the motion of the mouse pointer,
 - key presses and releases,
 - changes in focus,
-- changes in keymaps…
+- changes in keymaps...
 
-…all kinds of things. They give us a serious amount of control to pass along to the user.
+...all kinds of things. They give us a serious amount of control to pass along to the user.
 
 ## Changes to the TestRigWindow Class
 

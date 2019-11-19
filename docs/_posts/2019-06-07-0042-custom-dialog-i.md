@@ -302,7 +302,7 @@ Keep in mind that the border is the space between a `Container` and its parent, 
 - the `Grid`’s border is between itself and the `Dialog`'s *Content Area*, and
 - the `Box`’s border is between itself and the `Grid` square(s) containing it.
 
-We don’t need to bother with the spacing between a child widget and its `Box` container (and that's a good thing because most child `Widget`s won't give us that control anyway). Now let’s get into the classes…
+We don’t need to bother with the spacing between a child widget and its `Box` container (and that's a good thing because most child `Widget`s won't give us that control anyway). Now let’s get into the classes...
 
 ## The HPadBox
 
@@ -362,7 +362,7 @@ Here's the meat-n-taters of this class:
 } // class HPadBox
 ```
 
-Because the constructor’s first argument is a `Widget`, it’ll accept whatever widget you wanna drop into it… a `Label`, an `Entry`, whatever. We’ll talk more about that mechanism in a moment, but first let’s finish off this justification stuff…
+Because the constructor’s first argument is a `Widget`, it’ll accept whatever widget you wanna drop into it... a `Label`, an `Entry`, whatever. We’ll talk more about that mechanism in a moment, but first let’s finish off this justification stuff...
 
 `Box`es in the latest incarnation of *GTK* are genericized. *GTK 2.x* had an `HBox` and a `VBox`, but now we have the plain ole `Box` and—you’ll recognize this from earlier blog posts—the Box's constructor is passed a directional `Orientation`:
 
@@ -391,7 +391,7 @@ You can probably guess how this all pans out, but here it is in black-n-white: t
 	- `BOTTOM` = `packEnd()`, and
 	- `CENTER` = `add()`.
 
-This example doesn't have a `VPadBox`, but you've got the tools now to figure out how that would go together. Now let’s move on to the child widget used with `HPadBox`…
+This example doesn't have a `VPadBox`, but you've got the tools now to figure out how that would go together. Now let’s move on to the child widget used with `HPadBox`...
 
 ## The HPadLabel
 

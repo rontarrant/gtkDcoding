@@ -112,7 +112,7 @@ These two widgets, working together, give us the basis for text/code editors, wo
 
 To get the `TextView` into a `Window` in any kind of useful way also means using a `ScrolledWindow` as an intermediary container. After all, there’s no point in having hundreds of lines of text if you only have visual access to the first dozen. (There’s nothing like typing blind to keep you both focused and stressed.)
 
-So, we stuff a `ScrolledWindow` into our usual `AppBox`, and stuff the `TextView` into the `ScrolledWindow`… like this:
+So, we stuff a `ScrolledWindow` into our usual `AppBox`, and stuff the `TextView` into the `ScrolledWindow`... like this:
 
 ```d
 class AppBox : Box
@@ -155,7 +155,7 @@ class ScrolledTextWindow : ScrolledWindow
 We don’t have to instantiate the `TextBuffer` because the `TextView` already has one associated with it when it’s instantiated. But, there is some flexibility here. We could end up with this association between a `TextView` and a `TextBuffer` in a few different ways:
 
 - instantiate a `TextView` and grab a pointer to its `TextBuffer` (as we're doing in this example),
-- instantiate the `TextBuffer` first and pass it to the `TextView`’s overloaded constructor—which doesn’t seem all that useful to me unless you…
+- instantiate the `TextBuffer` first and pass it to the `TextView`’s overloaded constructor—which doesn’t seem all that useful to me unless you...
 - instantiate one `TextView` and pass its `TextBuffer` along to the constructors for one or more other `TextView`s so they can share.
 
 But in this example, we’ll do it the simplest way:
@@ -179,7 +179,7 @@ class MyTextView : TextView
 
 Within the `MyTextView` constructor, a quick call to `getBuffer()` gives us access and from there, we give it some content with `setText()`.
 
-But for thoroughness sake, let’s also look at a shared `TextBuffer`…
+But for thoroughness sake, let’s also look at a shared `TextBuffer`...
 
 ## TextViews with a Shared TextBuffer
 

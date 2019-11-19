@@ -179,7 +179,7 @@ enum Column
 
 ## The WeatherListStore Constructor
 
-There’s a lot going on here, so let’s break it down a bit…
+There’s a lot going on here, so let’s break it down a bit...
 
 ### Initialization
 
@@ -301,7 +301,7 @@ void assignFonts()
 
 We start by instantiating a singleton for the detected OS, then use a switch statement to pick fonts based on which OS we find.
 
-Now let’s get to…
+Now let’s get to...
 
 ## The WeatherComboBox Class
 

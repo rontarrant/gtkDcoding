@@ -179,7 +179,7 @@ context.showText(number.to!string());
 number++;
 ```
 
-And that’s in the `onDraw` callback… which is the real callback attached to the `DrawingArea` as opposed to the sort-of callback attached to the `Timeout`.
+And that’s in the `onDraw` callback... which is the real callback attached to the `DrawingArea` as opposed to the sort-of callback attached to the `Timeout`.
 
 We don’t have to set up a `for()` loop because the `Timeout` repeats 24 times per second and ends up doing the job a loop would normally do.
 
@@ -422,7 +422,7 @@ Pretty simple. And, of course, you could do any other drawing in there as well. 
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
 
-And now for the *pièce de resistance*, loading a bunch of frames and flipping through them at 12 fps… which simulates shooting on twos. That’s animator parlance meaning that each image is shot twice and played back at 24 fps. Anyway, here’s the initialization section:
+And now for the *pièce de resistance*, loading a bunch of frames and flipping through them at 12 fps... which simulates shooting on twos. That’s animator parlance meaning that each image is shot twice and played back at 24 fps. Anyway, here’s the initialization section:
 
 ```d
 int currentFrame = 0;
@@ -497,7 +497,7 @@ Nothing to it.
 
 ## Conclusion
 
-Next time we’ll… dive back into the MVC series and look at the `TreeStore` to see how it differs from the `ListStore`. Don't miss it, eh.
+Next time we’ll... dive back into the MVC series and look at the `TreeStore` to see how it differs from the `ListStore`. Don't miss it, eh.
 
 <div class="blog-nav">
 	<div style="float: left;">
