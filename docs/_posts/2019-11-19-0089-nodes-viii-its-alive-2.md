@@ -330,9 +330,7 @@ Until then, have a happy and contented coding life.
 	<div style="float: left;">
 		<a href="/2019/11/15/0088-nodes-vii-its-alive.html">Previous: Node VI - Hotspots</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/11/19/0090-titlebar-icons.html">Next: Windows - Titlebar Icons</a>
 	</div>
--->
 </div>
