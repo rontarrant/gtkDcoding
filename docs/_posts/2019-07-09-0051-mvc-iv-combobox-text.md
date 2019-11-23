@@ -230,7 +230,7 @@ Not a big deal, we just:
 
 Moving on...
 
-### Stage 3: The Callback
+#### Stage 3: The Callback
 
 And the last line of the constructor hooks up the callback signal, but that's straightforward, so let's look at the callback code itself:
 
