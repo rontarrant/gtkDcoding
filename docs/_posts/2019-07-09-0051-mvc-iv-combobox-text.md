@@ -105,7 +105,7 @@ author: Ron Tarrant
 
 Today starts a mini-series within our **MVC** series in which we look at a simple `ComboBox` example to reproduce what we’ve already done with the `ComboBoxText`.
 
-So... unlike the `ComboBoxText`—which you more or less just throw strings at—the `ComboBox` needs an actual `Model` (ListStore or `TreeStore`) to draw text strings from. This is a little more work than it was with the `ComboBoxText`, so let’s dig in...
+So... unlike the `ComboBoxText`—which you more or less just throw strings at—the `ComboBox` needs an actual `Model` (`ListStore` or `TreeStore`) to draw text strings from. This is a little more work than it was with the `ComboBoxText`, so let’s dig in...
 
 ## The Model
 
