@@ -141,7 +141,7 @@ The `ListStore` constructor takes an array of `GTypes` and these define the data
 
 You'll note that the call to `super()` still gets an array for an argument, even though we're only using one data type. And, of course, because there's only one element in the array, there will be only one column.
 
-The `for()` loop steps through the array, picks one from the `items` array, instantiates a `TreeIter`, and then sets the value in the `ListStore` row.
+The `for()` loop steps through the array, picks one of the `items`, instantiates a `TreeIter`, and then sets the value in the `ListStore` row.
 
 The `setValue()` arguments are:
 
