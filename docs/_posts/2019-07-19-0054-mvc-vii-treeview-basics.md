@@ -11,13 +11,12 @@ author: Ron Tarrant
 
 We’ve all been told that the `TreeView` is a complex and difficult beast to tame, but it’s not so hard once you've got a few bits of information at your fingertips. And in the previous six instalments of this series, most of those bits have been presented which means it should come as no big surprise that...
 
-There are only three things we need to understand in order to make a `TreeView` work:
+There are only two things we need to understand in order to make a `TreeView` work:
 
 - a `ListStore` holds the data and acts as a `TreeModel`,
-- the `TreeViewColumn` controls the content and look of a column inside...
--  the `TreeView`, and...
+- the `TreeViewColumn` controls the content and look of a column inside the `TreeView`.
 
-That’s it.
+And that’s it.
 
 
 ## A Single-column TreeView
