@@ -378,7 +378,7 @@ The [folder/directory of images](https://github.com/rontarrant/gtkDcoding/blob/m
 
 This post is running a bit long, but this example really won’t take much explanation, so here goes...
 
-There are only two difference between this example and the last. One's in the constructor and it's merely how many `CellRenderer`s we stuff into the `SignComboBox`. It happens in these lines in the constructor:
+There are only two differences between this example and the last. One's in the constructor and it's merely how many `CellRenderer`s we stuff into the `SignComboBox`. It happens in these lines in the constructor:
 
 ```d
 cellRendererInt = new CellRendererText();
