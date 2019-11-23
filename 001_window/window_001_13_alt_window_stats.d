@@ -1,6 +1,6 @@
 // This source code is in the public domain.
 
-// Center a window on the screen
+// alternate way to get window stats
 
 import std.stdio;
 
@@ -26,14 +26,16 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Centered Window";
+	string title = "Window Stats - Alt";
 	AppBox appBox;
-	int xPosition, yPosition, width, height;
+	int xPosition, yPosition, width = 275, height = 100;
 	bool _isMaximized;
 	
 	this()
 	{
 		super(title);
+		setSizeRequest(width, height);
+		
 		addOnDestroy(&quitApp);
 		addOnConfigure(&onConfigureEvent);
 		

@@ -147,10 +147,9 @@ class MoveableNode : DrawingArea
 
 	bool onButtonPress(Event event, Widget widget)
 	{
-		double xMouse, yMouse;
 		GdkEventButton* buttonEvent = event.button;
 		int button1 = 1;
-		
+		double xMouse, yMouse;
 		xMouse = buttonEvent.x;
 		yMouse = buttonEvent.y;
 
@@ -160,7 +159,6 @@ class MoveableNode : DrawingArea
 			if(buttonEvent.button is button1) // ModifierType.BUTTON1_MASK
 			{
 				// dragArea
-				GdkEventButton* mouseEvent = event.button;
 				dragAreaActive(xMouse, yMouse);
 			}
 		}
@@ -169,7 +167,6 @@ class MoveableNode : DrawingArea
 			if(buttonEvent.button is button1) // ModifierType.BUTTON1_MASK
 			{
 				// inHotspot
-				GdkEventButton* mouseEvent = event.button;
 				terminalInActive(xMouse, yMouse);
 			}
 		}
@@ -178,7 +175,6 @@ class MoveableNode : DrawingArea
 			if(buttonEvent.button is button1) // ModifierType.BUTTON1_MASK
 			{
 				// inHotspot
-				GdkEventButton* mouseEvent = event.button;
 				terminalOutActive(xMouse, yMouse);
 			}
 		}

@@ -11,10 +11,11 @@ author: Ron Tarrant
 
 We’ve all been told that the `TreeView` is a complex and difficult beast to tame, but it’s not so hard once you've got a few bits of information at your fingertips. And in the previous six instalments of this series, most of those bits have been presented which means it should come as no big surprise that...
 
-There are only two things we need to understand in order to make a `TreeView` work:
+There are only three `Widgets` we need to understand in order to make a `TreeView` work:
 
-- a `ListStore` holds the data and acts as a `TreeModel`,
-- the `TreeViewColumn` controls the content and look of a column inside the `TreeView`.
+- a `ListStore` which holds the data and acts as a `TreeModel`,
+- the `TreeViewColumn` which controls the content and look of a column, and
+- the `TreeView` itself.
 
 And that’s it.
 
@@ -115,7 +116,7 @@ And that’s it.
 	</div>
 </div>
 
-The TreeView class looks like this:
+We derive a `SignTreeView` from the `TreeView` class and it looks like this:
 
 ```d
 class SignTreeView : TreeView
@@ -138,7 +139,7 @@ class SignTreeView : TreeView
 } // class SignTreeView
 ```
 
-Once the `TreeView` is instantiated by calling the super-class constructor, we set up and assign the `Model`/Store (`signListStore`), then instantiate and append one or more `TreeViewColumn`s.
+Once the `TreeView` is instantiated by calling the super-class constructor, we set up and assign the Model/Store (`signListStore`), then instantiate and append one or more `TreeViewColumn`s.
 
 ## The ListStore
 
@@ -166,7 +167,7 @@ class SignListStore : ListStore
 } // class SignListStore
 ```
 
-This is the exact same `SignListStore` we used with a `ComboBox` in [an earlier example]( https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_06_combobox_liststore.d), thus illustrating how the same data can be used in different ways by different `Widget`s.
+This is the same `SignListStore` we used with a `ComboBox` in [an earlier example]( https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_017_06_combobox_liststore.d), thus illustrating how the same data can be used in different ways by different `Widget`s.
 
 And that just leaves...
 
@@ -314,7 +315,7 @@ And that means:
 
 ### Using ListStore's set() Instead of setValue()
 
-As mentioned in [Blog Post #0053](http://gtkdcoding.com/2019/07/16/0053-mvc-vi-image-combobox.html), as long as we’re using strings and only strings, we can get away with using `set()`. But it’s meant as a shorthand way of dealing with a single data type, the string. This means that even if you’re using numbers (which are rendered as text by `ComboBox` and `TreeView`) we still have to use `setValue()`.
+As mentioned in [Blog Post #0053](http://gtkdcoding.com/2019/07/16/0053-mvc-vi-image-combobox.html), as long as we’re using strings and only strings, we can get away with using `set()`. But it’s meant as a shorthand way of dealing with a single data type: the string. This means that even if you’re using numbers (which are rendered as text by `ComboBox` and `TreeView`) we still have to use `setValue()`.
 
 ## Conclusion
 

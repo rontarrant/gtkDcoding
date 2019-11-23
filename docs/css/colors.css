@@ -63,3 +63,8 @@
 {
 	background-image: linear-gradient(to right, rgba(92, 236, 241, 1), rgba(255, 255, 255, 1.0));
 }
+.topic-color_hardware /* orange */
+{
+	background-image: linear-gradient(to right, rgba(252, 156, 14, 1), rgba(255, 255, 255, 1.0));
+}
+

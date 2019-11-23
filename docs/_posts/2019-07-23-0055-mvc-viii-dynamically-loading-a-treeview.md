@@ -103,7 +103,7 @@ author: Ron Tarrant
 	</div>
 </div>
 
-This time we’re going to dynamically load the `TreeView` with a list of all fonts available on your computer. We’ll use `PgFontDescriptions` (*Pango* fonts) so we can play with not just the names, but the sizes, styles, and weights. And on top of that, we’ll use a bit of math to italicize, bold, and change the size of the fonts so we can also render the font names so every font in the list isn't rendered in the same size, weight, and style.
+This time we’re going to dynamically load the `TreeView` with a list of all fonts available on your computer. We’ll use `PgFontDescriptions` (*Pango* fonts) so we can play with not just the names, but the sizes, styles, and weights. And on top of that, we’ll use a bit of math to mix things up and give the list some variety.
 
 ## A Note for Windows Users
 
@@ -200,7 +200,8 @@ And here’s what it does:
 - also using the `TreePath`, we create a `TreeIter` as a handle for the row data (in other words, the `TreePath` gives us the visible row in the `TreeView`, the `TreeIter` gives us the corresponding row in the `ListStore`),
 - look up the column number using the column’s header text,
 - (purely for informational purposes) echo the row and column numbers to the terminal, and
-- use the `TreeIter` (which, remember, is a handle for the row) and the `columnNumber` to grab the value of the specific cell that was clicked.
+- use the `TreeIter` (which, remember, is a handle for the row where the data is stored), and
+- the `columnNumber` to grab the value of the specific cell that was clicked.
 
 ## The FontListStore Class
 
@@ -227,7 +228,7 @@ class FontListStore : ListStore
 
  We’re only working with one array, the `fontList` which is an array of *Pango* font descriptions.
 
-In the `Column` `enum`, we take advantage of *D*’s `enum` auto-numbering which amounts to: number the first item and D fills in the numbers for the rest automatically.
+In the `Column` `enum`, we take advantage of *D*’s `enum` auto-numbering which amounts to: number the first item and *D* fills in the numbers for the rest automatically.
 
 ### The FontListStore Constructor
 

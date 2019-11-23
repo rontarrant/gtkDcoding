@@ -1,6 +1,6 @@
 // This source code is in the public domain.
 
-// HeaderBar demo - simple
+// HeaderBar demo with an extra button
 
 import std.stdio;
 
@@ -27,7 +27,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "<see MyHeaderBar.title>";
+	string title = "HeaderBar - Extra Button";
 	MyHeaderBar  myHeaderBar;
 	AppBox appBox;
 	string iconName = "images/road_crew.png";
@@ -73,13 +73,13 @@ class MyHeaderBar : HeaderBar
 	{
 		super();
 		setShowCloseButton(decorationsOn); // turns on all buttons: close, max, min
-		setDecorationLayout("close:minimize,maximize,icon"); // no spaces between button IDs
+		setDecorationLayout("close,maximize,minimize:icon"); // no spaces between button IDs
 		setTitle(title);
 		setSubtitle(subtitle);
 		
 		headerBarButton = new HeaderBarButton();
 		packStart(headerBarButton); // unlike Box.packStart() which takes four arguments
-		
+
 	} // this()
 	
 } // class MyHeaderBar

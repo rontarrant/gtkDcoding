@@ -35,9 +35,8 @@ class TestRigWindow : MainWindow
 {
 	Seat seat;
 	Display myDisplay;
-	Device keyboard;
+	Device _keyboard;
 	Keymap keymap;
-	GdkRectangle rectangle;
 	
 	this(string title)
 	{
@@ -45,13 +44,13 @@ class TestRigWindow : MainWindow
 
 		myDisplay = Display.getDefault();
 		seat = myDisplay.getDefaultSeat();
-		keyboard = seat.getKeyboard();
-		keyboardReport();
+		_keyboard = seat.getKeyboard();
 		keymap = Keymap.getDefault();
+
 		addOnDestroy(&quitApp);
 		addOnKeyPress(&onKeyPress);
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	bool onKeyPress(GdkEventKey* eventKey, Widget widget)
@@ -66,19 +65,6 @@ class TestRigWindow : MainWindow
 		
 	} // onKeyPress()
 	
-// grab() - redirect all input from the device to the running application until it's ungrabbed
-
-// getKey() - get a pressed key and any modifiers
-// getNKeys() - how many keys the device has
-	void keyboardReport()
-	{
-		string keyboardName;
-		
-		keyboardName = keyboard.getName();
-		writeln("Your keyboard is a ", keyboardName);
-		
-	} // keyboard()
-
 
 	void quitApp(Widget widget)
 	{

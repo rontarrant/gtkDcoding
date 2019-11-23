@@ -240,9 +240,7 @@ Hope you liked the **MVC** series. Until next time, have fun coding.
 	<div style="float: left;">
 		<a href="/2019/09/03/0067-mvc-xii-expander.html">Previous: MVC - Expander</a>
 	</div>
-<!--
 	<div style="float: right;">
-		<a href="/2019/09/10/0069-textview-basics.html">Next: TextView Basics</a>
+		<a href="/2019/09/10/0069-textview-and-textbuffer.html">Next: TextView and TextBuffer</a>
 	</div>
--->
 </div>

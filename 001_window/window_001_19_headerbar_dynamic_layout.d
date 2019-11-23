@@ -81,8 +81,8 @@ class MyHeaderBar : HeaderBar
 		headerBarButtonLeft = new HeaderBarButton(leftLabel, this);
 		packStart(headerBarButtonLeft); // unlike Box.packStart() which takes four arguments
 		
-//		headerBarButtonRight = new HeaderBarButton(rightLabel, this);
-//		packEnd(headerBarButtonRight);
+		headerBarButtonRight = new HeaderBarButton(rightLabel, this);
+		packEnd(headerBarButtonRight);
 		
 	} // this()
 	

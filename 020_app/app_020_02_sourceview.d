@@ -1,6 +1,6 @@
 // This source code is in the public domain.
 
-// get the position of a window on the screen
+// Reorganized Test Rig
 
 import std.stdio;
 
@@ -8,8 +8,7 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Box;
 import gtk.Widget;
-import gdk.Event;
-import gtk.Label;
+import gsv.SourceView;
 
 void main(string[] args)
 {
@@ -26,58 +25,32 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Get Window Position";
+	string title = "<Insert Title>";
 	AppBox appBox;
-	int xPosition, yPosition;
 	
 	this()
 	{
 		super(title);
-		setSizeRequest(320, 400);
-		
 		addOnDestroy(&quitApp);
-		addOnConfigure(&onConfigure);
 		
-		appBox = new AppBox(this);
+		appBox = new AppBox();
 		add(appBox);
 		
 		showAll();
 
-		getPosition(xPosition, yPosition);
-		showWindowStats();
-		
 	} // this()
 	
 		
 	void quitApp(Widget widget)
 	{
-		string exitMessage = "At this point, we could save the window's position for next time the user runs this application.";
+		string exitMessage = "Bye.";
+		
 		writeln(exitMessage);
-
-		showWindowStats();
 		
 		Main.quit();
 		
 	} // quitApp()
 
-
-	bool onConfigure(Event event, Widget widget)
-	{
-		getPosition(xPosition, yPosition);
-		writeln("The window is positioned at: x = ", xPosition, ", y = ", yPosition);
-		
-		return(false); // must be false or the window doesn't redraw properly.
-		
-	} // onConfigure()
-	
-	
-	void showWindowStats()
-	{
-		writeln("Window stats...");
-		writeln("position: xPosition = ", xPosition, ", yPosition = ", yPosition);
-		
-	} // showWindowStats()
-	
 } // class TestRigWindow
 
 
@@ -85,17 +58,31 @@ class AppBox : Box
 {
 	bool expand = false, fill = false;
 	uint globalPadding = 10, localPadding = 5;
-	
 	// add child object and variable definitions here
+	MySourceView mySourceView;
 	
-	this(TestRigWindow testRigWindow)
+	this()
 	{
 		super(Orientation.VERTICAL, globalPadding);
 		
 		// instantiate child objects here
+		mySourceView = new MySourceView();
+		
 		// packStart(<child object>, expand, fill, localPadding); // LEFT justify
+		packStart(mySourceView, expand, fill, localPadding);
 		// packEnd(<child object>, expand, fill, localPadding); // RIGHT justify
 		
 	} // this()
 
 } // class AppBox
+
+
+class MySourceView : SourceView
+{
+	this()
+	{
+		super();
+		
+	} // this()
+	
+} // class MySourceView

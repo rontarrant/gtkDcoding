@@ -1,6 +1,6 @@
 // This source code is in the public domain.
 
-// Center a window on the screen
+// window stats
 
 import std.stdio;
 
@@ -26,14 +26,15 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Centered Window";
+	string title = "Window Stats";
 	AppBox appBox;
-	int xPosition, yPosition, width = 320, height = 400;
+	int xPosition, yPosition, width, height;
 	bool _isMaximized;
 	
 	this()
 	{
 		super(title);
+		
 		addOnDestroy(&quitApp);
 		addOnCheckResize(&onCheckResize);
 		addOnConfigure(&onConfigure);
@@ -115,13 +116,15 @@ class AppBox : Box
 {
 	bool expand = false, fill = false;
 	uint globalPadding = 10, localPadding = 5;
+	int width = 320, height = 400;
 	
 	// add child object and variable definitions here
 	
 	this(TestRigWindow testRigWindow)
 	{
 		super(Orientation.VERTICAL, globalPadding);
-		
+		setSizeRequest(width, height);
+
 		// instantiate child objects here
 		
 		// packStart(<child object>, expand, fill, localPadding); // LEFT justify

@@ -9,16 +9,15 @@ import std.math;
 import gtk.MainWindow;
 import gtk.Main;
 import gtk.Box;
-import gtk.DrawingArea;
 import gtk.Widget;
+import gtk.DrawingArea;
 import gtk.Layout;
 import gtk.Image;
+
 import gdkpixbuf.Pixbuf;
 import gdk.Event;
 
 import cairo.Context;
-import cairo.ImageSurface;
-import cairo.Surface;
 
 void main(string[] args)
 {
@@ -193,42 +192,6 @@ class MoveableNode : DrawingArea
 	} // onDraw()
 
 
-	bool onMotionNotify(Event event, Widget widget)
-	{
-		double newX, newY, pointerX, pointerY;
-		GdkEventMotion* motionEvent = event.motion();
-
-		if((motionEvent.state == ModifierType.BUTTON1_MASK) && _dragOn == true) // ModifierType.BUTTON1_MASK
-		{
-			pointerX = event.button.x;
-			pointerY = event.button.y;
-
-			if(pointerX > _xOffset)
-			{
-				newX = _nodePosition[_xIndex] + (pointerX - _xOffset);
-			}
-			else
-			{
-				newX = _nodePosition[_xIndex] - (_xOffset - pointerX);
-			}
-	
-			if(event.button.y > _yOffset)
-			{
-				newY = _nodePosition[_yIndex] + (pointerY - _yOffset);
-			}
-			else
-			{
-				newY = _nodePosition[_yIndex] - (_yOffset - pointerY);
-			}
-
-			_nodeLayout.moveNodeTo(this, newX, newY);
-		}
-
-		return(true);
-		
-	} // onMotionNotify()
-	
-
 	bool onButtonPress(Event event, Widget widget)
 	{
 		double xMouse, yMouse;
@@ -282,6 +245,51 @@ class MoveableNode : DrawingArea
 	} // onButtonPress()
 
 
+	bool onMotionNotify(Event event, Widget widget)
+	{
+		double newX, newY, pointerX, pointerY;
+		GdkEventMotion* motionEvent = event.motion();
+
+		if((motionEvent.state == ModifierType.BUTTON1_MASK) && _dragOn == true) // ModifierType.BUTTON1_MASK
+		{
+			pointerX = event.button.x;
+			pointerY = event.button.y;
+
+			if(pointerX > _xOffset)
+			{
+				newX = _nodePosition[_xIndex] + (pointerX - _xOffset);
+			}
+			else
+			{
+				newX = _nodePosition[_xIndex] - (_xOffset - pointerX);
+			}
+	
+			if(event.button.y > _yOffset)
+			{
+				newY = _nodePosition[_yIndex] + (pointerY - _yOffset);
+			}
+			else
+			{
+				newY = _nodePosition[_yIndex] - (_yOffset - pointerY);
+			}
+
+			_nodeLayout.moveNodeTo(this, newX, newY);
+		}
+
+		return(true);
+		
+	} // onMotionNotify()
+	
+
+	bool onButtonRelease(Event e, Widget w)
+	{
+		_dragOn = false;
+		
+		return(true);
+		
+	} // onButtonRelease()
+	
+
 	void dragAreaActive(double xMouse, double yMouse)
 	{
 		// see if the mouse is in the drag area 
@@ -304,15 +312,6 @@ class MoveableNode : DrawingArea
 		writeln("outHotspot: xMouse = ", xMouse, " yMouse = ", yMouse);
 		
 	} // dragAreaActive()
-	
-
-	bool onButtonRelease(Event e, Widget w)
-	{
-		_dragOn = false;
-		
-		return(true);
-		
-	} // onButtonRelease()
 	
 } // class MoveableNode
 

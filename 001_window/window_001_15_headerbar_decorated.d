@@ -1,6 +1,6 @@
 // This source code is in the public domain.
 
-// HeaderBar demo - simple
+// HeaderBar demo - decorated
 
 import std.stdio;
 
@@ -25,7 +25,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "<Insert Title>";
+	string title = "Decorated HeaderBar";
 	MyHeaderBar  myHeaderBar;
 	AppBox appBox;
 	

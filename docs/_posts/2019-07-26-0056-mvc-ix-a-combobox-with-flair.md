@@ -105,7 +105,7 @@ author: Ron Tarrant
 
 And here's a link to [the companion files]( https://github.com/rontarrant/gtkDcoding/blob/master/downloads/weather_combobox.zip).
 
-Everything presented today is something we’ve looked at before. What’s different, is how it’s all put together to make the *Weather ComboBox* example. So, we'll skim through to see those changes before checking out how this whole thing is put together.
+Everything presented today is something we’ve looked at before. What’s different is how it’s all put together to make the *Weather ComboBox* example. So, we'll skim through to see those changes before checking out how this whole thing is put together.
 
 First, there's this import:
 
@@ -128,7 +128,7 @@ But, that's nothing unusual, so moving right along...
 
 ## The WeatherListStore Class
 
-Right at the top of the instantiation section we’ve got:
+Right at the top of the preamble (which could also be referred to as the instantiation section, the list of class-level properties) we’ve got:
 
 ```d
 S_DetectedOS s_detectedOS;

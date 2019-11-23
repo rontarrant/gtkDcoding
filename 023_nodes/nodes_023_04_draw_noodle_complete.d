@@ -9,10 +9,13 @@ import gtk.MainWindow;
 import gtk.Main;
 import gtk.Box;
 import gtk.Widget;
-import gdk.Event;
-import cairo.Context;
 import gtk.DrawingArea;
+
+import gdk.Event;
+
 import glib.Timeout;
+
+import cairo.Context;
 
 void main(string[] args)
 {
@@ -79,23 +82,45 @@ class MyDrawingArea : DrawingArea
 	Timeout _timeout;
 	int fps = 1000 / 24; // 24 frames per second
 	bool dragAndDraw = false;
-	double xStart = 25, yStart = 128;
-	double controlPointX1 = 153, controlPointY1 = 230,
-		 	 controlPointX2 = 25, controlPointY2 = 25,
-			 xEnd, yEnd;
+	double xStart, yStart;
+	double controlPointX1, controlPointY1,
+		   controlPointX2, controlPointY2,
+		   xEnd, yEnd;
 
 	this()
 	{
 		addOnDraw(&onDraw);
-		addOnMotionNotify(&onMotion);
 		addOnButtonPress(&onButtonPress);
+		addOnMotionNotify(&onMotion);
 		addOnButtonRelease(&onButtonRelease);
 
 	} // this()
 
 
+	public bool onButtonPress(Event event, Widget widget)
+	{
+		bool returnValue = false;
+
+		// tell Cairo it can start drawing
+		dragAndDraw = true;
+
+		if(event.type == EventType.BUTTON_PRESS)
+		{
+			xStart = event.button.x;
+			yStart = event.button.y;
+			
+			returnValue = true;
+		}
+
+		return(returnValue);
+		
+	} // onButtonPress()
+
+
 	public bool onMotion(Event event, Widget widget)
 	{
+		bool returnValue = false;
+		
 		// make sure we're not reacting to the wrong event
 		if(event.type == EventType.MOTION_NOTIFY)
 		{
@@ -109,49 +134,29 @@ class MyDrawingArea : DrawingArea
 			controlPointY1 = yStart;
 			controlPointX2 = xStart;
 			controlPointY2 = yEnd;
-		}
-
-		return(true);
-		
-	} // onMotion()
-
-	
-	public bool onButtonPress(Event event, Widget widget)
-	{
-		bool returnValue = false;
-
-		// tell Cairo it can start drawing
-		dragAndDraw = true;
-
-		if(event.type == EventType.BUTTON_PRESS)
-		{
-			GdkEventButton* mouseEvent = event.button;
-			xStart = event.button.x;
-			yStart = event.button.y;
 			
 			returnValue = true;
 		}
 
 		return(returnValue);
 		
-	} // onButtonPress()
+	} // onMotion()
 
-
+	
 	public bool onButtonRelease(Event event, Widget widget)
 	{
-		bool value = false;
+		bool returnValue = false;
 		
 		if(event.type == EventType.BUTTON_RELEASE)
 		{
-			GdkEventButton* buttonEvent = event.button;
 			xEnd = event.button.x;
 			yEnd = event.button.y;
-			value = true;
+			returnValue = true;
 		}
 
 		dragAndDraw = false;
 
-		return(value);
+		return(returnValue);
 		
 	} // onButtonRelease()
 

@@ -37,7 +37,6 @@ class TestRigWindow : MainWindow
 	Device pointer;
 	Screen screen;
 	int x, y;
-	GdkRectangle rectangle;
 	
 	this(string title)
 	{
@@ -46,12 +45,11 @@ class TestRigWindow : MainWindow
 		myDisplay = Display.getDefault();
 		seat = myDisplay.getDefaultSeat();
 		pointer = seat.getPointer();
-		mouseReport();
 		
 		addOnDestroy(&quitApp);
 		addOnEnterNotify(&onEnterNotify);
 		
-	} // this() CONSTRUCTOR
+	} // this()
 	
 	
 	bool onEnterNotify(Event event, Widget widget)
@@ -70,20 +68,6 @@ class TestRigWindow : MainWindow
 		
 	} // onEnterNotify()
 	
-// getLastEventWindow() - which window was the mouse pointer in?
-// getPosition() - the position of the mouse pointer
-// getWindowAtPosition() - gets the Window (gdk?) under the pointer
-		
-	void mouseReport()
-	{
-		string pointerName;
-		
-		pointerName = pointer.getName();
-		
-		writeln("pointerName: ", pointerName);
-		
-	} // mouseReport()
-
 
 	void quitApp(Widget widget)
 	{

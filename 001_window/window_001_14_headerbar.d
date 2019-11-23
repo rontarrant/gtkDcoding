@@ -25,7 +25,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "<Insert Title>";
+	string title = "HeaderBar Basics";
 	HeaderBar  headerBar;
 	AppBox appBox;
 	
@@ -41,6 +41,7 @@ class TestRigWindow : MainWindow
 		add(appBox);
 		
 		showAll();
+		writeln("Because there is no Close button in this window: Ctrl-C to quit.");
 
 	} // this()
 	
