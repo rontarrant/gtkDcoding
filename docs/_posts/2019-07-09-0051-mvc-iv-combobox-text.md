@@ -209,7 +209,7 @@ After the instantiation of the super-class, we have three stages to this constru
 
 #### Stage 1: CellRendererText
 
-In the introduction to this series, I mentioned that one or more `CellRenderer`s are packed into a `TreeViewColumn` so it knows how to display its contents. With a `ComboBox`, we don’t have a `TreeViewColumn`. Instead, as I also said earlier, the `ComboBox` is an implementation of the `CellLayout` interface. This interface is also implemented by the `TreeViewColumn` which means the `ComboBox` acts as its own `TreeViewColumn` of a sort. All this means is that you can treat the `ComboBox` as if it has a `TreeViewColumn`... more or less. Later on, we’ll see how flexible this can be.
+In the introduction to this series, I mentioned that one or more `CellRenderer`s are packed into a `TreeViewColumn` so it knows how to display its contents. With a `ComboBox`, we don’t have a `TreeViewColumn`. Instead, as I also said earlier, the `ComboBox` is an implementation of the `CellLayout` interface. This interface is also implemented by the `TreeViewColumn` which means the `ComboBox` acts as its own `TreeViewColumn` of a sort. From a practical point of view, all this means is that you can treat the `ComboBox` as if it has a `TreeViewColumn`... sort of. Later on, we’ll dig into this a bit and see how flexible this can be.
 
 For now, though, this is what happens in the first stage of the constructor:
 
