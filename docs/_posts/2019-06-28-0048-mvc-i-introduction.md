@@ -104,7 +104,7 @@ This object can be used to access column properties such as:
 	- `CellRendererText`, and
 	- `CellRendererToggle`.
 
-As you may guess from this list, we have a lot of choice as to what can be be crammed into a column, either as primary data, companion data, or even functionality.
+As you may guess from this list, we have a lot of choice as to what can be crammed into a column, either as primary data, companion data, or even functionality.
 
 Something to note is that numbers are displayed as text, but despite that, because the **View** and **Model** are separate entities, numbers are stored as integers, floating point, or what-have-you. It's only when they're displayed in the **View** that they're treated as strings.
 
