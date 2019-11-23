@@ -213,7 +213,7 @@ Pixbuf.getType()
 
 And that does the job. Include that right in the array we pass to the super-class constructor and it’s accepted as just another `GType`.
 
-*Note: Because `getType()` is a function call, it can’t be read at compile time, so we can’t predefine the array like we can if the columns all hold standard `GTypes`. The entire array has to be written out as it’s passed to the super-class constructor:*
+*Note: Because `getType()` is a function call, it can’t be read at compile time, so we can’t predefine the array like we can if the columns all hold standard `GTypes`. The array has to be defined in the constructor at the very earliest, or written out as it’s passed to the super-class constructor as can be seen here:*
 
 ```d
 super([GType.STRING, GType.INT, Pixbuf.getType(), GType.STRING]);
