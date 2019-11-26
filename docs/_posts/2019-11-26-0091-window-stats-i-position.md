@@ -1,5 +1,5 @@
 ---
-title: "0090: Where’s My Window?"
+title: "0091: Where’s My Window?"
 layout: post
 topic: window
 description: This GTK Tutorial covers collecting position information about an open window.
@@ -7,7 +7,7 @@ author: Ron Tarrant
 
 ---
 
-# 0090: Where’s My Window?
+# 0091: Where’s My Window?
 
 This post, although not specifically requested by a reader, was inspired by a reader request...
 
