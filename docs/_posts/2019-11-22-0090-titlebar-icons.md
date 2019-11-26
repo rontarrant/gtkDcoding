@@ -441,9 +441,7 @@ If you have any specific questions about how some aspect of *GTK* or its depende
 	<div style="float: left;">
 		<a href="/2019/11/15/0088-nodes-vii-its-alive.html">Previous: Nodes VII - It's Alive!</a>
 	</div>
-<!--
 	<div style="float: right;">
-		<a href="/2019/11/22/0090-window-stats-i-position.html">Next: Window Stats I - Where's My Window?</a>
+		<a href="/2019/11/26/0091-window-stats-i-position.html">Next: Window Stats I - Where's My Window?</a>
 	</div>
--->
 </div>
