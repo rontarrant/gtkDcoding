@@ -9,6 +9,8 @@ author: Ron Tarrant
 
 # 0090: Where’s My Window?
 
+This post, although not specifically requested by a reader, was inspired by a reader request...
+
 Two things I appreciate in an application are when it remembers (from one session to the next):
 
 1. the size of its window, and
