@@ -191,9 +191,7 @@ Next time, we’ll carry on in this vein by exploring how to record the `Window`
 	<div style="float: left;">
 		<a href="/2019/11/22/0090-titlebar-icons.html">Previous: Windows - Titlebar Icons</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/12/03/0092-window-stats-ii-size.html">Next: Window Stats II - How Big is My Window?</a>
 	</div>
--->
 </div>
