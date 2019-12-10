@@ -196,9 +196,7 @@ Next time, we’ll look at an alternate way to gather this data. Until then, may
 	<div style="float: left;">
 		<a href="/2019/11/26/0091-window-stats-i-position.html">Previous: Window Stats I - Where's My Window?</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/12/10/0093-window-stats-iii-alt.html">Next: Window Stats III - Alternative Stats Gathering</a>
 	</div>
--->
 </div>
