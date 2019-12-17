@@ -235,9 +235,7 @@ Until then...
 	<div style="float: left;">
 		<a href="/2019/12/03/0092-window-stats-ii-size.html">Previous: Window Stats - How Big is My Window?</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/12/17/0094-hardware-i-monitors.html">Next: Hardware I - Monitors</a>
 	</div>
--->
 </div>
