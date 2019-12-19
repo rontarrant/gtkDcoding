@@ -143,7 +143,7 @@ And that should be that. You should be ready to dance the D-dance.
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/001_window/test_rig_000.png" alt="Current example output">	<!-- img# -->
+			<img id="img0" src="/images/screenshots/001_window/window_001_01.png" alt="Current example output">	<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																								<!-- modal# -->
@@ -185,7 +185,7 @@ And that should be that. You should be ready to dance the D-dance.
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/001_window/test_rig_000_term.png" alt="Current example terminal output"> <!-- img#, filename -->
+			<img id="img1" src="/images/screenshots/001_window/window_001_01_term.png" alt="Current example terminal output"> <!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																												<!-- modal# -->
@@ -227,7 +227,7 @@ And that should be that. You should be ready to dance the D-dance.
 	</div>
 
 	<div class="frame-footer">																																<!-- filename (below)-->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/test_rig_000_base.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/window_001_01_base.d" target="_blank">here</a>.
 	</div>
 </div>
 
