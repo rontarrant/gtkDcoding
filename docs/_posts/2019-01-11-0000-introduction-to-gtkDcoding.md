@@ -274,7 +274,7 @@ Save this as `test_rig_imperative.d` (or whatever you want, really) and compile 
 dmd –de –w –m64 –Lgtkd.lib test_rig_imperative.d
 ```
 
-After correcting typos so the compiler finishes, type the name without an extension (or you can include the .exe extension if you’re on Windows) to run it. If you're on Linux or any other POSIX-compliant OS, don't forget to prepend './' or type out the full path.
+After correcting typos so the compiler finishes, type the name without an extension (or you can include the .exe extension if you’re on Windows) to run it. If you're on Linux or any other POSIX-compliant OS, don't forget to prepend `./` to the file name (`./test_rig_imperative`) or type out the full path.
 
 And that’s it for now. Next time, we’ll break down the test rig code so you know what’s going on in there. Then I’ll show you the same functionality in an OOP version of the test rig.
 
