@@ -191,9 +191,7 @@ But we’re not stopping here. Next time, we’ll go after a full report on the 
 	<div style="float: left;">
 		<a href="/2019/12/10/0093-window-stats-iii-alt.html">Previous: Window Stats - Alternate Window Stats</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/12/24/0095-hardware-ii-full-monitor-report.html">Next: Hardware II - Full Monitor Report</a>
 	</div>
--->
 </div>
