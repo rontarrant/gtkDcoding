@@ -317,9 +317,7 @@ See you then.
 	<div style="float: left;">
 		<a href="/2019/12/17/0094-hardware-i-monitors.html">Previous: Hardware I - Monitors</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2019/12/31/0096-hardware-iii-keyboard-pointer.html">Next: Hardware IIII - Keyboard & Pointer</a>
 	</div>
--->
 </div>
