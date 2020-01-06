@@ -63,13 +63,13 @@ class MyButton : Button
 	
 	this()
 	{
-		string message = "Next time, don't bring the Wookie.";                    // *** NEW ***
+		string message = "Next time, don't bring the Wookie."; // *** NEW ***
 		
 		super(labelText);
 		
 		// The next two lines do the same thing, but the second uses shorthand in the void() definition.
 		//addOnClicked(delegate void(Button b) { buttonAction(message); });
-		addOnClicked(delegate void(_) { buttonAction(message); });                // *** NEW ***
+		addOnClicked(delegate void(_) { buttonAction(message); }); // *** NEW ***
 		
 	} // this()
 	

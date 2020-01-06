@@ -1,6 +1,6 @@
 // This source code is in the public domain.
 
-// GTK Switch Example
+// GTK Button Interaction - changing one button via the actions of another - Color
 
 import std.stdio;
 
@@ -30,7 +30,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Switch Example";
+	string title = "Button Interaction - Color";
 	string byeBye = "Bye-bye";
 	AppBox appBox;
 	
@@ -88,16 +88,17 @@ class AppBox : Box
 
 class PingPongButton : Button
 {
-	CSS css;
 	int labelNumber = 0;
 	string labelText;
-	string[] variableNames = [" Ho", " Hum", " Hey"];
-	string[] labelNames = ["pingpongred", "pingpongblue"];
+	string[] nameSuffixes = [" Tra", " La", " Li"];
 	PingPongButton partnerButton;
+
+	string[] labelNames = ["pingpongred", "pingpongblue"];
+	CSS css;
 
 	this(string buttonLabel, int color)
 	{
-		super(buttonLabel ~ variableNames[0]);
+		super(buttonLabel ~ nameSuffixes[0]);
 		labelText = buttonLabel;
 		
 		addOnButtonPress(&onButtonPress);
@@ -113,12 +114,12 @@ class PingPongButton : Button
 		
 		labelNumber++;
 		
-		if(labelNumber is 3)
+		if(labelNumber == nameSuffixes.length)
 		{
 			labelNumber = 0;
 		}
 		
-		newLabel = labelText ~ variableNames[labelNumber];
+		newLabel = partnerButton.labelText ~ nameSuffixes[labelNumber];
 		partnerButton.setLabel(newLabel);
 		
 		if(partnerButton.getName() == "pingpongred")

@@ -1,3 +1,7 @@
+// This source code is in the public domain.
+
+// An example of a Singleton written in the D language
+
 import std.stdio;
 
 void main()
@@ -15,9 +19,12 @@ void main()
 			
 	writeln("All instantiation is now done and we have:");
 	
-	writeln("1st singleton: ", singleton, " @ ", &singleton);
-	writeln("2nd singleton: ", singleton2, " @ ", &singleton2);
-	writeln("3rd singleton: ", singleton3, " @ ", &singleton3);
+	write("The 1st singleton pointer is stored at: ", &singleton, " and points to ");
+	singleton.getInstance();
+	write("The 2nd singleton pointer is stored at: ", &singleton2, " and points to ");
+	singleton.getInstance();
+	write("The 3rd singleton pointer is stored at: ", &singleton3, " and points to ");
+	singleton.getInstance();
 	
 } // main()
 
@@ -26,17 +33,13 @@ class DSingleton
 {
 	private:
 	// Cache instantiation flag in thread-local bool
-	// Thread local
 	static bool instantiated_;
 
 	// Thread global
 	__gshared DSingleton instance_;
 
-	this()
-	{
-		
-	} // this()
-
+	this() {}
+	
 	public:
 	
 	static DSingleton get()
@@ -63,6 +66,14 @@ class DSingleton
 		
 		return(instance_);
 		
-	} // DSingleton()
+	} // get()
 
+
+	DSingleton* getInstance()
+	{
+		writeln("the Singleton instance at ", &instance_);
+		return(&instance_);
+		
+	} // getInstance()
+	
 } // class DSingleton

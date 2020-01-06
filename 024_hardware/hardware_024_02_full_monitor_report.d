@@ -34,10 +34,7 @@ class TestRigWindow : MainWindow
 {
 	string title = "Monitor Report";
 	Display myDisplay;
-	int numberOfMonitors;
 	Screen screen;
-	MonitorG monitorG;
-	GdkRectangle rectangle;
 	ReportButton reportButton;
 
 	this()
@@ -62,7 +59,9 @@ class TestRigWindow : MainWindow
 
 	void monitorReport()
 	{
-		numberOfMonitors = myDisplay.getNMonitors();
+		MonitorG monitorG;
+		GdkRectangle rectangle;
+		int numberOfMonitors = myDisplay.getNMonitors();
 
 		writeln("Your set-up has ", numberOfMonitors, " monitors...\n\n");
 

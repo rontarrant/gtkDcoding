@@ -1,9 +1,8 @@
 // This source code is in the public domain.
 
-// GTK Button Interaction - changing one button via the actions of another - Text
+// GTK Button Interaction - changing one button via the actions of another - Font
 
 import std.stdio;
-import std.array;
 
 import gtk.MainWindow;
 import gtk.Main;
@@ -31,7 +30,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "Button Interaction - Text";
+	string title = "Button Interaction - Font";
 	string byeBye = "Bye-bye";
 	AppBox appBox;
 	
@@ -63,17 +62,19 @@ class TestRigWindow : MainWindow
 class AppBox : Box
 {
 	string ralph = "Ralph", george = "George";
+	int[string] colorNumbers;
 	PingPongButton pingButton, pongButton;
 	int globalPadding = 10, localPadding = 5;
 		
 	this()
 	{
 		super(Orientation.HORIZONTAL, globalPadding);
+		colorNumbers = ["red" : 0, "blue" : 1];
 		
-		pingButton = new PingPongButton(ralph);
+		pingButton = new PingPongButton(ralph, colorNumbers["red"]);
 		packStart(pingButton, false, false, localPadding);
 
-		pongButton = new PingPongButton(george);
+		pongButton = new PingPongButton(george, colorNumbers["blue"]);
 		packStart(pongButton, false, false, localPadding);
 
 		// partner up the buttons
@@ -89,15 +90,20 @@ class PingPongButton : Button
 {
 	int labelNumber = 0;
 	string labelText;
-	string[] nameSuffixes = [" Tra", " La", " Li"];
+	string[] variableNames = [" Ho", " Hum", " Hey"];
 	PingPongButton partnerButton;
 
-	this(string buttonLabel)
+	string[] labelNames = ["pingpongred", "pingpongblue"];
+	CSS css;
+
+	this(string buttonLabel, int color)
 	{
-		super(buttonLabel ~ nameSuffixes[0]);
+		super(buttonLabel ~ variableNames[0]);
 		labelText = buttonLabel;
 		
 		addOnButtonPress(&onButtonPress);
+		setName(labelNames[color]);
+		css = new CSS(getStyleContext());
 		
 	} // this()
 
@@ -108,13 +114,24 @@ class PingPongButton : Button
 		
 		labelNumber++;
 		
-		if(labelNumber == nameSuffixes.length)
+		if(labelNumber == variableNames.length)
 		{
 			labelNumber = 0;
 		}
 		
-		newLabel = partnerButton.labelText ~ nameSuffixes[labelNumber];
+		newLabel = labelText ~ variableNames[labelNumber];
 		partnerButton.setLabel(newLabel);
+		
+		if(partnerButton.getName() == "pingpongred")
+		{
+			writeln("CSS name is red, switching to blue");
+			partnerButton.setName("pingpongblue");
+		}
+		else
+		{
+			writeln("CSS name is blue, switching to red");
+			partnerButton.setName("pingpongred");
+		}
 		
 		writeln("Partner button label has changed to: ", newLabel);
 		
@@ -125,9 +142,34 @@ class PingPongButton : Button
 	
 	void addPartner(PingPongButton newPartnerButton)
 	{
-		writeln("New partner button for ", getLabel(), ": ", newPartnerButton.getLabel());
+		writeln("Partner button for ", getLabel(), ": ", newPartnerButton.getLabel());
 		partnerButton = newPartnerButton;
 		
 	} // addPartner()
 	
 } // class PingPongButton
+
+
+class CSS // GTK4 compliant
+{
+	CssProvider provider;
+
+	enum LABEL_CSS = ".text-button#pingpongred
+						{
+							font-family: Times New Roman;
+							border-radius: 20px;
+						}
+						.text-button#pingpongblue
+						{
+							font-family: Arial;
+						}";
+
+	this(StyleContext styleContext)
+	{
+		provider = new CssProvider();
+		provider.loadFromData(LABEL_CSS);
+		styleContext.addProvider(provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+		
+	} // this()	
+	
+} // class CSS
