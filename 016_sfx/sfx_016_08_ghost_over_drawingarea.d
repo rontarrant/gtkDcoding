@@ -151,28 +151,6 @@ class MyButton : Button
 
 	} // this()
 
-/*
-	bool onButtonPress(Event e, Widget w)
-	{
-		writeln("Button pressed is: ", getLabel());
-
-		if(getLabel() == labelText[0])
-		{
-			setLabel(labelText[1]);
-			setOpacity(1.0);
-			writeln("label: ", getLabel(), ", opacity = ", getOpacity(), ", turning it to full.");
-		}
-		else
-		{
-			setLabel(labelText[0]);
-			setOpacity(0.5);
-			writeln("label: ", getLabel(), ", opacity = ", getOpacity(), ", turning it to half.");
-		}
-		
-		return(true);
-		
-	} // onButtonPress()
-*/
 	
 	bool onButtonPress(Event e, Widget w)
 	{
@@ -194,4 +172,25 @@ class MyButton : Button
 		
 	} // onButtonPress()
 
+/*
+	bool onButtonPress(Event e, Widget w)
+	{
+		if(getLabel() == labelText[0])
+		{
+			setLabel(labelText[1]);
+			setOpacity(1.0);
+			writeln("label: ", getLabel(), ", opacity = ", getOpacity(), ", turning it to full.");
+		}
+		else
+		{
+			setLabel(labelText[0]);
+			setOpacity(0.5);
+			writeln("label: ", getLabel(), ", opacity = ", getOpacity(), ", turning it to half.");
+		}
+		writeln("Button pressed is: ", getLabel());
+		
+		return(true);
+		
+	} // onButtonPress()
+*/
 } // class MyButton
