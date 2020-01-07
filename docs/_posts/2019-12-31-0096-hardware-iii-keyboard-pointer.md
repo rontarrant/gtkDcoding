@@ -327,9 +327,7 @@ So, happy New Year, happy coding and see you next week.
 	<div style="float: left;">
 		<a href="/2019/12/24/0095-hardware-ii-full-monitor-report.html">Previous: Hardware II - Full Monitor Report</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2020/01/07/0097-headerbar.html">Next: HeaderBar</a>
 	</div>
--->
 </div>
