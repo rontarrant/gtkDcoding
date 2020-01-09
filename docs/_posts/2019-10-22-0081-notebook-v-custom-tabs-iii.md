@@ -204,7 +204,7 @@ We did look at the third line before, but let me refresh your memory... This con
 
 From there we have:
 
-- `radians`: we could have grabbed this from the standard math library, but it’s just as simple to do it this way; it comes out to a little less than two one-hundredths which is darned close to the true measurement of one radian… when compared to one degree of arc around a circle (6.28 radians = 360 degrees),
+- `radians`: we could have grabbed this from the standard math library, but it’s just as simple to do it this way; it comes out to a little less than two one-hundredths which is very close to the true measurement of one radian… when compared to one degree of arc around a circle (6.28 radians = 360 degrees),
 - then we set up the start/end point coordinates (`northWestArc` and `northEastArc`) for drawing the rounded shoulders (keep in mind, as we talked about in the *Cairo* series, drawing in *Cairo* always goes clockwise), and
 - `cornerRadius`: as stated above, this is the distance starting from where the blue and red lines intersect and going to the outer edge of the arc.
 

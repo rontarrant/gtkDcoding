@@ -321,7 +321,7 @@ bool onDraw(Scoped!Context context, Widget w)
 
 The action starts with the `if()` statement when we measure out a length of arc to draw, then add it to the length of arc we already have. Then we set up the line width, set up the `arc()` function and do the stroke.
 
-Pretty simple. And, of course, you could do any other drawing in there as well. And this not being the 80’s or 90’s, you’d have to pack in a very large crap-load of drawing commands before you slow down the refresh rate.
+Pretty simple. And, of course, you could do any other drawing in there as well. And this not being the 80’s or 90’s, you’d have to pack in a very long list of drawing commands before you slow down the refresh rate.
 
 ## Flipbook Animation
 
@@ -457,7 +457,7 @@ this()
 } // this()
 ```
 
-The `for()` loop loads all the frames and inside that, we build the file names through string concatenation (which is less trouble than copying an pasting a whole crap-load of file names into an array).
+The `for()` loop loads all the frames and inside that, we build the file names through string concatenation (which is less trouble than copying and pasting a whole big long list of file names into an array).
 
 Once the files are all loaded snug into their `Pixbuf`s, we hook up the signal and move on.
 
