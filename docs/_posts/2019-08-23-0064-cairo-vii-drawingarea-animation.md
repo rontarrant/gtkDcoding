@@ -420,7 +420,7 @@ Pretty simple. And, of course, you could do any other drawing in there as well. 
 		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_018_26_flipbook_animation.d" target="_blank">here</a>.
 	</div>
 </div>
-<!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
+<!-- end of snippet for third (3rd) occurrence of application and terminal screen shots on a single page -->
 
 And now for the *pièce de resistance*, loading a bunch of frames and flipping through them at 12 fps... which simulates shooting on twos. That’s animator parlance meaning that each image is shot twice and played back at 24 fps. Anyway, here’s the initialization section:
 
@@ -439,7 +439,7 @@ The constructor plays a bigger part in things this time:
 ```d
 this()
 {
-	for(int i = 0; i < numberOfFrames; i++)
+	foreach(int i; 0..numberOfFrames)
 	{
 		if(i < 10)
 		{
@@ -457,7 +457,7 @@ this()
 } // this()
 ```
 
-The `for()` loop loads all the frames and inside that, we build the file names through string concatenation (which is less trouble than copying and pasting a whole big long list of file names into an array).
+The `foreach()` loop loads all the frames and inside that, we build the file names through string concatenation (which is less trouble than copying and pasting a whole big long list of file names into an array).
 
 Once the files are all loaded snug into their `Pixbuf`s, we hook up the signal and move on.
 

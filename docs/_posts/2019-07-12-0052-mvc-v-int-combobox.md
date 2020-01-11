@@ -135,7 +135,7 @@ class DayListStore : ListStore
 		
 		super(columnTypes);
 		
-		for(int i; i < days.length; i++)
+		foreach(ulong i; 0..days.length)
 		{
 			day = days[i];
 			number = lettersInDays[i];
@@ -156,7 +156,7 @@ We have three arrays in the initialization section:
 - `dayNumbers` – the integer data, and
 - `columnTypes` – an array of `GType` data types.
 
-The constructor is pretty much the same as before except that in the `for()` loop we extract a bit of data from each of the two data arrays and make the call to `setValue()` twice, once for each column.
+The constructor is pretty much the same as before except that in the `foreach()` loop we extract a bit of data from each of the two data arrays and make the call to `setValue()` twice, once for each column.
 
 ### The DayComboBox
 

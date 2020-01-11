@@ -155,7 +155,7 @@ class SignListStore : ListStore
 	{
 		super([GType.STRING]);
 		
-		for(int i; i < items.length; i++)
+		foreach(ulong i; 0..items.length)
 		{
 			string message = items[i];
 			treeIter = createIter();

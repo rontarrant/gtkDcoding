@@ -204,7 +204,7 @@ Lastly, we make a call to the `assignFonts()` function which we’ll talk about 
 We build the store with this code where we grab a text description of the weather, a font name, and a size:
 
 ```d
-for(int i; i < _textItems.length; i++)
+foreach(ulong i; 0.._textItems.length)
 {
 	textItem = _textItems[i];
 	fontName = _fontNames[i];

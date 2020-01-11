@@ -184,7 +184,7 @@ this()
 
 	super([GType.STRING, GType.INT, Pixbuf.getType(), GType.STRING]);
 		
-	for(int i; i < items.length; i++)
+	foreach(ulong i; 0..items.length)
 	{
 		item = items[i];
 		number = signNumbers[i];
@@ -219,10 +219,10 @@ And that does the job. Include that right in the array we pass to the super-clas
 super([GType.STRING, GType.INT, Pixbuf.getType(), GType.STRING]);
 ```
 
-And the `for()` loop that calls `setValue()` can now stuff everything into the `ListStore`:
+And the `foreach()` loop that calls `setValue()` can now stuff everything into the `ListStore`:
 
 ```d
-for(int i; i < items.length; i++)
+foreach(ulong i; 0..items.length)
 {
 	item = items[i];
 	number = signNumbers[i];
@@ -239,7 +239,7 @@ for(int i; i < items.length; i++)
 
 Two things of note here:
 
-1. I mentioned earlier that we'd see how the `Column` enum values are used and here's the first of those uses, to identify which column is being filled for each pass through the `for()` loop, and
+1. I mentioned earlier that we'd see how the `Column` enum values are used and here's the first of those uses, to identify which column is being filled for each pass through the `foreach()` loop, and
 2. the call to `setValue()` that handles the `Pixbuf` column makes a call to the `Pixbuf` constructor, passing along the file name grabbed from the `imageName` array.
 
 *Note: When your `ListStore` is to contain only string data, you can use `set()` instead of `setValue()` and thereby plug data into all the columns of a single row in one statement, but when using non-string data types, doing a `setValue()` on columns one at a time is your only option.*

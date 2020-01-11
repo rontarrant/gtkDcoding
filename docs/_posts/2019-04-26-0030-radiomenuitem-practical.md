@@ -248,7 +248,7 @@ Earlier I mentioned that the naming of `RadioMenuItem`s is deferred. Well, this 
 ```d
 void setFeatureDefault()
 {
-	for(int i = 0; i < featureNames.length; i++)
+	foreach(ulong i; 0..featureNames.length)
 	{
 		string featureName = featureNames[i];
 		
@@ -266,6 +266,12 @@ void setFeatureDefault()
 ```
 
 This is the function called from `FileMenu`’s constructor, the one that—as the name implies—sorts out which `RadioMenuItem` will be turned on by default.
+
+Note: I just wanna point out the *D*-ness of the `foreach()` construct. A number of languages use `foreach()` for looping, but *D*'s syntax—if you've never seen it before—is worth a pause to take it in. It breaks down as:
+
+`foreach(`<type> <increment>`;` <start-of-range>`..`<end-of-range>`)`
+
+If you were to write the above loop with `for()`, your incrementing variable would be an integer. But with `foreach()`, any time you increment along the length of an array, `i` has to be a `ulong`.
 
 ### Chunk #4
 

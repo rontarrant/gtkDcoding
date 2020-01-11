@@ -589,8 +589,6 @@ The callback is:
 ```d
 bool onDraw(Scoped!Context context, Widget w)
 {
-	int i;
-	
 	// middle gray background
 	context.setSourceRgba(0.75, 0.75, 0.75, 1.0);
 	context.paint();
@@ -603,7 +601,7 @@ bool onDraw(Scoped!Context context, Widget w)
 	context.stroke();
 	
 	// 10 yellow rectangles with graduating transparency
-	for(i = 0; i < 11; i++)
+	foreach(int i; 0..11)
 	{
 		context.setSourceRgba(0.965, 1.0, 0.0, (i * 0.1));
 		context.rectangle((i * 56), 150, 32, 32);

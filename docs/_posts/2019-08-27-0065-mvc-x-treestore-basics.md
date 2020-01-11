@@ -531,14 +531,14 @@ Everything else is the same with just that simple substitution. `append()` becom
 </div>
 <!-- end of snippet for fourth (4th) occurrence of application and terminal screen shots on a single page -->
 
-One last example today and it uses `createIter()` as we just did, but takes what we did with the multiple top-level rows example and shoves it into a `for()` loop. Relevant code:
+One last example today and it uses `createIter()` as we just did, but takes what we did with the multiple top-level rows example and shoves it into a `foreach()` loop. Relevant code:
 
 ```d
 this()
 {
 	super([GType.STRING, GType.STRING]);
 
-	for(int i = 0; i < parentHeaders.length; i++)
+	foreach(ulong i; 0..parentHeaders.length)
 	{
 		string parentTitle = parentHeaders[i];
 		string[] childFamily = children[i];
@@ -546,7 +546,7 @@ this()
 		parentIter = createIter(); // append an empty row to the top level and get an iter back
 		setValue(parentIter, 0, parentTitle);
 
-		for(int j = 0; j < childFamily.length; j++)
+		foreach(ulong j; 0..childFamily.length)
 		{
 			childIter = createIter(parentIter); // passing in parentIter makes this a child row
 
@@ -559,11 +559,11 @@ this()
 } // this()
 ```
 
-No real surprises here. In the outside `for()` loop...
+No real surprises here. In the outside `foreach()` loop...
 
 - the parent iter is created as an empty row,
 - its label is populated with `setValue()`,
-- then the inner `for()` loop:
+- then the inner `foreach()` loop:
 	- creates the `childIter` by passing in `parentIter`,
 	- picks the appropriate string from the `children` array, and
 	- does a `setValue()` to fill in the child rows.

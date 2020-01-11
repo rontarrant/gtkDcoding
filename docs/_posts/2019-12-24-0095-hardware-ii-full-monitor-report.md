@@ -188,7 +188,7 @@ void monitorReport()
 
 	if(numberOfMonitors > 1)
 	{
-		for(int i; i < numberOfMonitors; i++)
+		foreach(int i; 0..numberOfMonitors)
 		{
 			monitorG = myDisplay.getMonitor(i);
 			monitorG.getGeometry(rectangle);
@@ -285,7 +285,7 @@ void onClicked(Button b)
 
 	int numberOfMonitors = _myDisplay.getNMonitors();
 
-	for(int i; i < numberOfMonitors; i++)
+	foreach(int i; 0..numberOfMonitors)
 	{
 		_monitorG = _myDisplay.getMonitor(i);
 
