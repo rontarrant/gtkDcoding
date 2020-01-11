@@ -82,8 +82,6 @@ class MyDrawingArea : DrawingArea
 	
 	bool onDraw(Scoped!Context context, Widget w)
 	{
-		int i;
-		
 		// middle gray background
 		context.setSourceRgba(0.75, 0.75, 0.75, 1.0); // middle gray
 		context.paint();
@@ -96,7 +94,7 @@ class MyDrawingArea : DrawingArea
 		context.stroke();
 		
 		// 10 yellow rectangles with graduating transparency
-		for(i = 0; i < 11; i++)
+		foreach(int i; 0..11)
 		{
 			context.setSourceRgba(0.965, 1.0, 0.0, (i * 0.1));
 			context.rectangle((i * 56), 150, 32, 32);

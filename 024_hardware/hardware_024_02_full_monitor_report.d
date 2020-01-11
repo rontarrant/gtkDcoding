@@ -67,7 +67,7 @@ class TestRigWindow : MainWindow
 
 		if(numberOfMonitors > 1)
 		{
-			for(int i; i < numberOfMonitors; i++)
+			foreach(int i; 0..numberOfMonitors)
 			{
 				monitorG = myDisplay.getMonitor(i);
 				monitorG.getGeometry(rectangle);
@@ -140,7 +140,7 @@ class ReportButton : Button
 
 		int numberOfMonitors = _myDisplay.getNMonitors();
 
-		for(int i; i < numberOfMonitors; i++)
+		foreach(int i; 0..numberOfMonitors)
 		{
 			_monitorG = _myDisplay.getMonitor(i);
 

@@ -181,7 +181,7 @@ class WeatherListStore : ListStore
 		
 		assignFonts();
 		
-		for(int i; i < _textItems.length; i++)
+		foreach(ulong i; 0.._textItems.length)
 		{
 			textItem = _textItems[i];
 			fontName = _fontNames[i];

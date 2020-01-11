@@ -170,7 +170,7 @@ class DayListStore : ListStore
 		
 		super(columnTypes);
 		
-		for(int i; i < days.length; i++)
+		foreach(ulong i; 0..days.length)
 		{
 			day = days[i];
 			number = dayNumbers[i];

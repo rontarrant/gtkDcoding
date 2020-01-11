@@ -202,7 +202,7 @@ class SignListStore : ListStore
 		
 		super([GType.STRING, GType.INT, Pixbuf.getType(), GType.STRING]);
 		
-		for(int i; i < items.length; i++)
+		foreach(ulong i; 0..items.length)
 		{
 			item = items[i];
 			number = signNumbers[i];

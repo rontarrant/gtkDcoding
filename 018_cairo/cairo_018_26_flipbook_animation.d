@@ -89,7 +89,7 @@ class MyDrawingArea : DrawingArea
 	
 	this()
 	{
-		for(int i = 0; i < numberOfFrames; i++)
+		foreach(int i; 0..numberOfFrames)
 		{
 			if(i < 10)
 			{

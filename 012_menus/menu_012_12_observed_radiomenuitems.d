@@ -245,7 +245,7 @@ class ObservedFeaturesList
 	
 	void setFeatureDefault()
 	{
-		for(int i = 0; i < featureNames.length; i++)
+		foreach(ulong i; 0..featureNames.length)
 		{
 			string featureName = featureNames[i];
 			

@@ -197,7 +197,7 @@ class SignListStore : ListStore
 	{
 		super([GType.STRING, GType.STRING]);
 		
-		for(int i; i < subjects.length; i++)
+		foreach(ulong i; 0..subjects.length)
 		{
 			string message = warning ~ descriptions[i];
 			treeIter = createIter();

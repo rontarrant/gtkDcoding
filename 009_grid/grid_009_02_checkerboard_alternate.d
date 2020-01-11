@@ -36,7 +36,6 @@ class GridWindow : MainWindow
 	
 	this()
 	{
-		int x, y; // positions within the grid
 		int xOddEven, yOddEven;
 		string labelText;
 		
@@ -44,9 +43,9 @@ class GridWindow : MainWindow
 		
 		grid = new Grid();
 		
-		for(x = 0; x < 4; x++)
+		foreach(int x; 0..4)
 		{
-			for(y = 0; y < 4; y++)
+			foreach(int y; 0..4)
 			{
 				// where the row and column numbers are both odd or both even, squares are red
 				// where one is odd and the other even, squares are blue

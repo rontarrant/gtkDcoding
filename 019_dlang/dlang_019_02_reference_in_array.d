@@ -75,7 +75,7 @@ class AppBox : Box
 	{
 		super(Orientation.VERTICAL, globalPadding);
 		
-		for(int i; i < 4; i++)
+		foreach(int i; 0..4)
 		{
 			lastButtonID++;
 			newButton = new MyButton(to!string(lastButtonID), this);
@@ -83,7 +83,7 @@ class AppBox : Box
 			buttons ~= newButton;
 		}
 
-		for(int i; i < buttons.length; i++)
+		foreach(ulong i; 0..buttons.length)
 		{
 			writeln("Button: ", cast(MyButton*)buttons[i], ", label: ", buttons[i].getLabel(), ", ID: ", buttons[i].buttonID);
 		}

@@ -11,7 +11,7 @@ void main()
 	Observer observer2 = new Observer("Second Observer..", subject);
 	
 	// change state
-	for(int i; i < 4; i++)
+	foreach(int i; 0..4)
 	{
 		writeln("\nChanging state of Subject...");
 		subject.change();
