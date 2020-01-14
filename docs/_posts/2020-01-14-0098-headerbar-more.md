@@ -123,7 +123,7 @@ headerBarButton = new HeaderBarButton();
 packStart(headerBarButton);
 ```
 
-Take note that unlike `Box.packStart()` which takes four arguments, `HeaderBar.packStart()` only takes one, a pointer to the extra widget you’re stuffing in there.
+Take note that unlike `Box.packStart()` which takes four arguments, `HeaderBar.packStart()` only takes one, a pointer to the extra `Widget` you’re stuffing in there.
 
 There’s only one thing left to look at for this demo and that’s the `HeaderBarButton` class:
 
