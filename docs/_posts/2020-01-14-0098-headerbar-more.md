@@ -542,9 +542,7 @@ And that should give you an idea of how flexible the `HeaderBar` can be. When we
 	<div style="float: left;">
 		<a href="/2020/01/07/0097-headerbar.html">Previous: HeaderBar</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2020/01/21/0099-sfx-button-interactions-i-text-labels.html">Next: SFX - Changing Button Text</a>
 	</div>
--->
 </div>
