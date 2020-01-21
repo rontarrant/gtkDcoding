@@ -1,5 +1,5 @@
 # gtkDcoding README
-**2020-01-04**: Support the efforts of the GtkDcoding team by contributing through the [GitHub Sponsorship Program](https://github.com/sponsors/rontarrant).
+**2020-01-04**: Support the GtkDcoding demos by contributing through the [GitHub Sponsorship Program](https://github.com/sponsors/rontarrant).
 
 **2019-04-12**: I've switched back to Windows. Linux has come a long way, but I'm so used to how things are done on Windows. Like, for instance, starting an application and having the window open in the same place I last used it. Dialogs, too. Having windows open in the same default position every single time is fine for a single-monitor set-up, but with three, I'm getting a kink in my neck trying to find stuff. Also, I much prefer PSPad as an editor over anything I've found so far on Linux. Maybe I'm just set in my ways, but most other editors just feel wrong by comparison.
 
