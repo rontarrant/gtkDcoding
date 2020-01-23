@@ -11,8 +11,6 @@ author: Ron Tarrant
 
 This post came about as the result of a request from Joel Christensen who asked me to cook up a demo wherein clicking one *GTK* `Button` would change the appearance of another.
 
-And just a reminder... if anyone has a request for a demo of any part of *GtkD*, please feel free to ask via any of the communication methods listed at the bottom of this post. I’m open to anything and if you stump me, well... Let's just say it might not be as hard as one might think.
-
 Anyway, on with the show...
 
 ## Changing Another Button’s Text Label
