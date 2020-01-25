@@ -102,21 +102,24 @@ class PingPongButton : Button
 	} // this()
 
 
-	bool onButtonPress(Event e, Widget w)
+	bool onButtonPress(Event event, Widget widget)
 	{
-		string newLabel;
-		
-		labelNumber++;
-		
-		if(labelNumber == nameSuffixes.length)
+		if(event.button.button == 1 && event.type != EventType.DOUBLE_BUTTON_PRESS && event.type != EventType.TRIPLE_BUTTON_PRESS)
 		{
-			labelNumber = 0;
+			string newLabel;
+			
+			labelNumber++;
+			
+			if(labelNumber == nameSuffixes.length)
+			{
+				labelNumber = 0;
+			}
+			
+			newLabel = partnerButton.labelText ~ nameSuffixes[labelNumber];
+			partnerButton.setLabel(newLabel);
+			
+			writeln("Partner button label has changed to: ", labelNumber, ", ", newLabel);
 		}
-		
-		newLabel = partnerButton.labelText ~ nameSuffixes[labelNumber];
-		partnerButton.setLabel(newLabel);
-		
-		writeln("Partner button label has changed to: ", newLabel);
 		
 		return(true);
 		
