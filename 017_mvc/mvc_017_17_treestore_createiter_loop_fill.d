@@ -170,7 +170,7 @@ class FamilyTreeStore : TreeStore
 	{
 		super([GType.STRING, GType.STRING]);
 
-		for(int i = 0; i < parentHeaders.length; i++)
+		foreach(ulong i; 0..parentHeaders.length)
 		{
 			string parentTitle = parentHeaders[i];
 			string[] childFamily = children[i];
@@ -178,7 +178,7 @@ class FamilyTreeStore : TreeStore
 			parentIter = createIter(); // append an empty row to the top level and get an iter back
 			setValue(parentIter, 0, parentTitle);
 
-			for(int j = 0; j < childFamily.length; j++)
+			foreach(ulong j; 0..childFamily.length)
 			{
 				childIter = createIter(parentIter); // passing in parentIter makes this a child row
 

@@ -70,6 +70,7 @@ class MyHeaderBar : HeaderBar
 		setShowCloseButton(decorationsOn); // turns on all buttons: close, max, min
 		setTitle(title);
 		setSubtitle(subtitle);
+		setOpacity(0.8);
 		
 	} // this()
 	

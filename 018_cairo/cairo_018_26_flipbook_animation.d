@@ -17,7 +17,6 @@ import gdk.Pixbuf;
 import gdk.Cairo;
 import glib.Timeout;
 
-
 void main(string[] args)
 {
 	TestRigWindow testRigWindow;
@@ -131,10 +130,7 @@ class MyDrawingArea : DrawingArea
 
 	bool onFrameElapsed()
 	{
-		GtkAllocation area;
-		getAllocation(area);
-		
-		queueDrawArea(area.x, area.y, area.width, area.height);
+		queueDraw();
 		
 		return(true);
 		

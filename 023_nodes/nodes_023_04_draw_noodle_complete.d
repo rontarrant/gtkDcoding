@@ -185,12 +185,9 @@ class MyDrawingArea : DrawingArea
 
 	bool onFrameElapsed()
 	{
-		GtkAllocation size;
-		getAllocation(size);
-		
 		if(dragAndDraw == true)
 		{
-			queueDrawArea(size.x, size.y, size.width, size.height);
+			queueDraw();
 		}
 		
 		return(true);

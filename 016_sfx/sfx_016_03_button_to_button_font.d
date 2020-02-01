@@ -90,7 +90,7 @@ class PingPongButton : Button
 {
 	int labelNumber = 0;
 	string labelText;
-	string[] variableNames = [" Ho", " Hum", " Hey"];
+	string[] nameSuffixes = [" Tra", " La", " Li"];
 	PingPongButton partnerButton;
 
 	string[] labelNames = ["pingpongred", "pingpongblue"];
@@ -98,7 +98,7 @@ class PingPongButton : Button
 
 	this(string buttonLabel, int color)
 	{
-		super(buttonLabel ~ variableNames[0]);
+		super(buttonLabel ~ nameSuffixes[0]);
 		labelText = buttonLabel;
 		
 		addOnButtonPress(&onButtonPress);
@@ -114,12 +114,12 @@ class PingPongButton : Button
 		
 		labelNumber++;
 		
-		if(labelNumber == variableNames.length)
+		if(labelNumber == nameSuffixes.length)
 		{
 			labelNumber = 0;
 		}
 		
-		newLabel = labelText ~ variableNames[labelNumber];
+		newLabel = partnerButton.labelText ~ nameSuffixes[labelNumber];
 		partnerButton.setLabel(newLabel);
 		
 		if(partnerButton.getName() == "pingpongred")
