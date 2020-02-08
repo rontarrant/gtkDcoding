@@ -67,7 +67,11 @@
 {
 	background-image: linear-gradient(to right, rgba(252, 156, 14, 1), rgba(255, 255, 255, 1.0));
 }
-.topic-color_sfx /* deep blue */
+.topic-color_sfx /* voilet */
 {
-	background-image: linear-gradient(to right, rgba(1, 1, 255, 1), rgba(255, 255, 255, 1.0));
+	background-image: linear-gradient(to right, rgba(140, 2, 140, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_snippets /* voilet */
+{
+	background-image: linear-gradient(to right, rgba(1, 81, 1, 1), rgba(255, 255, 255, 1.0));
 }
