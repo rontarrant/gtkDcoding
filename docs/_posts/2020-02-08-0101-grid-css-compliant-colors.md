@@ -257,10 +257,8 @@ Until then, happy February. I feel like a lot of us will need this wish what wit
 	<div style="float: left;">
 		<a href="/2020/01/28/0100-sfx-button-interactions-ii-color-font-shape.html">Previous: Button Interactions - Color, Font, Shape Changes</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2020/02/19/0102-grid-spacing.html">Next: Grid Spacing</a>
 	</div>
--->
 </div>
 
