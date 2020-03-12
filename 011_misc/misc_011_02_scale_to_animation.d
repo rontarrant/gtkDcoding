@@ -1,6 +1,6 @@
 // This source code is in the public domain.
 
-// Scale Controls Ball Position in DrawingArea
+// Scale Button that Controls a Ball's Position in a DrawingArea
 
 import std.stdio;
 
@@ -112,7 +112,7 @@ class MyScale : Scale
 
 class MyDrawingArea : DrawingArea
 {
-	int ballX, prevBallX;
+	int ballX;
 	
 	this()
 	{

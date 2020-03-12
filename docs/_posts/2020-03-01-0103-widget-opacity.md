@@ -383,9 +383,7 @@ See you then.
 	<div style="float: left;">
 		<a href="/2020/02/19/0102-grid-spacing.html">Previous: Grid Spacing</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2020/03/12/0104-widget-opacity-ii.html">Next: Widget Opacity II</a>
 	</div>
--->
 </div>

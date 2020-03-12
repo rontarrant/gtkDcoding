@@ -9,9 +9,19 @@ import gtk.Widget;
 import gtk.AccelGroup;
 import gdk.Event;
 
+int main(string[] args)
+{
+	auto application = new Application("org.gtkd.demo.popupmenu", GApplicationFlags.FLAGS_NONE);
+	application.addOnActivate(delegate void(GioApplication app) { new PopupMenuDemo(application); });
+	
+	return(application.run(args));
+	
+} // main()
+
+
 class PopupMenuDemo : ApplicationWindow
 {
-	Menu menu;
+	PopUpMenu popUpMenu;
 
 	this(Application application)
 	{
@@ -24,12 +34,7 @@ class PopupMenuDemo : ApplicationWindow
 		eventBox.addOnButtonPress(&onButtonPress);
 		add(eventBox);
 
-		menu = new Menu();
-		menu.append( new ImageMenuItem(StockID.CUT, cast(AccelGroup)null) );
-		menu.append( new ImageMenuItem(StockID.COPY, cast(AccelGroup)null) );
-		menu.append( new ImageMenuItem(StockID.PASTE, cast(AccelGroup)null) );
-		menu.append( new ImageMenuItem(StockID.DELETE, cast(AccelGroup)null) );
-		menu.attachToWidget(eventBox, null);
+		popUpMenu = new PopUpMenu(eventBox);
 
 		showAll();
 		
@@ -38,27 +43,38 @@ class PopupMenuDemo : ApplicationWindow
 
 	public bool onButtonPress(Event event, Widget widget)
 	{
-		if ( event.type == EventType.BUTTON_PRESS )
+		bool result = false; // always assume the state you're NOT explicitly setting in the function
+		
+		if(event.type == EventType.BUTTON_PRESS)
 		{
 			GdkEventButton* buttonEvent = event.button;
 
-			if ( buttonEvent.button == 3)
+			if(buttonEvent.button == 3)
 			{
-				menu.showAll();
-				menu.popup(buttonEvent.button, buttonEvent.time);
+				popUpMenu.showAll();
+				popUpMenu.popup(buttonEvent.button, buttonEvent.time);
 
-				return true;
+				result = true;
 			}
 		}
 
-		return(false);
+		return(result);
 		
 	} // onButtonPress()
 }
 
-int main(string[] args)
+
+class PopUpMenu : Menu
 {
-	auto application = new Application("org.gtkd.demo.popupmenu", GApplicationFlags.FLAGS_NONE);
-	application.addOnActivate(delegate void(GioApplication app) { new PopupMenuDemo(application); });
-	return application.run(args);
-} // main()
+	this(EventBox eventBox)
+	{
+		append(new ImageMenuItem(StockID.CUT, cast(AccelGroup)null));
+		append(new ImageMenuItem(StockID.COPY, cast(AccelGroup)null));
+		append(new ImageMenuItem(StockID.PASTE, cast(AccelGroup)null));
+		append(new ImageMenuItem(StockID.DELETE, cast(AccelGroup)null));
+		
+		super.attachToWidget(eventBox, null);
+		
+	} // this()
+
+} // class PopUpMenu

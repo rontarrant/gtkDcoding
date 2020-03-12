@@ -1,6 +1,6 @@
 // This source code is in the public domain.
 
-// ScaleButton example
+// Scale Button example (as opposed to a ScaleButton example) Yup. They're different.
 
 import std.stdio;
 
@@ -10,7 +10,6 @@ import gtk.Box;
 import gtk.Widget;
 import gtk.Scale;
 import gtk.Range;
-import gtk.Adjustment;
 
 void main(string[] args)
 {
@@ -27,7 +26,7 @@ void main(string[] args)
 
 class TestRigWindow : MainWindow
 {
-	string title = "ScaleButton Example";
+	string title = "Scale Button Example";
 	int borderWidth = 10;
 	int width = 250;
 	int height = 175;
@@ -83,27 +82,9 @@ class MyScale : Scale
 	double maximum = 10;
 	double step = 1;
 
-	Adjustment adjustment;
-	double initialValue = 5;
-
-	double pageIncrement = 1;
-	double pageSize = 0;
-	
-//	string[] icons = ["audio-volume-muted", "audio-volume-high", "audio-volume-low", "audio-volume-medium"];
-//	string[] icons = ["face-crying", "face-laugh", "face-embarrassed", "face-sad", "face-plain", "face-smirk", "face-smile"];
-//	string[] icons = ["face-crying", "face-laugh", "face-plain"];
-//	string[] icons = ["face-crying", "face-laugh"];
-//	string[] icons = ["face-plain"];
-	
 	this()
 	{
-		double compensateForWinBug = initialValue + 1;
-		
 		super(Orientation.HORIZONTAL, minimum, maximum, step);
-		
-//		adjustment = new Adjustment(compensateForWinBug, minimum, maximum, step, pageIncrement, pageSize);
-//		setAdjustment(adjustment);
-//		setValue(initialValue);
 		addOnValueChanged(&valueChanged);
 		
 	} // this()
@@ -115,5 +96,4 @@ class MyScale : Scale
 		
 	} // valueChanged()
 
-
-} // class MyScaleButton
+} // class MyScale
