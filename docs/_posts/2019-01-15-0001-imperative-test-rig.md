@@ -22,7 +22,7 @@ If you haven’t settled on an editor with support for *D*, I’d like to make a
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/001_window/window_001_01.png" alt="Current example output">
+			<img id="img0" src="/images/screenshots/001_window/window_001_02.png" alt="Current example output">
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																								<!-- modal# -->
@@ -64,7 +64,7 @@ If you haven’t settled on an editor with support for *D*, I’d like to make a
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/001_window/window_001_01_term.png" alt="Current example terminal output">
+			<img id="img1" src="/images/screenshots/001_window/window_001_02_term.png" alt="Current example terminal output">
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																												<!-- modal# -->
@@ -106,7 +106,7 @@ If you haven’t settled on an editor with support for *D*, I’d like to make a
 	</div>
 
 	<div class="frame-footer">																																<!-- filename (below)-->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/window_001_01_imperative.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/window_001_02_imperative.d" target="_blank">here</a>.
 	</div>
 </div>
 
