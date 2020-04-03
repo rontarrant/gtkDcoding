@@ -30,16 +30,16 @@ class Observer
 	this(string id, Subject subject)
 	{
 		idString = id;
-		subjectState = subject.addObserver(this);
+		subject.addObserver(this);
 		
 	} // this()
 	
 	
-	void updateSubjectState(bool newState)
+	void reactToSubjectStateChange(bool newState)
 	{
 		subjectState = newState;
 		
-	} // updateSubjectState()
+	} // reactToSubjectStateChange()
 	
 	
 	void reportState()
@@ -63,11 +63,10 @@ class Subject
 	} // this()
 
 
-	bool addObserver(Observer observer)
+	void addObserver(Observer observer)
 	{
 		observers ~= observer;
-		
-		return(switcherState);
+		observer.reactToSubjectStateChange(switcherState);
 		
 	} // addObserver()
 	
@@ -76,7 +75,7 @@ class Subject
 	{
 		foreach(observer; observers)
 		{
-			observer.updateSubjectState(switcherState);
+			observer.reactToSubjectStateChange(switcherState);
 			
 		}
 		

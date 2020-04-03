@@ -283,9 +283,7 @@ Until then, happy coding.
 	<div style="float: left;">
 		<a href="/2020/03/12/0104-widget-opacity-ii.html">Previous: Widget Opacity II</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2020/04/03/0106-dlang-ui-snippets-ii.html">Next: D Snippets II - A Generic Observer</a>
 	</div>
--->
 </div>
