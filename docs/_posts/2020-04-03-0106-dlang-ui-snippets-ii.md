@@ -242,9 +242,7 @@ Take care, and see you then.
 	<div style="float: left;">
 		<a href="/2020/03/23/0105-dlang-ui-snippets-i.html">Previous: D Snippets I - Singleton vs. Observer</a>
 	</div>
-<!--
 	<div style="float: right;">
-		<a href="/2020/04/14/0107-dlang-ui-snippets-iii.html">Next: D Snippets III - Working Observer</a>
+		<a href="/2020/04/14/0107-dlang-ui-snippets-iii.html">Next: D Snippets III - Practical Observer</a>
 	</div>
--->
 </div>
