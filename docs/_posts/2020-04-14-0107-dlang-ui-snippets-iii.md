@@ -298,9 +298,8 @@ Next time, we’ll take a look at how to handle a list of widgets using *D*-styl
 	<div style="float: left;">
 		<a href="/2020/04/03/0106-dlang-ui-snippets-ii.html">Previous: D Snippets II - Generic Observer</a>
 	</div>
-<!--
+
 	<div style="float: right;">
 		<a href="/2020/04/25/0108-snippets-iv-arrays.html">Next: Arrays in UI</a>
 	</div>
--->
 </div>
