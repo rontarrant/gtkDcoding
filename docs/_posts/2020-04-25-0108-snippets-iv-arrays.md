@@ -331,9 +331,7 @@ Until then, happy coding.
 	<div style="float: left;">
 		<a href="/2020/04/14/0107-dlang-ui-snippets-iii.html">Previous: D Snippets III - A Practical Observer</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2020/05/06/0109-sfx-bindproperty.html">Next: Sync Widgets with bindProperty()</a>
 	</div>
--->
 </div>
