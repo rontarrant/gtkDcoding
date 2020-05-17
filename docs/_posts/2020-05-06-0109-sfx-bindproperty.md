@@ -214,9 +214,7 @@ That’s it for now. Take care of each other and don’t let the bad guys win.
 	<div style="float: left;">
 		<a href="/2020/04/25/0108-snippets-iv-arrays.html">Previous: Snippets IV - Using Arrays in a UI Context</a>
 	</div>
-<!--
 	<div style="float: right;">
 		<a href="/2020/05/17/0110-scale-button.html">Next: The Scale Button</a>
 	</div>
--->
 </div>
