@@ -280,15 +280,6 @@ And that’s it for now. Next time, we’ll break down the test rig code so you 
 
 Until then, happy D-coding and may the widgets be with you.
 
-<script src="https://utteranc.es/client.js"
-        repo="rontarrant/gtkDcoding"
-        issue-term="url"
-        label="💬comment"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-
 <div class="blog-nav">
 	<div style="float: right;">
 		<a href="/2019/01/15/0001-imperative-test-rig.html">Next: Introduction to the Test Rig</a>
