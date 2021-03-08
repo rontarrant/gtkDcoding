@@ -281,8 +281,8 @@ And that’s it for now. Next time, we’ll break down the test rig code so you 
 Until then, happy D-coding and may the widgets be with you.
 
 <script src="https://utteranc.es/client.js"
-        repo="rontarrant/gktDcoding"
-        issue-term="pathname"
+        repo="rontarrant/gtkDcoding"
+        issue-term="url"
         label="💬comment"
         theme="github-light"
         crossorigin="anonymous"
