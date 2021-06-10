@@ -1,0 +1,77 @@
+/* site colors */
+
+/*
+ * TOPIC HEADER BACKGROUND color gradients
+ */
+.topic-color_window /* burnt orange */
+{
+	background-image: linear-gradient(to right, rgba(241, 92, 92, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_button /* yellow */
+{
+	background-image: linear-gradient(to right, rgba(243, 213, 163, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_container /* green */
+{
+	background-image: linear-gradient(to right, rgba(85, 243, 85, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_mouse /* light purple */
+{
+	background-image: linear-gradient(to right, rgba(192, 163, 255, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_text /* tan */
+{
+	background-image: linear-gradient(to right, rgba(222, 139, 243, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_nodes /* tan */
+{
+	background-image: linear-gradient(to right, rgba(140, 2, 2, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_image /* redish */
+{
+	background-image: linear-gradient(to right, rgba(243, 116, 196, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_bar /* aqua */
+{
+	background-image: linear-gradient(to right, rgba(123, 174, 195, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_menu /* lemon */
+{
+	background-image: linear-gradient(to right, rgba(241, 241, 92, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_dialog /* blue */
+{
+	background-image: linear-gradient(to right, rgba(84, 134, 84, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_linux /* hot pink */
+{
+	background-image: linear-gradient(to right, rgba(243, 163, 163, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_cairo /* chartreuse */
+{
+	background-image: linear-gradient(to right, rgba(147, 195, 123, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_mvc /* brown */
+{
+	background-image: linear-gradient(to right, rgba(241, 181, 92, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_oop /* gray */
+{
+	background-image: linear-gradient(to right, rgba(211, 137, 91, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_general /* light gray */
+{
+	background-image: linear-gradient(to right, rgba(92, 236, 241, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_hardware /* orange */
+{
+	background-image: linear-gradient(to right, rgba(252, 156, 14, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_sfx /* voilet */
+{
+	background-image: linear-gradient(to right, rgba(140, 2, 140, 1), rgba(255, 255, 255, 1.0));
+}
+.topic-color_snippets /* voilet */
+{
+	background-image: linear-gradient(to right, rgba(1, 81, 1, 1), rgba(255, 255, 255, 1.0));
+}
