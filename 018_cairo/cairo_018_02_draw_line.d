@@ -1,3 +1,10 @@
+/+ dub.sdl:
+name "cairo_018_02_draw_line"
+description "A Simple Line"
+homepage "https://gtkdcoding.com/2019/07/30/0057-cairo-i-the-basics.html"
+license "public domain"
+dependency "gtk-d" version="~>3.9.0"
++/
 // This source code is in the public domain.
 
 // Cairo: Draw a Line
