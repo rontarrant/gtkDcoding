@@ -1,0 +1,141 @@
+/* site colors */
+
+/*
+ * TOPIC HEADER BACKGROUND color gradients
+ */
+.topic-color_application /*  */
+{
+	background-image: linear-gradient(to right, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_button /*  */
+{
+	background-image: linear-gradient(to right, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_canvas /*  */
+{
+	background-image: linear-gradient(to right, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_checkbutton /*  */
+{
+	background-image: linear-gradient(to right, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_class /*  */
+{
+	background-image: linear-gradient(to right, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_colorchooser /*  */
+{
+	background-image: linear-gradient(to right, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_combobox /*  */
+{
+	background-image: linear-gradient(to right, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_dialog /*  */
+{
+	background-image: linear-gradient(to right, rgba(114, 114, 114, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_entry /*  */
+{
+	background-image: linear-gradient(to right, rgba(120, 68, 33, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_event /*  */
+{
+	background-image: linear-gradient(to right, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_font /*  */
+{
+	background-image: linear-gradient(to right, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_frame /*  */
+{
+	background-image: linear-gradient(to right, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_general /*  */
+{
+	background-image: linear-gradient(to right, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_grid /*  */
+{
+	background-image: linear-gradient(to right, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_image /*  */
+{
+	background-image: linear-gradient(to right, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_label /*  */
+{
+	background-image: linear-gradient(to right, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_labelframe /*  */
+{
+	background-image: linear-gradient(to right, rgba(114, 114, 114, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_listbox /*  */
+{
+	background-image: linear-gradient(to right, rgba(120, 68, 33, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_menu /*  */
+{
+	background-image: linear-gradient(to right, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_message /*  */
+{
+	background-image: linear-gradient(to right, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_messagebox /*  */
+{
+	background-image: linear-gradient(to right, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_notebook /*  */
+{
+	background-image: linear-gradient(to right, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_panedwindow /*  */
+{
+	background-image: linear-gradient(to right, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_progressbar /*  */
+{
+	background-image: linear-gradient(to right, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_radiobutton /*  */
+{
+	background-image: linear-gradient(to right, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_scale /*  */
+{
+	background-image: linear-gradient(to right, rgba(114, 114, 114, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_scrollbar /*  */
+{
+	background-image: linear-gradient(to right, rgba(120, 68, 33, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_scrolledtext /*  */
+{
+	background-image: linear-gradient(to right, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_sizegrip /*  */
+{
+	background-image: linear-gradient(to right, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_spinbox /*  */
+{
+	background-image: linear-gradient(to right, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_text /*  */
+{
+	background-image: linear-gradient(to right, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_themestyle /*  */
+{
+	background-image: linear-gradient(to right, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_treeview /*  */
+{
+	background-image: linear-gradient(to right, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_window /*  */
+{
+	background-image: linear-gradient(to right, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
