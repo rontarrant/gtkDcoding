@@ -242,7 +242,7 @@ Help overlays, however, aren’t something we’ll find in the old construction 
 
 Hideable `Menubars` are also inspired by mobile apps, although they’re becoming more prevalent on desktops as well.
 
-Anyway, that’s all nice theory, but how about a look at the code:
+Anyway, that’s all nice in theory, but how about a look at the code:
 
 ```d
 class AppWindow : ApplicationWindow
