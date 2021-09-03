@@ -384,7 +384,9 @@ Until then, have a happy life.
 	<div style="float: left;">
 		<a href="/2020/03/01/0103-widget-opacity.html">Previous: Widget Opacity</a>
 	</div>
+<!--
 	<div style="float: right;">
 		<a href="/2020/03/23/0105-dlang-ui-snippets-i.html">Next: Dlang UI Snippets I</a>
 	</div>
+-->
 </div>

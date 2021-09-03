@@ -1,8 +1,0 @@
-/*
- * text topic colors
- */
- 
-h1, h2, h3, h4, h5
-{
-	background-image: linear-gradient(to right, rgba(252, 156, 14, 1), rgba(255, 255, 255, 1.0));
-}

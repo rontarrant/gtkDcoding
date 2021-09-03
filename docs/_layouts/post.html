@@ -6,40 +6,42 @@ layout: default
 	<header class="post-header">
 		<link rel="stylesheet" href="/css/font_size.css" />
 		<link rel="stylesheet" href="/css/figure.css" />
-		{% if page.topic == 'window' %}
-			<link rel="stylesheet" href="/css/window.css" />
+		{% if page.topic == 'app' %}
+			<link rel="stylesheet" href="/css/app.css" />
 		{% elsif page.topic == 'button' %}
 			<link rel="stylesheet" href="/css/button.css" />
+		{% elsif page.topic == 'bar' %}
+			<link rel="stylesheet" href="/css/bar.css" />
+		{% elsif page.topic == 'cairo' %}
+			<link rel="stylesheet" href="/css/cairo.css" />		
 		{% elsif page.topic == 'container' %}
 			<link rel="stylesheet" href="/css/container.css" />		
-		{% elsif page.topic == 'mouse' %}
-			<link rel="stylesheet" href="/css/mouse.css" />		
-		{% elsif page.topic == 'text' %}
-			<link rel="stylesheet" href="/css/text.css" />		
+		{% elsif page.topic == 'dialog' %}
+			<link rel="stylesheet" href="/css/dialog.css" />		
+		{% elsif page.topic == 'hardware' %}
+			<link rel="stylesheet" href="/css/hardware.css" />		
 		{% elsif page.topic == 'image' %}
 			<link rel="stylesheet" href="/css/image.css" />		
 		{% elsif page.topic == 'linux' %}
 			<link rel="stylesheet" href="/css/linux.css" />		
-		{% elsif page.topic == 'bar' %}
-			<link rel="stylesheet" href="/css/bar.css" />
 		 {% elsif page.topic == 'menu' %}
 			<link rel="stylesheet" href="/css/menu.css" />		
-		{% elsif page.topic == 'dialog' %}
-			<link rel="stylesheet" href="/css/dialog.css" />		
-		{% elsif page.topic == 'cairo' %}
-			<link rel="stylesheet" href="/css/cairo.css" />		
+		{% elsif page.topic == 'mouse' %}
+			<link rel="stylesheet" href="/css/mouse.css" />		
 		{% elsif page.topic == 'mvc' %}
 			<link rel="stylesheet" href="/css/mvc.css" />		
-		{% elsif page.topic == 'oop' %}
-			<link rel="stylesheet" href="/css/oop.css" />		
 		{% elsif page.topic == 'nodes' %}
 			<link rel="stylesheet" href="/css/nodes.css" />		
-		{% elsif page.topic == 'hardware' %}
-			<link rel="stylesheet" href="/css/hardware.css" />		
+		{% elsif page.topic == 'oop' %}
+			<link rel="stylesheet" href="/css/oop.css" />		
 		{% elsif page.topic == 'sfx' %}
 			<link rel="stylesheet" href="/css/sfx.css" />		
 		{% elsif page.topic == 'snippets' %}
 			<link rel="stylesheet" href="/css/snippets.css" />		
+		{% elsif page.topic == 'text' %}
+			<link rel="stylesheet" href="/css/text.css" />		
+		{% elsif page.topic == 'window' %}
+			<link rel="stylesheet" href="/css/window.css" />
 		{% else %}
 			<link rel="stylesheet" href="/css/general.css" />
 		{% endif %}

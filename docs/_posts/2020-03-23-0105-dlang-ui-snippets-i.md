@@ -19,17 +19,19 @@ So, we’ll start off with a couple of more strictly-built (read: adhering more 
 
 First, what’s the difference between the two?
 
-The *Singleton* assures us that we have one instance of an object. Because of the way the *Singleton* is structured, no matter how many times we create new pointers to it, they'll always point to the same *Singleton*.
+The *Singleton* assures us that we have one instance of a class object. And no matter how many times we create more instances of that class in our code, we’re always dealing with a single instantiation.
 
-The *Observer*, on the other hand, allows a single object to be monitored by multiple other objects.
+The *Observer* allows a single object to inform several other objects of its internal changes.
 
-In both cases, we’re talking about a one-to-many relationship—one Singleton with multiple pointers... one object monitored by multiple others. The difference from a number-of-objects point of view is the *direction* of the one-to-many relationship.
+In both cases, we’re talking about a one-to-many relationship. So, that’s not the difference.
 
-Another difference can be found by thinking about the definition of the *Observer* pattern—a single object is monitored by multiple others. Why do they need to monitor it? Because the observed object is dynamic. It changes over the lifetime of the application.
+The *Observer* pattern is named for the object that needs to know what’s going on elsewhere. The *Singleton* is that elsewhere and so we might infer that both are actually part of the same pattern... and I’m not saying they can’t be, but there must be a reason they both exist, so let’s step back and look again...
 
-The *Singleton*, on the other hand, remains static. That's why we see use cases such as a print spooler, a window manager, a font list, or other OS-specific stuff. In other words, things we expect to remain static during the application’s lifetime.
+The definition of the *Observer* pattern—a single object keeps others informed of internal changes—gives us a clue. The observed object is dynamic. It changes over the lifetime of the application.
 
-So in a nutshell, a *Singleton* is used to encapsulate a *static* resource and *Observers* encapsulate objects that keep an eye on a *dynamic* resource.
+And the *Singleton*? Use cases cited by experts speak of resources—a print spooler, a window manager, a font list, or other OS-specific stuff. In other words, things we expect to remain static during the application’s lifetime.
+
+So, a *Singleton* is used for a static resource and *Observers* keep an eye on a dynamic resource.
 
 The rest of this post will first present the general specs for a *Singleton* in *D*, then look at a working example.
 
@@ -105,7 +107,7 @@ class DSingleton
 	__gshared DSingleton instance_;
 ```
 
-These two properties work together to make the *Singleton* thread-safe. In essence, they allow us to work with the *Singleton* whether we're working with a single- or multi-threaded application. The mechanism is a bit more complex than that, but for our purposes, this is deep as we need to dig.
+These two properties work together to make the *Singleton* thread-safe. In essence, they allow us to work with the *Singleton* whether we're working with a application having a single thread or multiple threads.
 
 Next, the constructor...
 
@@ -113,11 +115,7 @@ Next, the constructor...
 this() {}
 ```
 
-In other words, we don’t really have a constructor. It won't always be empty, but for this demo, we don't need it to do anything. (In our next example, it'll be used for setting a static variable.)
-
-Note also that the constructor definition is in the part of the class marked private which means no outsider can call it. Why? Because the work of the constructor should only be carried out once during the life of the application and we don't want anyone calling it by accident and screwing up our nefarious plan. And why don't we want anyone to call it?
-
-Besides, we don't instantiate the `DSingleton` with a direct call to the constructor. We pass all requests for instantiation through a getter instead:
+In other words, we don’t have a constructor. Not really. Note also that the constructor definition is in the part of the class marked private which means no outsider can call it. Why? Because that way, no one can call it by accident. And why don't we want anyone to call it? Because we don't instantiate the `DSingleton` with a constructor call. We use this instead:
 
 ```d
 static DSingleton get()
@@ -147,13 +145,13 @@ static DSingleton get()
 } // get()
 ```
 
-All those writeln() calls are there just as proof that the system works. They can be safely axed when you're doing a production-ready *Singleton*.
+All those writeln() calls are there just as proof that the system works, BTW.
 
-Wherever your code needs access to the *Singleton*, you start by calling `get()`. In the guts of the `get()`, there’s a bit of *D*-language hocus pocus going on to assure that multi-threaded applications won't end up with a new *Singleton* in every thread. It checks to see if an instance of the *Singleton* already exists either locally (in the current thread) or globally (in any possible thread) before deciding whether or not to create one.
+Wherever your code needs access to the *Singleton*, you start by calling `get()`. There’s a bit of *D*-language hocus pocus going on here and I won’t pretend to know exactly what it does (it’s above my pay grade). In a nutshell, though, this function checks to see if an instance of the *Singleton* exists either locally (in the current thread) or globally (in any possible thread) before deciding whether or not to create one.
 
-### The getInstance Function
+### The Getter Function
 
-Don't let the name fool you. This isn't another getter:
+This just helps to prove that this is, indeed, a *Singleton*:
 
 ```d
 DSingleton* getInstance()
@@ -164,7 +162,7 @@ DSingleton* getInstance()
 } // getInstance()
 ```
 
-It spits out the *address of the pointer* to the *Singleton* and then returns the *address of the Singleton* itself so we know, even though we may have multiple pointers to the `DSingleton` scattered throughout our code, they all point to the same instance of the `DSingleton`.
+It spits out the address of the pointer to the *Singleton* as well as the address of the *Singleton* itself so we know that, even though we have three pointers, they all point to the same instance of our `DSingleton`.
 
 ## The Singleton at Work
 
@@ -225,22 +223,22 @@ It spits out the *address of the pointer* to the *Singleton* and then returns th
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
 
-Detecting the user’s OS—something that’s definitely not expected to change while the application is running—is a quintessential example of the *Singleton* at work.
+Detecting the user’s OS—something that’s not expected to change while the application is running—is a perfect example of *Singleton* use.
 
 How we get from the generic example to this specific one comes down to this:
 
-- add a `string` property in the preamble to store the OS type,
-- add code to the constructor that detects and stores the OS type, and
-- because `getInstance()` is really just for testing purposes, replace it with `getOS()`.
+- add a string property to store the OS type,
+- supply code to the constructor that does the detection and store the results, and
+- replace `getInstance()` with something more appropriate like `getOS()`.
 
-It’s also a good idea to rename the *Singleton* to reflect what we’re dealing with. (Don't forget to edit all those places in the code where we refer to it by name.)
+It’s also a good idea to rename the *Singleton* to reflect what we’re dealing with and that means editing all those places in the code where we refer to it by name.
 
-So, all that boils down to:
+In this case, we:
 
-- change the name from `DSingleton` to `S_DetectedOS` (I'm here using the leading ‘S’ as a naming convention to indicate this is a *Singleton* class/object),
-- edit all references to `DSingleton` throughout the code to reflect the name change,
-- add the property string `_os_type`, and
-- rewrite the constructor to set this new variable:
+- change the name from `DSingleton` to `S_DetectedOS` (the ‘S’ indicates *Singleton*), editing all references throughout the code, and
+- add the property string `_os_type`.
+
+The constructor becomes:
 
 ```d
 this()
@@ -261,9 +259,7 @@ this()
 } // this()
 ```
 
-The `version()` function, if you hadn't guessed, is *D*'s way of finding out which OS it's running on.
-
-Our replacement for `getInstance()`—because we really don't care about the address of the *Singleton* as long as it does its job—looks like this:
+Our replacement getter looks like this:
 
 ```d
 string getOS()
@@ -283,7 +279,9 @@ Until then, happy coding.
 	<div style="float: left;">
 		<a href="/2020/03/12/0104-widget-opacity-ii.html">Previous: Widget Opacity II</a>
 	</div>
+<!--
 	<div style="float: right;">
 		<a href="/2020/04/03/0106-dlang-ui-snippets-ii.html">Next: D Snippets II - A Generic Observer</a>
 	</div>
+-->
 </div>

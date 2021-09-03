@@ -1,7 +1,7 @@
 ---
 title: "0000: Introduction to GtkDcoding"
 layout: post
-topic: general
+topic: window
 description: An introduction to GTK 3 and how it can be used to create Graphical User Interfaces (GUI) for applications - a D language tutorial.
 author: Ron Tarrant
 ---
@@ -50,7 +50,7 @@ All code is formatted in this way:
 
 ## What You’ll Need
 
-First, a *D* compiler. I’m using *dmd*, the official reference compiler throughout. You can find it on the [Downloads page of the dlang.org web site](https://dlang.org/download.html).
+First, a *D* compiler. I’m using *dmd*, the official reference compiler, throughout. You can find it on the [Downloads page of the dlang.org web site](https://dlang.org/download.html).
 
 Second, you’ll want the latest *GTK+* runtime. This as well as the [GtkD.zip](https://gtkd.org/Downloads/sources/GtkD-3.9.0.zip) file can be downloaded from [the official GtkD website (maintained by Mike Wey)](https://gtkd.org/download.html).
 

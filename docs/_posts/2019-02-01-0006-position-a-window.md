@@ -109,24 +109,23 @@ For this example, I used two buttons, one to move the window up and to the left,
 
 ## Something New
 
-The other thing I introduce here is *D* language’s interface which is used to sketch out a plan for classes which will be similar enough to share functions and data, but not so similar that the functions will all do exactly the same things in the same way. In our case, we want one button to move the window to the left, the other to the right. That similar enough in that the window’s moving somewhere, but the destinations are different.
+The other thing I introduce here is the `interface`. It's used to sketch out a plan for classes which will be similar enough to share functions and data, but not so similar that the functions will all do exactly the same things in the same way. In our case, we want one button to move the window to the left, the other to the right. That's similar enough that it makes sense to derive these two from an interface because, with both buttons, the window’s moving somewhere. It's just the destinations that are different.
 
-The interface could also be said to lay down the rules for Buttons that change the position of the window. By reading through the interface’s code, we can see that it:
+The interface could also be said to lay down the rules for `Button`s that change the position of the window. By reading through the interface code, we can see that it:
 
-- returns on value,
 - has a meaningful name (`PositionButton`),
-- it has one function that all derived buttons must also have (`moveWindow`), and
-- it takes a *GTK* `MainWindow` as an argument.
+- has one function that all derived buttons must also have (`moveWindow`), and
+- takes a *GTK* `MainWindow` as an argument.
 
 ## Inheritance in D
 
-`LeftButton` and `RightButton` are the derived `Button`s. They inherit from both our interface as well as the top-level `Button` class.
+`LeftButton` and `RightButton` are the derived `Button`s. They inherit from the interface—`PositionButton`—as well as the top-level `Button` class.
 
 The rules regarding inheritance in *D* are:
 
 - an interface can inherit only from another interface,
 - a class can inherit from one other class, but
-- a class can also inherit from an many interfaces as you need it to, and
+- a class can also inherit from as many interfaces as you need it to, and
 - when listing what a class inherits from, you have to list the class first, then any interfaces.
 
 Both `LeftButton` and `RightButton` are set up with the same string of inheritances, but implementation of functions? That’s another story.

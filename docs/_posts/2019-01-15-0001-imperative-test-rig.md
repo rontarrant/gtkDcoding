@@ -121,7 +121,12 @@ import gtk.Main;
 import gtk.Widget;
 ```
 
-Import statements are how *D* pulls things in from other files.
+*D* uses import statements to pull stuff in from other files. Anything to the left of the dot (`.`) is a directory/folder and everything following is a file name without an extension. In this case, files are dragged in from two locations (Note: the top level directory is where the *D* libraries were installed):
+
+- /src/phobos/std/, and
+- /src/gtkd/gtk/.
+
+And since all these files are *D*-language modules, the extension being left off is `.d`. And each *gtkD* module contains a `struct` that acts as a wrapper and supplies hooks into the *GTK* libraries. 
 
 ### main()
 
