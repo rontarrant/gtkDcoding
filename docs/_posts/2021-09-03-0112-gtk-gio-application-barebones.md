@@ -262,9 +262,9 @@ class AppWindow : ApplicationWindow
 } // class AppWindow
 ```
 
-As with run-of-the-mill `Window`s or `MainWindow`s, we set up dimensions and a title in the preamble, then in the constructor we call the super-class constructor, set the size, the title, and then call `showAll()`. The only thing here that departs from the old construction method is setting up an `Application` pointer which we pass to the super-class constructor, so let’s talk about that for a moment...
+As with run-of-the-mill `Window`s or `MainWindow`s, we set up dimensions and a title in the preamble, then in the constructor we call the super-class constructor, set the size, the title, and then call `showAll()`. The only thing here that departs from the old construction method is setting up an `Application` pointer which we pass to the super-class constructor, so what's up with that?
 
-All that’s really going on here is we’re setting up an association between the `ApplicationWindow` and the *GIO/GTK* `Application` so the `Application` can manage the `ApplicationWindow`. Makes sense, right?
+Not a lot, really. We’re setting up an association between the `ApplicationWindow` and the *GIO/GTK* `Application` so the `Application` can manage the `ApplicationWindow`. Makes sense, right?
 
 ## Conclusion
 
