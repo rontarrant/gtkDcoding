@@ -7,7 +7,24 @@ author: Ron Tarrant
 
 ---
 
-# 0112: GTK GIO Applications - Introduction
+## After the Hiatus
+
+It's been more than a year since I made my last post on this blog. When I stopped posting last year, I was burned out, distracted by COVID-19, our tiny apartment was suddenly a hub of work activity for both of us, and I was still disheartened by the changes being made to *GTK* in version 4.
+
+Now, I can see things a little more clearly... sort of. COVID-19 is still here and we may all go into (at least) one more round of lock-downs. But, other things are advancing...
+
+My wife and I have both been double-vaccinated and we've worked out an arrangement whereby we can both work in this tiny apartment without driving each other up the wall.
+
+Thirteen days ago, Mike Wey released GtkD 4, but the articles I've got on the go are all centred around GtkD 3.9. And frankly, I'm not sure I want to update to 4 because the *GTK* team dropped window position handling. Yes, it's a small thing, but I see a problem with this...
+
+The *GTK* team members believe window positions should be handled by the OS's window manager. I do agree with them except for one thing: not all window managers remember window positions. I use three monitors, so this is kind of important to me. I like my applications to open in the last place I used them so I don't have to search miles of screen real estate to find them.
+
+So, with that in mind, I'd like to hear from you. Is anyone still interested in articles about GtkD 3.x? Please let me know in the comments below.
+
+And with all that said, let's dig into today's article.
+ 
+
+## 0112: GTK GIO Applications - Introduction
 
 Up ‘til now, every example has been built up from a `MainWindow` widget and a `Main` struct, both of which are instantiated in the standard entry point function, `main()`. (*Note: `TestRigWindow`—the actual object we've been instantiating in our examples—inherits from `MainWindow`, so it amounts to the same thing.*) But today, we’re looking at an alternative way of building applications, this time using the *GTK/GIO* `Application` class modules.
 
@@ -268,7 +285,7 @@ Not a lot, really. We’re setting up an association between the `ApplicationWin
 
 ## Conclusion
 
-Anyway, that’s all for today. This should give you a basic understanding of what’s going on behind the curtain when you use this new application construction method.
+Anyway, that’s all for today. This should give you a basic understanding of what’s going on behind the curtain when you use this alternate application construction method.
 
 Next time, we’ll dig a little deeper. See you then.
 
