@@ -223,7 +223,7 @@ The next line, however, is a departure from the old method we’ve been using. I
 
 *Application actions are processed via signals and callbacks.*
 
-This means the *GIO/GTK* `Application` construction approach brings external operations directly under the control of a single, high-level entity, the `Application` object. I’m talking about things like window and accelerator management... or OS-related tasks such as handling command-line arguments, starting up, shutting down... In other words, because the uppercase-A `Application` handles all things external, the lowercase-a application doesn’t need to be aware of them. There’s no mixing of internal and external operations and therefore better separation of code.
+This means the *GIO/GTK* `Application` construction approach brings external operations directly under the control of a single, high-level entity, the `Application` object. I’m talking about things like window and accelerator management... or OS-related tasks such as handling command-line arguments, starting up, shutting down... In other words, because the uppercase-A `Application` handles all things external, the lowercase-a application (in other words: our code) doesn’t need to be aware of them. There’s no mixing of internal and external operations and therefore better separation of code.
 
 Looking at the last line, we find another way this new application construction method differs from the old. The command-line arguments—instead of being passed to an `init()` function—are passed to the `run()` function.
 
