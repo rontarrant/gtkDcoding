@@ -293,10 +293,8 @@ Next time, we’ll dig a little deeper. See you then.
 	<div style="float: left;">
 		<a href="/2020/05/28/0111-graphic-position-scale-button.html">Previous: Control Graphic Position with Scale Button</a>
 	</div>
-<!--
 	<div style="float: right;">
-		<a href="/2020/06/19/0113-gtk-gio-application-id.html">Next: GTK/GIO Application II - Application ID</a>
+		<a href="/2021/09/10/0113-gtk-gio-application-ids-signals.html">Next: GTK/GIO Application II - ID's & Signals</a>
 	</div>
--->
 </div>
 

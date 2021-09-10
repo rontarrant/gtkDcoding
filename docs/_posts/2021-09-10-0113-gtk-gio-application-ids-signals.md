@@ -9,7 +9,7 @@ author: Ron Tarrant
 
 # 0113: Application IDs and Signals
 
-Let’s start today with a look at...
+Continuing from last time when we started looking at GTK/GIO Applications, today let's look at...
 
 ## Application IDs
 
@@ -126,7 +126,11 @@ Here are the choices I had when naming the example used here, each based on a UR
 
 You’ll note that I added an extra layer (.app) between the URL and the file name. It’s not strictly necessary, but it’s part of the site organization, so I threw it in there. However, the directory where you'll find this code file is named `020_app`, not `app`. Why didn't I use the full directory name?
 
-Because we have other naming conventions we need to follow as well which, interestingly enough, are similar to those used to name variables:
+Because we have...
+
+### Other Naming Conventions We Need to Follow
+
+Interestingly enough, these conventions are similar to those used to name variables (as if we didn't see *that* coming):
 
 - the `ID` must be made up of at least two elements separated by a dot (element.element),
 - elements can be made up of:
@@ -147,7 +151,7 @@ So, naming the ID looks like this:
 string id = "com.gtkdcoding.app.app_020_02_barebones_with_id"; // rules
 ```
 
-Naming an `ID` string can be patterned after a *D*-language import statement. We can simply use the file or project name and substitute a dot for a directory separator. And when it's time to update the project to a new version, just toss in a version number... as long as it's done in such a way that we don't violate any of the naming conventions.
+As you can see, this ends up looking like a *D*-language import statement. We can simply use the file or project name and substitute a dot for a directory separator. And when it's time to update the project to a new version, just toss in a version number... as long as it's done in such a way that we don't violate any of the naming conventions.
 
 All this takes place in our derived class, `MyApplication` (derived from `GtkApplication` which, if you remember, is an alias of `gtk.Application` and is, in turn, derived from `gio.Application`).
 
@@ -294,3 +298,13 @@ void onShutdown(GioApplication app) // non-advanced syntax
 
 And that wraps it up for another day. Next time, we'll tackle *GIO*/*GTK* flags. Until then—to paraphrase Les Nessman of *WKRP*, may the good code be yours.
 
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2021/09/03/0112-gtk-gio-application-barebones.html">Previous: GTK GIO Applications - Introduction</a>
+	</div>
+<!--
+	<div style="float: right;">
+		<a href="/2021/09/17/0114-gtk-gio-app-flags-and-cl.html">Next: GTK/GIO Application III - Flags & the Command Line</a>
+	</div>
+-->
+</div>
