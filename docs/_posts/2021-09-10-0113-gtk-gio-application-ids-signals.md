@@ -2,9 +2,8 @@
 title: "0113: GTK GIO Application IDs and Signals"
 layout: post
 topic: button
-description: This GTK Tutorial covers a D-specific implementation of Scale Widget controlling placement of a graphic element.
+description: Wherein we discover the role and naming conventions for application ID's and signals.
 author: Ron Tarrant
-
 ---
 
 # 0113: Application IDs and Signals
@@ -151,7 +150,7 @@ So, naming the ID looks like this:
 string id = "com.gtkdcoding.app.app_020_02_barebones_with_id"; // rules
 ```
 
-As you can see, this ends up looking like a *D*-language import statement. We can simply use the file or project name and substitute a dot for a directory separator. And when it's time to update the project to a new version, just toss in a version number... as long as it's done in such a way that we don't violate any of the naming conventions.
+Naming an `ID` string can be patterned after a *D*-language import statement. We can simply use the file or project name and substitute a dot for a directory separator. And when it's time to update the project to a new version, just toss in a version number... as long as it's done in such a way that we don't violate any of the naming conventions.
 
 All this takes place in our derived class, `MyApplication` (derived from `GtkApplication` which, if you remember, is an alias of `gtk.Application` and is, in turn, derived from `gio.Application`).
 
@@ -302,9 +301,7 @@ And that wraps it up for another day. Next time, we'll tackle *GIO*/*GTK* flags.
 	<div style="float: left;">
 		<a href="/2021/09/03/0112-gtk-gio-application-barebones.html">Previous: GTK GIO Applications - Introduction</a>
 	</div>
-<!--
 	<div style="float: right;">
-		<a href="/2021/09/17/0114-gtk-gio-app-flags-and-cl.html">Next: GTK/GIO Application III - Flags & the Command Line</a>
+		<a href="/2021/09/17/0114-gtk-gio-app-flags-and-cl-args.html">Next: GTK/GIO - Flags & the Command Line</a>
 	</div>
--->
 </div>
