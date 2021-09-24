@@ -1,7 +1,7 @@
 ---
 title: "0113: GTK GIO Application IDs and Signals"
 layout: post
-topic: button
+topic: app
 description: Wherein we discover the role and naming conventions for application ID's and signals.
 author: Ron Tarrant
 ---

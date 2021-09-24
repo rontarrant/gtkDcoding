@@ -1,7 +1,7 @@
 ---
 title: "0114: GTK GIO Application Flags and Command Line Arguments"
 layout: post
-topic: button
+topic: app
 description: How GTK/GIO uses flags in the processing command line arguments.
 author: Ron Tarrant
 ---
@@ -242,9 +242,7 @@ Until then, just remember Howard’s immortal words: “There’s no place for t
 	<div style="float: left;">
 		<a href="/2021/09/10/0113-gtk-gio-application-ids-signals.html">Previous: GTK GIO Applications - IDs and Signals</a>
 	</div>
-<!--
 	<div style="float: right;">
-		<a href="/2021/09/24/0115-gtk-gio-app-flags-and-cl.html">Next: GTK/GIO Application IV - Opening Files</a>
+		<a href="/2021/09/24/0115-gtk-gio-app-open-flag.html">Next: GTK/GIO IV - Opening Files</a>
 	</div>
--->
 </div>
