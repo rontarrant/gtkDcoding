@@ -15,7 +15,7 @@ void main(string[] args)
 class MyApplication : GtkApplication
 {
 	ApplicationFlags flags = ApplicationFlags.FLAGS_NONE;
-	string id = "com.gtkdcoding.app.app_020_01_barebones"; // rules
+	string id = "com.gtkdcoding.app.app_020_03_adding_signals"; // rules
 
 	this(string[] args)
 	{
@@ -32,7 +32,7 @@ class MyApplication : GtkApplication
 
 	void onActivate(GioApplication app) // non-advanced syntax
 	{
-        AppWindow appWindow = new AppWindow(this);
+      AppWindow appWindow = new AppWindow(this);
 		writeln("triggered onActivate...");
 		writeln("\tApplication ID: ", getApplicationId());
 		

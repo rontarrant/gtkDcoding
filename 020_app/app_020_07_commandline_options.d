@@ -22,7 +22,7 @@ void main(string[] args)
 class MyApplication : GtkApplication
 {
 	ApplicationFlags flags = ApplicationFlags.HANDLES_COMMAND_LINE;
-	string id = "com.gtkdcoding.app.app_020_06_commandline_options"; // rules
+	string id = "com.gtkdcoding.app.app_020_07_commandline_options"; // rules
 	bool registration = false;
 	
 	OptionFlags optionFlags = OptionFlags.NONE;
@@ -38,6 +38,7 @@ class MyApplication : GtkApplication
 		addOnHandleLocalOptions(&onHandleLocalOptions);
 
 		// Build dictionary of command line switches (local options).
+		// args (in order): long name, short name, OptionFlags object, help blurb
 		//	When given on the command line, the long name is preceeded by '--' and the short name by '-'.
 		addMainOption("config", 'c', optionFlags, optionArg, "Configuration file", "to be filled in later");
 		addMainOption("version", 'v', optionFlags, optionArg, "Report software version", "to be filled in later");

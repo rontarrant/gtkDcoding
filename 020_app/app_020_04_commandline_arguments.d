@@ -43,6 +43,38 @@ class MyApplication : GtkApplication
 	} // this()
 
 
+	// override gio.Application.activate() so we can open a new window
+	void activate(int[] dimensions)
+	{
+		writeln("activate called");
+		AppWindow appWindow = new AppWindow(this, dimensions);
+
+	} // activate()
+	
+
+	void onActivate(GioApplication app) // non-advanced syntax
+	{
+		writeln("triggered onActivate...");
+		
+    } // onActivate()
+
+
+	void onStartup(GioApplication app) // non-advanced syntax
+	{
+		writeln("triggered onStartup...");
+		writeln("\tThis is where you'd read a config file.");
+		
+    } // onStartup()
+
+
+	void onShutdown(GioApplication app) // non-advanced syntax
+	{
+		writeln("triggered onShutdown...");
+		writeln("\tThis is where you'd write a config file.");
+
+    } // onShutdown()
+
+
 	int onCommandLine(ApplicationCommandLine acl, GioApplication app) // non-advanced syntax
 	{
 		int exitStatus = 0;
@@ -91,36 +123,6 @@ class MyApplication : GtkApplication
 		return(exitStatus);
 		
 	} // onCommandLine()
-
-
-	void activate(int[] dimensions) // override gio.Application.activate() so we can open a new window
-	{
-        AppWindow appWindow = new AppWindow(this, dimensions);
-
-	} // activate()
-	
-
-	void onActivate(GioApplication app) // non-advanced syntax
-	{
-		writeln("triggered (super) onActivate...");
-		
-    } // onActivate()
-
-
-	void onStartup(GioApplication app) // non-advanced syntax
-	{
-		writeln("triggered onStartup...");
-		writeln("\tThis is where you'd read a config file.");
-		
-    } // onStartup()
-
-
-	void onShutdown(GioApplication app) // non-advanced syntax
-	{
-		writeln("triggered onShutdown...");
-		writeln("\tThis is where you'd write a config file.");
-
-    } // onShutdown()
 
 } // class MyApplication
 

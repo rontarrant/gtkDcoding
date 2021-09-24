@@ -15,21 +15,21 @@ void main(string[] args)
 class MyApplication : GtkApplication
 {
 	ApplicationFlags flags = ApplicationFlags.FLAGS_NONE;
-	string id = "com.gtkdcoding.app.app_020_01_barebones"; // rules
+	string id = "com.gtkdcoding.app.app_020_02_barebones_with_id"; // rules
 
 	this(string[] args)
 	{
 		super(id, flags);
 		
 		addOnActivate(&onActivate);
-		run(args);
+		run(null);
 		
 	} // this()
 	
 	
 	void onActivate(GioApplication app) // non-advanced syntax
 	{
-        AppWindow appWindow = new AppWindow(this);
+		AppWindow appWindow = new AppWindow(this);
 		writeln("triggered onActivate...");
 		writeln("Application ID: ", getApplicationId());
 

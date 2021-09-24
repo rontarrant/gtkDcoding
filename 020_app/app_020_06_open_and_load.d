@@ -7,6 +7,12 @@ import gtk.ApplicationWindow;
 import gio.ApplicationCommandLine;
 import gio.FileIF;
 
+import gtk.Box;
+import gtk.Widget;
+import gtk.ScrolledWindow;
+import gtk.TextView;
+import gtk.TextBuffer;
+
 import std.stdio;
 
 void main(string[] args)
@@ -20,7 +26,7 @@ class MyApplication : GtkApplication
 {
 	// HANDLES_OPEN is for opening files from the command line. 
 	ApplicationFlags flags = ApplicationFlags.HANDLES_OPEN;
-	string id = "com.gtkdcoding.app.app_020_05_open_flag"; // rules
+	string id = "com.gtkdcoding.app.app_020_06_open_and_load"; // rules
 
 	this(string[] args)
 	{
@@ -91,6 +97,7 @@ class AppWindow : ApplicationWindow
 {
 	int width = 400, height = 200;
 	string title = "Application Open Signal";
+	AppBox appBox;
 
 	this(MyApplication myApp, string filename)
 	{
@@ -106,8 +113,78 @@ class AppWindow : ApplicationWindow
 			setTitle(title);
 		}
 		
-		showAll();
+		appBox = new AppBox(filename);
+		add(appBox);
 
+		showAll();
+		
 	} // this()
 	
 } // class AppWindow
+
+
+class AppBox : Box
+{
+	bool expand = true, fill = true;
+	uint globalPadding = 10, localPadding = 5;
+	ScrolledTextWindow scrolledTextWindow;
+	
+	this(string filename)
+	{
+		super(Orientation.VERTICAL, globalPadding);
+		
+		scrolledTextWindow = new ScrolledTextWindow(filename);
+		
+		packStart(scrolledTextWindow, expand, fill, localPadding); // TOP justify
+		
+	} // this()
+
+} // class AppBox
+
+
+class ScrolledTextWindow : ScrolledWindow
+{
+	MyTextView myTextView;
+	
+	this(string filename)
+	{
+		super();
+		
+		myTextView = new MyTextView(filename);
+		add(myTextView);
+		
+	} // this()
+	
+} // class ScrolledTextWindow
+
+
+class MyTextView : TextView
+{
+	TextBuffer textBuffer;
+	string content;
+	File file;
+	
+	this(string filename)
+	{
+		super();
+		textBuffer = getBuffer();
+		
+		// Make this conditional so a window will still open even
+		// if no file names are given on the command line.
+		if(filename)
+		{
+			file = File(filename, "r");
+			
+			while (!file.eof())
+			{
+				string line = file.readln();
+				content ~= line;
+			}
+			
+			textBuffer.setText(content);
+			file.close();		
+		}
+		
+	} // this()
+
+} // class MyTextView
