@@ -1,7 +1,7 @@
 ---
 title: "0111: A Scale Widget to Control Graphic Placement"
 layout: post
-topic: button
+topic: scale
 description: This GTK Tutorial covers a D-specific implementation of Scale Widget controlling placement of a graphic element.
 author: Ron Tarrant
 
