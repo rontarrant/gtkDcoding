@@ -334,3 +334,12 @@ So, now we’ve read file names from the command line and opened them, each in t
 
 Be safe.
 
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2021/09/17/0114-gtk-gio-app-flags-and-cl-args.html">Previous: GTK GIO - Command Line Arguments</a>
+	</div>
+<!--	<div style="float: right;">
+		<a href="/2021/10/01/0116-gtk-gio-app-cl-switches.html">Next: GTK/GIO - Command Line Switches</a>
+	</div> -->
+</div>
