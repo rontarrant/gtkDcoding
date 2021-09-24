@@ -151,7 +151,7 @@ void activate(string filename)
 } // activate()
 ```
 
-We’ve dispensed with the `dimensions` array of integers and replaced it with a string… the name of the file we’ll be opening in a window instance.
+We’ve dispensed with the `dimensions` argument—an array of integers—and replaced it with `filename`—a string—which is the name of the file we’ll be opening in a window instance.
 
 This method is called once for each file name provided on the command line.
 
@@ -169,7 +169,7 @@ void onActivate(GioApplication app) // non-advanced syntax
 } // onActivate()
 ```
 
-The reason we have another instantiation of `AppWindow` here is to deal with the possibility that the user gives no arguments. Here’s the low-down:
+The reason we have another instantiation of `AppWindow` here is to deal with the possibility that the user gives no arguments. Note that—depending on circumstances—either `activate()` or `onActivate()` is called, but not both. Here’s the low-down:
 
 - `activate()` is called once for each file name passed in, whether those file names are valid or not, and
 - `onActivate()` is called if no arguments whatsoever are given.
@@ -330,7 +330,7 @@ Once that’s done, `content` is dumped into the `TextBuffer` and we close the f
 
 So, now we’ve read file names from the command line and opened them, each in their own window. Next time, we’ll look at command line switches.
 
-‘Til then, let’s all do our best to stay sane. These trying times are a challenge—like trying to design a garbage collector on your first day with a new language while simultaneously trying to work out the plot of *Lost*—but we can survive and flourish if we all keep our heads… and our distance.
+‘Til then, let’s all do our best to stay sane. These trying times are a challenge—like setting out to design a garbage collector on your first day with a new language while simultaneously trying to work out the plot of *Lost*—but we can survive and flourish if we all keep our heads… and our distance.
 
 Be safe.
 
