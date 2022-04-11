@@ -1,0 +1,50 @@
+/* Mascot Effects */
+div.mascot_lap_dissolve
+{
+  width: 250px;
+  height: 213px;
+  animation-name: lap_dissolve;
+  animation-duration: 60s;
+  animation-iteration-count: infinite;
+  background-image: url("/images/mascot/mascot/mascot_250x213_red.png");
+}
+
+@keyframes lap_dissolve
+{
+	0%
+	{
+		background-image: url("/images/mascot/mascot_250x213_red.png");
+	}
+	12.5%
+	{
+		background-image: url("/images/mascot/mascot_250x213_orange.png");
+	}
+	25%
+	{
+		background-image: url("/images/mascot/mascot_250x213_yellow.png");
+	}
+	37.5%
+	{
+		background-image: url("/images/mascot/mascot_250x213_green.png");
+	}
+	50%
+	{
+		background-image: url("/images/mascot/mascot_250x213_blue.png");
+	}
+	62.5%
+	{
+		background-image: url("/images/mascot/mascot_250x213_indigo.png");
+	}
+	75%
+	{
+		background-image: url("/images/mascot/mascot_250x213_violet.png");
+	}
+	87.5%
+	{
+		background-image: url("/images/mascot/mascot_250x213_gray.png");
+	}
+	100%
+	{
+		background-image: url("/images/mascot/mascot_250x213_brown.png");
+	}
+}

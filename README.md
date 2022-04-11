@@ -1,5 +1,15 @@
 # gtkDcoding README
-GtkD is GTK+ for the D programming language. And what is GTK+? It's a GUI building toolkit for desktop applications and works on a number of POSIX operating systems (UNIX, UNIX-like, and OSX) as well as Windows. Together with D, GtkD can be used to build cross-platform desktop applications in a write-once-compile-for-many process.
+**2020-01-28**: As of today, posts will be rather sporadic as I work toward a more balanced life. I've also made some changes to the sponsorship tiers as can be seen on my [GitHub Sponsorship Page](https://github.com/sponsors/rontarrant).
+
+**2020-01-04**: Support the GtkDcoding demos by contributing through the [GitHub Sponsorship Program](https://github.com/sponsors/rontarrant).
+
+**2019-04-12**: I've switched back to Windows. Linux has come a long way, but I'm so used to how things are done on Windows. Like, for instance, starting an application and having the window open in the same place I last used it. Dialogs, too. Having windows open in the same default position every single time is fine for a single-monitor set-up, but with three, I'm getting a kink in my neck trying to find stuff. Also, I much prefer PSPad as an editor over anything I've found so far on Linux. Maybe I'm just set in my ways, but most other editors just feel wrong by comparison.
+
+**2019-02-22**: I've switched from Windows to Linux Mint 19.1 (xfce) as my main platform for development and blog contributions. I'll be doing a *howto do this on Linux* write-up soon.
+
+I also forgot to mention a few weeks back when I switched from GtkD 3.8.4 to GtkD 3.8.5. I do apologize. On the other hand, I haven't noticed (or heard of) anything breaking, so perhaps it's not a big deal.
+
+**2019-01-17**: GtkD is GTK+ for the D programming language. And what is GTK+? It's a GUI building toolkit for desktop applications and works on a number of POSIX operating systems (UNIX, UNIX-like, and OSX) as well as Windows. Together with D, GtkD can be used to build cross-platform desktop applications in a write-once-compile-for-many process.
 
 This repository is where I keep all the example code I've written for GtkD. Each example is written to demonstrate just one technique. For instance, in the buttons section, there are examples for each of the button types as well as how each of the available signals are handled. Each is written with the least amount of clutter and with comments intended to maximize clarity.
 
@@ -21,12 +31,6 @@ Here are the versions of the various software and libraries I've used:
 If and when any of these are updated, I'll mention it as a PS here in this readme.md file.
 
 -Ron Tarrant
-(January 17, 2019)
 
 [Read the blog](http://gtkDcoding.com)
 
-**2019-02-22**: I've switched from Windows to Linux Mint 19.1 (xfce) as my main platform for development and blog contributions. I'll be doing a *howto do this on Linux* write-up soon.
-
-**2019-04-12**: I've switched back to Windows. Linux has come a long way, but I'm so used to how things are done on Windows. Like, for instance, starting an application and having the window open in the same place I last used it. Dialogs, too. Having windows open in the same default position every single time is fine for a single-monitor set-up, but with three, I'm getting a kink in my neck trying to find stuff. Also, I much prefer PSPad as an editor over anything I've found so far on Linux. Maybe I'm just set in my ways, but most other editors just feel wrong by comparison.
-
-I also forgot to mention a few weeks back when I switched from GtkD 3.8.4 to GtkD 3.8.5. I do apologize. On the other hand, I haven't noticed (or heard of) anything breaking, so perhaps it's not a big deal.

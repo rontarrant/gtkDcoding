@@ -1,0 +1,296 @@
+/* Topics CSS */
+
+h7 /* used for topics menu at top of page */
+{
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.topics-menu /* Controls the grid spacing for the Topics menu on the By Topics page. */
+{
+	display: grid;
+	grid-template-columns: 260px 260px 260px 260px;
+	grid-template-rows: 90px 90px; /* Add row heights as site.tags list grows. */
+	justify-content: space-evenly;
+	justify-items: end;
+	grid-gap: 5px;
+	padding: 5px;
+}
+.topic-icon /* Controls the size of icons in the Topics menu grid on the By Topic page. */
+{
+	width: 186px;
+	height: 70px;
+}
+.application /*  */
+{
+	background-image: linear-gradient(to left, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.application_font-color
+{
+	color: rgba(207, 0, 0, 1.0);
+}
+.button /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.button_font-color
+{
+	color: rgba(212, 130, 2, 1.0);
+}
+.canvas /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.canvas_font-color
+{
+	color: rgba(191, 189, 0, 1.0);
+}
+.checkbutton /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.checkbutton_font-color
+{
+	color: rgba(0, 150, 11, 1.0);
+}
+.class /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.class_font-color
+{
+	color: rgba(2, 54, 184, 1.0);
+}
+.colorchooser /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.colorchooser_font-color
+{
+	color: rgba(122, 0, 235, 1.0);
+}
+.combobox /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
+.combobox_font-color
+{
+	color: rgba(255, 0, 216, 1.0);
+}
+.dialog /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(114, 114, 114, 1.0), rgba(255, 255, 255, 1.0));
+}
+.dialog_font-color
+{
+	color: rgba(114, 114, 114, 1.0);
+}
+.entry /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(120, 68, 33, 1.0), rgba(255, 255, 255, 1.0));
+}
+.entry_font-color
+{
+	color: rgba(120, 68, 33, 1.0);
+}
+.event /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.event_font-color
+{
+	color: rgba(207, 0, 0, 1.0);
+}
+.font /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.font_font-color
+{
+	color: rgba(212, 130, 2, 1.0);
+}
+.frame /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.frame_font-color
+{
+	color: rgba(191, 189, 0, 1.0);
+}
+.general /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.general_font-color
+{
+	color: rgba(2, 54, 184, 1.0);
+}
+.grid /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.grid_font-color
+{
+	color: rgba(0, 150, 11, 1.0);
+}
+.image /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.image_font-color
+{
+	color: rgba(122, 0, 235, 1.0);
+}
+.label /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
+.label_font-color
+{
+	color: rgba(255, 0, 216, 1.0);
+}
+.labelframe /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(114, 114, 114, 1.0), rgba(255, 255, 255, 1.0));
+}
+.labelframe_font-color
+{
+	color: rgba(114, 114, 114, 1.0);
+}
+.listbox /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(120, 68, 33, 1.0), rgba(255, 255, 255, 1.0));
+}
+.listbox_font-color
+{
+	color: rgba(120, 68, 33, 1.0);
+}
+.menu /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.menu_font-color
+{
+	color: rgba(207, 0, 0, 1.0);
+}
+.message /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.message_font-color
+{
+	color: rgba(212, 130, 2, 1.0);
+}
+.messagebox /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.messagebox_font-color
+{
+	color: rgba(191, 189, 0, 1.0);
+}
+.notebook /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.notebook_font-color
+{
+	color: rgba(0, 150, 11, 1.0);
+}
+.panedwindow /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.panedwindow_font-color
+{
+	color: rgba(2, 54, 184, 1.0);
+}
+.progressbar /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.progressbar_font-color
+{
+	color: rgba(122, 0, 235, 1.0);
+}
+.radiobutton /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
+.radiobutton_font-color
+{
+	color: rgba(255, 0, 216, 1.0);
+}
+.scale /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(114, 114, 114, 1.0), rgba(255, 255, 255, 1.0));
+}
+.scale_font-color
+{
+	color: rgba(114, 114, 114, 1.0);
+}
+.scrollbar /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(120, 68, 33, 1.0), rgba(255, 255, 255, 1.0));
+}
+.scrollbar_font-color
+{
+	color: rgba(120, 68, 33, 1.0);
+}
+.scrolledtext /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.scrolledtext_font-color
+{
+	color: rgba(207, 0, 0, 1.0);
+}
+.sizegrip /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.sizegrip_font-color
+{
+	color: rgba(212, 130, 2, 1.0);
+}
+.spinbox /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.spinbox_font-color
+{
+	color: rgba(191, 189, 0, 1.0);
+}
+.text /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.text_font-color
+{
+	color: rgba(0, 150, 11, 1.0);
+}
+.themestyle /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.themestyle_font-color
+{
+	color: rgba(2, 54, 184, 1.0);
+}
+.treeview /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.treeview_font-color
+{
+	color: rgba(122, 0, 235, 1.0);
+}
+.window /*  */
+{
+	background-image: linear-gradient(to bottom, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
+.window_font-color
+{
+	color: rgba(255, 0, 216, 1.0);
+}

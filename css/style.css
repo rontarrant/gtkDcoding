@@ -1,0 +1,70 @@
+/*
+ * used only on the main page
+ * Here, padding is different than on post pages.
+ */
+h1, h2, h3, h4, h5, h6
+{
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: left;
+	color: black;
+}
+
+h1
+{
+	font-size: 35px;
+	padding-top: 50px;
+	padding-left: 0px;
+	padding-bottom: 5px;
+}
+
+h2
+{
+	font-size: 25px;
+	padding-top: 25px;
+	padding-right: 35px;
+	padding-bottom: 2px;
+}
+
+h3
+{
+	font-size: 20px;
+	font-style: italic;
+	padding-top: 15px;
+	padding-right: 20px;
+	padding-bottom: 4px;
+}
+
+h4
+{
+	font-size: 14px;
+	font-style: italic;
+	padding-top: 10px;
+	padding-right: 20px;
+	padding-bottom: 3px;
+}
+h5
+{
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	padding-top: 10px;
+	margin-bottom: -15px;
+}
+p, li
+{
+	font-family: Times, Time New Roman, serif;
+	font-style: normal;
+	color: black;
+	z-index: 20;
+}
+
+a:link
+{
+	font-style: normal;
+	z-index: 2;
+	color: blue;
+}
+a:visited
+{
+	color: purple;
+}

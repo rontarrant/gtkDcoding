@@ -1,0 +1,125 @@
+/* site colors */
+
+/*
+ * TOPIC HEADER BACKGROUND color gradients
+ */
+.topic-color_app /*  */
+{
+	background-image: linear-gradient(to right, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_bar /*  */
+{
+	background-image: linear-gradient(to right, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_box /*  */
+{
+	background-image: linear-gradient(to right, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_button /*  */
+{
+	background-image: linear-gradient(to right, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_cairo /*  */
+{
+	background-image: linear-gradient(to right, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_container /*  */
+{
+	background-image: linear-gradient(to right, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_dialog /*  */
+{
+	background-image: linear-gradient(to right, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_dlang /*  */
+{
+	background-image: linear-gradient(to right, rgba(114, 114, 114, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_fontdeco /*  */
+{
+	background-image: linear-gradient(to right, rgba(120, 68, 33, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_general /*  */
+{
+	background-image: linear-gradient(to right, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_grid /*  */
+{
+	background-image: linear-gradient(to right, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_hardware /*  */
+{
+	background-image: linear-gradient(to right, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_image /*  */
+{
+	background-image: linear-gradient(to right, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_label /*  */
+{
+	background-image: linear-gradient(to right, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_layout /*  */
+{
+	background-image: linear-gradient(to right, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_linux /*  */
+{
+	background-image: linear-gradient(to right, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_menu /*  */
+{
+	background-image: linear-gradient(to right, rgba(114, 114, 114, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_misc /*  */
+{
+	background-image: linear-gradient(to right, rgba(120, 68, 33, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_modules /*  */
+{
+	background-image: linear-gradient(to right, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_mouse /*  */
+{
+	background-image: linear-gradient(to right, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_mvc /*  */
+{
+	background-image: linear-gradient(to right, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_nodes /*  */
+{
+	background-image: linear-gradient(to right, rgba(0, 150, 11, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_oop /*  */
+{
+	background-image: linear-gradient(to right, rgba(2, 54, 184, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_scale /*  */
+{
+	background-image: linear-gradient(to right, rgba(122, 0, 235, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_sfx /*  */
+{
+	background-image: linear-gradient(to right, rgba(255, 0, 216, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_spinbox /*  */
+{
+	background-image: linear-gradient(to right, rgba(114, 114, 114, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_text /*  */
+{
+	background-image: linear-gradient(to right, rgba(120, 68, 33, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_theme_style /*  */
+{
+	background-image: linear-gradient(to right, rgba(207, 0, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_treeview /*  */
+{
+	background-image: linear-gradient(to right, rgba(212, 130, 2, 1.0), rgba(255, 255, 255, 1.0));
+}
+.topic-color_window /*  */
+{
+	background-image: linear-gradient(to right, rgba(191, 189, 0, 1.0), rgba(255, 255, 255, 1.0));
+}
