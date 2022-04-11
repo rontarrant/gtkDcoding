@@ -100,13 +100,13 @@ author: Ron Tarrant
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_12_observed_radiomenuitems.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/012_menus/menu_12_observed_radiomenuitems.d" target="_blank">here</a>.
 	</div>
 </div>
 
 Today let’s look at an example that can perhaps be adapted for everyday use.
 
-Herein we set a bit of data with our `RadioMenuItem`s and track it with an observed object. And when the application terminates, it spits out a report about the state of all options in the set. This example is patterned after [the second CheckMenuItem example from two posts ago](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_10_multiple_checkmenuitems.d), so a lot of this ground [was covered there](/2019/04/19/0028-checkmenuitems.html).
+Herein we set a bit of data with our `RadioMenuItem`s and track it with an observed object. And when the application terminates, it spits out a report about the state of all options in the set. This example is patterned after [the second CheckMenuItem example from two posts ago](https://github.com/rontarrant/gtkd_demos/blob/master/012_menus/menu_10_multiple_checkmenuitems.d), so a lot of this ground [was covered there](/2019/04/19/0028-checkmenuitems.html).
 
 Just a quick reminder (if you aren’t flipping back to the previous post) that we created an observed object in `TestRigWindow` which got handed down through the hierarchy. We do the same here, but because we're dealing with `RadioMenuItem`s and not `CheckMenuItem`s, there will be a different approach.
 

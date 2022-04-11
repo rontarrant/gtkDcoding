@@ -106,7 +106,7 @@ Last time, we started with a look at a generic example of an *Observer* pattern.
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/021_oop/oop_04_checkbutton_observer.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/021_oop/oop_04_checkbutton_observer.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->

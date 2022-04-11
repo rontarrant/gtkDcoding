@@ -146,7 +146,7 @@ But to show this, we need an example, so let’s start with something simple lik
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_01_fill_surface.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_01_fill_surface.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -266,7 +266,7 @@ Now let’s look at a second simple example...
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_02_draw_line.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_02_draw_line.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -387,7 +387,7 @@ But what if you want to draw...
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_03_draw_rounded_lines.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_03_draw_rounded_lines.d" target="_blank">here</a>.
 	</div>
 </div>
 

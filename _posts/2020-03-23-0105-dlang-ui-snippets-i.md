@@ -90,7 +90,7 @@ Note: There is no UI for this example. You’ll have to run it in a terminal.
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/021_oop/oop_02_singleton.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/021_oop/oop_02_singleton.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -219,7 +219,7 @@ It spits out the address of the pointer to the *Singleton* as well as the addres
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/021_oop/oop_03_os_detection.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/021_oop/oop_03_os_detection.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->

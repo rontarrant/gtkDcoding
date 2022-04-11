@@ -104,7 +104,7 @@ This is a continuation of our Cairo briefs...
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_11_filled_arc.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_11_filled_arc.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -223,7 +223,7 @@ But we can also do some interesting stuff by issuing a bunch of `arc()` calls in
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_12_draw_arcs_cartoon_smile.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_12_draw_arcs_cartoon_smile.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -391,7 +391,7 @@ They're the start and end points of the 'smile' arc and they're in radians. A qu
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_13_draw_1_curve.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_13_draw_1_curve.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
@@ -489,7 +489,7 @@ They're the start and end points of the 'smile' arc and they're in radians. A qu
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_14_draw_2_curves.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_14_draw_2_curves.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for fourth (4th) occurrence of application and terminal screenshots on a single page -->

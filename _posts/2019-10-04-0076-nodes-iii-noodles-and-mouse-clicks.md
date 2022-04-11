@@ -108,7 +108,7 @@ This time, we’re going to toss out the hard-coded starting coordinates for the
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/023_nodes/nodes_03_cubic_bezier_set_xy_start_with_mouse.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/023_nodes/nodes_03_cubic_bezier_set_xy_start_with_mouse.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -120,7 +120,7 @@ As implied above, this won’t be a complete solution, but we’re getting there
 
 ### Harnessing the Mouse... Again
 
-We know how to harness mouse button presses from [Blog Post #0014](/2019/03/01/0014-reacting-to-mouse-events.html), specifically [the mouse button press example](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_01_press.d).
+We know how to harness mouse button presses from [Blog Post #0014](/2019/03/01/0014-reacting-to-mouse-events.html), specifically [the mouse button press example](https://github.com/rontarrant/gtkd_demos/blob/master/005_mouse/mouse_01_press.d).
 
 First, we add `onButtonPress` to our growing list of signals in the `MyDrawingArea` constructor:
 
@@ -290,7 +290,7 @@ Our example code, when run, will now have a drag-n-drop feel. The cubic *Bezier*
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/023_nodes/nodes_04_draw_noodle_complete.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/023_nodes/nodes_04_draw_noodle_complete.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->

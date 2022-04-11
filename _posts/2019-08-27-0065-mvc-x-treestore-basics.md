@@ -106,7 +106,7 @@ About a month ago, we broke away from *MVC* to talk about drawing with *Cairo*. 
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_14_treestore_append.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_14_treestore_append.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -263,7 +263,7 @@ In effect, this approach allows us to use whatever `TreeIter` is returned by `ap
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_15_treestore_append_multiple.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_15_treestore_append_multiple.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screenshots on a single page -->
@@ -402,7 +402,7 @@ But I mentioned earlier that there’s a second way to do this, so let’s look 
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_16_treestore_createiter.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_16_treestore_createiter.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
@@ -527,7 +527,7 @@ Everything else is the same with just that simple substitution. `append()` becom
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_17_treestore_createiter_loop_fill.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_17_treestore_createiter_loop_fill.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for fourth (4th) occurrence of application and terminal screen shots on a single page -->

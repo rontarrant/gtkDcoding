@@ -108,7 +108,7 @@ But, enough buildup. Let’s get to it.
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_10_notebook_basic.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_10_notebook_basic.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -282,10 +282,10 @@ And here’s another way to go about it...
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_11_notebook_with_visible_tab.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_11_notebook_with_visible_tab.d" target="_blank">here</a>.
 	</div>
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The CSS file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/css/visible_tabs.css" target="_blank">here</a>.
+		The CSS file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/css/visible_tabs.css" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
@@ -455,10 +455,10 @@ But, there's one more way to go about this, one that appeals to me because we br
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_12_notebook_internal_css_tab.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_12_notebook_internal_css_tab.d" target="_blank">here</a>.
 	</div>
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		A variation of the example using an enum <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_12a_notebook_internal_css_enum_tab.d" target="_blank">here</a>.
+		A variation of the example using an enum <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_12a_notebook_internal_css_enum_tab.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screen shots on a single page -->

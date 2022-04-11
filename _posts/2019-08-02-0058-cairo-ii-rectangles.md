@@ -106,7 +106,7 @@ So, let’s start with rectangles.
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_04_outline_rectangle.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_04_outline_rectangle.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -220,7 +220,7 @@ The rectangle() arguments are as they seem, x and y coordinates of the upper-lef
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_05_dashed_rectangle.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_05_dashed_rectangle.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -348,7 +348,7 @@ The dash pattern is an array of doubles and can be summed up as:
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_06_fill_rectangle.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_06_fill_rectangle.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -461,7 +461,7 @@ No mystery here, just substitute context.fill() for context.stroke() and if you 
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_07_fill_outlined_rectangle.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_07_fill_outlined_rectangle.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -581,7 +581,7 @@ And finally, let’s look at...
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_08_transparency.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_08_transparency.d" target="_blank">here</a>.
 	</div>
 </div>
 

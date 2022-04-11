@@ -114,7 +114,7 @@ The *Action Area* used in this example uses an array of roll-yer-own `Button` `L
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_10_custom_content_area.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_10_custom_content_area.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -228,7 +228,7 @@ Tuple!(string, int, int, int) getData()
 
 What you’re looking at is some *D*-specific coolness. To get the user-supplied data out of the `Entry`s, we’re dealing with two kinds of data, a string and a handful of integers. We use *D*’s `Tuple(S, I, I, I)` construct to declare a mixed return value and `tuple()` to put it together before handing it to the `return()` statement.
 
-*Note: You can also return a mixed bag of variables using a `Variant` or `struct`. [Here’s a short bit of example code showing all three: tuple, Variant, and struct]( https://github.com/rontarrant/gtkDcoding/blob/master/interesting_stuff/class_array_struct_return.d).*
+*Note: You can also return a mixed bag of variables using a `Variant` or `struct`. [Here’s a short bit of example code showing all three: tuple, Variant, and struct]( https://github.com/rontarrant/gtkd_demos/blob/master/interesting_stuff/class_array_struct_return.d).*
 
 Using this as a model, you can grab any combination of mixed data from the user, package it up, and get it back to whatever caller needs it.
 
@@ -236,7 +236,7 @@ Now, let’s skip back to the `NewImageDialog`’s callback function... well, pa
 
 ## Retrieving the User-supplied Data
 
-To handle the `Button`s in the action area, I set up a `switch()` statement inside the `doSomething()` callback. Here’s one relevant bit of that `switch`/`case` code. And for convenience, [here's the entire file again if you don't wanna scroll back up to the link]( https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_10_custom_content_area.d)):
+To handle the `Button`s in the action area, I set up a `switch()` statement inside the `doSomething()` callback. Here’s one relevant bit of that `switch`/`case` code. And for convenience, [here's the entire file again if you don't wanna scroll back up to the link]( https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_10_custom_content_area.d)):
 
 ```d
 case ResponseType.OK:

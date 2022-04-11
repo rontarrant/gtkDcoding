@@ -106,7 +106,7 @@ We’re still working our way through *Phase One* of this nodes-n-noodles concep
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/023_nodes/nodes_02_cubic_bezier_follow_mouse.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/023_nodes/nodes_02_cubic_bezier_follow_mouse.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -125,7 +125,7 @@ From these earlier examples, we’re reminded that:
 
 ## Draw and Redraw
 
-The `Timeout` object, [as we saw before](https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_24_counter_animation.d), decides when we’ll call a function similar to this example’s `onFrameElapsed()` function (which is taken, unchanged, from [the mouse tracker](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_04_tracker.d) example):
+The `Timeout` object, [as we saw before](https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_24_counter_animation.d), decides when we’ll call a function similar to this example’s `onFrameElapsed()` function (which is taken, unchanged, from [the mouse tracker](https://github.com/rontarrant/gtkd_demos/blob/master/005_mouse/mouse_04_tracker.d) example):
 
 ```d
 bool onFrameElapsed()
@@ -152,7 +152,7 @@ For now, we’ll use a hard-coded starting point and turn our attention to anoth
 
 ### Grabbing the Mouse Pointer Position
 
-We can use the `onMotion()` function from [the mouse tracker example](https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_04_tracker.d) to grab the mouse pointer position and use those x/y coordinates, along with the hard-coded starting point coordinates, to set our control points. From the previous post in this series, here’s a reminder of what those control point coordinates will be:
+We can use the `onMotion()` function from [the mouse tracker example](https://github.com/rontarrant/gtkd_demos/blob/master/005_mouse/mouse_04_tracker.d) to grab the mouse pointer position and use those x/y coordinates, along with the hard-coded starting point coordinates, to set our control points. From the previous post in this series, here’s a reminder of what those control point coordinates will be:
 
 - the coordinates of the first control point are:
 	- `x` is the same as the end point’s x,

@@ -112,7 +112,7 @@ Let’s start with the simplest of the bunch...
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_01_comboboxtext.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_01_comboboxtext.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -251,7 +251,7 @@ By default, the `ComboBox` and the `ComboBoxText` both assume you want an `Entry
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_02_comboboxtext_preselect.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_02_comboboxtext_preselect.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -355,7 +355,7 @@ And that’s all it takes to have one of our list items selected and showing on 
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_03_comboboxtext_entry.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_03_comboboxtext_entry.d" target="_blank">here</a>.
 	</div>
 </div>
 

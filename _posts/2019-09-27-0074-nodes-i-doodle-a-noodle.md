@@ -139,7 +139,7 @@ Third, we’ll bring nodes and noodles together. We’ll be able to connect the 
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/023_nodes/nodes_01_cubic_bezier.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/023_nodes/nodes_01_cubic_bezier.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -219,7 +219,7 @@ class MyDrawingArea : DrawingArea
 
 In the class preamble, we define the start and end points of the curve. Normally, this is where I’d also put the declarations and definitions for the control points as well, but because it's illegal to assign one variable to another in the preamble, these variable assignments are done in the constructor.
 
-And the rest is close enough to the third example ([Drawing a Curve](https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_13_draw_1_curve.d)) in [Blog Post #60](/2019/08/09/0060-cairo-iv-fill-arc-cartoon-mouth.html) as to need no further explanation.
+And the rest is close enough to the third example ([Drawing a Curve](https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_13_draw_1_curve.d)) in [Blog Post #60](/2019/08/09/0060-cairo-iv-fill-arc-cartoon-mouth.html) as to need no further explanation.
 
 ## Conclusion
 

@@ -104,7 +104,7 @@ Because the `ScaleButton` is the more involved of these two, I’m going to star
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_22_volume.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_22_volume.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -259,7 +259,7 @@ Anyway, so much for the `VolumeButton`. Let’s look at its parent...
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_21_scale.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_21_scale.d" target="_blank">here</a>.
 	</div>
 </div>
 

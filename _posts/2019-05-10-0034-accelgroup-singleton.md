@@ -100,7 +100,7 @@ author: Ron Tarrant
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_18_singleton_accel_menus.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/012_menus/menu_18_singleton_accel_menus.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -164,7 +164,7 @@ Seems complicated, right? Well, the only things we really need to know are:
 - the `private` keyword will only do its job if this class is in a `module` of its own, and
 - anything we add to this to make it useful goes into the constructor.
 
-So, after a few naming convention changes, our `S_AccelGroup` class (which you can find in [this example file right here](https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/singleton/S_AccelGroup.d)) looks like this:
+So, after a few naming convention changes, our `S_AccelGroup` class (which you can find in [this example file right here](https://github.com/rontarrant/gtkd_demos/blob/master/012_menus/singleton/S_AccelGroup.d)) looks like this:
 
 ```d
 module singleton.S_AccelGroup;

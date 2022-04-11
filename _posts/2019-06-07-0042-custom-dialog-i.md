@@ -114,7 +114,7 @@ The first one is...
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/009_grid/grid_03_non_aesthetic_layout.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/009_grid/grid_03_non_aesthetic_layout.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -212,7 +212,7 @@ But I'll let you know right now, the only code quoted here is from the second on
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/009_grid/grid_04_aesthetic_layout.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/009_grid/grid_04_aesthetic_layout.d" target="_blank">here</a>.
 	</div>
 </div>
 

@@ -104,7 +104,7 @@ Since we covered [a lot of this stuff last time](/2019/05/24/0038-file-save-dial
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_05_file_save_as.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_05_file_save_as.d" target="_blank">here</a>.
 	</div>
 </div>
 

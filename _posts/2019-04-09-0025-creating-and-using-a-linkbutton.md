@@ -104,7 +104,7 @@ Today’s buttons are simple, a button to click to follow a link and another one
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_10_linkbutton.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_10_linkbutton.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -244,7 +244,7 @@ That ain’t gonna look so pretty on a button, so you might instead consider...
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_11_linkbutton_labeled.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_11_linkbutton_labeled.d" target="_blank">here</a>.
 	</div>
 </div>
 

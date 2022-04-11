@@ -109,7 +109,7 @@ And what we’ll be playing with is the GTK `Switch` widget. First, we’ll get 
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_15_switch.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_15_switch.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -246,7 +246,7 @@ It seems that whereas we have the convenience of getting the `state` packaged wi
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_16_switch_light.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_16_switch_light.d" target="_blank">here</a>.
 	</div>
 </div>
 

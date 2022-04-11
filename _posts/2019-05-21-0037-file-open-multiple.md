@@ -102,7 +102,7 @@ This is a companion to the previous post, [File Dialog - Open a Single File](/20
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_03_file_open_multiple.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_03_file_open_multiple.d" target="_blank">here</a>.
 	</div>
 </div>
 

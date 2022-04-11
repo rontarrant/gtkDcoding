@@ -123,7 +123,7 @@ But since each has their own save options, we’ll look at each individually sta
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_20_draw_save_jpeg.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_20_draw_save_jpeg.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screenshots on a single page -->
@@ -292,7 +292,7 @@ And that’s all there is to it.
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_21_draw_save_png.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_21_draw_save_png.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screenshots on a single page -->
@@ -420,7 +420,7 @@ So the differences here (compared to our first example) are:
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_22_draw_save_tiff.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_22_draw_save_tiff.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
@@ -546,7 +546,7 @@ if(pixbuf.savev("./rectangle_hw.tiff", "tiff", tiffOptions, tiffOptionValues))
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_23_draw_save_bmp.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_23_draw_save_bmp.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for fourth (4th) occurrence of application and terminal screenshots on a single page -->

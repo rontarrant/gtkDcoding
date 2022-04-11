@@ -114,7 +114,7 @@ Today we look at three examples covering both ways of loading files, two that di
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_17_display_png.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_17_display_png.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screenshots on a single page -->
@@ -253,7 +253,7 @@ The next method of loading an image can also be used with PNG format, but it wil
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_18_display_jpeg.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_18_display_jpeg.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
@@ -269,7 +269,7 @@ string filename = "./images/guitar_bridge.jpg";
 
 Instead of a `Surface`, we’ll be working with a `Pixbuf`. I also gave non-zero values to `xOffset` and `yOffset` because there are times when we don’t want the image to be loaded in the top-left corner. `xOffset` and `yOffset` take care of that, placing the image’s upper-left corner in a specific spot in the window.
 
-In the call to `setSizeRequest()` in the `TestRigWindow` constructor, I made the window 40 pixels wider and 50 pixels taller than the photograph so that the offset leaves a border around the image. Note, too, that the bottom border is wider than the rest, adhering to the aesthetic we talked about in [the Grid examples](https://github.com/rontarrant/gtkDcoding/blob/master/009_grid/grid_04_aesthetic_layout.d).
+In the call to `setSizeRequest()` in the `TestRigWindow` constructor, I made the window 40 pixels wider and 50 pixels taller than the photograph so that the offset leaves a border around the image. Note, too, that the bottom border is wider than the rest, adhering to the aesthetic we talked about in [the Grid examples](https://github.com/rontarrant/gtkd_demos/blob/master/009_grid/grid_04_aesthetic_layout.d).
 
 The constructor looks like this:
 
@@ -391,7 +391,7 @@ Substitute a call to `setSourcePixbuf()` for the call to `setSourceSurface()` we
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_19_display_svg.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_19_display_svg.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
@@ -432,7 +432,7 @@ bool onDraw(Scoped!Context context, Widget w)
 } // onDraw()
 ```
 
-And, of course, this method also works for BMP, GIF, TIFF, and any of the other formats we found in the [list formats example](https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_16_list_formats.d).
+And, of course, this method also works for BMP, GIF, TIFF, and any of the other formats we found in the [list formats example](https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_16_list_formats.d).
 
 ## Conclusion
 

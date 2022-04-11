@@ -106,7 +106,7 @@ Today’s code lays the foundation for this type of functionality.
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_01_paned.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_01_paned.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -254,7 +254,7 @@ You could also use `pack1()` and `pack2()` if you prefer, but the behaviour will
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_02_paned_pack.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_02_paned_pack.d" target="_blank">here</a>.
 	</div>
 </div>
 

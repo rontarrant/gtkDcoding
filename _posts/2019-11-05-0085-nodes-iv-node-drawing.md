@@ -135,7 +135,7 @@ And, since the goal for nodes-n-noodles is more or less the same as it was for *
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/023_nodes/nodes_05_image_node_in_a_drawingarea.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/023_nodes/nodes_05_image_node_in_a_drawingarea.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -199,7 +199,7 @@ class MoveableNode : DrawingArea
 
 Looking at the class preamble, you’ll notice the visualness of the `Node` is just an image we’re pulling in from a file.
 
-And in the constructor, we use the image file to create a `Surface` and a `Pixbuf`. This is exactly what we did in one of the *Cairo* examples when we [loaded and displayed a PNG](https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_17_display_png.d).
+And in the constructor, we use the image file to create a `Surface` and a `Pixbuf`. This is exactly what we did in one of the *Cairo* examples when we [loaded and displayed a PNG](https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_17_display_png.d).
 
 As usual, the `onDraw()` function takes care of refresh so the drawing always looks the way it should.
 

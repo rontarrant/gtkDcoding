@@ -113,7 +113,7 @@ And that’s it.
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_10_treeview_1_column.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_10_treeview_1_column.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -168,7 +168,7 @@ class SignListStore : ListStore
 } // class SignListStore
 ```
 
-This is the same `SignListStore` we used with a `ComboBox` in [an earlier example]( https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_06_combobox_liststore.d), thus illustrating how the same data can be used in different ways by different `Widget`s.
+This is the same `SignListStore` we used with a `ComboBox` in [an earlier example]( https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_06_combobox_liststore.d), thus illustrating how the same data can be used in different ways by different `Widget`s.
 
 And that just leaves...
 
@@ -300,7 +300,7 @@ On top of that, we also name the column (`columnTitle`) and give it a number. An
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_11_treeview_2_column.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_11_treeview_2_column.d" target="_blank">here</a>.
 	</div>
 </div>
 

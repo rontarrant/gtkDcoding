@@ -100,11 +100,11 @@ author: Ron Tarrant
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_08_combobox_pixbuf.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_08_combobox_pixbuf.d" target="_blank">here</a>.
 	</div>
 </div>
 
-And here's a [link to the zip file containing images used in this example](https://github.com/rontarrant/gtkDcoding/blob/master/downloads/_images.zip).  
+And here's a [link to the zip file containing images used in this example](https://github.com/rontarrant/gtkd_demos/blob/master/downloads/_images.zip).  
 
 So, we’ve done a two-column `ListStore`, how about one with four columns? And this time, let's throw in a `Pixbuf`... which BTW isn’t defined in the `GType enum`.
 
@@ -371,11 +371,11 @@ This is the second (and final) use of the `Column` enum and it's why the `Column
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_09_combobox_view_3_columns.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_09_combobox_view_3_columns.d" target="_blank">here</a>.
 	</div>
 </div>
 
-The [folder/directory of images](https://github.com/rontarrant/gtkDcoding/blob/master/downloads/_images.zip) is used with this example as well.
+The [folder/directory of images](https://github.com/rontarrant/gtkd_demos/blob/master/downloads/_images.zip) is used with this example as well.
 
 This post is running a bit long, but this example really won’t take much explanation, so here goes...
 

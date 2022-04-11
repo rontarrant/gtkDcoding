@@ -102,7 +102,7 @@ This one’s both easy and tricky. Let me explain...
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_18_spinbutton.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_18_spinbutton.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -262,7 +262,7 @@ With a `SpinButton`, the `Adjustment`'s `pageSize` is best set to ‘0.’
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_19_multiple_spinbuttons.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_19_multiple_spinbuttons.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -466,7 +466,7 @@ Now you know how to tame the `SpinButton` and `Adjustment` beasts.
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_20_spinbutton_experiments.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_20_spinbutton_experiments.d" target="_blank">here</a>.
 	</div>
 </div>
 

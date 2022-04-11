@@ -102,7 +102,7 @@ author: Ron Tarrant
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_05_scroll_wheel.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/005_mouse/mouse_05_scroll_wheel.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -243,7 +243,7 @@ Again, we have to dig a bit to find the data we want: the direction the mouse wh
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_06_left_middle_right.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/005_mouse/mouse_06_left_middle_right.d" target="_blank">here</a>.
 	</div>
 </div>
 

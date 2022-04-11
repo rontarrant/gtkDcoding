@@ -125,7 +125,7 @@ Where the afore-mentioned `Button` creation methods differ is in how the `Button
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_08_custom_action_area_button_text.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_08_custom_action_area_button_text.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -286,7 +286,7 @@ Okay, perhaps that didn’t turn out to be as exciting as it might have been, so
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_09_custom_action_area_stockid.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_09_custom_action_area_stockid.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -302,7 +302,7 @@ class StockButtonDialog : Dialog
 	string titleText = "Connect or disconnect?";
 ```
 
-Again, you can look in `/generated/gtkd/gtk/c/types.d` for the full list of `StockID`s and there are tons of them. *But!* A lot of them are deprecated, so to lessen the burden of weeding out the ones that aren't, I copied the still-current ones into [another file that you can download if you wish]( https://github.com/rontarrant/gtkDcoding/blob/master/downloads/StockID_precated.d). 
+Again, you can look in `/generated/gtkd/gtk/c/types.d` for the full list of `StockID`s and there are tons of them. *But!* A lot of them are deprecated, so to lessen the burden of weeding out the ones that aren't, I copied the still-current ones into [another file that you can download if you wish]( https://github.com/rontarrant/gtkd_demos/blob/master/downloads/StockID_precated.d). 
 
 Once you’ve picked out your button names, as before, just instantiate an array and you’re set.
 

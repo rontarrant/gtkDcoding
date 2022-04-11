@@ -108,7 +108,7 @@ But since these examples—button press and button release—are so similar, we'
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_01_press.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/005_mouse/mouse_01_press.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -204,7 +204,7 @@ But since these examples—button press and button release—are so similar, we'
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_02_release.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/005_mouse/mouse_02_release.d" target="_blank">here</a>.
 	</div>
 </div>
 

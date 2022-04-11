@@ -101,7 +101,7 @@ author: Ron Tarrant
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_07_change_pointer.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/005_mouse/mouse_07_change_pointer.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -303,7 +303,7 @@ And that’s it.
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/005_mouse/mouse_08_all_actions.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/005_mouse/mouse_08_all_actions.d" target="_blank">here</a>.
 	</div>
 </div>
 

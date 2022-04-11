@@ -106,7 +106,7 @@ Something else you can do with a `HeaderBar` is add an extra `Button` or three. 
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/window_17_headerbar_extra_button.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/001_window/window_17_headerbar_extra_button.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -249,7 +249,7 @@ That gives us a `Button` to the left of the `HeaderBar`’s title and subtitle. 
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/window_18_headerbar_start_end_buttons.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/001_window/window_18_headerbar_start_end_buttons.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
@@ -361,7 +361,7 @@ But what if we need to have our standard `Button`s move around under user contro
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/window_19_headerbar_dynamic_layout.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/001_window/window_19_headerbar_dynamic_layout.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for third (3rd) occurrence of application and terminal screen shots on a single page -->
@@ -511,7 +511,7 @@ And just to round things out, let’s take a quick look at one more thing we can
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/window_20_headerbar_image.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/001_window/window_20_headerbar_image.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for fourth (4th) occurrence of application and terminal screen shots on a single page -->

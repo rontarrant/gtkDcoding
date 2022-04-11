@@ -104,7 +104,7 @@ Today’s examples are quite unrelated. The only reason they appear in the same 
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/006_text/text_04_disappearing_entry.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/006_text/text_04_disappearing_entry.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -246,7 +246,7 @@ That’s one down. Now let’s look at...
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/006_text/text_05_fontbutton.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/006_text/text_05_fontbutton.d" target="_blank">here</a>.
 	</div>
 </div>
 

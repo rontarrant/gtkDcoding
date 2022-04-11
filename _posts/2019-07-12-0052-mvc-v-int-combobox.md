@@ -107,7 +107,7 @@ This time around, we’re going to change things up in two ways:
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_07_combobox_int_2_column.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_07_combobox_int_2_column.d" target="_blank">here</a>.
 	</div>
 </div>
 

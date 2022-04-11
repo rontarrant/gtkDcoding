@@ -104,7 +104,7 @@ Let’s jump right in and look at...
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_09_draw_circle.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_09_draw_circle.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -256,7 +256,7 @@ So I took the liberty of reproducing the conversion chart so it accurately refle
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/018_cairo/cairo_10_draw_arc.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_10_draw_arc.d" target="_blank">here</a>.
 	</div>
 </div>
 

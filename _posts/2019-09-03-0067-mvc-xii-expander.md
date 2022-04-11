@@ -106,7 +106,7 @@ Today’s widget example is similar to a `TreeView` with a `TreeStore` model, bu
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_03_simple_expander.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_03_simple_expander.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -282,7 +282,7 @@ Intuitively you might think expanded means the `Expander` is... well, expanded, 
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_04_extended_expander.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_04_extended_expander.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
@@ -290,7 +290,7 @@ Intuitively you might think expanded means the `Expander` is... well, expanded, 
 
 To stuff more widgets into an `Expander`’s child area, I opted for the `Grid` as a container. Stick a `Grid` in there and follow [the guidelines I laid out in the post covering customized `Dialog` windows](/2019/06/07/0042-custom-dialog-i.html) and you should have no trouble getting a decent layout happening.
 
-Here’s the derived `Grid` I used (it’s based on the `PadGrid` from [the custom `Dialog` example](https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_10_custom_content_area.d)):
+Here’s the derived `Grid` I used (it’s based on the `PadGrid` from [the custom `Dialog` example](https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_10_custom_content_area.d)):
 
 ```d
 class ExpanderChildGrid : Grid

@@ -106,12 +106,12 @@ Accessing any child widgets we've stuffed into `Notebook` pages—for loading or
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_19_notebook_child_widgets.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_19_notebook_child_widgets.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
 
-Setting the text in a `TextView` is something we’ve seen before in [the first Notebook demo](https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_10_notebook_basic.d) and—cherry picking statements from the preamble and constructor—goes something like this:
+Setting the text in a `TextView` is something we’ve seen before in [the first Notebook demo](https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_10_notebook_basic.d) and—cherry picking statements from the preamble and constructor—goes something like this:
 
 ```d
 TextBuffer textBuffer;
@@ -278,7 +278,7 @@ What if we wanna reset the tab text programmatically?
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/014_container/container_20_notebook_set_tab_text.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_20_notebook_set_tab_text.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->

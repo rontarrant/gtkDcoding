@@ -100,11 +100,11 @@ author: Ron Tarrant
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_13_combobox_weather.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_13_combobox_weather.d" target="_blank">here</a>.
 	</div>
 </div>
 
-And here's a link to [the companion files]( https://github.com/rontarrant/gtkDcoding/blob/master/downloads/weather_combobox.zip).
+And here's a link to [the companion files]( https://github.com/rontarrant/gtkd_demos/blob/master/downloads/weather_combobox.zip).
 
 Everything presented today is something we’ve looked at before. What’s different is how it’s all put together to make the *Weather ComboBox* example. So, we'll skim through to see those changes before checking out how this whole thing is put together.
 
@@ -372,7 +372,7 @@ And we finish off by stuffing in a second `CellRenderer` for the images:
 } // this()
 ```
 
-And just for completeness sake, here’s the OS detection module which you'll find in the companion zip file (We linked to it at the top, but [here it is again]( https://github.com/rontarrant/gtkDcoding/blob/master/downloads/weather_combobox.zip)). Because we’ve seen these a couple of times already, I won’t go into detail, but it’s patterned after the same [thread-safe singleton found here]( https://wiki.dlang.org/Low-Lock_Singleton_Pattern). And here it is, the `S_DetectedOS.d` module:
+And just for completeness sake, here’s the OS detection module which you'll find in the companion zip file (We linked to it at the top, but [here it is again]( https://github.com/rontarrant/gtkd_demos/blob/master/downloads/weather_combobox.zip)). Because we’ve seen these a couple of times already, I won’t go into detail, but it’s patterned after the same [thread-safe singleton found here]( https://wiki.dlang.org/Low-Lock_Singleton_Pattern). And here it is, the `S_DetectedOS.d` module:
 
 ```d
 module DetectedOS;

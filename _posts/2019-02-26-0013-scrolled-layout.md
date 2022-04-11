@@ -104,7 +104,7 @@ This time around, we’ll be looking at how to do a...
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/004_layout/layout_03_scrolled.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/004_layout/layout_03_scrolled.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -242,7 +242,7 @@ And since that didn’t take much time or effort, let’s look at another exampl
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/004_layout/layout_04_tooltip.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/004_layout/layout_04_tooltip.d" target="_blank">here</a>.
 	</div>
 </div>
 

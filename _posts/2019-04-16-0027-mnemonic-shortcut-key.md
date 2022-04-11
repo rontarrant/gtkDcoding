@@ -106,7 +106,7 @@ There are two ways to set up a keyboard shortcut for a `MenuItem`. Both start wi
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_07_mnemonic.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/012_menus/menu_07_mnemonic.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -296,7 +296,7 @@ append(separator);
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_08_separator.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/012_menus/menu_08_separator.d" target="_blank">here</a>.
 	</div>
 </div>
 

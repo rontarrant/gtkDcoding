@@ -136,7 +136,7 @@ Another drawback of using a `Layout`, and therefore the `put()` function, is tha
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/004_layout/layout_01_rotated.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/004_layout/layout_01_rotated.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -288,7 +288,7 @@ And that’s pretty much it for this time. Yes, I mentioned a second code file a
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/004_layout/layout_02_put_multiple.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/004_layout/layout_02_put_multiple.d" target="_blank">here</a>.
 	</div>
 </div>
 

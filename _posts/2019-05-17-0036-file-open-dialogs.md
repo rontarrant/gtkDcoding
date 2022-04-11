@@ -106,7 +106,7 @@ But we’re concentrating on just the surface stuff here. Latter in this series,
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_02_file_open_single.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_02_file_open_single.d" target="_blank">here</a>.
 	</div>
 </div>
 

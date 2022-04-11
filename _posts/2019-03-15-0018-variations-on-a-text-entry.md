@@ -102,7 +102,7 @@ author: Ron Tarrant
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/006_text/text_01_entry.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/006_text/text_01_entry.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -217,7 +217,7 @@ Moving right along...
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/006_text/text_02_no_edit_entry.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/006_text/text_02_no_edit_entry.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -361,7 +361,7 @@ Note that both the `Entry` and `CheckButton` states are set to `false` which mea
 	</div>
 
 	<div class="frame-footer">																							<!---------- filename (below) ---------->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/006_text/text_03_obfuscated_entry.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/006_text/text_03_obfuscated_entry.d" target="_blank">here</a>.
 	</div>
 </div>
 

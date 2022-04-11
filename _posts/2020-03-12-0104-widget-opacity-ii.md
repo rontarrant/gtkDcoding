@@ -106,7 +106,7 @@ Last time, we looked at how to fake ghosting using the `setOpacity()` function. 
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/016_sfx/sfx_07_insensitive.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/016_sfx/sfx_07_insensitive.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
@@ -144,7 +144,7 @@ Or not.
 
 Moving right along...
 
-The only other difference between this example and [the last one](https://github.com/rontarrant/gtkDcoding/blob/master/016_sfx/sfx_06_opacity_ghosting.d) is that the only object that knows about the `Label` is the `ButtonGrid`, so all references to `Label` outside of `ButtonGrid` are now eliminated.
+The only other difference between this example and [the last one](https://github.com/rontarrant/gtkd_demos/blob/master/016_sfx/sfx_06_opacity_ghosting.d) is that the only object that knows about the `Label` is the `ButtonGrid`, so all references to `Label` outside of `ButtonGrid` are now eliminated.
 
 ## Ghosted Buttons on an Image
 
@@ -240,7 +240,7 @@ The only other difference between this example and [the last one](https://github
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/016_sfx/sfx_08_ghost_over_drawingarea.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/016_sfx/sfx_08_ghost_over_drawingarea.d" target="_blank">here</a>.
 	</div>
 </div>
 <!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->

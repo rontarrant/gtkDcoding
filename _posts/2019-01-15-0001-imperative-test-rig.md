@@ -13,7 +13,7 @@ Before we start examining the test rig code, I'd like to introduce you to a coup
 
 ## PS Pad and CodeBlocks Syntax Highlighters
 
-If you haven’t settled on an editor with support for *D*, I’d like to make a couple of recommendations. I’ve written lexers for *GtkD* for two text editors, *PSPad* and *CodeBlocks*. You can find them along with instructions for where to install them in the [downloads directory](https://github.com/rontarrant/gtkDcoding/blob/master/downloads/syntax_ps_pad_codeblocks.zip) on my *GitHub* site.
+If you haven’t settled on an editor with support for *D*, I’d like to make a couple of recommendations. I’ve written lexers for *GtkD* for two text editors, *PSPad* and *CodeBlocks*. You can find them along with instructions for where to install them in the [downloads directory](https://github.com/rontarrant/gtkd_demos/blob/master/downloads/syntax_ps_pad_codeblocks.zip) on my *GitHub* site.
 
 ## The Test Rig Code
 
@@ -107,7 +107,7 @@ If you haven’t settled on an editor with support for *D*, I’d like to make a
 	</div>
 
 	<div class="frame-footer">																																<!-- filename (below)-->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/001_window/window_02_imperative.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/001_window/window_02_imperative.d" target="_blank">here</a>.
 	</div>
 </div>
 

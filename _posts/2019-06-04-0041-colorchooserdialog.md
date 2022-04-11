@@ -102,11 +102,11 @@ We’ve actually seen today’s topic widget before, but it was part-n-parcel of
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_07_ColorChooserDialog.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_07_ColorChooserDialog.d" target="_blank">here</a>.
 	</div>
 </div>
 
-In this example, I’ve defined a `ColorChooserButton` based on a plain vanilla `Button` which, in effect, makes this newly-derived `ColorChooserButton` equivalent to the `ColorButton` we saw in [Blog Post #23]( /2019/04/02/0023-radio-and-color-buttons.html) (and [the code file for that can be found here]( https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_02_colorbutton.d), if you care to have another look at it).
+In this example, I’ve defined a `ColorChooserButton` based on a plain vanilla `Button` which, in effect, makes this newly-derived `ColorChooserButton` equivalent to the `ColorButton` we saw in [Blog Post #23]( /2019/04/02/0023-radio-and-color-buttons.html) (and [the code file for that can be found here]( https://github.com/rontarrant/gtkd_demos/blob/master/010_more_buttons/button_010_02_colorbutton.d), if you care to have another look at it).
 
 ## The Button that Opens the Dialog
 
@@ -194,7 +194,7 @@ You may wonder which of these methods of picking a color is best, the `ColorChoo
 - for access from menu, toolbar and button, again: dialog, but
 - for accessing the dialog only from a button, the `ColorButton` will do fine.
 
-Another thing to take into consideration is whether or not you want that default white color haunting your application. You could deal with it by using an `ObservedColor` object like we did in [the ColorButton example]( https://github.com/rontarrant/gtkDcoding/blob/master/010_more_buttons/button_010_02_colorbutton.d). And even if you decide to go with the `ColorChooserDialog`, an `ObservedColor` can still be nudged in the right direction so as to serve your purposes.
+Another thing to take into consideration is whether or not you want that default white color haunting your application. You could deal with it by using an `ObservedColor` object like we did in [the ColorButton example]( https://github.com/rontarrant/gtkd_demos/blob/master/010_more_buttons/button_010_02_colorbutton.d). And even if you decide to go with the `ColorChooserDialog`, an `ObservedColor` can still be nudged in the right direction so as to serve your purposes.
 
 And that’s the `ColorChooserDialog`.
 

@@ -100,13 +100,13 @@ author: Ron Tarrant
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_04_file_save.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_04_file_save.d" target="_blank">here</a>.
 	</div>
 </div>
 
 ## Introduction
 
-Today's dialog example illustrating *File > Save* is very much like [the one we looked at earlier for *File > Open*](https://github.com/rontarrant/gtkDcoding/blob/master/013_dialogs/dialog_02_file_open_single.d). Making the change naturally means that *‘Open’* becomes *‘Save’* and *‘open’* becomes *‘save.’* But there’s a bit more to it than a bit of search-n-replace.
+Today's dialog example illustrating *File > Save* is very much like [the one we looked at earlier for *File > Open*](https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_02_file_open_single.d). Making the change naturally means that *‘Open’* becomes *‘Save’* and *‘open’* becomes *‘save.’* But there’s a bit more to it than a bit of search-n-replace.
 
 ### Extra Widgets: Entry
 

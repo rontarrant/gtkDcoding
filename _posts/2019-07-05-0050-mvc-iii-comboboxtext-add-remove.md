@@ -106,7 +106,7 @@ In this first example, we’ll look at...
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_04_comboboxtext_add.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_04_comboboxtext_add.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -296,7 +296,7 @@ A quick note: There are three ways we can add items to the list:
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/017_mvc/mvc_05_comboboxtext_add_remove.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_05_comboboxtext_add_remove.d" target="_blank">here</a>.
 	</div>
 </div>
 

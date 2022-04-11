@@ -121,7 +121,7 @@ One to the first example...
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_11_simple_radiomenuitems.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/012_menus/menu_11_simple_radiomenuitems.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -272,7 +272,7 @@ And as for the callback, we’re looking at a different approach to signal handl
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/012_menus/menu_13_simple_radiomenuitems_toggle.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/012_menus/menu_13_simple_radiomenuitems_toggle.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -308,13 +308,13 @@ class FileMenu : Menu
 } // class FileMenu
 ```
 
-We’ve worked with the `ListSG group` before, but perhaps without realizing it. If you look back at [the example code for a RadioButton](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_13_radiobutton.d), you’ll see that the group is not named up front like it is here. Instead, it's declared and defined somewhere in the inner workings of the first `RadioButton`'s constructor and we only see it as a member of the `radioItem01` object.
+We’ve worked with the `ListSG group` before, but perhaps without realizing it. If you look back at [the example code for a RadioButton](https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_13_radiobutton.d), you’ll see that the group is not named up front like it is here. Instead, it's declared and defined somewhere in the inner workings of the first `RadioButton`'s constructor and we only see it as a member of the `radioItem01` object.
 
 But, in the current case, a non-instantiated `ListSG group` is declared in the `FileMenu` object (which is coming up next in this discussion) and passed along to the super-class's constructor. Internally, as far as the super-class is concerned, nothing's all that different. It still does the heavy lifting and it still stores `group` as a member variable in `radioItem01`. The only thing that changed was how the `group` variable started out. In the earlier example, it was created by the super-class. This time, it starts as a local variable here in the `FileMenu` object.
 
 And is there a difference? Not really. It's just another option. In fact, you may think you can pass `group` as an argument to `radioItem02` and `radioItem03`, but if you do, their constructors assume it's undefined and overwrite it. The result is that you end up with each `RadioMenuItem` in its own private group instead of being part of a set.
 
-*Aside: This process of passing an undefined group to the first `RadioMenuItem` also works with `RadioButton` as can be seen in [this bonus code example](https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_17_pregroup_radiobuttons.d). Look in these areas to see the changes:*
+*Aside: This process of passing an undefined group to the first `RadioMenuItem` also works with `RadioButton` as can be seen in [this bonus code example](https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_17_pregroup_radiobuttons.d). Look in these areas to see the changes:*
 
 - the import statements for `import glib.ListSG`,
 - the `RadioBox` class, and

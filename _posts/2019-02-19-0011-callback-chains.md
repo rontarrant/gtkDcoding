@@ -100,7 +100,7 @@ author: Ron Tarrant
 	</div>
 
 	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/002_button/button_08_multiple_signals.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_08_multiple_signals.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -256,7 +256,7 @@ Now let's move on to example #2...
 	</div>
 
 	<div class="frame-footer">																							<!--------- filename (below) ------------>
-		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/blob/master/003_box/box_05_signal_chain.d" target="_blank">here</a>.
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/003_box/box_05_signal_chain.d" target="_blank">here</a>.
 	</div>
 </div>
 
@@ -337,7 +337,7 @@ bool outputSomething(Event event, Widget widget)
 
 Again, the state of the underlying `ToggleButton` is checked and this time, we spit out a different message depending on what mode state we find.
 
-The `WatchedButton` class, derived as it is from a `ToggleButton`, is almost identical to the one we used in the [ToggleButton example code](https://github.com/rontarrant/gtkDcoding/blob/master/003_box/box_04_togglebutton.d), so no need to go over that.
+The `WatchedButton` class, derived as it is from a `ToggleButton`, is almost identical to the one we used in the [ToggleButton example code](https://github.com/rontarrant/gtkd_demos/blob/master/003_box/box_04_togglebutton.d), so no need to go over that.
 
 ### Are we done yet?
 
