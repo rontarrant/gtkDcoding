@@ -6,7 +6,6 @@ h7 /* used for topics menu at top of page */
 	font-size: 14px;
 	font-weight: normal;
 }
-
 .topics-menu /* Controls the grid spacing for the Topics menu on the By Topics page. */
 {
 	display: grid;

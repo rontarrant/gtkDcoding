@@ -5,11 +5,10 @@ layout: default
 <div class="home">
 	<div class="masthead-logo">
 		{{ content }} <!-- draw in the content of the page that uses this layout -->
-		<!-- <img src="/images/logos/logo_2019-07-22_185x186.png"> masthead logo -->
 	</div>
 	
 	{%- if site.posts.size > 0 -%}
-		<h2 class="post-list-heading">{{ page.list_title | default: "Musings of a GtkD Coder" }}</h2>
+		<!-- <h2 class="post-list-heading">{{ page.list_title | default: "Musings of a GtkD Coder" }}</h2> -->
 		<div  class="post-list">
 			<ul class="post-list">
 

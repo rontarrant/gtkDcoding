@@ -24,71 +24,94 @@ layout: default
 	<div itemprop="articleBody">
 		<!-- <img src="/images/page_headers/by_topic_page_header_860x130.png"> masthead logo -->
 		{{- content -}}
-		
 		<!-- find out if there are posts and, if so, sort them into a collection -->		
 		{%- if site.posts.size > 0 -%}
-			{%- assign posts_by_topic = site.posts | group_by: 'topic' | natural -%}
-			
+			{%- assign posts_by_topic = site.posts | group_by: 'topic' | reverse -%}
+			<!-- SORT ALL TAGS INTO AN ALPHABETICAL LIST -->
+			{% capture site_tags %}
+				{%- for tag in site.tags -%}
+					{{ tag | first }}
+					{% unless forloop.last %}
+						,
+					{% endunless %}
+				{% endfor %}
+			{% endcapture %}
+
+			{% assign sorted_tags = site_tags | split:',' | sort_natural %}
+
 			<!-- build the topics menu -->
 			<BR>
 			<!-- BUILD TOPICS MENU -->
 			<div class="topics-menu">
-				{% for topic in posts_by_topic %}
+				{% for tag in (0..site.tags.size) %}
+					{% unless forloop.last %}
 					 <!-- grab the topic name from the current post -->
-					{% capture topic_color %}
-						topic-color_{{ topic.name }}
+					{% capture topic_name %}
+						{{ sorted_tags[tag] | strip_newlines }}
 					{% endcapture %}
 					<div>
-						<a href="#{{ topic.name }}"> <!-- Build a link that will auto-scroll to the topic heading. -->
-							 <img class="topic-icon" src="/images/topics/{{ topic.name }}.png" alt="{{ topic.name | capitalize }}">
+						<a href="#{{ tag }}"> <!-- Build a link that will auto-scroll to the topic heading. -->
+							 <img class="topic-icon" src="/images/topics/{{ topic_name }}.png" alt="{{ tag | capitalize }}">
 						</a>
 						<p align="center" class="{{topic_name}}_font-color">{{ tag[1].size }}</p>
 					</div>
+					{% endunless %}
 				{%- endfor -%}
 			</div>
 			<BR>
 			<HR>
 			<BR>
-			<!-- TOPIC POSTS LISTED BY ALPHABETIC CATEGORY -->
+			<!-- TOPIC ARTICLES LISTED BY ALPHABETIC CATEGORY -->
 			 <!-- step through the list of tags/topics again -->
-			{%- for topic in posts_by_topic -%}
+			{%- for tag in sorted_tags -%}
+				{% unless forloop.last %}
 					<!-- Grab the topic name -->
-					{% capture topic_color %}
-						topic-color_{{ topic.name }}
+					{% capture topic_name %}
+						{{ sorted_tags[tag] | strip_newlines }}
 					{% endcapture %}
 
+					{%- assign current-topic-color = topic_name -%}
 					<!-- Build a header for the topic. -->
-					<div class="topic-div">
-						<a id="{{topic.name}}">
-						<span class="post-date"> {{ post.date | date: date_format }} <!-- Grab the post's date. -->
-							<div class="{{ topic-color }} post-list-item"></div>
+					<div>
+						<a id="{{ topic_name }}">
+						<span> {{ post.date | date: date_format }} <!-- Grab the post's date. -->
+							<div class="{{ current-topic-color }} topic-header"></div>
 						</span>
 						<span class="topic-span-icon">
-							<img class="topic-icon" src="/images/topics/{{topic.name}}.png">
+							<img src="/images/topics/{{- topic_name -}}.png">
 						</span>
 					</div>
 
 					{% assign topic_posts = topic.items | reverse %}
 
-					<!-- List the posts by current topic. -->
-					{%- for post in topic_posts -%}
+					<!-- List of posts for the current topic. -->
+					<ul class="{{topic_name}}-post-list post-list">
+					<!-- List the posts in each topic. -->
+					{%- for post in site.posts reversed -%}
+						<li>
 							{%- assign date_format = site.minima.date_format | default: "%A, %B %-d, %Y" -%}
 							<div class="post-topic">
 								<div class="post-info">
 									<div class="post-topic-date">
 										{{- post.date | date: "%A, %B %-d, %Y" -}} <!-- date of post -->
 									</div>
-									<div>
-										<a class="post-link" href="{{ post.url | relative_url }}"> <!-- build page URL -->
-										{{- post.title -}}</a> <!-- title text -->
+									<div class="post-link">
+										<a href="{{ post.url | relative_url }}"</a> <!-- build page URL -->
+										{{- post.title -}} <!-- title text -->
 									</div>
+									<BR>
 									<div class="post-blurb">
 										{{- post.description -}}
 									</div>
 								</div>
 							</div>
-							<BR>
+						</li>
 					{% endfor %}
+					</ul>
+					<a href="#top" align="right">Return to Top of Page</a>
+					<div class="post-color-fade-topic"> <!-- This is just a spacer now. -->
+					</div>
+				{% endunless %}
 			{%- endfor -%}
 		{%- endif -%}
 		{%- include post-footer.html -%}

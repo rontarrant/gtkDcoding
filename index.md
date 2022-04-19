@@ -8,6 +8,4 @@ layout: home
 <link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet" href="/css/colors.css" />
 
-a site for sore skode
-
-![image](/images/logos/gtkDcoding_logo_v3_811x184.png)
+![image](/images/logos/logo_v11e_811x223.png)
