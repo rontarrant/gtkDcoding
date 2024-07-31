@@ -55,6 +55,8 @@ First, a *D* compiler. I’m using *dmd*, the official reference compiler, throu
 
 Second, you’ll want the latest *GTK+* runtime. This as well as the [GtkD.zip](https://gtkd.org/Downloads/sources/GtkD-3.9.0.zip) file can be downloaded from [the official GtkD website (maintained by Mike Wey)](https://gtkd.org/download.html).
 
+**Important:** Don't forget to reboot after installing the Gtk+ runtime. (I did this and spent half an hour trying to figure out why my examples wouldn't run. Talk about embarrassed!) 
+
 For now, I’m working on *Windows* and that’ll be reflected herein as well, although I’ve done a bit of preliminary work with *FreeBSD*, so I suspect all these examples will compile without trouble on any OS where *D*, *GtkD*, and a *GTK+* runtime are available. Once I’m reoriented to the POSIX world, I’ll make sure everything works there, too. If you find any situation where you can’t compile and run these examples, please let me know.
 
 ### Installation of the Development Environment
@@ -94,10 +96,10 @@ Look for the `[Environment]` section’s `DFLAGS` variable and:
 Now you need to copy the *GtkD* wrapper files to where the compiler can find them:
 
 - unzip [GtkD-3.9.zip](https://gtkd.org/Downloads/sources/GtkD-3.9.0.zip) (the version numbers may differ by the time you read this, but that’s fine),
-- from the `gtkd-3.9\generated` directory, copy the `gtkd` directory to:
+- from the `gtkd-3.9\generated` directory, copy the contents of the `gtkd` directory (but NOT the directory itself!) to:
 
 ```
-C:\D\dmd2\src\
+C:\D\dmd2\src\druntime\import\
 ```
 
 Thirdly, you’ll build and install the *GtkD* library...
