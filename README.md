@@ -1,4 +1,6 @@
 # gtkDcoding README
+**2024-07-31**: Updated the installation instructions to reflect changes in how GtkD is configured. A half hour after uploading the changes, however, they still haven't shown up on the site.
+
 **2020-01-28**: As of today, posts will be rather sporadic as I work toward a more balanced life. I've also made some changes to the sponsorship tiers as can be seen on my [GitHub Sponsorship Page](https://github.com/sponsors/rontarrant).
 
 **2020-01-04**: Support the GtkDcoding demos by contributing through the [GitHub Sponsorship Program](https://github.com/sponsors/rontarrant).
