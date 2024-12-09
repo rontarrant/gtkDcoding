@@ -22,7 +22,7 @@ layout: default
 	</header>
 
 	<div class="post-content e-content" itemprop="articleBody">
-		<img src="/images/logos/logo_v11e_185x186.png"> <!-- masthead logo -->
+		<img src="images/logos/logo_v11e_185x186.png"> <!-- masthead logo -->
 		{{ content }}
 		<!-- find out if there are posts and, if so, sort them into a collection -->		
 		{%- if site.posts.size > 0 -%}
@@ -43,7 +43,7 @@ layout: default
 						 <!-- The topic icon will be the clickable element. -->
 						  <!-- Build the full image path by concatenating the directory, topic name, and image extension. -->
 						 {% capture image_full_path %}
-							{{ "/images/topics/" }}{{ topic.name }}{{ ".png" }}
+							{{ "images/topics/" }}{{ topic.name }}{{ ".png" }}
 						 {% endcapture %}
 						 
 						 <img class="topic-icon" src="{{ image_full_path }}" alt="{{ topic.name | capitalize }}">
@@ -65,7 +65,7 @@ layout: default
 						<div class="{{topic_color}} topic-header"></div>
 					</span>
 					<span class="topic-span-icon">
-						<img class="topic-icon" src="/images/topics/{{topic.name}}.png">
+						<img class="topic-icon" src="images/topics/{{topic.name}}.png">
 					</span>
 				</div>
 				 <!-- List of posts for the current topic. -->

@@ -26,7 +26,7 @@ And for the record, there are two ways to get a custom icon in the titlebar. Met
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/001_window/window_08.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="images/screenshots/001_window/window_08.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -68,7 +68,7 @@ And for the record, there are two ways to get a custom icon in the titlebar. Met
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/001_window/window_08_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="images/screenshots/001_window/window_08_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -165,7 +165,7 @@ One line of code is all it takes and boom, you’re done.
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/001_window/window_09.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="images/screenshots/001_window/window_09.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -207,7 +207,7 @@ One line of code is all it takes and boom, you’re done.
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/001_window/window_09_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="images/screenshots/001_window/window_09_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->
@@ -305,7 +305,7 @@ First, the `Pixbuf` is created and filled from the same file we used in method o
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img4" src="/images/screenshots/001_window/window_10.png" alt="Current example output">		<!-- img# -->
+			<img id="img4" src="images/screenshots/001_window/window_10.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal4" class="modal">																<!-- modal# -->
@@ -347,7 +347,7 @@ First, the `Pixbuf` is created and filled from the same file we used in method o
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img5" src="/images/screenshots/001_window/window_10_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img5" src="images/screenshots/001_window/window_10_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal5" class="modal">																			<!-- modal# -->

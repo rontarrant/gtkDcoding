@@ -18,7 +18,7 @@ Back in 2006, I wrote an application in *PHP-GTK2* called *Corkboard*. It was an
 
 <div class="inpage-frame">
 	<figure class="right">
-		<img src="/images/diagrams/023_nodes/node.png" alt="Figure 1: A Look Back at the Node Design" style="width: 111px; height: 102px;">
+		<img src="images/diagrams/023_nodes/node.png" alt="Figure 1: A Look Back at the Node Design" style="width: 111px; height: 102px;">
 		<figcaption>
 			Figure 1: A Look at<BR> the Node Design
 		</figcaption>
@@ -51,7 +51,7 @@ And, since the goal for nodes-n-noodles is more or less the same as it was for *
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/023_nodes/nodes_05.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="images/screenshots/023_nodes/nodes_05.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -93,7 +93,7 @@ And, since the goal for nodes-n-noodles is more or less the same as it was for *
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/023_nodes/nodes_05_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="images/screenshots/023_nodes/nodes_05_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->

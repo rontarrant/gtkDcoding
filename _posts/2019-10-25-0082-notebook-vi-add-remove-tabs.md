@@ -22,7 +22,7 @@ Rather than building a menu system for this, I decided it would be less work to 
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/014_container/container_17.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="images/screenshots/014_container/container_17.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -64,7 +64,7 @@ Rather than building a menu system for this, I decided it would be less work to 
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/014_container/container_17_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="images/screenshots/014_container/container_17_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->

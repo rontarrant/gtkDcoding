@@ -23,7 +23,7 @@ author: Ron Tarrant
 email: gtkDcoding@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Simple examples of how to use GtkD to build GUI applications.
-#baseurl: "/gtkDcoding/" # the subpath of your site, e.g. /blog
+baseurl: "/gtkDcoding" # the subpath of your site, e.g. /blog
 url: "https://rontarrant.github.io/gtkDcoding" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 github_username:  rontarrant

@@ -22,7 +22,7 @@ layout: default
 	</header>
 	
 	<div itemprop="articleBody">
-		<!-- <img src="/images/page_headers/by_topic_page_header_860x130.png"> masthead logo -->
+		<!-- <img src="images/page_headers/by_topic_page_header_860x130.png"> masthead logo -->
 		{{- content -}}
 		
 		<!-- find out if there are posts and, if so, sort them into a collection -->		
@@ -40,7 +40,7 @@ layout: default
 					{% endcapture %}
 					<div>
 						<a href="#{{ topic.name }}"> <!-- Build a link that will auto-scroll to the topic heading. -->
-							 <img class="topic-icon" src="/images/topics/{{ topic.name }}.png" alt="{{ topic.name | capitalize }}">
+							 <img class="topic-icon" src="images/topics/{{ topic.name }}.png" alt="{{ topic.name | capitalize }}">
 						</a>
 						<p align="center" class="{{topic_name}}_font-color">{{ tag[1].size }}</p>
 					</div>
@@ -64,7 +64,7 @@ layout: default
 							<div class="{{ topic-color }} post-list-item"></div>
 						</span>
 						<span class="topic-span-icon">
-							<img class="topic-icon" src="/images/topics/{{topic.name}}.png">
+							<img class="topic-icon" src="images/topics/{{topic.name}}.png">
 						</span>
 					</div>
 

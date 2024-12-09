@@ -26,7 +26,7 @@ Let’s have a look at another *D*-specific trick for hunting down stuff in arra
 	</div>
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/019_dlang/dlang_01_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="images/screenshots/019_dlang/dlang_01_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
@@ -114,7 +114,7 @@ Now let’s put this into a *GTK* example...
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img2" src="/images/screenshots/019_dlang/dlang_02.png" alt="Current example output">		<!-- img# -->
+			<img id="img2" src="images/screenshots/019_dlang/dlang_02.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal2" class="modal">																<!-- modal# -->
@@ -156,7 +156,7 @@ Now let’s put this into a *GTK* example...
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img3" src="/images/screenshots/019_dlang/dlang_02_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
+			<img id="img3" src="images/screenshots/019_dlang/dlang_02_term.png" alt="Current example terminal output"> 		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal3" class="modal">																			<!-- modal# -->

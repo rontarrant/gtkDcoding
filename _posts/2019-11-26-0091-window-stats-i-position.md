@@ -31,7 +31,7 @@ So, since I don’t wanna come across as a hypocrite, I decided to come up with 
 	</div>
 	<div class="frame-screenshot">
 		<figure>
-			<img id="img0" src="/images/screenshots/001_window/window_11.png" alt="Current example output">		<!-- img# -->
+			<img id="img0" src="images/screenshots/001_window/window_11.png" alt="Current example output">		<!-- img# -->
 			
 			<!-- Modal for screenshot -->
 			<div id="modal0" class="modal">																	<!-- modal# -->
@@ -73,7 +73,7 @@ So, since I don’t wanna come across as a hypocrite, I decided to come up with 
 
 	<div class="frame-terminal">
 		<figure class="right">
-			<img id="img1" src="/images/screenshots/001_window/window_11_term.png" alt="Current example terminal output">		<!-- img#, filename -->
+			<img id="img1" src="images/screenshots/001_window/window_11_term.png" alt="Current example terminal output">		<!-- img#, filename -->
 
 			<!-- Modal for terminal shot -->
 			<div id="modal1" class="modal">																				<!-- modal# -->
