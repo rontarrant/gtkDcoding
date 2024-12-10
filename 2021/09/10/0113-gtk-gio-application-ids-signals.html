@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0113: GTK GIO Application IDs and Signals | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0113: GTK GIO Application IDs and Signals" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Wherein we discover the role and naming conventions for application ID’s and signals." />
+<meta property="og:description" content="Wherein we discover the role and naming conventions for application ID’s and signals." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2021/09/10/0113-gtk-gio-application-ids-signals.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2021/09/10/0113-gtk-gio-application-ids-signals.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-10T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0113: GTK GIO Application IDs and Signals" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2021-09-10T00:00:00-04:00","datePublished":"2021-09-10T00:00:00-04:00","description":"Wherein we discover the role and naming conventions for application ID’s and signals.","headline":"0113: GTK GIO Application IDs and Signals","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2021/09/10/0113-gtk-gio-application-ids-signals.html"},"url":"http://localhost:4000/gtkDcoding/2021/09/10/0113-gtk-gio-application-ids-signals.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/app.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2021-09-10T00:00:00-04:00" itemprop="datePublished">Friday, September 10, 2021
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0113-application-ids-and-signals">0113: Application IDs and Signals</h1>
+
+<p>Continuing from last time when we started looking at GTK/GIO Applications, today let’s look at…</p>
+
+<h2 id="application-ids">Application IDs</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/020_app/app_02_barebones_with_id.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/020_app/app_02_barebones_with_id_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_02_barebones_with_id.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>Every <code class="language-plaintext highlighter-rouge">Application</code> has to have an <code class="language-plaintext highlighter-rouge">ID</code>, even if—as in our example from last time—it’s <code class="language-plaintext highlighter-rouge">null</code>. The intention is that each <code class="language-plaintext highlighter-rouge">Application</code> can be singled out for inter-process communication, even across the vastness of the Internet. This may seem like overkill, but if you think about it, how else can we guarantee finding a single remote application among the (possibly) millions that may be accessible online? This also serves as a first line of defence against hacking that can be built into every <code class="language-plaintext highlighter-rouge">Application</code> we write. It’s not a great defence, but while hackers are guessing the ID, they aren’t messing with our application.</p>
+
+<p>You may wonder how we can be sure that the <code class="language-plaintext highlighter-rouge">ID</code> we give our <code class="language-plaintext highlighter-rouge">Application</code> hasn’t been used before by every Thomas, Richard, and Harold on the planet. The solution is rather ingenious and so simple, I wish I’d thought of it…</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ID</code> starts with a reverse-order URL. And if you don’t own a URL you can use an email account or the full URL of any online code repository you have read/write privileges for.</p>
+
+<p>Then, we tack on a unique string identifier. And as long as we keep track of which identifiers we give to which application, there should never be a problem.</p>
+
+<p>Here are the choices I had when naming the example used here, each based on a URL I have access to and the unique string is just the name of the code file:</p>
+
+<ul>
+  <li><strong>blog</strong>: com.gtkdcoding.app.app_02_barebones_with_id,</li>
+  <li><strong>email</strong>: com.gmail.gtkdcoding.app.app_02_barebones_with_id,</li>
+  <li><strong>repository</strong>: com.github.rontarrant.gtkdcoding.app.app_02_barebones_with_id</li>
+</ul>
+
+<p>You’ll note that I added an extra layer (.app) between the URL and the file name. It’s not strictly necessary, but it’s part of the site organization, so I threw it in there. However, the directory where you’ll find this code file is named <code class="language-plaintext highlighter-rouge">020_app</code>, not <code class="language-plaintext highlighter-rouge">app</code>. Why didn’t I use the full directory name?</p>
+
+<p>Because we have…</p>
+
+<h3 id="other-naming-conventions-we-need-to-follow">Other Naming Conventions We Need to Follow</h3>
+
+<p>Interestingly enough, these conventions are similar to those used to name variables (as if we didn’t see <em>that</em> coming):</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">ID</code> must be made up of at least two elements separated by a dot (element.element),</li>
+  <li>elements can be made up of:
+    <ul>
+      <li>alpha-numeric characters (a-z/A-Z, 0-9),</li>
+      <li>underscores (_), and</li>
+      <li>hyphens (-),</li>
+    </ul>
+  </li>
+  <li>the first character in an <code class="language-plaintext highlighter-rouge">ID</code> cannot be:
+    <ul>
+      <li>a digit (0-9), or</li>
+      <li>a dot (.),</li>
+    </ul>
+  </li>
+  <li>the first character in an <em>element</em> cannot be a digit (0-9),</li>
+  <li>putting two dots together (..) is not allowed,</li>
+  <li>the <code class="language-plaintext highlighter-rouge">ID</code> can’t start or end with a dot (.), and</li>
+  <li>the full length of the ID can’t be more than 255 characters.</li>
+</ul>
+
+<p>So, naming the ID looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span> <span class="n">id</span> <span class="p">=</span> <span class="s">"com.gtkdcoding.app.app_02_barebones_with_id"</span><span class="p">;</span> <span class="c1">// rules</span>
+</code></pre></div></div>
+
+<p>Naming an <code class="language-plaintext highlighter-rouge">ID</code> string can be patterned after a <em>D</em>-language import statement. We can simply use the file or project name and substitute a dot for a directory separator. And when it’s time to update the project to a new version, just toss in a version number… as long as it’s done in such a way that we don’t violate any of the naming conventions.</p>
+
+<p>All this takes place in our derived class, <code class="language-plaintext highlighter-rouge">MyApplication</code> (derived from <code class="language-plaintext highlighter-rouge">GtkApplication</code> which, if you remember, is an alias of <code class="language-plaintext highlighter-rouge">gtk.Application</code> and is, in turn, derived from <code class="language-plaintext highlighter-rouge">gio.Application</code>).</p>
+
+<p>Now, let’s move on to…</p>
+
+<h2 id="application-signals">Application Signals</h2>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/020_app/app_03_adding_signals.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/020_app/app_03_adding_signals_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_03_adding_signals.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>The two most obvious signals that every <code class="language-plaintext highlighter-rouge">Application</code> might have are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">startup</code>, and</li>
+  <li><code class="language-plaintext highlighter-rouge">shutdown</code>.</li>
+</ul>
+
+<p>So much might be done to prepare for running an <code class="language-plaintext highlighter-rouge">Application</code> or to clean up before exiting. A few things that come to mind are:</p>
+
+<ul>
+  <li>loading and saving a configuration file,</li>
+  <li>on shutdown, check for unsaved changes and see if the user wants to save before exiting, or</li>
+  <li>on start-up, pop open a splash screen.</li>
+</ul>
+
+<p>Hooking them up is no biggie. We just do the same thing we always do:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">addOnStartup</span><span class="p">(&amp;</span><span class="n">onStartup</span><span class="p">);</span>
+<span class="n">addOnShutdown</span><span class="p">(&amp;</span><span class="n">onShutdown</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>And the callback functions, in their simplest form, might look like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">onStartup</span><span class="p">(</span><span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span> <span class="c1">// non-advanced syntax</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"triggered onStartup..."</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"\tThis is where you'd read a config file."</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onStartup()</span>
+
+
+<span class="kt">void</span> <span class="n">onShutdown</span><span class="p">(</span><span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span> <span class="c1">// non-advanced syntax</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"triggered onShutdown..."</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"\tThis is where you'd write a config file."</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// onShutdown()</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that wraps it up for another day. Next time, we’ll tackle <em>GIO</em>/<em>GTK</em> flags. Until then—to paraphrase Les Nessman of <em>WKRP</em>, may the good code be yours.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2021/09/03/0112-gtk-gio-application-barebones.html">Previous: GTK GIO Applications - Introduction</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2021/09/17/0114-gtk-gio-app-flags-and-cl-args.html">Next: GTK/GIO - Flags &amp; the Command Line</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2021/09/10/0113-gtk-gio-application-ids-signals.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

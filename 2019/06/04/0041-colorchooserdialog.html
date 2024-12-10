@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0041: Dialogs VII - The ColorChooserDialog | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0041: Dialogs VII - The ColorChooserDialog" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Using a standard GTK ColorChooserDialog - the Dialog behind the ColorChooserButton - a D-language tutorial." />
+<meta property="og:description" content="Using a standard GTK ColorChooserDialog - the Dialog behind the ColorChooserButton - a D-language tutorial." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/06/04/0041-colorchooserdialog.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/06/04/0041-colorchooserdialog.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-04T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0041: Dialogs VII - The ColorChooserDialog" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-06-04T00:00:00-04:00","datePublished":"2019-06-04T00:00:00-04:00","description":"Using a standard GTK ColorChooserDialog - the Dialog behind the ColorChooserButton - a D-language tutorial.","headline":"0041: Dialogs VII - The ColorChooserDialog","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/06/04/0041-colorchooserdialog.html"},"url":"http://localhost:4000/gtkDcoding/2019/06/04/0041-colorchooserdialog.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/dialog.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-06-04T00:00:00-04:00" itemprop="datePublished">Tuesday, June 4, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0041-dialogs-vii---the-colorchooserdialog">0041: Dialogs VII - The ColorChooserDialog</h1>
+
+<p>We’ve actually seen today’s topic widget before, but it was part-n-parcel of the <code class="language-plaintext highlighter-rouge">ColorButton</code>, so we didn’t really look at it because it was a behind-the-scenes kind of dialog. Today, though, we’re gonna roll up our sleeves and see how this sucker works.</p>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/013_dialogs/dialog_07.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/013_dialogs/dialog_07_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_07_ColorChooserDialog.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>In this example, I’ve defined a <code class="language-plaintext highlighter-rouge">ColorChooserButton</code> based on a plain vanilla <code class="language-plaintext highlighter-rouge">Button</code> which, in effect, makes this newly-derived <code class="language-plaintext highlighter-rouge">ColorChooserButton</code> equivalent to the <code class="language-plaintext highlighter-rouge">ColorButton</code> we saw in <a href="/2019/04/02/0023-radio-and-color-buttons.html">Blog Post #23</a> (and <a href="https://github.com/rontarrant/gtkd_demos/blob/master/010_more_buttons/button_010_02_colorbutton.d">the code file for that can be found here</a>, if you care to have another look at it).</p>
+
+<h2 id="the-button-that-opens-the-dialog">The Button that Opens the Dialog</h2>
+
+<p>However, there are differences, so let’s look at what we’ve got here in this new button:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">ColorChooserButton</span> <span class="p">:</span> <span class="n">Button</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="nb">string</span> <span class="n">labelText</span> <span class="p">=</span> <span class="s">"Ask for a Color"</span><span class="p">;</span>
+	
+	<span class="n">MyColorChooserDialog</span> <span class="n">colorChooserDialog</span><span class="p">;</span>
+	<span class="n">Window</span> <span class="n">_parentWindow</span><span class="p">;</span>
+	
+	<span class="k">public</span><span class="p">:</span>
+	<span class="k">this</span><span class="p">(</span><span class="n">Window</span> <span class="n">parentWindow</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">labelText</span><span class="p">);</span>
+		<span class="n">addOnClicked</span><span class="p">(&amp;</span><span class="n">doSomething</span><span class="p">);</span>
+		<span class="n">_parentWindow</span> <span class="p">=</span> <span class="n">parentWindow</span><span class="p">;</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">doSomething</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">colorChooserDialog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyColorChooserDialog</span><span class="p">(</span><span class="n">_parentWindow</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// doSomething()</span>
+
+<span class="p">}</span> <span class="c1">// class: ColorChooserButton</span>
+</code></pre></div></div>
+
+<p>Here—because we’re driving the boat, as it were—we have to declare our own dialog which we didn’t have to do with the <code class="language-plaintext highlighter-rouge">ColorButton</code>. And naturally, we’ve got to hook up a signal too, so that clicking on the button opens the dialog. Then there’s the whole modal rigmarole to deal with, so we have to pass a pointer to the parent window along to our dialog object…</p>
+
+<h2 id="and-now-the-dialog">And Now, the Dialog</h2>
+
+<p>For which the code looketh thus like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">MyColorChooserDialog</span> <span class="p">:</span> <span class="n">ColorChooserDialog</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="nb">string</span> <span class="n">title</span> <span class="p">=</span> <span class="s">"I am the Chooser"</span><span class="p">;</span>
+	<span class="n">DialogFlags</span> <span class="n">flags</span> <span class="p">=</span> <span class="n">GtkDialogFlags</span><span class="p">.</span><span class="n">MODAL</span><span class="p">;</span>
+	<span class="n">RGBA</span> <span class="n">selectedColor</span><span class="p">;</span>
+
+	<span class="k">public</span><span class="p">:</span>
+	<span class="k">this</span><span class="p">(</span><span class="n">Window</span> <span class="n">_parentWindow</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">_parentWindow</span><span class="p">);</span>
+		<span class="n">addOnResponse</span><span class="p">(&amp;</span><span class="n">doSomething</span><span class="p">);</span>
+		<span class="n">run</span><span class="p">();</span> <span class="c1">// no response ID because this dialog ignores it</span>
+		<span class="n">destroy</span><span class="p">();</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+
+	<span class="k">protected</span><span class="p">:</span>
+	<span class="kt">void</span> <span class="n">doSomething</span><span class="p">(</span><span class="kt">int</span> <span class="n">response</span><span class="p">,</span> <span class="n">Dialog</span> <span class="n">d</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">getRgba</span><span class="p">(</span><span class="n">selectedColor</span><span class="p">);</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"New color selection: "</span><span class="p">,</span> <span class="n">selectedColor</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// doSomething()</span>
+	
+<span class="p">}</span> <span class="c1">// class MyColorChooserDialog</span>
+</code></pre></div></div>
+
+<p>As you can see, this is a derivation of the <code class="language-plaintext highlighter-rouge">ColorChooserDialog</code>, mostly because I wanted to illustrate a couple of points:</p>
+
+<ul>
+  <li>first, I’ve used the <code class="language-plaintext highlighter-rouge">addOnResponse()</code> function to hook up the signal, same as with the <code class="language-plaintext highlighter-rouge">MessageDialog</code>, but different from the <code class="language-plaintext highlighter-rouge">FileChooserDialog</code> (for which we used: <code class="language-plaintext highlighter-rouge">addOnActivate()</code>),</li>
+  <li>second, the <em>response ID</em> for the dialog is ignored.</li>
+</ul>
+
+<p>Yup, this is one dialog that doesn’t care which button you click to close it. And why? Because it’s got a default color already picked out for you: white (255, 255, 255) so there’s always a color available when you call <code class="language-plaintext highlighter-rouge">getRbga()</code>, even if you don’t explicitly pick a new one.</p>
+
+<p>So, what if you pick a new color, let’s say <code class="language-plaintext highlighter-rouge">rgb(245, 121, 0)</code>, a nice middle-of-the-road orange, but then next time you open the dialog, you hit the cancel button. Does the orange remain as the default pick?</p>
+
+<p>Nope. It goes back to white.</p>
+
+<h2 id="which-is-best">Which is Best?</h2>
+
+<p>You may wonder which of these methods of picking a color is best, the <code class="language-plaintext highlighter-rouge">ColorChooserDialog</code> or the <code class="language-plaintext highlighter-rouge">ColorButton</code>… It depends on the circumstances you find yourself in while designing an application:</p>
+
+<ul>
+  <li>if you plan to have access through a menu, you’ll want to use the dialog,</li>
+  <li>for access from menu, toolbar and button, again: dialog, but</li>
+  <li>for accessing the dialog only from a button, the <code class="language-plaintext highlighter-rouge">ColorButton</code> will do fine.</li>
+</ul>
+
+<p>Another thing to take into consideration is whether or not you want that default white color haunting your application. You could deal with it by using an <code class="language-plaintext highlighter-rouge">ObservedColor</code> object like we did in <a href="https://github.com/rontarrant/gtkd_demos/blob/master/010_more_buttons/button_010_02_colorbutton.d">the ColorButton example</a>. And even if you decide to go with the <code class="language-plaintext highlighter-rouge">ColorChooserDialog</code>, an <code class="language-plaintext highlighter-rouge">ObservedColor</code> can still be nudged in the right direction so as to serve your purposes.</p>
+
+<p>And that’s the <code class="language-plaintext highlighter-rouge">ColorChooserDialog</code>.</p>
+
+<p>Take care and see you next time.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/05/31/0040-messagedialog.html">Previous: MessageDialog</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/06/07/0042-custom-dialog-i.html">Next: Dialog Aesthetics</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/06/04/0041-colorchooserdialog.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

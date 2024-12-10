@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0013: Scrolled Layout | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0013: Scrolled Layout" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How to scroll the contents of a GTK Layout container - a D language tutorial." />
+<meta property="og:description" content="How to scroll the contents of a GTK Layout container - a D language tutorial." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/02/26/0013-scrolled-layout.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/02/26/0013-scrolled-layout.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-02-26T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0013: Scrolled Layout" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-02-26T00:00:00-05:00","datePublished":"2019-02-26T00:00:00-05:00","description":"How to scroll the contents of a GTK Layout container - a D language tutorial.","headline":"0013: Scrolled Layout","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/02/26/0013-scrolled-layout.html"},"url":"http://localhost:4000/gtkDcoding/2019/02/26/0013-scrolled-layout.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/container.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-02-26T00:00:00-05:00" itemprop="datePublished">Tuesday, February 26, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0013-scrolled-layout">0013: Scrolled Layout</h1>
+
+<p>This time around, we’ll be looking at how to do a…</p>
+
+<h2 id="scrolled-layout">Scrolled Layout</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/004_layout/layout_03.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/004_layout/layout_03_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/004_layout/layout_03_scrolled.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>It’s possible to roll your own scrolling layout by creating <em>Adjustment</em> widgets and sticking them in the layout using <em>setHadjustment()</em> and <em>setVadjustment()</em>. But maybe you don’t want to go to all that trouble. It’s far quicker and less work to stuff the <em>Layout</em> into a <em>ScrolledWindow</em> widget instead. So, that’s what we’ll do for now. Sometime down the road, we’ll look into doing it the hard way because now that I’ve said it’s rare to need a Layout done that way, it’s far more likely to come up.</p>
+
+<p>Because there really isn’t any need for a class derived from <em>ScrolledWindow</em>, we’ll stuff it into the <em>TestRigWindow</em> class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">TestRigWindow</span> <span class="p">:</span> <span class="n">MainWindow</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">title</span> <span class="p">=</span> <span class="s">"Test Rig"</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">title</span><span class="p">);</span>
+		<span class="n">addOnDestroy</span><span class="p">(</span><span class="k">delegate</span> <span class="kt">void</span><span class="p">(</span><span class="n">Widget</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span> <span class="n">quitApp</span><span class="p">();</span> <span class="p">}</span> <span class="p">);</span>
+		<span class="n">setSizeRequest</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+		
+		<span class="n">ScrolledWindow</span> <span class="n">scrolledWindow</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ScrolledWindow</span><span class="p">();</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">scrolledWindow</span><span class="p">);</span>
+		
+		<span class="k">auto</span> <span class="n">myLayout</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyLayout</span><span class="p">();</span>
+		<span class="n">scrolledWindow</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">myLayout</span><span class="p">);</span>
+
+		<span class="n">showAll</span><span class="p">();</span>
+
+	<span class="p">}</span> <span class="c1">// this() CONSTRUCTOR</span>
+	
+	
+	<span class="kt">void</span> <span class="n">quitApp</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"Bye."</span><span class="p">);</span>
+		<span class="n">Main</span><span class="p">.</span><span class="n">quit</span><span class="p">();</span>
+		
+	<span class="p">}</span> <span class="c1">// quitApp()</span>
+
+<span class="p">}</span> <span class="c1">// class myAppWindow</span>
+</code></pre></div></div>
+
+<p>Nothing out of the ordinary here. Create the <em>ScrolledWindow</em> object, add it to the <em>TestRigWindow</em>, then create the <em>Layout</em> and stuff it into the <em>ScrolledWindow</em>.</p>
+
+<p>And everything else in this example is similar to what we’ve covered before. Compile and run the code to see the scrollbars. If you’re running on Windows, you may have to look closely to see the scrollbars. I haven’t yet found a way to make them bigger, but when I do, I’ll cover it in a later blog post.</p>
+
+<p>And since that didn’t take much time or effort, let’s look at another example, the tooltip.</p>
+
+<h2 id="tooltip">Tooltip</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/004_layout/layout_04.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/004_layout/layout_04_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/004_layout/layout_04_tooltip.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>In <em>GTK</em>, it used to be that tooltips took a lot of time and effort to figure out and put into practice, but by the time version 3.x came along, things had changed. Now tooltips are built right in at the generic <em>Widget</em> level, so now it’s like falling off a skateboard, anyone can do it. So, let’s look at the derived <em>Button</em> class to see how it’s done:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">TooltipButton</span> <span class="p">:</span> <span class="n">Button</span>
+<span class="p">{</span>
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+
+		<span class="c1">// a rotated label</span>
+		<span class="n">RotatedLabel</span> <span class="n">myRotatedLabel</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RotatedLabel</span><span class="p">();</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">myRotatedLabel</span><span class="p">);</span>
+
+		<span class="n">addOnClicked</span><span class="p">(</span><span class="k">delegate</span> <span class="kt">void</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="p">{</span> <span class="n">doSomething</span><span class="p">();</span> <span class="p">}</span> <span class="p">);</span>
+
+		<span class="n">setHasTooltip</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		<span class="n">setTooltipText</span><span class="p">(</span><span class="n">myRotatedLabel</span><span class="p">.</span><span class="n">getText</span><span class="p">()</span> <span class="p">~</span> <span class="s">"\nClick me and see what happens."</span><span class="p">);</span>
+
+	<span class="p">}</span> <span class="c1">// this()</span>
+
+
+	<span class="kt">void</span> <span class="n">doSomething</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"Action from a rotated button..."</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// doSomething()</span>
+	
+<span class="p">}</span> <span class="c1">// class TooltipButton</span>
+</code></pre></div></div>
+
+<p>This is so easy compared to the original way. All you have to do is:</p>
+
+<ul>
+  <li>tell the <em>Button</em> to use its built-in <em>Tooltip</em> with <em>setHasTooltip(true)</em>, and</li>
+  <li>tell the <em>Tooltip</em> what to say with <em>setTooltipText(“whatever string you want”)</em>.</li>
+</ul>
+
+<p>In the example, I opted to grab the <em>Button</em>’s <em>Label</em> text and put that in the <em>Tooltip</em> along with a message.</p>
+
+<h3 id="theres-that-rotated-label-again">There’s that Rotated Label Again</h3>
+
+<p>Yeah, it’s one reason which leaps to mind for actually needing a <em>Tooltip</em> on a <em>Button</em>. It’s not the only reason, but if you’ve ever used software with sideways labels, you know it can be a literal pain the neck. Besides, for our purposes, this seems logical, so there it is.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Two for the price of one, a scrolled layout and a tooltip. The coolness just amps up every step along the path here. But now it’s time, gentlefolk, please. So have a good coding experience and I’ll see you next time.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/02/22/0012-layout-containers.html">Previous: Layout Containers</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/03/01/0014-reacting-to-mouse-events.html">Next: Mouse Events</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/02/26/0013-scrolled-layout.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
