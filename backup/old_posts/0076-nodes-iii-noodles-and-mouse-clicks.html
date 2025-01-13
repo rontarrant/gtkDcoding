@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlnodes.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-10-04T00:00:00-04:00" itemprop="datePublished">Friday, October 4, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0076-nodes-n-noodles-iii--noodles-and-mouse-clicks">0076: Nodes-n-noodles III – Noodles and Mouse Clicks</h1>
+
+<p>We’re up to step three as we work towards drawing a noodle with the mouse.</p>
+
+<p>This time, we’re going to toss out the hard-coded starting coordinates for the noodle and instead, when the user clicks a mouse button, take the coordinates from the location of the mouse pointer.</p>
+
+<h2 id="start-the-curve-with-the-mouse">Start the Curve with the Mouse</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/023_nodes/nodes_03.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/023_nodes/nodes_03_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/023_nodes/nodes_03_cubic_bezier_set_xy_start_with_mouse.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>As implied above, this won’t be a complete solution, but we’re getting there. And to get this step to work, we need to change a couple of things in our code:</p>
+
+<ul>
+  <li>harness the <code class="language-plaintext highlighter-rouge">onButtonPress</code> signal so we know when the mouse button is pressed, and</li>
+  <li>set up and maintain a flag that will decide when the drawing routines will be called.</li>
+</ul>
+
+<h3 id="harnessing-the-mouse-again">Harnessing the Mouse… Again</h3>
+
+<p>We know how to harness mouse button presses from <a href="/posts/0014-reacting-to-mouse-events.html">Blog Post #0014</a>, specifically <a href="https://github.com/rontarrant/gtkd_demos/blob/master/005_mouse/mouse_01_press.d">the mouse button press example</a>.</p>
+
+<p>First, we add <code class="language-plaintext highlighter-rouge">onButtonPress</code> to our growing list of signals in the <code class="language-plaintext highlighter-rouge">MyDrawingArea</code> constructor:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">addOnDraw</span><span class="p">(&amp;</span><span class="n">onDraw</span><span class="p">);</span>
+	<span class="n">addOnMotionNotify</span><span class="p">(&amp;</span><span class="n">onMotion</span><span class="p">);</span>
+	<span class="n">addOnButtonPress</span><span class="p">(&amp;</span><span class="n">onButtonPress</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>And add its callback:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">bool</span> <span class="n">onButtonPress</span><span class="p">(</span><span class="n">Event</span> <span class="n">event</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">widget</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">bool</span> <span class="n">returnValue</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+
+	<span class="n">dragAndDraw</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+
+	<span class="k">if</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">type</span> <span class="p">==</span> <span class="n">EventType</span><span class="p">.</span><span class="n">BUTTON_PRESS</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">GdkEventButton</span><span class="p">*</span> <span class="n">mouseEvent</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">;</span>
+		<span class="n">xStart</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+		<span class="n">yStart</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+		
+		<span class="n">returnValue</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span><span class="p">(</span><span class="n">returnValue</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onButtonPress()</span>
+</code></pre></div></div>
+
+<p>One more little change…</p>
+
+<h3 id="draw-flag">Draw Flag</h3>
+
+<p>In the instantiation section of <code class="language-plaintext highlighter-rouge">MyDrawingArea</code>, we add a line:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">dragAndDraw</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>And it follows that we also have to make it do something. Where? We change our <code class="language-plaintext highlighter-rouge">onDraw()</code> callback so it now looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onDraw</span><span class="p">(</span><span class="n">Scoped</span><span class="p">!</span><span class="n">Context</span> <span class="n">context</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">_timeout</span> <span class="k">is</span> <span class="kc">null</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">_timeout</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Timeout</span><span class="p">(</span><span class="n">fps</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">onFrameElapsed</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span><span class="p">(</span><span class="n">dragAndDraw</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="c1">// set up and draw a cubic Bezier</span>
+		<span class="n">context</span><span class="p">.</span><span class="n">setLineWidth</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+		<span class="n">context</span><span class="p">.</span><span class="n">setSourceRgb</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">);</span>
+		<span class="n">context</span><span class="p">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">xStart</span><span class="p">,</span> <span class="n">yStart</span><span class="p">);</span>
+		<span class="n">context</span><span class="p">.</span><span class="n">curveTo</span><span class="p">(</span><span class="n">controlPointX1</span><span class="p">,</span> <span class="n">controlPointY1</span><span class="p">,</span> <span class="n">controlPointX2</span><span class="p">,</span> <span class="n">controlPointY2</span><span class="p">,</span> <span class="n">xEnd</span><span class="p">,</span> <span class="n">yEnd</span><span class="p">);</span>
+		<span class="n">context</span><span class="p">.</span><span class="n">stroke</span><span class="p">();</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onDraw()</span>
+</code></pre></div></div>
+
+<p>All we’ve done here is to make the set of drawing instructions conditional. If the <code class="language-plaintext highlighter-rouge">dragAndDraw</code> flag is negative, we don’t do it.</p>
+
+<p>Our example code, when run, will now have a drag-n-drop feel. The cubic <em>Bezier</em> curve won’t appear until we click with the mouse button. Then we can drag the <em>Bezier</em> curve out in any direction and the curve follows just like before. However, when the mouse button is clicked again, the drawing of the curve restarts from scratch, using the new mouse location as the starting point.</p>
+
+<h2 id="the-final-step-to-noodle-drawing">The Final Step to Noodle Drawing</h2>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/023_nodes/nodes_04.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/023_nodes/nodes_04_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/023_nodes/nodes_04_draw_noodle_complete.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>What we’ve been working toward all this time is this:</p>
+
+<ul>
+  <li>when the mouse button is pressed, the curve begins drawing at the position of the mouse,</li>
+  <li>as the mouse moves, we see constant feedback as to how the curve looks, and</li>
+  <li>when we release the mouse button, the curve becomes static.</li>
+</ul>
+
+<p>To get there, we need to harness one more signal, <code class="language-plaintext highlighter-rouge">onButtonRelease</code>. And the purpose of this signal is so we know when to stop drawing… which is when we let go of the mouse button.</p>
+
+<p>So, once again, we add another signal hook-up to the constructor:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">addOnDraw</span><span class="p">(&amp;</span><span class="n">onDraw</span><span class="p">);</span>
+	<span class="n">addOnMotionNotify</span><span class="p">(&amp;</span><span class="n">onMotion</span><span class="p">);</span>
+	<span class="n">addOnButtonPress</span><span class="p">(&amp;</span><span class="n">onButtonPress</span><span class="p">);</span>
+	<span class="n">addOnButtonRelease</span><span class="p">(&amp;</span><span class="n">onButtonRelease</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>And toss in an associated callback:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">bool</span> <span class="n">onButtonRelease</span><span class="p">(</span><span class="n">Event</span> <span class="n">event</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">widget</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">bool</span> <span class="n">value</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+		
+	<span class="k">if</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">type</span> <span class="p">==</span> <span class="n">EventType</span><span class="p">.</span><span class="n">BUTTON_RELEASE</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">GdkEventButton</span><span class="p">*</span> <span class="n">buttonEvent</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">;</span>
+		<span class="n">xEnd</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+		<span class="n">yEnd</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+		<span class="n">value</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">dragAndDraw</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+
+	<span class="k">return</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onButtonRelease()</span>
+</code></pre></div></div>
+
+<p>A couple of things to note here:</p>
+
+<ol>
+  <li>no matter what, this callback always switches the <code class="language-plaintext highlighter-rouge">dragAndDraw</code> flag off, and</li>
+  <li>the curve’s end point is set just before the flag is switched off.</li>
+</ol>
+
+<h3 id="one-more-look-at-the-draganddraw-flag">One More Look at the dragAndDraw Flag</h3>
+
+<p>There is one more place where this flag changes the flow of control and that’s in <code class="language-plaintext highlighter-rouge">onFrameElasped()</code>:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onFrameElapsed</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">GtkAllocation</span> <span class="n">size</span><span class="p">;</span>
+	<span class="n">getAllocation</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+		
+	<span class="k">if</span><span class="p">(</span><span class="n">dragAndDraw</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">queueDrawArea</span><span class="p">(</span><span class="n">size</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
+	<span class="p">}</span>
+		
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onFrameElapsed()</span>
+</code></pre></div></div>
+
+<p>Here, we’re using the <code class="language-plaintext highlighter-rouge">dragAndDraw</code> flag to decide whether or not to queue up the next drawing operation. So what we end up with is this:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">onButtonPress()</code> callback enables curve drawing,</li>
+  <li>as long as the mouse button is held down:
+    <ul>
+      <li>curve drawing continues in the <code class="language-plaintext highlighter-rouge">onDraw()</code> callback, refreshing every 24th of a second, and</li>
+      <li>as long as the mouse is moving, <code class="language-plaintext highlighter-rouge">onMotion()</code> continually updates the end position of the curve until…</li>
+    </ul>
+  </li>
+  <li>the mouse button is released and <code class="language-plaintext highlighter-rouge">onButtonRelease</code> turns off the drawing flag and the last mouse position reported by <code class="language-plaintext highlighter-rouge">onMotion()</code> becomes the final end point for the static curve.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>So much for noodles. Next time we pick up the nodes-n-noodles series, we’ll tackle nodes. And next time, we’ll be looking at more common widgets.</p>
+
+<p>Until then.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0075-nodes-ii-mouse-noodle.html">Previous: Mouse Noodle</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0077-notebook-i-basics.html">Next: Notebook - The Basics</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0076-nodes-iii-noodles-and-mouse-clicks.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

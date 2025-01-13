@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlmvc.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-07-16T00:00:00-04:00" itemprop="datePublished">Tuesday, July 16, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0053-mvc-vi---a-combobox-with-images">0053: MVC VI - A ComboBox with Images</h1>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/017_mvc/mvc_08.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/017_mvc/mvc_08_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_08_combobox_pixbuf.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>And here’s a <a href="https://github.com/rontarrant/gtkd_demos/blob/master/downloads/_images.zip">link to the zip file containing images used in this example</a>.</p>
+
+<p>So, we’ve done a two-column <code class="language-plaintext highlighter-rouge">ListStore</code>, how about one with four columns? And this time, let’s throw in a <code class="language-plaintext highlighter-rouge">Pixbuf</code>… which BTW isn’t defined in the <code class="language-plaintext highlighter-rouge">GType enum</code>.</p>
+
+<h2 id="the-signliststore-class">The SignListStore Class</h2>
+
+<p>Here’s the initialization section:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">SignListStore</span> <span class="p">:</span> <span class="n">ListStore</span>
+<span class="p">{</span>
+	<span class="nb">string</span><span class="p">[]</span> <span class="n">items</span> <span class="p">=</span> <span class="p">[</span><span class="s">"bike"</span><span class="p">,</span> <span class="s">"bump"</span><span class="p">,</span> <span class="s">"cow"</span><span class="p">,</span> <span class="s">"deer"</span><span class="p">,</span> <span class="s">"crumbling cliff"</span><span class="p">,</span> <span class="s">"man with a stop sign"</span><span class="p">,</span> <span class="s">"skidding vehicle"</span><span class="p">];</span>
+	<span class="kt">int</span><span class="p">[]</span> <span class="n">signNumbers</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">];</span>
+	<span class="nb">string</span><span class="p">[]</span> <span class="n">images</span> <span class="p">=</span> <span class="p">[</span><span class="s">"_images/bicycle.png"</span><span class="p">,</span>
+			<span class="s">"_images/bump.png"</span><span class="p">,</span> 
+			<span class="s">"_images/cattle.png"</span><span class="p">,</span> 
+			<span class="s">"_images/deer.png"</span><span class="p">,</span> 
+			<span class="s">"_images/falling_rocks.png"</span><span class="p">,</span> 
+			<span class="s">"_images/road_crew.png"</span><span class="p">,</span> 
+			<span class="s">"_images/slippery_road.png"</span><span class="p">];</span>
+	<span class="nb">string</span><span class="p">[]</span> <span class="n">descriptions</span> <span class="p">=</span> <span class="p">[</span><span class="s">"Bicycles present"</span><span class="p">,</span>
+				<span class="s">"Bump ahead"</span><span class="p">,</span>
+				<span class="s">"Cattle crossing"</span><span class="p">,</span>
+				<span class="s">"Deer crossing"</span><span class="p">,</span>
+				<span class="s">"Falling rocks ahead"</span><span class="p">,</span>
+				<span class="s">"Road crew ahead"</span><span class="p">,</span>
+				<span class="s">"Slippery when wet"</span><span class="p">];</span>
+	<span class="k">enum</span> <span class="n">Column</span>
+	<span class="p">{</span>
+		<span class="n">THEME_COLUMN</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+		<span class="n">NUMBER_COLUMN</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span>
+		<span class="n">IMAGE_COLUMN</span> <span class="p">=</span> <span class="mi">2</span><span class="p">,</span>
+		<span class="n">DESCRIPTION_COLUMN</span> <span class="p">=</span> <span class="mi">3</span>
+		
+	<span class="p">}</span> <span class="c1">// enum Column</span>
+	
+	<span class="n">TreeIter</span> <span class="n">treeIter</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>And the definitions for the four columns mean we’re working with:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">items</code>: one-word text tags for each image,</li>
+  <li><code class="language-plaintext highlighter-rouge">signNumbers</code>: numbers associated with each image,</li>
+  <li><code class="language-plaintext highlighter-rouge">images</code>: relative paths and file names for each image, and</li>
+  <li><code class="language-plaintext highlighter-rouge">descriptions</code>: strings with more complete descriptions of each sign.</li>
+</ul>
+
+<p>You’ll also notice there’s an <code class="language-plaintext highlighter-rouge">enum</code> (<code class="language-plaintext highlighter-rouge">Column</code>) and we’ll see in a moment how these values are used, in the constructors for both the <code class="language-plaintext highlighter-rouge">SignListStore</code> and the <code class="language-plaintext highlighter-rouge">SignComboBox</code>.</p>
+
+<p>Making the <code class="language-plaintext highlighter-rouge">Column enum</code> part of <code class="language-plaintext highlighter-rouge">SignListStore</code> means that anywhere we can access the <code class="language-plaintext highlighter-rouge">ListStore</code>, we’ll be able to access these static column values. And if you take a peek at the <code class="language-plaintext highlighter-rouge">AppBox</code> class…</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">AppBox</span> <span class="p">:</span> <span class="n">Box</span>
+<span class="p">{</span>
+	<span class="n">SignComboBox</span> <span class="n">signComboBox</span><span class="p">;</span>
+	<span class="n">SignListStore</span> <span class="n">signListStore</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+		
+		<span class="n">signListStore</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SignListStore</span><span class="p">();</span>
+		<span class="n">signComboBox</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SignComboBox</span><span class="p">(</span><span class="n">signListStore</span><span class="p">);</span>
+		<span class="n">packStart</span><span class="p">(</span><span class="n">signComboBox</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+
+<span class="p">}</span> <span class="c1">// class AppBox</span>
+</code></pre></div></div>
+
+<p>… you’ll see that a pointer to <code class="language-plaintext highlighter-rouge">signListStore</code> is passed into the <code class="language-plaintext highlighter-rouge">SignComboBox</code> constructor.</p>
+
+<p>Now let’s look at the <code class="language-plaintext highlighter-rouge">SignListStore</code> constructor:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">item</span><span class="p">,</span> <span class="n">imageName</span><span class="p">,</span> <span class="n">description</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">number</span><span class="p">;</span>
+
+	<span class="k">super</span><span class="p">([</span><span class="n">GType</span><span class="p">.</span><span class="n">STRING</span><span class="p">,</span> <span class="n">GType</span><span class="p">.</span><span class="n">INT</span><span class="p">,</span> <span class="n">Pixbuf</span><span class="p">.</span><span class="n">getType</span><span class="p">(),</span> <span class="n">GType</span><span class="p">.</span><span class="n">STRING</span><span class="p">]);</span>
+		
+	<span class="k">foreach</span><span class="p">(</span><span class="kt">ulong</span> <span class="n">i</span><span class="p">;</span> <span class="mf">0.</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">item</span> <span class="p">=</span> <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+		<span class="n">number</span> <span class="p">=</span> <span class="n">signNumbers</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+		<span class="n">imageName</span> <span class="p">=</span> <span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+		<span class="n">description</span> <span class="p">=</span> <span class="n">descriptions</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+			
+		<span class="n">treeIter</span> <span class="p">=</span> <span class="n">createIter</span><span class="p">();</span>
+		<span class="n">setValue</span><span class="p">(</span><span class="n">treeIter</span><span class="p">,</span> <span class="n">Column</span><span class="p">.</span><span class="n">THEME_COLUMN</span><span class="p">,</span> <span class="n">item</span><span class="p">);</span>
+		<span class="n">setValue</span><span class="p">(</span><span class="n">treeIter</span><span class="p">,</span> <span class="n">Column</span><span class="p">.</span><span class="n">NUMBER_COLUMN</span><span class="p">,</span> <span class="n">number</span><span class="p">);</span>
+		<span class="n">setValue</span><span class="p">(</span><span class="n">treeIter</span><span class="p">,</span> <span class="n">Column</span><span class="p">.</span><span class="n">IMAGE_COLUMN</span><span class="p">,</span> <span class="k">new</span> <span class="n">Pixbuf</span><span class="p">(</span><span class="n">imageName</span><span class="p">));</span>
+		<span class="n">setValue</span><span class="p">(</span><span class="n">treeIter</span><span class="p">,</span> <span class="n">Column</span><span class="p">.</span><span class="n">DESCRIPTION_COLUMN</span><span class="p">,</span> <span class="n">description</span><span class="p">);</span>
+	<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>The first thing I’ll point out is the array we’re passing to <code class="language-plaintext highlighter-rouge">super()</code>. See that <code class="language-plaintext highlighter-rouge">Pixbuf.getType()</code> argument? It needs a bit of explanation, so here goes…</p>
+
+<h3 id="non-gtypes">Non-GTypes</h3>
+
+<p>Any visible <em>GTK</em>/<em>GDK</em>/<em>Pango</em> object class—such as <code class="language-plaintext highlighter-rouge">Pixbuf</code>, <code class="language-plaintext highlighter-rouge">Color</code>, <code class="language-plaintext highlighter-rouge">RBGA</code>, <code class="language-plaintext highlighter-rouge">PgFontDescription</code>, along with a whole raft of others—can be used as <code class="language-plaintext highlighter-rouge">ListStore</code> column data types. Some—like <code class="language-plaintext highlighter-rouge">Color</code>, <code class="language-plaintext highlighter-rouge">RBGA</code>, and <code class="language-plaintext highlighter-rouge">PgFontDescription</code>—can do no more than decorate other columns, but others—like the <code class="language-plaintext highlighter-rouge">Pixbuf</code>—can be visible in the <code class="language-plaintext highlighter-rouge">ComboBox</code>. And we get the correct type to pass to the <code class="language-plaintext highlighter-rouge">ListStore</code> constructor by asking the data class—not an instantiation of the class, but the base class itself—what type it is, kind of a “who goes there” approach:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Pixbuf</span><span class="p">.</span><span class="n">getType</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>And that does the job. Include that right in the array we pass to the super-class constructor and it’s accepted as just another <code class="language-plaintext highlighter-rouge">GType</code>.</p>
+
+<p><em>Note: Because <code class="language-plaintext highlighter-rouge">getType()</code> is a function call, it can’t be read at compile time, so we can’t predefine the array like we can if the columns all hold standard <code class="language-plaintext highlighter-rouge">GTypes</code>. The array has to be defined in the constructor at the very earliest, or written out as it’s passed to the super-class constructor as can be seen here:</em></p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">super</span><span class="p">([</span><span class="n">GType</span><span class="p">.</span><span class="n">STRING</span><span class="p">,</span> <span class="n">GType</span><span class="p">.</span><span class="n">INT</span><span class="p">,</span> <span class="n">Pixbuf</span><span class="p">.</span><span class="n">getType</span><span class="p">(),</span> <span class="n">GType</span><span class="p">.</span><span class="n">STRING</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>And the <code class="language-plaintext highlighter-rouge">foreach()</code> loop that calls <code class="language-plaintext highlighter-rouge">setValue()</code> can now stuff everything into the <code class="language-plaintext highlighter-rouge">ListStore</code>:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">foreach</span><span class="p">(</span><span class="kt">ulong</span> <span class="n">i</span><span class="p">;</span> <span class="mf">0.</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">item</span> <span class="p">=</span> <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="n">number</span> <span class="p">=</span> <span class="n">signNumbers</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="n">imageName</span> <span class="p">=</span> <span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="n">description</span> <span class="p">=</span> <span class="n">descriptions</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+			
+	<span class="n">treeIter</span> <span class="p">=</span> <span class="n">createIter</span><span class="p">();</span>
+	<span class="n">setValue</span><span class="p">(</span><span class="n">treeIter</span><span class="p">,</span> <span class="n">Column</span><span class="p">.</span><span class="n">THEME_COLUMN</span><span class="p">,</span> <span class="n">item</span><span class="p">);</span>
+	<span class="n">setValue</span><span class="p">(</span><span class="n">treeIter</span><span class="p">,</span> <span class="n">Column</span><span class="p">.</span><span class="n">NUMBER_COLUMN</span><span class="p">,</span> <span class="n">number</span><span class="p">);</span>
+	<span class="n">setValue</span><span class="p">(</span><span class="n">treeIter</span><span class="p">,</span> <span class="n">Column</span><span class="p">.</span><span class="n">IMAGE_COLUMN</span><span class="p">,</span> <span class="k">new</span> <span class="n">Pixbuf</span><span class="p">(</span><span class="n">imageName</span><span class="p">));</span>
+	<span class="n">setValue</span><span class="p">(</span><span class="n">treeIter</span><span class="p">,</span> <span class="n">Column</span><span class="p">.</span><span class="n">DESCRIPTION_COLUMN</span><span class="p">,</span> <span class="n">description</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Two things of note here:</p>
+
+<ol>
+  <li>I mentioned earlier that we’d see how the <code class="language-plaintext highlighter-rouge">Column</code> enum values are used and here’s the first of those uses, to identify which column is being filled for each pass through the <code class="language-plaintext highlighter-rouge">foreach()</code> loop, and</li>
+  <li>the call to <code class="language-plaintext highlighter-rouge">setValue()</code> that handles the <code class="language-plaintext highlighter-rouge">Pixbuf</code> column makes a call to the <code class="language-plaintext highlighter-rouge">Pixbuf</code> constructor, passing along the file name grabbed from the <code class="language-plaintext highlighter-rouge">imageName</code> array.</li>
+</ol>
+
+<p><em>Note: When your <code class="language-plaintext highlighter-rouge">ListStore</code> is to contain only string data, you can use <code class="language-plaintext highlighter-rouge">set()</code> instead of <code class="language-plaintext highlighter-rouge">setValue()</code> and thereby plug data into all the columns of a single row in one statement, but when using non-string data types, doing a <code class="language-plaintext highlighter-rouge">setValue()</code> on columns one at a time is your only option.</em></p>
+
+<h2 id="the-signcombobox-class">The SignComboBox Class</h2>
+
+<p>Rather than reproduce the entire <code class="language-plaintext highlighter-rouge">SignComboBox</code> class here, we’ll just look at the bits and pieces we haven’t seen before…</p>
+
+<p>Because we want to show images instead of text, we need to declare a <code class="language-plaintext highlighter-rouge">CellRendererPixbuf</code> in the initialization section of the <code class="language-plaintext highlighter-rouge">SignComboBox</code> class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CellRendererPixbuf</span> <span class="n">cellRendererPixbuf</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>And in the constructor we have the instantiation, the packing, and the adding of attributes:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cellRendererPixbuf</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CellRendererPixbuf</span><span class="p">();</span>
+<span class="n">packStart</span><span class="p">(</span><span class="n">cellRendererPixbuf</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="n">addAttribute</span><span class="p">(</span><span class="n">cellRendererPixbuf</span><span class="p">,</span> <span class="s">"pixbuf"</span><span class="p">,</span> <span class="n">_signListStore</span><span class="p">.</span><span class="n">Column</span><span class="p">.</span><span class="n">IMAGE_COLUMN</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>You’ll note that whereas with the <code class="language-plaintext highlighter-rouge">CellRendererText</code> we used <code class="language-plaintext highlighter-rouge">“text”</code> as an attribute name, here we use <code class="language-plaintext highlighter-rouge">“pixbuf”</code> for the <code class="language-plaintext highlighter-rouge">CellRendererPixbuf</code>. Stands to reason, right?</p>
+
+<p><em>Note: There is a bit of terminology confusion with the second argument to the <code class="language-plaintext highlighter-rouge">addAttribute()</code> statement. In the <code class="language-plaintext highlighter-rouge">addAttribute()</code> function definition, this argument is called an attribute. But when you look in the online reference or one of the books written about</em> GTK<em>, they’re called properties.</em></p>
+
+<p>Anyway, if you’re curious about this type of attribute/property, go to the <em><a href="https://developer.gnome.org/gtk4/3.96/">GTK Reference Manual</a></em> online and search in the page for <code class="language-plaintext highlighter-rouge">CellRenderer</code>. Click on any of them and you’ll find a <em>Properties</em> section not too far down the page.</p>
+
+<p>As we encounter each type of <code class="language-plaintext highlighter-rouge">CellRenderer</code>, we’ll cover which property/attribute is used with each one.</p>
+
+<p>The other thing to note about the call to <code class="language-plaintext highlighter-rouge">addAttribute()</code> is its last argument:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_signListStore</span><span class="p">.</span><span class="n">Column</span><span class="p">.</span><span class="n">IMAGE_COLUMN</span>
+</code></pre></div></div>
+
+<p>This is the second (and final) use of the <code class="language-plaintext highlighter-rouge">Column</code> enum and it’s why the <code class="language-plaintext highlighter-rouge">Column enum</code> was made part of the <code class="language-plaintext highlighter-rouge">SignListStore</code> class. A pointer to the store itself gets passed into the <code class="language-plaintext highlighter-rouge">SignComboBox</code> constructor, so we have access to it here without any major fiddling around.</p>
+
+<h2 id="bonus-example--a-3-column-combobox">Bonus Example – A 3-Column ComboBox</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/017_mvc/mvc_09.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/017_mvc/mvc_09_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_09_combobox_view_3_columns.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>The <a href="https://github.com/rontarrant/gtkd_demos/blob/master/downloads/_images.zip">folder/directory of images</a> is used with this example as well.</p>
+
+<p>This post is running a bit long, but this example really won’t take much explanation, so here goes…</p>
+
+<p>There are only two differences between this example and the last. One’s in the constructor and it’s merely how many <code class="language-plaintext highlighter-rouge">CellRenderer</code>s we stuff into the <code class="language-plaintext highlighter-rouge">SignComboBox</code>. It happens in these lines in the constructor:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cellRendererInt</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CellRendererText</span><span class="p">();</span>
+<span class="n">packStart</span><span class="p">(</span><span class="n">cellRendererInt</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="n">addAttribute</span><span class="p">(</span><span class="n">cellRendererInt</span><span class="p">,</span> <span class="s">"text"</span><span class="p">,</span> <span class="n">_signListStore</span><span class="p">.</span><span class="n">Column</span><span class="p">.</span><span class="n">NUMBER_COLUMN</span><span class="p">);</span>
+	
+<span class="n">cellRendererText</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CellRendererText</span><span class="p">();</span>
+<span class="n">packStart</span><span class="p">(</span><span class="n">cellRendererText</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="n">addAttribute</span><span class="p">(</span><span class="n">cellRendererText</span><span class="p">,</span> <span class="s">"text"</span><span class="p">,</span> <span class="n">_signListStore</span><span class="p">.</span><span class="n">Column</span><span class="p">.</span><span class="n">THEME_COLUMN</span><span class="p">);</span>
+
+<span class="n">cellRendererPixbuf</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CellRendererPixbuf</span><span class="p">();</span>
+<span class="n">packStart</span><span class="p">(</span><span class="n">cellRendererPixbuf</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="n">addAttribute</span><span class="p">(</span><span class="n">cellRendererPixbuf</span><span class="p">,</span> <span class="s">"pixbuf"</span><span class="p">,</span> <span class="n">_signListStore</span><span class="p">.</span><span class="n">Column</span><span class="p">.</span><span class="n">IMAGE_COLUMN</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">ComboBox</code> is derived from the Bin class and so all we have to do is pack in three <code class="language-plaintext highlighter-rouge">CellRenderer</code>s, making sure we use an appropriate attribute (in this case, <code class="language-plaintext highlighter-rouge">“text”</code> for the first two columns and <code class="language-plaintext highlighter-rouge">“pixbuf”</code> for the last) and make sure they’re pointing to columns with matching data.</p>
+
+<p>The other difference is…</p>
+
+<p>There’s no <code class="language-plaintext highlighter-rouge">visibleColumn</code> variable because they’re all visible.</p>
+
+<p>So remember:</p>
+
+<ul>
+  <li>you can have as many columns visible in the <code class="language-plaintext highlighter-rouge">ComboBox</code> as you wish, and</li>
+  <li>multiple calls to <code class="language-plaintext highlighter-rouge">addAttribute()</code> will make this happen.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that wraps up our look at <code class="language-plaintext highlighter-rouge">ComboBox</code>es with images. Next time we’ll start looking at the <code class="language-plaintext highlighter-rouge">TreeView</code>.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0052-mvc-v-int-combobox.html">Previous: ComboBox with Integers</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0054-mvc-vii-treeview-basics.html">Next: TreeView Basics</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0053-mvc-vi-image-combobox.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

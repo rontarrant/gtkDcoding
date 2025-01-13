@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmldlang.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2020-03-23T00:00:00-04:00" itemprop="datePublished">Monday, March 23, 2020
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0105-d-snippets-i---observer-vs-singleton">0105: D Snippets I - Observer vs. Singleton</h1>
+
+<p>When it comes to building a UI, it isn’t always about the Widgets. Often, you need to find ways to handle Widgets in non-Widget-y ways just to keep things manageable.</p>
+
+<p>For instance, over the last year, I’ve touched on a few design patterns—sometimes, quite sloppily—while incorporating such things as OS detection, accelerator keymaps, fonts, and groups of Widgets such as <code class="language-plaintext highlighter-rouge">Radio</code>- or <code class="language-plaintext highlighter-rouge">ToggleButton</code>s.</p>
+
+<p>So, we’ll start off with a couple of more strictly-built (read: adhering more to the strict definitions) design patterns and, over the next while, we’ll go over other bits of <em>D</em>-specific code that will help in various ways when building a UI. So, without further ado, let’s dig in…</p>
+
+<h2 id="singleton-vs-observer">Singleton vs. Observer</h2>
+
+<p>First, what’s the difference between the two?</p>
+
+<p>The <em>Singleton</em> assures us that we have one instance of a class object. And no matter how many times we create more instances of that class in our code, we’re always dealing with a single instantiation.</p>
+
+<p>The <em>Observer</em> allows a single object to inform several other objects of its internal changes.</p>
+
+<p>In both cases, we’re talking about a one-to-many relationship. So, that’s not the difference.</p>
+
+<p>The <em>Observer</em> pattern is named for the object that needs to know what’s going on elsewhere. The <em>Singleton</em> is that elsewhere and so we might infer that both are actually part of the same pattern… and I’m not saying they can’t be, but there must be a reason they both exist, so let’s step back and look again…</p>
+
+<p>The definition of the <em>Observer</em> pattern—a single object keeps others informed of internal changes—gives us a clue. The observed object is dynamic. It changes over the lifetime of the application.</p>
+
+<p>And the <em>Singleton</em>? Use cases cited by experts speak of resources—a print spooler, a window manager, a font list, or other OS-specific stuff. In other words, things we expect to remain static during the application’s lifetime.</p>
+
+<p>So, a <em>Singleton</em> is used for a static resource and <em>Observers</em> keep an eye on a dynamic resource.</p>
+
+<p>The rest of this post will first present the general specs for a <em>Singleton</em> in <em>D</em>, then look at a working example.</p>
+
+<h2 id="the-singleton--a-generic-example">The Singleton – a Generic Example</h2>
+
+<p>Note: There is no UI for this example. You’ll have to run it in a terminal.</p>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/021_oop/oop_02_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/021_oop/oop_02_singleton.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>Here’s what the <code class="language-plaintext highlighter-rouge">DSingleton</code> preamble looks like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">DSingleton</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="c1">// Cache instantiation flag in thread-local bool</span>
+	<span class="k">static</span> <span class="kt">bool</span> <span class="n">instantiated_</span><span class="p">;</span>
+
+	<span class="c1">// Thread global</span>
+	<span class="k">__gshared</span> <span class="n">DSingleton</span> <span class="n">instance_</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>These two properties work together to make the <em>Singleton</em> thread-safe. In essence, they allow us to work with the <em>Singleton</em> whether we’re working with a application having a single thread or multiple threads.</p>
+
+<p>Next, the constructor…</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>In other words, we don’t have a constructor. Not really. Note also that the constructor definition is in the part of the class marked private which means no outsider can call it. Why? Because that way, no one can call it by accident. And why don’t we want anyone to call it? Because we don’t instantiate the <code class="language-plaintext highlighter-rouge">DSingleton</code> with a constructor call. We use this instead:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="n">DSingleton</span> <span class="n">get</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(!</span><span class="n">instantiated_</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">synchronized</span><span class="p">(</span><span class="n">DSingleton</span><span class="p">.</span><span class="n">classinfo</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="k">if</span><span class="p">(!</span><span class="n">instance_</span><span class="p">)</span>
+			<span class="p">{</span>
+				<span class="n">instance_</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DSingleton</span><span class="p">();</span>
+				<span class="n">write</span><span class="p">(</span><span class="s">"Creating the singleton and"</span><span class="p">);</span>
+			<span class="p">}</span>
+
+			<span class="n">instantiated_</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">write</span><span class="p">(</span><span class="s">"Singleton already exists, so just"</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="n">writeln</span><span class="p">(</span><span class="s">" returning an instance."</span><span class="p">);</span>
+		
+	<span class="k">return</span><span class="p">(</span><span class="n">instance_</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// get()</span>
+</code></pre></div></div>
+
+<p>All those writeln() calls are there just as proof that the system works, BTW.</p>
+
+<p>Wherever your code needs access to the <em>Singleton</em>, you start by calling <code class="language-plaintext highlighter-rouge">get()</code>. There’s a bit of <em>D</em>-language hocus pocus going on here and I won’t pretend to know exactly what it does (it’s above my pay grade). In a nutshell, though, this function checks to see if an instance of the <em>Singleton</em> exists either locally (in the current thread) or globally (in any possible thread) before deciding whether or not to create one.</p>
+
+<h3 id="the-getter-function">The Getter Function</h3>
+
+<p>This just helps to prove that this is, indeed, a <em>Singleton</em>:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DSingleton</span><span class="p">*</span> <span class="n">getInstance</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"the Singleton instance at "</span><span class="p">,</span> <span class="p">&amp;</span><span class="n">instance_</span><span class="p">);</span>
+	<span class="k">return</span><span class="p">(&amp;</span><span class="n">instance_</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// getInstance()</span>
+</code></pre></div></div>
+
+<p>It spits out the address of the pointer to the <em>Singleton</em> as well as the address of the <em>Singleton</em> itself so we know that, even though we have three pointers, they all point to the same instance of our <code class="language-plaintext highlighter-rouge">DSingleton</code>.</p>
+
+<h2 id="the-singleton-at-work">The Singleton at Work</h2>
+
+<p><em>Note: As with the last example, there is no UI for this. You’ll have to run it in a terminal.</em></p>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/021_oop/oop_03_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/021_oop/oop_03_os_detection.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>Detecting the user’s OS—something that’s not expected to change while the application is running—is a perfect example of <em>Singleton</em> use.</p>
+
+<p>How we get from the generic example to this specific one comes down to this:</p>
+
+<ul>
+  <li>add a string property to store the OS type,</li>
+  <li>supply code to the constructor that does the detection and store the results, and</li>
+  <li>replace <code class="language-plaintext highlighter-rouge">getInstance()</code> with something more appropriate like <code class="language-plaintext highlighter-rouge">getOS()</code>.</li>
+</ul>
+
+<p>It’s also a good idea to rename the <em>Singleton</em> to reflect what we’re dealing with and that means editing all those places in the code where we refer to it by name.</p>
+
+<p>In this case, we:</p>
+
+<ul>
+  <li>change the name from <code class="language-plaintext highlighter-rouge">DSingleton</code> to <code class="language-plaintext highlighter-rouge">S_DetectedOS</code> (the ‘S’ indicates <em>Singleton</em>), editing all references throughout the code, and</li>
+  <li>add the property string <code class="language-plaintext highlighter-rouge">_os_type</code>.</li>
+</ul>
+
+<p>The constructor becomes:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">version</span><span class="p">(</span><span class="n">Windows</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">_os_type</span> <span class="p">=</span> <span class="s">"Windows"</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="k">version</span><span class="p">(</span><span class="n">OSX</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">_os_type</span> <span class="p">=</span> <span class="s">"OSX"</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="k">version</span><span class="p">(</span><span class="n">Posix</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">_os_type</span> <span class="p">=</span> <span class="s">"Posix"</span><span class="p">;</span>
+	<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>Our replacement getter looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span> <span class="n">getOS</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">return</span><span class="p">(</span><span class="n">_os_type</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// getOS()</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Next time, we’ll start by taking a closer look at the <em>Observer</em>.</p>
+
+<p>Until then, happy coding.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0104-widget-opacity-ii.html">Previous: Widget Opacity II</a>
+	</div>
+<!--
+	<div style="float: right;">
+		<a href="/posts/0106-dlang-ui-snippets-ii.html">Next: D Snippets II - A Generic Observer</a>
+	</div>
+-->
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0105-dlang-ui-snippets-i.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

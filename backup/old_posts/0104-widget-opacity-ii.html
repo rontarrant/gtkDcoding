@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlsfx.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2020-03-12T00:00:00-04:00" itemprop="datePublished">Thursday, March 12, 2020
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0104-widget-opacity-ii--real-ghosting-and-more-real-ghosting">0104: Widget Opacity II – Real Ghosting and More Real Ghosting</h1>
+
+<p>Last time, we looked at how to fake ghosting using the <code class="language-plaintext highlighter-rouge">setOpacity()</code> function. This time, we’ll see how to do proper ghosting using the <code class="language-plaintext highlighter-rouge">setSensitive()</code> function. Then we’ll move on to an example wherein we overlay buttons, one ghosted and one not, over an image. And we’ll be using a <code class="language-plaintext highlighter-rouge">Layout</code> instead of a <code class="language-plaintext highlighter-rouge">Grid</code> this time.</p>
+
+<h2 id="how-to-make-a-cruel-widget">How to Make a Cruel Widget</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/016_sfx/sfx_07.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/016_sfx/sfx_07_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/016_sfx/sfx_07_insensitive.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>Well, not exactly cruel… just insensitive.</p>
+
+<p>Last time, it took more code to get this job done. For one thing, <code class="language-plaintext highlighter-rouge">MySwitch</code> needed a ghosting flag to keep track of when the opacity was low. And for another, we needed an entire function (<code class="language-plaintext highlighter-rouge">switchGhosting</code>) so <code class="language-plaintext highlighter-rouge">MyButton</code> could turn ghosting on and off.</p>
+
+<p>But this time, we eliminate both of these. <code class="language-plaintext highlighter-rouge">MyButton</code>, because it has <code class="language-plaintext highlighter-rouge">MySwitch</code> set up as a companion (like we did last time) can go straight for the jugular:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onButtonPress</span><span class="p">(</span><span class="n">Event</span> <span class="n">e</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">companion</span><span class="p">.</span><span class="n">getSensitive</span><span class="p">()</span> <span class="k">is</span> <span class="kc">false</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"Activating switch"</span><span class="p">);</span>
+		<span class="n">companion</span><span class="p">.</span><span class="n">setSensitive</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		<span class="n">setLabel</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"Deactivating switch."</span><span class="p">);</span>
+		<span class="n">companion</span><span class="p">.</span><span class="n">setSensitive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+		<span class="n">setLabel</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+	<span class="p">}</span>
+		
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onButtonPress()</span>
+</code></pre></div></div>
+
+<p>It checks to see which way <code class="language-plaintext highlighter-rouge">MySwitch</code>’s sensitivity is set and flips it to the other state. Because we’re doing it this way, the opacity of the <code class="language-plaintext highlighter-rouge">Label</code> isn’t going to match <code class="language-plaintext highlighter-rouge">MySwitch</code>’s insensitive state. This may be confusing for the user, so syncing the <code class="language-plaintext highlighter-rouge">Label</code>’s appearance with that of <code class="language-plaintext highlighter-rouge">MySwitch</code> may be something to try as an exercise.</p>
+
+<p>Or not.</p>
+
+<p>Moving right along…</p>
+
+<p>The only other difference between this example and <a href="https://github.com/rontarrant/gtkd_demos/blob/master/016_sfx/sfx_06_opacity_ghosting.d">the last one</a> is that the only object that knows about the <code class="language-plaintext highlighter-rouge">Label</code> is the <code class="language-plaintext highlighter-rouge">ButtonGrid</code>, so all references to <code class="language-plaintext highlighter-rouge">Label</code> outside of <code class="language-plaintext highlighter-rouge">ButtonGrid</code> are now eliminated.</p>
+
+<h2 id="ghosted-buttons-on-an-image">Ghosted Buttons on an Image</h2>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/016_sfx/sfx_08.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/016_sfx/sfx_08_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/016_sfx/sfx_08_ghost_over_drawingarea.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>There may be nothing inherently new in this demo, but it is another way to demonstrate what we’re talking about as well as present another possible use case. Here is a list of what’s being demonstrated here:</p>
+
+<ul>
+  <li>an opacity-ghosted <code class="language-plaintext highlighter-rouge">Button</code> can be active,</li>
+  <li>an insensitive <code class="language-plaintext highlighter-rouge">Button</code> can’t, and</li>
+  <li>making a <code class="language-plaintext highlighter-rouge">Button</code> insensitive doesn’t change its opacity.</li>
+</ul>
+
+<p>And since we’re using a Layout instead of a <code class="language-plaintext highlighter-rouge">Grid</code>, let’s look at how all this fits together…</p>
+
+<h3 id="the-bglayout-class">The BGLayout Class</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">BGLayout</span> <span class="p">:</span> <span class="n">Layout</span>
+<span class="p">{</span>
+	<span class="n">MyButton</span> <span class="n">myButton1</span><span class="p">,</span> <span class="n">myButton2</span><span class="p">,</span> <span class="n">myButton3</span><span class="p">;</span>
+	<span class="n">BGDrawingArea</span> <span class="n">bgDrawing</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+		<span class="n">setSizeRequest</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">426</span><span class="p">);</span> <span class="c1">// has to be set so signals get through from child widgets</span>
+		
+		<span class="n">bgDrawing</span> <span class="p">=</span> <span class="k">new</span> <span class="n">BGDrawingArea</span><span class="p">();</span>
+		<span class="n">put</span><span class="p">(</span><span class="n">bgDrawing</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>		
+		
+		<span class="n">myButton1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyButton</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+		<span class="n">put</span><span class="p">(</span><span class="n">myButton1</span><span class="p">,</span> <span class="mi">226</span><span class="p">,</span> <span class="mi">213</span><span class="p">);</span>
+		<span class="n">myButton1</span><span class="p">.</span><span class="n">setOpacity</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+
+		<span class="n">myButton2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyButton</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+		<span class="n">put</span><span class="p">(</span><span class="n">myButton2</span><span class="p">,</span> <span class="mi">320</span><span class="p">,</span> <span class="mi">120</span><span class="p">);</span>
+
+		<span class="n">myButton3</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyButton</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+		<span class="n">put</span><span class="p">(</span><span class="n">myButton3</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">306</span><span class="p">);</span>
+		<span class="n">myButton3</span><span class="p">.</span><span class="n">setSensitive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class BGLayout</span>
+</code></pre></div></div>
+
+<p>Because we want to place these <code class="language-plaintext highlighter-rouge">Button</code>s over parts of the image that will show through, thus proving the transparency of the <code class="language-plaintext highlighter-rouge">Button</code>s, we’re using a <code class="language-plaintext highlighter-rouge">Layout</code> so we don’t have to fiddle around too much when placing them.</p>
+
+<p>Notice also that each call to <code class="language-plaintext highlighter-rouge">MyButton()</code> passes in a number. This is the index into the <code class="language-plaintext highlighter-rouge">labelText</code> array in the <code class="language-plaintext highlighter-rouge">MyButton</code> class and decides which of the three strings we’ll use initially for labeling the <code class="language-plaintext highlighter-rouge">Button</code>s.</p>
+
+<h3 id="the-mybutton-class">The MyButton Class</h3>
+
+<p>Here’s the preamble where the <code class="language-plaintext highlighter-rouge">labelText</code> string array is defined:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span><span class="p">[]</span> <span class="n">labelText</span> <span class="p">=</span> <span class="p">[</span><span class="s">"Ghosted"</span><span class="p">,</span> <span class="s">"Non-ghosted"</span><span class="p">,</span> <span class="s">"Insensitive"</span><span class="p">];</span>
+</code></pre></div></div>
+
+<h4 id="the-constructor">The Constructor</h4>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">(</span><span class="kt">int</span> <span class="n">labelIndex</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="n">labelIndex</span><span class="p">]);</span>
+	<span class="n">addOnButtonPress</span><span class="p">(&amp;</span><span class="n">onButtonPress</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>Just pick the label string and hook up the signal.</p>
+
+<h4 id="the-callback">The Callback</h4>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onButtonPress</span><span class="p">(</span><span class="n">Event</span> <span class="n">e</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">getOpacity</span><span class="p">()</span> <span class="p">!</span><span class="k">is</span> <span class="mf">1.0</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">setLabel</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+		<span class="n">setOpacity</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"opacity = "</span><span class="p">,</span> <span class="n">getOpacity</span><span class="p">(),</span> <span class="s">", turning it to full."</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">setLabel</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+		<span class="n">setOpacity</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"opacity = "</span><span class="p">,</span> <span class="n">getOpacity</span><span class="p">(),</span> <span class="s">", turning it to half."</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"Button pressed is: "</span><span class="p">,</span> <span class="n">getLabel</span><span class="p">());</span>
+	
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// onButtonPress()</span>
+</code></pre></div></div>
+
+<p>Here, we check the opacity setting, using an <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">else</code> to switch back and forth from half opacity to full.</p>
+
+<p>You may wonder why I’ve done it this way, checking to see if opacity is set to <code class="language-plaintext highlighter-rouge">1.0</code>. In fact, you may be tempted to test if it’s set to <code class="language-plaintext highlighter-rouge">0.5</code> (I was at first.). But the reality of the situation is that when you set the opacity to <code class="language-plaintext highlighter-rouge">0.5</code>, it’s actually set to <code class="language-plaintext highlighter-rouge">0.501961</code>. It’s our old buddy FPI (Floating Point Inaccuracy) come to play havoc with our sanity. You could test for <code class="language-plaintext highlighter-rouge">0.501961</code> if you like, but I don’t imagine it’s worth the extra typing. Who knows if the inaccuracy will be the same from one OS to another or between the 32-bit and the 64-bit versions of an OS. It seems more sane to me to test for <code class="language-plaintext highlighter-rouge">1.0</code> instead. Or if you want to deal with finer-tuned numbers, just look for a range like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">getOpacity</span><span class="p">()</span> <span class="p">&gt;</span> <span class="mf">0.5</span> <span class="p">&amp;&amp;</span> <span class="n">getOpacity</span><span class="p">()</span> <span class="p">&lt;</span> <span class="mf">0.6</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Of course, you might also switch based on the <code class="language-plaintext highlighter-rouge">labelText</code>, like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">getLabel</span><span class="p">()</span> <span class="p">==</span> <span class="n">labelText</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="p">{</span>
+	<span class="n">setLabel</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+	<span class="n">setOpacity</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"label: "</span><span class="p">,</span> <span class="n">getLabel</span><span class="p">(),</span> <span class="s">", opacity = "</span><span class="p">,</span> <span class="n">getOpacity</span><span class="p">(),</span> <span class="s">", turning it to full."</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+	<span class="n">setLabel</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+	<span class="n">setOpacity</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"label: "</span><span class="p">,</span> <span class="n">getLabel</span><span class="p">(),</span> <span class="s">", opacity = "</span><span class="p">,</span> <span class="n">getOpacity</span><span class="p">(),</span> <span class="s">", turning it to half."</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>All this does is look to see if the label text is <code class="language-plaintext highlighter-rouge">“Ghosted”</code> and if it is, changes it to <code class="language-plaintext highlighter-rouge">“Non-ghosted”</code>.</p>
+
+<p>Note: You might think you can do a string comparison with the is keyword as in:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">getLabel</span><span class="p">()</span> <span class="k">is</span> <span class="n">labelText</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>However, because <em>D</em> uses <em>Unicode</em> strings, we can’t do that, but but we can do this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getLabel</span><span class="p">()</span> <span class="p">==</span> <span class="n">labelText</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>I’ve left both methods in the source with the label comparison commented out so you can (to borrow an expression from my grandmother) pick your choose.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>So much for ghosting, opacity, and sensitivity. Next time, we’ll look at some common <em>D-language</em> stuff that you may find useful in building a UI, even though these snippets aren’t necessarily <em>GTK</em>-specific.</p>
+
+<p>Until then, have a happy life.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0103-widget-opacity.html">Previous: Widget Opacity</a>
+	</div>
+<!--
+	<div style="float: right;">
+		<a href="/posts/0105-dlang-ui-snippets-i.html">Next: Dlang UI Snippets I</a>
+	</div>
+-->
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0104-widget-opacity-ii.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

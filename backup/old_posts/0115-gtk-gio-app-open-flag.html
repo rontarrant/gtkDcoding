@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlapp.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2021-09-24T00:00:00-04:00" itemprop="datePublished">Friday, September 24, 2021
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0115--gtkgio-open-flag">0115 – GTK/GIO Open Flag</h1>
+
+<p>The next <code class="language-plaintext highlighter-rouge">ApplicationFlag</code>, <code class="language-plaintext highlighter-rouge">HANDLES_OPEN</code>, gives us a mechanism for opening files from the command line. Such things are relatively straightforward anyway, but perhaps we’ll find an advantage or two by using what <em>GIO</em> has to offer. Let’s dig in and find out, shall we?</p>
+
+<p>We’ll do this in two steps. Firstly, we’ll look at the basics—grabbing the file names from the command line—and secondly, we’ll add just enough code to open each file in its own window.</p>
+
+<h2 id="importing-the-gio-file-abstraction">Importing the GIO File Abstraction</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/020_app/app_05_open_flag.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Demonstration where multiple file names are given on the command line.
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/020_app/app_05_open_flag_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Top: no file names given on the command line. Bottom: two file names given.
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_05_open_flag.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>The <em>GIO</em> construct that helps us handle files is called <code class="language-plaintext highlighter-rouge">gio.FileIF</code>. It’s not really an interface, but a sort-of wrapper standing in for a <em>C</em>-language abstraction—<code class="language-plaintext highlighter-rouge">GFile</code>—which represents the vital statistics of a file. For our purposes, we don’t need to know a lot about this to use it, so we’ll skip the details. For now, just know we need this import statement to make this stuff work:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gio</span><span class="p">.</span><span class="n">FileIF</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="myapplication-changes">MyApplication Changes</h2>
+<h3 id="raise-the-flag">Raise the Flag</h3>
+
+<p>As we’ve done before, we declare the appropriate flag in the <code class="language-plaintext highlighter-rouge">MyApplication</code> class. And while we’re at it, let’s change the application <code class="language-plaintext highlighter-rouge">id</code> as well so it matches our current example:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ApplicationFlags</span> <span class="n">flags</span> <span class="p">=</span> <span class="n">ApplicationFlags</span><span class="p">.</span><span class="n">HANDLES_OPEN</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">id</span> <span class="p">=</span> <span class="s">"com.gtkdcoding.app.app_05_open_flag"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="hook-up-the-callback">Hook up the Callback</h3>
+
+<p>The initializer method needs a little something, too:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">addOnOpen</span><span class="p">(&amp;</span><span class="n">onOpen</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Basically, just hook up the signal. Note that we don’t need the <code class="language-plaintext highlighter-rouge">HANDLES_COMMAND_LINE</code> flag to make this work, even though that might seem like the case (it did to me at first).</p>
+
+<h3 id="messing-with-the-activate-method">Messing with the activate() Method</h3>
+
+<p>This is a pretty small change from our last demo. There, we passed in an array containing the dimensions of the window we were about to open. This time, we forego that in favour of passing in whatever arguments the user types on the command line. For purposes of demonstration, we hope these arguments will be valid file names so we don’t have to write <code class="language-plaintext highlighter-rouge">try</code>/<code class="language-plaintext highlighter-rouge">catch</code> statements. But feel free to add those if you want.</p>
+
+<p>Anyway, <code class="language-plaintext highlighter-rouge">activate()</code> now looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">activate</span><span class="p">(</span><span class="nb">string</span> <span class="n">filename</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"activate called"</span><span class="p">);</span>
+	<span class="n">AppWindow</span> <span class="n">appWindow</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AppWindow</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">filename</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// activate()</span>
+</code></pre></div></div>
+
+<p>We’ve dispensed with the <code class="language-plaintext highlighter-rouge">dimensions</code> argument—an array of integers—and replaced it with <code class="language-plaintext highlighter-rouge">filename</code>—a string—which is the name of the file we’ll be opening in a window instance.</p>
+
+<p>This method is called once for each file name provided on the command line.</p>
+
+<h3 id="changes-to-the-onactivate-method">Changes to the onActivate() Method</h3>
+
+<p>Here’s another small change:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">onActivate</span><span class="p">(</span><span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span> <span class="c1">// non-advanced syntax</span>
+<span class="p">{</span>
+	<span class="n">AppWindow</span> <span class="n">appWindow</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AppWindow</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"triggered onActivate..."</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"\tApplication ID: "</span><span class="p">,</span> <span class="n">getApplicationId</span><span class="p">());</span>
+	
+<span class="p">}</span> <span class="c1">// onActivate()</span>
+</code></pre></div></div>
+
+<p>The reason we have another instantiation of <code class="language-plaintext highlighter-rouge">AppWindow</code> here is to deal with the possibility that the user gives no arguments. Note that—depending on circumstances—either <code class="language-plaintext highlighter-rouge">activate()</code> or <code class="language-plaintext highlighter-rouge">onActivate()</code> is called, but not both. Here’s the low-down:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">activate()</code> is called once for each file name passed in, whether those file names are valid or not, and</li>
+  <li><code class="language-plaintext highlighter-rouge">onActivate()</code> is called if no arguments whatsoever are given.</li>
+</ul>
+
+<p><em>Note: If multiple non-valid file names are given, <code class="language-plaintext highlighter-rouge">activate()</code> is still called multiple times and multiple windows are opened. A little error checking will not go amiss here, but I’ll leave that to your imagination and skill.</em></p>
+
+<h3 id="a-new-callback--onopen">A New Callback – onOpen()</h3>
+
+<p>It’s relatively trivial, so here’s the entire method:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">onOpen</span><span class="p">(</span><span class="n">FileIF</span><span class="p">[]</span> <span class="n">files</span><span class="p">,</span> <span class="nb">string</span> <span class="n">hint</span><span class="p">,</span> <span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"triggered onOpen..."</span><span class="p">);</span>
+		
+	<span class="k">foreach</span><span class="p">(</span><span class="n">file</span><span class="p">;</span> <span class="n">files</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="nb">string</span> <span class="n">name</span> <span class="p">=</span> <span class="n">file</span><span class="p">.</span><span class="n">getPath</span><span class="p">();</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"file name: "</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+		<span class="n">activate</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+	<span class="p">}</span>
+		
+<span class="p">}</span> <span class="c1">// onOpen()</span>
+</code></pre></div></div>
+
+<p>This simple method steps through an array of <code class="language-plaintext highlighter-rouge">FileIF</code> objects, grabs the full path of each, then calls <code class="language-plaintext highlighter-rouge">activate()</code> for each one… as mentioned above.</p>
+
+<p>The second argument—<code class="language-plaintext highlighter-rouge">string hint</code>—allows for different modes when opening a file (edit, view, etc.) and it’s suggested that unless we have a specific need for this type of thing, we should just leave it be. So we will.</p>
+
+<p>Let’s move on to the next step where we actually load files into these windows…</p>
+
+<h2 id="loading-text-files">Loading Text Files</h2>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/020_app/app_06_open_and_load.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Two file names given on the command line.
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/020_app/app_06_open_and_load_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Two file names given on the command line. (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_06_open_and_load.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>We’ve seen the <em>GTK</em> code to accomplish this before—the bits and bobs that slap a <code class="language-plaintext highlighter-rouge">TextView</code> into a <code class="language-plaintext highlighter-rouge">Window</code>—so that part, I’ll skip. If you want a refresher, take a quick look at <a href="https:/.com/posts/0069-textview-and-textbuffer.html">blog post #0069</a>.</p>
+
+<p>The one thing we haven’t covered is the <em>D</em> code that opens and reads the file. Here’s what that looks like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">file</span> <span class="p">=</span> <span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">"r"</span><span class="p">);</span>
+			
+	<span class="k">while</span> <span class="p">(!</span><span class="n">file</span><span class="p">.</span><span class="n">eof</span><span class="p">())</span>
+	<span class="p">{</span>
+		<span class="nb">string</span> <span class="n">line</span> <span class="p">=</span> <span class="n">file</span><span class="p">.</span><span class="n">readln</span><span class="p">();</span>
+		<span class="n">content</span> <span class="p">~=</span> <span class="n">line</span><span class="p">;</span>
+	<span class="p">}</span>
+			
+	<span class="n">textBuffer</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
+	<span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>		
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Pretty straightforward. We start by making sure the <code class="language-plaintext highlighter-rouge">filename</code> variable contains a string, then dip into <em>D</em>’s <code class="language-plaintext highlighter-rouge">stdio</code> library to open the file in read mode.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">while</code> loop reads the file one line at a time and concatenates it to the <code class="language-plaintext highlighter-rouge">content</code> variable.</p>
+
+<p>Once that’s done, <code class="language-plaintext highlighter-rouge">content</code> is dumped into the <code class="language-plaintext highlighter-rouge">TextBuffer</code> and we close the file.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>So, now we’ve read file names from the command line and opened them, each in their own window. Next time, we’ll look at command line switches.</p>
+
+<p>‘Til then, let’s all do our best to stay sane. These trying times are a challenge—like setting out to design a garbage collector on your first day with a new language while simultaneously trying to work out the plot of <em>Lost</em>—but we can survive and flourish if we all keep our heads… and our distance.</p>
+
+<p>Be safe.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0114-gtk-gio-app-flags-and-cl-args.html">Previous: GTK GIO - Command Line Arguments</a>
+	</div>
+<!--	<div style="float: right;">
+		<a href="/posts/0116-gtk-gio-app-cl-switches.html">Next: GTK/GIO - Command Line Switches</a>
+	</div> -->
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0115-gtk-gio-app-open-flag.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

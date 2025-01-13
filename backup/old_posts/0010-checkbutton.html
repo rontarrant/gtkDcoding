@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmldialog.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-02-15T00:00:00-05:00" itemprop="datePublished">Friday, February 15, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0010-observing-checkbuttons">0010: Observing CheckButtons</h1>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/003_box/box_03.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																<!-- modal# -->
+				<span class="close0">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img00" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");														// img#
+			var modalImg = document.getElementById("img00");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/003_box/box_03_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																			<!-- modal# -->
+				<span class="close1">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img11" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																	// img#
+			var modalImg = document.getElementById("img11");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!-------------- filename (below) ---------->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/003_box/box_03_checkbutton.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>Today’s mission is to have a button exhibit different behaviour depending on the state of another widget, a <code class="language-plaintext highlighter-rouge">CheckButton</code>.</p>
+
+<h2 id="another-import">Another Import</h2>
+
+<p>Right at the top, as usual, we have to add an import statement:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">CheckButton</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="the-observer">The Observer</h2>
+
+<p>Now, skip to the end of the file to look at the <code class="language-plaintext highlighter-rouge">ObserverButton</code> class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">ObserverButton</span> <span class="p">:</span> <span class="n">Button</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">label</span> <span class="p">=</span> <span class="s">"Take Action"</span><span class="p">;</span>
+	
+	<span class="nb">string</span> <span class="n">standardMessage</span> <span class="p">=</span> <span class="s">"Droids? We don't need no stinking droids!"</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">switchMessage</span> <span class="p">=</span> <span class="s">"These aren't the droids you're looking for."</span><span class="p">;</span>
+	<span class="n">CheckButton</span> <span class="n">checkButton</span><span class="p">;</span>
+
+	<span class="k">this</span><span class="p">(</span><span class="n">CheckButton</span> <span class="n">extCheckButton</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
+		<span class="n">addOnClicked</span><span class="p">(&amp;</span><span class="n">doSomething</span><span class="p">);</span>
+		<span class="n">checkButton</span> <span class="p">=</span> <span class="n">extCheckButton</span><span class="p">;</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">doSomething</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">checkButton</span><span class="p">.</span><span class="n">getActive</span><span class="p">()</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">writeln</span><span class="p">(</span><span class="n">switchMessage</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="n">writeln</span><span class="p">(</span><span class="n">standardMessage</span><span class="p">);</span>
+		<span class="p">}</span>
+		
+	<span class="p">}</span> <span class="c1">// doSomething()</span>
+	
+<span class="p">}</span> <span class="c1">// class ObserverButton</span>
+</code></pre></div></div>
+
+<p>This is the observer half of the observer/observed class objects that make up the observer pattern. Our other button (which we’ll look at in a moment, as dull as it is) is watched so the <code class="language-plaintext highlighter-rouge">ObserverButton</code> knows which of two actions to take.</p>
+
+<p>You’ll notice, below the label and other strings representing actions we can take with this button, there’s a pointer to a <code class="language-plaintext highlighter-rouge">CheckButton</code>. It’s passed in through the <code class="language-plaintext highlighter-rouge">ObserverButton</code>’s constructor and assigned to a local variable so we can call its <code class="language-plaintext highlighter-rouge">getActive()</code> function which reads the state of the <code class="language-plaintext highlighter-rouge">CheckButton</code>.</p>
+
+<h2 id="the-callback-dosomething">The Callback: doSomething()</h2>
+
+<p>If you look at the callback (so aptly named: <code class="language-plaintext highlighter-rouge">doSomething</code>) you’ll see the simple logic used to decide which of the two messages to spit out to the command shell.</p>
+
+<p>Everything else here is off-the-shelf, so let’s look at…</p>
+
+<h2 id="the-observationbox">The ObservationBox</h2>
+
+<p>Not that there’s anything really new here. All we do is establish the box as parent to both buttons. If we’d built them outside the box, we’d have to drag them in here anyway, so why not?</p>
+
+<h1 id="and-now-for-something-completely-toggled">And Now for Something Completely… Toggled</h1>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/003_box/box_04.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/003_box/box_04_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------------- filename (below) --------->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/003_box/box_04_togglebutton.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<h2 id="imports">Imports</h2>
+
+<p>Here, the <code class="language-plaintext highlighter-rouge">CheckButton</code> is replaced by the <code class="language-plaintext highlighter-rouge">ToggleButton</code>. The statement:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">CheckButton</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>has been replaced by:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">ToggleButton</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="observationbox">ObservationBox</h2>
+
+<p>Take a look at the <code class="language-plaintext highlighter-rouge">ObservationBox</code> class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">ObservationBox</span> <span class="p">:</span> <span class="n">Box</span>
+<span class="p">{</span>
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+		
+		<span class="n">ObservedToggleButton</span> <span class="n">observedToggle</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ObservedToggleButton</span><span class="p">();</span>
+		<span class="n">ObserverButton</span> <span class="n">myObserverButton</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ObserverButton</span><span class="p">(</span><span class="n">observedToggle</span><span class="p">);</span>
+
+		<span class="n">add</span><span class="p">(</span><span class="n">myObserverButton</span><span class="p">);</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">observedToggle</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class ObservationBox</span>
+</code></pre></div></div>
+
+<p>We’re still adding two buttons, but the <code class="language-plaintext highlighter-rouge">ObservedToggleButton</code> is more elaborate than the simple <code class="language-plaintext highlighter-rouge">CheckButton</code> used in the first example. So, let’s go look at that:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">ObservedToggleButton</span> <span class="p">:</span> <span class="n">ToggleButton</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">onText</span> <span class="p">=</span> <span class="s">"Toggle is on."</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">offText</span> <span class="p">=</span> <span class="s">"Toggle is off."</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">onLabel</span> <span class="p">=</span> <span class="s">"Toggle: ON"</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">offLabel</span> <span class="p">=</span> <span class="s">"Toggle: OFF"</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">onLabel</span><span class="p">);</span>
+		<span class="n">addOnClicked</span><span class="p">(&amp;</span><span class="n">toggleMode</span><span class="p">);</span>
+		<span class="n">setMode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+		<span class="n">writeln</span><span class="p">(</span><span class="n">onText</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">toggleMode</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">getMode</span><span class="p">()</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">setMode</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+			<span class="n">writeln</span><span class="p">(</span><span class="n">offText</span><span class="p">);</span>
+			<span class="n">setLabel</span><span class="p">(</span><span class="n">offLabel</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="n">setMode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+			<span class="n">writeln</span><span class="p">(</span><span class="n">onText</span><span class="p">);</span>
+			<span class="n">setLabel</span><span class="p">(</span><span class="n">onLabel</span><span class="p">);</span>
+		<span class="p">}</span>
+	
+	<span class="p">}</span> <span class="c1">// toggleMode()</span>
+	
+<span class="p">}</span> <span class="c1">// class MyToggleButton</span>
+</code></pre></div></div>
+
+<p>This is what can happen if we want to hook something up to one of the <code class="language-plaintext highlighter-rouge">ToggleButton</code>’s signals, giving it something else to do besides sitting there looking oh-so pretty. All those strings are there to tell us the state of things, not just in the command shell, but on the <code class="language-plaintext highlighter-rouge">ToggleButton</code>’s label, too.</p>
+
+<p>And in the constructor, we’re using a new signal, the <code class="language-plaintext highlighter-rouge">onToggle</code> signal, which we hook up with <code class="language-plaintext highlighter-rouge">addOnToggled()</code>.</p>
+
+<p>A little side note: if we’d wanted to add a callback to the <code class="language-plaintext highlighter-rouge">CheckButton</code>, instead of using the <code class="language-plaintext highlighter-rouge">onClicked</code> signal (inherited from <code class="language-plaintext highlighter-rouge">Button</code>) we could have used <code class="language-plaintext highlighter-rouge">onToggle</code> there, too. But because <code class="language-plaintext highlighter-rouge">CheckButton</code> inherits the signal from <code class="language-plaintext highlighter-rouge">ToggleButton</code>, we’d have to add an extra import statement:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">ToggleButton</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">CheckButton</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>in order to get access to the signal and the all-important hook-up function, <code class="language-plaintext highlighter-rouge">addOnToggled()</code>.</p>
+
+<p>And that’s pretty much it. The <code class="language-plaintext highlighter-rouge">ObserverButton</code> is almost identical to the one in the <code class="language-plaintext highlighter-rouge">CheckButton</code> example. The only significant difference being that it calls the <code class="language-plaintext highlighter-rouge">ObservedToggleButton</code>’s <code class="language-plaintext highlighter-rouge">getMode()</code> to find its state rather than the <code class="language-plaintext highlighter-rouge">getActive()</code> function used with the first example.</p>
+
+<p>And that is a day’s work, two examples that do very much the same thing, a <code class="language-plaintext highlighter-rouge">CheckButton</code> and a <code class="language-plaintext highlighter-rouge">ToggleButton</code>. You might think there’s so little difference that only one is actually needed and maybe that’s the case. But when you think about it, the <code class="language-plaintext highlighter-rouge">CheckButton</code>’s state is visually obvious the moment you glance at it. With a <code class="language-plaintext highlighter-rouge">ToggleButton</code>, we’ve got to go the extra mile and make changes to the label. We could also have changed the colour of the button if we really wanted it to stand out. Either way, though, in the end it comes down to which is more appealing for the GUI design you’re working on.</p>
+
+<p>And that’s it. Until next time, may your wookies eat cookies and don’t stare into any novas.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0009-boxes.html">Previous: Boxes</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0011-callback-chains.html">Next: Callback Chains</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0010-checkbutton.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

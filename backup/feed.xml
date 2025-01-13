@@ -1,0 +1,2675 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-12-07T15:34:22-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">gtkDcoding</title><subtitle>Simple examples of how to use GtkD to build GUI applications.</subtitle><author><name>Ron Tarrant</name></author><entry><title type="html">0115: GTK GIO Application Flags - Opening Files</title><link href="http://localhost:4000/2021/09/24/0115-gtk-gio-app-open-flag.html" rel="alternate" type="text/html" title="0115: GTK GIO Application Flags - Opening Files" /><published>2021-09-24T00:00:00-04:00</published><updated>2021-09-24T00:00:00-04:00</updated><id>http://localhost:4000/2021/09/24/0115-gtk-gio-app-open-flag</id><content type="html" xml:base="http://localhost:4000/2021/09/24/0115-gtk-gio-app-open-flag.html"><![CDATA[<h1 id="0115--gtkgio-open-flag">0115 – GTK/GIO Open Flag</h1>
+
+<p>The next <code class="language-plaintext highlighter-rouge">ApplicationFlag</code>, <code class="language-plaintext highlighter-rouge">HANDLES_OPEN</code>, gives us a mechanism for opening files from the command line. Such things are relatively straightforward anyway, but perhaps we’ll find an advantage or two by using what <em>GIO</em> has to offer. Let’s dig in and find out, shall we?</p>
+
+<p>We’ll do this in two steps. Firstly, we’ll look at the basics—grabbing the file names from the command line—and secondly, we’ll add just enough code to open each file in its own window.</p>
+
+<h2 id="importing-the-gio-file-abstraction">Importing the GIO File Abstraction</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/020_app/app_05_open_flag.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Demonstration where multiple file names are given on the command line.
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/020_app/app_05_open_flag_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Top: no file names given on the command line. Bottom: two file names given.
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_05_open_flag.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>The <em>GIO</em> construct that helps us handle files is called <code class="language-plaintext highlighter-rouge">gio.FileIF</code>. It’s not really an interface, but a sort-of wrapper standing in for a <em>C</em>-language abstraction—<code class="language-plaintext highlighter-rouge">GFile</code>—which represents the vital statistics of a file. For our purposes, we don’t need to know a lot about this to use it, so we’ll skip the details. For now, just know we need this import statement to make this stuff work:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gio</span><span class="p">.</span><span class="n">FileIF</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="myapplication-changes">MyApplication Changes</h2>
+<h3 id="raise-the-flag">Raise the Flag</h3>
+
+<p>As we’ve done before, we declare the appropriate flag in the <code class="language-plaintext highlighter-rouge">MyApplication</code> class. And while we’re at it, let’s change the application <code class="language-plaintext highlighter-rouge">id</code> as well so it matches our current example:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ApplicationFlags</span> <span class="n">flags</span> <span class="p">=</span> <span class="n">ApplicationFlags</span><span class="p">.</span><span class="n">HANDLES_OPEN</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">id</span> <span class="p">=</span> <span class="s">"com.gtkdcoding.app.app_05_open_flag"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="hook-up-the-callback">Hook up the Callback</h3>
+
+<p>The initializer method needs a little something, too:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">addOnOpen</span><span class="p">(&amp;</span><span class="n">onOpen</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Basically, just hook up the signal. Note that we don’t need the <code class="language-plaintext highlighter-rouge">HANDLES_COMMAND_LINE</code> flag to make this work, even though that might seem like the case (it did to me at first).</p>
+
+<h3 id="messing-with-the-activate-method">Messing with the activate() Method</h3>
+
+<p>This is a pretty small change from our last demo. There, we passed in an array containing the dimensions of the window we were about to open. This time, we forego that in favour of passing in whatever arguments the user types on the command line. For purposes of demonstration, we hope these arguments will be valid file names so we don’t have to write <code class="language-plaintext highlighter-rouge">try</code>/<code class="language-plaintext highlighter-rouge">catch</code> statements. But feel free to add those if you want.</p>
+
+<p>Anyway, <code class="language-plaintext highlighter-rouge">activate()</code> now looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">activate</span><span class="p">(</span><span class="nb">string</span> <span class="n">filename</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"activate called"</span><span class="p">);</span>
+	<span class="n">AppWindow</span> <span class="n">appWindow</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AppWindow</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">filename</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// activate()</span>
+</code></pre></div></div>
+
+<p>We’ve dispensed with the <code class="language-plaintext highlighter-rouge">dimensions</code> argument—an array of integers—and replaced it with <code class="language-plaintext highlighter-rouge">filename</code>—a string—which is the name of the file we’ll be opening in a window instance.</p>
+
+<p>This method is called once for each file name provided on the command line.</p>
+
+<h3 id="changes-to-the-onactivate-method">Changes to the onActivate() Method</h3>
+
+<p>Here’s another small change:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">onActivate</span><span class="p">(</span><span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span> <span class="c1">// non-advanced syntax</span>
+<span class="p">{</span>
+	<span class="n">AppWindow</span> <span class="n">appWindow</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AppWindow</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"triggered onActivate..."</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"\tApplication ID: "</span><span class="p">,</span> <span class="n">getApplicationId</span><span class="p">());</span>
+	
+<span class="p">}</span> <span class="c1">// onActivate()</span>
+</code></pre></div></div>
+
+<p>The reason we have another instantiation of <code class="language-plaintext highlighter-rouge">AppWindow</code> here is to deal with the possibility that the user gives no arguments. Note that—depending on circumstances—either <code class="language-plaintext highlighter-rouge">activate()</code> or <code class="language-plaintext highlighter-rouge">onActivate()</code> is called, but not both. Here’s the low-down:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">activate()</code> is called once for each file name passed in, whether those file names are valid or not, and</li>
+  <li><code class="language-plaintext highlighter-rouge">onActivate()</code> is called if no arguments whatsoever are given.</li>
+</ul>
+
+<p><em>Note: If multiple non-valid file names are given, <code class="language-plaintext highlighter-rouge">activate()</code> is still called multiple times and multiple windows are opened. A little error checking will not go amiss here, but I’ll leave that to your imagination and skill.</em></p>
+
+<h3 id="a-new-callback--onopen">A New Callback – onOpen()</h3>
+
+<p>It’s relatively trivial, so here’s the entire method:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">onOpen</span><span class="p">(</span><span class="n">FileIF</span><span class="p">[]</span> <span class="n">files</span><span class="p">,</span> <span class="nb">string</span> <span class="n">hint</span><span class="p">,</span> <span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"triggered onOpen..."</span><span class="p">);</span>
+		
+	<span class="k">foreach</span><span class="p">(</span><span class="n">file</span><span class="p">;</span> <span class="n">files</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="nb">string</span> <span class="n">name</span> <span class="p">=</span> <span class="n">file</span><span class="p">.</span><span class="n">getPath</span><span class="p">();</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"file name: "</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+		<span class="n">activate</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+	<span class="p">}</span>
+		
+<span class="p">}</span> <span class="c1">// onOpen()</span>
+</code></pre></div></div>
+
+<p>This simple method steps through an array of <code class="language-plaintext highlighter-rouge">FileIF</code> objects, grabs the full path of each, then calls <code class="language-plaintext highlighter-rouge">activate()</code> for each one… as mentioned above.</p>
+
+<p>The second argument—<code class="language-plaintext highlighter-rouge">string hint</code>—allows for different modes when opening a file (edit, view, etc.) and it’s suggested that unless we have a specific need for this type of thing, we should just leave it be. So we will.</p>
+
+<p>Let’s move on to the next step where we actually load files into these windows…</p>
+
+<h2 id="loading-text-files">Loading Text Files</h2>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/020_app/app_06_open_and_load.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Two file names given on the command line.
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/020_app/app_06_open_and_load_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Two file names given on the command line. (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_06_open_and_load.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>We’ve seen the <em>GTK</em> code to accomplish this before—the bits and bobs that slap a <code class="language-plaintext highlighter-rouge">TextView</code> into a <code class="language-plaintext highlighter-rouge">Window</code>—so that part, I’ll skip. If you want a refresher, take a quick look at <a href="https:/.com/2019/09/10/0069-textview-and-textbuffer.html">blog post #0069</a>.</p>
+
+<p>The one thing we haven’t covered is the <em>D</em> code that opens and reads the file. Here’s what that looks like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">file</span> <span class="p">=</span> <span class="n">File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">"r"</span><span class="p">);</span>
+			
+	<span class="k">while</span> <span class="p">(!</span><span class="n">file</span><span class="p">.</span><span class="n">eof</span><span class="p">())</span>
+	<span class="p">{</span>
+		<span class="nb">string</span> <span class="n">line</span> <span class="p">=</span> <span class="n">file</span><span class="p">.</span><span class="n">readln</span><span class="p">();</span>
+		<span class="n">content</span> <span class="p">~=</span> <span class="n">line</span><span class="p">;</span>
+	<span class="p">}</span>
+			
+	<span class="n">textBuffer</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="n">content</span><span class="p">);</span>
+	<span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>		
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Pretty straightforward. We start by making sure the <code class="language-plaintext highlighter-rouge">filename</code> variable contains a string, then dip into <em>D</em>’s <code class="language-plaintext highlighter-rouge">stdio</code> library to open the file in read mode.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">while</code> loop reads the file one line at a time and concatenates it to the <code class="language-plaintext highlighter-rouge">content</code> variable.</p>
+
+<p>Once that’s done, <code class="language-plaintext highlighter-rouge">content</code> is dumped into the <code class="language-plaintext highlighter-rouge">TextBuffer</code> and we close the file.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>So, now we’ve read file names from the command line and opened them, each in their own window. Next time, we’ll look at command line switches.</p>
+
+<p>‘Til then, let’s all do our best to stay sane. These trying times are a challenge—like setting out to design a garbage collector on your first day with a new language while simultaneously trying to work out the plot of <em>Lost</em>—but we can survive and flourish if we all keep our heads… and our distance.</p>
+
+<p>Be safe.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2021/09/17/0114-gtk-gio-app-flags-and-cl-args.html">Previous: GTK GIO - Command Line Arguments</a>
+	</div>
+<!--	<div style="float: right;">
+		<a href="/2021/10/01/0116-gtk-gio-app-cl-switches.html">Next: GTK/GIO - Command Line Switches</a>
+	</div> -->
+</div>]]></content><author><name>Ron Tarrant</name></author><category term="app" /><summary type="html"><![CDATA[How GTK/GIO flags that allow opening files from the command line.]]></summary></entry><entry><title type="html">0114: GTK GIO Application Flags and Command Line Arguments</title><link href="http://localhost:4000/2021/09/17/0114-gtk-gio-app-flags-and-cl-args.html" rel="alternate" type="text/html" title="0114: GTK GIO Application Flags and Command Line Arguments" /><published>2021-09-17T00:00:00-04:00</published><updated>2021-09-17T00:00:00-04:00</updated><id>http://localhost:4000/2021/09/17/0114-gtk-gio-app-flags-and-cl-args</id><content type="html" xml:base="http://localhost:4000/2021/09/17/0114-gtk-gio-app-flags-and-cl-args.html"><![CDATA[<h1 id="0114-gtkgio-application-flags-and-command-line-arguments">0114: GTK/GIO Application Flags and Command Line Arguments</h1>
+
+<p>Today we’ll dig into passing command line arguments to a <em>GTK</em>/<em>GIO</em> application and start looking at the built-in mechanism that handles them.</p>
+
+<h2 id="the-arguments">The Arguments</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/020_app/app_04_commandline_arguments.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/020_app/app_04_commandline_arguments_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_04_commandline_arguments.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>As mentioned last time, command-line arguments are passed along to the <em>GIO</em> <code class="language-plaintext highlighter-rouge">Application</code>—a class object rather than the <code class="language-plaintext highlighter-rouge">Main</code> C-style struct we’ve used all along—and packed into an array. The flow of these arguments is:</p>
+
+<ul>
+  <li>the user types the arguments,</li>
+  <li>the class initializer method then:
+    <ul>
+      <li>pulls them in — <code class="language-plaintext highlighter-rouge">this(string[] args)</code>,</li>
+      <li>passes them to the <code class="language-plaintext highlighter-rouge">GtkApplication.run()</code> method — <code class="language-plaintext highlighter-rouge">run(args)</code>, and</li>
+    </ul>
+  </li>
+  <li>they’re stored in an <code class="language-plaintext highlighter-rouge">ApplicationCommandLine</code> object.</li>
+</ul>
+
+<p>From there, we pull them out in our <code class="language-plaintext highlighter-rouge">onCommandLine()</code> method (which we’ll look at momentarily).</p>
+
+<p>Now let’s take a gander at the initialization method in full:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">(</span><span class="nb">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">flags</span><span class="p">);</span>
+		
+	<span class="n">addOnActivate</span><span class="p">(&amp;</span><span class="n">onActivate</span><span class="p">);</span>
+	<span class="n">addOnCommandLine</span><span class="p">(&amp;</span><span class="n">onCommandLine</span><span class="p">);</span>
+
+	<span class="n">addOnStartup</span><span class="p">(&amp;</span><span class="n">onStartup</span><span class="p">);</span>
+	<span class="n">addOnShutdown</span><span class="p">(&amp;</span><span class="n">onShutdown</span><span class="p">);</span>
+
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"registration before: "</span><span class="p">,</span> <span class="n">registration</span><span class="p">);</span>
+	<span class="n">registration</span> <span class="p">=</span> <span class="n">register</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"registration after: "</span><span class="p">,</span> <span class="n">registration</span><span class="p">);</span>
+
+	<span class="n">run</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>Notice that we’re using a signal to hook up command-line processing to a method just as we do with application activation, application start-up, or—for that matter—connecting any widget to an action.</p>
+
+<p>Now, before we dig in further, I want to point out one other thing we need to take care of when deriving our <code class="language-plaintext highlighter-rouge">MyApplication</code> class from <code class="language-plaintext highlighter-rouge">GtkApplication</code>…</p>
+
+<p>We need to tell <em>GTK</em>/<em>GIO</em> that we’re intending to handle command-line arguments and to do this, we declare a class attribute in the preamble:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ApplicationFlags</span> <span class="n">flags</span> <span class="p">=</span> <span class="n">ApplicationFlags</span><span class="p">.</span><span class="n">HANDLES_COMMAND_LINE</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>It’s an extra step compared to doing things the way we’re used to.</p>
+
+<h3 id="parsing-parsing-over-the-bounding-command-line">Parsing, Parsing, Over the Bounding Command-line</h3>
+
+<p>Now that <em>GIO</em> has done its part, it’s up to us to pick up the command-line argument baton and finish the race. How? We write a command-line parser. It’ll be written as a method similar to the widget action methods we’ve looked at so often in this blog. In this case, it takes this form:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">onCommandLine</span><span class="p">(</span><span class="n">ApplicationCommandLine</span> <span class="n">acl</span><span class="p">,</span> <span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span>
+<span class="p">{</span>
+		<span class="kt">int</span> <span class="n">exitStatus</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="nb">string</span><span class="p">[]</span> <span class="n">args</span> <span class="p">=</span> <span class="n">acl</span><span class="p">.</span><span class="n">getArguments</span><span class="p">();</span>
+		<span class="kt">int</span><span class="p">[]</span> <span class="n">dimensions</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">];</span>
+
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"triggered onCommandLine..."</span><span class="p">);</span>
+	
+		<span class="c1">// remove the application name from the string of args</span>
+		<span class="n">args</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"\tcommandline args: "</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"\targs.length: "</span><span class="p">,</span> <span class="n">args</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">length</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span>
+		<span class="p">{</span>
+				<span class="n">writeln</span><span class="p">(</span><span class="s">"\tno args"</span><span class="p">);</span>
+				<span class="n">activate</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">args</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span> <span class="p">+=</span> <span class="mi">2</span><span class="p">)</span>
+			<span class="p">{</span>
+				<span class="nb">string</span> <span class="n">arg</span> <span class="p">=</span> <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+				
+				<span class="k">switch</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+				<span class="p">{</span>
+					<span class="k">case</span> <span class="s">"width"</span><span class="p">:</span>
+						<span class="n">dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="n">to</span><span class="p">!</span><span class="kt">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span> <span class="p">+</span> <span class="mi">1</span><span class="p">]);</span>
+					<span class="k">break</span><span class="p">;</span>
+					
+					<span class="k">case</span> <span class="s">"height"</span><span class="p">:</span>
+						<span class="n">dimensions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="n">to</span><span class="p">!</span><span class="kt">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span> <span class="p">+</span> <span class="mi">1</span><span class="p">]);</span>
+					<span class="k">break</span><span class="p">;</span>
+					
+					<span class="k">default</span><span class="p">:</span>
+						<span class="n">writeln</span><span class="p">(</span><span class="s">"arg: "</span><span class="p">,</span> <span class="n">arg</span><span class="p">);</span>
+						<span class="n">writeln</span><span class="p">(</span><span class="s">"arg: "</span><span class="p">,</span> <span class="n">to</span><span class="p">!</span><span class="nb">string</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span> <span class="p">+</span> <span class="mi">1</span><span class="p">]));</span>
+					<span class="k">break</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+			
+			<span class="n">activate</span><span class="p">(</span><span class="n">dimensions</span><span class="p">);</span>
+		<span class="p">}</span>
+		
+		<span class="k">return</span><span class="p">(</span><span class="n">exitStatus</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// onCommandLine()</span>
+</code></pre></div></div>
+
+<p>Note the method arguments:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationCommandLine acl</code>, and</li>
+  <li><code class="language-plaintext highlighter-rouge">GioApplication app</code>.</li>
+</ul>
+
+<p>Earlier, we talked about the path our arguments take when they’re passed in. I didn’t mention their final destination which is—they get shoved into the <code class="language-plaintext highlighter-rouge">ApplicationCommandLine</code> class which is specifically designed for that purpose. Here in the parser method is where we retrieve them and get down to business.</p>
+
+<p>In short (skipping down to the <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">else</code>), what we do here is:</p>
+
+<ul>
+  <li>get rid of the application name (which, you’ll remember, is always retrieved along with the arguments) by <code class="language-plaintext highlighter-rouge">remove()</code>ing the zeroth element of the <code class="language-plaintext highlighter-rouge">args</code> array,</li>
+  <li>step through the remaining args two at a time,</li>
+  <li>check each against a pre-determined set of args we’re expecting (<code class="language-plaintext highlighter-rouge">“width”</code> and <code class="language-plaintext highlighter-rouge">“height”</code> in this case),</li>
+  <li>do a look-ahead to the next argument to get a value, and</li>
+  <li>calling the <code class="language-plaintext highlighter-rouge">activate()</code> method, passing in the width and height we’ve captured from the command line.</li>
+</ul>
+
+<h2 id="the-activate-method">The activate() Method</h2>
+
+<p><em>GIO</em> has a default <code class="language-plaintext highlighter-rouge">activate()</code> method which gets called unless we override it. Here, that’s exactly what we’re doing.</p>
+
+<p>If you run this demo without appending command line arguments, you’ll get a few bits of info dumped to the terminal, but that’s it. The demo exits. But adding even one command line argument changes that. A window opens… and if you don’t specify a <code class="language-plaintext highlighter-rouge">width</code> and <code class="language-plaintext highlighter-rouge">height</code>, each followed by a number, the window has a default size, the dimensions of which are object attributes in the preamble to the <code class="language-plaintext highlighter-rouge">AppWindow</code> class.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Because of space constraints, I’ve skimmed over a few things, so if you have questions, please ask them in the comments below.</p>
+
+<p>Next time, we’ll carry on in this same vein, but turn to the <code class="language-plaintext highlighter-rouge">HANDLES_OPEN</code> flag to see how a list of files can be opened using these methods.</p>
+
+<p>Until then, just remember Howard’s immortal words: “There’s no place for truth on the Internet.”</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2021/09/10/0113-gtk-gio-application-ids-signals.html">Previous: GTK GIO Applications - IDs and Signals</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2021/09/24/0115-gtk-gio-app-open-flag.html">Next: GTK/GIO IV - Opening Files</a>
+	</div>
+</div>]]></content><author><name>Ron Tarrant</name></author><category term="app" /><summary type="html"><![CDATA[How GTK/GIO uses flags in the processing command line arguments.]]></summary></entry><entry><title type="html">0113: GTK GIO Application IDs and Signals</title><link href="http://localhost:4000/2021/09/10/0113-gtk-gio-application-ids-signals.html" rel="alternate" type="text/html" title="0113: GTK GIO Application IDs and Signals" /><published>2021-09-10T00:00:00-04:00</published><updated>2021-09-10T00:00:00-04:00</updated><id>http://localhost:4000/2021/09/10/0113-gtk-gio-application-ids-signals</id><content type="html" xml:base="http://localhost:4000/2021/09/10/0113-gtk-gio-application-ids-signals.html"><![CDATA[<h1 id="0113-application-ids-and-signals">0113: Application IDs and Signals</h1>
+
+<p>Continuing from last time when we started looking at GTK/GIO Applications, today let’s look at…</p>
+
+<h2 id="application-ids">Application IDs</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/020_app/app_02_barebones_with_id.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/020_app/app_02_barebones_with_id_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_02_barebones_with_id.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>Every <code class="language-plaintext highlighter-rouge">Application</code> has to have an <code class="language-plaintext highlighter-rouge">ID</code>, even if—as in our example from last time—it’s <code class="language-plaintext highlighter-rouge">null</code>. The intention is that each <code class="language-plaintext highlighter-rouge">Application</code> can be singled out for inter-process communication, even across the vastness of the Internet. This may seem like overkill, but if you think about it, how else can we guarantee finding a single remote application among the (possibly) millions that may be accessible online? This also serves as a first line of defence against hacking that can be built into every <code class="language-plaintext highlighter-rouge">Application</code> we write. It’s not a great defence, but while hackers are guessing the ID, they aren’t messing with our application.</p>
+
+<p>You may wonder how we can be sure that the <code class="language-plaintext highlighter-rouge">ID</code> we give our <code class="language-plaintext highlighter-rouge">Application</code> hasn’t been used before by every Thomas, Richard, and Harold on the planet. The solution is rather ingenious and so simple, I wish I’d thought of it…</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ID</code> starts with a reverse-order URL. And if you don’t own a URL you can use an email account or the full URL of any online code repository you have read/write privileges for.</p>
+
+<p>Then, we tack on a unique string identifier. And as long as we keep track of which identifiers we give to which application, there should never be a problem.</p>
+
+<p>Here are the choices I had when naming the example used here, each based on a URL I have access to and the unique string is just the name of the code file:</p>
+
+<ul>
+  <li><strong>blog</strong>: com.gtkdcoding.app.app_02_barebones_with_id,</li>
+  <li><strong>email</strong>: com.gmail.gtkdcoding.app.app_02_barebones_with_id,</li>
+  <li><strong>repository</strong>: com.github.rontarrant.gtkdcoding.app.app_02_barebones_with_id</li>
+</ul>
+
+<p>You’ll note that I added an extra layer (.app) between the URL and the file name. It’s not strictly necessary, but it’s part of the site organization, so I threw it in there. However, the directory where you’ll find this code file is named <code class="language-plaintext highlighter-rouge">020_app</code>, not <code class="language-plaintext highlighter-rouge">app</code>. Why didn’t I use the full directory name?</p>
+
+<p>Because we have…</p>
+
+<h3 id="other-naming-conventions-we-need-to-follow">Other Naming Conventions We Need to Follow</h3>
+
+<p>Interestingly enough, these conventions are similar to those used to name variables (as if we didn’t see <em>that</em> coming):</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">ID</code> must be made up of at least two elements separated by a dot (element.element),</li>
+  <li>elements can be made up of:
+    <ul>
+      <li>alpha-numeric characters (a-z/A-Z, 0-9),</li>
+      <li>underscores (_), and</li>
+      <li>hyphens (-),</li>
+    </ul>
+  </li>
+  <li>the first character in an <code class="language-plaintext highlighter-rouge">ID</code> cannot be:
+    <ul>
+      <li>a digit (0-9), or</li>
+      <li>a dot (.),</li>
+    </ul>
+  </li>
+  <li>the first character in an <em>element</em> cannot be a digit (0-9),</li>
+  <li>putting two dots together (..) is not allowed,</li>
+  <li>the <code class="language-plaintext highlighter-rouge">ID</code> can’t start or end with a dot (.), and</li>
+  <li>the full length of the ID can’t be more than 255 characters.</li>
+</ul>
+
+<p>So, naming the ID looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span> <span class="n">id</span> <span class="p">=</span> <span class="s">"com.gtkdcoding.app.app_02_barebones_with_id"</span><span class="p">;</span> <span class="c1">// rules</span>
+</code></pre></div></div>
+
+<p>Naming an <code class="language-plaintext highlighter-rouge">ID</code> string can be patterned after a <em>D</em>-language import statement. We can simply use the file or project name and substitute a dot for a directory separator. And when it’s time to update the project to a new version, just toss in a version number… as long as it’s done in such a way that we don’t violate any of the naming conventions.</p>
+
+<p>All this takes place in our derived class, <code class="language-plaintext highlighter-rouge">MyApplication</code> (derived from <code class="language-plaintext highlighter-rouge">GtkApplication</code> which, if you remember, is an alias of <code class="language-plaintext highlighter-rouge">gtk.Application</code> and is, in turn, derived from <code class="language-plaintext highlighter-rouge">gio.Application</code>).</p>
+
+<p>Now, let’s move on to…</p>
+
+<h2 id="application-signals">Application Signals</h2>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/020_app/app_03_adding_signals.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/020_app/app_03_adding_signals_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_03_adding_signals.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>The two most obvious signals that every <code class="language-plaintext highlighter-rouge">Application</code> might have are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">startup</code>, and</li>
+  <li><code class="language-plaintext highlighter-rouge">shutdown</code>.</li>
+</ul>
+
+<p>So much might be done to prepare for running an <code class="language-plaintext highlighter-rouge">Application</code> or to clean up before exiting. A few things that come to mind are:</p>
+
+<ul>
+  <li>loading and saving a configuration file,</li>
+  <li>on shutdown, check for unsaved changes and see if the user wants to save before exiting, or</li>
+  <li>on start-up, pop open a splash screen.</li>
+</ul>
+
+<p>Hooking them up is no biggie. We just do the same thing we always do:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">addOnStartup</span><span class="p">(&amp;</span><span class="n">onStartup</span><span class="p">);</span>
+<span class="n">addOnShutdown</span><span class="p">(&amp;</span><span class="n">onShutdown</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>And the callback functions, in their simplest form, might look like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">onStartup</span><span class="p">(</span><span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span> <span class="c1">// non-advanced syntax</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"triggered onStartup..."</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"\tThis is where you'd read a config file."</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onStartup()</span>
+
+
+<span class="kt">void</span> <span class="n">onShutdown</span><span class="p">(</span><span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span> <span class="c1">// non-advanced syntax</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"triggered onShutdown..."</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"\tThis is where you'd write a config file."</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// onShutdown()</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that wraps it up for another day. Next time, we’ll tackle <em>GIO</em>/<em>GTK</em> flags. Until then—to paraphrase Les Nessman of <em>WKRP</em>, may the good code be yours.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2021/09/03/0112-gtk-gio-application-barebones.html">Previous: GTK GIO Applications - Introduction</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2021/09/17/0114-gtk-gio-app-flags-and-cl-args.html">Next: GTK/GIO - Flags &amp; the Command Line</a>
+	</div>
+</div>]]></content><author><name>Ron Tarrant</name></author><category term="app" /><summary type="html"><![CDATA[Wherein we discover the role and naming conventions for application ID's and signals.]]></summary></entry><entry><title type="html">0112: GTK GIO Applications - Introduction</title><link href="http://localhost:4000/2021/09/03/0112-gtk-gio-application-barebones.html" rel="alternate" type="text/html" title="0112: GTK GIO Applications - Introduction" /><published>2021-09-03T00:00:00-04:00</published><updated>2021-09-03T00:00:00-04:00</updated><id>http://localhost:4000/2021/09/03/0112-gtk-gio-application-barebones</id><content type="html" xml:base="http://localhost:4000/2021/09/03/0112-gtk-gio-application-barebones.html"><![CDATA[<h2 id="after-the-hiatus">After the Hiatus</h2>
+
+<p>It’s been more than a year since I made my last post on this blog. When I stopped posting last year, I was burned out, distracted by COVID-19, our tiny apartment was suddenly a hub of work activity for both of us, and I was still disheartened by the changes being made to <em>GTK</em> in version 4.</p>
+
+<p>Now, I can see things a little more clearly… sort of. COVID-19 is still here and we may all go into (at least) one more round of lock-downs. But, other things are advancing…</p>
+
+<p>My wife and I have both been double-vaccinated and we’ve worked out an arrangement whereby we can both work in this tiny apartment without driving each other up the wall.</p>
+
+<p>Thirteen days ago, Mike Wey released GtkD 4, but the articles I’ve got on the go are all centred around GtkD 3.9. And frankly, I’m not sure I want to update to 4 because the <em>GTK</em> team dropped window position handling. Yes, it’s a small thing, but I see a problem with this…</p>
+
+<p>The <em>GTK</em> team members believe window positions should be handled by the OS’s window manager. I do agree with them except for one thing: not all window managers remember window positions. I use three monitors, so this is kind of important to me. I like my applications to open in the last place I used them so I don’t have to search miles of screen real estate to find them.</p>
+
+<p>So, with that in mind, I’d like to hear from you. Is anyone still interested in articles about GtkD 3.x? Please let me know in the comments below.</p>
+
+<p>And with all that said, let’s dig into today’s article.</p>
+
+<h2 id="0112-gtk-gio-applications---introduction">0112: GTK GIO Applications - Introduction</h2>
+
+<p>Up ‘til now, every example has been built up from a <code class="language-plaintext highlighter-rouge">MainWindow</code> widget and a <code class="language-plaintext highlighter-rouge">Main</code> struct, both of which are instantiated in the standard entry point function, <code class="language-plaintext highlighter-rouge">main()</code>. (<em>Note: <code class="language-plaintext highlighter-rouge">TestRigWindow</code>—the actual object we’ve been instantiating in our examples—inherits from <code class="language-plaintext highlighter-rouge">MainWindow</code>, so it amounts to the same thing.</em>) But today, we’re looking at an alternative way of building applications, this time using the <em>GTK/GIO</em> <code class="language-plaintext highlighter-rouge">Application</code> class modules.</p>
+
+<p>I’d like to point out that I didn’t stutter in that last sentence. There are two <code class="language-plaintext highlighter-rouge">Application</code> modules… the <em>GIO</em> <code class="language-plaintext highlighter-rouge">Application</code> is the parent class and the <em>GTK</em> class is derived from it. This can be a bit confusing when it comes time to write code because both modules need to be imported if we want to handle <em>GIO</em> signals. But, there’s a simple way to keep them straight, so let’s just dive in.</p>
+
+<h2 id="why-application">Why Application?</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">Application</code> is a more flexible framework for writing software. It doesn’t just give us the tools for building classic GUI-based software, it makes several other project types possible:</p>
+
+<ul>
+  <li>a GUI front-end for a background service,</li>
+  <li>the background service itself,</li>
+  <li>remote applications controlled locally,</li>
+  <li>local applications controlled remotely, and</li>
+  <li>a GUI-less command line application (the kind intended to be run from a terminal).</li>
+</ul>
+
+<p>On top of that, a <em>GIO</em> <code class="language-plaintext highlighter-rouge">Application</code> has a signal/callback system that gives us all kinds of flexibility in how we start up our application.</p>
+
+<p>Finally, it also gives us a system of flags we can use for all kinds of stuff including:</p>
+
+<ol>
+  <li>designating the application as a service,</li>
+  <li>passing in parameters to modify the behaviour of the running software, or</li>
+  <li>react to the existence of environment variables on the computer where the application is running.</li>
+</ol>
+
+<h2 id="old-method-vs-new">Old Method vs. New</h2>
+
+<p>The biggest difference between the <code class="language-plaintext highlighter-rouge">MainWindow</code> approach and this one is this…</p>
+
+<p>In the <code class="language-plaintext highlighter-rouge">Application</code> paradigm, signals are used to associate callbacks with such things as <code class="language-plaintext highlighter-rouge">activate</code>, <code class="language-plaintext highlighter-rouge">startup</code>, and <code class="language-plaintext highlighter-rouge">shutdown</code>. In the paradigm we’ve been using ‘til now, <code class="language-plaintext highlighter-rouge">Main.init()</code>, <code class="language-plaintext highlighter-rouge">Main.run()</code>, and <code class="language-plaintext highlighter-rouge">Main.quit()</code> (respectively) take care of these things. Nothing new is going on here, but responsibility for application-level stuff has shifted from a <em>C</em>-style struct (<code class="language-plaintext highlighter-rouge">Main</code>) to a <em>D</em>-style object (<code class="language-plaintext highlighter-rouge">Application</code>).</p>
+
+<h3 id="mainwindow-vs-applicationwindow">MainWindow vs. ApplicationWindow</h3>
+
+<p>In the classical construction method, <code class="language-plaintext highlighter-rouge">MainWindow</code> acts as a top-level container for our program, but the <em>GTK/GIO</em> <code class="language-plaintext highlighter-rouge">Application</code> instead uses the <code class="language-plaintext highlighter-rouge">ApplicationWindow</code> as its primary UI container. They both inherit from <code class="language-plaintext highlighter-rouge">Window</code>, so we still get pretty much the same functionality. But the <em>GTK/GIO</em> <code class="language-plaintext highlighter-rouge">Application</code> construction method adds such things as window <code class="language-plaintext highlighter-rouge">ID</code>s, a pop-up help window for keyboard shortcuts, and a mechanism to handle how and when a <code class="language-plaintext highlighter-rouge">Menu</code> or <code class="language-plaintext highlighter-rouge">Menubar</code> is displayed. More on these as we go along, but for now, let’s dig into a barebones example…</p>
+
+<h2 id="working-with-giogtk-applications">Working with GIO/GTK Applications</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/020_app/app_01.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/020_app/app_01_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_01_barebones.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>Right up front, naturally, we need to do some imports to get all this working. But because the <em>GTK</em> and <em>GIO</em> modules are both named <code class="language-plaintext highlighter-rouge">Application</code>, we need to put some extra effort into keeping them straight. That’s done with <em>D</em>’s aliasing feature:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gio</span><span class="p">.</span><span class="n">Application</span> <span class="p">:</span> <span class="n">GioApplication</span> <span class="p">=</span> <span class="n">Application</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">Application</span> <span class="p">:</span> <span class="n">GtkApplication</span> <span class="p">=</span> <span class="n">Application</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">ApplicationWindow</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Alias names are up to you, of course, but for this demonstration, I’m emphasizing clarity of function.</p>
+
+<h3 id="how-main-differs">How main() Differs</h3>
+
+<p>In the classical construction method, our <code class="language-plaintext highlighter-rouge">main()</code> function had to do a few things before handing control over to the <code class="language-plaintext highlighter-rouge">Main</code> <code class="language-plaintext highlighter-rouge">struct</code>… I’m pointing this out because, as it turns out, <code class="language-plaintext highlighter-rouge">Main</code> is a <code class="language-plaintext highlighter-rouge">struct</code>, not a <code class="language-plaintext highlighter-rouge">class</code>. It’s the reason we don’t sub-class it into <code class="language-plaintext highlighter-rouge">MyMain</code> or some-such in order to move its definition outside of the <code class="language-plaintext highlighter-rouge">main()</code> function.</p>
+
+<p>With the <em>GTK/GIO</em> <code class="language-plaintext highlighter-rouge">Application</code> construction method, however, we don’t have this restriction, so <code class="language-plaintext highlighter-rouge">main()</code> only has to do one thing, instantiate the <em>GTK</em> <code class="language-plaintext highlighter-rouge">Application</code> object:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">main</span><span class="p">(</span><span class="nb">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">MyApplication</span> <span class="n">thisApp</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyApplication</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// main()</span>
+</code></pre></div></div>
+
+<p>Note that it passes any command-line arguments along to the <code class="language-plaintext highlighter-rouge">MyApplication</code> constructor, another change from the old way of doing things in which we passed them to <code class="language-plaintext highlighter-rouge">Main.init()</code>. And keep in mind, <code class="language-plaintext highlighter-rouge">MyApplication</code> is derived from the <em>GTK</em> <code class="language-plaintext highlighter-rouge">Application</code> object, not its <em>GIO</em> namesake.</p>
+
+<p>Speaking of which, let’s have a look at this sub-class…</p>
+
+<h3 id="myapplication-a-gtk-application-lovechild">MyApplication, a GTK Application Lovechild</h3>
+
+<p>The preamble looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">MyApplication</span> <span class="p">:</span> <span class="n">GtkApplication</span>
+<span class="p">{</span>
+	<span class="n">ApplicationFlags</span> <span class="n">flags</span> <span class="p">=</span> <span class="n">ApplicationFlags</span><span class="p">.</span><span class="n">FLAGS_NONE</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">id</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// if application uniqueness isn't important</span>
+</code></pre></div></div>
+
+<p>In order to call the super-class constructor, we need two things:</p>
+
+<ul>
+  <li>one or more flags to set up the <code class="language-plaintext highlighter-rouge">Application</code>’s type and abilities, and</li>
+  <li>an <code class="language-plaintext highlighter-rouge">ID</code> in the form of a string.</li>
+</ul>
+
+<p>Now, you’ll note that this particular example has <code class="language-plaintext highlighter-rouge">id</code> set to <code class="language-plaintext highlighter-rouge">null</code>. That’s because, if we really don’t care about <code class="language-plaintext highlighter-rouge">Application</code> uniqueness, we don’t have to supply an <code class="language-plaintext highlighter-rouge">ID</code>. In the next example, we’ll talk more about this, but for now, let’s move on to…</p>
+
+<h3 id="the-myapplication-constructor">The MyApplication Constructor</h3>
+
+<p>This is where we set up the <code class="language-plaintext highlighter-rouge">Application</code> and get things going:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">(</span><span class="nb">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">flags</span><span class="p">);</span>
+	<span class="n">addOnActivate</span><span class="p">(&amp;</span><span class="n">onActivate</span><span class="p">);</span>
+	<span class="n">run</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>The first line isn’t all that different from what we’re used to. We call the super-class constructor, passing it the <code class="language-plaintext highlighter-rouge">id</code> and <code class="language-plaintext highlighter-rouge">flags</code> variables. In this example, because <code class="language-plaintext highlighter-rouge">id</code> is <code class="language-plaintext highlighter-rouge">null</code> and our <code class="language-plaintext highlighter-rouge">flags</code> variable is <code class="language-plaintext highlighter-rouge">NONE</code>, we aren’t asking anything of the super-class constructor except to start the application.</p>
+
+<p>The next line, however, is a departure from the old method we’ve been using. I’m sure you recognize the function naming convention even if you don’t know the <code class="language-plaintext highlighter-rouge">addOnActivate()</code> function itself. It’s a signal hook-up, as you’ve likely already guessed. Why it’s there is because (and you might wanna make an extra-large mental note of this):</p>
+
+<p><em>Application actions are processed via signals and callbacks.</em></p>
+
+<p>This means the <em>GIO/GTK</em> <code class="language-plaintext highlighter-rouge">Application</code> construction approach brings external operations directly under the control of a single, high-level entity, the <code class="language-plaintext highlighter-rouge">Application</code> object. I’m talking about things like window and accelerator management… or OS-related tasks such as handling command-line arguments, starting up, shutting down… In other words, because the uppercase-A <code class="language-plaintext highlighter-rouge">Application</code> handles all things external, the lowercase-a application (in other words: our code) doesn’t need to be aware of them. There’s no mixing of internal and external operations and therefore better separation of code.</p>
+
+<p>Looking at the last line, we find another way this new application construction method differs from the old. The command-line arguments—instead of being passed to an <code class="language-plaintext highlighter-rouge">init()</code> function—are passed to the <code class="language-plaintext highlighter-rouge">run()</code> function.</p>
+
+<p>What’s the difference? Not much, actually. Both <code class="language-plaintext highlighter-rouge">Main.init()</code> and <code class="language-plaintext highlighter-rouge">Gio.Application.run()</code> count the number of command-line arguments and build a string array with one element per argument. The biggest difference here is that <code class="language-plaintext highlighter-rouge">Main</code> is a <em>C</em> struct whereas <code class="language-plaintext highlighter-rouge">Gio.Application</code> is a proper class and is more consistent with the <em>OOP</em> paradigm we’ve been using in every example posted on this blog.</p>
+
+<h3 id="the-onactivate-callback">The onActivate Callback</h3>
+
+<p>This is the only place, in a simple application, where we need to reference the <code class="language-plaintext highlighter-rouge">Gio.Application</code> module:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">onActivate</span><span class="p">(</span><span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span> <span class="c1">// non-advanced syntax</span>
+<span class="p">{</span>
+        <span class="n">AppWindow</span> <span class="n">appWindow</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AppWindow</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onActivate()</span>
+</code></pre></div></div>
+
+<p>This is because the <code class="language-plaintext highlighter-rouge">addOnActivate()</code> function lives in that module. There are other signal hook-up functions in <code class="language-plaintext highlighter-rouge">Gtk.Application</code> and, of course, <code class="language-plaintext highlighter-rouge">Gtk.Application</code> inherits from <code class="language-plaintext highlighter-rouge">Gio.Application</code>, but when hooking up signals—just as we’ve seen elsewhere—we need to declare the arguments to be exactly what they are in the wrapper file.</p>
+
+<p>We have one last class to look at…</p>
+
+<h3 id="the-appwindow-class">The AppWindow Class</h3>
+
+<p>This class, as mentioned above, inherits from <code class="language-plaintext highlighter-rouge">ApplicationWindow</code> which in turn inherits from <em>GTK</em> <code class="language-plaintext highlighter-rouge">Window</code> which means for the most part, it’s just another <code class="language-plaintext highlighter-rouge">Window</code>. It does have a few features not found in the generic <em>GTK</em> <code class="language-plaintext highlighter-rouge">Window</code>, however, things like:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ID</code>s to make window management easier,</li>
+  <li>help overlays (more on these in a moment), and</li>
+  <li>hideable menubars.</li>
+</ul>
+
+<p>The first—<code class="language-plaintext highlighter-rouge">ID</code>s—is more or less self-explanatory. The <code class="language-plaintext highlighter-rouge">Application</code> uses <code class="language-plaintext highlighter-rouge">ApplicationWindow</code> <code class="language-plaintext highlighter-rouge">ID</code>s for window management. <code class="language-plaintext highlighter-rouge">Window</code>s can be added, removed… you get the idea.</p>
+
+<p>Help overlays, however, aren’t something we’ll find in the old construction method. These are inspired by mobile apps where the help screen slides in over top of the <code class="language-plaintext highlighter-rouge">ApplicationWindow</code> and slides back out when we’re done with it.</p>
+
+<p>Hideable <code class="language-plaintext highlighter-rouge">Menubars</code> are also inspired by mobile apps, although they’re becoming more prevalent on desktops as well.</p>
+
+<p>Anyway, that’s all nice in theory, but how about a look at the code:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">AppWindow</span> <span class="p">:</span> <span class="n">ApplicationWindow</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">width</span> <span class="p">=</span> <span class="mi">400</span><span class="p">,</span> <span class="n">height</span> <span class="p">=</span> <span class="mi">200</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">title</span> <span class="p">=</span> <span class="s">"Barebones Application"</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">(</span><span class="n">MyApplication</span> <span class="n">myApp</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">myApp</span><span class="p">);</span>
+		<span class="n">setSizeRequest</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+		<span class="n">setTitle</span><span class="p">(</span><span class="n">title</span><span class="p">);</span>
+		<span class="n">showAll</span><span class="p">();</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class AppWindow</span>
+</code></pre></div></div>
+
+<p>As with run-of-the-mill <code class="language-plaintext highlighter-rouge">Window</code>s or <code class="language-plaintext highlighter-rouge">MainWindow</code>s, we set up dimensions and a title in the preamble, then in the constructor we call the super-class constructor, set the size, the title, and then call <code class="language-plaintext highlighter-rouge">showAll()</code>. The only thing here that departs from the old construction method is setting up an <code class="language-plaintext highlighter-rouge">Application</code> pointer which we pass to the super-class constructor, so what’s up with that?</p>
+
+<p>Not a lot, really. We’re setting up an association between the <code class="language-plaintext highlighter-rouge">ApplicationWindow</code> and the <em>GIO/GTK</em> <code class="language-plaintext highlighter-rouge">Application</code> so the <code class="language-plaintext highlighter-rouge">Application</code> can manage the <code class="language-plaintext highlighter-rouge">ApplicationWindow</code>. Makes sense, right?</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Anyway, that’s all for today. This should give you a basic understanding of what’s going on behind the curtain when you use this alternate application construction method.</p>
+
+<p>Next time, we’ll dig a little deeper. See you then.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2020/05/28/0111-graphic-position-scale-button.html">Previous: Control Graphic Position with Scale Button</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2020/06/19/0113-gtk-gio-application-id.html">Next: GTK/GIO Application II - Application ID</a>
+	</div>
+</div>]]></content><author><name>Ron Tarrant</name></author><category term="app" /><summary type="html"><![CDATA[This GTK Tutorial covers a D-specific implementation of Scale Widget controlling placement of a graphic element.]]></summary></entry><entry><title type="html">0111: A Scale Widget to Control Graphic Placement</title><link href="http://localhost:4000/2020/05/28/0111-graphic-position-scale-button.html" rel="alternate" type="text/html" title="0111: A Scale Widget to Control Graphic Placement" /><published>2020-05-28T00:00:00-04:00</published><updated>2020-05-28T00:00:00-04:00</updated><id>http://localhost:4000/2020/05/28/0111-graphic-position-scale-button</id><content type="html" xml:base="http://localhost:4000/2020/05/28/0111-graphic-position-scale-button.html"><![CDATA[<h1 id="0111-a-scale-widget-to-control-graphic-placement">0111: A Scale Widget to Control Graphic Placement</h1>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/011_misc/misc_02.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/011_misc/misc_02_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/011_misc/misc_02_scale_to_animation.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>Last time, we did the simple version of a <code class="language-plaintext highlighter-rouge">Scale</code> button. If you didn’t read that—depending on your skill level—it might be helpful in understanding what’s going on in today’s post. So, no mucky about, let’s get down to it…</p>
+
+<h2 id="the-scale-v-drawingarea-demo">The Scale-v-DrawingArea Demo</h2>
+
+<p>Okay, because we’re doing a bit of graphic work this time, we’ll need to import the usual graphical culprits:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">cairo</span><span class="p">.</span><span class="n">Context</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">DrawingArea</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>And in the <code class="language-plaintext highlighter-rouge">AppBox</code> class, we’ll be setting up two widgets, the <code class="language-plaintext highlighter-rouge">Scale</code> and a <code class="language-plaintext highlighter-rouge">DrawingArea</code>:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">AppBox</span> <span class="p">:</span> <span class="n">Box</span>
+<span class="p">{</span>
+	<span class="n">MyScale</span> <span class="n">myScale</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">localPadding</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">globalPadding</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="kt">bool</span> <span class="n">expand</span> <span class="p">=</span> <span class="kc">false</span><span class="p">,</span> <span class="n">fill</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+	<span class="n">MyDrawingArea</span> <span class="n">myDrawingArea</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="n">globalPadding</span><span class="p">);</span>
+		
+		<span class="n">myDrawingArea</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyDrawingArea</span><span class="p">();</span>
+		<span class="n">myScale</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyScale</span><span class="p">(</span><span class="n">myDrawingArea</span><span class="p">);</span>
+
+		<span class="n">packStart</span><span class="p">(</span><span class="n">myScale</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">localPadding</span><span class="p">);</span>
+		<span class="n">packStart</span><span class="p">(</span><span class="n">myDrawingArea</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// LEFT justify</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+
+<span class="p">}</span> <span class="c1">// class AppBox</span>
+</code></pre></div></div>
+
+<p>We went over all this stuff in the <em>Cairo</em> drawing series (which started in <a href="/2019/07/30/0057-cairo-i-the-basics.html">blog post 0057</a> and continued to <a href="/2019/08/23/0064-cairo-vii-drawingarea-animation.html">blog post 0064</a>), so let’s move on to the more relevant details…</p>
+
+<h3 id="the-myscale-callback-function">The MyScale Callback Function</h3>
+
+<p>This is where the action is:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">valueChanged</span><span class="p">(</span><span class="n">Range</span> <span class="n">range</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">double</span> <span class="n">scaleValue</span> <span class="p">=</span> <span class="n">getValue</span><span class="p">();</span>
+	<span class="n">ballDisplay</span><span class="p">.</span><span class="n">setBallPosition</span><span class="p">(</span><span class="k">cast</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">scaleValue</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// valueChanged()</span>
+</code></pre></div></div>
+
+<p>The callback hook-up is the same as the previous example, so no need to go over it again here. If you need to refresh your memory on this point, take a look at <a href="/2020/05/17/0110-scale-button.html">the previous post</a>.</p>
+
+<p>Breaking it down, we:</p>
+<ul>
+  <li>call the inherited function <code class="language-plaintext highlighter-rouge">Scale.getValue()</code>,</li>
+  <li>so we can set the function-local variable <code class="language-plaintext highlighter-rouge">scaleValue</code>,</li>
+  <li>which is then passed to <code class="language-plaintext highlighter-rouge">ballDisplay</code>’s <code class="language-plaintext highlighter-rouge">setBallPosition()</code> function.</li>
+</ul>
+
+<p>What’s <code class="language-plaintext highlighter-rouge">ballDisplay</code>? That’s how the <code class="language-plaintext highlighter-rouge">MyScale</code> class refers to the <code class="language-plaintext highlighter-rouge">DrawingArea</code> we stuffed into the <code class="language-plaintext highlighter-rouge">AppBox</code>. Here’s what I mean…</p>
+
+<h3 id="myscales-constructor">MyScale’s Constructor</h3>
+
+<p>Take a look at the constructor’s argument:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">(</span><span class="n">MyDrawingArea</span> <span class="n">myDrawingArea</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">HORIZONTAL</span><span class="p">,</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">,</span> <span class="n">step</span><span class="p">);</span>
+		
+	<span class="n">ballDisplay</span> <span class="p">=</span> <span class="n">myDrawingArea</span><span class="p">;</span>
+	<span class="n">addOnValueChanged</span><span class="p">(&amp;</span><span class="n">valueChanged</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">AppBox</code> passes in a pointer to the <code class="language-plaintext highlighter-rouge">DrawingArea</code> which is then renamed as <code class="language-plaintext highlighter-rouge">ballDisplay</code> to put it into context for the coming operations. Not <code class="language-plaintext highlighter-rouge">Context</code> as in <code class="language-plaintext highlighter-rouge">Cairo Context</code>, but context as in circumstances… specifically, the circumstances of accessing the <code class="language-plaintext highlighter-rouge">DrawingArea</code> from the <code class="language-plaintext highlighter-rouge">Scale</code> button.</p>
+
+<h3 id="the-mydrawingarea-class">The MyDrawingArea Class</h3>
+
+<p>Let’s break this class down a bit…</p>
+
+<h4 id="the-class-preamble">The Class Preamble</h4>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">MyDrawingArea</span> <span class="p">:</span> <span class="n">DrawingArea</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">ballX</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>This variable keeps track of where the ball’s position… where it is at any given moment at runtime. We’ll see how that works momentarily.</p>
+
+<h4 id="the-constructor">The Constructor</h4>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">ballX</span> <span class="p">=</span> <span class="mi">30</span><span class="p">;</span>
+		
+	<span class="n">addOnDraw</span><span class="p">(&amp;</span><span class="n">onDraw</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>We set an initial position for the graphic—a ball—and hook up the callback function which we’ll talk about now…</p>
+
+<h4 id="the-callback">The Callback</h4>
+
+<p>As is usual with a <code class="language-plaintext highlighter-rouge">DrawingArea</code> callback, all we do is draw:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onDraw</span><span class="p">(</span><span class="n">Scoped</span><span class="p">!</span><span class="n">Context</span> <span class="n">context</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">setLineWidth</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// prepare the context</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">arc</span><span class="p">(</span><span class="n">ballX</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="p">*</span> <span class="mf">3.1415</span><span class="p">);</span> <span class="c1">// define the circle as an arc</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">stroke</span><span class="p">();</span> <span class="c1">// and draw</span>
+
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onDraw()</span>
+</code></pre></div></div>
+
+<p>We set a line width, define the ball shape, draw it, and we’re out of there. Responding to changes in the <code class="language-plaintext highlighter-rouge">Scale</code>’s slider happens in a different function:</p>
+
+<h4 id="the-setballposition-function">The setBallPosition() Function</h4>
+
+<p>And this function is called directly from MyScale’s callback (the callback being the function which reacts to movement of the <code class="language-plaintext highlighter-rouge">Scale</code> slider):</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">setBallPosition</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">x</span> <span class="p">*=</span> <span class="mi">15</span><span class="p">;</span> <span class="c1">// move the ball a noticeable distance</span>
+	<span class="n">ballX</span> <span class="p">=</span> <span class="n">x</span> <span class="p">+</span> <span class="mi">30</span><span class="p">;</span>
+	<span class="n">queueDraw</span><span class="p">();</span>
+		
+<span class="p">}</span> <span class="c1">// setBallPosition()</span>
+</code></pre></div></div>
+
+<p>Now, because the <code class="language-plaintext highlighter-rouge">Scale</code>’s <code class="language-plaintext highlighter-rouge">Range</code> is from <code class="language-plaintext highlighter-rouge">0</code> to <code class="language-plaintext highlighter-rouge">10</code>, using a one-to-one ratio for moving the ball isn’t going to be that noticeable, so the first thing we do is take the value passed in from <code class="language-plaintext highlighter-rouge">MyScale</code>’s callback and multiply it by <code class="language-plaintext highlighter-rouge">15</code>. That way we don’t have to squint to see the ball move.</p>
+
+<p>Next, we update the value of <code class="language-plaintext highlighter-rouge">ballX</code>, the ball’s position, and finally, force the <code class="language-plaintext highlighter-rouge">DrawingArea</code> to do a redraw.</p>
+
+<p>And that, ladies and gents, is that.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>It’s fairly straightforward to control the position of a graphic in a <code class="language-plaintext highlighter-rouge">DrawingArea</code> using a <code class="language-plaintext highlighter-rouge">Scale</code> button (or, in fact, a <code class="language-plaintext highlighter-rouge">ScaleButton</code>, but that I’ll leave as an exercise for you if you’re so inclined).</p>
+
+<p>Until next time, be brave, code well, and don’t let the bugs bite.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2020/05/17/0110-scale-button.html">Previous: The Scale Button</a>
+	</div>
+<!--
+	<div style="float: right;">
+		<a href="/2020/06/08/0112-gtk-gio-application-barebones.html">Next: The GTK/GIO Application - Introduction</a>
+	</div>
+-->
+</div>]]></content><author><name>Ron Tarrant</name></author><category term="scale" /><summary type="html"><![CDATA[This GTK Tutorial covers a D-specific implementation of Scale Widget controlling placement of a graphic element.]]></summary></entry><entry><title type="html">0110: Scale Button</title><link href="http://localhost:4000/2020/05/17/0110-scale-button.html" rel="alternate" type="text/html" title="0110: Scale Button" /><published>2020-05-17T00:00:00-04:00</published><updated>2020-05-17T00:00:00-04:00</updated><id>http://localhost:4000/2020/05/17/0110-scale-button</id><content type="html" xml:base="http://localhost:4000/2020/05/17/0110-scale-button.html"><![CDATA[<h1 id="0110-scale-button">0110: Scale Button</h1>
+
+<p>Today we’re going to look at the <code class="language-plaintext highlighter-rouge">Scale</code> button. Note that this is different from a <code class="language-plaintext highlighter-rouge">ScaleButton</code> which we worked with in <a href="/2019/06/25/0047-scalebutton-and-volumebutton.html">post #0047</a>. Also, we won’t be stopping with just a simple demo. Instead, we’ll be using it as a springboard into a practical example that grew out of a request by Jan Hönig over on the <em>DLang</em> forum. Jan asked for a demo wherein a slider controls the position of a ball on a <code class="language-plaintext highlighter-rouge">DrawingArea</code>. So today, we’ll start with this simple example of a plain-jane <code class="language-plaintext highlighter-rouge">Scale</code> button and in the next blog post, we’ll go for the full-on demo Jan asked for.</p>
+
+<h2 id="the-scale-button">The Scale Button</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/011_misc/misc_01.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/011_misc/misc_01_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/011_misc/misc_01_scale.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>First things first. Since we haven’t yet talked about the <code class="language-plaintext highlighter-rouge">Scale</code> button, let’s start by taking a look at the bare-bones version…</p>
+
+<h2 id="imports">Imports</h2>
+
+<p>Right at the top, we have a couple of new import statements:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">Scale</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">Range</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Yup, the <code class="language-plaintext highlighter-rouge">Scale</code> module is needed so we can work with the <code class="language-plaintext highlighter-rouge">Scale</code> button. As to the <code class="language-plaintext highlighter-rouge">Range</code>, we’ll talk about that when we get to the <code class="language-plaintext highlighter-rouge">MyScale</code> class.</p>
+
+<p>For now, here’s the `AppBox’:</p>
+
+<h2 id="the-appbox-stuff">The AppBox Stuff</h2>
+
+<p>Here’s the entire class (it’s very brief, so why not?):</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">AppBox</span> <span class="p">:</span> <span class="n">Box</span>
+<span class="p">{</span>
+	<span class="n">MyScale</span> <span class="n">myScale</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">localPadding</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">globalPadding</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="kt">bool</span> <span class="n">expand</span> <span class="p">=</span> <span class="kc">false</span><span class="p">,</span> <span class="n">fill</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="n">globalPadding</span><span class="p">);</span>
+		
+		<span class="n">myScale</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyScale</span><span class="p">();</span>
+		<span class="n">packStart</span><span class="p">(</span><span class="n">myScale</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">localPadding</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+
+<span class="p">}</span> <span class="c1">// class AppBox</span>
+</code></pre></div></div>
+
+<p>All we’re doing here stuffing in an instance of a ‘MyScale’ class (derived from the <code class="language-plaintext highlighter-rouge">Scale</code>). That’s it.</p>
+
+<p>So, let’s talk about that…</p>
+
+<h2 id="the-myscale-class">The MyScale Class</h2>
+
+<p>Here’s the class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">MyScale</span> <span class="p">:</span> <span class="n">Scale</span>
+<span class="p">{</span>
+	<span class="kt">double</span> <span class="n">minimum</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">double</span> <span class="n">maximum</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="kt">double</span> <span class="n">step</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">HORIZONTAL</span><span class="p">,</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span><span class="p">,</span> <span class="n">step</span><span class="p">);</span>
+		<span class="n">addOnValueChanged</span><span class="p">(&amp;</span><span class="n">valueChanged</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">valueChanged</span><span class="p">(</span><span class="n">Range</span> <span class="n">range</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="n">getValue</span><span class="p">());</span>
+		
+	<span class="p">}</span> <span class="c1">// valueChanged()</span>
+
+<span class="p">}</span> <span class="c1">// class MyScale</span>
+</code></pre></div></div>
+
+<p>Right up front in the class preamble, we set up the details. And those details are what define the <code class="language-plaintext highlighter-rouge">Range</code> I mentioned earlier:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">minimum</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">maximum</code>, and</li>
+  <li><code class="language-plaintext highlighter-rouge">step</code>.</li>
+</ul>
+
+<p>The statement, <code class="language-plaintext highlighter-rouge">addOnValueChanged(&amp;valueChanged)</code> hooks up the <code class="language-plaintext highlighter-rouge">Scale</code> button to its callback function. If you look at the <code class="language-plaintext highlighter-rouge">valueChanged()</code> callback itself, you’ll see that the argument is a <code class="language-plaintext highlighter-rouge">Range</code>. So, let’s talk about that…</p>
+
+<p>Firstly, the <code class="language-plaintext highlighter-rouge">Range</code> is internal, so don’t worry about figuring out how to access it. As the name implies, a <code class="language-plaintext highlighter-rouge">Range</code> is a series of numbers with a minimum and a maximum (we just saw those in the preamble). They can be 0 to 10, -52 to +76… whatever you want.</p>
+
+<p>We saw similar things before in <a href="http://localhost:4000/2019/06/25/0047-scalebutton-and-volumebutton.html">the <code class="language-plaintext highlighter-rouge">ScaleButton</code> demo</a>, but as we’ve seen here, these two widgets are quite different. Don’t let the similarity in name throw you off.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>That’s all we have time for today, so join us next time when we put this <code class="language-plaintext highlighter-rouge">Scale</code> button to work in controlling the position of a simple graphic on a <code class="language-plaintext highlighter-rouge">DrawingArea</code>.</p>
+
+<p>Until then.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2020/05/06/0109-sfx-bindproperty.html">Previous: Sync Properties Over Multiple Widgets</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2020/05/28/0111-graphic-position-scale-button.html">Next: Control Graphic Position with Scale Button</a>
+	</div>
+</div>]]></content><author><name>Ron Tarrant</name></author><category term="scale" /><summary type="html"><![CDATA[This GTK Tutorial covers a D-specific implementation of the Scale Button.]]></summary></entry><entry><title type="html">0109: SFX – Sync Properties Over Multiple Widgets</title><link href="http://localhost:4000/2020/05/06/0109-sfx-bindproperty.html" rel="alternate" type="text/html" title="0109: SFX – Sync Properties Over Multiple Widgets" /><published>2020-05-06T00:00:00-04:00</published><updated>2020-05-06T00:00:00-04:00</updated><id>http://localhost:4000/2020/05/06/0109-sfx-bindproperty</id><content type="html" xml:base="http://localhost:4000/2020/05/06/0109-sfx-bindproperty.html"><![CDATA[<h1 id="0109-sfx--using-bindproperty-to-sync-properties-over-multiple-widgets">0109: SFX – Using bindProperty() to Sync Properties Over Multiple Widgets</h1>
+
+<p>This post is the result of a discussion with Ferhat Kurtulmuş on the <em>D Forum</em>. He pointed out that <code class="language-plaintext highlighter-rouge">bindProperty()</code> can be used to sync up the sensitivity of a bunch of widgets. Change one and they all change. It sounded rather intriguing, so let’s have a look, shall we?</p>
+
+<h2 id="widget-sync">Widget Sync</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/016_sfx/sfx_09.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/016_sfx/sfx_09_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/016_sfx/sfx_09_bindproperty.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>Looking at the screen-shot, you’ll see a list of three <code class="language-plaintext highlighter-rouge">Switch</code>s and, at the bottom, a single standard <code class="language-plaintext highlighter-rouge">Button</code> that will control their sensitivity. The standard <code class="language-plaintext highlighter-rouge">Button</code> only changes the <code class="language-plaintext highlighter-rouge">"sensitive"</code> flag on the first <code class="language-plaintext highlighter-rouge">Switch</code>. The rest have theirs bound to that of the first. Anyway, let’s have a look at how it works…</p>
+
+<h3 id="adding-companion-widgets">Adding Companion Widgets</h3>
+
+<p>The function that sets all this up is part of the <code class="language-plaintext highlighter-rouge">MyButton</code> class and looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">addCompanion</span><span class="p">(</span><span class="n">Widget</span> <span class="n">widget</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">companions</span> <span class="p">~=</span> <span class="n">widget</span><span class="p">;</span>
+		
+	<span class="k">if</span><span class="p">(</span><span class="n">companions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">!=</span> <span class="n">widget</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">companions</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">bindProperty</span><span class="p">(</span><span class="s">"sensitive"</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="s">"sensitive"</span><span class="p">,</span> <span class="n">GBindingFlags</span><span class="p">.</span><span class="n">DEFAULT</span><span class="p">);</span>
+	<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// addCompanion()</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">if()</code> statement makes sure the zeroeth <code class="language-plaintext highlighter-rouge">Switch</code> has already been assigned to the <code class="language-plaintext highlighter-rouge">companions</code> array before doing anything. It then names that zeroeth <code class="language-plaintext highlighter-rouge">Switch</code> as the observed <code class="language-plaintext highlighter-rouge">Switch</code>, so to speak, and binds its <code class="language-plaintext highlighter-rouge">sensitive</code> property to any other <code class="language-plaintext highlighter-rouge">Switch</code> widgets passed into the <code class="language-plaintext highlighter-rouge">addCompanion()</code> function.</p>
+
+<p>This example only uses <code class="language-plaintext highlighter-rouge">Switch</code>es, but you can use anything, really, as long as you up-cast to <code class="language-plaintext highlighter-rouge">Widget</code> as you pass it to <code class="language-plaintext highlighter-rouge">addCompanion()</code>.</p>
+
+<h3 id="making-the-list-of-switches-insensitive">Making the List of Switches Insensitive</h3>
+
+<p>This is done in the <code class="language-plaintext highlighter-rouge">onButtonPress()</code> callback:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onButtonPress</span><span class="p">(</span><span class="n">Event</span> <span class="n">e</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">companions</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">getSensitive</span><span class="p">()</span> <span class="k">is</span> <span class="kc">false</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"Activating switch"</span><span class="p">);</span>
+		<span class="n">companions</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">setSensitive</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		<span class="n">setLabel</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"Deactivating switch."</span><span class="p">);</span>
+		<span class="n">companions</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">setSensitive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+		<span class="n">setLabel</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+	<span class="p">}</span>
+		
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onButtonPress()</span>
+</code></pre></div></div>
+
+<p>This is pretty much the same as the <code class="language-plaintext highlighter-rouge">onButtonPress()</code> function we saw in the first demo we talked about in <a href="/2020/03/12/0104-widget-opacity-ii.html">Blog Post #0104</a>. The only difference is that we’re working with an array of companion widgets instead of just one.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">MySwitch</code> class is identical, so the only thing left to look at is…</p>
+
+<h3 id="the-buttongrid-constructor">The ButtonGrid Constructor</h3>
+
+<p>And really, all we’re looking at here is how these <code class="language-plaintext highlighter-rouge">Switch</code>es are all stuffed into the UI and associated, each with the first…</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">switchLabel1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="s">"Insensitize Me"</span><span class="p">);</span>
+	<span class="n">attach</span><span class="p">(</span><span class="n">switchLabel1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="n">mySwitch1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MySwitch</span><span class="p">();</span>
+	<span class="n">attach</span><span class="p">(</span><span class="n">mySwitch1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		
+	<span class="n">switchLabel2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="s">"Insensitize Me, too"</span><span class="p">);</span>
+	<span class="n">attach</span><span class="p">(</span><span class="n">switchLabel2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="n">mySwitch2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MySwitch</span><span class="p">();</span>
+	<span class="n">attach</span><span class="p">(</span><span class="n">mySwitch2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		
+	<span class="n">switchLabel3</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="s">"Me, three!"</span><span class="p">);</span>
+	<span class="n">attach</span><span class="p">(</span><span class="n">switchLabel3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="n">mySwitch3</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MySwitch</span><span class="p">();</span>
+	<span class="n">attach</span><span class="p">(</span><span class="n">mySwitch3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+	<span class="n">myButton</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyButton</span><span class="p">();</span>
+	<span class="n">attach</span><span class="p">(</span><span class="n">myButton</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="n">myButton</span><span class="p">.</span><span class="n">addCompanion</span><span class="p">(</span><span class="k">cast</span><span class="p">(</span><span class="n">Widget</span><span class="p">)</span><span class="n">mySwitch1</span><span class="p">);</span>
+	<span class="n">myButton</span><span class="p">.</span><span class="n">addCompanion</span><span class="p">(</span><span class="k">cast</span><span class="p">(</span><span class="n">Widget</span><span class="p">)</span><span class="n">mySwitch2</span><span class="p">);</span>
+	<span class="n">myButton</span><span class="p">.</span><span class="n">addCompanion</span><span class="p">(</span><span class="k">cast</span><span class="p">(</span><span class="n">Widget</span><span class="p">)</span><span class="n">mySwitch3</span><span class="p">);</span>
+
+	<span class="n">setBorderWidth</span><span class="p">(</span><span class="n">borderWidth</span><span class="p">);</span>
+	<span class="n">setMarginBottom</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+	<span class="n">setColumnSpacing</span><span class="p">(</span><span class="n">columnSpacing</span><span class="p">);</span>
+	<span class="n">setRowSpacing</span><span class="p">(</span><span class="n">rowSpacing</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>The first three sets of four statements each add a <code class="language-plaintext highlighter-rouge">Switch</code> along with a <code class="language-plaintext highlighter-rouge">Label</code>. The only tricky bit in there is making sure we count <code class="language-plaintext highlighter-rouge">Grid</code> rows and columns correctly. That’s something that, I’m sure, could be automated if one put some effort into it. Perhaps that’ll be the subject of a future post. Anyway…</p>
+
+<p>Once we add <code class="language-plaintext highlighter-rouge">myButton</code>—the standard <code class="language-plaintext highlighter-rouge">Button</code> that triggers all this insensitivity—we drop it onto the <code class="language-plaintext highlighter-rouge">Grid</code> and then call <code class="language-plaintext highlighter-rouge">myButton.addCompanion()</code> for each <code class="language-plaintext highlighter-rouge">Switch</code>.</p>
+
+<p>The rest is all stuff we’ve done before.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>There’s no limit to how many <code class="language-plaintext highlighter-rouge">Widgets</code>—or which type(s) of <code class="language-plaintext highlighter-rouge">Widgets</code>—we can add to the list. Since <code class="language-plaintext highlighter-rouge">addCompanion()</code> is set up to add a generic <code class="language-plaintext highlighter-rouge">Widget</code>, all you have to do is use the <code class="language-plaintext highlighter-rouge">cast()</code> function to match what <code class="language-plaintext highlighter-rouge">addCompanion()</code> needs and you’re all set. And with <code class="language-plaintext highlighter-rouge">ObjectG</code> being everybody’s great-grandparental unit, you don’t have to worry about climbing too far up the hierarchy to access the <code class="language-plaintext highlighter-rouge">bindProperty()</code> function.</p>
+
+<p>That’s it for now. Take care of each other and don’t let the bad guys win.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2020/04/25/0108-snippets-iv-arrays.html">Previous: Snippets IV - Using Arrays in a UI Context</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2020/05/17/0110-scale-button.html">Next: The Scale Button</a>
+	</div>
+</div>]]></content><author><name>Ron Tarrant</name></author><category term="sfx" /><summary type="html"><![CDATA[This GTK Tutorial covers a D-specific implementation of the Observer pattern.]]></summary></entry><entry><title type="html">0108: D Snippets IV - Using Arrays in a UI Context</title><link href="http://localhost:4000/2020/04/25/0108-snippets-iv-arrays.html" rel="alternate" type="text/html" title="0108: D Snippets IV - Using Arrays in a UI Context" /><published>2020-04-25T00:00:00-04:00</published><updated>2020-04-25T00:00:00-04:00</updated><id>http://localhost:4000/2020/04/25/0108-snippets-iv-arrays</id><content type="html" xml:base="http://localhost:4000/2020/04/25/0108-snippets-iv-arrays.html"><![CDATA[<h1 id="0108-d-snippets-iv---using-arrays-in-a-ui-context">0108: D Snippets IV - Using Arrays in a UI Context</h1>
+
+<p>So, what do you do when you need to pick an object out of a bunch/collection/array for special processing? Or deletion?</p>
+
+<p>Last time, we talked about adding and removing <em>Observers</em> from a watched object’s list and this technique ties right into that discussion. It’s the kind of thing that also comes up when you want to remove a tab from a <code class="language-plaintext highlighter-rouge">Notebook</code>.</p>
+
+<p>Let’s have a look at another <em>D</em>-specific trick for hunting down stuff in arrays…</p>
+
+<h2 id="the-countuntil-function">The countUntil() Function</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/019_dlang/dlang_01_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/019_dlang/dlang_01_find_in_array.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>To use the <code class="language-plaintext highlighter-rouge">countUntil()</code> function, we need to:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">algorithm</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>To demonstrate this at its simplest, I wrote a quick test where everything takes place in the <code class="language-plaintext highlighter-rouge">main()</code> function:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">main</span><span class="p">(</span><span class="nb">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span><span class="p">[]</span> <span class="n">intArray</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">];</span>
+	<span class="nb">string</span><span class="p">[]</span> <span class="n">stringArray</span> <span class="p">=</span> <span class="p">[</span><span class="s">"buzz"</span><span class="p">,</span> <span class="s">"fill"</span><span class="p">,</span> <span class="s">"hope"</span><span class="p">,</span> <span class="s">"negatory"</span><span class="p">,</span> <span class="s">"bobberdoodle"</span><span class="p">];</span>
+	<span class="kt">long</span> <span class="n">intIndex</span><span class="p">,</span> <span class="n">stringIndex</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">findVar</span> <span class="p">=</span> <span class="mi">22</span><span class="p">;</span>
+	
+	<span class="n">intIndex</span> <span class="p">=</span> <span class="n">intArray</span><span class="p">.</span><span class="n">countUntil</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"intIndex: "</span><span class="p">,</span> <span class="n">intIndex</span><span class="p">);</span>
+	<span class="n">intIndex</span> <span class="p">=</span> <span class="n">intArray</span><span class="p">.</span><span class="n">countUntil</span><span class="p">(</span><span class="n">findVar</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"intIndex: "</span><span class="p">,</span> <span class="n">intIndex</span><span class="p">);</span>
+	
+	<span class="n">stringIndex</span> <span class="p">=</span> <span class="n">stringArray</span><span class="p">.</span><span class="n">countUntil</span><span class="p">(</span><span class="s">"negatory"</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"stringIndex: "</span><span class="p">,</span> <span class="n">stringIndex</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// main()</span>
+</code></pre></div></div>
+
+<p>The beauty of <code class="language-plaintext highlighter-rouge">countUntil()</code> is that it finds the value of the variable you’re looking for and returns the position in the array as a <code class="language-plaintext highlighter-rouge">long</code>. This makes life easy if you’re trying to identify an array element without resorting to such things as object ID’s. And it works whether that value is an integer, a string, or an object reference.</p>
+
+<p>Now let’s put this into a <em>GTK</em> example…</p>
+
+<h2 id="find-a-reference-in-an-array">Find a Reference in an Array</h2>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/019_dlang/dlang_02.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/019_dlang/dlang_02_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/019_dlang/dlang_02_reference_in_array.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>First, a quick note about the imports at the top of the file…</p>
+
+<p>We already talked about this one:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">algorithm</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>But I’ve added another:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">conv</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>This isn’t necessary to make <code class="language-plaintext highlighter-rouge">countUntil()</code> work. It’s only here so we can create a bunch of buttons using a <code class="language-plaintext highlighter-rouge">for()</code> loop. I did it this way so we can try this with any number of buttons without having to fiddle around with copying and pasting a bunch of statements.</p>
+
+<p>Moving on…</p>
+
+<p>Until we get to the <code class="language-plaintext highlighter-rouge">AppBox</code> class, things are very much the same as usual, so let’s skip right to it.</p>
+
+<h3 id="the-appbox">The AppBox</h3>
+
+<p>There’s something important we need to keep in mind when creating an array of widgets and it fits neatly into the <em>OOP</em> programming paradigm. It’s this:</p>
+
+<p><em>We can’t access an array from outside its home object without extra smoke and mirrors.</em></p>
+
+<p>In fact, I’d say it’s nigh on impossible, but it doesn’t matter if that’s true or not. It’s bad practice, so I’d advise not doing it. <em>D</em> forces us to use <em>OOP</em> techniques like this in the way they were meant to be used and who are we to question the language designers? When we get to the section of this discussion where we look at the <code class="language-plaintext highlighter-rouge">MyButton</code> object, you’ll see that we reach back up to the <code class="language-plaintext highlighter-rouge">AppBox</code> level to carry out the search for the current <code class="language-plaintext highlighter-rouge">MyButton</code> in the array… and since the array lives in <code class="language-plaintext highlighter-rouge">AppBox</code>, this makes total sense.</p>
+
+<p>Anyway, if my point isn’t clear, it’ll become more so as we go along, so let’s just continue…</p>
+
+<h4 id="appbox-preamble">AppBox Preamble</h4>
+
+<p>Ignoring the properties that are just for the <code class="language-plaintext highlighter-rouge">AppBox</code> itself, we have these:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MyButton</span><span class="p">[]</span> <span class="n">buttons</span><span class="p">;</span>
+<span class="n">MyButton</span> <span class="n">newButton</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">lastButtonID</span> <span class="p">=</span> <span class="p">-</span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>They are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">buttons</code>: an array to hold <code class="language-plaintext highlighter-rouge">MyButton</code> references,</li>
+  <li><code class="language-plaintext highlighter-rouge">newButton</code>: a placeholder for each <code class="language-plaintext highlighter-rouge">MyButton</code> created that lasts the lifetime of the <code class="language-plaintext highlighter-rouge">for()</code> loop, just long enough so it can be tacked onto the end of the <code class="language-plaintext highlighter-rouge">buttons</code> array,</li>
+  <li><code class="language-plaintext highlighter-rouge">lastButtonID</code>: a unique ID for each button created.</li>
+</ul>
+
+<p>That last property isn’t strictly necessary and is only there so we can use it to prove that the code works.</p>
+
+<h4 id="the-appbox-constructor">The AppBox Constructor</h4>
+
+<p>I won’t reproduce the whole thing here, just the bits that concern us in this discussion, which are:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">foreach</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="mf">0..4</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">lastButtonID</span><span class="p">++;</span>
+	<span class="n">newButton</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyButton</span><span class="p">(</span><span class="n">to</span><span class="p">!</span><span class="nb">string</span><span class="p">(</span><span class="n">lastButtonID</span><span class="p">),</span> <span class="k">this</span><span class="p">);</span>
+	<span class="n">packStart</span><span class="p">(</span><span class="n">newButton</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">localPadding</span><span class="p">);</span>
+	<span class="n">buttons</span> <span class="p">~=</span> <span class="n">newButton</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="kt">ulong</span> <span class="n">i</span><span class="p">;</span> <span class="mf">0.</span><span class="p">.</span><span class="n">buttons</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"Button: "</span><span class="p">,</span> <span class="k">cast</span><span class="p">(</span><span class="n">MyButton</span><span class="p">*)</span><span class="n">buttons</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s">", label: "</span><span class="p">,</span> <span class="n">buttons</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">getLabel</span><span class="p">(),</span> <span class="s">", ID: "</span><span class="p">,</span> <span class="n">buttons</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">buttonID</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The first <code class="language-plaintext highlighter-rouge">foreach()</code> loop creates the buttons array, the second lists them all so we can see the RAM location for each.</p>
+
+<p>Notice the use of <code class="language-plaintext highlighter-rouge">to!string()</code> to convert the <code class="language-plaintext highlighter-rouge">lastButtonID</code> integer to a string so it can be used as part of the label text for <code class="language-plaintext highlighter-rouge">MyButton</code>.</p>
+
+<p>One more thing of interest in the <code class="language-plaintext highlighter-rouge">AppBox</code> class is…</p>
+
+<h4 id="the-findbutton-function">The findButton() Function</h4>
+
+<p>And it looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">long</span> <span class="n">findButton</span><span class="p">(</span><span class="n">MyButton</span> <span class="n">findButton</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">long</span> <span class="n">index</span> <span class="p">=</span> <span class="n">buttons</span><span class="p">.</span><span class="n">countUntil</span><span class="p">(</span><span class="n">findButton</span><span class="p">);</span>
+	
+	<span class="k">return</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// findButton()</span>
+</code></pre></div></div>
+
+<p>This is called whenever a button is clicked and it returns the index of the clicked button. <em>OOP</em> philosophy demands that this search take place here in the <code class="language-plaintext highlighter-rouge">AppBox</code> because that’s where the array of <code class="language-plaintext highlighter-rouge">MyButton</code> objects lives. This is what I was alluding to earlier. You may be able to find a way to search a reference to the array from inside another object, but I couldn’t find a way to do that… not that I’m an expert in the <em>D</em> language, but my point is, it’s far more trouble than it’s worth. And most of the time, you’ll be looking for the widget’s reference from elsewhere, so I wanted to stress that this is the easy way… perhaps, the only way… to get accurate results.</p>
+
+<p>Moving on…</p>
+
+<h3 id="the-mybutton-class">The MyButton Class</h3>
+
+<p>The preamble looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span> <span class="n">labelText</span> <span class="p">=</span> <span class="s">"Button "</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">buttonID</span><span class="p">;</span>
+<span class="n">AppBox</span> <span class="n">_appBox</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">_appBox</code> variable is the reference to our <code class="language-plaintext highlighter-rouge">AppBox</code> and will be used in the <code class="language-plaintext highlighter-rouge">buttonAction</code> callback below.</p>
+
+<p>Since nothing out of the ordinary happens in the constructor—we use the constructor arguments to name the button and assign the <code class="language-plaintext highlighter-rouge">_appBox</code> reference, then hook up the callback—let’s move right along to the callback function itself:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">buttonAction</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">MyButton</span><span class="p">*</span> <span class="n">currentButton</span> <span class="p">=</span> <span class="k">cast</span><span class="p">(</span><span class="n">MyButton</span><span class="p">*)</span><span class="k">this</span><span class="p">;</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"Button clicked: "</span><span class="p">,</span> <span class="n">getLabel</span><span class="p">(),</span> <span class="s">", address: "</span><span class="p">,</span> <span class="n">currentButton</span><span class="p">,</span> <span class="s">", ID: "</span><span class="p">,</span> <span class="n">buttonID</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"found in the array at index: "</span><span class="p">,</span> <span class="n">_appBox</span><span class="p">.</span><span class="n">findButton</span><span class="p">(</span><span class="k">this</span><span class="p">),</span> <span class="s">"\n"</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// buttonAction()</span>
+</code></pre></div></div>
+
+<p>Now, you’ll see a lot of mucking around with <code class="language-plaintext highlighter-rouge">cast()</code>ing and pointers, but take note that when we pass the <code class="language-plaintext highlighter-rouge">MyButton</code> reference to <code class="language-plaintext highlighter-rouge">_appBox.findButton()</code>, we just pass it <code class="language-plaintext highlighter-rouge">this</code>. No pointer, no address, just the actual bare-bulb <code class="language-plaintext highlighter-rouge">this</code> reference.</p>
+
+<p>And that’s how easy this is. Sometimes, life doesn’t have to be difficult… and this is one of those times.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that’s that. Join me next time when we do something else interesting with the <em>D</em> language and the <em>Gnome Toolkit</em>.</p>
+
+<p>Until then, happy coding.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2020/04/14/0107-dlang-ui-snippets-iii.html">Previous: D Snippets III - A Practical Observer</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2020/05/06/0109-sfx-bindproperty.html">Next: Sync Widgets with bindProperty()</a>
+	</div>
+</div>]]></content><author><name>Ron Tarrant</name></author><category term="dlang" /><summary type="html"><![CDATA[This GTK Tutorial covers a D-specific implementation of the Observer pattern.]]></summary></entry><entry><title type="html">0107: D Snippets III - A Practical Observer</title><link href="http://localhost:4000/2020/04/14/0107-dlang-ui-snippets-iii.html" rel="alternate" type="text/html" title="0107: D Snippets III - A Practical Observer" /><published>2020-04-14T00:00:00-04:00</published><updated>2020-04-14T00:00:00-04:00</updated><id>http://localhost:4000/2020/04/14/0107-dlang-ui-snippets-iii</id><content type="html" xml:base="http://localhost:4000/2020/04/14/0107-dlang-ui-snippets-iii.html"><![CDATA[<h1 id="0107-d-snippets-iii---a-practical-observer">0107: D Snippets III - A Practical Observer</h1>
+
+<p>Last time, we started with a look at a generic example of an <em>Observer</em> pattern. This time, we’ll pick apart a more practical example in which multiple <em>Observers</em>—a <code class="language-plaintext highlighter-rouge">Button</code>, an <code class="language-plaintext highlighter-rouge">Image</code>, and an <code class="language-plaintext highlighter-rouge">Entry</code>—change their state depending on the state of a watched object.</p>
+
+<h2 id="the-observer-at-work">The Observer at Work</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/021_oop/oop_04.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/021_oop/oop_04_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/021_oop/oop_04_checkbutton_observer.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>The challenge here is that the watched object needs to see all widgets as being a common type. We’ve got a <code class="language-plaintext highlighter-rouge">Button</code>, an <code class="language-plaintext highlighter-rouge">Entry</code>, and an <code class="language-plaintext highlighter-rouge">Image</code>, so if we write the <code class="language-plaintext highlighter-rouge">addObserver()</code> function to accept a <code class="language-plaintext highlighter-rouge">Button</code>, it’s going to have a fit if we pass it anything else. If we, instead, write it to accept a widget (the common ancestor of <code class="language-plaintext highlighter-rouge">Button</code>, <code class="language-plaintext highlighter-rouge">Image</code>, etc.) we don’t gain anything because we still have no mechanism for adding an <code class="language-plaintext highlighter-rouge">update()</code> function to each of the widgets.</p>
+
+<p>Further, that <code class="language-plaintext highlighter-rouge">update()</code> function has to take on a form that’s useful for each widget type. Here’s what it has to do:</p>
+
+<ul>
+  <li>for the <code class="language-plaintext highlighter-rouge">Button</code> we need to change the label text which requires calling <code class="language-plaintext highlighter-rouge">setLabel()</code>,</li>
+  <li>for obfuscating text in an <code class="language-plaintext highlighter-rouge">Entry</code>, we need to call <code class="language-plaintext highlighter-rouge">setVisibility()</code>, and</li>
+  <li>to switch the graphic displayed in an <code class="language-plaintext highlighter-rouge">Image</code> widget, we need to call <code class="language-plaintext highlighter-rouge">setFromFile()</code>.</li>
+</ul>
+
+<p>These functions aren’t interchangeable, so <code class="language-plaintext highlighter-rouge">update()</code> needs to be generic at some level so it can take specific action(s) for each widget we add it to.</p>
+
+<p>What do we do? This is <em>OOP 101</em>. We make <em>Observer</em> an <code class="language-plaintext highlighter-rouge">interface</code> so we can:</p>
+
+<ul>
+  <li>have all observing widgets inherit from the <em>Observer</em> <code class="language-plaintext highlighter-rouge">interface</code>,</li>
+  <li>define an empty <code class="language-plaintext highlighter-rouge">update()</code> function within the <code class="language-plaintext highlighter-rouge">interface</code> which forces each inheriting widget to implement its own version of it, and</li>
+  <li>cast all widgets to type <em>Observer</em> as we add them to the list of <em>Observers</em> so we don’t need to write an override for each widget type.</li>
+</ul>
+
+<p>Casting everything to <em>Observer</em> like this works because the only commonality we need between <em>Observers</em> is the <code class="language-plaintext highlighter-rouge">update()</code> function and that’s what’s provided by the <em>Observer</em> interface.</p>
+
+<h3 id="the-observer-interface">The Observer Interface</h3>
+
+<p>So, here’s what our <em>Observer</em> now looks like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">interface</span> <span class="n">Observer</span>
+<span class="p">{</span>
+	<span class="kt">void</span> <span class="n">update</span><span class="p">(</span><span class="kt">bool</span> <span class="n">value</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// interface Observer</span>
+</code></pre></div></div>
+
+<p>We just need to tell it what we expect for arguments and a return value for the <code class="language-plaintext highlighter-rouge">update()</code> function and that’s that.</p>
+
+<p>Now let’s take a look at the watched object so we have some idea of the requirements of the <code class="language-plaintext highlighter-rouge">update()</code> function.</p>
+
+<h3 id="the-watchedbutton">The WatchedButton</h3>
+
+<p>Here’s the code:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">WatchedButton</span> <span class="p">:</span> <span class="n">CheckButton</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">buttonText</span> <span class="p">=</span> <span class="s">"Switch Output"</span><span class="p">;</span>
+	<span class="n">Observer</span><span class="p">[]</span> <span class="n">observers</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">buttonText</span><span class="p">);</span>
+		<span class="n">addOnClicked</span><span class="p">(&amp;</span><span class="n">updateAll</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">addObserver</span><span class="p">(</span><span class="n">Observer</span> <span class="n">observer</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">observers</span> <span class="p">~=</span> <span class="n">observer</span><span class="p">;</span>
+		
+	<span class="p">}</span> <span class="c1">// addObserver()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">updateAll</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">foreach</span><span class="p">(</span><span class="n">observer</span><span class="p">;</span> <span class="n">observers</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">observer</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">getActive</span><span class="p">());</span>
+			
+		<span class="p">}</span>
+		
+	<span class="p">}</span> <span class="c1">// updateAll()</span>
+
+<span class="p">}</span> <span class="c1">// class WatchedButton</span>
+</code></pre></div></div>
+
+<p>The first thing you may notice is that the <code class="language-plaintext highlighter-rouge">change()</code> function is gone. We don’t need it because, instead, we’re hooking up the <code class="language-plaintext highlighter-rouge">updateAll()</code> function to the <code class="language-plaintext highlighter-rouge">onClicked</code> signal. Whenever the state of the <code class="language-plaintext highlighter-rouge">CheckButton</code> changes, <code class="language-plaintext highlighter-rouge">updateAll()</code> runs through the list of observers, calls <code class="language-plaintext highlighter-rouge">update()</code> for each, and passes along the current state of the <code class="language-plaintext highlighter-rouge">CheckButton</code>.</p>
+
+<p>Now let’s look at one of the Widgets that will hear from the watched object.</p>
+
+<h3 id="the-observerbutton---preamble">The ObserverButton - Preamble</h3>
+
+<p>Firstly, what’s going to react to the changing state of the watched object? Let’s make it really obvious and change the label text. For this, we can use a string array. And let’s make things simple by pairing the zeroth element with the <code class="language-plaintext highlighter-rouge">CheckButton</code>’s <code class="language-plaintext highlighter-rouge">false</code> state and the first element with <code class="language-plaintext highlighter-rouge">true</code>, 0 for 0, 1 for 1:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span><span class="p">[]</span> <span class="n">labels</span> <span class="p">=</span> <span class="p">[</span><span class="s">"Take Action"</span><span class="p">,</span> <span class="s">"Don't Take Action"</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>Naturally, one of these will need to be selected as the default and we take care of that in…</p>
+
+<h3 id="the-observerbutton--constructor">The ObserverButton – Constructor</h3>
+
+<p>This is also short-n-sweet:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+	<span class="n">addOnClicked</span><span class="p">(&amp;</span><span class="n">doSomething</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>We set our default label and hook up the <code class="language-plaintext highlighter-rouge">Button</code>’s callback. Now, the callback will do something different based on which label is current, but we’ll get to that momentarily. First, let’s look at…</p>
+
+<h3 id="the-observerbutton--update-function">The ObserverButton – update() Function</h3>
+
+<p>This is the locally-implemented version of the <code class="language-plaintext highlighter-rouge">update()</code> function we declared in the <em>Observer</em> interface. This is where we change the label text.</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">update</span><span class="p">(</span><span class="kt">bool</span> <span class="n">state</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">setLabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">state</span><span class="p">]);</span>
+		
+<span class="p">}</span> <span class="c1">// updateSubjectState()</span>
+</code></pre></div></div>
+
+<h3 id="the-observerbutton--dosomething-function">The ObserverButton – doSomething() Function</h3>
+
+<p>Okay, here it is:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">doSomething</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">message</span><span class="p">;</span>
+
+	<span class="k">if</span><span class="p">(</span><span class="n">getLabel</span><span class="p">()</span> <span class="p">==</span> <span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+	<span class="p">{</span>
+		<span class="n">message</span> <span class="p">=</span> <span class="s">"These aren't the droids you're looking for."</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">message</span> <span class="p">=</span> <span class="s">"These aren't droids. They're monkeys in tin suits."</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">writeln</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// doSomething()</span>
+</code></pre></div></div>
+
+<p>Based on which of the two label strings is current, we spit out a different terminal message.</p>
+
+<p>Now, let’s take a quick look at how the other <em>Observer</em>-derived objects implement the <code class="language-plaintext highlighter-rouge">update()</code> function…</p>
+
+<h3 id="observerentry">ObserverEntry</h3>
+
+<p>We take the incoming state of the <code class="language-plaintext highlighter-rouge">CheckButton</code> and flip it so that <code class="language-plaintext highlighter-rouge">true</code> becomes <code class="language-plaintext highlighter-rouge">false</code> and vise versa:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">update</span><span class="p">(</span><span class="kt">bool</span> <span class="n">state</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">state</span> <span class="p">=</span> <span class="p">!</span><span class="n">state</span><span class="p">;</span>
+	<span class="n">setVisibility</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// update()</span>
+</code></pre></div></div>
+
+<p>This way, visibility is turned on when the <code class="language-plaintext highlighter-rouge">CheckButton</code> is unchecked.</p>
+
+<h3 id="observerimage">ObserverImage</h3>
+
+<p>In the preamble we define two image paths and then write <code class="language-plaintext highlighter-rouge">update()</code> like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">update</span><span class="p">(</span><span class="kt">bool</span> <span class="n">state</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">state</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">current</span> <span class="p">=</span> <span class="n">monkey</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">current</span> <span class="p">=</span> <span class="n">robot</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">setFromFile</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// update()</span>
+</code></pre></div></div>
+
+<p>We hop back and forth between the two image paths, then use <code class="language-plaintext highlighter-rouge">setFromFile()</code> to make the switch.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And there you have it. Each <em>Observer</em>-derived class/object deals with the state of <code class="language-plaintext highlighter-rouge">CheckButton</code> in its own way.</p>
+
+<p>Next time, we’ll take a look at how to handle a list of widgets using <em>D</em>-style arrays. Sounds easy, right? We’ll see.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2020/04/03/0106-dlang-ui-snippets-ii.html">Previous: D Snippets II - Generic Observer</a>
+	</div>
+
+	<div style="float: right;">
+		<a href="/2020/04/25/0108-snippets-iv-arrays.html">Next: Arrays in UI</a>
+	</div>
+</div>]]></content><author><name>Ron Tarrant</name></author><category term="dlang" /><summary type="html"><![CDATA[This GTK Tutorial covers a D-specific implementation of the Observer pattern.]]></summary></entry><entry><title type="html">0106: D Snippets II - A Generic Observer</title><link href="http://localhost:4000/2020/04/03/0106-dlang-ui-snippets-ii.html" rel="alternate" type="text/html" title="0106: D Snippets II - A Generic Observer" /><published>2020-04-03T00:00:00-04:00</published><updated>2020-04-03T00:00:00-04:00</updated><id>http://localhost:4000/2020/04/03/0106-dlang-ui-snippets-ii</id><content type="html" xml:base="http://localhost:4000/2020/04/03/0106-dlang-ui-snippets-ii.html"><![CDATA[<h1 id="0106-d-language-snippets-ii---a-generic-observer">0106: D-language Snippets II - A Generic Observer</h1>
+
+<p>Picking up from last time…</p>
+
+<p>We discussed the difference between the <em>Observer</em> and <em>Singleton</em> patterns, then took a closer look at both the generic <em>Singleton</em> and a specific example of the <em>Singleton</em> at work. This time, we’ll do the same thing with the <em>Observer</em>.</p>
+
+<h2 id="the-observer-pattern">The Observer Pattern</h2>
+
+<p><em>Note: There is no UI for this example, just the output to the terminal.</em></p>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/021_oop/oop_01_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/021_oop/oop_01_observer.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>And because there’s no UI, we’ll start with…</p>
+
+<h3 id="the-main-function">The main() Function</h3>
+
+<p>All we do in <code class="language-plaintext highlighter-rouge">main()</code> is instantiate all the bits we need, then run the test a few times.</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="c1">// initialize objects</span>
+	<span class="n">Subject</span> <span class="n">subject</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Subject</span><span class="p">();</span>
+	<span class="n">Observer</span> <span class="n">observer1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Observer</span><span class="p">(</span><span class="s">"First Observer..."</span><span class="p">,</span> <span class="n">subject</span><span class="p">);</span>
+	<span class="n">Observer</span> <span class="n">observer2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Observer</span><span class="p">(</span><span class="s">"Second Observer.."</span><span class="p">,</span> <span class="n">subject</span><span class="p">);</span>
+	
+	<span class="c1">// change state</span>
+	<span class="k">foreach</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="mf">0..4</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"\nChanging state of Subject..."</span><span class="p">);</span>
+		<span class="n">subject</span><span class="p">.</span><span class="n">change</span><span class="p">();</span>
+		<span class="n">observer1</span><span class="p">.</span><span class="n">reportState</span><span class="p">();</span>
+		<span class="n">observer2</span><span class="p">.</span><span class="n">reportState</span><span class="p">();</span>
+	<span class="p">}</span>
+	
+<span class="p">}</span> <span class="c1">// main()</span>
+</code></pre></div></div>
+
+<p>In the preamble, we instantiate three objects—one to be watched, and two others to do the watching. (Make sure to instantiate the subject of observation first.)</p>
+
+<p>Next comes the heart of our demo, a loop that:</p>
+
+<ul>
+  <li>toggles the state of the watched object between true and false a few times, and</li>
+  <li>calls upon each of the <em>Observers</em> to tell us what they see.</li>
+</ul>
+
+<p>The loop spits out proof that the dynamic between <em>Observers</em> and watched object is working.</p>
+
+<h3 id="the-observer-class">The Observer Class</h3>
+
+<p>Now we get into the actual <em>Observer</em> code, starting with the class named for the pattern:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">Observer</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">idString</span><span class="p">;</span>
+	<span class="kt">bool</span> <span class="n">subjectState</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">(</span><span class="nb">string</span> <span class="n">id</span><span class="p">,</span> <span class="n">Subject</span> <span class="n">subject</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">idString</span> <span class="p">=</span> <span class="n">id</span><span class="p">;</span>
+		<span class="n">subject</span><span class="p">.</span><span class="n">addObserver</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">reactToSubjectStateChange</span><span class="p">(</span><span class="kt">bool</span> <span class="n">newState</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">subjectState</span> <span class="p">=</span> <span class="n">newState</span><span class="p">;</span>
+		
+	<span class="p">}</span> <span class="c1">// reactToSubjectStateChange()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">reportState</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"Viewing from "</span><span class="p">,</span> <span class="n">idString</span><span class="p">,</span> <span class="s">". The subject's state is now: "</span><span class="p">,</span> <span class="n">subjectState</span><span class="p">);</span>
+
+	<span class="p">}</span> <span class="c1">// reportState()</span>
+	
+<span class="p">}</span> <span class="c1">// class Observer</span>
+</code></pre></div></div>
+
+<p>In the preamble we find an <code class="language-plaintext highlighter-rouge">ID</code>. It’s not strictly necessary for production-level code… unless you need to track which observer is watching at any given time. For a demonstration such as this, it can also give us proof that the mechanism is working.</p>
+
+<p>In the <code class="language-plaintext highlighter-rouge">reactToSubjectStateChange()</code> function the <code class="language-plaintext highlighter-rouge">Observer</code>’s <code class="language-plaintext highlighter-rouge">subjectState</code> <em>Boolean</em> is the only thing we update, but it stands in for whatever housekeeping the <em>Observer</em> would ordinarily do when the watched object reports changes.</p>
+
+<p><em>Note: this function is never called by anything other than the watched object. This is because we only want an <code class="language-plaintext highlighter-rouge">Observer</code> to react to changes reported by the watched object… in other words, only when new information comes straight from the horse’s mouth.</em></p>
+
+<p>Now let’s look at…</p>
+
+<h3 id="the-subjectwatchedobserved-class">The Subject/Watched/Observed Class</h3>
+
+<p>In a nutshell, any watched object will have:</p>
+
+<ul>
+  <li>one or more dynamic properties,</li>
+  <li>a mechanism for adding (and, in real-world use cases, perhaps, removing) <em>Observers</em>, and</li>
+  <li>a second mechanism for reporting to the <em>Observers</em> any time a change takes place in one of its dynamic properties.</li>
+</ul>
+
+<h4 id="preamble">Preamble</h4>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">switcherState</span><span class="p">;</span>
+<span class="n">Observer</span><span class="p">[]</span> <span class="n">observers</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>So, as expected, we have a bit of data that the <em>Observers</em> want to track and an array that will hold a list of those <em>Observers</em>.</p>
+
+<h4 id="the-constructor">The Constructor</h4>
+
+<p>This constructor is pretty straightforward:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">switcherState</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+	
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>As can be seen, it just sets the initial state of the data.</p>
+
+<h4 id="the-addobserver-function">The addObserver Function</h4>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">addObserver</span><span class="p">(</span><span class="n">Observer</span> <span class="n">observer</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">observers</span> <span class="p">~=</span> <span class="n">observer</span><span class="p">;</span>
+	<span class="n">observer</span><span class="p">.</span><span class="n">reactToSubjectStateChange</span><span class="p">(</span><span class="n">switcherState</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// addObserver()</span>
+</code></pre></div></div>
+
+<p>Here we add a new <em>Observer</em> to the watched object’s list and get it up to speed right away as to the state of the <code class="language-plaintext highlighter-rouge">switcherState</code> property. If we had a bunch of properties that <code class="language-plaintext highlighter-rouge">Observer</code>s needed to be aware of, we can pass as many as necessary to the <code class="language-plaintext highlighter-rouge">reactToSubjectStateChange()</code> function.</p>
+
+<h4 id="the-updateall-function">The updateAll Function</h4>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">updateAll</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">foreach</span><span class="p">(</span><span class="n">observer</span><span class="p">;</span> <span class="n">observers</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">observer</span><span class="p">.</span><span class="n">reactToSubjectStateChange</span><span class="p">(</span><span class="n">switcherState</span><span class="p">);</span>
+			
+	<span class="p">}</span>
+		
+<span class="p">}</span> <span class="c1">// updateAll()</span>
+</code></pre></div></div>
+
+<p>This steps through the list of <em>Observers</em> and informs them of the change. <em>Observers</em> can have different implementations of <code class="language-plaintext highlighter-rouge">reactToSubjectStateChange()</code> which allows each to react in its own unique way to changes in the watched object.</p>
+
+<h4 id="the-change-function">The change Function</h4>
+
+<p>And finally, we have:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">change</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">switcherState</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">switcherState</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">switcherState</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="n">updateAll</span><span class="p">();</span>
+	
+<span class="p">}</span> <span class="c1">// change()</span>
+</code></pre></div></div>
+
+<p>This is our change-for-change’s-sake function and is here for demonstration purposes only. It forces a change that the entire system then reacts to.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This article is running long, so we’ll have to wait until next time to look over the <em>Observer</em> at work example.</p>
+
+<p>Take care, and see you then.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2020/03/23/0105-dlang-ui-snippets-i.html">Previous: D Snippets I - Singleton vs. Observer</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2020/04/14/0107-dlang-ui-snippets-iii.html">Next: D Snippets III - Practical Observer</a>
+	</div>
+</div>]]></content><author><name>Ron Tarrant</name></author><category term="dlang" /><summary type="html"><![CDATA[This GTK Tutorial covers a generic Observer pattern implemented in D.]]></summary></entry></feed>

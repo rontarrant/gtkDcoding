@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlapp.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2021-09-17T00:00:00-04:00" itemprop="datePublished">Friday, September 17, 2021
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0114-gtkgio-application-flags-and-command-line-arguments">0114: GTK/GIO Application Flags and Command Line Arguments</h1>
+
+<p>Today we’ll dig into passing command line arguments to a <em>GTK</em>/<em>GIO</em> application and start looking at the built-in mechanism that handles them.</p>
+
+<h2 id="the-arguments">The Arguments</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/020_app/app_04_commandline_arguments.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/020_app/app_04_commandline_arguments_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/020_app/app_04_commandline_arguments.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>As mentioned last time, command-line arguments are passed along to the <em>GIO</em> <code class="language-plaintext highlighter-rouge">Application</code>—a class object rather than the <code class="language-plaintext highlighter-rouge">Main</code> C-style struct we’ve used all along—and packed into an array. The flow of these arguments is:</p>
+
+<ul>
+  <li>the user types the arguments,</li>
+  <li>the class initializer method then:
+    <ul>
+      <li>pulls them in — <code class="language-plaintext highlighter-rouge">this(string[] args)</code>,</li>
+      <li>passes them to the <code class="language-plaintext highlighter-rouge">GtkApplication.run()</code> method — <code class="language-plaintext highlighter-rouge">run(args)</code>, and</li>
+    </ul>
+  </li>
+  <li>they’re stored in an <code class="language-plaintext highlighter-rouge">ApplicationCommandLine</code> object.</li>
+</ul>
+
+<p>From there, we pull them out in our <code class="language-plaintext highlighter-rouge">onCommandLine()</code> method (which we’ll look at momentarily).</p>
+
+<p>Now let’s take a gander at the initialization method in full:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">(</span><span class="nb">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">flags</span><span class="p">);</span>
+		
+	<span class="n">addOnActivate</span><span class="p">(&amp;</span><span class="n">onActivate</span><span class="p">);</span>
+	<span class="n">addOnCommandLine</span><span class="p">(&amp;</span><span class="n">onCommandLine</span><span class="p">);</span>
+
+	<span class="n">addOnStartup</span><span class="p">(&amp;</span><span class="n">onStartup</span><span class="p">);</span>
+	<span class="n">addOnShutdown</span><span class="p">(&amp;</span><span class="n">onShutdown</span><span class="p">);</span>
+
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"registration before: "</span><span class="p">,</span> <span class="n">registration</span><span class="p">);</span>
+	<span class="n">registration</span> <span class="p">=</span> <span class="n">register</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"registration after: "</span><span class="p">,</span> <span class="n">registration</span><span class="p">);</span>
+
+	<span class="n">run</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>Notice that we’re using a signal to hook up command-line processing to a method just as we do with application activation, application start-up, or—for that matter—connecting any widget to an action.</p>
+
+<p>Now, before we dig in further, I want to point out one other thing we need to take care of when deriving our <code class="language-plaintext highlighter-rouge">MyApplication</code> class from <code class="language-plaintext highlighter-rouge">GtkApplication</code>…</p>
+
+<p>We need to tell <em>GTK</em>/<em>GIO</em> that we’re intending to handle command-line arguments and to do this, we declare a class attribute in the preamble:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ApplicationFlags</span> <span class="n">flags</span> <span class="p">=</span> <span class="n">ApplicationFlags</span><span class="p">.</span><span class="n">HANDLES_COMMAND_LINE</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>It’s an extra step compared to doing things the way we’re used to.</p>
+
+<h3 id="parsing-parsing-over-the-bounding-command-line">Parsing, Parsing, Over the Bounding Command-line</h3>
+
+<p>Now that <em>GIO</em> has done its part, it’s up to us to pick up the command-line argument baton and finish the race. How? We write a command-line parser. It’ll be written as a method similar to the widget action methods we’ve looked at so often in this blog. In this case, it takes this form:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">onCommandLine</span><span class="p">(</span><span class="n">ApplicationCommandLine</span> <span class="n">acl</span><span class="p">,</span> <span class="n">GioApplication</span> <span class="n">app</span><span class="p">)</span>
+<span class="p">{</span>
+		<span class="kt">int</span> <span class="n">exitStatus</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="nb">string</span><span class="p">[]</span> <span class="n">args</span> <span class="p">=</span> <span class="n">acl</span><span class="p">.</span><span class="n">getArguments</span><span class="p">();</span>
+		<span class="kt">int</span><span class="p">[]</span> <span class="n">dimensions</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">];</span>
+
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"triggered onCommandLine..."</span><span class="p">);</span>
+	
+		<span class="c1">// remove the application name from the string of args</span>
+		<span class="n">args</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"\tcommandline args: "</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"\targs.length: "</span><span class="p">,</span> <span class="n">args</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
+		
+		<span class="k">if</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">length</span> <span class="p">==</span> <span class="mi">0</span><span class="p">)</span>
+		<span class="p">{</span>
+				<span class="n">writeln</span><span class="p">(</span><span class="s">"\tno args"</span><span class="p">);</span>
+				<span class="n">activate</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">args</span><span class="p">.</span><span class="n">length</span><span class="p">;</span> <span class="n">i</span> <span class="p">+=</span> <span class="mi">2</span><span class="p">)</span>
+			<span class="p">{</span>
+				<span class="nb">string</span> <span class="n">arg</span> <span class="p">=</span> <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+				
+				<span class="k">switch</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+				<span class="p">{</span>
+					<span class="k">case</span> <span class="s">"width"</span><span class="p">:</span>
+						<span class="n">dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="n">to</span><span class="p">!</span><span class="kt">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span> <span class="p">+</span> <span class="mi">1</span><span class="p">]);</span>
+					<span class="k">break</span><span class="p">;</span>
+					
+					<span class="k">case</span> <span class="s">"height"</span><span class="p">:</span>
+						<span class="n">dimensions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="n">to</span><span class="p">!</span><span class="kt">int</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span> <span class="p">+</span> <span class="mi">1</span><span class="p">]);</span>
+					<span class="k">break</span><span class="p">;</span>
+					
+					<span class="k">default</span><span class="p">:</span>
+						<span class="n">writeln</span><span class="p">(</span><span class="s">"arg: "</span><span class="p">,</span> <span class="n">arg</span><span class="p">);</span>
+						<span class="n">writeln</span><span class="p">(</span><span class="s">"arg: "</span><span class="p">,</span> <span class="n">to</span><span class="p">!</span><span class="nb">string</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span> <span class="p">+</span> <span class="mi">1</span><span class="p">]));</span>
+					<span class="k">break</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+			
+			<span class="n">activate</span><span class="p">(</span><span class="n">dimensions</span><span class="p">);</span>
+		<span class="p">}</span>
+		
+		<span class="k">return</span><span class="p">(</span><span class="n">exitStatus</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// onCommandLine()</span>
+</code></pre></div></div>
+
+<p>Note the method arguments:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ApplicationCommandLine acl</code>, and</li>
+  <li><code class="language-plaintext highlighter-rouge">GioApplication app</code>.</li>
+</ul>
+
+<p>Earlier, we talked about the path our arguments take when they’re passed in. I didn’t mention their final destination which is—they get shoved into the <code class="language-plaintext highlighter-rouge">ApplicationCommandLine</code> class which is specifically designed for that purpose. Here in the parser method is where we retrieve them and get down to business.</p>
+
+<p>In short (skipping down to the <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">else</code>), what we do here is:</p>
+
+<ul>
+  <li>get rid of the application name (which, you’ll remember, is always retrieved along with the arguments) by <code class="language-plaintext highlighter-rouge">remove()</code>ing the zeroth element of the <code class="language-plaintext highlighter-rouge">args</code> array,</li>
+  <li>step through the remaining args two at a time,</li>
+  <li>check each against a pre-determined set of args we’re expecting (<code class="language-plaintext highlighter-rouge">“width”</code> and <code class="language-plaintext highlighter-rouge">“height”</code> in this case),</li>
+  <li>do a look-ahead to the next argument to get a value, and</li>
+  <li>calling the <code class="language-plaintext highlighter-rouge">activate()</code> method, passing in the width and height we’ve captured from the command line.</li>
+</ul>
+
+<h2 id="the-activate-method">The activate() Method</h2>
+
+<p><em>GIO</em> has a default <code class="language-plaintext highlighter-rouge">activate()</code> method which gets called unless we override it. Here, that’s exactly what we’re doing.</p>
+
+<p>If you run this demo without appending command line arguments, you’ll get a few bits of info dumped to the terminal, but that’s it. The demo exits. But adding even one command line argument changes that. A window opens… and if you don’t specify a <code class="language-plaintext highlighter-rouge">width</code> and <code class="language-plaintext highlighter-rouge">height</code>, each followed by a number, the window has a default size, the dimensions of which are object attributes in the preamble to the <code class="language-plaintext highlighter-rouge">AppWindow</code> class.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Because of space constraints, I’ve skimmed over a few things, so if you have questions, please ask them in the comments below.</p>
+
+<p>Next time, we’ll carry on in this same vein, but turn to the <code class="language-plaintext highlighter-rouge">HANDLES_OPEN</code> flag to see how a list of files can be opened using these methods.</p>
+
+<p>Until then, just remember Howard’s immortal words: “There’s no place for truth on the Internet.”</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0113-gtk-gio-application-ids-signals.html">Previous: GTK GIO Applications - IDs and Signals</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0115-gtk-gio-app-open-flag.html">Next: GTK/GIO IV - Opening Files</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0114-gtk-gio-app-flags-and-cl-args.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

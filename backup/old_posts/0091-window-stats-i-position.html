@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlwindow.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-11-26T00:00:00-05:00" itemprop="datePublished">Tuesday, November 26, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0091-wheres-my-window">0091: Where’s My Window?</h1>
+
+<p>This post, although not specifically requested by a reader, was inspired by a reader request…</p>
+
+<p>Two things I appreciate in an application are when it remembers (from one session to the next):</p>
+
+<ol>
+  <li>the size of its window, and</li>
+  <li>its position.</li>
+</ol>
+
+<p>This is especially convenient since I switched to a multi-monitor set-up. If I open an application or dialog, but then have to search the entire area of three large monitors to find it, I’m not just slowed down and put off, I’m dumped out of that zen-like coding head-space I’m so addicted to. And frankly, that’s grounds for dismissal in my book. I’ve fired several text editors for this violation of etiquette. I’ve even sworn off window managers for this.</p>
+
+<p>So, since I don’t wanna come across as a hypocrite, I decided to come up with a <em>GTK</em> solution to these issues and over the next two posts, we’ll look at how to gather these statistics for future use.</p>
+
+<h2 id="so-where-is-my-window-anyway">So, Where is My Window, Anyway?</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/001_window/window_11.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/001_window/window_11_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/001_window/window_11_get_position.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>As it happens, <em>GTK</em> has a signal we can hook up to that gives us our application’s <code class="language-plaintext highlighter-rouge">Window</code> position. It goes by the name: configure-event.</p>
+
+<h3 id="the-constructor">The Constructor</h3>
+
+<p>Once you’ve got that little tidbit of knowledge, getting the signal/callback sorted out is no harder than any other. Let’s look at the <code class="language-plaintext highlighter-rouge">TestRigWindow</code>’s constructor:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">(</span><span class="n">title</span><span class="p">);</span>
+	<span class="n">addOnDestroy</span><span class="p">(&amp;</span><span class="n">quitApp</span><span class="p">);</span>
+	<span class="n">addOnConfigure</span><span class="p">(&amp;</span><span class="n">onConfigure</span><span class="p">);</span> <span class="c1">// this is it</span>
+		
+	<span class="n">appBox</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AppBox</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+	<span class="n">add</span><span class="p">(</span><span class="n">appBox</span><span class="p">);</span>
+		
+	<span class="n">showAll</span><span class="p">();</span>
+
+	<span class="n">getPosition</span><span class="p">(</span><span class="n">xPosition</span><span class="p">,</span> <span class="n">yPosition</span><span class="p">);</span>
+	<span class="n">showWindowStats</span><span class="p">();</span>
+		
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>Just use <code class="language-plaintext highlighter-rouge">addOnConfigure()</code>  to hook up the signal to the callback. The last two lines of the constructor don’t need to be there, but for demo purposes, they give us a report on the window’s position at start-up.</p>
+
+<h3 id="the-callback">The Callback</h3>
+
+<p>Very much as straightforward as ever:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onConfigure</span><span class="p">(</span><span class="n">Event</span> <span class="n">event</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">widget</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">getPosition</span><span class="p">(</span><span class="n">xPosition</span><span class="p">,</span> <span class="n">yPosition</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"The window is positioned at: x = "</span><span class="p">,</span> <span class="n">xPosition</span><span class="p">,</span> <span class="s">", y = "</span><span class="p">,</span> <span class="n">yPosition</span><span class="p">);</span>
+		
+	<span class="k">return</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onConfigure()</span>
+</code></pre></div></div>
+
+<p>In the real world, we wouldn’t be spewing all those lines of text into the shell. Instead, we’d have this callback sitting quietly in the weeds keeping track of our window’s position so that when the time comes, it can be saved out to a configuration file.</p>
+
+<p>That <code class="language-plaintext highlighter-rouge">getPosition()</code> function is a method of the <em>GTK</em> <code class="language-plaintext highlighter-rouge">Window</code> that either directly, or indirectly, queries the operating system’s window manager.</p>
+
+<p><em>Note: Something that isn’t obvious about this demo is that the <code class="language-plaintext highlighter-rouge">onConfigure</code> callback must return <code class="language-plaintext highlighter-rouge">false</code>, indicating that there are more signals to process, specifically the redraw signal. If this callback returns <code class="language-plaintext highlighter-rouge">true</code>, only the <code class="language-plaintext highlighter-rouge">Window</code> frame will be drawn. So, if you find your application in this state, there’s yer problem.</em></p>
+
+<p>Now for a look at the <code class="language-plaintext highlighter-rouge">TestRigWindow</code>’s other function…</p>
+
+<h3 id="the-showwindowstats-function">The showWindowStats() Function</h3>
+
+<p>This one is called from both the constructor and the <code class="language-plaintext highlighter-rouge">quitApp()</code> function, the first time it’s called is to give us a first look at window position. The second gives us the final position as we’re exiting the application. In the real world, this function would be replaced with another that writes out configuration data and there’d be yet another function that reads it back in when the application is restarted. That’s something we’ll get into at some point down the road, but for now, let’s just have a look at what we’ve got:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">showWindowStats</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"Window stats..."</span><span class="p">);</span>
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"position: xPosition = "</span><span class="p">,</span> <span class="n">xPosition</span><span class="p">,</span> <span class="s">", yPosition = "</span><span class="p">,</span> <span class="n">yPosition</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// showWindowStats()</span>
+</code></pre></div></div>
+
+<p>This doesn’t gather any new information, just spits out what we already have stored in <code class="language-plaintext highlighter-rouge">TestRigWindow</code> properties. And that’s the best way to handle this type of thing… one function to gather the info, another to save it or, in this case, just report it.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Next time, we’ll carry on in this vein by exploring how to record the <code class="language-plaintext highlighter-rouge">Window</code> size as well. Until then, happy coding and make every little bit count.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0090-titlebar-icons.html">Previous: Windows - Titlebar Icons</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0092-window-stats-ii-size.html">Next: Window Stats II - How Big is My Window?</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0091-window-stats-i-position.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlcontainer.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2020-02-08T00:00:00-05:00" itemprop="datePublished">Saturday, February 8, 2020
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0101-grid-with-gtk-4x-compliant-css-coloring">0101: Grid with GTK 4.x-compliant CSS Coloring</h1>
+
+<p>Since I started this blog back in January 2019, the D language has gone from being #25 in popularity to #14 as of early February 2020. That’s a significant jump and I couldn’t be happier that my favourite language is doing so well. I have no idea if this blog has helped in any way with this, but it’s fun to think it has. In the end, though, what really matters is that more and more people are discovering a fine language and—dare I say—the world is a better place for it.</p>
+
+<p>This being the 101st post, let’s circle back around to cover some topics that were missed the first time through the list of <code class="language-plaintext highlighter-rouge">Widget</code>s. The plan for this post was originally to dig into setting column and row spacing for a <code class="language-plaintext highlighter-rouge">Grid</code>, but then I realized that before we go there, we need to revisit how we actually create the checkerboard <code class="language-plaintext highlighter-rouge">Grid</code>. Why? Because the way we did this before won’t work after <em>GTK 4.x</em> is released and since we have an alternate way of doing this now, let’s get a jumpstart on things, shall we?</p>
+
+<h2 id="a-checkerboard-grid-with-css">A Checkerboard Grid with CSS</h2>
+
+<p>We touched on <em>CSS</em> before a few times, but as stated above, we need to take a new look at the checkerboard <code class="language-plaintext highlighter-rouge">Grid</code> demo. What we did before to colour the background of a <code class="language-plaintext highlighter-rouge">Label</code> was stuff it into an <code class="language-plaintext highlighter-rouge">EventBox</code>. But this mechanism is deprecated. Bye, bye <code class="language-plaintext highlighter-rouge">EventBox</code>. It’s been nice knowing you.</p>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/009_grid/grid_05.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/009_grid/grid_05_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/009_grid/grid_05_checkerboard_css.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<h3 id="a-new-widelabel-class">A New WideLabel Class</h3>
+
+<p>So, what are we going to use in place of the <code class="language-plaintext highlighter-rouge">EventBox</code>? Well… nothing, really. Not as a container, anyway. Instead, we’ll associate a <em>CSS</em> object with our <code class="language-plaintext highlighter-rouge">Label</code> directly.</p>
+
+<p>Here’s what the original <code class="language-plaintext highlighter-rouge">WideLabel</code> class looked like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">WideLabel</span> <span class="p">:</span> <span class="n">EventBox</span>
+<span class="p">{</span>
+	<span class="n">Label</span> <span class="n">label</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">(</span><span class="nb">string</span> <span class="n">text</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+			
+		<span class="n">label</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+		<span class="n">label</span><span class="p">.</span><span class="n">setSizeRequest</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
+			
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class WideLabel</span>
+</code></pre></div></div>
+
+<p>Here, the <code class="language-plaintext highlighter-rouge">Label</code> was a child of the <code class="language-plaintext highlighter-rouge">WideLabel</code> class and the class itself was derived from the <code class="language-plaintext highlighter-rouge">EventBox</code>. Comparing that to the new <code class="language-plaintext highlighter-rouge">WideLabel</code> class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">WideLabel</span> <span class="p">:</span> <span class="n">Label</span>
+<span class="p">{</span>
+	<span class="k">this</span><span class="p">(</span><span class="nb">string</span> <span class="n">text</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+		
+		<span class="n">setSizeRequest</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
+			
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class WideLabel</span>
+</code></pre></div></div>
+
+<p>See? Much simpiler now. <code class="language-plaintext highlighter-rouge">WideLabel</code> is derived from <code class="language-plaintext highlighter-rouge">Label</code> and when we get to the next level of derivation, the whole thing will become clear.</p>
+
+<p>And BTW, my understanding is that we aren’t actually missing out by losing the <code class="language-plaintext highlighter-rouge">EventBox</code>. Any functionality worth having will be moved elsewhere, but we’ll talk more about that when <em>GTK 4.x</em> arrives.</p>
+
+<p>Now let’s compare one of <code class="language-plaintext highlighter-rouge">WideLabel</code>’s derived classes, the old version and the new…</p>
+
+<h3 id="the-bluelabel-class">The BlueLabel Class</h3>
+
+<p>Here’s what this used to look like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">BlueLabel</span> <span class="p">:</span> <span class="n">WideLabel</span>
+<span class="p">{</span>
+	<span class="k">this</span><span class="p">(</span><span class="nb">string</span> <span class="n">labelText</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">labelText</span><span class="p">);</span>
+		
+		<span class="n">RGBA</span> <span class="n">blueColor</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RGBA</span><span class="p">(</span><span class="mf">0.518</span><span class="p">,</span> <span class="mf">0.710</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span> <span class="c1">// 0.518	0.710	1.000</span>
+		<span class="n">overrideBackgroundColor</span><span class="p">(</span><span class="n">StateFlags</span><span class="p">.</span><span class="n">NORMAL</span><span class="p">,</span> <span class="n">blueColor</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class BlueLabel</span>
+</code></pre></div></div>
+
+<p>We were mucky around with overriding colors and states. And don’t forget, all this is being done to the <code class="language-plaintext highlighter-rouge">EventBox</code>, not the <code class="language-plaintext highlighter-rouge">Label</code>, because without <em>CSS</em>, we have no other way to give a <code class="language-plaintext highlighter-rouge">Label</code> a non-default background color.</p>
+
+<p>But in the new version:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">BlueLabel</span> <span class="p">:</span> <span class="n">WideLabel</span>
+<span class="p">{</span>
+	<span class="n">CSS</span> <span class="n">css</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">blueLabelName</span> <span class="p">=</span> <span class="s">"blue_label"</span><span class="p">;</span>
+
+	<span class="k">this</span><span class="p">(</span><span class="nb">string</span> <span class="n">labelText</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">labelText</span><span class="p">);</span>
+		<span class="n">setName</span><span class="p">(</span><span class="n">blueLabelName</span><span class="p">);</span>
+		<span class="n">css</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CSS</span><span class="p">(</span><span class="n">getStyleContext</span><span class="p">());</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class BlueLabel</span>
+</code></pre></div></div>
+
+<p>We start off by setting up a <em>CSS</em> object (which is the same as we’ve used elsewhere, but we’ll look at it again below) and giving our <code class="language-plaintext highlighter-rouge">BlueLabel</code> class a <em>CSS</em> name. Attach the <em>CSS</em> object to the <code class="language-plaintext highlighter-rouge">BlueLabel</code> object and that’s that.</p>
+
+<h3 id="the-css-object">The CSS Object</h3>
+
+<p>We’ve seen this before, but let’s have another look anyway:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">CSS</span> <span class="c1">// GTK4 compliant</span>
+<span class="p">{</span>
+	<span class="n">CssProvider</span> <span class="n">provider</span><span class="p">;</span>
+
+	<span class="k">enum</span> <span class="n">LABEL_CSS</span> <span class="p">=</span> <span class="s">"label#red_label
+		{
+			background-color: #84B5FF;
+		}
+		label#blue_label
+		{
+			background-color: #FF6B8E;
+		}"</span><span class="p">;</span>
+
+	<span class="k">this</span><span class="p">(</span><span class="n">StyleContext</span> <span class="n">styleContext</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">provider</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CssProvider</span><span class="p">();</span>
+		<span class="n">provider</span><span class="p">.</span><span class="n">loadFromData</span><span class="p">(</span><span class="n">LABEL_CSS</span><span class="p">);</span>
+		<span class="n">styleContext</span><span class="p">.</span><span class="n">addProvider</span><span class="p">(</span><span class="n">provider</span><span class="p">,</span> <span class="n">GTK_STYLE_PROVIDER_PRIORITY_APPLICATION</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()	</span>
+	
+<span class="p">}</span> <span class="c1">// class CSS</span>
+</code></pre></div></div>
+
+<p>The main thing to notice here is that we have two <em>CSS</em> names defined, one for a red background and another for a blue.</p>
+
+<p>And when we look again at two statements from the <code class="language-plaintext highlighter-rouge">BlueLabel</code> preamble and constructor:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span> <span class="n">blueLabelName</span> <span class="p">=</span> <span class="s">"blue_label"</span><span class="p">;</span>
+
+<span class="n">setName</span><span class="p">(</span><span class="n">blueLabelName</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>We see that we’ve got a match between the selector name and the <code class="language-plaintext highlighter-rouge">BlueLabel</code> <em>CSS</em> name.</p>
+
+<p>The same thing appears in the <code class="language-plaintext highlighter-rouge">RedLabel</code> class, except that, of course, the string is called <code class="language-plaintext highlighter-rouge">redLabelName</code> and is set to <code class="language-plaintext highlighter-rouge">“red_label”</code>.</p>
+
+<p>Absolutely nothing else needs to be changed to make this work. Our <code class="language-plaintext highlighter-rouge">Grid</code> full of <code class="language-plaintext highlighter-rouge">Label</code>s with non-standard background colors has made the transition to <em>GTK 4.x</em> compliance.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Next time, we’ll take another look at the <code class="language-plaintext highlighter-rouge">Grid</code> and I’ll show you a different way to give a <code class="language-plaintext highlighter-rouge">Grid</code> extra spacing around each cell.</p>
+
+<p>Until then, happy February. I feel like a lot of us will need this wish what with all this global warming stuff going on. Stay warm and see you next time.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0100-sfx-button-interactions-ii-color-font-shape.html">Previous: Button Interactions - Color, Font, Shape Changes</a>
+	</div>
+<!--
+	<div style="float: right;">
+		<a href="/posts/0102-grid-spacing.html">Next: Grid Spacing</a>
+	</div>
+-->
+</div>
+
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0101-grid-css-compliant-colors.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmldialog.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-05-17T00:00:00-04:00" itemprop="datePublished">Friday, May 17, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0036-dialogs-ii---opening-a-single-file">0036: Dialogs II - Opening a Single File</h1>
+
+<p>Today we’re working with a more useful dialog, one that opens a file.</p>
+
+<p>But we’re concentrating on just the surface stuff here. Latter in this series, we’ll get down to how to do the actual file loading (which is really a <em>D</em> thing rather than a <em>GtkD</em> thing). For now, we’ll just be grabbing a file name and echoing it to the terminal to verify that we’re actually selecting a file to work with.</p>
+
+<h2 id="the-open-file-dialog">The Open File Dialog</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/013_dialogs/dialog_02.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/013_dialogs/dialog_02_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_02_file_open_single.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>Onward to the particulars…</p>
+
+<h2 id="imports">Imports</h2>
+
+<p>We need to add something to our list of imports:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">FileChooseDialog</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>That’ll get us access to a pre-rolled <em>GTK</em> file dialog. It’s won’t be specific to the OS you’re running (with the possible exception of <em>Linux</em>) but it’ll work and that’s what counts, so let’s carry on.</p>
+
+<p>Since we went over how the window is handed down in <a href="/posts/0035-help-about-dialog.html">the previous post</a>, there’s no need to cover it again. So, let’s just get to the business of the day…</p>
+
+<h2 id="the-fileopenitem">The FileOpenItem</h2>
+
+<p>We’ll look at this in chunks. Here’s the first chunk:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">FileOpenItem</span> <span class="p">:</span> <span class="n">MenuItem</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">itemLabel</span> <span class="p">=</span> <span class="s">"Open"</span><span class="p">;</span>
+	<span class="n">FileChooserDialog</span> <span class="n">fileChooserDialog</span><span class="p">;</span>
+	<span class="n">Window</span> <span class="n">parentWindow</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Before the constructor, we define two new variables:</p>
+
+<ul>
+  <li>the dialog, and</li>
+  <li>the window we’re going modal on.</li>
+</ul>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">(</span><span class="n">Window</span> <span class="n">extParentWindow</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">(</span><span class="n">itemLabel</span><span class="p">);</span>
+	<span class="n">addOnActivate</span><span class="p">(&amp;</span><span class="n">doSomething</span><span class="p">);</span>
+	<span class="n">parentWindow</span> <span class="p">=</span> <span class="n">extParentWindow</span><span class="p">;</span>
+	
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>Then in the constructor, we:</p>
+
+<ul>
+  <li>pass in the top-level window,</li>
+  <li>set up the <code class="language-plaintext highlighter-rouge">MenuItem</code> by calling the super-class and connecting the signal (<code class="language-plaintext highlighter-rouge">onActivate</code>), and</li>
+  <li>assign the parent window to a locally-accessible variable.</li>
+</ul>
+
+<h2 id="the-callback">The Callback</h2>
+
+<p>Now let’s look at this <code class="language-plaintext highlighter-rouge">MenuItem</code>’s workhorse function:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">doSomething</span><span class="p">(</span><span class="n">MenuItem</span> <span class="n">mi</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">response</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">filename</span><span class="p">;</span>
+	<span class="n">FileChooserAction</span> <span class="n">action</span> <span class="p">=</span> <span class="n">FileChooserAction</span><span class="p">.</span><span class="n">OPEN</span><span class="p">;</span>
+	
+	<span class="n">FileChooserDialog</span> <span class="n">dialog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FileChooserDialog</span><span class="p">(</span><span class="s">"Open a File"</span><span class="p">,</span> <span class="n">parentWindow</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+	<span class="n">response</span> <span class="p">=</span> <span class="n">dialog</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+	
+	<span class="k">if</span><span class="p">(</span><span class="n">response</span> <span class="p">==</span> <span class="n">ResponseType</span><span class="p">.</span><span class="n">OK</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">filename</span> <span class="p">=</span> <span class="n">dialog</span><span class="p">.</span><span class="n">getFilename</span><span class="p">();</span>
+		<span class="n">openFile</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"cancelled."</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="n">dialog</span><span class="p">.</span><span class="n">destroy</span><span class="p">();</span>
+	
+<span class="p">}</span> <span class="c1">// doSomething()</span>
+</code></pre></div></div>
+
+<p>We set up a few variables before we get going:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">response</code> – to track the dialog’s return value,</li>
+  <li><code class="language-plaintext highlighter-rouge">filename</code> – that which we’re going to all this trouble for, and</li>
+  <li><code class="language-plaintext highlighter-rouge">action</code> – the flag that decides if this file dialog is an ‘innie’ or an ‘outie’ (ie. <code class="language-plaintext highlighter-rouge">OPEN</code> dialog or <code class="language-plaintext highlighter-rouge">SAVE</code> dialog).</li>
+</ul>
+
+<p>Next, we create the dialog with a call to its constructor. The arguments are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">“Open a File”</code> - a string to drop into the title area,</li>
+  <li><code class="language-plaintext highlighter-rouge">parentWindow</code> – discussed above, the window we’ll be going modal on,</li>
+  <li><code class="language-plaintext highlighter-rouge">action</code> – what the dialog is intended for (in this case, opening a file),</li>
+  <li><code class="language-plaintext highlighter-rouge">null</code> – this could also be an array of string labels if we’d prefer custom buttons, and</li>
+  <li><code class="language-plaintext highlighter-rouge">null</code> – an array of <code class="language-plaintext highlighter-rouge">ResponseType</code> (found in <strong>gtk.c.types.d</strong>) responses for the custom buttons.</li>
+</ul>
+
+<p><em>Note: If you decide to go with your own custom buttons, make sure the two arrays (label text and <code class="language-plaintext highlighter-rouge">ResponseType</code>) are the same length.</em></p>
+
+<p>Now we get to actually opening the dialog. As with the <code class="language-plaintext highlighter-rouge">AboutDialog</code>, once the dialog is open, we do nothing until it closes and sends back a response.</p>
+
+<h2 id="checking-the-response">Checking the Response</h2>
+
+<p>First, we make sure the user didn’t cancel by checking against <code class="language-plaintext highlighter-rouge">ResponseType.OK</code>. Had it been cancelled, response would be <code class="language-plaintext highlighter-rouge">ResponseType.CANCEL</code>, but we only need to check for that if we have something special to do in that situation.</p>
+
+<p>So, if the user selected a file, we grab it using <code class="language-plaintext highlighter-rouge">dialog.getFilename()</code> and pass it along to the <code class="language-plaintext highlighter-rouge">openFile()</code> function.</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kt">void</span> <span class="n">openFile</span><span class="p">(</span><span class="nb">string</span> <span class="n">filename</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"file to open: "</span><span class="p">,</span> <span class="n">filename</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// openFile()</span>
+	
+<span class="p">}</span> <span class="c1">// class FileOpenItem</span>
+</code></pre></div></div>
+
+<p>Had this been a production-ready example, we’d do something besides spit out the filename to the terminal.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>That’s it for today. Next time, we’ll tackle opening multiple files. Until then…</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0035-help-about-dialog.html">Previous: About Dialog</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0037-file-open-multiple.html">Next: Dialog - Open Multiple Filesas</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0036-file-open-dialogs.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

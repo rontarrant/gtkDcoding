@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlnodes.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-11-05T00:00:00-05:00" itemprop="datePublished">Tuesday, November 5, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0085-nodes-n-noodles-part-iv--drawing-a-node">0085: Nodes-n-noodles, Part IV – Drawing a Node</h1>
+
+<p>Last time we visited this series, we drew a noodle using the mouse. Now, we turn to the node stuff. But before we dive in, I’d like to outline how this nodes-n-noodles concept is going to play out, widget-wise.</p>
+
+<h2 id="of-what-does-a-node-consist">Of What Does a Node Consist?</h2>
+
+<p>Back in 2006, I wrote an application in <em>PHP-GTK2</em> called <em>Corkboard</em>. It was an index card simulator in which the user could create/remove cards, move them around on a corkboard, edit them… all that happy stuff. In that case, the index cards were <code class="language-plaintext highlighter-rouge">Button</code> widgets with multi-line <code class="language-plaintext highlighter-rouge">Label</code>s embedded. The entire card was ‘hot’ (reacted to mouse clicks) and changed color so the user would know which one was selected.</p>
+
+<div class="inpage-frame">
+	<figure class="right">
+		<img src="/images/diagrams/023_nodes/node.png" alt="Figure 1: A Look Back at the Node Design" style="width: 111px; height: 102px;" />
+		<figcaption>
+			Figure 1: A Look at<br /> the Node Design
+		</figcaption>
+	</figure>
+</div>
+
+<p>Using a <code class="language-plaintext highlighter-rouge">Button</code> was appropriate for <em>Corkboard</em> because an index card is rectangular and, well… so is a <code class="language-plaintext highlighter-rouge">Button</code>. But for nodes-n-noodles, a rectangle doesn’t quit do it. Going by what other applications are doing with this type of thing, we need a rectangular-ish widget, but with terminals sticking out the sides and, what the heck, let’s give the node rounded corners for that 1950s refrigerator look. The drawing to the right is the end result we’re aiming for.</p>
+
+<p>I tried to produce the node using an <code class="language-plaintext highlighter-rouge">Image</code> on a <code class="language-plaintext highlighter-rouge">Button</code>, but getting rid of the <code class="language-plaintext highlighter-rouge">Button</code>’s rectangular border is far more trouble than it’s worth. And leaving it there spoiled the look. So instead, I used a <code class="language-plaintext highlighter-rouge">DrawingArea</code>.</p>
+
+<p>Yup, that’s right. A <code class="language-plaintext highlighter-rouge">DrawingArea</code>—because it’s a full-fledged <code class="language-plaintext highlighter-rouge">Widget</code>—can do just about anything a <code class="language-plaintext highlighter-rouge">Button</code> can do. And if it doesn’t, you can expand its capabilities by adding more signal flags. And best of all, the final look of the node can be whatever shape suits the job at hand.</p>
+
+<h2 id="a-working-surface">A Working Surface</h2>
+
+<p>In that long-ago version of <em>Corkboard</em>, I used a <code class="language-plaintext highlighter-rouge">Layout</code> as the corkboard. The advantages to using a <code class="language-plaintext highlighter-rouge">Layout</code> are:</p>
+
+<ul>
+  <li>child widgets can be <code class="language-plaintext highlighter-rouge">put()</code> in specific places rather than being at the mercy of widget flow as they would be in—for instance—the <code class="language-plaintext highlighter-rouge">Box</code> widget,</li>
+  <li>the <code class="language-plaintext highlighter-rouge">Layout</code> inherits from <code class="language-plaintext highlighter-rouge">ScrollableIT</code>, so scrolling is part of its default functionality, and</li>
+  <li>widgets can be layered onto a <code class="language-plaintext highlighter-rouge">Layout</code>, so it’s easy to have a backdrop behind whatever foreground widgets you wanna stick in there.</li>
+</ul>
+
+<p>And, since the goal for nodes-n-noodles is more or less the same as it was for <em>Corkboard</em>, the <code class="language-plaintext highlighter-rouge">Layout</code> will suit quit well.</p>
+
+<h2 id="a-simple-node">A Simple Node</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/023_nodes/nodes_05.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/023_nodes/nodes_05_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/023_nodes/nodes_05_image_node_in_a_drawingarea.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>All right, we’ve got our widget players, let’s bring them onstage. We’re going to have a <code class="language-plaintext highlighter-rouge">Layout</code> and on that <code class="language-plaintext highlighter-rouge">Layout</code>, we’ll have a <code class="language-plaintext highlighter-rouge">Node</code>. And since it’ll eventually be moveable, let’s call the class <code class="language-plaintext highlighter-rouge">MoveableNode</code>… something like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">MoveableNode</span> <span class="p">:</span> <span class="n">DrawingArea</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="n">Surface</span> <span class="n">_surface</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">_imageFilename</span> <span class="p">=</span> <span class="s">"images/node.png"</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">_xOffset</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_yOffset</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_width</span><span class="p">,</span> <span class="n">_height</span><span class="p">;</span>
+	<span class="n">GtkAllocation</span> <span class="n">_size</span><span class="p">;</span>
+	
+	<span class="k">public</span><span class="p">:</span>	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">_surface</span> <span class="p">=</span> <span class="n">ImageSurface</span><span class="p">.</span><span class="n">createFromPng</span><span class="p">(</span><span class="n">_imageFilename</span><span class="p">);</span>
+		<span class="n">Pixbuf</span><span class="p">.</span><span class="n">getFileInfo</span><span class="p">(</span><span class="n">_imageFilename</span><span class="p">,</span> <span class="n">_width</span><span class="p">,</span> <span class="n">_height</span><span class="p">);</span> <span class="c1">// get the image size</span>
+
+		<span class="n">addOnDraw</span><span class="p">(&amp;</span><span class="n">onDraw</span><span class="p">);</span>
+		<span class="n">addOnButtonPress</span><span class="p">(&amp;</span><span class="n">doSomething</span><span class="p">);</span>
+		<span class="n">addOnButtonRelease</span><span class="p">(&amp;</span><span class="n">doSomethingElse</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">bool</span> <span class="n">onDraw</span><span class="p">(</span><span class="n">Scoped</span><span class="p">!</span><span class="n">Context</span> <span class="n">context</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">context</span><span class="p">.</span><span class="n">setSourceSurface</span><span class="p">(</span><span class="n">_surface</span><span class="p">,</span> <span class="n">_xOffset</span><span class="p">,</span> <span class="n">_yOffset</span><span class="p">);</span>
+		<span class="n">getAllocation</span><span class="p">(</span><span class="n">_size</span><span class="p">);</span>
+		<span class="n">setSizeRequest</span><span class="p">(</span><span class="n">_width</span><span class="p">,</span> <span class="n">_height</span><span class="p">);</span>
+
+		<span class="n">context</span><span class="p">.</span><span class="n">paint</span><span class="p">();</span>
+		
+		<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// onDraw()</span>
+
+
+	<span class="kt">bool</span> <span class="n">doSomething</span><span class="p">(</span><span class="n">Event</span> <span class="n">e</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"down"</span><span class="p">);</span>
+	
+		<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// doSomething()</span>
+
+
+	<span class="kt">bool</span> <span class="n">doSomethingElse</span><span class="p">(</span><span class="n">Event</span> <span class="n">e</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"up"</span><span class="p">);</span>
+	
+		<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// doSomethingElse()</span>
+	
+<span class="p">}</span> <span class="c1">// class MoveableNode</span>
+</code></pre></div></div>
+
+<p>Looking at the class preamble, you’ll notice the visualness of the <code class="language-plaintext highlighter-rouge">Node</code> is just an image we’re pulling in from a file.</p>
+
+<p>And in the constructor, we use the image file to create a <code class="language-plaintext highlighter-rouge">Surface</code> and a <code class="language-plaintext highlighter-rouge">Pixbuf</code>. This is exactly what we did in one of the <em>Cairo</em> examples when we <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_17_display_png.d">loaded and displayed a PNG</a>.</p>
+
+<p>As usual, the <code class="language-plaintext highlighter-rouge">onDraw()</code> function takes care of refresh so the drawing always looks the way it should.</p>
+
+<p>For now, the <code class="language-plaintext highlighter-rouge">addOnButtonPress()</code> and <code class="language-plaintext highlighter-rouge">addOnButtonRelease()</code> callback functions are just placeholders. We’ll do something with those as we dig deeper into all this.</p>
+
+<h3 id="the-nodelayout">The NodeLayout</h3>
+
+<p>As mentioned, the surface where the <code class="language-plaintext highlighter-rouge">MoveableNode</code> lives is based on a <code class="language-plaintext highlighter-rouge">Layout</code> and looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">NodeLayout</span> <span class="p">:</span> <span class="n">Layout</span>
+<span class="p">{</span>
+	<span class="n">MoveableNode</span> <span class="n">moveableNode</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+		<span class="n">setSizeRequest</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">360</span><span class="p">);</span> <span class="c1">// has to be set so signals get through from child widgets</span>
+		
+		<span class="n">moveableNode</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MoveableNode</span><span class="p">();</span>
+		<span class="n">put</span><span class="p">(</span><span class="n">moveableNode</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">140</span><span class="p">);</span>		
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class NodeLayout</span>
+</code></pre></div></div>
+
+<p>Because this is a simple demo with only one <code class="language-plaintext highlighter-rouge">MoveableNode</code>, it’s hard-coded. Later, we’ll get to a point where hard-coding goes out the window and we do as we did for <code class="language-plaintext highlighter-rouge">Notebook</code> tabs, creating and deleting <code class="language-plaintext highlighter-rouge">MoveableNodes</code> on the fly. But for now, this’ll do to illustrate the process so far.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that, my friends, is all for this time. Next time, we’ll double back and look at the drawing code that created that node image because we might not want to rely on an image file external to our code on release day. And after we look at the code, we’ll dig into setting up draggable hot-spots and other such stuff.</p>
+
+<p>See you next time.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0084-notebook-viii-child-widgets.html">Previous: Notebook VIII - Child Widgets</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0086-nodes-v-node-drawing-routines.html">Next: Nodes V - Node Drawing Routines</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0085-nodes-iv-node-drawing.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlmvc.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-06-28T00:00:00-04:00" itemprop="datePublished">Friday, June 28, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0048-mvc-part-i---introduction-to-the-model-view-controller">0048: MVC Part I - Introduction to the Model-View-Controller</h1>
+
+<p>Before we start…</p>
+
+<div class="inpage-frame">
+	<figure class="left">
+		<img src="/images/diagrams/017_mvc/mvc_01_mvc_and_the_user.png" alt="Figure 1: Model/View/Controller and the User" style="width: 500px; height: 314px;" />
+		<figcaption>
+			Figure 1: Model/View/Controller and the User
+		</figcaption>
+	</figure>
+</div>
+
+<p>There won’t be any code examples today, just lots of theory. Yeah, it’ll be a lot to take in, but you might consider it a reference to use over the next four weeks as we wade through all this stuff. So, without further ado…</p>
+
+<p>Today begins an exploration of a bunch of <em>GTK</em> widgets that use the <strong>Model-View-Controller</strong> (<strong>MVC</strong>) architectural pattern. In case you don’t know, in an <strong>MVC</strong> system, the user is presented with a UI to <strong>Control</strong> data in a <strong>Model</strong> which then updates the <strong>View</strong> (the UI). It’s a circular and flexible system wherein the <strong>View</strong> shows either some or all of the data stored in the <strong>Model</strong>. Also, a single behind-the-scenes <strong>Model</strong> can have its data displayed in more than one <strong>View</strong>, either simultaneously or by switching out one <strong>View</strong> for another.</p>
+
+<p>Let’s look at these pieces one at a time starting with…</p>
+
+<h2 id="the-model">The Model</h2>
+
+<div class="inpage-frame">
+	<figure class="right">
+		<img src="/images/diagrams/017_mvc/mvc_01_model_table.png" alt="Firgure 2: The TreeModel is a table" style="width: 400px; height: 316px;" />
+		<figcaption>
+			Firgure 2: The TreeModel is a table
+		</figcaption>
+	</figure>
+</div>
+
+<p>‘<strong>Model</strong>’ is just another way of saying, “a system for storing data.” At its simplest, a <code class="language-plaintext highlighter-rouge">Model</code> is a single column—say, the days of the week. But if we add more columns showing a T-shirt color for each day, the number of words written per day, or whatever other data you may need to track, the <code class="language-plaintext highlighter-rouge">Model</code> now has columns and rows which constitutes a table. So in short, a <code class="language-plaintext highlighter-rouge">Model</code> is a table for storing data.</p>
+
+<p>In <em>GTK</em> parlance, a <strong>Model</strong> is referred to as a <code class="language-plaintext highlighter-rouge">TreeModel</code> but, we rarely deal with the <code class="language-plaintext highlighter-rouge">TreeModel</code> directly unless we’re getting down-n-dirty. Instead, we instantiate one of the two storage objects derived from it…</p>
+
+<h2 id="the-liststore-and-treestore">The ListStore and TreeStore</h2>
+
+<div class="inpage-frame">
+	<figure class="left">
+		<img src="/images/diagrams/017_mvc/mvc_01_hierarchical_tree_model.png" alt="Figure 3: The TreeView is Hierarchical" style="width: 500px; height: 250px;" />
+		<figcaption>
+			Figure 3: The TreeView is Hierarchical
+		</figcaption>
+	</figure>
+</div>
+
+<p>In a nutshell, these two classes are expressions of the <code class="language-plaintext highlighter-rouge">TreeModel</code> with the following individual characteristics:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">ListStore</code> is a flat <code class="language-plaintext highlighter-rouge">TreeModel</code> with no hierarchy—a plain table as is shown in <em>Figure 2</em> above, in other words, and</li>
+  <li>the <code class="language-plaintext highlighter-rouge">TreeStore</code> is a hierarchical <code class="language-plaintext highlighter-rouge">TreeModel</code> and its rows may contain descendant rows (see <em>Figure 3</em> below).</li>
+</ul>
+
+<p>If it helps… the <code class="language-plaintext highlighter-rouge">TreeStore</code> is like a file browser in that any level can contain files and directories and those directories may contain other files and directories, etc., etc., ad infinitum.</p>
+
+<h2 id="the-controller--data-access-widgets">The Controller – Data Access Widgets</h2>
+
+<p>Because <code class="language-plaintext highlighter-rouge">TreeModel</code>s have rows and columns, we access the data as… well, rows or columns. To access columns, we have one widget, the <code class="language-plaintext highlighter-rouge">TreeViewColumn</code>, but for accessing rows, we have two:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">TreeIter</code>, and</li>
+  <li>the <code class="language-plaintext highlighter-rouge">TreePath</code>.</li>
+</ul>
+
+<p>And there’s a subtle, but important, difference between the two…</p>
+
+<h3 id="the-treeiter">The TreeIter</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">TreeIter</code> is a direct reference to a specified row in a <code class="language-plaintext highlighter-rouge">ListStore</code>. It’s used for stuffing data into or retrieving data from a <code class="language-plaintext highlighter-rouge">ListStore</code>, one row at a time. The functions most often used for these operations are <code class="language-plaintext highlighter-rouge">setValue()</code> and <code class="language-plaintext highlighter-rouge">getValue()</code> respectively.</p>
+
+<p>However, because it’s a <em>direct</em> reference, a <code class="language-plaintext highlighter-rouge">TreeIter</code> may only be valid for a short time depending on whether or not the <code class="language-plaintext highlighter-rouge">ListStore</code> (or <code class="language-plaintext highlighter-rouge">TreeStore</code>) has had rows added or deleted. Also, it can only be used with the <strong>Model</strong> (<code class="language-plaintext highlighter-rouge">ListStore</code> or <code class="language-plaintext highlighter-rouge">TreeStore</code>) and not the <strong>View</strong>.</p>
+
+<h3 id="the-treepath">The TreePath</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">TreePath</code> is not a direct, but rather a <em>logical</em> reference to a row number and the same <code class="language-plaintext highlighter-rouge">TreePath</code> is valid for both the <strong>Model</strong> and <strong>View</strong>.</p>
+
+<h2 id="the-view-treeview">The View: TreeView</h2>
+
+<p>This is the last of the acronym letters and it’s the visible widget that presents data to the user. Data is laid out in—yeah, that’s right—columns.</p>
+
+<p>And that leads us to the visible mechanisms that give the user control over the data. They are:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">TreeViewColumn</code>, and</li>
+  <li>the <code class="language-plaintext highlighter-rouge">TreeSelection</code>.</li>
+</ul>
+
+<h2 id="the-treeviewcolumn">The TreeViewColumn</h2>
+
+<p>This object can be used to access column properties such as:</p>
+
+<ul>
+  <li>the column header (which includes:),
+    <ul>
+      <li>the column’s name,</li>
+      <li>whether or not the header acts as a button for sorting,</li>
+    </ul>
+  </li>
+  <li>how the cells in a column are rendered (font, color, etc.),</li>
+  <li>any and all <code class="language-plaintext highlighter-rouge">CellRenderer</code>s used to dress up column data. They can be:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">CellRendererCombo</code>,</li>
+      <li><code class="language-plaintext highlighter-rouge">CellRendererPixbuf</code>,</li>
+      <li><code class="language-plaintext highlighter-rouge">CellRendererProgress</code>,</li>
+      <li><code class="language-plaintext highlighter-rouge">CellRendererSpin</code>,</li>
+      <li><code class="language-plaintext highlighter-rouge">CellRendererSpinner</code>,</li>
+      <li><code class="language-plaintext highlighter-rouge">CellRendererText</code>, and</li>
+      <li><code class="language-plaintext highlighter-rouge">CellRendererToggle</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>As you may guess from this list, we have a lot of choice as to what can be crammed into a column, either as primary data, companion data, or even functionality.</p>
+
+<p>Something to note is that numbers are displayed as text, but despite that, because the <strong>View</strong> and <strong>Model</strong> are separate entities, numbers are stored as integers, floating point, or what-have-you. It’s only when they’re displayed in the <strong>View</strong> that they’re treated as strings.</p>
+
+<p>Multiple <code class="language-plaintext highlighter-rouge">CellRender</code>s can be stuffed into a single <code class="language-plaintext highlighter-rouge">TreeViewColumn</code> making it possible (if you wanna go so far) to decorate each row within the column in its own way or mix decoration and functionality in a single column.</p>
+
+<p><em>Note: <code class="language-plaintext highlighter-rouge">CellRenderer</code>s are not exclusively for use by <code class="language-plaintext highlighter-rouge">TreeViewColumn</code>s or, indeed, the <code class="language-plaintext highlighter-rouge">TreeView</code>. We’ll see them again later when we dig into</em> Cairo, GTK<em>’s vector-based graphics library.</em></p>
+
+<h2 id="the-treeselection">The TreeSelection</h2>
+
+<p>This mechanism tracks such things as:</p>
+
+<ul>
+  <li>which row or rows are selected, and</li>
+  <li>which <code class="language-plaintext highlighter-rouge">SelectionMode</code> is set:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">NONE</code>,</li>
+      <li><code class="language-plaintext highlighter-rouge">SINGLE</code>,</li>
+      <li><code class="language-plaintext highlighter-rouge">BROWSE</code>, or</li>
+      <li><code class="language-plaintext highlighter-rouge">MULTIPLE</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">SelectionMode</code> enum is defined in <code class="language-plaintext highlighter-rouge">generated/gtkd/gtk/c/types.d</code>.</p>
+
+<h2 id="and-finally-the-mvc-widgets">And Finally, the MVC Widgets</h2>
+
+<p>Here’s a list of the widgets that make full use of the <strong>MVC</strong> architectural pattern. We have:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">TreeView</code>.</li>
+</ul>
+
+<p>Only one? Well, yes, but there are two others that have very similar features and they are:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">ComboBox</code>, and</li>
+  <li>the <code class="language-plaintext highlighter-rouge">ComboBoxText</code>.</li>
+</ul>
+
+<p>But the difference is:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">TreeView</code> uses the <code class="language-plaintext highlighter-rouge">TreeViewColumn</code> directly, whereas</li>
+  <li>the <code class="language-plaintext highlighter-rouge">ComboBox</code> and <code class="language-plaintext highlighter-rouge">ComboBoxText</code> implement the <code class="language-plaintext highlighter-rouge">CellLayout</code> interface which in turn uses the <code class="language-plaintext highlighter-rouge">TreeViewColumn</code>.</li>
+</ul>
+
+<p>This difference between these two uses of the <code class="language-plaintext highlighter-rouge">TreeViewColumn</code> is minimal, but it allows us to take on this collection of widgets one at a time and get used to each separately before tackling them all in one example.</p>
+
+<p>Other classes that implement the <code class="language-plaintext highlighter-rouge">CellLayout</code> interface are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">CellView</code> (which works in conjunction with <code class="language-plaintext highlighter-rouge">CellArea</code> and <code class="language-plaintext highlighter-rouge">CellAreaContext</code>),</li>
+  <li><code class="language-plaintext highlighter-rouge">IconView</code> (an alternative view of data using icons and labels, similar to a file browser with all details hidden), and</li>
+  <li><code class="language-plaintext highlighter-rouge">EntryCompletion</code>.</li>
+</ul>
+
+<p>But those are more of a <strong>Model-View</strong> (<strong>MV</strong>) implementation. And finally, there’s one other class that implements <strong>MVC</strong> and that’s:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">FontSelection</code>, which is used in the <code class="language-plaintext highlighter-rouge">FontSelectionDialog</code>.</li>
+</ul>
+
+<p>We’ll get into all this eventually, but for now, you have a more-or-less comprehensive list of all <strong>GTK</strong> <code class="language-plaintext highlighter-rouge">Widget</code>s that implement <strong>MVC</strong> in one way or another.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that’s the lowdown on <em>GTK</em>’s version of the <strong>Model-View-Controller</strong> architectural pattern. Next time, we’ll start off with the simplest of the widgets that follow this paradigm, The <code class="language-plaintext highlighter-rouge">ComboBoxText</code>. See you then.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0047-scalebutton-and-volumebutton.html">Previous: ScaleButton &amp; VolumeButton</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0049-mvc-ii-comboboxtext.html">Next: ComboBoxText</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0048-mvc-i-introduction.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

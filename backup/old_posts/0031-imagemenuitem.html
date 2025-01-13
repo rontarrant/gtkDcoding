@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlmenu.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-04-30T00:00:00-04:00" itemprop="datePublished">Tuesday, April 30, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0031-menus-vi---image-on-a-menu">0031: Menus VI - Image on a Menu</h1>
+
+<p>The <em>GTK</em> <code class="language-plaintext highlighter-rouge">ImageMenuItem</code> has been deprecated, but…</p>
+
+<p>For crossing language barriers or giving your application visual appeal, nothing beats an image. So how can we stick one in a menu?</p>
+
+<p>As it turns out (surprise, surprise) a <code class="language-plaintext highlighter-rouge">MenuItem</code> is actually a container, so adding images is rather easy. The <code class="language-plaintext highlighter-rouge">MenuItem</code> shares characteristics with the <code class="language-plaintext highlighter-rouge">Button</code> widget in that it can hold one item and only one item.</p>
+
+<h2 id="the-fakeimagemenuitem">The FakeImageMenuItem</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/012_menus/menu_14.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/012_menus/menu_14_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/012_menus/menu_14_fake_image_item.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>Only one part of the source is significantly different, so we’ll concentrate on that. Just because the <code class="language-plaintext highlighter-rouge">ImageMenuItem</code> has been deprecated doesn’t stop us from faking it like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">FakeImageMenuItem</span> <span class="p">:</span> <span class="n">MenuItem</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">actionMessage</span> <span class="p">=</span> <span class="s">"You have added one (1) apple to your cart."</span><span class="p">;</span>
+	<span class="n">ImageMenuBox</span> <span class="n">imageMenuBox</span><span class="p">;</span>
+   
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		
+		<span class="n">imageMenuBox</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ImageMenuBox</span><span class="p">();</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">imageMenuBox</span><span class="p">);</span>
+		
+		<span class="n">addOnActivate</span><span class="p">(&amp;</span><span class="n">reportStuff</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">reportStuff</span><span class="p">(</span><span class="n">MenuItem</span> <span class="n">mi</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="n">actionMessage</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// exit()</span>
+	
+<span class="p">}</span> <span class="c1">// class FakeImageMenuItem</span>
+</code></pre></div></div>
+
+<p>The defined variables at the top are pretty obvious:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">actionMessage</code> : give the user feedback when the <code class="language-plaintext highlighter-rouge">MenuItem</code> is selected, and</li>
+  <li><code class="language-plaintext highlighter-rouge">ImageMenuBox</code> : a <code class="language-plaintext highlighter-rouge">Box</code> to stuff things into.</li>
+</ul>
+
+<p>Then, just like a <code class="language-plaintext highlighter-rouge">Button</code>, we <code class="language-plaintext highlighter-rouge">add()</code> the <code class="language-plaintext highlighter-rouge">Image</code> and then set up a signal.</p>
+
+<p>This callback is nothing unusual, so let’s look at where all that <code class="language-plaintext highlighter-rouge">Box</code> stuffing was delegated to…</p>
+
+<h3 id="the-imagemenubox-class">The ImageMenuBox Class</h3>
+
+<p>And here it is:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">ImageMenuBox</span> <span class="p">:</span> <span class="n">Box</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">imageLabelText</span> <span class="p">=</span> <span class="s">"Buy an Apple"</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">imageFilename</span> <span class="p">=</span> <span class="s">"images/apples.jpg"</span><span class="p">;</span>
+	<span class="n">Image</span> <span class="n">image</span><span class="p">;</span>
+	<span class="n">Label</span> <span class="n">label</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">HORIZONTAL</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// no padding</span>
+		
+		<span class="n">image</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Image</span><span class="p">(</span><span class="n">imageFilename</span><span class="p">);</span>
+		<span class="n">label</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="n">imageLabelText</span><span class="p">);</span>
+
+		<span class="n">packStart</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		<span class="n">packStart</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		
+	<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// class ImageMenuBox</span>
+</code></pre></div></div>
+
+<p>In the initialization phase, we define an <code class="language-plaintext highlighter-rouge">Image</code> and a <code class="language-plaintext highlighter-rouge">Label</code> to stuff into the <code class="language-plaintext highlighter-rouge">Box</code>. Once they’re instantiated in the constructor, we pack them in and that’s that.</p>
+
+<p><em>Note:</em> Padding <em>is optional. The <code class="language-plaintext highlighter-rouge">Image</code> and <code class="language-plaintext highlighter-rouge">Label</code> are spaced far enough apart to look aesthetically pleasing without it, but that can’t stop you from experimenting.</em></p>
+
+<h2 id="the-fakeiconmenuitem">The FakeIconMenuItem</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/012_menus/menu_15.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/012_menus/menu_15_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/012_menus/menu_15_fake_icon.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>This second example shows that using stock icons instead of images is also possible.</p>
+
+<p>This is pretty much the same as using an image, code-wise, although I would like to point out where the icons are and which ones are usable under these circumstances. Let’s start with the code and go from there:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">IconMenuBox</span> <span class="p">:</span> <span class="n">Box</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">menuLabelText</span> <span class="p">=</span> <span class="s">"Buy a _Plane"</span><span class="p">;</span>
+	<span class="n">Image</span> <span class="n">icon</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">iconName</span> <span class="p">=</span> <span class="s">"airplane-mode-symbolic"</span><span class="p">;</span>
+	<span class="n">Label</span> <span class="n">label</span><span class="p">;</span>	
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">HORIZONTAL</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// no padding 'cause we're on a menu</span>
+		
+		<span class="n">icon</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Image</span><span class="p">(</span><span class="n">iconName</span><span class="p">,</span> <span class="n">IconSize</span><span class="p">.</span><span class="n">MENU</span><span class="p">);</span>
+		<span class="n">label</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="n">menuLabelText</span><span class="p">);</span>
+
+		<span class="n">packStart</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		<span class="n">packStart</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		
+	<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// class IconMenuBox</span>
+</code></pre></div></div>
+
+<p>See? Nothing earth-shattering or (really) all that different, so let’s talk about the nitty-gritty details…</p>
+
+<h3 id="icons">Icons</h3>
+
+<p>Okay, there are a few things you need to know…</p>
+
+<p><strong>First</strong>, you’ll wanna know where the icons live so you can look at them and decide which you wanna use. On <em>Windows</em>, you’ll find them either here:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\Program Files\GTK3-Runtime Win64\share\icons
+</code></pre></div></div>
+
+<p>or here:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\Program Files\GTK3-Runtime\share\icons
+</code></pre></div></div>
+
+<p>On <em>Linux</em>, icons are part of the desktop theme system and you’ll find them here:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/share/icons
+</code></pre></div></div>
+
+<p>You’ll have to drill down into one of the theme directories to see the actual icons.</p>
+
+<p><strong>Second</strong>, I played around with these a bit and discovered a few things:</p>
+
+<ul>
+  <li>when referring to the icon in your code, always drop the file extension,</li>
+  <li>if an icon filename ends in ‘<code class="language-plaintext highlighter-rouge">-symbolic.symbolic.png</code>’ keep ‘<code class="language-plaintext highlighter-rouge">-symbolic</code>’ and drop ‘<code class="language-plaintext highlighter-rouge">.symbolic.png</code>’,</li>
+  <li>the icon set used in menus is normally 16x16 (the size is determined by IconSize.MENU).</li>
+</ul>
+
+<p><strong>Third</strong>, you can’t make an ad hoc addition to any of these icon sets without rolling up your sleeves and diving into <em>Linux</em> theme creation. Getting them from there to <em>Windows</em> will be another whole can of worms. Both of these endeavours is beyond the scope of this blog.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>So my advice on this point is, if you wanna roll your own custom images for menus (or anything other part of a UI) and make them look like icons, use the <code class="language-plaintext highlighter-rouge">FakeImageMenuItem</code> approach and just make the image 16x16 pixels. Oh. And hire an experienced artist. Too many of them get asked to do stuff for no money and they’re worth paying. Seriously.</p>
+
+<p>And here we are at the end of another <em>gtkDcoding</em> blog post. May you never get involved in a fish-slap dance… unless you’re willing to get wet. See you next time.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0030-radiomenuitem-practical.html">Previous: Practical RadioMenuItem</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0032-accelerator-keys.html">Next: Accelerator Keys</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0031-imagemenuitem.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

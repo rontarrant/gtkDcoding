@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlbutton.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-04-02T00:00:00-04:00" itemprop="datePublished">Tuesday, April 2, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0023-radio-and-color-selection-buttons">0023: Radio and Color Selection Buttons</h1>
+
+<p><code class="language-plaintext highlighter-rouge">RadioButton</code>s are complex and tricky suckers and if you don’t prep their bits and pieces in just the right order, they aren’t going to work. <code class="language-plaintext highlighter-rouge">ColorButton</code>s? Not so much, but to harness a <code class="language-plaintext highlighter-rouge">ColorButton</code> to do our bidding means we’ll use a signal found in no other widget.</p>
+
+<h2 id="put-your-radiobutton-on">Put Your RadioButton On</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/002_button/button_13.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/002_button/button_13_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_13_radiobutton.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>As with so many other widgets, stuffing a set of <code class="language-plaintext highlighter-rouge">RadioButton</code>s into a <code class="language-plaintext highlighter-rouge">Box</code> makes good sense. At the design stage, you can move that <code class="language-plaintext highlighter-rouge">Box</code> around easily and take all the <code class="language-plaintext highlighter-rouge">RadioButton</code>s along with no fuss. And we already know the advantages of <code class="language-plaintext highlighter-rouge">Box</code>es at runtime, but if you don’t remember, it gives us a place from which to observe and manipulate them.</p>
+
+<p>So, let’s look at the <code class="language-plaintext highlighter-rouge">RadioBox</code>, a child class born of the <code class="language-plaintext highlighter-rouge">Box</code>:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">RadioBox</span> <span class="p">:</span> <span class="n">Box</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">padding</span> <span class="p">=</span> <span class="mi">5</span><span class="p">;</span>
+	<span class="n">Observed</span> <span class="n">observed</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Observed</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+	<span class="n">MyRadioButton</span> <span class="n">button1</span><span class="p">,</span> <span class="n">button2</span><span class="p">,</span> <span class="n">button3</span><span class="p">;</span>
+	<span class="n">ActionButton</span> <span class="n">actionButton</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="n">padding</span><span class="p">);</span>
+		
+		<span class="n">button1</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyRadioButton</span><span class="p">(</span><span class="s">"button 1"</span><span class="p">,</span> <span class="n">observed</span><span class="p">);</span>
+		
+		<span class="n">button2</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyRadioButton</span><span class="p">(</span><span class="s">"button 2"</span><span class="p">,</span> <span class="n">observed</span><span class="p">);</span>
+		<span class="n">button2</span><span class="p">.</span><span class="n">setGroup</span><span class="p">(</span><span class="n">button1</span><span class="p">.</span><span class="n">getGroup</span><span class="p">());</span>
+		
+		<span class="n">button3</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyRadioButton</span><span class="p">(</span><span class="s">"button 3"</span><span class="p">,</span> <span class="n">observed</span><span class="p">);</span>
+		<span class="n">button3</span><span class="p">.</span><span class="n">setGroup</span><span class="p">(</span><span class="n">button1</span><span class="p">.</span><span class="n">getGroup</span><span class="p">());</span>
+		
+		<span class="n">setActiveButton</span><span class="p">(</span><span class="n">button2</span><span class="p">);</span>
+
+		<span class="n">actionButton</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ActionButton</span><span class="p">(</span><span class="n">observed</span><span class="p">);</span>
+		
+		<span class="n">add</span><span class="p">(</span><span class="n">button1</span><span class="p">);</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">button2</span><span class="p">);</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">button3</span><span class="p">);</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">actionButton</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">setActiveButton</span><span class="p">(</span><span class="n">Button</span> <span class="n">button</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="c1">// set which button is active on start-up</span>
+		<span class="n">observed</span><span class="p">.</span><span class="n">setState</span><span class="p">(</span><span class="n">button2</span><span class="p">.</span><span class="n">getLabel</span><span class="p">());</span> <span class="c1">// initial state</span>
+		<span class="n">button2</span><span class="p">.</span><span class="n">setActive</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>  <span class="c1">// set AFTER all buttons are instantiated</span>
+		
+	<span class="p">}</span> <span class="c1">// setActiveButton()</span>
+
+<span class="p">}</span> <span class="c1">// class Radiobox</span>
+</code></pre></div></div>
+
+<h3 id="radiobox-an-observation-point">RadioBox: An Observation Point</h3>
+
+<p>First thing of note is that we’re once again using an <code class="language-plaintext highlighter-rouge">Observed</code> class. If you think about it, there’s not much point in having a set of <code class="language-plaintext highlighter-rouge">RadioButton</code>s if they aren’t affecting some entity that is, in turn, being observed by some other entity. Here, the <code class="language-plaintext highlighter-rouge">RadioButton</code>s affect an <code class="language-plaintext highlighter-rouge">Observed</code> object and the <code class="language-plaintext highlighter-rouge">ActionButton</code> acts as observer, modifying its behaviour based on what it sees.</p>
+
+<h3 id="radiobutton-creation">RadioButton Creation</h3>
+
+<p>The first <code class="language-plaintext highlighter-rouge">RadioButton</code> is easy, just create it, give it a name, etc., and you’re done. But with the second <code class="language-plaintext highlighter-rouge">RadioButton</code> in the set, that’s where you need to know the tricky bit.</p>
+
+<p>Yes, we simply create <code class="language-plaintext highlighter-rouge">button2</code>, but then we need to tell it that it’s in the same <code class="language-plaintext highlighter-rouge">Group</code> as <code class="language-plaintext highlighter-rouge">button1</code>. But the <code class="language-plaintext highlighter-rouge">Group</code> doesn’t exist, and can’t exist, before <code class="language-plaintext highlighter-rouge">button1</code> is created. Even then, the only way to find the <code class="language-plaintext highlighter-rouge">Group</code> and tell <code class="language-plaintext highlighter-rouge">button2</code> about it is to get it from <code class="language-plaintext highlighter-rouge">button1</code>.</p>
+
+<p>But once you know that, adding <code class="language-plaintext highlighter-rouge">button3</code> or other subsequent buttons is dead easy again.</p>
+
+<h3 id="radiobutton-state">RadioButton State</h3>
+
+<p>If we don’t care which <code class="language-plaintext highlighter-rouge">RadioButton</code> is active, all we have to do is sync up the state of the observed object so it points at the default active <code class="language-plaintext highlighter-rouge">RadioButton</code> and that’s always going to be the first one created, <code class="language-plaintext highlighter-rouge">button1</code> in this example.</p>
+
+<p>But if we want one of the others to be active on start-up, as well as syncing up the observed object, we have to call that button’s <code class="language-plaintext highlighter-rouge">setActive(true)</code> function. To simplify this two-step process, I broke it out into its own function, <code class="language-plaintext highlighter-rouge">setActiveButton()</code>.</p>
+
+<p>And one more note about this: Don’t try to set state or <code class="language-plaintext highlighter-rouge">setActive()</code> until all the buttons are created. Your results may be unpredictable.</p>
+
+<h3 id="myradiobutton-class">MyRadioButton Class</h3>
+
+<p>Familiar territory, this. Hook up the observed object, attach a signal and we’re ready to go.</p>
+
+<p><strong>One thing of note</strong>: Because we’re using the <code class="language-plaintext highlighter-rouge">onToggle</code> signal, we have to declare our <code class="language-plaintext highlighter-rouge">RadioButton</code> as a <code class="language-plaintext highlighter-rouge">ToggleButton</code> or we’ll get an error. This works because <code class="language-plaintext highlighter-rouge">RadioButton</code> is a grandchild of <code class="language-plaintext highlighter-rouge">ToggleButton</code> (with <code class="language-plaintext highlighter-rouge">CheckButton</code> being in the middle of the hierarchy). In effect, we’re borrowing grandma’s signal. If we try to do this any other way, casting the button as a <code class="language-plaintext highlighter-rouge">RadioButton</code> (or as its parent, a <code class="language-plaintext highlighter-rouge">CheckButton</code>) won’t work because the <code class="language-plaintext highlighter-rouge">onToggle()</code> delegate can only take a <code class="language-plaintext highlighter-rouge">ToggleButton</code> as its argument.</p>
+
+<h3 id="actionbutton-and-observed-class"><code class="language-plaintext highlighter-rouge">ActionButton</code> and <code class="language-plaintext highlighter-rouge">Observed</code> class</h3>
+
+<p>Same as with the <code class="language-plaintext highlighter-rouge">MyRadioButton</code>, we’ve seen all this before. At least, we’ve seen stuff like it.</p>
+
+<p>So, let’s move on to our next subject…</p>
+
+<h2 id="a-colorbutton-to-select-color">A ColorButton to Select Color</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/002_button/button_14.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/002_button/button_14_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/002_button/button_14_colorbutton.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>The similarities between this example and the previous one won’t be lost on you. Instead of a <code class="language-plaintext highlighter-rouge">RadioBox</code>, we’ve got a <code class="language-plaintext highlighter-rouge">ColorBox</code> and in it:</p>
+
+<ul>
+  <li>a similar <code class="language-plaintext highlighter-rouge">Observed</code> object,</li>
+  <li>a <code class="language-plaintext highlighter-rouge">FetchColorButton</code> to fetch,</li>
+  <li>a <code class="language-plaintext highlighter-rouge">ResetColorButton</code> to reset the color to its default, and</li>
+  <li>an array to hold them all.</li>
+</ul>
+
+<p>And everything else is stuff we’ve seen before. A quick browser through the code will get you up to speed as long as you’ve been following these blog posts in order and haven’t jumped straight here.</p>
+
+<p>There are two places where notable differences show up. One is in the construction of the <code class="language-plaintext highlighter-rouge">ObservedColor</code> class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">ObservedColor</span>                                                             <span class="c1">// *** NOTE *** r, g, b, a = 0.00 - 1.0</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="nb">string</span> <span class="n">message</span> <span class="p">=</span> <span class="s">"Color is now "</span><span class="p">;</span>
+	<span class="n">RGBA</span> <span class="n">color</span><span class="p">;</span>
+	<span class="n">RGBA</span> <span class="n">defaultColor</span><span class="p">;</span>
+	<span class="kt">float</span> <span class="n">red</span> <span class="p">=</span> <span class="mf">.75</span><span class="p">,</span> <span class="n">green</span> <span class="p">=</span> <span class="mf">.75</span><span class="p">,</span> <span class="n">blue</span> <span class="p">=</span> <span class="mf">.75</span><span class="p">,</span> <span class="n">alpha</span> <span class="p">=</span> <span class="mf">1.0</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">defaultColor</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RGBA</span><span class="p">(</span><span class="n">red</span><span class="p">,</span> <span class="n">green</span><span class="p">,</span> <span class="n">blue</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
+		<span class="n">setColor</span><span class="p">(</span><span class="n">defaultColor</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="k">public</span><span class="p">:</span>
+	
+	<span class="kt">void</span> <span class="n">setColor</span><span class="p">(</span><span class="n">RGBA</span> <span class="n">extColor</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">color</span> <span class="p">=</span> <span class="n">extColor</span><span class="p">;</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">extColor</span><span class="p">);</span>
+
+	<span class="p">}</span> <span class="c1">// setColor()</span>
+
+
+	<span class="n">RGBA</span> <span class="n">getColor</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span><span class="p">(</span><span class="n">color</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// getColor()</span>
+
+<span class="p">}</span> <span class="c1">// class ObservedColor</span>
+</code></pre></div></div>
+
+<p>In earlier <code class="language-plaintext highlighter-rouge">Observed</code> objects, we used strings to keep track of state, but here we’re storing the actual <code class="language-plaintext highlighter-rouge">RGBA</code> objects themselves (ie. the colors) within the <code class="language-plaintext highlighter-rouge">Observed</code> object. This gives us a central location to store colors that’s accessible to any object in the <code class="language-plaintext highlighter-rouge">ColorBox</code>.</p>
+
+<p>And if we want to add a second color (perhaps we want a foreground color and a background color a la <em>Photoshop</em>) we simply add a second <code class="language-plaintext highlighter-rouge">ColorBox</code>, label the two <code class="language-plaintext highlighter-rouge">ColorBox</code>es as Foreground and Background, and we’re set.</p>
+
+<p>Of course, you’d likely want to be a little slicker with the UI design, but this gives you a place from which to leap off the cliff.</p>
+
+<p>And so we wrap up another <em>gtkDcoding</em> blog post with this: May your bugs only nip you a bit, and not byte.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/x0002-gtkd-in-a-linux-environment.html">Previous: GtkD Linux</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0024-switch-and-light-switch.html">Next: Switch</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0023-radio-and-color-buttons.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">	<head>
+		<link rel="stylesheet" href="/assets/main.css">		 <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+		<link rel="stylesheet" href="/css/style.css" />
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" />
+	</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About</a><a class="page-link" href="/index-reverse.html">Posts in Date Order</a><a class="page-link" href="/topics.html">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics.htmlcairo.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-08-09T00:00:00-04:00" itemprop="datePublished">Friday, August 9, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0060-cairo-iv--filled-arc-precision-drawing-and-curves">0060: Cairo IV – Filled Arc, Precision Drawing, and Curves</h1>
+
+<p>This is a continuation of our Cairo briefs…</p>
+
+<h2 id="filled-arc">Filled Arc</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/018_cairo/cairo_11.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/018_cairo/cairo_11_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_11_filled_arc.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>This is the callback:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onDraw</span><span class="p">(</span><span class="n">Scoped</span><span class="p">!</span><span class="n">Context</span> <span class="n">context</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">float</span> <span class="n">x</span> <span class="p">=</span> <span class="mi">320</span><span class="p">,</span> <span class="n">y</span> <span class="p">=</span> <span class="mi">180</span><span class="p">,</span> <span class="n">radius</span> <span class="p">=</span> <span class="mi">40</span><span class="p">;</span>
+       <span class="kt">float</span> <span class="n">start</span> <span class="p">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">finish</span> <span class="p">=</span> <span class="mf">2.44</span><span class="p">;</span>
+		
+ 	<span class="c1">// draw the arc</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">setLineWidth</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">arc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">);</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">fill</span><span class="p">();</span>
+
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onDraw()</span>
+</code></pre></div></div>
+
+<p>This is like the other <code class="language-plaintext highlighter-rouge">arc()</code> calls, but followed with a <code class="language-plaintext highlighter-rouge">fill()</code> command instead of <code class="language-plaintext highlighter-rouge">stroke()</code>.</p>
+
+<p>But we can also do some interesting stuff by issuing a bunch of <code class="language-plaintext highlighter-rouge">arc()</code> calls interspersed with <code class="language-plaintext highlighter-rouge">moveTo()</code>’s and such like…</p>
+
+<h2 id="a-cartoon-smile-with-arcs">A Cartoon Smile with Arcs</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/018_cairo/cairo_12.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/018_cairo/cairo_12_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_12_draw_arcs_cartoon_smile.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>The cartoon smile is done like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onDraw</span><span class="p">(</span><span class="n">Scoped</span><span class="p">!</span><span class="n">Context</span> <span class="n">context</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">float</span> <span class="n">xPos1</span> <span class="p">=</span> <span class="mi">213</span><span class="p">,</span> <span class="n">yPos1</span> <span class="p">=</span> <span class="mi">160</span><span class="p">,</span> <span class="n">xPos2</span><span class="p">,</span> <span class="n">yPos2</span><span class="p">;</span>
+	<span class="kt">float</span> <span class="n">xPos3</span><span class="p">,</span> <span class="n">yPos3</span><span class="p">,</span> <span class="n">radius1</span> <span class="p">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">radius2</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+	
+	<span class="c1">// draw the first arc (the mouth shape)</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">setLineWidth</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">arc</span><span class="p">(</span><span class="n">xPos1</span><span class="p">,</span> <span class="n">yPos1</span><span class="p">,</span> <span class="n">radius1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">2.44</span><span class="p">);</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">stroke</span><span class="p">();</span>
+	<span class="c1">// find the right corner of the mouth shape</span>
+	<span class="n">xPos2</span> <span class="p">=</span> <span class="n">xPos1</span> <span class="p">+</span> <span class="n">cos</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span> <span class="p">*</span> <span class="n">radius1</span><span class="p">;</span>
+	<span class="n">yPos2</span> <span class="p">=</span> <span class="n">yPos1</span> <span class="p">+</span> <span class="n">sin</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span> <span class="p">*</span> <span class="n">radius1</span><span class="p">;</span>
+	<span class="c1">// draw the second arc</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">arc</span><span class="p">(</span><span class="n">xPos2</span><span class="p">,</span> <span class="n">yPos2</span><span class="p">,</span> <span class="n">radius2</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">);</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">stroke</span><span class="p">();</span>
+	<span class="c1">// find the left corner of the mouth shape</span>
+	<span class="n">xPos3</span> <span class="p">=</span> <span class="n">xPos1</span> <span class="p">+</span> <span class="n">cos</span><span class="p">(</span><span class="mf">2.44</span><span class="p">)</span> <span class="p">*</span> <span class="n">radius1</span><span class="p">;</span>
+	<span class="n">yPos3</span> <span class="p">=</span> <span class="n">yPos1</span> <span class="p">+</span> <span class="n">sin</span><span class="p">(</span><span class="mf">2.44</span><span class="p">)</span> <span class="p">*</span> <span class="n">radius1</span><span class="p">;</span>
+	<span class="c1">// draw the third arc</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">arc</span><span class="p">(</span><span class="n">xPos3</span><span class="p">,</span> <span class="n">yPos3</span><span class="p">,</span> <span class="n">radius2</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">,</span> <span class="mf">5.6</span><span class="p">);</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">stroke</span><span class="p">();</span>
+	
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// onDraw()</span>
+</code></pre></div></div>
+
+<h3 id="the-x-and-y-positions">The X and Y Positions</h3>
+
+<p>These are the centers of our three circles around which we’ll draw three arcs. The first—<code class="language-plaintext highlighter-rouge">xPos1</code>, <code class="language-plaintext highlighter-rouge">yPos1</code>—is for the mouth shape and the other two are for the “smile lines.”</p>
+
+<h3 id="finding-the-corners-of-the-mouth">Finding the Corners of the Mouth</h3>
+
+<p><code class="language-plaintext highlighter-rouge">xPos2</code>/<code class="language-plaintext highlighter-rouge">yPos2</code> and <code class="language-plaintext highlighter-rouge">xPos3</code>/<code class="language-plaintext highlighter-rouge">yPos3</code> are positioned at the two ends of the smile arc—the corners of the mouth—which takes a bit of trig, but nothing complicated.</p>
+
+<p>Finding the end of an arc is pretty straightforward. Looking back at the start angle of the mouth arc and the radius, we calculate the right corner of the mouth like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">xPos2</span> <span class="p">=</span> <span class="n">xPos1</span> <span class="p">+</span> <span class="n">cos</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span> <span class="p">*</span> <span class="n">radius1</span><span class="p">;</span>
+<span class="n">yPos2</span> <span class="p">=</span> <span class="n">yPos1</span> <span class="p">+</span> <span class="n">sin</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span> <span class="p">*</span> <span class="n">radius1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>I’ll throw in a quick reminder that arcs are drawn in a clockwise direction which is why this calculation yields <code class="language-plaintext highlighter-rouge">xPos2</code>/<code class="language-plaintext highlighter-rouge">yPos2</code>, the right corner.</p>
+
+<p>Same for the left corner except we use the end position of the arc:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">xPos3</span> <span class="p">=</span> <span class="n">xPos1</span> <span class="p">+</span> <span class="n">cos</span><span class="p">(</span><span class="mf">2.44</span><span class="p">)</span> <span class="p">*</span> <span class="n">radius1</span><span class="p">;</span>
+<span class="n">yPos3</span> <span class="p">=</span> <span class="n">yPos1</span> <span class="p">+</span> <span class="n">sin</span><span class="p">(</span><span class="mf">2.44</span><span class="p">)</span> <span class="p">*</span> <span class="n">radius1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Follow each of those pairs of calculations with a call to arc() with a smaller radius and we’re done.</p>
+
+<p>###Where Did Those cos() &amp; sin() Args Come From?</p>
+
+<p>They’re the start and end points of the ‘smile’ arc and they’re in radians. A quick look at our Radians Compass bears this out:</p>
+
+<div class="inpage-frame">
+	<figure class="center">
+		<img class="center" src="/images/diagrams/018_cairo/radians_compass_smile_points.png" alt="Figure 1: Left: First example, Middle/Right: second example in two steps" style="width: 600px; height: 600px;" />
+		<figcaption>
+			Figure 2: Radians Compass with 'smile' start and end points marked. 
+		</figcaption>
+	</figure>
+</div>
+
+<h2 id="drawing-a-curve">Drawing a Curve</h2>
+
+<!-- 4, 5 -->
+<!-- third occurrence of application and terminal screenshots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img4" src="/images/screenshots/018_cairo/cairo_13.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal4" class="modal">																<!-- modal# -->
+				<span class="close4">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img44" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal4");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img4");														// img#
+			var modalImg = document.getElementById("img44");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close4")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img5" src="/images/screenshots/018_cairo/cairo_13_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal5" class="modal">																			<!-- modal# -->
+				<span class="close5">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img55" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal5");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img5");																	// img#
+			var modalImg = document.getElementById("img55");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close5")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!---------- filename (below) ---------->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_13_draw_1_curve.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
+
+<!-- 6, 7 -->
+<!-- third occurrence of application and terminal screenshots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img6" src="/images/screenshots/018_cairo/cairo_14.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal6" class="modal">																<!-- modal# -->
+				<span class="close6">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img66" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal6");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img6");														// img#
+			var modalImg = document.getElementById("img66");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close6")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img7" src="/images/screenshots/018_cairo/cairo_14_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal7" class="modal">																			<!-- modal# -->
+				<span class="close7">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img77" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal7");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img7");																	// img#
+			var modalImg = document.getElementById("img77");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close7")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!---------- filename (below) ---------->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_14_draw_2_curves.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for fourth (4th) occurrence of application and terminal screenshots on a single page -->
+
+<p>In <em>Cairo</em> terms, the difference between an arc and curve is:</p>
+
+<ul>
+  <li>an arc uses a center ‘anchor’ point as a base and two positions around a circle as start and end points, whereas</li>
+  <li>a curve uses x/y locations to set up two control points and only needs coordinates for the end point of the curve.</li>
+</ul>
+
+<p>So how does the <code class="language-plaintext highlighter-rouge">curveTo()</code> function know where to start the curve?</p>
+
+<p>There are three rules governing placement of <code class="language-plaintext highlighter-rouge">curveTo()</code>’s starting x/y position:</p>
+
+<ol>
+  <li>It’s set beforehand with <code class="language-plaintext highlighter-rouge">moveTo()</code>,</li>
+  <li>if no <code class="language-plaintext highlighter-rouge">moveTo()</code> call precedes <code class="language-plaintext highlighter-rouge">curveTo()</code>, the first control point doubles as a starting point, or</li>
+  <li>it uses the end point of a previously-drawn line, arc, or curve.</li>
+</ol>
+
+<p>When you look at the code for our two example files, which are a single curve, and two curves joined together, you’ll note that the curve in the first example is repeated in the second, but the resulting curves are quite different. But, looking back at the rules, it’s easy to see why…</p>
+
+<p>Comparing the two curve-drawing examples…</p>
+
+<p>In the first example, the starting x/y position is passed to <code class="language-plaintext highlighter-rouge">curveTo()</code> and because it’s not preceded by a <code class="language-plaintext highlighter-rouge">moveTo()</code> call, it’s also where the drawing actually starts.</p>
+
+<p>In the second example, however, the first call to <code class="language-plaintext highlighter-rouge">curveTo()</code> <em>is</em> preceded by a <code class="language-plaintext highlighter-rouge">moveTo()</code> which means the <code class="language-plaintext highlighter-rouge">moveTo()</code> decides where drawing starts. Here’s how the two examples play out:</p>
+
+<div class="inpage-frame">
+	<figure class="center">
+		<img class="center" src="/images/diagrams/018_cairo/cairo_13_14_compared.png" alt="Figure 1: Left: First example, Middle/Right: second example in two steps" style="width: 640px; height: 359px;" />
+		<figcaption>
+			Figure 1: Left: First example, Middle/Right: second example in two steps
+		</figcaption>
+	</figure>
+</div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Keep these things in mind while drawing curves and you’ll do just fine:</p>
+
+<ul>
+  <li>remember to use a <code class="language-plaintext highlighter-rouge">moveTo()</code> <em>before</em> a <code class="language-plaintext highlighter-rouge">curveTo()</code>, or else</li>
+  <li>the first x/y coordinate will be the starting point, and</li>
+  <li>curves use control points to control the severity of the curve.</li>
+</ul>
+
+<p>And that’s about it for curves. Next time, we’ll dig into what’s referred to as <code class="language-plaintext highlighter-rouge">Cairo</code>’s <em>Toy Text</em> mechanism. Until then.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0059-cairo-iii-circles-and-arcs.html">Previous: Cairo Circles and Arcs</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0061-cairo-v-toy-text-image-formats.html">Next: Cairo Toy Text &amp; Image Formats</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0060-cairo-iv-fill-arc-cartoon-mouth.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
