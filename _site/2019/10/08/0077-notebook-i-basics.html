@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0077: Notebook I – The Basics | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0077: Notebook I – The Basics" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="GTK Tutorial covering the basics of using a Notebook." />
+<meta property="og:description" content="GTK Tutorial covering the basics of using a Notebook." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/10/08/0077-notebook-i-basics.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/10/08/0077-notebook-i-basics.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-08T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0077: Notebook I – The Basics" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-10-08T00:00:00-04:00","datePublished":"2019-10-08T00:00:00-04:00","description":"GTK Tutorial covering the basics of using a Notebook.","headline":"0077: Notebook I – The Basics","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/10/08/0077-notebook-i-basics.html"},"url":"http://localhost:4000/gtkDcoding/2019/10/08/0077-notebook-i-basics.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/container.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-10-08T00:00:00-04:00" itemprop="datePublished">Tuesday, October 8, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0077-notebook-i--the-basics">0077: Notebook I – The Basics</h1>
+
+<p>Today, we’ll be digging into the <em>GTK</em> <code class="language-plaintext highlighter-rouge">Notebook</code>, the basic widget used to build a multi-document interface (MDI). Each tab in a <code class="language-plaintext highlighter-rouge">Notebook</code> can contain pretty much whatever you want from a text document to a 2D or 3D graphic, even a visual representation of an audio file or JBC™ (Just a Bunch of Controls).</p>
+
+<p>But, enough buildup. Let’s get to it.</p>
+
+<h2 id="a-single-tab-notebook">A Single-tab Notebook</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/014_container/container_10.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/014_container/container_10_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_10_notebook_basic.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>Before we construct a <code class="language-plaintext highlighter-rouge">Notebook</code>, we need to decide where the tabs will go:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">PositionType.LEFT</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">PositionType.RIGHT</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">PositionType.TOP</code>, or</li>
+  <li><code class="language-plaintext highlighter-rouge">PositionType.BOTTOM</code>.</li>
+</ul>
+
+<p>And, yeah, that’s the entire list of options available in the <code class="language-plaintext highlighter-rouge">PositionType enum</code>.</p>
+
+<p>Let’s set up a derived class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">MyNotebook</span> <span class="p">:</span> <span class="n">Notebook</span>
+<span class="p">{</span>
+	<span class="n">PositionType</span> <span class="n">tabPosition</span> <span class="p">=</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">TOP</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">tabLabel</span> <span class="p">=</span> <span class="s">"Demo Tab"</span><span class="p">;</span>
+	<span class="n">Label</span> <span class="n">myTabLabel</span><span class="p">;</span>
+	<span class="n">MyTextView</span> <span class="n">myTextview</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		<span class="n">setTabPos</span><span class="p">(</span><span class="n">tabPosition</span><span class="p">);</span>
+
+		<span class="n">myTabLabel</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="n">tabLabel</span><span class="p">);</span>
+		<span class="n">myTextview</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyTextView</span><span class="p">();</span>
+		<span class="n">appendPage</span><span class="p">(</span><span class="n">myTextview</span><span class="p">,</span> <span class="n">myTabLabel</span><span class="p">);</span>
+				
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class MyNotebook</span>
+</code></pre></div></div>
+
+<h3 id="class-attributes">Class Attributes</h3>
+
+<p>In the attributes list, we find our tab position followed by a bunch of other (pretty-much) self-explanatory stuff, but here’s a quick run-down, anyway:</p>
+
+<ul>
+  <li>a string for the tab’s <code class="language-plaintext highlighter-rouge">Label</code>,</li>
+  <li>the actual <code class="language-plaintext highlighter-rouge">Label</code> we’ll stuff into the tab, and</li>
+  <li>a derivative of a <code class="language-plaintext highlighter-rouge">TextView</code> that we’ll stuff into the tab’s work area/page.</li>
+</ul>
+
+<h3 id="the-constructor">The Constructor</h3>
+
+<p>Still following the code snippet above, after calling the super-constructor, we:</p>
+
+<ul>
+  <li>set the tabs to appear at the top,</li>
+  <li>instantiate the <code class="language-plaintext highlighter-rouge">Label</code> and <code class="language-plaintext highlighter-rouge">TextView</code> derivatives, and finally,</li>
+  <li>call the <code class="language-plaintext highlighter-rouge">appendPage()</code> function to cram everything in there.</li>
+</ul>
+
+<p>I won’t go over the <code class="language-plaintext highlighter-rouge">TextView</code> or the <code class="language-plaintext highlighter-rouge">Label</code> derivative classes here since we’ve talked about those many times in earlier posts.</p>
+
+<p>And that is all there is to it.</p>
+
+<h3 id="but-wait">But Wait…</h3>
+
+<p>When you compile and run this demo (in <em>Windows</em>, at least) you’ll notice that the tab’s <code class="language-plaintext highlighter-rouge">Label</code> text shows along with a little blue bar underneath so we know it’s selected, but there’s no visible tab background. It doesn’t even have an outline.</p>
+
+<p>Of course, if you’ve already been messing around with themes other than the default <em>GTK</em> theme available on <em>Windows</em>, your tabs might already be visible. But for those of us who haven’t, this brings us to explore a couple of solutions.</p>
+
+<h2 id="making-tabs-visible-in-windows-10-the-universal-method">Making Tabs Visible in Windows 10: the Universal Method</h2>
+
+<p>One way to go about this is to change the theme for all <em>GTK</em> apps. This is not a well-documented process, but a quick-n-dirty solution is to give your <code class="language-plaintext highlighter-rouge">GTK</code> apps a win32 theme. It’s not the best solution because it gives everything a <em>Windows 7</em> look. It also spits out warnings on the command line. One workaround for that is don’t run your app from the command line, which may or may not be appealing.</p>
+
+<p>Either way, here’s what you do:</p>
+
+<ul>
+  <li>as administrator, open <code class="language-plaintext highlighter-rouge">C:\Program Files\Gtk-Runtime\etc\gtk-3.0\settings.ini</code>,</li>
+  <li>find all lines starting with <code class="language-plaintext highlighter-rouge">gtk</code> and comment them out by typing an octothorp (#) at the begining of each (you could delete them if you want, but by commenting them out, you can easily revert… which I’m sure you will once you see the results),</li>
+  <li>go to a new line and add this: <code class="language-plaintext highlighter-rouge">gtk-theme-name=win32</code></li>
+  <li>save and close the file.</li>
+</ul>
+
+<p>Now you can open any of your GTK apps/demos and travel back in time to the <em>Windows 7</em> era.</p>
+
+<p>Like I said, it’s not the best solution, but you end up with visible tabs.</p>
+
+<p>And here’s another way to go about it…</p>
+
+<h2 id="making-tabs-visible-the-application-level-method">Making Tabs Visible: the Application-level Method</h2>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/014_container/container_11.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/014_container/container_11_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_11_notebook_with_visible_tab.d" target="_blank">here</a>.
+	</div>
+	<div class="frame-footer">																							<!---------- filename (below) ---------->
+		The CSS file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/css/visible_tabs.css" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>This isn’t an ideal solution either because we don’t get control over such things as the shape of the tabs, but we do get some control… and it looks better than a <em>Windows 7</em> theme superimposed onto a <em>Windows 10</em> application.</p>
+
+<h5 id="a-call-for-participation">A Call for Participation</h5>
+<p><br /></p>
+
+<p>I haven’t tried this on <em>Linux</em> (or any other OS) but I’m sure it’ll work. If anyone tries it, please tell us about your results (see list of contact options at the bottom of this page).</p>
+
+<h5 id="now-back-to-our-show">(now, back to our show)</h5>
+<p><br /></p>
+
+<p>If you recall, we covered how to decorate widgets using <em>CSS</em> in <a href="/2019/09/24/0073-frame-part-ii.html">Blog Post #0073</a> when we were talking about the <code class="language-plaintext highlighter-rouge">Frame</code> widget and what we did there can be adapted here. Below is the <em>CSS</em> class we used before, but with <code class="language-plaintext highlighter-rouge">cssPath</code> set to the file we’re working with for this demo:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">CSS</span> <span class="c1">// GTK4 compliant</span>
+<span class="p">{</span>
+	<span class="n">CssProvider</span> <span class="n">provider</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">cssPath</span> <span class="p">=</span> <span class="s">"./css/visible_tabs.css"</span><span class="p">;</span>
+
+	<span class="k">this</span><span class="p">(</span><span class="n">StyleContext</span> <span class="n">styleContext</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">provider</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CssProvider</span><span class="p">();</span>
+		<span class="n">provider</span><span class="p">.</span><span class="n">loadFromPath</span><span class="p">(</span><span class="n">cssPath</span><span class="p">);</span>
+		<span class="n">styleContext</span><span class="p">.</span><span class="n">addProvider</span><span class="p">(</span><span class="n">provider</span><span class="p">,</span> <span class="n">GTK_STYLE_PROVIDER_PRIORITY_APPLICATION</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()	</span>
+	
+<span class="p">}</span> <span class="c1">// class CSS</span>
+</code></pre></div></div>
+
+<p>So, like before, we’ll:</p>
+
+<ul>
+  <li>create a <em>CSS</em> class (this time, specifically for tabs), and</li>
+  <li>attach it to the <code class="language-plaintext highlighter-rouge">Notebook</code>’s <code class="language-plaintext highlighter-rouge">StyleContext</code>.</li>
+</ul>
+
+<h3 id="changes-to-class-attributes">Changes to Class Attributes</h3>
+
+<p>For each <code class="language-plaintext highlighter-rouge">Widget</code> where we want <em>CSS</em> styling, we add this line in the class preamble:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CSS</span> <span class="n">css</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The we go to…</p>
+
+<h3 id="the-constructor-1">The Constructor</h3>
+
+<p>Here, we add this line:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">css</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CSS</span><span class="p">(</span><span class="n">getStyleContext</span><span class="p">());</span>
+</code></pre></div></div>
+
+<p>And remember, this also has to be done in the constructor for each widget where CSS will be used.</p>
+
+<p>One more thing to look at…</p>
+
+<h3 id="the-visible_tabscss-file">The visible_tabs.css File</h3>
+
+<p>The file is short-n-sweet:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">tab</span>
+<span class="p">{</span>
+	<span class="nl">background-color</span><span class="p">:</span> <span class="m">#f2f2f2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <em>CSS Name</em> for tabs is <code class="language-plaintext highlighter-rouge">tab</code> and we just need to set the color.</p>
+
+<p>But, there’s one more way to go about this, one that appeals to me because we bring the <em>CSS</em> selector inside our <em>D</em> code file where it can’t get misplaced.</p>
+
+<h2 id="embedding-css-in-d">Embedding CSS in D</h2>
+
+<!-- 4, 5 -->
+<!-- third occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img4" src="/images/screenshots/014_container/container_12.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal4" class="modal">																<!-- modal# -->
+				<span class="close4">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img44" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal4");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img4");														// img#
+			var modalImg = document.getElementById("img44");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close4")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img5" src="/images/screenshots/014_container/container_12_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal5" class="modal">																			<!-- modal# -->
+				<span class="close5">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img55" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal5");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img5");																	// img#
+			var modalImg = document.getElementById("img55");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close5")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!---------- filename (below) ---------->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_12_notebook_internal_css_tab.d" target="_blank">here</a>.
+	</div>
+	<div class="frame-footer">																							<!---------- filename (below) ---------->
+		A variation of the example using an enum <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_12a_notebook_internal_css_enum_tab.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for third (3rd) occurrence of application and terminal screen shots on a single page -->
+
+<p>The <em>CSS</em> selector can be a <code class="language-plaintext highlighter-rouge">string</code> or an <code class="language-plaintext highlighter-rouge">enum</code> (follow the second code link above and look for the CSS class at the bottom of the file) and it’s associated with the <code class="language-plaintext highlighter-rouge">CssProvider</code> using <code class="language-plaintext highlighter-rouge">loadFromData()</code> instead of <code class="language-plaintext highlighter-rouge">loadFromPath()</code>. A quick rewrite of the <code class="language-plaintext highlighter-rouge">CSS</code> class makes this happen:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">CSS</span> <span class="c1">// GTK4 compliant</span>
+<span class="p">{</span>
+	<span class="n">CssProvider</span> <span class="n">provider</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">myCSS</span> <span class="p">=</span> <span class="s">"tab { background-color: #f2f2f2; }"</span><span class="p">;</span>
+
+	<span class="k">this</span><span class="p">(</span><span class="n">StyleContext</span> <span class="n">styleContext</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">provider</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CssProvider</span><span class="p">();</span>
+		<span class="n">provider</span><span class="p">.</span><span class="n">loadFromData</span><span class="p">(</span><span class="n">myCSS</span><span class="p">);</span>
+		<span class="n">styleContext</span><span class="p">.</span><span class="n">addProvider</span><span class="p">(</span><span class="n">provider</span><span class="p">,</span> <span class="n">GTK_STYLE_PROVIDER_PRIORITY_APPLICATION</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()	</span>
+	
+<span class="p">}</span> <span class="c1">// class CSS</span>
+</code></pre></div></div>
+
+<p>Nothing has to change in the class(s) using the <code class="language-plaintext highlighter-rouge">CSS</code>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Next time, we’ll carry on and look at multiple tabs (why else are we playing around with tabs?) and eventually get into:</p>
+
+<ul>
+  <li>reordering tabs,</li>
+  <li>customized tabs (wherein we draw our own tab shapes from scratch),</li>
+  <li>adding and removing tabs, and</li>
+  <li>signals associated with the <code class="language-plaintext highlighter-rouge">Notebook</code> widget and its tabs/pages.</li>
+</ul>
+
+<p>Until then, be nice to each other.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/10/04/0076-nodes-iii-noodles-and-mouse-clicks.html">Previous: Noodles and Mouse Clicks</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/10/11/0078-notebook-ii-multiple-tabs.html">Next: Notebook II - Multiple Tabs</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/10/08/0077-notebook-i-basics.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

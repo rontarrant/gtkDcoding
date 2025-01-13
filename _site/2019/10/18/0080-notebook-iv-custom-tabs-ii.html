@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0080: Notebook VI - Customized Tabs, Part 2 | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0080: Notebook VI - Customized Tabs, Part 2" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This GTK Tutorial is part two of customizing how tabs look." />
+<meta property="og:description" content="This GTK Tutorial is part two of customizing how tabs look." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/10/18/0080-notebook-iv-custom-tabs-ii.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/10/18/0080-notebook-iv-custom-tabs-ii.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-18T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0080: Notebook VI - Customized Tabs, Part 2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-10-18T00:00:00-04:00","datePublished":"2019-10-18T00:00:00-04:00","description":"This GTK Tutorial is part two of customizing how tabs look.","headline":"0080: Notebook VI - Customized Tabs, Part 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/10/18/0080-notebook-iv-custom-tabs-ii.html"},"url":"http://localhost:4000/gtkDcoding/2019/10/18/0080-notebook-iv-custom-tabs-ii.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/container.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-10-18T00:00:00-04:00" itemprop="datePublished">Friday, October 18, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0080-notebook-vi---customized-tabs-part-2">0080: Notebook VI - Customized Tabs, Part 2</h1>
+
+<p>Last time we got started on building customized tabs, so let’s continue, starting with another look at the screen-shot showing our goal:</p>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/014_container/container_16.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/014_container/container_16_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_16_notebook_multi_custom_tabs.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<h2 id="the-actual-customization">The Actual Customization</h2>
+
+<p>Okay, now we’re getting serious. By stuffing a <code class="language-plaintext highlighter-rouge">DrawingArea</code> into the tab, we get to draw whatever we want in there. I opted for a round-shouldered tab shape with the tab’s label text inside it, but you could get all <em>Monty Python</em> and do something completely different.</p>
+
+<p>We’ll go over the drawing code in a later post, but for now, let’s talk about all the prep that needs to be done for the drawing…</p>
+
+<h2 id="in-the-class-preamble">In the Class Preamble</h2>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">_tabNumber</span><span class="p">;</span>
+<span class="n">Notebook</span> <span class="n">_notebook</span><span class="p">;</span>
+<span class="n">cairo_text_extents_t</span> <span class="n">extents</span><span class="p">;</span>
+<span class="n">GtkAllocation</span> <span class="n">size</span><span class="p">;</span> <span class="c1">// the area assigned to the DrawingArea by its parent</span>
+</code></pre></div></div>
+
+<p>These are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">_tabNumber</code>: a number that identifies the currently-created <code class="language-plaintext highlighter-rouge">Notebook</code> page/tab,</li>
+  <li><code class="language-plaintext highlighter-rouge">_notebook</code>: a pointer to the parent (the <code class="language-plaintext highlighter-rouge">Notebook</code>),</li>
+  <li><code class="language-plaintext highlighter-rouge">extents</code>: how much space a string will take up, and</li>
+  <li><code class="language-plaintext highlighter-rouge">size</code>: the size of the <code class="language-plaintext highlighter-rouge">DrawingArea</code></li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">_tabNumber</code> variable originates in the MyNotebook class and is passed down to here. If we were adding tabs dynamically, we would have a mechanism at the MyNotebook level that would automatically increment this number so that each tab has a unique identifier. We’ll see this mechanism in a later post.</p>
+
+<h2 id="in-the-constructor">In the Constructor</h2>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">(</span><span class="nb">string</span> <span class="n">labelText</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tabNumber</span><span class="p">,</span> <span class="n">Notebook</span> <span class="n">notebook</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">_tabNumber</span> <span class="p">=</span> <span class="n">tabNumber</span><span class="p">;</span>	
+	<span class="n">_notebook</span> <span class="p">=</span> <span class="n">notebook</span><span class="p">;</span>
+	<span class="n">_labelText</span> <span class="p">=</span> <span class="n">labelText</span><span class="p">;</span>
+
+	<span class="n">radians</span> <span class="p">=</span> <span class="n">PI</span> <span class="p">/</span> <span class="mf">180.0</span><span class="p">;</span>
+
+	<span class="c1">// map out the shape ofa tab with rounded corners</span>
+	<span class="n">northWestArc</span> <span class="p">=</span> <span class="p">[</span><span class="mi">180</span> <span class="p">*</span> <span class="n">radians</span><span class="p">,</span> <span class="mi">270</span> <span class="p">*</span> <span class="n">radians</span><span class="p">];</span> <span class="c1">// upper-left</span>
+	<span class="n">northEastArc</span> <span class="p">=</span> <span class="p">[-</span><span class="mi">90</span> <span class="p">*</span> <span class="n">radians</span><span class="p">,</span> <span class="mi">0</span> <span class="p">*</span> <span class="n">radians</span><span class="p">];</span> <span class="c1">// upper-right</span>
+	<span class="n">cornerRadius</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+
+	<span class="n">addOnDraw</span><span class="p">(&amp;</span><span class="n">onDraw</span><span class="p">);</span>
+	<span class="n">addOnButtonPress</span><span class="p">(&amp;</span><span class="n">onButtonPress</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>First, we set up local copies of the values being passed in, define <code class="language-plaintext highlighter-rouge">radians</code>, then set up the arrays for drawing the two arcs (rounded shoulders), set the arc radius, and finally, hook up the signals.</p>
+
+<h3 id="signals-and-communications">Signals and Communications</h3>
+
+<p>This is it, the solution to passing a mouse click from the child widget to the <code class="language-plaintext highlighter-rouge">Notebook</code> tab. Remember in <a href="/2019/10/15/0079-notebook-iii-custom-tabs-i.html">Blog Post #79</a> when we talked about harnessing the <code class="language-plaintext highlighter-rouge">onSwitchPage</code> signal? Well, here’s the other half of that equation…</p>
+
+<p>In the <code class="language-plaintext highlighter-rouge">TabDrawingArea</code> constructor, we hooked up the <code class="language-plaintext highlighter-rouge">onButtonPress</code> signal to trigger this callback:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kt">bool</span> <span class="n">onButtonPress</span><span class="p">(</span><span class="n">Event</span> <span class="n">event</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">widget</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">_notebook</span><span class="p">.</span><span class="n">setCurrentPage</span><span class="p">(</span><span class="n">_tabNumber</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">pageNumber</span> <span class="p">=</span> <span class="n">_notebook</span><span class="p">.</span><span class="n">getCurrentPage</span><span class="p">();</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"_pageNumber: "</span><span class="p">,</span> <span class="n">pageNumber</span><span class="p">);</span>
+		
+		<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// onButtonPress()</span>
+</code></pre></div></div>
+
+<p>Each time the user clicks on our customized tab, this callback triggers and, in turn, reaches back into the <code class="language-plaintext highlighter-rouge">Notebook</code> and calls <code class="language-plaintext highlighter-rouge">setCurrentPage()</code>. And what happens whenever the page is switched? The <code class="language-plaintext highlighter-rouge">onSwitchPage</code> signal is fired and that triggers the <code class="language-plaintext highlighter-rouge">Notebook</code>’s <code class="language-plaintext highlighter-rouge">onSwitchPage()</code> callback.</p>
+
+<div class="inpage-frame">
+	<figure class="left">
+		<img src="/images/diagrams/014_container/active_tab_area.png" alt="Figure 1: Active tab areas" style="width: 294px; height: 231px;" />
+		<figcaption>
+			Figure 1: Active tab areas
+		</figcaption>
+	</figure>
+</div>
+
+<p>So, in effect, what we’ve done is harness one signal in one widget to fire another signal in another widget.</p>
+
+<p>Have another look at the drawing from <a href="/2019/10/15/0079-notebook-iii-custom-tabs-i.html">Blog Post #79</a>. Remember, we talked about coming up with a workaround so the user can click anywhere on the tab and get the same results?</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">onButtonPress</code> callback is the final part of that solution to this dilemma.</p>
+
+<p><br /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In the third and final installment for this mini-series, we’ll look at the drawing code. See you then. Take care.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/10/15/0079-notebook-iii-custom-tabs-i.html">Previous: Notebook III - Custom Tabs I</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/10/22/0081-notebook-v-custom-tabs-iii.html">Next: Notebook V - Custom Tabs III</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/10/18/0080-notebook-iv-custom-tabs-ii.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

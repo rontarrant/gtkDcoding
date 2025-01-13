@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0082: Notebook VI – Adding and Removing Tabs | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0082: Notebook VI – Adding and Removing Tabs" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This GTK Tutorial covers adding and removing tabs from a Notebook." />
+<meta property="og:description" content="This GTK Tutorial covers adding and removing tabs from a Notebook." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/10/25/0082-notebook-vi-add-remove-tabs.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/10/25/0082-notebook-vi-add-remove-tabs.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-25T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0082: Notebook VI – Adding and Removing Tabs" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-10-25T00:00:00-04:00","datePublished":"2019-10-25T00:00:00-04:00","description":"This GTK Tutorial covers adding and removing tabs from a Notebook.","headline":"0082: Notebook VI – Adding and Removing Tabs","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/10/25/0082-notebook-vi-add-remove-tabs.html"},"url":"http://localhost:4000/gtkDcoding/2019/10/25/0082-notebook-vi-add-remove-tabs.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/container.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-10-25T00:00:00-04:00" itemprop="datePublished">Friday, October 25, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0082-notebook-vi--adding-and-removing-tabs">0082: Notebook VI – Adding and Removing Tabs</h1>
+
+<p>Today we’re going to cover adding and deleting tabs and I’ll talk a bit about how a <em>GTK</em> <code class="language-plaintext highlighter-rouge">Notebook</code> keeps track of tabs, why you don’t have to, and why you might think you do.</p>
+
+<p>Rather than building a menu system for this, I decided it would be less work to just toss in a couple of <code class="language-plaintext highlighter-rouge">Button</code>s… and it was.</p>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="images/screenshots/014_container/container_17.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="images/screenshots/014_container/container_17_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_17_notebook_add_remove_tabs.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<h2 id="a-grid-for-buttons">A Grid for Buttons</h2>
+
+<p>We’ll use a <code class="language-plaintext highlighter-rouge">Grid</code> derivative to hold the <code class="language-plaintext highlighter-rouge">Button</code> widgets:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">ButtonGrid</span> <span class="p">:</span> <span class="n">Grid</span>
+<span class="p">{</span>
+	<span class="n">InsertButton</span> <span class="n">insertButton</span><span class="p">;</span>
+	<span class="n">RemoveButton</span> <span class="n">removeButton</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">(</span><span class="n">MyNotebook</span> <span class="n">myNotebook</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">insertButton</span> <span class="p">=</span> <span class="k">new</span> <span class="n">InsertButton</span><span class="p">(</span><span class="n">myNotebook</span><span class="p">);</span>
+		<span class="n">attach</span><span class="p">(</span><span class="n">insertButton</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		
+		<span class="n">removeButton</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RemoveButton</span><span class="p">(</span><span class="n">myNotebook</span><span class="p">);</span>
+		<span class="n">attach</span><span class="p">(</span><span class="n">removeButton</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class ButtonGrid</span>
+</code></pre></div></div>
+
+<p>Nothing new here, just a quick refresher on how to stuff things into a <code class="language-plaintext highlighter-rouge">Grid</code>. Create a couple of <code class="language-plaintext highlighter-rouge">Button</code> widgets and <code class="language-plaintext highlighter-rouge">attach()</code>, remembering that those arguments mean:</p>
+
+<ul>
+  <li>first arg (<code class="language-plaintext highlighter-rouge">0</code>): the column to start in,</li>
+  <li>second arg (<code class="language-plaintext highlighter-rouge">0</code>): the row to start in,</li>
+  <li>third arg (<code class="language-plaintext highlighter-rouge">1</code>): number of columns this widget takes up, and</li>
+  <li>fourth arg (<code class="language-plaintext highlighter-rouge">1</code>): number of rows this widget takes up.</li>
+</ul>
+
+<p>The only thing of real note here is that a pointer to the <code class="language-plaintext highlighter-rouge">Notebook</code> is passed into the <code class="language-plaintext highlighter-rouge">Grid</code> and subsequently passed along to each <code class="language-plaintext highlighter-rouge">Button</code> that’s created. We’ll cover the particulars of why next as we look at…</p>
+
+<h2 id="a-button-for-inserting-tabs">A Button for Inserting Tabs</h2>
+
+<p>We’ve seen these buttons before, so no new ground is being covered. Even the fact that we’re passing in a pointer to the <code class="language-plaintext highlighter-rouge">Notebook</code> is something we’ve seen before in the <em>GTK</em> <code class="language-plaintext highlighter-rouge">Menu</code> series (<a href="/2019/05/10/0034-accelgroup-singleton.html">Blog Post #34: AccelGroup as a Singleton</a>) where we Singleton-ized our <code class="language-plaintext highlighter-rouge">AccelGroup</code> so we could tap into it from wherever without passing it down through multiple layers of objects. But this time, for simplicity sake and because there are only two levels to deal with, we’ll do it the non-Singleton way:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">InsertButton</span> <span class="p">:</span> <span class="n">Button</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">_buttonLabel</span> <span class="p">=</span> <span class="s">"Insert Page"</span><span class="p">;</span>
+	<span class="n">TabTextView</span> <span class="n">myTextView</span><span class="p">;</span>
+	<span class="n">MyNotebook</span> <span class="n">_myNotebook</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">(</span><span class="n">MyNotebook</span> <span class="n">myNotebook</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">_buttonLabel</span><span class="p">);</span>
+		
+		<span class="n">_myNotebook</span> <span class="p">=</span> <span class="n">myNotebook</span><span class="p">;</span>
+		
+		<span class="n">addOnClicked</span><span class="p">(&amp;</span><span class="n">onClicked</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">onClicked</span><span class="p">(</span><span class="n">Button</span> <span class="n">button</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">_myNotebook</span><span class="p">.</span><span class="n">addPage</span><span class="p">();</span>
+		
+	<span class="p">}</span> <span class="c1">// onClicked()</span>
+	
+<span class="p">}</span> <span class="c1">// class InsertButton</span>
+</code></pre></div></div>
+
+<p>And why do we need the <code class="language-plaintext highlighter-rouge">Notebook</code> pointer in here? Because the <code class="language-plaintext highlighter-rouge">Insert Page</code> and <code class="language-plaintext highlighter-rouge">Remove Page</code> <code class="language-plaintext highlighter-rouge">Button</code>s need access to the <code class="language-plaintext highlighter-rouge">MyNotebook.addPage()</code> and <code class="language-plaintext highlighter-rouge">MyNotebook.deletePage()</code> functions, respectively.</p>
+
+<p>And when we hook up the signals, because we’ve got a local copy of the <code class="language-plaintext highlighter-rouge">MyNotebook</code> pointer (<code class="language-plaintext highlighter-rouge">_myNotebook</code>) it’s dead simple to make the calls.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Remove Page</code> <code class="language-plaintext highlighter-rouge">Button</code> is set up exactly the same way, so let’s now look at the changes in <code class="language-plaintext highlighter-rouge">MyNotebook</code>…</p>
+
+<h2 id="mynotebook--whats-new">MyNotebook – What’s New?</h2>
+
+<p>There are some pretty drastic changes in this class, so let’s look at them by section…</p>
+
+<h3 id="the-preamble">The Preamble</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CSS</span> <span class="n">css</span><span class="p">;</span> <span class="c1">// needed to see tab shapes against the bg</span>
+<span class="n">PositionType</span> <span class="n">tabPosition</span> <span class="p">=</span> <span class="n">PositionType</span><span class="p">.</span><span class="n">TOP</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">tabLabelPrefix</span> <span class="p">=</span> <span class="s">"Tab "</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">_lastPageNumber</span> <span class="p">=</span> <span class="p">-</span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Here, we got rid of all the declarations for <code class="language-plaintext highlighter-rouge">TextView</code> and <code class="language-plaintext highlighter-rouge">Label</code> objects and replaced them with a single string (<code class="language-plaintext highlighter-rouge">tabLabelPrefix</code>) which we’ll use to build tab <code class="language-plaintext highlighter-rouge">Label</code>s each time <code class="language-plaintext highlighter-rouge">addPage()</code> is called.</p>
+
+<p>We also have a completely new addition in <code class="language-plaintext highlighter-rouge">_lastPageNumber</code>. This will help make sure each new tab gets a unique name. This isn’t strictly necessary for a full-blown application, but I have seen it done. For our purposes, it will mainly serve to tell us which tab is being removed or what the new order of the tabs is… because we’re also keeping that reordering functionality we talked about last time.</p>
+
+<p>And why is it initially set to <code class="language-plaintext highlighter-rouge">-1</code>? Because if we’re being purists, all arrays start at <code class="language-plaintext highlighter-rouge">0</code> and that leads me to a slight digression…</p>
+
+<h4 id="how-the-gtk-notebook-handles-tabspages-and-why-it-might-not-be-obvious">How the GTK Notebook Handles Tabs/Pages and Why it Might Not be Obvious</h4>
+
+<p>Each time you make a call to <code class="language-plaintext highlighter-rouge">Notebook.appendPage()</code>, it returns an integer commonly referred to in the API docs as an index or <code class="language-plaintext highlighter-rouge">tabIndex</code>. The fact that this number is returned might lead you to believe that you have to track the array of tabs, but don’t be fooled. It does keep a running tally—each subsequent call to <code class="language-plaintext highlighter-rouge">appendPage()</code> increases the index returned by this function—but my guess is this is a leftover from a time when you actually did have to keep track of the tab array.</p>
+
+<p>This is why, in all the demo code I’ve written for the <code class="language-plaintext highlighter-rouge">Notebook</code>, I ignore the <code class="language-plaintext highlighter-rouge">appendPage()</code> return value. I couldn’t think of anything useful to do with the index, so I ignored it, but if you come up with something, I’d love to hear about it.</p>
+
+<p>Now, back to our show…</p>
+
+<h3 id="the-constructor">The Constructor</h3>
+
+<p>This is short and sweet:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">();</span>
+	<span class="n">setTabPos</span><span class="p">(</span><span class="n">tabPosition</span><span class="p">);</span>
+	<span class="n">css</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CSS</span><span class="p">(</span><span class="n">getStyleContext</span><span class="p">());</span>
+	<span class="n">addPage</span><span class="p">();</span>
+	
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>Here’s what we do:</p>
+
+<ul>
+  <li>call the super-class constructor,</li>
+  <li>set up where the tabs will appear in relation to the <code class="language-plaintext highlighter-rouge">Notebook</code> work area,</li>
+  <li>associate our <code class="language-plaintext highlighter-rouge">CSS</code> so we have tabs with colored backgrounds, and</li>
+  <li>add the first tab/page.</li>
+</ul>
+
+<p>I threw in that last line to mimic what most text editors do, give you a new, blank page to work with on start-up so you don’t have to monkey around with <code class="language-plaintext highlighter-rouge">New</code> as soon as you’ve started your app.</p>
+
+<h3 id="the-addpage-function">The addPage() Function</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">addPage</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">_lastPageNumber</span><span class="p">++;</span> <span class="c1">// increase the page count</span>
+	<span class="n">TabTextView</span> <span class="n">tabTextView</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TabTextView</span><span class="p">();</span>
+	<span class="n">Label</span> <span class="n">label</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="s">"Tab "</span> <span class="p">~</span> <span class="n">_lastPageNumber</span><span class="p">.</span><span class="n">to</span><span class="p">!</span><span class="nb">string</span><span class="p">());</span>
+	<span class="n">appendPage</span><span class="p">(</span><span class="n">tabTextView</span><span class="p">,</span> <span class="n">label</span><span class="p">);</span>
+	<span class="n">setTabReorderable</span><span class="p">(</span><span class="n">tabTextView</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+	<span class="n">showAll</span><span class="p">();</span>
+		
+<span class="p">}</span> <span class="c1">// addPage()</span>
+</code></pre></div></div>
+
+<p>This is all straightforward:</p>
+
+<ul>
+  <li>increment the page count variable to ensure a unique tab name,</li>
+  <li>instantiate a <code class="language-plaintext highlighter-rouge">TabTextView</code> and a <code class="language-plaintext highlighter-rouge">Label</code>,</li>
+  <li>append the page, and</li>
+  <li>turn on the reorderable flag.</li>
+</ul>
+
+<p>That last line, <code class="language-plaintext highlighter-rouge">showAll()</code>, is important because with all these widgets we’re juggling, the <code class="language-plaintext highlighter-rouge">Notebook</code> needs a kick in the butt to do a redraw.</p>
+
+<h3 id="a-note-about-page-count-and-the-tabindex">A Note About Page Count and the tabIndex</h3>
+
+<p>You might think that the value returned from <code class="language-plaintext highlighter-rouge">appendPage()</code> could be used in place of <code class="language-plaintext highlighter-rouge">_lastPageNumber</code>, but here’s the thing… for our purposes, we need the new page to be created with its label containing the number that’s <em>returned</em> by <code class="language-plaintext highlighter-rouge">appendPage()</code>. In other words, we need the number before <code class="language-plaintext highlighter-rouge">appendPage()</code> can give it to us. And that’s why this one thing, the numbering used in tab labels, is something we have to track ourselves.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And so we come to the end of another post dedicated to the <code class="language-plaintext highlighter-rouge">Notebook</code>. And next time, a look at all the signals you might deal with in—yup—a <code class="language-plaintext highlighter-rouge">Notebook</code>.</p>
+
+<p>Until then, happy coding.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/10/22/0081-notebook-v-custom-tabs-iii.html">Previous: Notebook V - Custom Tabs II</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/10/29/0083-notebook-vii-notebook-all-signals.html">Next: Notebook VIII - A Snoot Full of Signals</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/10/25/0082-notebook-vi-add-remove-tabs.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

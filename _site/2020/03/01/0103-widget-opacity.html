@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0103: SFX - Widget Opacity | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0103: SFX - Widget Opacity" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This GTK Tutorial covers ghosting a Widget using opacity." />
+<meta property="og:description" content="This GTK Tutorial covers ghosting a Widget using opacity." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2020/03/01/0103-widget-opacity.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2020/03/01/0103-widget-opacity.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-01T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0103: SFX - Widget Opacity" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2020-03-01T00:00:00-05:00","datePublished":"2020-03-01T00:00:00-05:00","description":"This GTK Tutorial covers ghosting a Widget using opacity.","headline":"0103: SFX - Widget Opacity","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2020/03/01/0103-widget-opacity.html"},"url":"http://localhost:4000/gtkDcoding/2020/03/01/0103-widget-opacity.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/sfx.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2020-03-01T00:00:00-05:00" itemprop="datePublished">Sunday, March 1, 2020
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0103-sfx---widget-opacity">0103: SFX - Widget Opacity</h1>
+
+<p>The most common thing for diminished opacity to signal is that a <code class="language-plaintext highlighter-rouge">Widget</code> isn’t currently available. However, it may also be that we want to see what’s behind the <code class="language-plaintext highlighter-rouge">Widget</code>(s) while we fiddle with them to set a bunch of settings. To these ends, let’s look at how opacity is changed in <em>GTK</em>.</p>
+
+<h2 id="setting-opacity">Setting Opacity</h2>
+
+<p>Here’s a straightforward example to start:</p>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/016_sfx/sfx_05.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/016_sfx/sfx_05_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/016_sfx/sfx_05_opacity.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>To get that ghosted look for the second <code class="language-plaintext highlighter-rouge">Button</code>, its opacity is set using the <code class="language-plaintext highlighter-rouge">setOpacity()</code> function… which you’ll find in the <code class="language-plaintext highlighter-rouge">AppBox</code> constructor:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">button2</span><span class="p">.</span><span class="n">setOpacity</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>That’s all well and good, but let’s look at some situations where such a thing might be useful.</p>
+
+<h2 id="a-fake-ghosted-button">A Fake Ghosted Button</h2>
+
+<p>Now, when I say “useful,” take that with a grain of salt because we’ll see further along that what we’re about to do—fake a ghosted <code class="language-plaintext highlighter-rouge">Button</code>—can be done another way. Still, it’s nearly impossible to predict when something may or may not come in handy, so let’s take a look…</p>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/016_sfx/sfx_06.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/016_sfx/sfx_06_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/016_sfx/sfx_06_opacity_ghosting.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>For the sake of reasonable layout management, we’ll toss these buttons onto a <code class="language-plaintext highlighter-rouge">Grid</code> like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">ButtonGrid</span> <span class="p">:</span> <span class="n">Grid</span>
+<span class="p">{</span>
+	<span class="n">MySwitch</span> <span class="n">mySwitch</span><span class="p">;</span>
+	<span class="n">MyButton</span> <span class="n">myButton</span><span class="p">;</span>
+	<span class="n">Label</span> <span class="n">switchLabel</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">borderWidth</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">columnSpacing</span> <span class="p">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">rowSpacing</span> <span class="p">=</span> <span class="mi">5</span><span class="p">;</span>
+
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">switchLabel</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="s">"Ghost Me"</span><span class="p">);</span>
+		<span class="n">attach</span><span class="p">(</span><span class="n">switchLabel</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		<span class="n">mySwitch</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MySwitch</span><span class="p">();</span>
+		<span class="n">mySwitch</span><span class="p">.</span><span class="n">setLabel</span><span class="p">(</span><span class="n">switchLabel</span><span class="p">);</span>
+		<span class="n">attach</span><span class="p">(</span><span class="n">mySwitch</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		
+		<span class="n">myButton</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyButton</span><span class="p">();</span>
+		<span class="n">attach</span><span class="p">(</span><span class="n">myButton</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		<span class="n">myButton</span><span class="p">.</span><span class="n">setCompanion</span><span class="p">(</span><span class="n">mySwitch</span><span class="p">);</span>
+
+		<span class="n">setBorderWidth</span><span class="p">(</span><span class="n">borderWidth</span><span class="p">);</span>
+		<span class="n">setMarginBottom</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+		<span class="n">setColumnSpacing</span><span class="p">(</span><span class="n">columnSpacing</span><span class="p">);</span>
+		<span class="n">setRowSpacing</span><span class="p">(</span><span class="n">rowSpacing</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class ButtonGrid</span>
+</code></pre></div></div>
+
+<p>Why are we looking at this? It never hurts to take a fresh look at aesthetics and all that border, row, and column spacing stuff.</p>
+
+<p>But the main thing I want to draw your attention to is the <code class="language-plaintext highlighter-rouge">setCompanion()</code> function (the eighth statement in the constructor). It sets up an association between the <code class="language-plaintext highlighter-rouge">Button</code> and the <code class="language-plaintext highlighter-rouge">Switch</code> so that clicking on the <code class="language-plaintext highlighter-rouge">Button</code> can affect the appearance and behaviour of the <code class="language-plaintext highlighter-rouge">Switch</code>, sort of an extension of what we were talking about in Blog Posts <a href="/2020/01/21/0099-sfx-button-interactions-i-text-labels.html">0099: SFX - Button Interactions</a> and <a href="/2020/01/28/0100-sfx-button-interactions-ii-color-font-shape.html">0100: SFX - Button Interactions II, Color, Font, &amp; Shape</a>.</p>
+
+<p>The function is part of the <code class="language-plaintext highlighter-rouge">MyButton</code> object:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">setCompanion</span><span class="p">(</span><span class="n">MySwitch</span> <span class="n">mySwitch</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">companion</span> <span class="p">=</span> <span class="n">mySwitch</span><span class="p">;</span>
+		
+<span class="p">}</span> <span class="c1">// setCompanion()</span>
+</code></pre></div></div>
+
+<p>And the action takes place in <code class="language-plaintext highlighter-rouge">MyButton</code>’s <code class="language-plaintext highlighter-rouge">onButtonPress()</code> callback:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onButtonPress</span><span class="p">(</span><span class="n">Event</span> <span class="n">e</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">companion</span><span class="p">.</span><span class="n">getGhosting</span><span class="p">()</span> <span class="k">is</span> <span class="kc">true</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"Activating switch"</span><span class="p">);</span>
+		<span class="n">companion</span><span class="p">.</span><span class="n">switchGhosting</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+		<span class="n">setLabel</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"Deactivating switch."</span><span class="p">);</span>
+		<span class="n">companion</span><span class="p">.</span><span class="n">switchGhosting</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		<span class="n">setLabel</span><span class="p">(</span><span class="n">labelText</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+	<span class="p">}</span>
+		
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onButtonPress()</span>
+</code></pre></div></div>
+
+<p>You’ll notice that the <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">else</code> depends on a flag that’s actually a property of the <code class="language-plaintext highlighter-rouge">MySwitch</code> object. More about that in a moment. First, take a look at the rocker action of the <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">else</code>. If the flag is set, unset it. If not, set it.</p>
+
+<p>But we also change the <code class="language-plaintext highlighter-rouge">MyButton</code> label to reflect the state of <code class="language-plaintext highlighter-rouge">MySwitch</code>. If you’ve already looked at the complete code file, you may have noticed in the <code class="language-plaintext highlighter-rouge">MyButton</code> preamble, as well as having a pointer to a <code class="language-plaintext highlighter-rouge">MySwitch</code> object, there’s a string array for <code class="language-plaintext highlighter-rouge">Label</code>s:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span><span class="p">[]</span> <span class="n">labelText</span> <span class="p">=</span> <span class="p">[</span><span class="s">"Activate"</span><span class="p">,</span> <span class="s">"Deactivate"</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>And now you know why that’s there.</p>
+
+<h3 id="breakdown-of-myswitch">Breakdown of MySwitch</h3>
+
+<p>Starting with the preamble, we have:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Label</span> <span class="n">switchLabel</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">ghosting</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Because a <code class="language-plaintext highlighter-rouge">Switch</code> widget doesn’t have the capacity for a label of its own, we give it one by supplying a <code class="language-plaintext highlighter-rouge">Label</code> widget. This is the reason for the <code class="language-plaintext highlighter-rouge">Grid</code>. In fact, I opted for a <code class="language-plaintext highlighter-rouge">Grid</code> so the <code class="language-plaintext highlighter-rouge">Label</code> can easily be placed beside <code class="language-plaintext highlighter-rouge">MySwitch</code> while <code class="language-plaintext highlighter-rouge">MyButton</code> occupies its own row below.</p>
+
+<p>And because this is a <code class="language-plaintext highlighter-rouge">Switch</code>, we harness it with the <code class="language-plaintext highlighter-rouge">onStateSet</code> signal, hooking up our callback function of the same name, <code class="language-plaintext highlighter-rouge">onStateSet()</code> which looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onStateSet</span><span class="p">(</span><span class="kt">bool</span> <span class="n">state</span><span class="p">,</span> <span class="n">Switch</span> <span class="n">s</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(!</span><span class="n">ghosting</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">setState</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"State set is: "</span><span class="p">,</span> <span class="n">getState</span><span class="p">(),</span> <span class="s">" and state is: "</span><span class="p">,</span> <span class="n">state</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"Switch is ghosted. Doing nothing."</span><span class="p">);</span>
+	<span class="p">}</span>
+		
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onStateSet()</span>
+</code></pre></div></div>
+
+<p>This handles setting and unsetting that <code class="language-plaintext highlighter-rouge">ghosting</code> flag we saw in the preamble. And, like the <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">else</code> in <code class="language-plaintext highlighter-rouge">MyButton</code>’s <code class="language-plaintext highlighter-rouge">onButtonPress()</code> callback, it’s simply a matter of checking the state of the flag and, no matter which state we find, we switch to the other.</p>
+
+<p>And speaking of switching the flag, here’s the function we call from <code class="language-plaintext highlighter-rouge">MyButton</code> to do the switching:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">switchGhosting</span><span class="p">(</span><span class="kt">bool</span> <span class="n">on</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">ghosting</span> <span class="p">=</span> <span class="n">on</span><span class="p">;</span>
+		
+	<span class="k">if</span><span class="p">(</span><span class="n">on</span> <span class="k">is</span> <span class="kc">true</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">setOpacity</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+		<span class="n">switchLabel</span><span class="p">.</span><span class="n">setOpacity</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">setOpacity</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+		<span class="n">switchLabel</span><span class="p">.</span><span class="n">setOpacity</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+	<span class="p">}</span>
+		
+<span class="p">}</span> <span class="c1">// switchGhosting()</span>
+</code></pre></div></div>
+
+<p>At first glance, you may wonder why the argument to this function is named <code class="language-plaintext highlighter-rouge">on</code>. By the time you get to the <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">else</code>, it should be clear:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">on</span> <span class="k">is</span> <span class="kc">true</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Because <code class="language-plaintext highlighter-rouge">if(on is false)</code> tells of the opposite state, right?</p>
+
+<p>And this is where the demonstrated action takes place. We either set <code class="language-plaintext highlighter-rouge">MySwitch</code>’s opacity to half (<code class="language-plaintext highlighter-rouge">0.5</code>) or full (<code class="language-plaintext highlighter-rouge">1.0</code>). Then we do the same thing with the <code class="language-plaintext highlighter-rouge">Label</code>, just to demonstrate that this opacity stuff can be set on any <code class="language-plaintext highlighter-rouge">Widget</code>.</p>
+
+<p>The rest of this demo is straightforward enough.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Now we’ve seen how to set opacity for three types of <code class="language-plaintext highlighter-rouge">Widget</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Button</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">Label</code>, and</li>
+  <li><code class="language-plaintext highlighter-rouge">Switch</code>.</li>
+</ul>
+
+<p>But there are a few more circumstances I’d like to cover as well as a completely different approach to ghosting, something that’s actually more natural for <em>GTK</em> and disables the <code class="language-plaintext highlighter-rouge">Widget</code> at the same time it ghosts it. And that, we’ll cover next time.</p>
+
+<p>See you then.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2020/02/19/0102-grid-spacing.html">Previous: Grid Spacing</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2020/03/12/0104-widget-opacity-ii.html">Next: Widget Opacity II</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2020/03/01/0103-widget-opacity.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

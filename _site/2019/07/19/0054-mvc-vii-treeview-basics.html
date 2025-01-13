@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0054: MVC VII – TreeView Basics | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0054: MVC VII – TreeView Basics" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="GTK Tutorial - introduction to TreeView, ListStore, and TreeViewColumn." />
+<meta property="og:description" content="GTK Tutorial - introduction to TreeView, ListStore, and TreeViewColumn." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/07/19/0054-mvc-vii-treeview-basics.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/07/19/0054-mvc-vii-treeview-basics.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-19T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0054: MVC VII – TreeView Basics" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-07-19T00:00:00-04:00","datePublished":"2019-07-19T00:00:00-04:00","description":"GTK Tutorial - introduction to TreeView, ListStore, and TreeViewColumn.","headline":"0054: MVC VII – TreeView Basics","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/07/19/0054-mvc-vii-treeview-basics.html"},"url":"http://localhost:4000/gtkDcoding/2019/07/19/0054-mvc-vii-treeview-basics.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/mvc.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-07-19T00:00:00-04:00" itemprop="datePublished">Friday, July 19, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0054-mvc-vii--treeview-basics">0054: MVC VII – TreeView Basics</h1>
+
+<p>We’ve all been told that the <code class="language-plaintext highlighter-rouge">TreeView</code> is a complex and difficult beast to tame, but it’s not so hard once you’ve got a few bits of information at your fingertips. And in the previous six instalments of this series, most of those bits have been presented which means it should come as no big surprise that…</p>
+
+<p>There are only three <code class="language-plaintext highlighter-rouge">Widgets</code> we need to understand in order to make a <code class="language-plaintext highlighter-rouge">TreeView</code> work:</p>
+
+<ul>
+  <li>a <code class="language-plaintext highlighter-rouge">ListStore</code> which holds the data and acts as a <code class="language-plaintext highlighter-rouge">TreeModel</code>,</li>
+  <li>the <code class="language-plaintext highlighter-rouge">TreeViewColumn</code> which controls the content and look of a column, and</li>
+  <li>the <code class="language-plaintext highlighter-rouge">TreeView</code> itself.</li>
+</ul>
+
+<p>And that’s it.</p>
+
+<h2 id="a-single-column-treeview">A Single-column TreeView</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/017_mvc/mvc_10.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/017_mvc/mvc_10_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_10_treeview_1_column.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>We derive a <code class="language-plaintext highlighter-rouge">SignTreeView</code> from the <code class="language-plaintext highlighter-rouge">TreeView</code> class and it looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">SignTreeView</span> <span class="p">:</span> <span class="n">TreeView</span>
+<span class="p">{</span>
+	<span class="n">SignTreeViewColumn</span> <span class="n">signTreeViewColumn</span><span class="p">;</span>
+	<span class="n">SignListStore</span> <span class="n">signListStore</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		
+		<span class="n">signListStore</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SignListStore</span><span class="p">();</span>
+		<span class="n">setModel</span><span class="p">(</span><span class="n">signListStore</span><span class="p">);</span>
+		
+		<span class="n">signTreeViewColumn</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SignTreeViewColumn</span><span class="p">();</span>
+		<span class="n">appendColumn</span><span class="p">(</span><span class="n">signTreeViewColumn</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class SignTreeView</span>
+</code></pre></div></div>
+
+<p>Once the <code class="language-plaintext highlighter-rouge">TreeView</code> is instantiated by calling the super-class constructor, we set up and assign the Model/Store (<code class="language-plaintext highlighter-rouge">signListStore</code>), then instantiate and append one or more <code class="language-plaintext highlighter-rouge">TreeViewColumn</code>s.</p>
+
+<h2 id="the-liststore">The ListStore</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">ListStore</code> is used the same way with a <code class="language-plaintext highlighter-rouge">TreeView</code> as it was with the <code class="language-plaintext highlighter-rouge">ComboBox</code> and so we have:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">SignListStore</span> <span class="p">:</span> <span class="n">ListStore</span>
+<span class="p">{</span>
+	<span class="nb">string</span><span class="p">[]</span> <span class="n">items</span> <span class="p">=</span> <span class="p">[</span><span class="s">"bike"</span><span class="p">,</span> <span class="s">"bump"</span><span class="p">,</span> <span class="s">"cow"</span><span class="p">,</span> <span class="s">"deer"</span><span class="p">,</span> <span class="s">"crumbling cliff"</span><span class="p">,</span> <span class="s">"man with a stop sign"</span><span class="p">,</span> <span class="s">"skidding vehicle"</span><span class="p">];</span>
+	<span class="n">TreeIter</span> <span class="n">treeIter</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">([</span><span class="n">GType</span><span class="p">.</span><span class="n">STRING</span><span class="p">]);</span>
+		
+		<span class="k">foreach</span><span class="p">(</span><span class="kt">ulong</span> <span class="n">i</span><span class="p">;</span> <span class="mf">0.</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="nb">string</span> <span class="n">message</span> <span class="p">=</span> <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+			<span class="n">treeIter</span> <span class="p">=</span> <span class="n">createIter</span><span class="p">();</span>
+			<span class="n">setValue</span><span class="p">(</span><span class="n">treeIter</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+		<span class="p">}</span>
+
+	<span class="p">}</span> <span class="c1">// this()</span>
+
+<span class="p">}</span> <span class="c1">// class SignListStore</span>
+</code></pre></div></div>
+
+<p>This is the same <code class="language-plaintext highlighter-rouge">SignListStore</code> we used with a <code class="language-plaintext highlighter-rouge">ComboBox</code> in <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_06_combobox_liststore.d">an earlier example</a>, thus illustrating how the same data can be used in different ways by different <code class="language-plaintext highlighter-rouge">Widget</code>s.</p>
+
+<p>And that just leaves…</p>
+
+<h2 id="the-treeviewcolumn">The TreeViewColumn</h2>
+
+<p>Which looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">SignTreeViewColumn</span> <span class="p">:</span> <span class="n">TreeViewColumn</span>
+<span class="p">{</span>
+	<span class="n">CellRendererText</span> <span class="n">cellRendererText</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">columnTitle</span> <span class="p">=</span> <span class="s">"Sign Message"</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">attributeType</span> <span class="p">=</span> <span class="s">"text"</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">columnNumber</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// numbering starts at '0'</span>
+
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">cellRendererText</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CellRendererText</span><span class="p">();</span>
+		
+		<span class="k">super</span><span class="p">(</span><span class="n">columnTitle</span><span class="p">,</span> <span class="n">cellRendererText</span><span class="p">,</span> <span class="n">attributeType</span><span class="p">,</span> <span class="n">columnNumber</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+
+<span class="p">}</span> <span class="c1">// class SignTreeViewColumn</span>
+</code></pre></div></div>
+
+<p>When we populated a <code class="language-plaintext highlighter-rouge">ComboBox</code>, a <code class="language-plaintext highlighter-rouge">CellRenderer</code> was packed directly into the <code class="language-plaintext highlighter-rouge">ComboBox</code>. But with a <code class="language-plaintext highlighter-rouge">TreeView</code>:</p>
+
+<ul>
+  <li>each <code class="language-plaintext highlighter-rouge">TreeViewColumn</code> takes care of its own <code class="language-plaintext highlighter-rouge">CellRenderer</code>(s), and</li>
+  <li>is appended to the <code class="language-plaintext highlighter-rouge">TreeView</code> as we saw earlier when we looked at the <code class="language-plaintext highlighter-rouge">TreeView</code> class itself.</li>
+</ul>
+
+<p>So, it’s here in the <code class="language-plaintext highlighter-rouge">TreeViewColumn</code> constructor we deal with such things as:</p>
+
+<ul>
+  <li>instantiating the <code class="language-plaintext highlighter-rouge">CellRenderer</code>,</li>
+  <li>assigning a column number, and</li>
+  <li>defining the column type as <code class="language-plaintext highlighter-rouge">“text”</code>.</li>
+</ul>
+
+<p>On top of that, we also name the column (<code class="language-plaintext highlighter-rouge">columnTitle</code>) and give it a number. And that’s pretty much it.</p>
+
+<h2 id="two-column-treeview">Two-column TreeView</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/017_mvc/mvc_11.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/017_mvc/mvc_11_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/017_mvc/mvc_11_treeview_2_column.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>You only have to do two things differently with a two-column <code class="language-plaintext highlighter-rouge">TreeView</code>:</p>
+
+<ul>
+  <li>add another column (naturally), and</li>
+  <li>decide if you want the column(s) sort-able.</li>
+</ul>
+
+<p>And that means:</p>
+<ul>
+  <li>in the <code class="language-plaintext highlighter-rouge">SignTreeView</code> class, we <code class="language-plaintext highlighter-rouge">appendColumn()</code> the second column,</li>
+  <li>in one or both <code class="language-plaintext highlighter-rouge">TreeViewColumn</code> classes, we <code class="language-plaintext highlighter-rouge">setSortColumnId()</code> with the number of the column (starting from <code class="language-plaintext highlighter-rouge">0</code>), and</li>
+  <li>in the <code class="language-plaintext highlighter-rouge">ListStore</code>, we add a second array of data.</li>
+</ul>
+
+<h3 id="using-liststores-set-instead-of-setvalue">Using ListStore’s set() Instead of setValue()</h3>
+
+<p>As mentioned in <a href="http://gtkdcoding.com/2019/07/16/0053-mvc-vi-image-combobox.html">Blog Post #0053</a>, as long as we’re using strings and only strings, we can get away with using <code class="language-plaintext highlighter-rouge">set()</code>. But it’s meant as a shorthand way of dealing with a single data type: the string. This means that even if you’re using numbers (which are rendered as text by <code class="language-plaintext highlighter-rouge">ComboBox</code> and <code class="language-plaintext highlighter-rouge">TreeView</code>) we still have to use <code class="language-plaintext highlighter-rouge">setValue()</code>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that’s the basics of using the <code class="language-plaintext highlighter-rouge">TreeView</code>… create a storage model, whip up a <code class="language-plaintext highlighter-rouge">TreeView</code>, and stuff a column in there.</p>
+
+<p>Next time around we’ll look at a second multi-column <code class="language-plaintext highlighter-rouge">TreeView</code> example which is dynamically loaded rather than using roll-yer-own arrays.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/07/16/0053-mvc-vi-image-combobox.html">Previous: A ComboBox with Images</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/07/23/0055-mvc-viii-dynamically-loading-a-treeview.html">Next: TreeView - Dynamic Population</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/07/19/0054-mvc-vii-treeview-basics.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

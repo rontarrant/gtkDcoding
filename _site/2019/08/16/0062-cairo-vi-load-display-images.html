@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0062: Cairo VI – Load and Display Images | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0062: Cairo VI – Load and Display Images" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="GTK Tutorial on loading and displaying images with Cairo." />
+<meta property="og:description" content="GTK Tutorial on loading and displaying images with Cairo." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/08/16/0062-cairo-vi-load-display-images.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/08/16/0062-cairo-vi-load-display-images.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-08-16T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0062: Cairo VI – Load and Display Images" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-08-16T00:00:00-04:00","datePublished":"2019-08-16T00:00:00-04:00","description":"GTK Tutorial on loading and displaying images with Cairo.","headline":"0062: Cairo VI – Load and Display Images","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/08/16/0062-cairo-vi-load-display-images.html"},"url":"http://localhost:4000/gtkDcoding/2019/08/16/0062-cairo-vi-load-display-images.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/cairo.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-08-16T00:00:00-04:00" itemprop="datePublished">Friday, August 16, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0062-cairo-vi--load-and-display-images">0062: Cairo VI – Load and Display Images</h1>
+
+<p>Loading images in <em>GTK</em> isn’t difficult, but it takes on two different forms depending on which type of file you want to load.</p>
+
+<p>On the other hand, once the image is loaded, displaying it is a piece of cake.</p>
+
+<p>Today we look at three examples covering both ways of loading files, two that display bitmap images and one for a structured drawing:</p>
+
+<ul>
+  <li>loading and displaying a PNG with <code class="language-plaintext highlighter-rouge">createFromPng()</code>,</li>
+  <li>loading and displaying a JPeg with <code class="language-plaintext highlighter-rouge">setSourcePixbuf()</code>, and</li>
+  <li>loading and displaying an SVG, also using <code class="language-plaintext highlighter-rouge">setSourcePixbuf()</code>.</li>
+</ul>
+
+<h2 id="png--load-and-display">PNG – Load and Display</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screenshots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/018_cairo/cairo_17.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/018_cairo/cairo_17_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_17_display_png.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screenshots on a single page -->
+
+<p>We’re still dealing with code that’s very much the same as all other <em>Cairo</em> operations we’ve done so far and—as one might expect—we have changes in the constructor as well as the callback.</p>
+
+<p>First, the constructor:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">surface</span> <span class="p">=</span> <span class="n">ImageSurface</span><span class="p">.</span><span class="n">createFromPng</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+	<span class="n">addOnDraw</span><span class="p">(&amp;</span><span class="n">onDraw</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>Here, we need to create a <code class="language-plaintext highlighter-rouge">Surface</code> and pass it a file name, both of which are declared in the initialization section of the <code class="language-plaintext highlighter-rouge">MyDrawingArea</code> class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Surface</span> <span class="n">surface</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">filename</span> <span class="p">=</span> <span class="s">"./images/foundlings.png"</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">xOffset</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">yOffset</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>And when we get to the callback, here’s what happens:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onDraw</span><span class="p">(</span><span class="n">Scoped</span><span class="p">!</span><span class="n">Context</span> <span class="n">context</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">setSourceSurface</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">xOffset</span><span class="p">,</span> <span class="n">yOffset</span><span class="p">);</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">paint</span><span class="p">();</span>
+	
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// onDraw()</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">Context</code> needs to associate itself with the <code class="language-plaintext highlighter-rouge">Surface</code> we created and because we want the entire Surface, we pass it <code class="language-plaintext highlighter-rouge">xOffset</code> and <code class="language-plaintext highlighter-rouge">yOffset</code> (coordinates for the upper-left corner) both with values of <code class="language-plaintext highlighter-rouge">0</code>.</p>
+
+<p>And that’s all there is to it.</p>
+
+<p>The next method of loading an image can also be used with PNG format, but it will also work with every other image format supported by <em>GTK</em>.</p>
+
+<h2 id="jpeg--load-and-display">JPeg – Load and Display</h2>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screenshots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/018_cairo/cairo_18.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/018_cairo/cairo_18_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_18_display_jpeg.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>This time, our initialization section gets a bit longer:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Pixbuf</span> <span class="n">pixbuf</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">xOffset</span> <span class="p">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">yOffset</span> <span class="p">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">filename</span> <span class="p">=</span> <span class="s">"./images/guitar_bridge.jpg"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Instead of a <code class="language-plaintext highlighter-rouge">Surface</code>, we’ll be working with a <code class="language-plaintext highlighter-rouge">Pixbuf</code>. I also gave non-zero values to <code class="language-plaintext highlighter-rouge">xOffset</code> and <code class="language-plaintext highlighter-rouge">yOffset</code> because there are times when we don’t want the image to be loaded in the top-left corner. <code class="language-plaintext highlighter-rouge">xOffset</code> and <code class="language-plaintext highlighter-rouge">yOffset</code> take care of that, placing the image’s upper-left corner in a specific spot in the window.</p>
+
+<p>In the call to <code class="language-plaintext highlighter-rouge">setSizeRequest()</code> in the <code class="language-plaintext highlighter-rouge">TestRigWindow</code> constructor, I made the window 40 pixels wider and 50 pixels taller than the photograph so that the offset leaves a border around the image. Note, too, that the bottom border is wider than the rest, adhering to the aesthetic we talked about in <a href="https://github.com/rontarrant/gtkd_demos/blob/master/009_grid/grid_04_aesthetic_layout.d">the Grid examples</a>.</p>
+
+<p>The constructor looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">pixbuf</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Pixbuf</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+	<span class="n">addOnDraw</span><span class="p">(&amp;</span><span class="n">onDraw</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>This is actually simpler than the first method we looked at. There’s no <code class="language-plaintext highlighter-rouge">Surface</code> in the middle of things. It’s there; we just don’t have to deal with it. We just load that image right into the <code class="language-plaintext highlighter-rouge">Pixbuf</code> and that makes it possible, in the callback, to do this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onDraw</span><span class="p">(</span><span class="n">Scoped</span><span class="p">!</span><span class="n">Context</span> <span class="n">context</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">setSourcePixbuf</span><span class="p">(</span><span class="n">pixbuf</span><span class="p">,</span> <span class="n">xOffset</span><span class="p">,</span> <span class="n">yOffset</span><span class="p">);</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">paint</span><span class="p">();</span>
+	
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// onDraw()</span>
+</code></pre></div></div>
+
+<p>Substitute a call to <code class="language-plaintext highlighter-rouge">setSourcePixbuf()</code> for the call to <code class="language-plaintext highlighter-rouge">setSourceSurface()</code> we used before and from there’s it’s all the same.</p>
+
+<h2 id="svg--load-and-display">SVG – Load and Display</h2>
+
+<!-- 4, 5 -->
+<!-- third occurrence of application and terminal screenshots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img4" src="/images/screenshots/018_cairo/cairo_19.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal4" class="modal">																<!-- modal# -->
+				<span class="close4">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img44" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal4");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img4");														// img#
+			var modalImg = document.getElementById("img44");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close4")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img5" src="/images/screenshots/018_cairo/cairo_19_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal5" class="modal">																			<!-- modal# -->
+				<span class="close5">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img55" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal5");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img5");																	// img#
+			var modalImg = document.getElementById("img55");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close5")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!---------- filename (below) ---------->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_19_display_svg.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for third (3rd) occurrence of application and terminal screenshots on a single page -->
+
+<p>As you may guess, this is identical to the second method we used…</p>
+
+<p>The initialization section:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Pixbuf</span> <span class="n">pixbuf</span><span class="p">;</span>
+<span class="n">Context</span> <span class="n">context</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">xOffset</span><span class="p">,</span> <span class="n">yOffset</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">filename</span> <span class="p">=</span> <span class="s">"./images/Envy.svg"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The constructor:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>this()
+{
+	pixbuf = new Pixbuf(filename);
+	addOnDraw(&amp;onDraw);
+	
+} // this()
+</code></pre></div></div>
+
+<p>And the callback:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onDraw</span><span class="p">(</span><span class="n">Scoped</span><span class="p">!</span><span class="n">Context</span> <span class="n">context</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">setSourcePixbuf</span><span class="p">(</span><span class="n">pixbuf</span><span class="p">,</span> <span class="n">xOffset</span><span class="p">,</span> <span class="n">yOffset</span><span class="p">);</span>
+	<span class="n">context</span><span class="p">.</span><span class="n">paint</span><span class="p">();</span>
+	
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// onDraw()</span>
+</code></pre></div></div>
+
+<p>And, of course, this method also works for BMP, GIF, TIFF, and any of the other formats we found in the <a href="https://github.com/rontarrant/gtkd_demos/blob/master/018_cairo/cairo_16_list_formats.d">list formats example</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>So, now we know how to load and display images. Next time around, we’ll tackle drawing images and then saving them.</p>
+
+<p>Until then.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/08/13/0061-cairo-v-toy-text-image-formats.html">Previous: Cairo Toy Text &amp; Image Formats</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/08/20/0063-cairo-vii-draw-save-images.html">Next: Cairo Draw &amp; Save Images</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/08/16/0062-cairo-vi-load-display-images.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

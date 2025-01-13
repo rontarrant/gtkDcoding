@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0035: Dialogs I - The About Dialog | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0035: Dialogs I - The About Dialog" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How to use a GTK AboutDialog - a D-language tutorial." />
+<meta property="og:description" content="How to use a GTK AboutDialog - a D-language tutorial." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/05/14/0035-help-about-dialog.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/05/14/0035-help-about-dialog.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-14T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0035: Dialogs I - The About Dialog" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-05-14T00:00:00-04:00","datePublished":"2019-05-14T00:00:00-04:00","description":"How to use a GTK AboutDialog - a D-language tutorial.","headline":"0035: Dialogs I - The About Dialog","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/05/14/0035-help-about-dialog.html"},"url":"http://localhost:4000/gtkDcoding/2019/05/14/0035-help-about-dialog.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/dialog.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-05-14T00:00:00-04:00" itemprop="datePublished">Tuesday, May 14, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h2 id="0035-dialogs-i---the-about-dialog">0035: Dialogs I - The About Dialog</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/013_dialogs/dialog_01.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/013_dialogs/dialog_01_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_01_help_about.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>Starting today, and for the next few weeks, we’ll be looking at <code class="language-plaintext highlighter-rouge">Dialog</code> windows of various types. We’ll get started with one of the simpler ones, the AboutDialog, but to make it more interesting, we’ll toss in a <code class="language-plaintext highlighter-rouge">Pixbuf</code>.</p>
+
+<p>Let’s get going by checking out…</p>
+
+<h3 id="the-imports">The Imports</h3>
+
+<p>These are the ones we haven’t worked with yet:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">AboutDialog</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">gdk</span><span class="p">.</span><span class="n">Pixbuf</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Okay… <code class="language-plaintext highlighter-rouge">main()</code> is the same and we’ve seen <code class="language-plaintext highlighter-rouge">TestRigWindow</code> more than 30 times, and these aren’t new, either:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">AppBox</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">MyMenuBar</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">HelpHeader</code> (except for the name, anyway), and</li>
+  <li><code class="language-plaintext highlighter-rouge">HelpMenu</code>.</li>
+</ul>
+
+<p>And that brings us to…</p>
+
+<h3 id="the-aboutitem">The AboutItem</h3>
+
+<p>We have a ton of string tied around the initialization section and maybe that’s so the other stray items don’t wander off:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span> <span class="n">itemLabel</span> <span class="p">=</span> <span class="s">"About"</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">sectionName</span> <span class="p">=</span> <span class="s">"Them What Done Stuff"</span><span class="p">;</span>
+<span class="nb">string</span><span class="p">[]</span> <span class="n">people</span> <span class="p">=</span> <span class="p">[</span><span class="s">"Laurence Find"</span><span class="p">,</span> <span class="s">"Jerome Hayward"</span><span class="p">,</span> <span class="s">"Dick van Puddlesopper"</span><span class="p">];</span>
+<span class="nb">string</span><span class="p">[]</span> <span class="n">artists</span> <span class="p">=</span> <span class="p">[</span><span class="s">"Alice Warhol"</span><span class="p">,</span> <span class="s">"Salvador Deli"</span><span class="p">,</span> <span class="s">"My Brother-in-law, Bill"</span><span class="p">];</span>
+<span class="nb">string</span> <span class="n">comments</span> <span class="p">=</span> <span class="s">"This is a fine bit of software built for the rigors of testing dialog windows."</span><span class="p">;</span>
+<span class="nb">string</span><span class="p">[]</span> <span class="n">documenters</span> <span class="p">=</span> <span class="p">[</span><span class="s">"Billy Buck Thorndyke"</span><span class="p">,</span> <span class="s">"Phil Gates"</span><span class="p">];</span>
+<span class="nb">string</span> <span class="n">license</span> <span class="p">=</span> <span class="s">"This is a FOSS Budget build of a GNOLD project"</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">programName</span> <span class="p">=</span> <span class="s">"About Dialog Demo"</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">protection</span> <span class="p">=</span> <span class="s">"Copywrong 2019 © The Three Stool Pigeons"</span><span class="p">;</span>
+<span class="n">Pixbuf</span> <span class="n">logoPixbuf</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">pixbufFilename</span> <span class="p">=</span> <span class="s">"images/logo.png"</span><span class="p">;</span>
+<span class="n">Window</span> <span class="n">parentWindow</span><span class="p">;</span>
+<span class="n">AboutDialog</span> <span class="n">aboutDialog</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>You could probably leave most of these strings empty, especially if you don’t work with a team, but I filled all these in for demonstration purposes.</p>
+
+<p>But as I breezed through that list of classes that hadn’t changed, there actually was one change worth mentioning…</p>
+
+<h4 id="passing-down-the-window">Passing Down the Window</h4>
+
+<p>Because the <code class="language-plaintext highlighter-rouge">AboutDialog</code> (or any other dialog) needs to know who its mommy is, we gotta give it an ersatz family tree, passing down the <code class="language-plaintext highlighter-rouge">Window</code> pointer so when the <code class="language-plaintext highlighter-rouge">Dialog</code> goes up, it can go <code class="language-plaintext highlighter-rouge">MODAL</code> if it needs to. If you take a quick look through the code, you’ll see this is done very much the same way we passed along the <code class="language-plaintext highlighter-rouge">AccelGroup</code> in Blog Post #32 - <a href="/2019/05/03/0032-accelerator-keys.html">Adding Accelerator Keys to MenuItems</a>.</p>
+
+<p><em>Note: if you want your <code class="language-plaintext highlighter-rouge">Dialog</code> to be <code class="language-plaintext highlighter-rouge">MODAL</code>, use <code class="language-plaintext highlighter-rouge">DialogFlags.MODAL</code> which can be found in <code class="language-plaintext highlighter-rouge">generated/gtkd/gtk/c/types.d</code>.</em></p>
+
+<h3 id="hooking-up-the-menuitem">Hooking up the MenuItem</h3>
+
+<p>In the constructor, we do this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">(</span><span class="n">Window</span> <span class="n">extParentWindow</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">(</span><span class="n">itemLabel</span><span class="p">);</span>
+	<span class="n">addOnActivate</span><span class="p">(&amp;</span><span class="n">doSomething</span><span class="p">);</span>
+	<span class="n">parentWindow</span> <span class="p">=</span> <span class="n">extParentWindow</span><span class="p">;</span>
+	
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>Like any other <code class="language-plaintext highlighter-rouge">MenuItem</code>, we instantiate and hook up the callback, but then we have one more step. We assign the local pointer to the parent Window so we can use it in the callback.</p>
+
+<p>The callback is quite busy:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">doSomething</span><span class="p">(</span><span class="n">MenuItem</span> <span class="n">mi</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">responseID</span><span class="p">;</span>
+	
+	<span class="n">writeln</span><span class="p">(</span><span class="s">"Bringing up dialog..."</span><span class="p">);</span>
+	
+	<span class="n">logoPixbuf</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Pixbuf</span><span class="p">(</span><span class="n">pixbufFilename</span><span class="p">);</span>
+	
+	<span class="c1">// Although it seems we should do all this config stuff in this()</span>
+	<span class="c1">// it has to be done here.</span>
+	<span class="n">AboutDialog</span> <span class="n">aboutDialog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AboutDialog</span><span class="p">();</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setAuthors</span><span class="p">(</span><span class="n">people</span><span class="p">);</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setArtists</span><span class="p">(</span><span class="n">artists</span><span class="p">);</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">addCreditSection</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">people</span><span class="p">);</span> <span class="c1">// shows when the Credits button is clicked</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setCopyright</span><span class="p">(</span><span class="n">protection</span><span class="p">);</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setArtists</span><span class="p">(</span><span class="n">artists</span><span class="p">);</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setComments</span><span class="p">(</span><span class="n">comments</span><span class="p">);</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setLicense</span><span class="p">(</span><span class="n">license</span><span class="p">);</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setProgramName</span><span class="p">(</span><span class="n">programName</span><span class="p">);</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setLogo</span><span class="p">(</span><span class="n">logoPixbuf</span><span class="p">);</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setTransientFor</span><span class="p">(</span><span class="n">parentWindow</span><span class="p">);</span>
+	
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+	<span class="n">aboutDialog</span><span class="p">.</span><span class="n">destroy</span><span class="p">();</span>
+	
+<span class="p">}</span> <span class="c1">// doSomething()</span>
+</code></pre></div></div>
+
+<p>We need a <code class="language-plaintext highlighter-rouge">responseID</code> for any dialog, even if we ignore it like we do here. As we move deeper into dialogs, we’ll come back to this variable and look at it more closely.</p>
+
+<p>And there’s the <code class="language-plaintext highlighter-rouge">Pixbuf</code> I mentioned. Here, it’s used to show off the gtkDcoding logo.</p>
+
+<p>Then we instantiate the dialog:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AboutDialog aboutDialog = new AboutDialog();
+</code></pre></div></div>
+
+<p>Fill in all the fields:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">aboutDialog</span><span class="p">.</span><span class="n">setArtists</span><span class="p">(</span><span class="n">artists</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setAuthors</span><span class="p">(</span><span class="n">people</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setComments</span><span class="p">(</span><span class="n">comments</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setCopyright</span><span class="p">(</span><span class="n">protection</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setDocumenters</span><span class="p">(</span><span class="n">documenters</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setLicense</span><span class="p">(</span><span class="n">license</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setLicenseType</span><span class="p">(</span><span class="n">licenseType</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">addCreditSection</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">people</span><span class="p">);</span> <span class="c1">// shows when the Credits button is clicked</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setProgramName</span><span class="p">(</span><span class="n">programName</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setLogo</span><span class="p">(</span><span class="n">logoPixbuf</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setLogoIconName</span><span class="p">(</span><span class="n">logoIconName</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setVersion</span><span class="p">(</span><span class="n">productVersion</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setWebsite</span><span class="p">(</span><span class="n">website</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setWebsiteLabel</span><span class="p">(</span><span class="n">websiteLabel</span><span class="p">);</span>
+<span class="n">aboutDialog</span><span class="p">.</span><span class="n">setTransientFor</span><span class="p">(</span><span class="n">parentWindow</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><em>Note: There may be a bug in</em> GTK <em>that (apparently) stops the website link from working with some operating systems.</em> Mac <em>was mentioned as one that falls victim to this, but it does work with Windows (it does, however, spit out a warning). I haven’t tried it with</em> Linux.</p>
+
+<p>And finally, we open it:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">aboutDialog</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>And the last statement doesn’t get called until the dialog closes and program control comes back to this object (the <code class="language-plaintext highlighter-rouge">AboutMenuItem</code> object):</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">aboutDialog</span><span class="p">.</span><span class="n">destroy</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>All this does is destroy everything we built. And if the <code class="language-plaintext highlighter-rouge">Dialog</code> gets opened again? The entire dialog is rebuilt from scratch.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that was a quick look at a simple <code class="language-plaintext highlighter-rouge">Dialog</code>. As we go along, things could get complicated, especially when we dig into rolling our own dialog from scratch. Now, that will be an adventure.</p>
+
+<p>Until next time… bye.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/05/10/0034-accelgroup-singleton.html">Previous: AccelGroup Singleton</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/05/17/0036-file-open-dialogs.html">Next: Open File Dialog</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/05/14/0035-help-about-dialog.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

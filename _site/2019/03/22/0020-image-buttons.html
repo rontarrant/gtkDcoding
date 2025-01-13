@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0020: Image Buttons | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0020: Image Buttons" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How to put an image on a GTK Button - a D language tutorial." />
+<meta property="og:description" content="How to put an image on a GTK Button - a D language tutorial." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/03/22/0020-image-buttons.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/03/22/0020-image-buttons.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-03-22T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0020: Image Buttons" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-03-22T00:00:00-04:00","datePublished":"2019-03-22T00:00:00-04:00","description":"How to put an image on a GTK Button - a D language tutorial.","headline":"0020: Image Buttons","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/03/22/0020-image-buttons.html"},"url":"http://localhost:4000/gtkDcoding/2019/03/22/0020-image-buttons.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/button.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-03-22T00:00:00-04:00" itemprop="datePublished">Friday, March 22, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0020-image-buttons">0020: Image Buttons</h1>
+
+<p>We’ll do two things today:</p>
+
+<ol>
+  <li>slap an image onto a button, and</li>
+  <li>set up a mechanism to swap that image for another.</li>
+</ol>
+
+<h2 id="image-on-a-button">Image on a Button</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/007_image/image_01.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/007_image/image_01_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/007_image/image_01_image_button.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>There isn’t much in the way of preparation needed, just one extra import statement:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">Image</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Then load the image:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Image</span> <span class="n">oranges</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Image</span><span class="p">(</span><span class="n">imageFilename</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>And finally, add it to the button:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">button</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">oranges</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>But because we’re doing this in the usual way, in a derived class, it looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">ImageButton</span> <span class="p">:</span> <span class="n">Button</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">imageFilename</span> <span class="p">=</span> <span class="s">"images/apples.jpg"</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">actionMessage</span> <span class="p">=</span> <span class="s">"You have added one (1) apple to your cart."</span><span class="p">;</span>
+		
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		
+		<span class="n">Image</span> <span class="n">appleImage</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Image</span><span class="p">(</span><span class="n">imageFilename</span><span class="p">);</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">appleImage</span><span class="p">);</span>
+		
+		<span class="n">addOnClicked</span><span class="p">(&amp;</span><span class="n">doSomething</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">doSomething</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="n">actionMessage</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// doSomething()</span>
+	
+<span class="p">}</span> <span class="c1">// class ImageButton</span>
+</code></pre></div></div>
+
+<p>There is no deep meaning behind using an image of apples and calling it oranges. I’d call it a joke if it was actually funny. I’m explaining this to avoid any confusion.</p>
+
+<p>Drop this class into the test rig window:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ImageButton</span> <span class="n">myButt</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ImageButton</span><span class="p">();</span>
+<span class="n">add</span><span class="p">(</span><span class="n">myButt</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>And that’s it for the coding side.</p>
+
+<p>Don’t forget to create a directory (folder, in Windows speak) and place the image in there. And of course there’s nothing says you have to use the image I’ve provided or the naming convention I’ve laid out.</p>
+
+<h3 id="path-names">Path Names</h3>
+
+<p>It may cross your mind, if you’re doing this in Windows, that you have to swap out the UNIX forward slash ( / ) for the Windows backslash ( \ ) when you’re writing out the path/filename.</p>
+
+<p>You don’t have to.</p>
+
+<p>Compilers are OS-aware enough to know which way to slash. And as a side note, how do you remember which is which? I saw it explained like this:</p>
+
+<ul>
+  <li>if a person leans forward, they look like a forward slash (UNIX),</li>
+  <li>if a person leans backward, they look like a backslash (Windows).</li>
+</ul>
+
+<p>When it comes to this incompatibility that has plagued cross-platform development since the dawn of the personal computer era, I won’t point any fingers. The person who came up with this knows who he is. ‘Nuff said.</p>
+
+<h2 id="swap-an-image-on-a-button">Swap an Image on a Button</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/007_image/image_02.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/007_image/image_02_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/007_image/image_02_image_swap.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>The necessary differences with this example are twofold:</p>
+
+<ol>
+  <li>we need a second image (you may say: well, duh), and</li>
+  <li>we need a function to do the swapping.</li>
+</ol>
+
+<p>But that hasn’t stopped me from throwing in some extra layers of complication. These are:</p>
+
+<ul>
+  <li>an <code class="language-plaintext highlighter-rouge">InnerBox</code> class (an observer) so we can have both a label and an image,</li>
+  <li>a <code class="language-plaintext highlighter-rouge">SwitchingImage</code> class (one of the observed) that does the work of swapping the image, and</li>
+  <li>a <code class="language-plaintext highlighter-rouge">SwitchingLabel</code> class (also observed by the <code class="language-plaintext highlighter-rouge">InnerBox</code> observer) that does the same for the label.</li>
+</ul>
+
+<h3 id="how-it-all-works">How it All Works</h3>
+
+<p>If you remember, a <code class="language-plaintext highlighter-rouge">Button</code> is actually a container type similar to a <code class="language-plaintext highlighter-rouge">Window</code> and that means:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">ImageButton</code> (derived from <code class="language-plaintext highlighter-rouge">Button</code>) contains one child widget: <code class="language-plaintext highlighter-rouge">InnerBox</code>,</li>
+  <li>the <code class="language-plaintext highlighter-rouge">InnerBox</code> (derived from a <code class="language-plaintext highlighter-rouge">Box</code>) contains two widgets:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">SwitchingImage</code> (derived from <code class="language-plaintext highlighter-rouge">Image</code>), and</li>
+      <li><code class="language-plaintext highlighter-rouge">SwitchingLabel</code> (derived from <code class="language-plaintext highlighter-rouge">Label</code>).</li>
+    </ul>
+  </li>
+</ul>
+
+<p>And because <code class="language-plaintext highlighter-rouge">InnerBox</code> maintains pointers to its children, all this makes observation and action easy from within the <code class="language-plaintext highlighter-rouge">InnerBox</code> with its <code class="language-plaintext highlighter-rouge">changeBoth()</code> function:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">changeBoth</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">switchingLabel</span><span class="p">.</span><span class="n">change</span><span class="p">();</span>
+	<span class="n">switchingImage</span><span class="p">.</span><span class="n">change</span><span class="p">();</span>
+	
+<span class="p">}</span> <span class="c1">// changeBoth()</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">SwitchingImage</code> and <code class="language-plaintext highlighter-rouge">SwitchingLabel</code> each have similar-but-not-exactly-the-same <code class="language-plaintext highlighter-rouge">change()</code> functions. <code class="language-plaintext highlighter-rouge">SwitchingImage</code>’s looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">change</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">current</span> <span class="p">==</span> <span class="n">apples</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">current</span> <span class="p">=</span> <span class="n">oranges</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">current</span> <span class="p">=</span> <span class="n">apples</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">setFromFile</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// change()</span>
+</code></pre></div></div>
+
+<p>And the only difference with <code class="language-plaintext highlighter-rouge">SwitchingLabel</code> is the removal of this line:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">setFromFile</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>and replacing it with this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">setText</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>And, of course, if you look closely at these <code class="language-plaintext highlighter-rouge">change()</code> functions you’ll see that the variable current is a string in both instances, but in one it’s a path/filename combination which in the other, it’s just text.</p>
+
+<h2 id="a-note-regarding-typing-in-code-examples">A Note Regarding Typing in Code Examples</h2>
+
+<p>If you type these in by hand (highly recommended for getting your memory to embrace this stuff) just make sure to get those import statements correct. All the GTK imports come from the gtk library except one: Event. It comes from the gdk library and if you type <em>gtk</em> instead of <em>gdk</em>, you’ll get a potentially-confusing compiler error:</p>
+
+<p><em>module <code class="language-plaintext highlighter-rouge">Event</code> is in file ‘gtk/Event.d’ which cannot be read</em></p>
+
+<p>But this is just a bump along the road to becoming a coder. And now you know about it.</p>
+
+<p>Until next time, take care and may the good code be yours (points for knowing who I’m paraphrasing here).</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/03/19/0019-disappearing-text-entry.html">Previous: Disappearing Text Entry</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/03/26/0021-labels-with-background-colors-markup.html">Next: Labels - Background Colors</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/03/22/0020-image-buttons.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0088: Nodes-n-noodles VII – It’s Alive! | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0088: Nodes-n-noodles VII – It’s Alive!" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This GTK Tutorial covers animating a node with the mouse for a node-n-noodles demo." />
+<meta property="og:description" content="This GTK Tutorial covers animating a node with the mouse for a node-n-noodles demo." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/11/15/0088-nodes-vii-its-alive.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/11/15/0088-nodes-vii-its-alive.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-15T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0088: Nodes-n-noodles VII – It’s Alive!" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-11-15T00:00:00-05:00","datePublished":"2019-11-15T00:00:00-05:00","description":"This GTK Tutorial covers animating a node with the mouse for a node-n-noodles demo.","headline":"0088: Nodes-n-noodles VII – It’s Alive!","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/11/15/0088-nodes-vii-its-alive.html"},"url":"http://localhost:4000/gtkDcoding/2019/11/15/0088-nodes-vii-its-alive.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/nodes.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-11-15T00:00:00-05:00" itemprop="datePublished">Friday, November 15, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0088-nodes-n-noodles-vii--its-alive">0088: Nodes-n-noodles VII – It’s Alive!</h1>
+
+<p>Are you ready to move a node?</p>
+
+<p>Yeah, me, too.</p>
+
+<h2 id="the-moveable-node">The Moveable Node</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/023_nodes/nodes_08.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/023_nodes/nodes_08_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/023_nodes/nodes_08_drawingarea_node_moveable.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>Again, we have to add some new statements in the <code class="language-plaintext highlighter-rouge">MoveableNode</code> class’s preamble and constructor, but our list of changes doesn’t stop there. We also need to add a couple of other functions and doctor every callback we’ve got so far. On top of that, we have to go up a level, class-wise, and make changes to the <code class="language-plaintext highlighter-rouge">NodeLayout</code> as well.</p>
+
+<p>So to start with, let’s look at that…</p>
+
+<h3 id="setting-up-the-nodelayout-for-moving-nodes">Setting Up the NodeLayout for Moving Nodes</h3>
+
+<p>In each nodes-n-noodles demo until now, the initial position of the node was hard-coded in the <code class="language-plaintext highlighter-rouge">NodeLayout</code>’s constructor like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">put</span><span class="p">(</span><span class="n">moveableNode</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">140</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>But if we’re working toward—eventually—adding nodes as we go, we’ll want to move the <code class="language-plaintext highlighter-rouge">MoveableNode</code>’s position into the <code class="language-plaintext highlighter-rouge">MoveableNode</code> class where it belongs. But-but… at this experimental stage, that would be awkward because we’d have to instantiate the <code class="language-plaintext highlighter-rouge">MoveableNode</code>, then use a getter to grab its location info before we could place it within the <code class="language-plaintext highlighter-rouge">NodeLayout</code>. So for now, let’s throw caution to the wind and just move the node’s initial position into the <code class="language-plaintext highlighter-rouge">NodeLayout</code>’s preamble where we can still get at it easily, thus leaving proper encapsulation for a later stage of development:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">NodeLayout</span> <span class="p">:</span> <span class="n">Layout</span>
+<span class="p">{</span>
+	<span class="n">MoveableNode</span> <span class="n">moveableNode</span><span class="p">;</span>
+	<span class="kt">int</span><span class="p">[]</span> <span class="n">_initialXY</span> <span class="p">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">140</span><span class="p">];</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+		<span class="n">setSizeRequest</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">360</span><span class="p">);</span> <span class="c1">// has to be set so signals get through from child widgets</span>
+		
+		<span class="n">moveableNode</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MoveableNode</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+		<span class="n">put</span><span class="p">(</span><span class="n">moveableNode</span><span class="p">,</span> <span class="n">_initialXY</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">_initialXY</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+		<span class="n">moveableNode</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">_initialXY</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">_initialXY</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">moveNodeTo</span><span class="p">(</span><span class="n">MoveableNode</span> <span class="n">moveableNode</span><span class="p">,</span> <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">move</span><span class="p">(</span><span class="n">moveableNode</span><span class="p">,</span> <span class="k">cast</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">x</span><span class="p">,</span> <span class="k">cast</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">y</span><span class="p">);</span>
+		<span class="n">moveableNode</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// moveNodeTo()</span>
+	
+<span class="p">}</span> <span class="c1">// class NodeLayout</span>
+</code></pre></div></div>
+
+<p>Okay, that works. The <code class="language-plaintext highlighter-rouge">_initialXY</code> array will store the node’s starting position and sometime down the road we’ll deal with varying this initial position, perhaps by having new nodes appear attached to the mouse pointer so they can be placed wherever the user wants. Sounds like a plan, but for now, this’ll do.</p>
+
+<p>Another thing we have to do is grab a pointer to the <code class="language-plaintext highlighter-rouge">NodeLayout</code> and pass it to the <code class="language-plaintext highlighter-rouge">MoveableNode</code>. Why? So we have access to <code class="language-plaintext highlighter-rouge">NodeLayout.moveNodeTo()</code> because that’s how we’ll define the <code class="language-plaintext highlighter-rouge">MoveableNode</code>’s position in relation to the <code class="language-plaintext highlighter-rouge">NodeLayout</code>. We haven’t even talked yet about how we’ll tell the <code class="language-plaintext highlighter-rouge">NodeLayout</code> where the <code class="language-plaintext highlighter-rouge">MoveableNode</code> is and it’s a bit tricky because the x/y coordinates of the mouse pointer we’ve been working with so far have been in relation to the upper-left corner of the <code class="language-plaintext highlighter-rouge">MoveableNode</code>, not the <code class="language-plaintext highlighter-rouge">NodeLayout</code>.</p>
+
+<p>It may have crossed your mind, too, that we talked about <code class="language-plaintext highlighter-rouge">xRoot</code> and <code class="language-plaintext highlighter-rouge">yRoot</code> last time and that these values might be of some help. But, no. Those variables record the offset from the upper-left corner of the <code class="language-plaintext highlighter-rouge">Screen</code> which is two levels up the hierarchy as can be seen here:</p>
+
+<div class="inpage-frame">
+	<figure class="left">
+		<img src="/images/diagrams/023_nodes/screen_window_layout_node.png" alt="Figure 1: Relationship between the Screen, Window, Layout, and Node" style="width: 446px; height: 312px;" />
+		<figcaption>
+			Figure 1: Relationship between the Screen, Window, Layout, and Node
+		</figcaption>
+	</figure>
+</div>
+
+<p>And this means, in order to move the <code class="language-plaintext highlighter-rouge">MoveableNode</code> around within the <code class="language-plaintext highlighter-rouge">NodeLayout</code>, we need to translate the mouse pointer position from <code class="language-plaintext highlighter-rouge">MoveableNode</code> coordinates to <code class="language-plaintext highlighter-rouge">NodeLayout</code> coordinates. Not that it’s difficult—just mind-bending—and we’ll get to that in a moment. All you need to keep in mind for now is that <code class="language-plaintext highlighter-rouge">NodeLayout.moveNodeTo()</code> makes the actual move happen and is called from <code class="language-plaintext highlighter-rouge">MoveableNode.onMotionNotify()</code>. And after the move is made, <code class="language-plaintext highlighter-rouge">moveNodeTo()</code> reaches back into the <code class="language-plaintext highlighter-rouge">MoveableNode</code> to update its position there.</p>
+
+<p>Which, unfortunately, makes these two classes tightly coupled, but considering that we likely won’t use one without the other… we just might find a way to live with that.</p>
+
+<p>Now, let’s look at the changes in the <code class="language-plaintext highlighter-rouge">MoveableNode</code> class.</p>
+
+<h3 id="moveablenode-changes">MoveableNode Changes</h3>
+
+<p>First, here’s what we’re adding to the preamble:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="n">_xOffset</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_yOffset</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">_dragOn</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">_connectToIn</span> <span class="p">=</span> <span class="kc">false</span><span class="p">,</span> <span class="n">_connectToOut</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="kt">double</span><span class="p">[]</span> <span class="n">_nodePosition</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">_xIndex</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_yIndex</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// indices into the _nodePosition array</span>
+<span class="n">NodeLayout</span> <span class="n">_nodeLayout</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>In the very first line, we’re preparing to translate from <code class="language-plaintext highlighter-rouge">MoveableNode</code> coordinates to <code class="language-plaintext highlighter-rouge">Layout</code> coordinates. When the user clicks anywhere on the <code class="language-plaintext highlighter-rouge">MoveableNode</code>, these two variables, <code class="language-plaintext highlighter-rouge">_xOffset</code> and <code class="language-plaintext highlighter-rouge">_yOffset</code>, will record where in relation to the node’s origin (upper-left corner) the mouse pointer was at the time of the click.</p>
+
+<p>Next we have <code class="language-plaintext highlighter-rouge">_dragOn</code>, a mode flag that gets <em>raised</em> when we want the <code class="language-plaintext highlighter-rouge">MoveableNode</code> to move and <em>lowered</em> when we want it to stay put. More on this in a moment.</p>
+
+<p>The next two variables, <code class="language-plaintext highlighter-rouge">_connectToIn</code> and <code class="language-plaintext highlighter-rouge">_connectToOut</code>, are also mode flags—not used at this time—but as we progress toward a fully-functional nodes-n-noodles demo, we’ll be using them when we make connections between nodes. For now, they’re just there to show that we’re taking these things into account.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">_nodePosition</code> array will keep track of the <code class="language-plaintext highlighter-rouge">MoveableNode</code>’s x/y coordinates on the <code class="language-plaintext highlighter-rouge">NodeLayout</code> and the next two, <code class="language-plaintext highlighter-rouge">_xIndex</code> and <code class="language-plaintext highlighter-rouge">_yIndex</code>, are here for clarity (rather than accessing the array as <code class="language-plaintext highlighter-rouge">_nodePosition[0]</code> and <code class="language-plaintext highlighter-rouge">_nodePosition[1]</code>, we do it with <code class="language-plaintext highlighter-rouge">_nodePosition[_xIndex]</code> and <code class="language-plaintext highlighter-rouge">_nodePosition[_yIndex]</code>).</p>
+
+<p>And finally, <code class="language-plaintext highlighter-rouge">_nodeLayout</code> is a pointer to the <code class="language-plaintext highlighter-rouge">MoveableNode</code>’s parent container.</p>
+
+<h4 id="changes-to-the-moveablenodes-constructor">Changes to the MoveableNode’s Constructor</h4>
+
+<p>The first significant change here is the line:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">setEvents</span><span class="p">(</span><span class="n">EventMask</span><span class="p">.</span><span class="n">POINTER_MOTION_MASK</span> <span class="p">|</span> <span class="n">EventMask</span><span class="p">.</span><span class="n">BUTTON1_MOTION_MASK</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>In order to separate mouse movement in two states—mouse button held down and mouse button not held down—we need to add these two signal masks. Without them, every movement of the mouse pointer will move the node, whether we’re holding a mouse button down or not.</p>
+
+<p>Further down, we hook up the extra signals/callbacks we’ll need to properly process all this activity, bringing our total up to four connected signals:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">addOnDraw</span><span class="p">(&amp;</span><span class="n">onDraw</span><span class="p">);</span>
+<span class="n">addOnButtonPress</span><span class="p">(&amp;</span><span class="n">onButtonPress</span><span class="p">);</span>
+<span class="n">addOnButtonRelease</span><span class="p">(&amp;</span><span class="n">onButtonRelease</span><span class="p">);</span>
+<span class="n">addOnMotionNotify</span><span class="p">(&amp;</span><span class="n">onMotionNotify</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>As mentioned before, the processing of each node movement is done in three stages:</p>
+
+<ul>
+  <li>in <code class="language-plaintext highlighter-rouge">onButtonPress()</code>, we figure out what was clicked and set the active flag for the appropriate area: node handle, in terminal, or out terminal,</li>
+  <li>in <code class="language-plaintext highlighter-rouge">onMotionNotify()</code>, we figure out which direction the mouse pointer is moving and do the appropriate math to translate from node coordinates to <code class="language-plaintext highlighter-rouge">Layout</code> coordinates (this is so the <code class="language-plaintext highlighter-rouge">MoveableNode</code> can be <code class="language-plaintext highlighter-rouge">put()</code> in the right place on the <code class="language-plaintext highlighter-rouge">NodeLayout</code>), and lastly,</li>
+  <li>in <code class="language-plaintext highlighter-rouge">onButtonRelease()</code>, we turn off the active flag so we know we’re finished with whatever activity we were carrying out: moving the node or connecting one of the terminals.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Because there’s so much to this node movement stuff, let’s stop here for now and pick up next time by looking at a handful of new functions needed to make this whole thing work.</p>
+
+<p>Until then…</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/11/12/0087-nodes-vi-hotspots.html">Previous: Node VI - Hot Spots</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/11/19/0089-nodes-viii-its-alive-2.html">Next: Node VIII - It's Alive! (2)</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/11/15/0088-nodes-vii-its-alive.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

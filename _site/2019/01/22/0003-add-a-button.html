@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0003: Add a Button (Imperative) | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0003: Add a Button (Imperative)" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Adding a GTK Button to the TestRig window - Imperative version - a D language tutorial." />
+<meta property="og:description" content="Adding a GTK Button to the TestRig window - Imperative version - a D language tutorial." />
+<link rel="canonical" href="http://localhost:4000/gtkDcoding/2019/01/22/0003-add-a-button.html" />
+<meta property="og:url" content="http://localhost:4000/gtkDcoding/2019/01/22/0003-add-a-button.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-01-22T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0003: Add a Button (Imperative)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-01-22T00:00:00-05:00","datePublished":"2019-01-22T00:00:00-05:00","description":"Adding a GTK Button to the TestRig window - Imperative version - a D language tutorial.","headline":"0003: Add a Button (Imperative)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/gtkDcoding/2019/01/22/0003-add-a-button.html"},"url":"http://localhost:4000/gtkDcoding/2019/01/22/0003-add-a-button.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/gtkDcoding/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/gtkDcoding/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/gtkDcoding/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/gtkDcoding/about/">About</a><a class="page-link" href="/gtkDcoding/index-reverse/">Posts in Date Order</a><a class="page-link" href="/gtkDcoding/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/button.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-01-22T00:00:00-05:00" itemprop="datePublished">Tuesday, January 22, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0003-add-a-button-imperative">0003: Add a Button (Imperative)</h1>
+
+<p>This is another imperative example, actually two imperative examples. Next time, we’ll look at the OOP method of adding a button.</p>
+
+<h2 id="first-button">First Button</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/002_button/button_01.png" alt="Current example output" />	<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																								<!-- modal# -->
+				<span class="close0">&times;</span>																					<!-- close# -->
+				<img class="modal-content" id="img00" />																					<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");																			// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");																				// img#
+			var modalImg = document.getElementById("img00");																		// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];															// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/002_button/button_01_term.png" alt="Current example terminal output" /> <!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																												<!-- modal# -->
+				<span class="close1">&times;</span>																										<!-- close# -->
+				<img class="modal-content" id="img11" />																									<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																							// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																								// img#
+			var modalImg = document.getElementById("img11");																						// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];																				// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																																<!-- filename (below)-->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/tree/master/002_button/button_01_imperative_noargs.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>The code is based on the imperative test rig and only needs a few extra lines to get a button to show.</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">Button</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">gdk</span><span class="p">.</span><span class="n">Event</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Line 1: In order to work with buttons, we’ll need access to button routines and we have to import them.</p>
+
+<p>Line 2: To work with signals evoked by events, we need Event routines, naturally.</p>
+
+<p><em>Note: Make sure that second character is a ‘d’ and not a ‘t.’</em></p>
+
+<p>Then these three lines are added after setting up the test rig window:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Button</span> <span class="n">button</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Button</span><span class="p">(</span><span class="s">"Label Text"</span><span class="p">);</span>
+<span class="n">button</span><span class="p">.</span><span class="n">addOnClicked</span><span class="p">(</span><span class="k">delegate</span> <span class="kt">void</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="n">quitApp</span><span class="p">();</span> <span class="p">});</span>
+<span class="n">testRigWindow</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">button</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="breakdown">Breakdown:</h3>
+
+<ul>
+  <li>the first line creates the button,</li>
+  <li>the second hooks up a signal, and</li>
+  <li>the third adds the button to the window.</li>
+</ul>
+
+<p>But that second line needs a bit of explanation…</p>
+
+<p>The signal we’re connecting this time is <code class="language-plaintext highlighter-rouge">onClicked</code>, the signal signifying that a mouse button has been clicked by the user. This signal doesn’t distinguish between the buttons, so any clicked button will do (we’ll talk about how to distinguish between them in a later post).</p>
+
+<p>And there’s that delegate again. As I mentioned before, when a function doesn’t exist as part of an object (and therefore doesn’t appear in a class definition) the scope of the variables within the function need to be preserved somehow so they don’t get tossed out by the garbage collector before we need them. And that’s what the delegate keyword does.</p>
+
+<p>The callback function definition appearing after the delegate keyword says, in a nutshell:</p>
+
+<ul>
+  <li>the callback will return void,</li>
+  <li>the callback takes a <em>GTK</em> <code class="language-plaintext highlighter-rouge">Button</code> object as its first argument, and</li>
+  <li>the callback is named <code class="language-plaintext highlighter-rouge">quitApp()</code>.</li>
+</ul>
+
+<p>And that’s it. We only need those few lines to add a working button and give it something to do.</p>
+
+<p>You’ll notice that the in-window button carries out the same action taken by the window’s close button. I’ve chosen to illustrate this because it’s an example of getting two UI elements to do the same thing, but with a bit of thought, you’ll be able to define a second callback function and subsequently pointing a UI element at it instead.</p>
+
+<p>As with all examples, to compile:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dmd -de -w -m64 -Lgtkd.lib &lt;filename&gt;.d
+</code></pre></div></div>
+
+<h2 id="second-button">Second Button</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/002_button/button_02.png" alt="Current example output" />							<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																								<!-- modal# -->
+				<span class="close2">&times;</span>																					<!-- close# -->
+				<img class="modal-content" id="img22" />																					<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");																			// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");																				// img#
+			var modalImg = document.getElementById("img22");																		// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];															// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/002_button/button_02_term.png" alt="Current example terminal output" /> 					<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																												<!-- modal# -->
+				<span class="close3">&times;</span>																										<!-- close# -->
+				<img class="modal-content" id="img33" />																									<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																							// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																								// img#
+			var modalImg = document.getElementById("img33");																						// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];																				// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																																<!-- filename (below)-->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkDcoding/tree/master/002_button/button_02_imperative_args.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>The difference between the first code example and the second is that now we’re going to set up the <code class="language-plaintext highlighter-rouge">quitApp()</code> function to tell us which button got us there, the window’s close button or the UI button.</p>
+
+<p>To get there, we don’t need to change much:</p>
+<ol>
+  <li>we define two message strings, each of which we’ll hand over to a button which will pass along to the callback function,</li>
+  <li>when we hook up the button signals to the callback, tell each which message they’ll be passing along,</li>
+  <li>in the <code class="language-plaintext highlighter-rouge">quitApp()</code> definition, we tell it to expect a string argument, and</li>
+  <li>also tell <code class="language-plaintext highlighter-rouge">quitApp()</code> to tack this extra text onto the end of it’s exit message.</li>
+</ol>
+
+<h3 id="message-strings">Message Strings</h3>
+
+<p>Pretty straightforward, define two strings. One mentions the window’s close button, and the other mentions the UI button.</p>
+
+<h3 id="signal-hook-ups">Signal Hook-ups</h3>
+
+<p>And this is the interesting part of our second button example. When we hook up the <code class="language-plaintext highlighter-rouge">onDestroy</code> signal, we pass an argument along to the callback. Here’s what it looks like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">myTestRig</span><span class="p">.</span><span class="n">addOnDestroy</span><span class="p">(</span><span class="k">delegate</span> <span class="kt">void</span><span class="p">(</span><span class="n">Widget</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span> <span class="n">quitApp</span><span class="p">(</span><span class="n">message</span><span class="p">);</span> <span class="p">}</span> <span class="p">);</span>
+</code></pre></div></div>
+
+<p>All we had to do was put one of the string variables between the brackets. And the other signal hook-up is very much the same, just with a different variable name and a different signal:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">button</span><span class="p">.</span><span class="n">addOnClicked</span><span class="p">(</span><span class="k">delegate</span> <span class="kt">void</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="n">quitApp</span><span class="p">(</span><span class="n">otherMessage</span><span class="p">);</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="changes-to-quitapp">Changes to quitApp()</h3>
+
+<p>Right at the top, you can see that <code class="language-plaintext highlighter-rouge">quitApp()</code> now expects a string argument:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">quitApp</span><span class="p">(</span><span class="nb">string</span> <span class="n">message</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And further down:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">writeln</span><span class="p">(</span><span class="err">“</span><span class="n">Bye</span><span class="p">.</span><span class="err">”</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>spits out its original message along with the new message passed in.</p>
+
+<p>And that’s it.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Here we are at the end of another <em>gtkDcoding</em> post. So long until next time. Happy D-coding and may the widgets be with you.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/2019/01/18/0002-oop-test-rig.html">Previous: OOP Test Rig</a>
+	</div>
+	<div style="float: right;">
+		<a href="/2019/01/25/0004-oop-button.html">Next: OOP Button</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant/gtkDcoding"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com/gtkdcoding">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2024 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/gtkDcoding/2019/01/22/0003-add-a-button.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/gtkDcoding/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/gtkDcoding/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

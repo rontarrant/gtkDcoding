@@ -1,0 +1,161 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+		<link rel="stylesheet" href="/css/topics.css" />
+		
+		{% if page.keywords %}
+			<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">
+		{% endif %}
+		<p class="post-meta">
+		<time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+			{%- assign date_format = site.minima.date_format | default: "%A, %B %-d, %Y" -%}
+			{{ page.date | date: date_format }}
+		</time>
+			{%- if page.author -%}
+			• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+	      {%- endif -%}</p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<img src="images/logos/logo_v11e_185x186.png"> <!-- masthead logo -->
+		{{ content }}
+		<!-- find out if there are posts and, if so, sort them into a collection -->		
+		{%- if site.posts.size > 0 -%}
+			{% assign posts_by_topic = site.posts | group_by: 'topic' | reverse %}
+
+		<!-- build the topics menu -->
+		<div class="topics-menu">
+			{%- for topic in posts_by_topic -%}
+				{% capture topic_color %} <!-- build the current topic color as the variable 'topic_color' -->
+					{{ topic.name }} <!-- grab the topic name from the current post -->
+				{% endcapture %}
+
+				<!-- <div class="{{ topic.name }}"> -->
+				<div>
+					<!-- <h7>{{ topic.name | capitalize }}</h7>Capitalize the topic name and drop it into the div. -->
+					<br>
+					<a href="#{{ topic.name }}"> <!-- Build a link that will auto-scroll to the topic heading. -->
+						 <!-- The topic icon will be the clickable element. -->
+						  <!-- Build the full image path by concatenating the directory, topic name, and image extension. -->
+						 {% capture image_full_path %}
+							{{ "images/topics/" }}{{ topic.name }}{{ ".png" }}
+						 {% endcapture %}
+						 
+						 <img class="topic-icon" src="{{ image_full_path }}" alt="{{ topic.name | capitalize }}">
+						 <p><h7>articles: {{ topic.size }}</h7></p>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+		<!-- list of posts sorted by topic -->
+			{%- for topic in posts_by_topic -%} <!-- Same as above. -->
+				{% capture topic_color %}
+					topic-color_{{ topic.name }}
+				{% endcapture %}
+	
+				 <!-- Build a header for each topic. -->
+				<div class="topic-header-div">
+					<a id="{{topic.name}}">
+					<span class="post-date"> {{ post.date | date: date_format }} <!-- Grab the post's date. -->
+						<div class="{{topic_color}} topic-header"></div>
+					</span>
+					<span class="topic-span-icon">
+						<img class="topic-icon" src="images/topics/{{topic.name}}.png">
+					</span>
+				</div>
+				 <!-- List of posts for the current topic. -->
+				{% assign topic_posts = topic.items | reverse %}
+				<ul class="post-list">
+				 <!-- List the posts in each topic. -->
+				{% for post in topic_posts %}
+				<li>
+					{% assign current-topic-color = post.topic %}
+					
+					{%- assign date_format = site.minima.date_format | default: "%A, %B %-d, %Y" -%}
+					<div class="post-topic">
+						<div class="post-info">
+							<div class="post-topic-date">
+								{{ post.date | date: date_format }} <!-- date of post -->
+							</div>
+							<div class="post-link">
+								<a href="{{ post.url | relative_url }}"</a> <!-- build page URL -->
+								{{ post.title }} <!-- title text -->
+							</div>
+							<BR>
+							<div class="post-blurb">
+								{{ post.description }}
+							</div>
+						</div>
+					</div>
+				</li>
+				{% endfor %}
+				</ul>
+				<div class="{{current-topic-color}} post-color-fade-topic"> <!-- pulls colors from colors.css, position from main.css -->
+				</div>
+				<a href="#top">Return to Top of Page</a>
+				<br>
+				<br>
+			{%- endfor -%}
+		{% endif %}
+		
+		{%- include post-footer.html -%}
+	</div>
+
+	<a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

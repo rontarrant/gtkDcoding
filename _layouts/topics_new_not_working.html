@@ -1,0 +1,121 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+		<link rel="stylesheet" href="/css/topics.css" />
+		
+		{% if page.keywords %}
+			<meta name="keywords" content="{{ page.keywords | join: ', ' | escape }}">
+		{% endif %}
+		<p class="post-meta">
+		<time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+			{%- assign date_format = site.minima.date_format | default: "%A, %B %-d, %Y" -%}
+			{{ page.date | date: date_format }}
+		</time>
+			{%- if page.author -%}
+			by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+	      {%- endif -%}</p>
+	</header>
+	
+	<div itemprop="articleBody">
+		<!-- <img src="/images/page_headers/by_topic_page_header_860x130.png"> masthead logo -->
+		{{- content -}}
+		<!-- find out if there are posts and, if so, sort them into a collection -->		
+		{%- if site.posts.size > 0 -%}
+			{%- assign posts_by_topic = site.posts | group_by: 'topic' | reverse -%}
+			<!-- SORT ALL TAGS INTO AN ALPHABETICAL LIST -->
+			{% capture site_tags %}
+				{%- for tag in site.tags -%}
+					{{ tag | first }}
+					{% unless forloop.last %}
+						,
+					{% endunless %}
+				{% endfor %}
+			{% endcapture %}
+
+			{% assign sorted_tags = site_tags | split:',' | sort_natural %}
+
+			<!-- build the topics menu -->
+			<BR>
+			<!-- BUILD TOPICS MENU -->
+			<div class="topics-menu">
+				{% for tag in (0..site.tags.size) %}
+					{% unless forloop.last %}
+					 <!-- grab the topic name from the current post -->
+					{% capture topic_name %}
+						{{ sorted_tags[tag] | strip_newlines }}
+					{% endcapture %}
+					<div>
+						<a href="#{{ tag }}"> <!-- Build a link that will auto-scroll to the topic heading. -->
+							 <img class="topic-icon" src="/images/topics/{{ topic_name }}.png" alt="{{ tag | capitalize }}">
+						</a>
+						<p align="center" class="{{topic_name}}_font-color">{{ tag[1].size }}</p>
+					</div>
+					{% endunless %}
+				{%- endfor -%}
+			</div>
+			<BR>
+			<HR>
+			<BR>
+			<!-- TOPIC ARTICLES LISTED BY ALPHABETIC CATEGORY -->
+			 <!-- step through the list of tags/topics again -->
+			{%- for tag in sorted_tags -%}
+				{% unless forloop.last %}
+					<!-- Grab the topic name -->
+					{% capture topic_name %}
+						{{ sorted_tags[tag] | strip_newlines }}
+					{% endcapture %}
+
+					{%- assign current-topic-color = topic_name -%}
+					<!-- Build a header for the topic. -->
+					<div>
+						<a id="{{ topic_name }}">
+						<span> {{ post.date | date: date_format }} <!-- Grab the post's date. -->
+							<div class="{{ current-topic-color }} topic-header"></div>
+						</span>
+						<span class="topic-span-icon">
+							<img src="/images/topics/{{- topic_name -}}.png">
+						</span>
+					</div>
+
+					{% assign topic_posts = topic.items | reverse %}
+
+					<!-- List of posts for the current topic. -->
+					<ul class="{{topic_name}}-post-list post-list">
+					<!-- List the posts in each topic. -->
+					{%- for post in site.posts reversed -%}
+						<li>
+							{%- assign date_format = site.minima.date_format | default: "%A, %B %-d, %Y" -%}
+							<div class="post-topic">
+								<div class="post-info">
+									<div class="post-topic-date">
+										{{- post.date | date: "%A, %B %-d, %Y" -}} <!-- date of post -->
+									</div>
+									<div class="post-link">
+										<a href="{{ post.url | relative_url }}"</a> <!-- build page URL -->
+										{{- post.title -}} <!-- title text -->
+									</div>
+									<BR>
+									<div class="post-blurb">
+										{{- post.description -}}
+									</div>
+								</div>
+							</div>
+						</li>
+					{% endfor %}
+					</ul>
+					<a href="#top" align="right">Return to Top of Page</a>
+					<div class="post-color-fade-topic"> <!-- This is just a spacer now. -->
+					</div>
+				{% endunless %}
+			{%- endfor -%}
+		{%- endif -%}
+		{%- include post-footer.html -%}
+	</div>
+
+	<a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>
