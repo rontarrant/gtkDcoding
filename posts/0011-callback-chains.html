@@ -20,8 +20,8 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-02-19T00:00:00-05:00","datePublished":"2019-02-19T00:00:00-05:00","description":"How GTK signals are chained together - a D language tutorial.","headline":"0011: Callback Chains","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0011-callback-chains.html"},"url":"http://localhost:4000/posts/0011-callback-chains.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css">
-  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<link rel="stylesheet" href="../assets/main.css">
+  <link rel="stylesheet" href="../css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
 <body><header class="site-header" role="banner">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
@@ -34,19 +34,19 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+        <div class="trigger"><a class="page-link" href="../about.html">About</a><a class="page-link" href="../index-reverse.html">Posts in Date Order</a><a class="page-link" href="../topics.html">Blog Posts by Topic</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 	<header class="post-header">
-		<link rel="stylesheet" href="/css/font_size.css" />
-		<link rel="stylesheet" href="/css/figure.css" />
-		<link rel="stylesheet" href="/css/topics/button.css" />  <!-- sub in the tag/topic -->
-		<link rel="stylesheet" href="/css/modal.css" />
-		<link rel="stylesheet" href="/css/post.css" />
-		<link rel="stylesheet" href="/css/mascot_effects.css" />
+		<link rel="stylesheet" href="../css/font_size.css" />
+		<link rel="stylesheet" href="../css/figure.css" />
+		<link rel="stylesheet" href="../css/topics/button.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="../css/modal.css" />
+		<link rel="stylesheet" href="../css/post.css" />
+		<link rel="stylesheet" href="../css/mascot_effects.css" />
 
 		
 		
@@ -153,7 +153,7 @@
 	</div>
 </div>
 
-<p>I mentioned in <a href="/posts/0008-callbacks.html">post #0008</a> that we’d look at callback chains and here we are. In blog <a href="/posts/0010-checkbutton.html">entry #0010</a>, I covered setting up an observer pattern. Today we’ll have a bit of fun combining these two. All this code should seem quite familiar, so no need to fasten your seat belt. However, there is a surprise in store, so you still might wanna hold onto your hat…</p>
+<p>I mentioned in <a href="./0008-callbacks.html">post #0008</a> that we’d look at callback chains and here we are. In blog <a href="./0010-checkbutton.html">entry #0010</a>, I covered setting up an observer pattern. Today we’ll have a bit of fun combining these two. All this code should seem quite familiar, so no need to fasten your seat belt. However, there is a surprise in store, so you still might wanna hold onto your hat…</p>
 
 <p>First, we’ll look at how multiple signals are chained together. It’s nothing fancy, just a few extra lines of code in the constructor of our derived button class:</p>
 
@@ -324,7 +324,7 @@
 
 <h3 id="the-code">The Code</h3>
 
-<p>This time around, the <code class="language-plaintext highlighter-rouge">ObserverButton</code> keeps an eye on a <code class="language-plaintext highlighter-rouge">WatchedButton</code> derived from the <code class="language-plaintext highlighter-rouge">ToggleButton</code> class, very much like it did in the companion code for <a href="/posts/0010-checkbutton.html">entry #0010</a>. But the constructor is busier:</p>
+<p>This time around, the <code class="language-plaintext highlighter-rouge">ObserverButton</code> keeps an eye on a <code class="language-plaintext highlighter-rouge">WatchedButton</code> derived from the <code class="language-plaintext highlighter-rouge">ToggleButton</code> class, very much like it did in the companion code for <a href="./0010-checkbutton.html">entry #0010</a>. But the constructor is busier:</p>
 
 <div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">(</span><span class="n">WatchedButton</span> <span class="n">extWatched</span><span class="p">)</span>
 <span class="p">{</span>
@@ -398,10 +398,10 @@
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/posts/0010-checkbutton.html">Previous: CheckButton</a>
+		<a href="./0010-checkbutton.html">Previous: CheckButton</a>
 	</div>
 	<div style="float: right;">
-		<a href="/posts/0012-layout-containers.html">Next: Layout Containers</a>
+		<a href="./0012-layout-containers.html">Next: Layout Containers</a>
 	</div>
 </div>
 <p>
@@ -440,7 +440,7 @@
 <p>&copy; Copyright 2025 Ron Tarrant </p>
 </div>
 
-	<a class="u-url" href="/posts/0011-callback-chains.html" hidden></a>
+	<a class="u-url" href="./0011-callback-chains.html" hidden></a>
 </article>
 
       </div>
@@ -457,7 +457,7 @@
           <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
       </div>
 
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="../assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
 </div>
 
       <div class="footer-col footer-col-3">

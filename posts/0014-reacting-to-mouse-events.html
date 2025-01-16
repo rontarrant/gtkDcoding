@@ -20,8 +20,8 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-03-01T00:00:00-05:00","datePublished":"2019-03-01T00:00:00-05:00","description":"Harnessing mouse events in a GTK Window - a D language tutorial.","headline":"0014: Reacting to Mouse Events","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0014-reacting-to-mouse-events.html"},"url":"http://localhost:4000/posts/0014-reacting-to-mouse-events.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css">
-  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<link rel="stylesheet" href="../assets/main.css">
+  <link rel="stylesheet" href="../css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
 <body><header class="site-header" role="banner">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
@@ -34,19 +34,19 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+        <div class="trigger"><a class="page-link" href="../about.html">About</a><a class="page-link" href="../index-reverse.html">Posts in Date Order</a><a class="page-link" href="../topics.html">Blog Posts by Topic</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 	<header class="post-header">
-		<link rel="stylesheet" href="/css/font_size.css" />
-		<link rel="stylesheet" href="/css/figure.css" />
-		<link rel="stylesheet" href="/css/topics/mouse.css" />  <!-- sub in the tag/topic -->
-		<link rel="stylesheet" href="/css/modal.css" />
-		<link rel="stylesheet" href="/css/post.css" />
-		<link rel="stylesheet" href="/css/mascot_effects.css" />
+		<link rel="stylesheet" href="../css/font_size.css" />
+		<link rel="stylesheet" href="../css/figure.css" />
+		<link rel="stylesheet" href="../css/topics/mouse.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="../css/modal.css" />
+		<link rel="stylesheet" href="../css/post.css" />
+		<link rel="stylesheet" href="../css/mascot_effects.css" />
 
 		
 		
@@ -319,7 +319,7 @@
 
 <p>We make sure we’ve actually got a new <code class="language-plaintext highlighter-rouge">Event</code> to play with, then dig into it to find its type. The only one we want to react to is <code class="language-plaintext highlighter-rouge">BUTTON_PRESS</code>. And which button was pressed? To find out, we dig a little deeper. Each <code class="language-plaintext highlighter-rouge">Event</code> carries with it a field identifying whatever bit of hardware was manipulated to cause the event.</p>
 
-<p>All that stuff about a value that’s returned from this function has to do with signal chains which we covered in <a href="/posts/0011-callback-chains.html">blog post #0011 Callback Chains</a>. Once the event has been handled, we tell <code class="language-plaintext highlighter-rouge">Main</code> we’re done handling signals and back away.</p>
+<p>All that stuff about a value that’s returned from this function has to do with signal chains which we covered in <a href="./0011-callback-chains.html">blog post #0011 Callback Chains</a>. Once the event has been handled, we tell <code class="language-plaintext highlighter-rouge">Main</code> we’re done handling signals and back away.</p>
 
 <h2 id="but-wait-theres-more">But, wait, There’s more…</h2>
 
@@ -349,10 +349,10 @@
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/posts/0013-scrolled-layout.html">Previous: Scrolled Layout</a>
+		<a href="./0013-scrolled-layout.html">Previous: Scrolled Layout</a>
 	</div>
 	<div style="float: right;">
-		<a href="/posts/0015-enter-leave.html">Next: Entering and Leaving</a>
+		<a href="./0015-enter-leave.html">Next: Entering and Leaving</a>
 	</div>
 </div>
 <p>
@@ -391,7 +391,7 @@
 <p>&copy; Copyright 2025 Ron Tarrant </p>
 </div>
 
-	<a class="u-url" href="/posts/0014-reacting-to-mouse-events.html" hidden></a>
+	<a class="u-url" href="./0014-reacting-to-mouse-events.html" hidden></a>
 </article>
 
       </div>
@@ -408,7 +408,7 @@
           <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
       </div>
 
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="../assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
 </div>
 
       <div class="footer-col footer-col-3">

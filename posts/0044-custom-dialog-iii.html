@@ -20,8 +20,8 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-06-14T00:00:00-04:00","datePublished":"2019-06-14T00:00:00-04:00","description":"How to layout the Content Area of a custom GTK Dialog using basic design principals - a D-language tutorial.","headline":"0044: Dialogs X - Customizing (3 of 3) - Fancy Content Area","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0044-custom-dialog-iii.html"},"url":"http://localhost:4000/posts/0044-custom-dialog-iii.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css">
-  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<link rel="stylesheet" href="../assets/main.css">
+  <link rel="stylesheet" href="../css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
 <body><header class="site-header" role="banner">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
@@ -34,19 +34,19 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+        <div class="trigger"><a class="page-link" href="../about.html">About</a><a class="page-link" href="../index-reverse.html">Posts in Date Order</a><a class="page-link" href="../topics.html">Blog Posts by Topic</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 	<header class="post-header">
-		<link rel="stylesheet" href="/css/font_size.css" />
-		<link rel="stylesheet" href="/css/figure.css" />
-		<link rel="stylesheet" href="/css/topics/dialog.css" />  <!-- sub in the tag/topic -->
-		<link rel="stylesheet" href="/css/modal.css" />
-		<link rel="stylesheet" href="/css/post.css" />
-		<link rel="stylesheet" href="/css/mascot_effects.css" />
+		<link rel="stylesheet" href="../css/font_size.css" />
+		<link rel="stylesheet" href="../css/figure.css" />
+		<link rel="stylesheet" href="../css/topics/dialog.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="../css/modal.css" />
+		<link rel="stylesheet" href="../css/post.css" />
+		<link rel="stylesheet" href="../css/mascot_effects.css" />
 
 		
 		
@@ -64,8 +64,8 @@
 <p>This collection of topics is split up like this:</p>
 
 <ul>
-  <li><em><a href="/posts/0042-custom-dialog-i.html">Part I</a></em> (the time before last) deals with how to create an aesthetically-pleasing widget layout for a custom <code class="language-plaintext highlighter-rouge">Dialog</code>,</li>
-  <li><em><a href="/posts/0043-custom-dialog-ii.html">Part II</a></em> (last time) covers user interaction, and</li>
+  <li><em><a href="./0042-custom-dialog-i.html">Part I</a></em> (the time before last) deals with how to create an aesthetically-pleasing widget layout for a custom <code class="language-plaintext highlighter-rouge">Dialog</code>,</li>
+  <li><em><a href="./0043-custom-dialog-ii.html">Part II</a></em> (last time) covers user interaction, and</li>
   <li><em>Part III</em> (this time) brings it all together.</li>
 </ul>
 
@@ -231,7 +231,7 @@
 
 <p>And this is important: We have to call <code class="language-plaintext highlighter-rouge">_contentArea.showAll()</code> for the <code class="language-plaintext highlighter-rouge">Dialog</code> just as we do with a <code class="language-plaintext highlighter-rouge">MainWindow</code>. If we don’t, the <code class="language-plaintext highlighter-rouge">Dialog</code> will appear without its <em>Content Area</em>.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">PadGrid</code> (see <a href="/posts/0042-custom-dialog-i.html"><em>Part I</em></a> of this series if you haven’t already) has morphed into the <code class="language-plaintext highlighter-rouge">NewImageDataGrid</code> class (but only to support the paradigm present in the example) and contains all the bits and bobs for gathering data from the user. In this case, we’re gathering a file name, x and y dimensions, and the resolution of a new image to create. For the sake of brevity, I won’t reproduce the entire <code class="language-plaintext highlighter-rouge">NewImageDataGrid</code> here, but these are the properties it contains:</p>
+<p>The <code class="language-plaintext highlighter-rouge">PadGrid</code> (see <a href="./0042-custom-dialog-i.html"><em>Part I</em></a> of this series if you haven’t already) has morphed into the <code class="language-plaintext highlighter-rouge">NewImageDataGrid</code> class (but only to support the paradigm present in the example) and contains all the bits and bobs for gathering data from the user. In this case, we’re gathering a file name, x and y dimensions, and the resolution of a new image to create. For the sake of brevity, I won’t reproduce the entire <code class="language-plaintext highlighter-rouge">NewImageDataGrid</code> here, but these are the properties it contains:</p>
 
 <ul>
   <li>a <code class="language-plaintext highlighter-rouge">Label</code>, <code class="language-plaintext highlighter-rouge">Entry</code>, and <em>placeholder text</em> for the file name, and</li>
@@ -333,10 +333,10 @@
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/posts/0043-custom-dialog-ii.html">Previous: Dialog Action Area</a>
+		<a href="./0043-custom-dialog-ii.html">Previous: Dialog Action Area</a>
 	</div>
 	<div style="float: right;">
-		<a href="/posts/0045-split-a-window-into-panes.html">Next: Split a Window into Panes</a>
+		<a href="./0045-split-a-window-into-panes.html">Next: Split a Window into Panes</a>
 	</div>
 </div>
 <p>
@@ -375,7 +375,7 @@
 <p>&copy; Copyright 2025 Ron Tarrant </p>
 </div>
 
-	<a class="u-url" href="/posts/0044-custom-dialog-iii.html" hidden></a>
+	<a class="u-url" href="./0044-custom-dialog-iii.html" hidden></a>
 </article>
 
       </div>
@@ -392,7 +392,7 @@
           <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
       </div>
 
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="../assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
 </div>
 
       <div class="footer-col footer-col-3">

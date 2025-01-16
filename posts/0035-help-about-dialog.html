@@ -20,8 +20,8 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-05-14T00:00:00-04:00","datePublished":"2019-05-14T00:00:00-04:00","description":"How to use a GTK AboutDialog - a D-language tutorial.","headline":"0035: Dialogs I - The About Dialog","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0035-help-about-dialog.html"},"url":"http://localhost:4000/posts/0035-help-about-dialog.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css">
-  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<link rel="stylesheet" href="../assets/main.css">
+  <link rel="stylesheet" href="../css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
 <body><header class="site-header" role="banner">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
@@ -34,19 +34,19 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+        <div class="trigger"><a class="page-link" href="../about.html">About</a><a class="page-link" href="../index-reverse.html">Posts in Date Order</a><a class="page-link" href="../topics.html">Blog Posts by Topic</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 	<header class="post-header">
-		<link rel="stylesheet" href="/css/font_size.css" />
-		<link rel="stylesheet" href="/css/figure.css" />
-		<link rel="stylesheet" href="/css/topics/dialog.css" />  <!-- sub in the tag/topic -->
-		<link rel="stylesheet" href="/css/modal.css" />
-		<link rel="stylesheet" href="/css/post.css" />
-		<link rel="stylesheet" href="/css/mascot_effects.css" />
+		<link rel="stylesheet" href="../css/font_size.css" />
+		<link rel="stylesheet" href="../css/figure.css" />
+		<link rel="stylesheet" href="../css/topics/dialog.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="../css/modal.css" />
+		<link rel="stylesheet" href="../css/post.css" />
+		<link rel="stylesheet" href="../css/mascot_effects.css" />
 
 		
 		
@@ -201,7 +201,7 @@
 
 <h4 id="passing-down-the-window">Passing Down the Window</h4>
 
-<p>Because the <code class="language-plaintext highlighter-rouge">AboutDialog</code> (or any other dialog) needs to know who its mommy is, we gotta give it an ersatz family tree, passing down the <code class="language-plaintext highlighter-rouge">Window</code> pointer so when the <code class="language-plaintext highlighter-rouge">Dialog</code> goes up, it can go <code class="language-plaintext highlighter-rouge">MODAL</code> if it needs to. If you take a quick look through the code, you’ll see this is done very much the same way we passed along the <code class="language-plaintext highlighter-rouge">AccelGroup</code> in Blog Post #32 - <a href="/posts/0032-accelerator-keys.html">Adding Accelerator Keys to MenuItems</a>.</p>
+<p>Because the <code class="language-plaintext highlighter-rouge">AboutDialog</code> (or any other dialog) needs to know who its mommy is, we gotta give it an ersatz family tree, passing down the <code class="language-plaintext highlighter-rouge">Window</code> pointer so when the <code class="language-plaintext highlighter-rouge">Dialog</code> goes up, it can go <code class="language-plaintext highlighter-rouge">MODAL</code> if it needs to. If you take a quick look through the code, you’ll see this is done very much the same way we passed along the <code class="language-plaintext highlighter-rouge">AccelGroup</code> in Blog Post #32 - <a href="./0032-accelerator-keys.html">Adding Accelerator Keys to MenuItems</a>.</p>
 
 <p><em>Note: if you want your <code class="language-plaintext highlighter-rouge">Dialog</code> to be <code class="language-plaintext highlighter-rouge">MODAL</code>, use <code class="language-plaintext highlighter-rouge">DialogFlags.MODAL</code> which can be found in <code class="language-plaintext highlighter-rouge">generated/gtkd/gtk/c/types.d</code>.</em></p>
 
@@ -300,10 +300,10 @@
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/posts/0034-accelgroup-singleton.html">Previous: AccelGroup Singleton</a>
+		<a href="./0034-accelgroup-singleton.html">Previous: AccelGroup Singleton</a>
 	</div>
 	<div style="float: right;">
-		<a href="/posts/0036-file-open-dialogs.html">Next: Open File Dialog</a>
+		<a href="./0036-file-open-dialogs.html">Next: Open File Dialog</a>
 	</div>
 </div>
 <p>
@@ -342,7 +342,7 @@
 <p>&copy; Copyright 2025 Ron Tarrant </p>
 </div>
 
-	<a class="u-url" href="/posts/0035-help-about-dialog.html" hidden></a>
+	<a class="u-url" href="./0035-help-about-dialog.html" hidden></a>
 </article>
 
       </div>
@@ -359,7 +359,7 @@
           <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
       </div>
 
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="../assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
 </div>
 
       <div class="footer-col footer-col-3">

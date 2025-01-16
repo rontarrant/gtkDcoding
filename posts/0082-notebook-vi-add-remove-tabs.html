@@ -20,8 +20,8 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-10-25T00:00:00-04:00","datePublished":"2019-10-25T00:00:00-04:00","description":"This GTK Tutorial covers adding and removing tabs from a Notebook.","headline":"0082: Notebook VI – Adding and Removing Tabs","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0082-notebook-vi-add-remove-tabs.html"},"url":"http://localhost:4000/posts/0082-notebook-vi-add-remove-tabs.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css">
-  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<link rel="stylesheet" href="../assets/main.css">
+  <link rel="stylesheet" href="../css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
 <body><header class="site-header" role="banner">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
@@ -34,19 +34,19 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+        <div class="trigger"><a class="page-link" href="../about.html">About</a><a class="page-link" href="../index-reverse.html">Posts in Date Order</a><a class="page-link" href="../topics.html">Blog Posts by Topic</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 	<header class="post-header">
-		<link rel="stylesheet" href="/css/font_size.css" />
-		<link rel="stylesheet" href="/css/figure.css" />
-		<link rel="stylesheet" href="/css/topics/container.css" />  <!-- sub in the tag/topic -->
-		<link rel="stylesheet" href="/css/modal.css" />
-		<link rel="stylesheet" href="/css/post.css" />
-		<link rel="stylesheet" href="/css/mascot_effects.css" />
+		<link rel="stylesheet" href="../css/font_size.css" />
+		<link rel="stylesheet" href="../css/figure.css" />
+		<link rel="stylesheet" href="../css/topics/container.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="../css/modal.css" />
+		<link rel="stylesheet" href="../css/post.css" />
+		<link rel="stylesheet" href="../css/mascot_effects.css" />
 
 		
 		
@@ -195,7 +195,7 @@
 
 <h2 id="a-button-for-inserting-tabs">A Button for Inserting Tabs</h2>
 
-<p>We’ve seen these buttons before, so no new ground is being covered. Even the fact that we’re passing in a pointer to the <code class="language-plaintext highlighter-rouge">Notebook</code> is something we’ve seen before in the <em>GTK</em> <code class="language-plaintext highlighter-rouge">Menu</code> series (<a href="/posts/0034-accelgroup-singleton.html">Blog Post #34: AccelGroup as a Singleton</a>) where we Singleton-ized our <code class="language-plaintext highlighter-rouge">AccelGroup</code> so we could tap into it from wherever without passing it down through multiple layers of objects. But this time, for simplicity sake and because there are only two levels to deal with, we’ll do it the non-Singleton way:</p>
+<p>We’ve seen these buttons before, so no new ground is being covered. Even the fact that we’re passing in a pointer to the <code class="language-plaintext highlighter-rouge">Notebook</code> is something we’ve seen before in the <em>GTK</em> <code class="language-plaintext highlighter-rouge">Menu</code> series (<a href="./0034-accelgroup-singleton.html">Blog Post #34: AccelGroup as a Singleton</a>) where we Singleton-ized our <code class="language-plaintext highlighter-rouge">AccelGroup</code> so we could tap into it from wherever without passing it down through multiple layers of objects. But this time, for simplicity sake and because there are only two levels to deal with, we’ll do it the non-Singleton way:</p>
 
 <div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">InsertButton</span> <span class="p">:</span> <span class="n">Button</span>
 <span class="p">{</span>
@@ -318,10 +318,10 @@
 
 <div class="blog-nav">
 	<div style="float: left;">
-		<a href="/posts/0081-notebook-v-custom-tabs-iii.html">Previous: Notebook V - Custom Tabs II</a>
+		<a href="./0081-notebook-v-custom-tabs-iii.html">Previous: Notebook V - Custom Tabs II</a>
 	</div>
 	<div style="float: right;">
-		<a href="/posts/0083-notebook-vii-notebook-all-signals.html">Next: Notebook VIII - A Snoot Full of Signals</a>
+		<a href="./0083-notebook-vii-notebook-all-signals.html">Next: Notebook VIII - A Snoot Full of Signals</a>
 	</div>
 </div>
 <p>
@@ -360,7 +360,7 @@
 <p>&copy; Copyright 2025 Ron Tarrant </p>
 </div>
 
-	<a class="u-url" href="/posts/0082-notebook-vi-add-remove-tabs.html" hidden></a>
+	<a class="u-url" href="./0082-notebook-vi-add-remove-tabs.html" hidden></a>
 </article>
 
       </div>
@@ -377,7 +377,7 @@
           <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
       </div>
 
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="../assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
 </div>
 
       <div class="footer-col footer-col-3">
