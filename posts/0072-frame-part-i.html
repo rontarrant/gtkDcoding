@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0072: The Frame, Part I - Common Use and Label Placement | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0072: The Frame, Part I - Common Use and Label Placement" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="GTK Tutorial - common use of a Frame and techniques for placing the Frame Label." />
+<meta property="og:description" content="GTK Tutorial - common use of a Frame and techniques for placing the Frame Label." />
+<link rel="canonical" href="http://localhost:4000/posts/0072-frame-part-i.html" />
+<meta property="og:url" content="http://localhost:4000/posts/0072-frame-part-i.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-20T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0072: The Frame, Part I - Common Use and Label Placement" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-09-20T00:00:00-04:00","datePublished":"2019-09-20T00:00:00-04:00","description":"GTK Tutorial - common use of a Frame and techniques for placing the Frame Label.","headline":"0072: The Frame, Part I - Common Use and Label Placement","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0072-frame-part-i.html"},"url":"http://localhost:4000/posts/0072-frame-part-i.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/container.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-09-20T00:00:00-04:00" itemprop="datePublished">Friday, September 20, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0072-the-frame-part-i">0072: The Frame, Part I</h1>
+
+<p>The <em>GTK</em> <code class="language-plaintext highlighter-rouge">Frame</code> isn’t complicated to use, but I’m doing this write up for a few reasons:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Frame</code> styles aren’t handled the way I expected,</li>
+  <li>making the contents of a <code class="language-plaintext highlighter-rouge">Frame</code> look good takes a bit of effort, and</li>
+  <li>the flexibility of <code class="language-plaintext highlighter-rouge">Frame</code> <code class="language-plaintext highlighter-rouge">Label</code> placement begs coverage.</li>
+</ul>
+
+<p>So, without further ado, here’s our first example…</p>
+
+<h2 id="frame-on">Frame On</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/014_container/container_05.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/014_container/container_05_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_05_frame_on.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<p>Getting a <code class="language-plaintext highlighter-rouge">Frame</code> into your application is straightforward. In this case, we toss it into an <code class="language-plaintext highlighter-rouge">AppBox</code> object like we’ve done with so many other widgets:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">AppBox</span> <span class="p">:</span> <span class="n">Box</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">_borderWidth</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="kt">bool</span> <span class="n">expand</span> <span class="p">=</span> <span class="kc">false</span><span class="p">,</span> <span class="n">fill</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+	<span class="kt">uint</span> <span class="n">globalPadding</span> <span class="p">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">localPadding</span> <span class="p">=</span> <span class="mi">5</span><span class="p">;</span>
+	<span class="n">FrameOn</span> <span class="n">frameOn</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="n">globalPadding</span><span class="p">);</span>
+		<span class="n">setBorderWidth</span><span class="p">(</span><span class="n">_borderWidth</span><span class="p">);</span>
+		
+		<span class="n">frameOn</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FrameOn</span><span class="p">();</span>
+		<span class="n">packStart</span><span class="p">(</span><span class="n">frameOn</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">localPadding</span><span class="p">);</span> <span class="c1">// LEFT justify</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+
+<span class="p">}</span> <span class="c1">// class AppBox</span>
+</code></pre></div></div>
+
+<p>One key difference is that not many other widgets demand that we pay attention to the white space around them. But the Frame needs a tweak or two in this area and that’s why there’s a <code class="language-plaintext highlighter-rouge">_borderWidth</code> variable along with a call to <code class="language-plaintext highlighter-rouge">setBorderWidth()</code>. Without it, the <code class="language-plaintext highlighter-rouge">Window</code> crowds the <code class="language-plaintext highlighter-rouge">Frame</code> and aesthetics go out the window… so to speak. You can see the effect of <code class="language-plaintext highlighter-rouge">_borderWidth</code> in the screen shot above.</p>
+
+<p>And just FYI, the same principles we used in <a href="/posts/0042-custom-dialog-i.html">customizing a Dialog’s content area</a> can be applied here.</p>
+
+<p>And that takes care of aesthetics. The <code class="language-plaintext highlighter-rouge">Grid</code>—which holds all the widgets that show up in the Frame—gets a bit of elbow room and it’s heading in the direction of looking nice. But let’s put aesthetics aside for a moment and talk about…</p>
+
+<h3 id="the-frame-class">The Frame Class</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">FrameOn</span> <span class="p">:</span> <span class="n">Frame</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="nb">string</span> <span class="n">titleLabel</span> <span class="p">=</span> <span class="s">"Coordinates"</span><span class="p">;</span>
+	<span class="n">FrameChildGrid</span> <span class="n">frameChildGrid</span><span class="p">;</span>
+	
+	<span class="k">public</span><span class="p">:</span>
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">titleLabel</span><span class="p">);</span>
+		<span class="n">frameChildGrid</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FrameChildGrid</span><span class="p">();</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">frameChildGrid</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class FrameOn</span>
+</code></pre></div></div>
+
+<p>No big mysteries here. Set up a label string and a child container to put in the Frame and we’re all set.</p>
+
+<p>You may wonder why a child container is needed and here’s the lowdown: The <code class="language-plaintext highlighter-rouge">Frame</code> is derived from <code class="language-plaintext highlighter-rouge">Bin</code> which can only hold one child object. Using a <code class="language-plaintext highlighter-rouge">Grid</code> to hold the children seems a good idea to me because, like the custom <code class="language-plaintext highlighter-rouge">Dialog</code> we looked at back in that series, the <code class="language-plaintext highlighter-rouge">Grid</code> gives us flexibility and ease for layout as well as future-proof-ness. In other words, the <code class="language-plaintext highlighter-rouge">Grid</code> ain’t going nowhere in <em>GTK 4.0</em>.</p>
+
+<p>But as I hinted earlier, right out of the box (or should I say “<code class="language-plaintext highlighter-rouge">Bin</code>?”) the <code class="language-plaintext highlighter-rouge">Frame</code> <code class="language-plaintext highlighter-rouge">Label</code> is shoved all the way to the left and that just doesn’t look right to my designer’s eye, so let’s look at a couple of things we can do about that.</p>
+
+<h2 id="high-label-placement-right-justified">High Label Placement, Right Justified</h2>
+
+<!-- 2, 3 -->
+<!-- second occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/014_container/container_06.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/014_container/container_06_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_06_frame_label_high.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for second (2nd) occurrence of application and terminal screen shots on a single page -->
+
+<p>If, for whatever reason, you need the <code class="language-plaintext highlighter-rouge">Frame</code> <code class="language-plaintext highlighter-rouge">Label</code> above and to the right, aligning it is achieved with the <code class="language-plaintext highlighter-rouge">setLabelAlign()</code> function which takes two arguments:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">xAlign</code> for horizontal placement, and</li>
+  <li><code class="language-plaintext highlighter-rouge">yAlign</code> for vertical.</li>
+</ul>
+
+<p>Here’s what that code might look like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">FrameHigh</span> <span class="p">:</span> <span class="n">Frame</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="nb">string</span> <span class="n">titleLabel</span> <span class="p">=</span> <span class="s">"Coordinates"</span><span class="p">;</span>
+	<span class="n">FrameChildGrid</span> <span class="n">frameChildGrid</span><span class="p">;</span>
+	<span class="kt">float</span> <span class="n">xAlign</span> <span class="p">=</span> <span class="mf">0.95</span><span class="p">,</span> <span class="n">yAlign</span> <span class="p">=</span> <span class="mf">1.0</span><span class="p">;</span>
+	
+	<span class="k">public</span><span class="p">:</span>
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">titleLabel</span><span class="p">);</span>
+		<span class="n">setLabelAlign</span><span class="p">(</span><span class="n">xAlign</span><span class="p">,</span> <span class="n">yAlign</span><span class="p">);</span>
+		<span class="n">frameChildGrid</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FrameChildGrid</span><span class="p">();</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">frameChildGrid</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class FrameHigh</span>
+</code></pre></div></div>
+
+<p>The values for both of these variables (<code class="language-plaintext highlighter-rouge">xAlign</code> and <code class="language-plaintext highlighter-rouge">yAlign</code>) range between <code class="language-plaintext highlighter-rouge">0.0</code> and <code class="language-plaintext highlighter-rouge">1.0</code> with meaningful values extending out to two decimal places (ie. <code class="language-plaintext highlighter-rouge">0.95</code>, <code class="language-plaintext highlighter-rouge">0.32</code>, etc) meaning you get pretty fine control over placement. The difference between how the <code class="language-plaintext highlighter-rouge">xAlign</code> and <code class="language-plaintext highlighter-rouge">yAlign</code> values are interpreted are as follows:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">xAlign</code> values:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">0.0</code> is pushed up against the left <code class="language-plaintext highlighter-rouge">Frame</code> edge,</li>
+      <li><code class="language-plaintext highlighter-rouge">1.0</code> is pushed against the right edge, and</li>
+      <li>you can use as many decimal places as you want for placement, although any more than two is likely too fine to distinguish.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">yAlign</code> values:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">1.0</code> is above the <code class="language-plaintext highlighter-rouge">Frame</code>,</li>
+      <li><code class="language-plaintext highlighter-rouge">0.0</code> is below, and</li>
+      <li><code class="language-plaintext highlighter-rouge">0.5</code> is vertically centered on the <code class="language-plaintext highlighter-rouge">Frame</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><em>Note: If you leave the <code class="language-plaintext highlighter-rouge">Frame</code>’s <code class="language-plaintext highlighter-rouge">Label</code> in the default vertical position (ie. where it intersects the <code class="language-plaintext highlighter-rouge">Frame</code>’s top horizontal border) it will likely never look good to place the <code class="language-plaintext highlighter-rouge">Label</code> all the way to the right or left where it will overlap the <code class="language-plaintext highlighter-rouge">Frame</code>’s vertical line. For that reason, I consider <code class="language-plaintext highlighter-rouge">0.05</code> as being the furthest left you’ll wanna go and <code class="language-plaintext highlighter-rouge">0.95</code> to be the furthest to the right.</em></p>
+
+<h2 id="low-placement-of-the-frames-label">Low Placement of the Frame’s Label</h2>
+
+<!-- 4, 5 -->
+<!-- third occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img4" src="/images/screenshots/014_container/container_07.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal4" class="modal">																<!-- modal# -->
+				<span class="close4">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img44" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal4");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img4");														// img#
+			var modalImg = document.getElementById("img44");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close4")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img5" src="/images/screenshots/014_container/container_07_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal5" class="modal">																			<!-- modal# -->
+				<span class="close5">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img55" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal5");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img5");																	// img#
+			var modalImg = document.getElementById("img55");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close5")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!---------- filename (below) ---------->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/014_container/container_07_frame_label_low.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for third (3rd) occurrence of application and terminal screen shots on a single page -->
+
+<p>Here, the <code class="language-plaintext highlighter-rouge">Label</code> is placed at <code class="language-plaintext highlighter-rouge">yAlign</code>’s lower limit of <code class="language-plaintext highlighter-rouge">0.0</code> and the leftward limit of <code class="language-plaintext highlighter-rouge">0.05</code> so that the Label appears to be about the same distance from the <code class="language-plaintext highlighter-rouge">Frame</code>’s upper and left border lines.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that’s about all for now. Next time, we’ll take up this Frame business again and look at two things:</p>
+
+<ul>
+  <li>(irony mode on) the invisible <code class="language-plaintext highlighter-rouge">Frame</code> (irony mode off), and</li>
+  <li>using <em>CSS</em> to ‘decorate’ the <code class="language-plaintext highlighter-rouge">Frame</code>.</li>
+</ul>
+
+<p>Until then, happy what-have-you.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0071-expanding-on-the-statusbar.html">Previous: Statusbar Basics</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0073-frame-part-ii.html">Next: Frames, Part II</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0072-frame-part-i.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

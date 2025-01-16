@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0038: Dialogs IV - Saving a File | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0038: Dialogs IV - Saving a File" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How to save a single filename using a GTK FileChooserDialog - a D-language tutorial." />
+<meta property="og:description" content="How to save a single filename using a GTK FileChooserDialog - a D-language tutorial." />
+<link rel="canonical" href="http://localhost:4000/posts/0038-file-save-dialog.html" />
+<meta property="og:url" content="http://localhost:4000/posts/0038-file-save-dialog.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-24T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0038: Dialogs IV - Saving a File" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-05-24T00:00:00-04:00","datePublished":"2019-05-24T00:00:00-04:00","description":"How to save a single filename using a GTK FileChooserDialog - a D-language tutorial.","headline":"0038: Dialogs IV - Saving a File","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0038-file-save-dialog.html"},"url":"http://localhost:4000/posts/0038-file-save-dialog.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/dialog.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-05-24T00:00:00-04:00" itemprop="datePublished">Friday, May 24, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0038-dialogs-iv---saving-a-file">0038: Dialogs IV - Saving a File</h1>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/013_dialogs/dialog_04.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/013_dialogs/dialog_04_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_04_file_save.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Today’s dialog example illustrating <em>File &gt; Save</em> is very much like <a href="https://github.com/rontarrant/gtkd_demos/blob/master/013_dialogs/dialog_02_file_open_single.d">the one we looked at earlier for <em>File &gt; Open</em></a>. Making the change naturally means that <em>‘Open’</em> becomes <em>‘Save’</em> and <em>‘open’</em> becomes <em>‘save.’</em> But there’s a bit more to it than a bit of search-n-replace.</p>
+
+<h3 id="extra-widgets-entry">Extra Widgets: Entry</h3>
+
+<p>To the top-level window, I added a <code class="language-plaintext highlighter-rouge">TextEntry</code> class derived from the <code class="language-plaintext highlighter-rouge">Entry</code> widget so the file name can be seen and changes easily tracked. Let’s look at it a bit at a time. Here’s the first part:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">TextEntry</span> <span class="p">:</span> <span class="n">Entry</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="nb">string</span> <span class="n">_defaultFilename</span> <span class="p">=</span> <span class="s">"Untitled"</span><span class="p">;</span>
+	<span class="n">Window</span> <span class="n">_parentWindow</span><span class="p">;</span>
+	
+	<span class="k">public</span><span class="p">:</span>
+	<span class="k">this</span><span class="p">(</span><span class="n">Window</span> <span class="n">parentWindow</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">_defaultFilename</span><span class="p">);</span>
+		<span class="n">addOnActivate</span><span class="p">(&amp;</span><span class="n">changeFilename</span><span class="p">);</span>
+		
+		<span class="n">_parentWindow</span> <span class="p">=</span> <span class="n">parentWindow</span><span class="p">;</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>You’ll note that, in preparation for breaking these classes out into their own modules, variable names are private. They each have a leading underscore, a convention that sets up an association between local and incoming variables that hold the same values or pointers.</p>
+
+<p>The public section starts with the constructor which does nothing we haven’t seen before, although I will call your attention to the <code class="language-plaintext highlighter-rouge">addOnActivate()</code> call. This sets up a signal so that any time the <code class="language-plaintext highlighter-rouge">TextEntry</code> has focus and the user hits the Enter key, the callback is triggered. Speaking of which, here’s the callback:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kt">void</span> <span class="n">changeFilename</span><span class="p">(</span><span class="n">Entry</span> <span class="n">e</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">getText</span><span class="p">()</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">writeln</span><span class="p">(</span><span class="s">"The file name is an empty string. Resetting to default: Untitled."</span><span class="p">);</span>
+			<span class="n">setText</span><span class="p">(</span><span class="n">_defaultFilename</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="n">writeln</span><span class="p">(</span><span class="s">"Filename has changed to: "</span><span class="p">,</span> <span class="n">getText</span><span class="p">());</span>
+		<span class="p">}</span>
+		
+	<span class="p">}</span> <span class="c1">// changeFilename()</span>
+
+<span class="p">}</span> <span class="c1">// class TextEntry</span>
+</code></pre></div></div>
+
+<p>The callback first ensures that the file name isn’t empty (the <code class="language-plaintext highlighter-rouge">if</code> statement) and if that’s the case, echoes it to the terminal (the <code class="language-plaintext highlighter-rouge">else</code>), but that’s all. The rest we take care of in the <code class="language-plaintext highlighter-rouge">FileSaveItem</code> object… which we’ll talk about now.</p>
+
+<h3 id="the-filesaveitem">The FileSaveItem</h3>
+
+<p>This class is a bit long, so we’ll look at it in chunks, starting with the initialization section:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">FileSaveItem</span> <span class="p">:</span> <span class="n">MenuItem</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="nb">string</span> <span class="n">itemLabel</span> <span class="p">=</span> <span class="s">"Save"</span><span class="p">;</span>
+	<span class="n">FileChooserDialog</span> <span class="n">fileChooserDialog</span><span class="p">;</span>
+	<span class="n">Window</span> <span class="n">_parentWindow</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">filename</span><span class="p">;</span>
+	<span class="n">TextEntry</span> <span class="n">_filenameEntry</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Same as with the <code class="language-plaintext highlighter-rouge">FileOpenItem</code>, we’ve got:</p>
+
+<ul>
+  <li>the label, <code class="language-plaintext highlighter-rouge">itemLabel</code>,</li>
+  <li>a definition for the dialog, <code class="language-plaintext highlighter-rouge">fileChooserDialog</code>, and</li>
+  <li>a pointer to the parent window (<code class="language-plaintext highlighter-rouge">_parentWindow</code>) so we can make the dialog modal.</li>
+</ul>
+
+<p>But then we also have:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">filename</code>, and</li>
+  <li><code class="language-plaintext highlighter-rouge">_filenameEntry</code>.</li>
+</ul>
+
+<p>Strictly speaking, we don’t need the <code class="language-plaintext highlighter-rouge">filename</code> variable, but it’s more convenient than typing <code class="language-plaintext highlighter-rouge">filenameEntry.getText()</code> each time we need to refer to the current file name.</p>
+
+<p>And, of course, <code class="language-plaintext highlighter-rouge">_filenameEntry</code> will be dealt with here in a second, so let’s move on to…</p>
+
+<h3 id="the-filesaveitem-constructor">The FileSaveItem Constructor</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span><span class="p">:</span>
+<span class="k">this</span><span class="p">(</span><span class="n">Window</span> <span class="n">parentWindow</span><span class="p">,</span> <span class="n">TextEntry</span> <span class="n">filenameEntry</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">super</span><span class="p">(</span><span class="n">itemLabel</span><span class="p">);</span>
+	<span class="n">addOnActivate</span><span class="p">(&amp;</span><span class="n">doSomething</span><span class="p">);</span>
+	<span class="n">_parentWindow</span> <span class="p">=</span> <span class="n">parentWindow</span><span class="p">;</span>
+	<span class="n">_filenameEntry</span> <span class="p">=</span> <span class="n">filenameEntry</span><span class="p">;</span>
+	
+<span class="p">}</span> <span class="c1">// this()</span>
+</code></pre></div></div>
+
+<p>Nothing unexpected here. We bring in the parent window and the <code class="language-plaintext highlighter-rouge">TextEntry</code> pointer and, after calling the super-class constructor and adding a signal, we assign these local copies of these variables.</p>
+
+<h3 id="the-filesaveitem-callback">The FileSaveItem Callback</h3>
+
+<p>But here in the callback is where changes are more apparent, starting with:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span><span class="p">:</span>
+<span class="kt">void</span> <span class="n">doSomething</span><span class="p">(</span><span class="n">MenuItem</span> <span class="n">mi</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">response</span><span class="p">;</span>
+	<span class="n">FileChooserAction</span> <span class="n">action</span> <span class="p">=</span> <span class="n">FileChooserAction</span><span class="p">.</span><span class="n">SAVE</span><span class="p">;</span>
+	<span class="n">filename</span> <span class="p">=</span> <span class="n">_filenameEntry</span><span class="p">.</span><span class="n">getText</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>The big change here (as expected) is in the <code class="language-plaintext highlighter-rouge">action</code> variable which is now set to <code class="language-plaintext highlighter-rouge">FileChooserAction.SAVE</code> instead of <code class="language-plaintext highlighter-rouge">FileChooserAction.OPEN</code>. We also need that reference to the <code class="language-plaintext highlighter-rouge">TextEntry</code> object (<code class="language-plaintext highlighter-rouge">_filenameEntry</code>) so we can <code class="language-plaintext highlighter-rouge">getText()</code> and <code class="language-plaintext highlighter-rouge">setText()</code> from here.</p>
+
+<p>Now the next chunk:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">filename</span> <span class="p">==</span> <span class="s">"Untitled"</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">FileChooserDialog</span> <span class="n">dialog</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FileChooserDialog</span><span class="p">(</span><span class="s">"Save a File"</span><span class="p">,</span> <span class="n">_parentWindow</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+
+	<span class="n">dialog</span><span class="p">.</span><span class="n">setCurrentName</span><span class="p">(</span><span class="n">_filenameEntry</span><span class="p">.</span><span class="n">getText</span><span class="p">());</span>
+	<span class="n">response</span> <span class="p">=</span> <span class="n">dialog</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+	
+	<span class="k">if</span><span class="p">(</span><span class="n">response</span> <span class="p">==</span> <span class="n">ResponseType</span><span class="p">.</span><span class="n">OK</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">filename</span> <span class="p">=</span> <span class="n">dialog</span><span class="p">.</span><span class="n">getFilename</span><span class="p">();</span>
+		<span class="n">saveFile</span><span class="p">();</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"cancelled."</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="n">dialog</span><span class="p">.</span><span class="n">destroy</span><span class="p">();</span>		
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Earlier, when we were looking at the <code class="language-plaintext highlighter-rouge">TextEntry</code> class, I mentioned that the <code class="language-plaintext highlighter-rouge">filename</code> string, unless empty, is set and reset here in the <code class="language-plaintext highlighter-rouge">FileSaveItem</code> class. This <code class="language-plaintext highlighter-rouge">if</code> block is where that’s done. If <code class="language-plaintext highlighter-rouge">filename</code> is <code class="language-plaintext highlighter-rouge">“Untitled”</code>, we instantiate and open the dialog, get the response, and then test it the same way we did with the <code class="language-plaintext highlighter-rouge">FileOpenItem</code> before destroying the dialog.</p>
+
+<p>Now the <code class="language-plaintext highlighter-rouge">else</code> block:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">saveFile</span><span class="p">();</span>
+	<span class="p">}</span>
+
+	<span class="n">_filenameEntry</span><span class="p">.</span><span class="n">setText</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+			
+<span class="p">}</span> <span class="c1">// doSomething()</span>
+</code></pre></div></div>
+
+<p>This compliment to the above <code class="language-plaintext highlighter-rouge">if</code> block mock-saves the file with whatever text is found in the <code class="language-plaintext highlighter-rouge">TextEntry</code>. In a real application, we’d make sure we’re working with a fully-qualified file and path for the OS we’re running before the actual save. Among other things, we’d make sure the file extension (if any) was in there and matched the file contents.</p>
+
+<p>We could also separate the file name from the path so the path can be preserved in a settings file for next time the application runs. This would be my approach because it’s just handy as all git-out when an application remembers where I was working from one session to the next. But all that’s for another blog post sometime down the road. For now, this illustrates the basics of the process.</p>
+
+<p>And at the very end of the callback, we make sure the file name in the <code class="language-plaintext highlighter-rouge">TextEntry</code> is in sync.</p>
+
+<p><em>Note: If you type in and compile this code, you can conduct tests by typing arbitrary text or deleting all text in the <code class="language-plaintext highlighter-rouge">TextEntry</code> (don’t forget to hit</em> <strong>Enter</strong>) <em>and then selecting the <code class="language-plaintext highlighter-rouge">Save</code> <code class="language-plaintext highlighter-rouge">MenuItem</code> under various circumstances to see how these mechanisms play out.</em></p>
+
+<h3 id="the-appbox">The AppBox</h3>
+
+<p>Just one thing I’d like to point out here… the <code class="language-plaintext highlighter-rouge">filenameEntry</code> pointer is passed to the menuBar, the object at the top of the menu hierarchy, so it can be passed down from object to object until it reaches the <code class="language-plaintext highlighter-rouge">FileSaveItem</code>.</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">AppBox</span> <span class="p">:</span> <span class="n">Box</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">padding</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="n">MyMenuBar</span> <span class="n">menuBar</span><span class="p">;</span>
+	<span class="n">TextEntry</span> <span class="n">filenameEntry</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">(</span><span class="n">Window</span> <span class="n">parentWindow</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">VERTICAL</span><span class="p">,</span> <span class="n">padding</span><span class="p">);</span>
+
+		<span class="n">filenameEntry</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TextEntry</span><span class="p">(</span><span class="n">parentWindow</span><span class="p">);</span>
+		<span class="n">menuBar</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyMenuBar</span><span class="p">(</span><span class="n">parentWindow</span><span class="p">,</span> <span class="n">filenameEntry</span><span class="p">);</span>
+
+		<span class="n">packStart</span><span class="p">(</span><span class="n">menuBar</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		<span class="n">packStart</span><span class="p">(</span><span class="n">filenameEntry</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>		
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class AppBox</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that’s how a simple <code class="language-plaintext highlighter-rouge">Save</code> item can be coded. Next time, we’ll add in <code class="language-plaintext highlighter-rouge">Save as...</code> and do something else that’s often done in applications, display the file name in the <code class="language-plaintext highlighter-rouge">Window</code> header and keep it current.</p>
+
+<p>Until then.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0037-file-open-multiple.html">Previous: Dialog - Open Multiple Files</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0039-file-save-as-dialog.html">Next: SaveAs Dialog</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0038-file-save-dialog.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

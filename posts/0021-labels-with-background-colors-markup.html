@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0021: Labels with Background Colors &amp; Markup | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0021: Labels with Background Colors &amp; Markup" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How to give a GTK Label a unique background colour - a D language tutorial." />
+<meta property="og:description" content="How to give a GTK Label a unique background colour - a D language tutorial." />
+<link rel="canonical" href="http://localhost:4000/posts/0021-labels-with-background-colors-markup.html" />
+<meta property="og:url" content="http://localhost:4000/posts/0021-labels-with-background-colors-markup.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-03-26T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0021: Labels with Background Colors &amp; Markup" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-03-26T00:00:00-04:00","datePublished":"2019-03-26T00:00:00-04:00","description":"How to give a GTK Label a unique background colour - a D language tutorial.","headline":"0021: Labels with Background Colors &amp; Markup","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0021-labels-with-background-colors-markup.html"},"url":"http://localhost:4000/posts/0021-labels-with-background-colors-markup.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/text.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-03-26T00:00:00-04:00" itemprop="datePublished">Tuesday, March 26, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0021-labels-with-background-colors--markup">0021: Labels with Background Colors &amp; Markup</h1>
+
+<p>Whenever you create a <em>GTK</em> <code class="language-plaintext highlighter-rouge">Button</code> and slap text on it, even though it’s not obvious at first glance, the text ends up on a <code class="language-plaintext highlighter-rouge">Label</code>. So, today we’re going to skip the <code class="language-plaintext highlighter-rouge">Button</code> and go straight to the <code class="language-plaintext highlighter-rouge">Label</code>.</p>
+
+<h2 id="label-background-color">Label Background Color</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/008_label/label_01.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/008_label/label_01_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/008_label/label_01_bg_color.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>One thing you can’t do with a <code class="language-plaintext highlighter-rouge">Label</code> is give it a colored background… unless you stick the <code class="language-plaintext highlighter-rouge">Label</code> into an <code class="language-plaintext highlighter-rouge">EventBox</code>.</p>
+
+<h2 id="abbreviated-intro-to-the-eventbox">Abbreviated Intro to the EventBox</h2>
+
+<p>This widget was mostly invented so programmers could reanimate dead things like Labels and make them react to mouse clicks and keyboard input. An <code class="language-plaintext highlighter-rouge">EventBox</code> allows us to let loose our inner Frankenstein, but we can do more then react to events. We can also change the background colour through the use of <code class="language-plaintext highlighter-rouge">StateFlags</code> and overrides.</p>
+
+<p>There is baggage, however. We need to build a colour from scratch before we engage the <code class="language-plaintext highlighter-rouge">EventBox</code>’s <code class="language-plaintext highlighter-rouge">overrideBackgroundColor()</code> function. Here’s what all that looks like:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">RedLabel</span> <span class="p">:</span> <span class="n">EventBox</span>
+<span class="p">{</span>
+	<span class="n">Label</span> <span class="n">label</span><span class="p">;</span>
+	<span class="n">RGBA</span> <span class="n">redishColor</span><span class="p">;</span>
+	<span class="c1">// extra spaces at start and end so it doesn't look crowded</span>
+	<span class="nb">string</span> <span class="n">labelText</span> <span class="p">=</span> <span class="s">"  Label with Red Background  "</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		<span class="n">label</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="n">labelText</span><span class="p">);</span>
+		<span class="n">redishColor</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RGBA</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.420</span><span class="p">,</span> <span class="mf">0.557</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+		<span class="n">overrideBackgroundColor</span><span class="p">(</span><span class="n">StateFlags</span><span class="p">.</span><span class="n">NORMAL</span><span class="p">,</span> <span class="n">redishColor</span><span class="p">);</span>
+		
+		<span class="n">add</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class RedLabel</span>
+</code></pre></div></div>
+
+<p>You’ll notice that we’re deriving a new class from the <code class="language-plaintext highlighter-rouge">EventBox</code>. We could go a step further down the OOP trail and do this up as an interface and derive the <code class="language-plaintext highlighter-rouge">RedLabel</code> from there, leaving us with a pattern for creating <code class="language-plaintext highlighter-rouge">Label</code>s of other colours down the road. But for now, this’ll do.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">labelText</code> string has lots of extra space on either side, but this is for aesthetic reasons. Letting the text touch the edges of the coloured area is like fingernails on a chalkboard to my inner designer. (Mad scientist, designer… yeah, it’s crowded in there.)</p>
+
+<h3 id="color-as-an-rgba-object">Color as an RGBA Object</h3>
+
+<p>Smack in the middle of the constructor is where we build the colour as an <code class="language-plaintext highlighter-rouge">RGBA</code> object. Keep in mind that <em>GTK</em> defines each colour with four channels:</p>
+
+<ul>
+  <li>red,</li>
+  <li>green,</li>
+  <li>blue, and</li>
+  <li>alpha.</li>
+</ul>
+
+<p>And the values for those channels have a range from <strong>0.0 to 1.0</strong> rather than the <strong>0 to 255</strong> (or <strong>#00 to #FF</strong>) we may be used to seeing. You’ll need a calculator to convert from <em>Photoshop</em> or G.I.M.P. palette colours. Of course, you could also use <em>Blender</em> which would be handier because <em>Blender</em> uses that same <strong>0.0 to 1.0</strong> range. No conversion necessary. Besides, <a href="https://www.blender.org/download/"><em>Blender</em>’s free</a>.</p>
+
+<p>The second-last line of the constructor calls <code class="language-plaintext highlighter-rouge">overrideBackgroundColor()</code>, telling it our customized colour goes along with the <code class="language-plaintext highlighter-rouge">NORMAL</code> state of the <code class="language-plaintext highlighter-rouge">EventBox</code>. In other words, the <code class="language-plaintext highlighter-rouge">EventBox</code> doesn’t have to be selected, checked, hovered over, or in focus for our custom colour to appear.</p>
+
+<p>And finally, we drop the <code class="language-plaintext highlighter-rouge">Label</code> into the <code class="language-plaintext highlighter-rouge">EventBox</code>.</p>
+
+<p>Moving right along…</p>
+
+<h2 id="markup-on-a-label">Markup on a Label</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/008_label/label_02.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/008_label/label_02_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/008_label/label_02_markup.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p><em>GTK</em> patterns its markup after HTML, css, and all that web stuff, so if you’re familiar with web development at the hand-coding level, you’re well prepared.</p>
+
+<h3 id="the-markupswitchbutton-class">The MarkupSwitchButton Class</h3>
+
+<p>That’s this thing:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">MarkupSwitchButton</span> <span class="p">:</span> <span class="n">Button</span>
+<span class="p">{</span>
+	<span class="n">MarkupLabel</span> <span class="n">muLabel</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		<span class="n">muLabel</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MarkupLabel</span><span class="p">();</span>
+		<span class="n">add</span><span class="p">(</span><span class="n">muLabel</span><span class="p">);</span>
+		
+		<span class="n">addOnClicked</span><span class="p">(&amp;</span><span class="n">switchStuff</span><span class="p">);</span>
+
+	<span class="p">}</span> <span class="c1">// this()</span>
+
+
+	<span class="kt">void</span> <span class="n">switchStuff</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">muLabel</span><span class="p">.</span><span class="n">markupSwitch</span><span class="p">();</span>
+		
+	<span class="p">}</span> <span class="c1">// switchStuff()</span>
+	
+<span class="p">}</span> <span class="c1">// class MarkupSwitchButton</span>
+</code></pre></div></div>
+
+<p>The class is based on a <code class="language-plaintext highlighter-rouge">Button</code> and we drop in the fancied-up <code class="language-plaintext highlighter-rouge">Label</code>. Then we point the callback at the <code class="language-plaintext highlighter-rouge">markupSwitch()</code> function, a member function of the <code class="language-plaintext highlighter-rouge">MarkupLabel</code> class… which looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">MarkupLabel</span> <span class="p">:</span> <span class="n">Label</span>
+<span class="p">{</span>
+	<span class="nb">string</span> <span class="n">markupText</span> <span class="p">=</span> <span class="s">"&lt;i&gt;Fancy&lt;/i&gt; &lt;b&gt;Schmancy&lt;/b&gt;"</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">onMessage</span> <span class="p">=</span> <span class="s">"Markup is ON."</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">offMessage</span> <span class="p">=</span> <span class="s">"Markup is OFF."</span><span class="p">;</span>
+	<span class="nb">string</span> <span class="n">currentStateMessage</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="n">markupText</span><span class="p">);</span>
+		<span class="n">setUseMarkup</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		<span class="n">currentStateMessage</span> <span class="p">=</span> <span class="n">onMessage</span><span class="p">;</span>
+		<span class="n">markupState</span><span class="p">();</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	<span class="c1">// a function to turn markup on and off</span>
+	<span class="kt">void</span> <span class="n">markupSwitch</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">getUseMarkup</span><span class="p">()</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">setUseMarkup</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+			<span class="n">currentStateMessage</span> <span class="p">=</span> <span class="n">offMessage</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="n">setUseMarkup</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+			<span class="n">currentStateMessage</span> <span class="p">=</span> <span class="n">onMessage</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="n">markupState</span><span class="p">();</span>
+
+	<span class="p">}</span> <span class="c1">// markupSwitch()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">markupState</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="n">currentStateMessage</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// markupState()</span>
+
+<span class="p">}</span> <span class="c1">// class MarkupLabel</span>
+</code></pre></div></div>
+
+<p>Most of this (as is usual by now) is standard stuff. Some notable exceptions being:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">markupText</code> string uses HTML formatting circa 1999, and</li>
+  <li>we have to explicitly tell the <code class="language-plaintext highlighter-rouge">Label</code> to <code class="language-plaintext highlighter-rouge">setUseMarkup()</code> so the markup will show.</li>
+</ul>
+
+<p>And the rest is a function to switch the <code class="language-plaintext highlighter-rouge">Label</code>’s appear and another to relay the <code class="language-plaintext highlighter-rouge">Label</code>’s state to the command shell.</p>
+
+<p>Okay, well that was fun. Keep those cards and letters coming in and I’ll see you next time around.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0020-image-buttons.html">Previous: Image Buttons</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0022-grids.html">Next: Grids</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0021-labels-with-background-colors-markup.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

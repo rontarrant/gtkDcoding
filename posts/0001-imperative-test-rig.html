@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0001: Introduction to the Test Rig | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0001: Introduction to the Test Rig" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction to the GTK TestRig window and how to install syntax highlighter files for PSPad and CodeBlocks - a D language tutorial." />
+<meta property="og:description" content="Introduction to the GTK TestRig window and how to install syntax highlighter files for PSPad and CodeBlocks - a D language tutorial." />
+<link rel="canonical" href="http://localhost:4000/posts/0001-imperative-test-rig.html" />
+<meta property="og:url" content="http://localhost:4000/posts/0001-imperative-test-rig.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-01-15T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0001: Introduction to the Test Rig" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-01-15T00:00:00-05:00","datePublished":"2019-01-15T00:00:00-05:00","description":"Introduction to the GTK TestRig window and how to install syntax highlighter files for PSPad and CodeBlocks - a D language tutorial.","headline":"0001: Introduction to the Test Rig","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0001-imperative-test-rig.html"},"url":"http://localhost:4000/posts/0001-imperative-test-rig.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/window.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-01-15T00:00:00-05:00" itemprop="datePublished">Tuesday, January 15, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0001-introduction-to-the-test-rig">0001: Introduction to the Test Rig</h1>
+
+<p>Before we start examining the test rig code, I’d like to introduce you to a couple of syntax highlighting configurations for two popular text editors on <em>Windows</em>.</p>
+
+<h2 id="ps-pad-and-codeblocks-syntax-highlighters">PS Pad and CodeBlocks Syntax Highlighters</h2>
+
+<p>If you haven’t settled on an editor with support for <em>D</em>, I’d like to make a couple of recommendations. I’ve written lexers for <em>GtkD</em> for two text editors, <em>PSPad</em> and <em>CodeBlocks</em>. You can find them along with instructions for where to install them in the <a href="https://github.com/rontarrant/gtkd_demos/blob/master/downloads/syntax_ps_pad_codeblocks.zip">downloads directory</a> on my <em>GitHub</em> site.</p>
+
+<h2 id="the-test-rig-code">The Test Rig Code</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/001_window/window_02.png" alt="Current example output" />
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																								<!-- modal# -->
+				<span class="close0">&times;</span>																					<!-- close# -->
+				<img class="modal-content" id="img00" />																					<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");																			// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");																				// img#
+			var modalImg = document.getElementById("img00");																		// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];															// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/001_window/window_02_term.png" alt="Current example terminal output" />
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																												<!-- modal# -->
+				<span class="close1">&times;</span>																										<!-- close# -->
+				<img class="modal-content" id="img11" />																									<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																							// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																								// img#
+			var modalImg = document.getElementById("img11");																						// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];																				// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																																<!-- filename (below)-->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/001_window/window_02_imperative.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>This version of the test rig is written in the imperative paradigm. There’s a second one we’ll look at next time that’s written for OOP. And now here’s a breakdown of the test rig code:</p>
+
+<h3 id="imports">Imports</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">MainWindow</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">Main</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">gtk</span><span class="p">.</span><span class="n">Widget</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><em>D</em> uses import statements to pull stuff in from other files. Anything to the left of the dot (<code class="language-plaintext highlighter-rouge">.</code>) is a directory/folder and everything following is a file name without an extension. In this case, files are dragged in from two locations (Note: the top level directory is where the <em>D</em> libraries were installed):</p>
+
+<ul>
+  <li>/src/phobos/std/, and</li>
+  <li>/src/gtkd/gtk/.</li>
+</ul>
+
+<p>And since all these files are <em>D</em>-language modules, the extension being left off is <code class="language-plaintext highlighter-rouge">.d</code>. And each <em>gtkD</em> module contains a <code class="language-plaintext highlighter-rouge">struct</code> that acts as a wrapper and supplies hooks into the <em>GTK</em> libraries.</p>
+
+<h3 id="main">main()</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">main</span><span class="p">(</span><span class="nb">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Just like <em>C</em>, <em>D</em> demands a <code class="language-plaintext highlighter-rouge">main()</code> function unless you’re building a library. This one is defined as:</p>
+
+<ul>
+  <li>having no return value, and</li>
+  <li>takes an array of strings as arguments from the command line.</li>
+</ul>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+</code></pre></div></div>
+
+<p>Yup, there’s that opening curly brace on a line all by itself, just like I said it would be. You all know what it means, so let’s just carry on.</p>
+
+<h3 id="initialization">Initialization</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span> <span class="n">windowTitle</span> <span class="p">=</span> <span class="s">"Test Rig"</span><span class="p">;</span>
+<span class="nb">string</span> <span class="n">message</span> <span class="p">=</span> <span class="s">"Hello GtkD Imperative World"</span><span class="p">;</span>
+
+<span class="n">Main</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>After a couple of string variables get set, the last line calls the <code class="language-plaintext highlighter-rouge">init()</code> function in <em>GtkD</em>’s <code class="language-plaintext highlighter-rouge">Main</code> module. Command line arguments are passed along. We’ll see why sometime down the road.</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MainWindow</span> <span class="n">testRigWindow</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MainWindow</span><span class="p">(</span><span class="n">windowTitle</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This line creates the window the user will see when the application is run. This is the breakdown:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MainWindow</code> (the first time) names the variable type</li>
+  <li><code class="language-plaintext highlighter-rouge">MainWindow</code> (the second time) is the constructor function call,</li>
+  <li><code class="language-plaintext highlighter-rouge">testRigWindow</code> is the variable name we’re assigning to the window created,</li>
+  <li><code class="language-plaintext highlighter-rouge">windowTitle</code> is one of the string variables we instantiated earlier, this one being the window title, and</li>
+  <li><code class="language-plaintext highlighter-rouge">new</code> speaks for itself.</li>
+</ul>
+
+<h3 id="window-close-button">Window Close Button</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">testRigWindow</span><span class="p">.</span><span class="n">addOnDestroy</span><span class="p">(</span><span class="k">delegate</span> <span class="kt">void</span><span class="p">(</span><span class="n">Widget</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span><span class="n">quitApp</span><span class="p">();});</span>
+</code></pre></div></div>
+
+<p>This line breaks down as:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">testRigWindow.addOnDestroy()</code> makes a call to the window’s destructor (opposite of constructor) and interrupts it, allowing us to wedge in another function call of our own before the window dies,</li>
+  <li><code class="language-plaintext highlighter-rouge">quitApp()</code> is the function we want called before the window is destroyed,</li>
+  <li><code class="language-plaintext highlighter-rouge">void(Widget w)</code> defines:
+    <ul>
+      <li>the return type (<code class="language-plaintext highlighter-rouge">void</code>)</li>
+      <li>as well as the argument (<code class="language-plaintext highlighter-rouge">w</code>), and</li>
+      <li>the argument type (<code class="language-plaintext highlighter-rouge">Widget</code>).</li>
+    </ul>
+  </li>
+  <li>delegate says this function definition needs to preserve its scope, so that no matter when it’s called, the arguments passed to it will still be viable.</li>
+</ul>
+
+<h3 id="classic-greeting">Classic Greeting</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">writeln</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This just spits a line out to the command shell with a classic-style greeting using the other instantiated string from the top of <code class="language-plaintext highlighter-rouge">main()</code>.</p>
+
+<h3 id="show-the-window-and-its-contents">Show the Window and its Contents</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">testRigWindow</span><span class="p">.</span><span class="n">showAll</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>We now make another call to the window object to show itself.</p>
+
+<h3 id="start-the-main-loop">Start the Main Loop</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Main</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>And here we hand control over to <em>GTK</em>’s main loop. In a nutshell, the main loop will keep running until it gets a signal to act on from our application.</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">}</span> <span class="c1">// main()</span>
+</code></pre></div></div>
+
+<p>And this is the end of the <code class="language-plaintext highlighter-rouge">main()</code> function. I like to mark the ends of all functions with a comment stating the function’s name in case it’s off screen. No point scrolling back up if I don’t have to.</p>
+
+<h3 id="callback-function">Callback Function</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">quitApp</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Here we define the <code class="language-plaintext highlighter-rouge">quitApp()</code> function to have no return value.</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">string</span> <span class="n">exitMessage</span> <span class="p">=</span> <span class="s">"Bye."</span><span class="p">;</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">exitMessage</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>These two lines are straightforward, a string is instantiated and used by <code class="language-plaintext highlighter-rouge">writeln()</code> to show that we’ve truly interrupted the window’s destroy function, and it does so by spitting out another quick message to the command shell.</p>
+
+<h3 id="clean-up-and-go">Clean up and Go</h3>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Main</span><span class="p">.</span><span class="n">quit</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>And lastly, after we’ve done all we wanna do (perhaps warn the user that the end is nigh) we hand over to Main’s <code class="language-plaintext highlighter-rouge">quit()</code> function. This makes sure our application makes a clean exit.</p>
+
+<p>As with the last example (and with all of them, really) to compile:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dmd -de -w -m64 -Lgtkd.lib &lt;filename&gt;.d
+</code></pre></div></div>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>That’s it for this lesson. We’ve got <em>D</em> and <em>GtkD</em> installed and we’ve done a short test to make sure everything’s working. (Let me know if everything isn’t working, okay?)</p>
+
+<p>Next time, we’ll look at the OOP version of the test rig and build our first button. Until then, happy <em>D</em>-coding and may the widgets be with you.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0000-introduction-to-gtkDcoding.html">Previous: Introduction to GtkDcoding</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0002-oop-test-rig.html">Next: OOP Test Rig Breakdown</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0001-imperative-test-rig.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

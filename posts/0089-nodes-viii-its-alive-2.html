@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0089: Nodes-n-noodles VIII – It’s Alive! (2) | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0089: Nodes-n-noodles VIII – It’s Alive! (2)" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This GTK Tutorial covers animating a node with the mouse for a node-n-noodles demo." />
+<meta property="og:description" content="This GTK Tutorial covers animating a node with the mouse for a node-n-noodles demo." />
+<link rel="canonical" href="http://localhost:4000/posts/0089-nodes-viii-its-alive-2.html" />
+<meta property="og:url" content="http://localhost:4000/posts/0089-nodes-viii-its-alive-2.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-19T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0089: Nodes-n-noodles VIII – It’s Alive! (2)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-11-19T00:00:00-05:00","datePublished":"2019-11-19T00:00:00-05:00","description":"This GTK Tutorial covers animating a node with the mouse for a node-n-noodles demo.","headline":"0089: Nodes-n-noodles VIII – It’s Alive! (2)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0089-nodes-viii-its-alive-2.html"},"url":"http://localhost:4000/posts/0089-nodes-viii-its-alive-2.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/nodes.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-11-19T00:00:00-05:00" itemprop="datePublished">Tuesday, November 19, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0089-nodes-n-noodles-viii--yes-its-alive-2">0089: Nodes-n-noodles VIII – Yes, It’s Alive! (2)</h1>
+
+<p>Last time, we looked at the <code class="language-plaintext highlighter-rouge">NodeLayout</code>, the surface we’ll be moving the nodes around on and also got started with the <code class="language-plaintext highlighter-rouge">MoveableNode</code> by looking at its preamble. This time, we’ll dig into the functions that make moving possible.</p>
+
+<p>Here’s another look at where we’re headed…</p>
+
+<h2 id="the-moveable-node">The Moveable Node</h2>
+
+<!-- 0, 1 -->
+<!-- first occurrence of application and terminal screen shots on a single page -->
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/023_nodes/nodes_08.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/023_nodes/nodes_08_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/023_nodes/nodes_08_drawingarea_node_moveable.d" target="_blank">here</a>.
+	</div>
+</div>
+<!-- end of snippet for first (1st) occurrence of application and terminal screen shots on a single page -->
+
+<h4 id="the-new-functions">The New Functions</h4>
+
+<p>The process of moving a <code class="language-plaintext highlighter-rouge">MoveableNode</code> breaks down into three stages. We need to separate the actions carried out by our code into what’s happening:</p>
+
+<ul>
+  <li>before the move,</li>
+  <li>during the move, and</li>
+  <li>after the move.</li>
+</ul>
+
+<p>And in <em>GTK</em>, that’s a simple matter of hooking up three callback functions:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">onButtonPress</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">onMotionNotify</code>, and</li>
+  <li><code class="language-plaintext highlighter-rouge">onButtonRelease</code>.</li>
+</ul>
+
+<p>But before we look at those, let’s take a quick peek at the getters and setters…</p>
+
+<h4 id="the-getposition-and-setposition-functions">The getPosition() and setPosition() Functions</h4>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kt">void</span> <span class="n">setPosition</span><span class="p">(</span><span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">_nodePosition</span> <span class="p">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">];</span>
+		
+	<span class="p">}</span> <span class="c1">// setPosition()</span>
+
+
+	<span class="kt">double</span><span class="p">[]</span> <span class="n">getPosition</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">return</span><span class="p">(</span><span class="n">_nodePosition</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// getPosition()</span>
+
+</code></pre></div></div>
+
+<p>These each do one simple job. One takes x and y coordinates for the current position of the node and stores them. The other retrieves them. These coordinates are stored and retrieved like this so that as the <code class="language-plaintext highlighter-rouge">MoveableNode</code> moves, the new current position can be measured in relation to the old current position. These functions are called over and over as the node moves, about 60 times per second, so the changes in position being measured are from one frame refresh to the next.</p>
+
+<h4 id="the-setoffset-function">The setOffset() Function</h4>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kt">void</span> <span class="n">setOffset</span><span class="p">(</span><span class="kt">double</span> <span class="n">xOffset</span><span class="p">,</span> <span class="kt">double</span> <span class="n">yOffset</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">_xOffset</span> <span class="p">=</span> <span class="n">xOffset</span><span class="p">;</span>
+		<span class="n">_yOffset</span> <span class="p">=</span> <span class="n">yOffset</span><span class="p">;</span>
+		
+	<span class="p">}</span> <span class="c1">// getOffset()</span>
+
+</code></pre></div></div>
+
+<div class="inpage-frame">
+	<figure class="left">
+		<img src="/images/diagrams/023_nodes/node_offset.png" alt="Figure 1: Offset: the distance (x/y) from the node origin to the mouse pointer at the time it was clicked" style="width: 229px; height: 199px;" />
+		<figcaption>
+			Figure 1: Offset: the distance (x/y) from the node <br />origin to the mouse pointer at the time it was clicked
+		</figcaption>
+	</figure>
+</div>
+
+<p>This function measures the offset from the upper-left corner of the node to the spot where the mouse pointer was when it was clicked.</p>
+
+<p>In the illustration to the left, the red dotted lines show the node origin and the green lines represent where the mouse pointer was when the user clicked the mouse button.</p>
+
+<p>Keep in mind, too, that the node’s origin is in a different space than the pointer position. What do I mean by that?</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">MoveableNode</code> lives on the <code class="language-plaintext highlighter-rouge">NodeLayout</code> and so its origin will be in NodeLayout coordinates. The mouse pointer, when it’s clicked on the node, will be in <code class="language-plaintext highlighter-rouge">MoveableNode</code> coordinates. To keep these straight, I think of <code class="language-plaintext highlighter-rouge">NodeLayout</code> coordinates as the global space and coordinates within the <code class="language-plaintext highlighter-rouge">MoveableNode</code> as local space. And we have to translate between these two spaces to make this all work.</p>
+
+<p>Now, let’s have a look at what needs to happen at each of the three stages mentioned earlier by checking out the callback functions. However, since we’ve covered most of this material before, we’ll just look at the changes…</p>
+
+<h4 id="changes-to-onbuttonpress">Changes to onButtonPress()</h4>
+
+<p>The changes start in the outer <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">else()</code> construct where we check for which hot spot we’re in. Abbreviated, this construct looks like this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">xMouse</span> <span class="p">&gt;</span> <span class="n">dragArea</span><span class="p">[</span><span class="s">"left"</span><span class="p">]</span> <span class="p">&amp;&amp;</span> <span class="n">xMouse</span> <span class="p">&lt;</span> <span class="n">dragArea</span><span class="p">[</span><span class="s">"right"</span><span class="p">]</span> <span class="p">&amp;&amp;</span> <span class="n">yMouse</span> <span class="p">&gt;</span> <span class="n">dragArea</span><span class="p">[</span><span class="s">"top"</span><span class="p">]</span> <span class="p">&amp;&amp;</span> <span class="n">yMouse</span> <span class="p">&lt;</span> <span class="n">dragArea</span><span class="p">[</span><span class="s">"bottom"</span><span class="p">])</span>
+<span class="p">{</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">xMouse</span> <span class="p">&gt;</span> <span class="n">inHotspot</span><span class="p">[</span><span class="s">"left"</span><span class="p">]</span> <span class="p">&amp;&amp;</span> <span class="n">xMouse</span> <span class="p">&lt;</span> <span class="n">inHotspot</span><span class="p">[</span><span class="s">"right"</span><span class="p">]</span> <span class="p">&amp;&amp;</span> <span class="n">yMouse</span> <span class="p">&gt;</span> <span class="n">inHotspot</span><span class="p">[</span><span class="s">"top"</span><span class="p">]</span> <span class="p">&amp;&amp;</span> <span class="n">yMouse</span> <span class="p">&lt;</span> <span class="n">inHotspot</span><span class="p">[</span><span class="s">"bottom"</span><span class="p">])</span>
+<span class="p">{</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">xMouse</span> <span class="p">&gt;</span> <span class="n">outHotspot</span><span class="p">[</span><span class="s">"left"</span><span class="p">]</span> <span class="p">&amp;&amp;</span> <span class="n">xMouse</span> <span class="p">&lt;</span> <span class="n">outHotspot</span><span class="p">[</span><span class="s">"right"</span><span class="p">]</span> <span class="p">&amp;&amp;</span> <span class="n">yMouse</span> <span class="p">&gt;</span> <span class="n">outHotspot</span><span class="p">[</span><span class="s">"top"</span><span class="p">]</span> <span class="p">&amp;&amp;</span> <span class="n">yMouse</span> <span class="p">&lt;</span> <span class="n">outHotspot</span><span class="p">[</span><span class="s">"bottom"</span><span class="p">])</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And this illustrates why we’re using key/value pairs in the hot spot arrays. At a glance, the purpose of <code class="language-plaintext highlighter-rouge">"left"</code> and <code class="language-plaintext highlighter-rouge">"right"</code> are easier to see than <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">1</code>.</p>
+
+<p>So, when we find the right hot spot, one of these three flags is set to <code class="language-plaintext highlighter-rouge">true</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">_dragOn</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">_connectToIn</code>, or</li>
+  <li><code class="language-plaintext highlighter-rouge">_connectToOut</code>.</li>
+</ul>
+
+<p>As mentioned before, we aren’t yet using the <code class="language-plaintext highlighter-rouge">_connectToXX</code> flags, but they’re there as placeholders. Each of these flags sets things up for our next test. In the case where the drag handle was clicked, once the <code class="language-plaintext highlighter-rouge">_dragOn</code> flag is set, we see this:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="n">buttonEvent</span><span class="p">.</span><span class="n">button</span> <span class="k">is</span> <span class="n">button1</span><span class="p">)</span> <span class="c1">// ModifierType.BUTTON1_MASK</span>
+<span class="p">{</span>
+	<span class="c1">// dragArea</span>
+	<span class="n">setOffset</span><span class="p">(</span><span class="k">cast</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="k">cast</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+	<span class="n">GdkEventButton</span><span class="p">*</span> <span class="n">mouseEvent</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">;</span>
+	<span class="n">dragAreaActive</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>With the condition met (the LMB was clicked), we record the position of the mouse pointer in relation to the upper-left corner of the node, then call <code class="language-plaintext highlighter-rouge">dragAreaActive()</code> which, for now, simply reports the offset coordinates. The same, more or less, happens with either of the connection hotspots.</p>
+
+<p>You might think more would happen here, like… well, actually moving the node, but keep in mind that this is only stage one of the process. Now, let’s look at stage two…</p>
+
+<h4 id="another-new-function-onmotionnotify">Another New Function: onMotionNotify()</h4>
+
+<p>If you recall the three stages, this is stage two, the stage where the mouse button is being held down and the mouse pointer is moving:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onMotionNotify</span><span class="p">(</span><span class="n">Event</span> <span class="n">event</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">widget</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">double</span> <span class="n">newX</span><span class="p">,</span> <span class="n">newY</span><span class="p">,</span> <span class="n">pointerX</span><span class="p">,</span> <span class="n">pointerY</span><span class="p">;</span>
+	<span class="n">GdkEventMotion</span><span class="p">*</span> <span class="n">motionEvent</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">motion</span><span class="p">();</span>
+
+	<span class="k">if</span><span class="p">((</span><span class="n">motionEvent</span><span class="p">.</span><span class="n">state</span> <span class="p">==</span> <span class="n">ModifierType</span><span class="p">.</span><span class="n">BUTTON1_MASK</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="n">_dragOn</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span> <span class="c1">// ModifierType.BUTTON1_MASK</span>
+	<span class="p">{</span>
+		<span class="n">pointerX</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+		<span class="n">pointerY</span> <span class="p">=</span> <span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+
+		<span class="k">if</span><span class="p">(</span><span class="n">pointerX</span> <span class="p">&gt;</span> <span class="n">_xOffset</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">newX</span> <span class="p">=</span> <span class="n">_nodePosition</span><span class="p">[</span><span class="n">_xIndex</span><span class="p">]</span> <span class="p">+</span> <span class="p">(</span><span class="n">pointerX</span> <span class="p">-</span> <span class="n">_xOffset</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="n">newX</span> <span class="p">=</span> <span class="n">_nodePosition</span><span class="p">[</span><span class="n">_xIndex</span><span class="p">]</span> <span class="p">-</span> <span class="p">(</span><span class="n">_xOffset</span> <span class="p">-</span> <span class="n">pointerX</span><span class="p">);</span>
+		<span class="p">}</span>
+
+		<span class="k">if</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">button</span><span class="p">.</span><span class="n">y</span> <span class="p">&gt;</span> <span class="n">_yOffset</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">newY</span> <span class="p">=</span> <span class="n">_nodePosition</span><span class="p">[</span><span class="n">_yIndex</span><span class="p">]</span> <span class="p">+</span> <span class="p">(</span><span class="n">pointerY</span> <span class="p">-</span> <span class="n">_yOffset</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="n">newY</span> <span class="p">=</span> <span class="n">_nodePosition</span><span class="p">[</span><span class="n">_yIndex</span><span class="p">]</span> <span class="p">-</span> <span class="p">(</span><span class="n">_yOffset</span> <span class="p">-</span> <span class="n">pointerY</span><span class="p">);</span>
+		<span class="p">}</span>
+
+		<span class="n">_nodeLayout</span><span class="p">.</span><span class="n">moveNodeTo</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">newX</span><span class="p">,</span> <span class="n">newY</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+	
+<span class="p">}</span> <span class="c1">// onMotionNotify()</span>
+</code></pre></div></div>
+
+<p>The first two variables record where the mouse pointer was when the mouse button was clicked (<code class="language-plaintext highlighter-rouge">pointerX</code> and <code class="language-plaintext highlighter-rouge">pointerY</code>).</p>
+
+<p>Then we use an <code class="language-plaintext highlighter-rouge">if()</code> statement to make sure our motion event is taking place <em>while</em> the mouse button is held down. This is crucial to distinguishing between movement with and without the mouse button qualifier and it’s why we masked in those extra signals back in the constructor.</p>
+
+<p>From there, depending on which way the mouse pointer is moving in relation to where it was to start with, we do a different calculation to find the new node position on the <code class="language-plaintext highlighter-rouge">Layout</code> (<code class="language-plaintext highlighter-rouge">newX</code> and <code class="language-plaintext highlighter-rouge">newY</code>), factoring in the offset mentioned above. The first <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">else</code> calculates the <code class="language-plaintext highlighter-rouge">x</code> direction, the second works out the <code class="language-plaintext highlighter-rouge">y</code> direction.</p>
+
+<p>Read carefully through the calculations for <code class="language-plaintext highlighter-rouge">newX</code> and <code class="language-plaintext highlighter-rouge">newY</code>. Note that if either <code class="language-plaintext highlighter-rouge">x</code> or <code class="language-plaintext highlighter-rouge">y</code> is <em>increasing</em> (in other words, the pointer position is <em>less than</em> the offset) the last part of the calculation <em>subtracts the offset</em> from the current pointer position. But if <code class="language-plaintext highlighter-rouge">x</code> or <code class="language-plaintext highlighter-rouge">y</code> is <em>decreasing</em> (because the mouse pointer is moving left or up, respectively), we turn the calculation around. The offset is <em>subtracted from</em> the pointer position.</p>
+
+<p>And finally, right at the bottom, the line:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_nodeLayout</span><span class="p">.</span><span class="n">moveNodeTo</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">newX</span><span class="p">,</span> <span class="n">newY</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>does the actual move.</p>
+
+<p>And because of the nature of this type of operation, <code class="language-plaintext highlighter-rouge">onMotionNotify()</code> is called over and over while the mouse pointer is moving and the button is held down.</p>
+
+<p>So, how do we know when to stop? That’s where the next callback comes in…</p>
+
+<h4 id="the-onbuttonrelease-function">The onButtonRelease() Function</h4>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="n">onButtonRelease</span><span class="p">(</span><span class="n">Event</span> <span class="n">e</span><span class="p">,</span> <span class="n">Widget</span> <span class="n">w</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">_dragOn</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+		
+	<span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+		
+<span class="p">}</span> <span class="c1">// onButtonRelease()</span>
+</code></pre></div></div>
+
+<p>Nothing big happens here, but it’s important. We switch off the flag when the user lets go of the button. That’s it, but because of that, next time through <code class="language-plaintext highlighter-rouge">onMotionNotify()</code>, our first test:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">((</span><span class="n">motionEvent</span><span class="p">.</span><span class="n">state</span> <span class="p">==</span> <span class="n">ModifierType</span><span class="p">.</span><span class="n">BUTTON1_MASK</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="n">_dragOn</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Will fail because we’ve turned off the <code class="language-plaintext highlighter-rouge">_dragOn</code> flag. And that means, nothing else in that function will be processed and node movement will stop.</p>
+
+<p>Now let’s take a step back and get an overview while we recap…</p>
+
+<h3 id="how-the-nodes-position-is-determined">How the Node’s Position is Determined</h3>
+
+<p>In this demo, the node position is set programmatically, so we know where the node is before the first move. From there, each time the user does a click-n-drag, this is what happens:</p>
+
+<ul>
+  <li>in <code class="language-plaintext highlighter-rouge">onButtonPress()</code> we:
+    <ul>
+      <li>figure out which hot spot we’re dealing with,</li>
+      <li>turn on the <code class="language-plaintext highlighter-rouge">_dragOn</code> flag, and</li>
+      <li>record where the mouse pointer is in relation to the upper-left corner of the node,</li>
+    </ul>
+  </li>
+  <li>in <code class="language-plaintext highlighter-rouge">onMotionNotify()</code> we:
+    <ul>
+      <li>we make sure mouse button #1 is depressed and the node movement flag is on,</li>
+      <li>figure out which direction the mouse pointer is moving, and</li>
+      <li>pass the new node position to the function that moves the node,</li>
+    </ul>
+  </li>
+  <li>in <code class="language-plaintext highlighter-rouge">onButtonRelease()</code> we:
+    <ul>
+      <li>we turn off the node movement flag and everything grinds to a halt.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that’s how to move a node around. Next time we revisit this series, we’ll see about connecting two <code class="language-plaintext highlighter-rouge">MoveableNode</code>s with a noodle.</p>
+
+<p>Over the next few posts, we’ll do some special requests from readers and then dig into some hardware stuff (also by special request).</p>
+
+<p>Until then, have a happy and contented coding life.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0088-nodes-vii-its-alive.html">Previous: Node VI - Hotspots</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0090-titlebar-icons.html">Next: Windows - Titlebar Icons</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0089-nodes-viii-its-alive-2.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

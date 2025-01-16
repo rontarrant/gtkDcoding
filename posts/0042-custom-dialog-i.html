@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0042: Dialogs VIII - Customizing (1 of 3) - Aesthetics | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0042: Dialogs VIII - Customizing (1 of 3) - Aesthetics" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How to build an aesthetically-pleasing layout for the content area of a custom GTK Dialog - a D-language tutorial." />
+<meta property="og:description" content="How to build an aesthetically-pleasing layout for the content area of a custom GTK Dialog - a D-language tutorial." />
+<link rel="canonical" href="http://localhost:4000/posts/0042-custom-dialog-i.html" />
+<meta property="og:url" content="http://localhost:4000/posts/0042-custom-dialog-i.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-07T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0042: Dialogs VIII - Customizing (1 of 3) - Aesthetics" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-06-07T00:00:00-04:00","datePublished":"2019-06-07T00:00:00-04:00","description":"How to build an aesthetically-pleasing layout for the content area of a custom GTK Dialog - a D-language tutorial.","headline":"0042: Dialogs VIII - Customizing (1 of 3) - Aesthetics","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0042-custom-dialog-i.html"},"url":"http://localhost:4000/posts/0042-custom-dialog-i.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/dialog.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-06-07T00:00:00-04:00" itemprop="datePublished">Friday, June 7, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0042-dialogs-viii---customizing-1-of-3---aesthetics">0042: Dialogs VIII - Customizing (1 of 3) - Aesthetics</h1>
+
+<p>Today we start a three-part series about building a <code class="language-plaintext highlighter-rouge">Dialog</code> from scratch.</p>
+
+<p>There’s a range of topics to cover, so I’ve split them up like this:</p>
+
+<ul>
+  <li><em>Part I</em> deals with how to create an aesthetically-pleasing widget layout for a custom <code class="language-plaintext highlighter-rouge">Dialog</code>,</li>
+  <li><em>Part II</em> covers user interaction, and</li>
+  <li><em>Part III</em> brings it all together.</li>
+</ul>
+
+<p>There are two code example files today and they illustrate before and after states of using design principles.</p>
+
+<p>The first one is…</p>
+
+<h2 id="life-before-aesthetics">Life Before Aesthetics</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/009_grid/grid_03.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																	<!-- modal# -->
+				<span class="close0">&times;</span>															<!-- close# -->
+				<img class="modal-content" id="img00" />															<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");														// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");															// img#
+			var modalImg = document.getElementById("img00");													// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];											// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/009_grid/grid_03_term.png" alt="Current example terminal output" />		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																				<!-- modal# -->
+				<span class="close1">&times;</span>																		<!-- close# -->
+				<img class="modal-content" id="img11" />																		<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																	// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																		// img#
+			var modalImg = document.getElementById("img11");																// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];														// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																								<!-- ------------- filename (below) --------- -->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/009_grid/grid_03_non_aesthetic_layout.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>But I’ll let you know right now, the only code quoted here is from the second one because… well, there’s no point in showing the code for a bad layout, right? <em>Seeing</em> the bad layout will be traumatizing enough. So…</p>
+
+<h2 id="life-after-we-study-design">Life After we Study Design</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/009_grid/grid_04.png" alt="Current example output" />		<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																<!-- modal# -->
+				<span class="close2">&times;</span>														<!-- close# -->
+				<img class="modal-content" id="img22" />														<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");													// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");														// img#
+			var modalImg = document.getElementById("img22");												// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];										// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/009_grid/grid_04_term.png" alt="Current example terminal output" /> 		<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																			<!-- modal# -->
+				<span class="close3">&times;</span>																	<!-- close# -->
+				<img class="modal-content" id="img33" />																	<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																	// img#
+			var modalImg = document.getElementById("img33");															// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];													// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																							<!--------- filename (below) ------------>
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/009_grid/grid_04_aesthetic_layout.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<h2 id="anatomy-of-a-dialog-window">Anatomy of a Dialog Window</h2>
+
+<p>A custom <code class="language-plaintext highlighter-rouge">Dialog</code> has two areas you need to deal with:</p>
+
+<ul>
+  <li>the content area, and</li>
+  <li>the action area.</li>
+</ul>
+
+<p>It’s not complicated, but besides presenting information and soliciting user interaction, we also have to come up with a way to make everything we stuff into the content area look good. Since the <code class="language-plaintext highlighter-rouge">Table</code> widget has been deprecated, the easiest way to do this now is with a <code class="language-plaintext highlighter-rouge">Grid</code>.</p>
+
+<p>But before we get to how the content area is built, I’d like to go over a few basics of how to make an appealing layout. This isn’t only about lining things up, but also keeping them from looking cramped and helping the user’s eye see the important stuff.</p>
+
+<h2 id="a-brief-introduction-to-design">A Brief Introduction to Design</h2>
+
+<p><em>Note: Be advised that when I speak of layout, I’m not talking about the <code class="language-plaintext highlighter-rouge">Layout</code> <code class="language-plaintext highlighter-rouge">Widget</code>. I’m talking about the design concept of layout.</em></p>
+
+<p>The approach I’ve taken to controlling layout is elementary and easy to implement:</p>
+
+<ul>
+  <li>each widget in a layout is placed in its own <code class="language-plaintext highlighter-rouge">Box</code>, and</li>
+  <li>the boxes are then stuffed into <code class="language-plaintext highlighter-rouge">Grid</code> squares.</li>
+</ul>
+
+<p>This allows:</p>
+
+<ul>
+  <li>each <code class="language-plaintext highlighter-rouge">Box</code> to have elbow room, that is: separation from the contents of other <code class="language-plaintext highlighter-rouge">Box</code>es in the design, and</li>
+  <li>column or row justification can be done easily on a column-by-column or row-by-row basis.</li>
+</ul>
+
+<p>Because I learned about design in art college, I feel more comfortable speaking that language when it comes to layout. So I’ve taken the liberty of translating from coder speak to artist speak so you can then take your pick when you’re doing your own stuff. Here’s what I came up with…</p>
+
+<p>In design terms, alignment is:</p>
+
+<ul>
+  <li>left-justified,</li>
+  <li>right-justified, or</li>
+  <li>centre-justified.</li>
+</ul>
+
+<p>Anyone who’s used a word processor or desktop publishing application knows these terms, too, so I came up with this <code class="language-plaintext highlighter-rouge">enum</code>:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">BoxJustify</span>
+<span class="p">{</span>
+	<span class="n">LEFT</span> <span class="p">=</span> <span class="mi">0</span><span class="p">,</span>
+	<span class="n">RIGHT</span> <span class="p">=</span> <span class="mi">1</span><span class="p">,</span>
+	<span class="n">CENTER</span> <span class="p">=</span> <span class="mi">2</span><span class="p">,</span>
+	<span class="n">TOP</span> <span class="p">=</span> <span class="mi">3</span><span class="p">,</span>
+	<span class="n">BOTTOM</span> <span class="p">=</span> <span class="mi">4</span><span class="p">,</span>
+	
+<span class="p">}</span> <span class="c1">// PaBoxJustify</span>
+</code></pre></div></div>
+
+<p>This allows us to speak in designerly terms. And by the way, <code class="language-plaintext highlighter-rouge">CENTER</code> is used for either horizontal or vertical centering.</p>
+
+<h2 id="padding-vs-border--margin">Padding vs. Border &amp; Margin</h2>
+
+<p>There are at three ways to get extra space around a widget:</p>
+
+<ul>
+  <li>padding,</li>
+  <li>border, and</li>
+  <li>margin.</li>
+</ul>
+
+<p>And here’s how <em>GTK</em> uses them:</p>
+
+<ul>
+  <li>padding controls the space around all four sides of a <code class="language-plaintext highlighter-rouge">Widget</code> with a single setting,</li>
+  <li>border does the same, and</li>
+  <li>margin is used to set top, bottom, right and left individually.</li>
+</ul>
+
+<p>Technically, padding is inside the confines of the widget and border is outside, but the effect for our purposes is the same with either. In deciding which to use, I looked at which widgets have each of these:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">Widget</code> and all its sub-classes have margin settings,</li>
+  <li>the <code class="language-plaintext highlighter-rouge">Container</code> and all its sub-classes have border settings, and</li>
+  <li>only the <code class="language-plaintext highlighter-rouge">Box</code> has padding.</li>
+</ul>
+
+<p>That means we can use the border property of any <code class="language-plaintext highlighter-rouge">Container</code>-derived <code class="language-plaintext highlighter-rouge">Widget</code> to get the control needed to make a layout look good.</p>
+
+<h3 id="so-whats-the-margin-for">So what’s the margin for?</h3>
+
+<p>One of the things designers discovered eons ago is that having the same amount of space at the top and bottom of a design doesn’t quite look right. A bit of extra space at the bottom makes things feel more balanced. And ‘feel’ is the right word because it’s an optical illusion, but such is the nature of the human mind.</p>
+
+<p>So, here are the guidelines I use:</p>
+
+<ul>
+  <li>set overall spacing with <code class="language-plaintext highlighter-rouge">setBorderWidth()</code>, and</li>
+  <li>use <code class="language-plaintext highlighter-rouge">setMarginBottom()</code> for that final, aesthetic touch.</li>
+</ul>
+
+<p>Also, this blog tries to be as forward-facing as possible and with <em>GTK 4.0</em> deprecating the use of padding, that leaves us with border and margin.</p>
+
+<p>Keep in mind that the border is the space between a <code class="language-plaintext highlighter-rouge">Container</code> and its parent, so:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">Grid</code>’s border is between itself and the <code class="language-plaintext highlighter-rouge">Dialog</code>’s <em>Content Area</em>, and</li>
+  <li>the <code class="language-plaintext highlighter-rouge">Box</code>’s border is between itself and the <code class="language-plaintext highlighter-rouge">Grid</code> square(s) containing it.</li>
+</ul>
+
+<p>We don’t need to bother with the spacing between a child widget and its <code class="language-plaintext highlighter-rouge">Box</code> container (and that’s a good thing because most child <code class="language-plaintext highlighter-rouge">Widget</code>s won’t give us that control anyway). Now let’s get into the classes…</p>
+
+<h2 id="the-hpadbox">The HPadBox</h2>
+
+<p>Here’s the initialization chunk:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">HPadBox</span> <span class="p">:</span> <span class="n">Box</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="n">Widget</span> <span class="n">_widget</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">_globalPadding</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">_padding</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">bool</span> <span class="n">fill</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+	<span class="kt">bool</span> <span class="n">expand</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">_borderWidth</span> <span class="p">=</span> <span class="mi">5</span><span class="p">;</span>
+
+	<span class="n">BoxJustify</span> <span class="n">_pJustify</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>We still have variables for <code class="language-plaintext highlighter-rouge">_globalPadding</code> and <code class="language-plaintext highlighter-rouge">_padding</code>, but they’re both set to <code class="language-plaintext highlighter-rouge">0</code> so they don’t get in the way… for now. <em>GTK 4.0</em> compliance will mean calls to the <code class="language-plaintext highlighter-rouge">Box</code> constructor will need one less argument, but we’ll deal with that when 4.0 is released because for now, we still need them:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">Box</code> constructor still expects global padding, and</li>
+  <li>the <code class="language-plaintext highlighter-rouge">packStart()</code> or <code class="language-plaintext highlighter-rouge">packEnd()</code> functions expect local padding.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">_pJustify</code> variable will be one of the values from the <code class="language-plaintext highlighter-rouge">BoxJustify</code> enum discussed in <em>A Lighting-fast Introduction to Design</em> above.</p>
+
+<h2 id="the-constructor">The Constructor</h2>
+
+<p>Here’s the meat-n-taters of this class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="k">public</span><span class="p">:</span>
+	<span class="k">this</span><span class="p">(</span><span class="n">Widget</span> <span class="n">widget</span><span class="p">,</span> <span class="n">BoxJustify</span> <span class="n">pJustify</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">_widget</span> <span class="p">=</span> <span class="n">widget</span><span class="p">;</span>
+		<span class="n">_pJustify</span> <span class="p">=</span> <span class="n">pJustify</span><span class="p">;</span>
+		
+		<span class="k">super</span><span class="p">(</span><span class="n">Orientation</span><span class="p">.</span><span class="n">HORIZONTAL</span><span class="p">,</span> <span class="n">_globalPadding</span><span class="p">);</span>
+
+		<span class="k">if</span><span class="p">(</span><span class="n">_pJustify</span> <span class="p">==</span> <span class="n">BoxJustify</span><span class="p">.</span><span class="n">LEFT</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">packStart</span><span class="p">(</span><span class="n">_widget</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">_padding</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">_pJustify</span> <span class="p">==</span> <span class="n">BoxJustify</span><span class="p">.</span><span class="n">RIGHT</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">packEnd</span><span class="p">(</span><span class="n">_widget</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">_padding</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="n">add</span><span class="p">(</span><span class="n">_widget</span><span class="p">);</span>
+		<span class="p">}</span>	
+		
+		<span class="n">setBorderWidth</span><span class="p">(</span><span class="n">_borderWidth</span><span class="p">);</span>
+
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class HPadBox</span>
+</code></pre></div></div>
+
+<p>Because the constructor’s first argument is a <code class="language-plaintext highlighter-rouge">Widget</code>, it’ll accept whatever widget you wanna drop into it… a <code class="language-plaintext highlighter-rouge">Label</code>, an <code class="language-plaintext highlighter-rouge">Entry</code>, whatever. We’ll talk more about that mechanism in a moment, but first let’s finish off this justification stuff…</p>
+
+<p><code class="language-plaintext highlighter-rouge">Box</code>es in the latest incarnation of <em>GTK</em> are genericized. <em>GTK 2.x</em> had an <code class="language-plaintext highlighter-rouge">HBox</code> and a <code class="language-plaintext highlighter-rouge">VBox</code>, but now we have the plain ole <code class="language-plaintext highlighter-rouge">Box</code> and—you’ll recognize this from earlier blog posts—the Box’s constructor is passed a directional <code class="language-plaintext highlighter-rouge">Orientation</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Orientation.HORIZONTAL</code>, or</li>
+  <li><code class="language-plaintext highlighter-rouge">Orientation.VERTICAL</code>.</li>
+</ul>
+
+<p>And because the <code class="language-plaintext highlighter-rouge">Box</code> is generic, the orientation changes the meaning of <code class="language-plaintext highlighter-rouge">packStart()</code> or <code class="language-plaintext highlighter-rouge">packEnd()</code>:</p>
+
+<ul>
+  <li>with <code class="language-plaintext highlighter-rouge">Orientation.HORIZONTAL</code>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">packStart()</code> means left justify, and</li>
+      <li><code class="language-plaintext highlighter-rouge">packEnd()</code> means right justify,</li>
+    </ul>
+  </li>
+  <li>with <code class="language-plaintext highlighter-rouge">Orientation.VERTICAL</code>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">packStart()</code> means top justify, and</li>
+      <li><code class="language-plaintext highlighter-rouge">packEnd()</code> means bottom justify.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>With either <code class="language-plaintext highlighter-rouge">Orientation</code>, <code class="language-plaintext highlighter-rouge">add()</code> means center justify.</p>
+
+<p>You can probably guess how this all pans out, but here it is in black-n-white: the <code class="language-plaintext highlighter-rouge">BoxJustify</code> enum values translate to:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Orientation.HORIZONTAL</code>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">LEFT</code> = <code class="language-plaintext highlighter-rouge">packStart()</code>,</li>
+      <li><code class="language-plaintext highlighter-rouge">RIGHT</code> = <code class="language-plaintext highlighter-rouge">packEnd()</code>, or</li>
+      <li><code class="language-plaintext highlighter-rouge">CENTER</code> = <code class="language-plaintext highlighter-rouge">add()</code>,</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Orientation.VERTICAL</code>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">TOP</code> = <code class="language-plaintext highlighter-rouge">packStart()</code>,</li>
+      <li><code class="language-plaintext highlighter-rouge">BOTTOM</code> = <code class="language-plaintext highlighter-rouge">packEnd()</code>, and</li>
+      <li><code class="language-plaintext highlighter-rouge">CENTER</code> = <code class="language-plaintext highlighter-rouge">add()</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>This example doesn’t have a <code class="language-plaintext highlighter-rouge">VPadBox</code>, but you’ve got the tools now to figure out how that would go together. Now let’s move on to the child widget used with <code class="language-plaintext highlighter-rouge">HPadBox</code>…</p>
+
+<h2 id="the-hpadlabel">The HPadLabel</h2>
+
+<p>This class is derived from the <code class="language-plaintext highlighter-rouge">HPadBox</code> class, but not the <code class="language-plaintext highlighter-rouge">Label</code> class. Instead, the Label becomes a property of the class and is passed to the super-class constructor where it’s treated as a generic, incoming <code class="language-plaintext highlighter-rouge">Widget</code>. <em>D</em> only allows a class to inherit from a single super-class, but this way we can sidestep that limitation and sneak in a second one… sort of:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">HPadLabel</span> <span class="p">:</span> <span class="n">HPadBox</span>
+<span class="p">{</span>
+	<span class="n">Label</span> <span class="n">label</span><span class="p">;</span>
+	
+	<span class="k">this</span><span class="p">(</span><span class="nb">string</span> <span class="n">text</span><span class="p">,</span> <span class="n">BoxJustify</span> <span class="n">pJustify</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">label</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Label</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+		
+		<span class="k">super</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">pJustify</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class HPadLabel</span>
+</code></pre></div></div>
+
+<p>And that takes care of keeping our widgets separated from each other within our GUI design. Now let’s look at how the entire design fends off border encroachment by the <code class="language-plaintext highlighter-rouge">Window</code>.</p>
+
+<p><em>Note: In case you didn’t want to take the implied challenge above…</em></p>
+
+<p><em>A <code class="language-plaintext highlighter-rouge">VPadBox</code> can be interpolated from the <code class="language-plaintext highlighter-rouge">HPadBox</code> by changing the name and switching <code class="language-plaintext highlighter-rouge">LEFT</code> to <code class="language-plaintext highlighter-rouge">TOP</code> and <code class="language-plaintext highlighter-rouge">RIGHT</code> to <code class="language-plaintext highlighter-rouge">BOTTOM</code>. Then you could derive a whole set of <code class="language-plaintext highlighter-rouge">VPadXxxx</code> widgets to go with it. And as usual, if you want to discuss any of this, I invite you to respond to one of the</em> GtkD <em>threads in the</em> Learn <em>section of the</em> D-lang <em>forum or start a thread on <a href="http://gtkd.org">GtkD.org</a> (see the links below).</em></p>
+
+<h2 id="the-padgrid">The PadGrid</h2>
+
+<p>This is pretty straightforward:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">PadGrid</span> <span class="p">:</span> <span class="n">Grid</span>
+<span class="p">{</span>
+	<span class="k">private</span><span class="p">:</span>
+	<span class="kt">int</span> <span class="n">_borderWidth</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+	<span class="n">HPadLabel</span> <span class="n">zeroZero</span><span class="p">,</span> <span class="n">oneZero</span><span class="p">,</span> <span class="n">zeroOne</span><span class="p">,</span> <span class="n">oneOne</span><span class="p">;</span>
+	
+	<span class="k">public</span><span class="p">:</span>
+	<span class="k">this</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		<span class="n">setBorderWidth</span><span class="p">(</span><span class="n">_borderWidth</span><span class="p">);</span>
+		<span class="n">setMarginBottom</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+		<span class="c1">// row 0</span>
+		<span class="n">zeroZero</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HPadLabel</span><span class="p">(</span><span class="s">"this is a long bit of text"</span><span class="p">,</span> <span class="n">BoxJustify</span><span class="p">.</span><span class="n">RIGHT</span><span class="p">);</span>
+		<span class="n">attach</span><span class="p">(</span><span class="n">zeroZero</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		
+		<span class="n">oneZero</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HPadLabel</span><span class="p">(</span><span class="s">"cell 1, 0"</span><span class="p">,</span> <span class="n">BoxJustify</span><span class="p">.</span><span class="n">LEFT</span><span class="p">);</span>
+		<span class="n">attach</span><span class="p">(</span><span class="n">oneZero</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+		<span class="c1">// row 1</span>
+		<span class="n">zeroOne</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HPadLabel</span><span class="p">(</span><span class="s">"and this is shorter"</span><span class="p">,</span> <span class="n">BoxJustify</span><span class="p">.</span><span class="n">RIGHT</span><span class="p">);</span>
+		<span class="n">attach</span><span class="p">(</span><span class="n">zeroOne</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+				
+		<span class="n">oneOne</span> <span class="p">=</span> <span class="k">new</span> <span class="n">HPadLabel</span><span class="p">(</span><span class="s">"cell 1, 1"</span><span class="p">,</span> <span class="n">BoxJustify</span><span class="p">.</span><span class="n">LEFT</span><span class="p">);</span>
+		<span class="n">attach</span><span class="p">(</span><span class="n">oneOne</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+<span class="p">}</span> <span class="c1">// class PadGrid</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">_borderWidth</code> variable does the heavy lifting while <code class="language-plaintext highlighter-rouge">setMarginBottom()</code> adds the aesthetic touch.</p>
+
+<p>Also, in case it isn’t obvious, the <code class="language-plaintext highlighter-rouge">HPadLabel</code>s are named for their positions within the <code class="language-plaintext highlighter-rouge">Grid</code>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>And that’s it for this time. Far from being an exhaustive or even comprehensive guide to design and layout, follow these few rules and you’ll at least be headed in the right direction:</p>
+
+<ul>
+  <li>separate each widget from its parent and siblings by stuffing it into a <code class="language-plaintext highlighter-rouge">HPadBox</code>, <code class="language-plaintext highlighter-rouge">VPadBox</code>, or something of your own devising. Then use <code class="language-plaintext highlighter-rouge">setBorderWidth()</code> to give them elbow room,</li>
+  <li>stuff each <code class="language-plaintext highlighter-rouge">HPadBox</code> into a <code class="language-plaintext highlighter-rouge">PadGrid</code> and separate it from the containing widget (<code class="language-plaintext highlighter-rouge">Window</code>, Content Area, etc.) with <code class="language-plaintext highlighter-rouge">setBorderWidth()</code>,</li>
+  <li>set up left-, right-, top-, or bottom-alignment with the <code class="language-plaintext highlighter-rouge">BoxJustify</code> enum, and</li>
+  <li>give the <code class="language-plaintext highlighter-rouge">PadGrid</code> an aesthetic bit of extra space via <code class="language-plaintext highlighter-rouge">setMarginBottom()</code>.</li>
+</ul>
+
+<p>Neither be stingy nor overzealous with border width or the bottom margin. Use glossy print magazine page layouts as guides to this whole space-around-elements thing.</p>
+
+<p>See you next time for <em>Part II</em>.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0041-colorchooserdialog.html">Previous: ColorChooserDialog</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0043-custom-dialog-ii.html">Next: Dialog Action Area</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0042-custom-dialog-i.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

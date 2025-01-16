@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>0005: Window Size | gtkDcoding</title>
+<meta name="generator" content="Jekyll v4.3.4" />
+<meta property="og:title" content="0005: Window Size" />
+<meta name="author" content="Ron Tarrant" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How to preset and reset the size of a GTK Window - a D language tutorial." />
+<meta property="og:description" content="How to preset and reset the size of a GTK Window - a D language tutorial." />
+<link rel="canonical" href="http://localhost:4000/posts/0005-window-size.html" />
+<meta property="og:url" content="http://localhost:4000/posts/0005-window-size.html" />
+<meta property="og:site_name" content="gtkDcoding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-01-29T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="0005: Window Size" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ron Tarrant"},"dateModified":"2019-01-29T00:00:00-05:00","datePublished":"2019-01-29T00:00:00-05:00","description":"How to preset and reset the size of a GTK Window - a D language tutorial.","headline":"0005: Window Size","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/0005-window-size.html"},"url":"http://localhost:4000/posts/0005-window-size.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/css/style.css" /><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="gtkDcoding" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">gtkDcoding</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/index-reverse/">Posts in Date Order</a><a class="page-link" href="/topics/">Blog Posts by Topic</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<link rel="stylesheet" href="/css/font_size.css" />
+		<link rel="stylesheet" href="/css/figure.css" />
+		<link rel="stylesheet" href="/css/topics/window.css" />  <!-- sub in the tag/topic -->
+		<link rel="stylesheet" href="/css/modal.css" />
+		<link rel="stylesheet" href="/css/post.css" />
+		<link rel="stylesheet" href="/css/mascot_effects.css" />
+
+		
+		
+		<p class="post-meta">
+		<time class="dt-published" datetime="2019-01-29T00:00:00-05:00" itemprop="datePublished">Tuesday, January 29, 2019
+		</time>• by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Ron Tarrant</span></span></p>
+	</header>
+
+	<div class="post-content e-content" itemprop="articleBody">
+		<div class="skew-line"></div>
+		<h1 id="0005-window-size">0005: Window Size</h1>
+
+<p>I’ve prepared two code files this time, a straight set-the-size example and another with a button for resetting size. Both examples are based on the OOP test rig window.</p>
+
+<h1 id="pre-size-a-window">Pre-Size a Window</h1>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img0" src="/images/screenshots/001_window/window_04.png" alt="Current example output" />	<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal0" class="modal">																								<!-- modal# -->
+				<span class="close0">&times;</span>																					<!-- close# -->
+				<img class="modal-content" id="img00" />																					<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal0");																			// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img0");																				// img#
+			var modalImg = document.getElementById("img00");																		// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close0")[0];															// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img1" src="/images/screenshots/001_window/window_04_term.png" alt="Current example terminal output" /> <!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal1" class="modal">																												<!-- modal# -->
+				<span class="close1">&times;</span>																										<!-- close# -->
+				<img class="modal-content" id="img11" />																									<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal1");																							// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img1");																								// img#
+			var modalImg = document.getElementById("img11");																						// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close1")[0];																				// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																																<!-- filename (below)-->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/001_window/window_04_sized.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>Now let’s talk about the next code example.</p>
+
+<h2 id="window-resized">Window Resized</h2>
+
+<p>There’s only one new line of code here and it appears in the <code class="language-plaintext highlighter-rouge">TestRigWindow</code>’s constructor:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">setSizeRequest</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>You may wonder why size is being requested instead of demanded, but that’s a question for the original <em>GTK+</em> devs and it really doesn’t matter, anyway.</p>
+
+<p>The numbers are, of course, the x and y dimensions of the window we’re opening.</p>
+
+<p>Simple. Now let’s look at something a bit more interesting…</p>
+
+<h2 id="size-a-window-on-the-fly">Size a Window on the Fly</h2>
+
+<div class="screenshot-frame">
+	<div class="frame-header">
+		Results of this example:
+	</div>
+	<div class="frame-screenshot">
+		<figure>
+			<img id="img2" src="/images/screenshots/001_window/window_05.png" alt="Current example output" />							<!-- img# -->
+			
+			<!-- Modal for screenshot -->
+			<div id="modal2" class="modal">																								<!-- modal# -->
+				<span class="close2">&times;</span>																					<!-- close# -->
+				<img class="modal-content" id="img22" />																					<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal2");																			// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img2");																				// img#
+			var modalImg = document.getElementById("img22");																		// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close2")[0];															// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+			<figcaption>
+			Current example output
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-terminal">
+		<figure class="right">
+			<img id="img3" src="/images/screenshots/001_window/window_05_term.png" alt="Current example terminal output" /> 					<!-- img#, filename -->
+
+			<!-- Modal for terminal shot -->
+			<div id="modal3" class="modal">																												<!-- modal# -->
+				<span class="close3">&times;</span>																										<!-- close# -->
+				<img class="modal-content" id="img33" />																									<!-- img## -->
+				<div id="caption"></div>
+			</div>
+			
+			<script>
+			// Get the modal
+			var modal = document.getElementById("modal3");																							// modal#
+			
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById("img3");																								// img#
+			var modalImg = document.getElementById("img33");																						// img##
+			var captionText = document.getElementById("caption");
+
+			img.onclick = function()
+			{
+			  modal.style.display = "block";
+			  modalImg.src = this.src;
+			  captionText.innerHTML = this.alt;
+			}
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close3")[0];																				// close#
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function()
+			{ 
+				modal.style.display = "none";
+			}
+			</script>
+
+			<figcaption>
+				Current example terminal output (click for enlarged view)
+			</figcaption>
+		</figure>
+	</div>
+
+	<div class="frame-footer">																																<!-- filename (below)-->
+		The code file for this example is available <a href="https://github.com/rontarrant/gtkd_demos/blob/master/001_window/window_05_other_sized.d" target="_blank">here</a>.
+	</div>
+</div>
+
+<p>In the second code file, instead of requesting a size, we demand it:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="n">setDefaultSize</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Why? Sometimes you wanna override the window manager (POSIX and POSIX-like operating systems) and sometimes you don’t. The philosophy regarding when ‘to’ and when ‘not to’ is beyond the scope of this blog (mainly because I have no freaking idea).</p>
+
+<p>But the interesting part comes further down where I’ve defined a class called <code class="language-plaintext highlighter-rouge">ResizeButton</code>:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="n">ResizeButton</span> <span class="p">:</span> <span class="n">Button</span>
+<span class="p">{</span>
+	<span class="k">this</span><span class="p">(</span><span class="n">MainWindow</span> <span class="n">window</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">super</span><span class="p">(</span><span class="s">"Resize Window"</span><span class="p">);</span>
+		<span class="n">addOnClicked</span><span class="p">(</span><span class="k">delegate</span> <span class="kt">void</span><span class="p">(</span><span class="n">Button</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="n">resizeMe</span><span class="p">(</span><span class="n">window</span><span class="p">);</span> <span class="p">});</span>
+		
+	<span class="p">}</span> <span class="c1">// this()</span>
+	
+	
+	<span class="kt">void</span> <span class="n">resizeMe</span><span class="p">(</span><span class="n">MainWindow</span> <span class="n">window</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+		
+		<span class="n">window</span><span class="p">.</span><span class="n">getSize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+		<span class="n">writeln</span><span class="p">(</span><span class="s">"x = "</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s">"y = "</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+		
+		
+		<span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="p">&lt;</span> <span class="mi">640</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">window</span><span class="p">.</span><span class="n">setSizeRequest</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="p">&gt;</span> <span class="mi">641</span><span class="p">)</span>
+		<span class="p">{</span>
+			
+			<span class="n">writeln</span><span class="p">(</span><span class="s">"Minimum size is now set. You can shrink it, but not below the minimum size."</span><span class="p">);</span>
+			<span class="n">window</span><span class="p">.</span><span class="n">setSizeRequest</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">480</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// class ResizeButton</span>
+</code></pre></div></div>
+
+<p>Right off the bat, the constructor takes its parent window as an argument. That’s so we can use one of the window’s functions (I’ll get to that in a minute). The window argument could also be defined as type <code class="language-plaintext highlighter-rouge">TestRigWindow</code>.</p>
+
+<p>And after the call to <code class="language-plaintext highlighter-rouge">super()</code> to create the window, the window argument is passed along to the callback function.</p>
+
+<h3 id="the-resizeme-callback">The resizeMe() Callback</h3>
+
+<p>Here we dabble in a little contract programming, yet another of the <em>D</em> language’s cool features. Back in my <em>C</em> days, I often wanted to return more than one value from a function, but of course, that was impossible at the time. The only recourse was to either rewrite the code as two functions or use a <code class="language-plaintext highlighter-rouge">struct</code> to hold multiple values.</p>
+
+<p>But <em>D</em> has contracts and that means we can have a function definition like this in the <code class="language-plaintext highlighter-rouge">Window</code> class:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">void</span> <span class="n">getSize</span><span class="p">(</span><span class="k">out</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="k">out</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>You’ll notice that <code class="language-plaintext highlighter-rouge">getSize()</code> returns nothing. But looking a bit closer, the ‘out’ keyword appears in front of both function arguments. That means that we can define two variables, <code class="language-plaintext highlighter-rouge">x</code> for width and <code class="language-plaintext highlighter-rouge">y</code> for height, and then pass them along to <code class="language-plaintext highlighter-rouge">getSize()</code> and when the function returns, the calling function has access to the new values set in <code class="language-plaintext highlighter-rouge">getSize()</code>. It’s more or less the same as passing the variables in by reference in <em>C</em> (or in other words, passing the variable’s addresses instead of the variables themselves). But <em>D</em> gives us this more formalized way of doing it which makes this possible:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+<span class="n">window</span><span class="p">.</span><span class="n">getSize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Then we do something <code class="language-plaintext highlighter-rouge">if</code>-fy (and <code class="language-plaintext highlighter-rouge">else</code>-y), setting the window size with a request this time. In fact, if we use <code class="language-plaintext highlighter-rouge">setDefaultSize()</code> in these callbacks, nothing happens. So we have to use <em>setSizeRequest()</em>.</p>
+
+<p>NB: Use of the keywords <code class="language-plaintext highlighter-rouge">in</code>, <code class="language-plaintext highlighter-rouge">out</code>, and <code class="language-plaintext highlighter-rouge">ref</code> in function definitions can be thought of in the following terms:</p>
+
+<ul>
+  <li><em><code class="language-plaintext highlighter-rouge">in</code>: the variable’s value is set by the caller and cannot be changed by the called function,</em></li>
+  <li><em><code class="language-plaintext highlighter-rouge">out</code>: the variable’s value is set by the caller and can be changed by the called function, but if the function is called repeatedly, the value is reset before each call</em></li>
+  <li><em><code class="language-plaintext highlighter-rouge">ref</code>: the value is set by the caller, can be changed by the called function, and retains its new value even if called repeatedly.</em></li>
+</ul>
+
+<p>And something else interesting happens here. <em>GTK</em> deals in minimum sizes, not maximum or absolute sizes, therefore we can set a window’s minimum size, but that’s it. And that affects the behaviour of our example.</p>
+
+<p>Once the example is running – before clicking the <code class="language-plaintext highlighter-rouge">Resize Window</code> button – grab the window’s size widget and make the window smaller. No problem. Now click the <code class="language-plaintext highlighter-rouge">Resize Window</code> button and the window goes back to it’s original size.</p>
+
+<p>But – and here’s the interesting bit – if you try to make the window smaller at this point, it refuses.</p>
+
+<p>But-but, if you now make the window larger and click the button again… well, nothing seems to happen… until you grab the size widget and make it smaller. It works. The window can once again be sized smaller than its original size.</p>
+
+<p>So, behaviour-wise, as long as the window is smaller than it was to begin with, clicking the button sets a minimum size. As long as the window is larger than the original size, clicking the button removes the minimum size limitation.</p>
+
+<p>This line reveals the magic:</p>
+
+<div class="language-d highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">window</span><span class="p">.</span><span class="n">setSizeRequest</span><span class="p">(-</span><span class="mi">1</span><span class="p">,</span> <span class="p">-</span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Passing <code class="language-plaintext highlighter-rouge">-1</code> to both unlocks the minimum sizes for <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>, allowing us to freely resize the window again.</p>
+
+<p>That’s all for today. Next time, I’ll talk about window positioning and bring in another OOP concept, the interface. Until then, happy D-coding and may the widgets be… you know.</p>
+
+<div class="blog-nav">
+	<div style="float: left;">
+		<a href="/posts/0004-oop-button.html">Previous: OOP Button</a>
+	</div>
+	<div style="float: right;">
+		<a href="/posts/0006-position-a-window.html">Next: Position a Window</a>
+	</div>
+</div>
+<p>
+	<h3></h3>
+<div class="inpage-frame">
+	<a href="https://github.com/sponsors/rontarrant">
+		<BR>
+		<BR>
+		<B>Is this article useful? Educational? Entertaining, perhaps?</B>
+		<BR>
+		<figure class="left">
+			<img src="/images/favorite_32.png" alt="Sponsorship heart" style="width: 32px; height: 32px;">
+		</figure>
+		You're free to accept or decline this invitation to become our newest sponsor.
+	</a>
+</div>
+	<h4 class="comment-blurb"><B>Comments? Questions? Observations?</B></h4>
+	<p>
+		Did we miss a tidbit of information that would make this post even more informative? Let's talk about it in the comments.
+	</p>
+	<script src="https://utteranc.es/client.js"
+		repo="rontarrant"
+		issue-term="pathname"
+		theme="github-light"
+		crossorigin="anonymous"
+		async>
+	</script>
+	<ul>
+		<li> come on over to the <a href="https://forum.dlang.org/">D Language Forum</a> and look for one of the <i>gtkDcoding</i> announcement posts, </li>
+		<li> drop by <a href="https://forum.gtkd.org/">the <i>GtkD Forum</i></a>,</li>
+		<li> follow the link below to email me, or</li>
+		<li> go to the	<a href="https://www.facebook.com">gtkDcoding Facebook page.</a></li>
+	</ul>
+</p>
+<p> You can also subscribe <a href="/feed.xml">via RSS</a> so you won't miss anything. Thank you very much for dropping by.</p>
+<p>&copy; Copyright 2025 Ron Tarrant </p>
+</div>
+
+	<a class="u-url" href="/posts/0005-window-size.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">gtkDcoding</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ron Tarrant</li><li><a class="u-email" href="mailto:gtkDcoding@gmail.com">gtkDcoding@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/rontarrant"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">rontarrant</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Simple examples of how to use GtkD to build GUI applications.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
